@@ -1,88 +1,110 @@
-# Phase 3b Results — Cross-System Benchmark (2026-08-10)
+# Phase 3b Results — Cross-System Benchmark (2026-08-10, rev 2 post-audit)
 
-First full evaluation on all three systems, one parameterized harness, zero
-per-system code. All v5 protocol discipline retained; new: zone localization
-(E3) and per-scenario noise-floor significance (no "detected" claim unless a
-channel fires significantly above its own healthy holdout rate, binomial
-p < 1e-3).
+Rev 2 supersedes the same-day rev 1 after a hostile audit of the results
+(two agents + recomputation from raw data). Every change made the numbers
+smaller and the claims harder. The audit record: see the "audit corrections"
+section below; the falsifier outcome is reported as a finding, not hidden.
 
-## Infrastructure delivered
+## Infrastructure delivered (unchanged from rev 1)
 
-- `holdout_mask` handles composite day×device cases (calendar-based: a day
-  never straddles the split) — the device-stratum blocker is gone
-- `device:` rule tag → `device` column in the event log (localization + 3c)
-- `scripts/benchmark.py <system>` + per-config `scenarios.yaml` manifest
-- SDAHU regression under the new harness: row-for-row identical to v5
-- 55/55 tests
+- day×device-safe holdout split; `device:` tag → device column
+- `scripts/benchmark.py <system>` + per-config scenario manifests
+- Per-scenario significance vs each channel's own healthy noise floor
+  (binomial p<1e-3; rules channel gated by rule-of-three, NOT exempt)
+- TTD reported only for meaningful detections; sensor-precision floor
+  (0.5 °F) on the residual band; min-robust model counts alongside
+  threshold-based counts. SDAHU regression: row-for-row ≡ v5. 55/55 tests.
 
-## Headline results (meaningful detections only — noise-floor disciplined)
+## Headline results (noise-disciplined, regenerated artifacts)
 
 | | SDAHU | PFPU | SFPU |
 |---|---|---|---|
-| scenarios meaningfully detected | 14/14 | 20/30 | 19/30 |
-| median TTD (meaningful) | 1–2 days | 1 day | 1 day |
-| zone localization (scored scenarios) | n/a | **18/18** | **20/20** |
-| healthy-year signature days | 0/303 | 0/365 | 0/365 |
+| scenarios meaningfully detected | 14/14 | **17/30** | **18/30** |
+| median TTD (meaningful only) | 1–2 d | 1 d | 1 d |
+| zone localization, scored scenarios | n/a | 18/18 | 19/19 |
+| healthy-year signature days | 0 | 0 | 0 |
 
-Detected at 100% of alarm-days with TTD 1, both FPU systems: reheat valve
-stuck (incl. the 0% severity) and leak (all severities, waterside rule).
-Detected at ~74–76% of days, TTD 1: damper stuck (command-less! via flow
-tracking) and airflow sensor bias. Zone localization is perfect on every
-scenario where the pre-registered ground truth permits scoring.
+Strong families (≈100% alarm-days, TTD 1, correctly localized): reheat
+valve stuck, reheat valve leak (waterside rule, all severities), damper
+stuck (command-less, via flow tracking), airflow sensor bias.
 
-## The Phase 3b discovery: a genuine, system-type-dependent unit-model signal
+**Localization is a SPECIFICITY claim, not discrimination**: every LBNL
+fault is injected in Zone S (zero ground-truth variance), so correctness
+cannot distinguish our localizer from "always answer S." What IS measured:
+non-S zone rules fired at most 1 day in 365 across all 61 scenario files —
+the localizer is quiet where it should be. Discrimination requires faults
+in other zones (future data / TRU).
 
-On SFPU (series fans), the unit-stratum conformance channel fires on
-135–140 days for VAVDMPRStuck 50/80/100 and VAVAirflow −200/−400 —
-**13–14× its noise floor (1/96 holdout), with 15–17 uniquely-caught days
-per scenario** (days neither rules nor residual flagged). Mechanism
-(inspected, not guessed): the stuck zone damper disturbs primary flow, the
-AHU heating coil stops cycling normally, and `heating_active/inactive` go
-MISSING from the day trace (273/365 days) — the healthy net expects the
-rhythm; absence drives fitness down. On PFPU the parallel fan decouples
-zones from the AHU and the signal does not exist (model ≈ noise there).
+## The SFPU unit-model finding — honest version
 
-This is the first genuinely non-circular process-model contribution in the
-project: detection by absence, at the unit level, expressible by no zone
-rule, and present only in the topology where physics says it should be.
-It is also a measured cross-system CONTRAST — direct input to the Stratum-S
-grammar story (the same fault class is unit-visible in series systems and
-unit-invisible in parallel ones).
+**What is real (recomputed exactly):** SFPU healthy operation has a daily
+AHU heating rhythm (357/365 days). Under VAVDMPRStuck 50/80/100 and
+VAVAirflow −200/−400, that rhythm goes missing (~270–281 days) because
+zone-S over-delivery removes the heating call — physics verified in flow
+numbers, coherent with the +bias direction showing no signal, and the
+series-topology coupling matches published engineering (Titus; Nailor;
+ASHRAE RP-1292). The discovered healthy net flags days where the expected
+heating moves are absent.
 
-## Honest negatives (pre-registered expectations, now measured)
+**Honest magnitudes:** threshold-based counts (135–140 days) are ~80%
+attributable to a threshold interpolated off a single holdout day (G2
+recurring). The min-robust count — days strictly worse than ANY healthy
+holdout day — is **22–26 days per scenario**, still far above the noise
+floor. Detection is heating-season-conditional (0 flags in July).
 
-- **Coil fouling: 0 meaningful detection anywhere** (12 scenarios). As
-  pre-registered: needs the waterside ΔT channel (RH_EWT−RH_LWT exists in
-  the data, unused). Phase 3c/4 target.
-- **Instability (RMTEMP/VAVDMPR Unstable): noise-only on 3 of 4.** As
-  pre-registered: these are the count/frequency-check targets (Phase 4
-  stochastic conformance). Current channels see levels and order, not rates.
-- **RMTEMP bias: asymmetric and weak.** +2/+4 °C meaningful but late
-  (rules/residual side-effects); −2/−4 °C noise-only. The unmapped
-  ZONE_TEMP comfort-band vs setpoint residual is the designed increment.
-- Fault-family coverage claim for the paper: 5 of 8 FPU families
-  meaningfully detected today; the 3 misses each have a designed,
-  pre-registered channel that is not yet built. No family is written off.
+**The pre-registered falsifier FIRED, and we report it:** a one-line
+matched rule ("occupied workday AND AHU heating never active") achieves
+0/365 healthy false positives and covers 192–194 fault days — more than
+the model channel — and a relaxed variant also covers the model's 15–17
+unique weekend days. Therefore the defensible claim is NOT "detection no
+rule can express." It is: **the discovered model found the load-bearing
+healthy rhythm unsupervised — nobody had to know, in advance, that "AHU
+heating runs daily" was the invariant a zone damper fault would break.**
+The rule exists only after the model showed where to look. (The matched
+rule becomes a permanent E2 ablation arm in Phase 4.)
 
-## Watch items (carried into 3c)
+**The PFPU contrast, corrected:** the fault couples into PFPU heating too
+(healthy 166 heating-days → 90–92 under fault) — the earlier "parallel
+decouples zones" claim was wrong as physics. PFPU's healthy heating has no
+daily rhythm, so ORDER-based conformance has nothing to miss. Testable
+prediction, pre-registered here: the Phase-4 frequency-aware channel should
+see the PFPU heating-day-count collapse that order-only conformance cannot.
 
-1. SFPU residual band is razor-thin ([+1.36, +1.58] °F, 0.22 wide) — ultra-
-   stable train medians. Holdout clean (0/41), but fragile under real
-   variation; consider a min-width floor derived from sensor precision.
-2. `sat_setpoint_deviation` still has no positive-control opportunity on
-   FPU (all faults are zone-level); its FPU thresholds are silence-only.
-3. The source-rotated SFPU file (RMTEMP −2C) has broken calendar alignment;
-   its weak result is not interpretable — excluded from family claims.
-4. Economizer window still SDAHU-derived; FPU OA_TEMP is floor-clamped at
-   14.00 °F (documented; re-derive per system in 3c).
+## Honest negatives (regenerated, gate applied everywhere)
 
-## Comparison against previous results — consistency ledger
+- Coil fouling: 0/12 meaningful (waterside ΔT channel not yet built)
+- Instability: 0/4 meaningful (frequency check is the Phase-4 answer;
+  rev 1's "1 of 4" rested on a single rule-day — retracted by the gate)
+- RMTEMP bias: 3/8 meaningful, weak and late; −2/−4 °C undetected
+  (zone-temp comfort residual is the designed increment). The SFPU −2C
+  scenario is excluded from family claims (source file calendar-rotated).
+- SFPU residual detections on stuck/leak from rev 1 (21–117 days):
+  **retracted** — they rode on 0.02–0.03 °F band exceedances; the 0.5 °F
+  sensor-precision floor removes them (now ≤2 days). The rev-1 "residual
+  cross-system contrast" was band geometry, not topology; dropped.
 
-- SDAHU v6 ≡ v5 row-for-row (harness change is non-invasive) ✓
-- FPU positive controls (pre-benchmark) match benchmark counts exactly
-  (e.g. flow-tracking on damper-stuck-20: 177 days both) ✓
-- Week-0 ground truth (Zone S) vs detector localization: agreement on all
-  38 scored scenarios ✓ — two independent methods, same answer
-- The unit-model null on SDAHU/PFPU and signal on SFPU are all *predicted*
-  by the same principle: the unit stratum sees only what couples into
-  unit-level rhythm. One principle, three systems, three correct outcomes.
+## Audit corrections ledger (rev 1 → rev 2)
+
+1. Meaningful counts 20/30, 19/30 → **17/30, 18/30** (rules channel now
+   inside the significance gate).
+2. Model magnitude: report min-robust 22–26 alongside threshold 135–140;
+   "13–14× noise floor" corrected (arithmetic error; it is ~36× on
+   threshold counts, ~6× on min-robust).
+3. "No rule can express this" → discovery-automation claim (falsifier
+   honored).
+4. "Parallel decouples" → baseline-irregularity explanation + Phase-4
+   prediction.
+5. Localization reframed as specificity; "two independent methods agree"
+   downgraded (same data, different computations).
+6. TTD/detected no longer reported for noise-only scenarios; family labels
+   fixed (damper_stuck, not "other"); rotated file footnoted in manifest;
+   FPU artifacts regenerated with full provenance.
+
+## Positioning notes (fresh web sweep, 2026-08-10)
+
+- Still nobody publishing on LBNL PFPU/SFPU ("to our knowledge, first").
+- Detection-by-absence must be scoped: model-moves exist in BPM alignments
+  and DES diagnosers; ours is its first application to discovered healthy
+  models for HVAC terminal-unit FDD.
+- **ICPM 2027 research track: abstract Sept 4, paper Sept 11, 2026** — the
+  natural venue and the operative deadline.

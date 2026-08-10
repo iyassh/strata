@@ -100,6 +100,11 @@ def evaluate(fname: str):
     per_day = classify_days(det, log)
     model = per_day.set_index("case_id")["flagged"].reindex(days).fillna(False)
     model = model | (~has_events & (uni["occupied_min"] > 0))
+    # min-robust model count: days STRICTLY worse than the worst healthy
+    # holdout day (immune to the interpolated-threshold artifact, audit 1b)
+    strict = float(det.holdout_per_day["fitness"].min())
+    minrob = per_day[per_day["fitness"] < strict]["case_id"]
+    model_minrobust = int(len(set(minrob)))
 
     res = flag_days(daily_residual_scores(df, cfg), BAND).set_index("case_id")
     res_flag = res["flagged"].reindex(days).fillna(False)
@@ -120,6 +125,7 @@ def evaluate(fname: str):
         "res_eval": res_eval, "combined": combined, "log_hash": log_hash,
         "n_model_unique": int((model & ~rules & ~res_flag).sum()),
         "top_device": top_device, "top_device_days": loc_days,
+        "model_minrobust": model_minrobust,
     }
 
 
@@ -140,7 +146,8 @@ det = build_detector(cfg, healthy_log)
 
 res_healthy = daily_residual_scores(healthy_df, cfg)
 hold = holdout_mask(res_healthy["case_id"], cfg.rules["detection"]["holdout_days_per_month"])
-BAND = calibrate_band(res_healthy, ~hold)
+BAND = calibrate_band(res_healthy, ~hold,
+                      min_width=cfg.rules["detection"].get("residual_min_band_width", 0.0))
 res_hold = flag_days(res_healthy[hold], BAND)
 hold_fp, hold_n = int(res_hold["flagged"].sum()), int(res_hold["evaluable"].sum())
 
@@ -167,16 +174,20 @@ for sc in SCENARIOS:
     n_days, n_eval = len(uni), int(uni["evaluable"].sum())
     n_win = int(e["res_eval"].sum())
     c = {ch: int(e[ch].sum()) for ch in ("rules", "res_flag", "model", "combined")}
-    t = ttd(e["combined"], uni)
 
     # significance vs each channel's own holdout noise floor
     p_model = max(model_hold_fp, 1) / max(len(det.holdout_per_day), 1)
     p_resid = max(hold_fp, 1) / max(hold_n, 1)
-    sig_rules = c["rules"] > 0
+    # rules floor: 0 observed FP on the healthy year still only bounds the
+    # rate at ~3/365 (rule of three) — 1-3 fire-days are NOT detection
+    sig_rules = binom_sf(c["rules"], n_eval, 3.0 / 365.0) < 1e-3
     sig_resid = bool(n_win) and binom_sf(c["res_flag"], n_win, p_resid) < 1e-3
     sig_model = binom_sf(c["model"], n_eval, p_model) < 1e-3
     meaningful = "+".join(x for x, s_ in
                           (("rules", sig_rules), ("resid", sig_resid), ("model", sig_model)) if s_)
+
+    # TTD only means something when detection beats noise (audit 5)
+    t = ttd(e["combined"], uni) if meaningful else None
 
     gt = GROUND_TRUTH.get(fname, {}).get("injected_zone")
     loc = "-"
@@ -196,6 +207,7 @@ for sc in SCENARIOS:
         "log_hash": e["log_hash"], "top_device": e["top_device"],
         "ground_truth_zone": gt, "localization": loc,
         "meaningful_channels": meaningful or None,
+        "model_days_minrobust": e["model_minrobust"],
     })
 
 by_hash: dict[str, list[str]] = {}

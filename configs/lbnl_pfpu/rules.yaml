@@ -13,6 +13,9 @@ climate:
 
 detection:
   fpr_quantile: 0.01
+  # sensor-precision floor for the daily residual band (audit: SFPU raw
+  # band was 0.22F wide; sub-0.1F exceedances are simulation-grade only)
+  residual_min_band_width: 0.5
   holdout_days_per_month: 8
 
 events:

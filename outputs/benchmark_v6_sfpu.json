@@ -1,8 +1,8 @@
 {
   "system": "sfpu",
   "residual_band": [
-    1.3599999999999994,
-    1.5799999999999983
+    1.2199999999999989,
+    1.7199999999999989
   ],
   "residual_holdout_fp": [
     0,
@@ -22,15 +22,17 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 0,
-      "residual_days": 2,
+      "residual_days": 0,
       "model_days": 2,
-      "combined_days": 4,
+      "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 131,
+      "ttd_days": null,
       "log_hash": "ec700c5d",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatCoilFouling_Airside_Minor",
@@ -45,11 +47,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 139,
+      "ttd_days": null,
       "log_hash": "21927f41",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
@@ -64,11 +68,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 139,
+      "ttd_days": null,
       "log_hash": "6540b258",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatCoilFouling_Airside_Severe",
@@ -83,11 +89,13 @@
       "model_days": 3,
       "combined_days": 3,
       "model_unique_days": 3,
-      "ttd_days": 139,
+      "ttd_days": null,
       "log_hash": "e01bd88e",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
@@ -102,11 +110,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 139,
+      "ttd_days": null,
       "log_hash": "a2040a3a",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
@@ -121,11 +131,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 139,
+      "ttd_days": null,
       "log_hash": "2107b2e1",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
@@ -140,11 +152,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 139,
+      "ttd_days": null,
       "log_hash": "89d375c2",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
@@ -155,7 +169,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 365,
-      "residual_days": 86,
+      "residual_days": 0,
       "model_days": 2,
       "combined_days": 365,
       "model_unique_days": 0,
@@ -163,7 +177,9 @@
       "log_hash": "c22cf52f",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
@@ -174,7 +190,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 365,
-      "residual_days": 83,
+      "residual_days": 0,
       "model_days": 2,
       "combined_days": 365,
       "model_unique_days": 0,
@@ -182,7 +198,9 @@
       "log_hash": "7c3ab21c",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
@@ -193,7 +211,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 365,
-      "residual_days": 73,
+      "residual_days": 0,
       "model_days": 1,
       "combined_days": 365,
       "model_unique_days": 0,
@@ -201,7 +219,9 @@
       "log_hash": "3dcf742a",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatVLVStuck_0%",
@@ -220,7 +240,9 @@
       "log_hash": "094c5ceb",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatVLVStuck_100%",
@@ -231,7 +253,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 365,
-      "residual_days": 78,
+      "residual_days": 0,
       "model_days": 1,
       "combined_days": 365,
       "model_unique_days": 0,
@@ -239,7 +261,9 @@
       "log_hash": "2dc7c265",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatVLVStuck_20%",
@@ -250,7 +274,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 365,
-      "residual_days": 21,
+      "residual_days": 0,
       "model_days": 2,
       "combined_days": 365,
       "model_unique_days": 0,
@@ -258,7 +282,9 @@
       "log_hash": "44067f62",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatVLVStuck_50%",
@@ -269,7 +295,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 365,
-      "residual_days": 89,
+      "residual_days": 0,
       "model_days": 2,
       "combined_days": 365,
       "model_unique_days": 0,
@@ -277,7 +303,9 @@
       "log_hash": "bdb1e365",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_ReheatVLVStuck_80%",
@@ -288,7 +316,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 365,
-      "residual_days": 81,
+      "residual_days": 0,
       "model_days": 2,
       "combined_days": 365,
       "model_unique_days": 0,
@@ -296,7 +324,9 @@
       "log_hash": "ff9d2bbe",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_+2C",
@@ -307,15 +337,17 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 2,
-      "residual_days": 10,
+      "residual_days": 0,
       "model_days": 2,
-      "combined_days": 14,
+      "combined_days": 4,
       "model_unique_days": 2,
-      "ttd_days": 80,
+      "ttd_days": null,
       "log_hash": "67f31907",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_+4C",
@@ -326,15 +358,17 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 99,
-      "residual_days": 41,
+      "residual_days": 0,
       "model_days": 3,
-      "combined_days": 142,
+      "combined_days": 102,
       "model_unique_days": 3,
-      "ttd_days": 3,
+      "ttd_days": 108,
       "log_hash": "6eaa6b94",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_-2C",
@@ -349,11 +383,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 141,
+      "ttd_days": null,
       "log_hash": "b3a0bc33",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_-4C",
@@ -368,11 +404,13 @@
       "model_days": 4,
       "combined_days": 4,
       "model_unique_days": 4,
-      "ttd_days": 139,
+      "ttd_days": null,
       "log_hash": "9f688e88",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
@@ -383,7 +421,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 263,
-      "residual_days": 24,
+      "residual_days": 0,
       "model_days": 2,
       "combined_days": 263,
       "model_unique_days": 0,
@@ -391,7 +429,9 @@
       "log_hash": "961817ca",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
@@ -402,7 +442,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 263,
-      "residual_days": 23,
+      "residual_days": 0,
       "model_days": 2,
       "combined_days": 263,
       "model_unique_days": 0,
@@ -410,7 +450,9 @@
       "log_hash": "00125df4",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
@@ -421,7 +463,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 262,
-      "residual_days": 30,
+      "residual_days": 0,
       "model_days": 140,
       "combined_days": 278,
       "model_unique_days": 16,
@@ -429,7 +471,9 @@
       "log_hash": "fa08d951",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules+model",
+      "model_days_minrobust": 22
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
@@ -440,7 +484,7 @@
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 261,
-      "residual_days": 54,
+      "residual_days": 0,
       "model_days": 139,
       "combined_days": 278,
       "model_unique_days": 17,
@@ -448,18 +492,20 @@
       "log_hash": "b20753ff",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules+model",
+      "model_days_minrobust": 25
     },
     {
       "file": "SFPU_VAVDMPRStuck_0%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 0%",
       "is_fault": true,
       "days": 365,
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 302,
-      "residual_days": 16,
+      "residual_days": 0,
       "model_days": 3,
       "combined_days": 302,
       "model_unique_days": 0,
@@ -467,18 +513,20 @@
       "log_hash": "fe3c5006",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_VAVDMPRStuck_100%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 100%",
       "is_fault": true,
       "days": 365,
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 261,
-      "residual_days": 89,
+      "residual_days": 2,
       "model_days": 136,
       "combined_days": 277,
       "model_unique_days": 16,
@@ -486,11 +534,13 @@
       "log_hash": "b274a50a",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules+model",
+      "model_days_minrobust": 26
     },
     {
       "file": "SFPU_VAVDMPRStuck_20%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 20%",
       "is_fault": true,
       "days": 365,
@@ -505,18 +555,20 @@
       "log_hash": "57f0813e",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_VAVDMPRStuck_50%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 50%",
       "is_fault": true,
       "days": 365,
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 262,
-      "residual_days": 100,
+      "residual_days": 0,
       "model_days": 137,
       "combined_days": 277,
       "model_unique_days": 15,
@@ -524,18 +576,20 @@
       "log_hash": "b0730c32",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules+model",
+      "model_days_minrobust": 23
     },
     {
       "file": "SFPU_VAVDMPRStuck_80%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 80%",
       "is_fault": true,
       "days": 365,
       "evaluable_days": 365,
       "window_days": 152,
       "rules_days": 261,
-      "residual_days": 117,
+      "residual_days": 2,
       "model_days": 135,
       "combined_days": 277,
       "model_unique_days": 16,
@@ -543,7 +597,9 @@
       "log_hash": "cd6afa0d",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules+model",
+      "model_days_minrobust": 25
     },
     {
       "file": "SFPU_VAVDMPRUnstable",
@@ -558,11 +614,13 @@
       "model_days": 1,
       "combined_days": 1,
       "model_unique_days": 1,
-      "ttd_days": 333,
+      "ttd_days": null,
       "log_hash": "16c17b07",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "SFPU_VAVFanRestrictFlow",
@@ -577,11 +635,13 @@
       "model_days": 4,
       "combined_days": 4,
       "model_unique_days": 4,
-      "ttd_days": 139,
+      "ttd_days": null,
       "log_hash": "9f91592d",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     }
   ],
   "event_identical_groups": {}

@@ -60,12 +60,22 @@ def daily_residual_scores(
     return out
 
 
-def calibrate_band(healthy_scores: pd.DataFrame, train_mask: pd.Series) -> tuple[float, float]:
+def calibrate_band(
+    healthy_scores: pd.DataFrame, train_mask: pd.Series, min_width: float = 0.0
+) -> tuple[float, float]:
     """Healthy band = [min, max] of TRAIN-day scores (blind: no fault data,
-    no holdout data). Reported honestly as extreme-calibrated: the achievable
-    per-side false-alarm rate is a discrete ladder, not a smooth quantile."""
+    no holdout data), expanded symmetrically to at least ``min_width`` —
+    the sensor-precision floor. Without it, an ultra-stable simulated train
+    year yields a razor band (SFPU: 0.22 F) and "detections" that exceed the
+    edge by 0.02-0.03 F: physically meaningless on real hardware. Reported
+    honestly as extreme-calibrated: the achievable per-side false-alarm rate
+    is a discrete ladder, not a smooth quantile."""
     train = healthy_scores.loc[train_mask, "score"].dropna()
-    return float(train.min()), float(train.max())
+    lo, hi = float(train.min()), float(train.max())
+    if hi - lo < min_width:
+        pad = (min_width - (hi - lo)) / 2.0
+        lo, hi = lo - pad, hi + pad
+    return lo, hi
 
 
 def flag_days(scores: pd.DataFrame, band: tuple[float, float]) -> pd.DataFrame:

@@ -26,11 +26,13 @@
       "model_days": 2,
       "combined_days": 4,
       "model_unique_days": 2,
-      "ttd_days": 25,
+      "ttd_days": null,
       "log_hash": "25d87428",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatCoilFouling_Airside_Minor",
@@ -45,11 +47,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 204,
+      "ttd_days": null,
       "log_hash": "3f49135b",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatCoilFouling_Airside_Moderate",
@@ -64,11 +68,13 @@
       "model_days": 3,
       "combined_days": 3,
       "model_unique_days": 3,
-      "ttd_days": 204,
+      "ttd_days": null,
       "log_hash": "407daed6",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatCoilFouling_Airside_Severe",
@@ -83,11 +89,13 @@
       "model_days": 3,
       "combined_days": 3,
       "model_unique_days": 3,
-      "ttd_days": 204,
+      "ttd_days": null,
       "log_hash": "71bc2f91",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatCoilFouling_Waterside_Minor",
@@ -102,11 +110,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 204,
+      "ttd_days": null,
       "log_hash": "57c2a5c1",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatCoilFouling_Waterside_Moderate",
@@ -121,11 +131,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 204,
+      "ttd_days": null,
       "log_hash": "0f01f1fe",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatCoilFouling_Waterside_Severe",
@@ -140,11 +152,13 @@
       "model_days": 2,
       "combined_days": 2,
       "model_unique_days": 2,
-      "ttd_days": 204,
+      "ttd_days": null,
       "log_hash": "518a64fc",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
-      "localization": "excl(GT?)"
+      "localization": "excl(GT?)",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatVLVLeak_20%MaxFlow",
@@ -163,7 +177,9 @@
       "log_hash": "fa222d7c",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatVLVLeak_50%MaxFlow",
@@ -182,7 +198,9 @@
       "log_hash": "50775bc7",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatVLVLeak_80%MaxFlow",
@@ -201,7 +219,9 @@
       "log_hash": "ff8d5731",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatVLVStuck_0%",
@@ -220,7 +240,9 @@
       "log_hash": "5d3e5aaa",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatVLVStuck_100%",
@@ -239,7 +261,9 @@
       "log_hash": "c1b707f0",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatVLVStuck_20%",
@@ -258,7 +282,9 @@
       "log_hash": "31337da4",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatVLVStuck_50%",
@@ -277,7 +303,9 @@
       "log_hash": "e389a623",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_ReheatVLVStuck_80%",
@@ -296,7 +324,9 @@
       "log_hash": "0ad35ad7",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_SensorBias_RMTEMP_+2C",
@@ -311,11 +341,13 @@
       "model_days": 3,
       "combined_days": 6,
       "model_unique_days": 3,
-      "ttd_days": 184,
+      "ttd_days": null,
       "log_hash": "56f6e5db",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_SensorBias_RMTEMP_+4C",
@@ -330,11 +362,13 @@
       "model_days": 3,
       "combined_days": 20,
       "model_unique_days": 3,
-      "ttd_days": 58,
+      "ttd_days": null,
       "log_hash": "ad625a16",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_SensorBias_RMTEMP_-2C",
@@ -349,11 +383,13 @@
       "model_days": 3,
       "combined_days": 4,
       "model_unique_days": 3,
-      "ttd_days": 138,
+      "ttd_days": null,
       "log_hash": "70f49fca",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_SensorBias_RMTEMP_-4C",
@@ -368,11 +404,13 @@
       "model_days": 5,
       "combined_days": 6,
       "model_unique_days": 5,
-      "ttd_days": 109,
+      "ttd_days": null,
       "log_hash": "e4ba962c",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 1
     },
     {
       "file": "PFPU_SensorBias_VAVAirflow_+200CFM",
@@ -391,7 +429,9 @@
       "log_hash": "ab51e2f8",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_SensorBias_VAVAirflow_+400CFM",
@@ -410,7 +450,9 @@
       "log_hash": "56370423",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_SensorBias_VAVAirflow_-200CFM",
@@ -429,7 +471,9 @@
       "log_hash": "50c1c7fe",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules+resid",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_SensorBias_VAVAirflow_-400CFM",
@@ -448,11 +492,13 @@
       "log_hash": "e3465d5b",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_VAVDMPRStuck_0%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 0%",
       "is_fault": true,
       "days": 365,
@@ -467,11 +513,13 @@
       "log_hash": "42f4865c",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_VAVDMPRStuck_100%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 100%",
       "is_fault": true,
       "days": 365,
@@ -486,11 +534,13 @@
       "log_hash": "29095063",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_VAVDMPRStuck_20%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 20%",
       "is_fault": true,
       "days": 365,
@@ -505,11 +555,13 @@
       "log_hash": "9c8ab4ca",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_VAVDMPRStuck_50%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 50%",
       "is_fault": true,
       "days": 365,
@@ -524,11 +576,13 @@
       "log_hash": "c79148c8",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_VAVDMPRStuck_80%",
-      "family": "other",
+      "family": "damper_stuck",
       "label": "VAVDMPRStuck 80%",
       "is_fault": true,
       "days": 365,
@@ -543,7 +597,9 @@
       "log_hash": "b7d2422a",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
-      "localization": "OK"
+      "localization": "OK",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_VAVDMPRUnstable",
@@ -558,11 +614,13 @@
       "model_days": 6,
       "combined_days": 7,
       "model_unique_days": 6,
-      "ttd_days": 138,
+      "ttd_days": null,
       "log_hash": "114da47d",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     },
     {
       "file": "PFPU_VAVFanRestrictFlow",
@@ -577,11 +635,13 @@
       "model_days": 3,
       "combined_days": 3,
       "model_unique_days": 3,
-      "ttd_days": 204,
+      "ttd_days": null,
       "log_hash": "1ef52d6a",
       "top_device": null,
       "ground_truth_zone": "S",
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": null,
+      "model_days_minrobust": 0
     }
   ],
   "event_identical_groups": {}

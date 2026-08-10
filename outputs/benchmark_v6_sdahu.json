@@ -30,7 +30,9 @@
       "log_hash": "156ae73f",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 5
     },
     {
       "file": "damper_stuck_025_annual",
@@ -49,7 +51,9 @@
       "log_hash": "4f6eb20c",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 5
     },
     {
       "file": "damper_stuck_075_annual",
@@ -68,7 +72,9 @@
       "log_hash": "bea41fbb",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "rules+resid",
+      "model_days_minrobust": 5
     },
     {
       "file": "damper_stuck_100_annual_short",
@@ -87,7 +93,9 @@
       "log_hash": "7861a5c2",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "rules+resid",
+      "model_days_minrobust": 3
     },
     {
       "file": "coi_stuck_010_annual",
@@ -106,7 +114,9 @@
       "log_hash": "7901d4bb",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 9
     },
     {
       "file": "coi_stuck_025_annual",
@@ -125,7 +135,9 @@
       "log_hash": "181304f4",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 9
     },
     {
       "file": "coi_stuck_050_annual",
@@ -144,7 +156,9 @@
       "log_hash": "c10d9aa4",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 9
     },
     {
       "file": "coi_stuck_075_annual",
@@ -163,7 +177,9 @@
       "log_hash": "e601f6a9",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 9
     },
     {
       "file": "coi_leakage_010_annual",
@@ -182,7 +198,9 @@
       "log_hash": "7055755f",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "rules",
+      "model_days_minrobust": 9
     },
     {
       "file": "coi_bias_-4_annual",
@@ -201,7 +219,9 @@
       "log_hash": "9adbdf1a",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "resid",
+      "model_days_minrobust": 4
     },
     {
       "file": "coi_bias_-2_annual",
@@ -220,7 +240,9 @@
       "log_hash": "8296ad26",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "resid",
+      "model_days_minrobust": 4
     },
     {
       "file": "coi_bias_2_annual",
@@ -239,7 +261,9 @@
       "log_hash": "318aa581",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "resid",
+      "model_days_minrobust": 5
     },
     {
       "file": "coi_bias_4_annual",
@@ -258,7 +282,9 @@
       "log_hash": "0878e25b",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "resid",
+      "model_days_minrobust": 5
     },
     {
       "file": "oa_bias_4_annual",
@@ -277,7 +303,9 @@
       "log_hash": "41d0a295",
       "top_device": null,
       "ground_truth_zone": null,
-      "localization": "-"
+      "localization": "-",
+      "meaningful_channels": "resid",
+      "model_days_minrobust": 5
     }
   ],
   "event_identical_groups": {}

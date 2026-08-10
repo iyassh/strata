@@ -1,0 +1,14 @@
+# Canonical sensor name -> LBNL SDAHU CSV column name.
+# The pipeline code only ever uses canonical names; this file is the only
+# place the building's actual column names appear.
+canonical_to_csv:
+  OA_TEMP: OA_TEMP
+  SA_TEMP: SA_TEMP
+  SA_TEMP_SP: SA_TEMPSPT
+  MA_TEMP: MA_TEMP
+  CHWC_VLV_POS: CHWC_VLV
+  CHWC_VLV_CMD: CHWC_VLV_DM
+  OA_DMPR_POS: OA_DMPR
+  OA_DMPR_CMD: OA_DMPR_DM
+  OCCUPIED: SYS_CTL
+  Datetime: Datetime

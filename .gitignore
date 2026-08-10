@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# data is a symlink to the local LBNL parquet store (1.1 GB, public dataset)
+data
+.DS_Store

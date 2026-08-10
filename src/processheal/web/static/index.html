@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ProcessHeal — Live Demo</title>
+<link rel="stylesheet" href="/static/style.css?v=3" />
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Process<span>Heal</span></h1>
+    <p class="tag">Process mining for HVAC fault detection &middot; UREAP 2026, Thompson Rivers University</p>
+    <div class="headline">
+      <div class="stat"><b>14</b><span>LBNL fault scenarios evaluated</span></div>
+      <div class="stat"><b>~5,300</b><span>trace-days scored out-of-sample</span></div>
+      <div class="stat"><b>open</b><span>source pipeline &amp; benchmark</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="wrap">
+  <a href="#how" class="active">How it works</a>
+  <a href="#results">Results &amp; models</a>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ HOW IT WORKS: GUIDED WALKTHROUGH ============ -->
+  <section id="how" class="card">
+    <h2>How it works &mdash; the pipeline, step by step</h2>
+    <p class="lead">Pick a scenario and walk through what ProcessHeal actually does with it.
+      Every chart, event, and number below is computed live by the real pipeline for one
+      real day of data &mdash; nothing is mocked up.</p>
+    <div class="replay-bar">
+      <select id="wt-scenario"></select>
+      <button id="wt-load">Start walkthrough</button>
+      <span id="wt-status" class="wt-status"></span>
+    </div>
+
+    <div id="wt-body" class="hidden">
+      <div class="wt-head">
+        <div id="wt-dots" class="wt-dots"></div>
+        <h3 id="wt-title"></h3>
+      </div>
+      <div id="wt-stage" class="wt-stage"></div>
+      <p id="wt-plain" class="wt-plain"></p>
+      <details class="wt-detail"><summary>Technical detail</summary>
+        <p id="wt-detail-text"></p>
+      </details>
+      <div class="wt-nav">
+        <button id="wt-prev">&larr; Back</button>
+        <span id="wt-count"></span>
+        <button id="wt-next">Next &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section id="results" class="card">
+    <h2>Results &amp; models</h2>
+    <p class="lead">Per-day benchmark with a temporal split: the model is discovered from
+      healthy training days, the detection threshold is learned on held-out healthy days,
+      and every fault day is scored out-of-sample. All figures are generated from the
+      benchmark's own JSON output &mdash; no hand-typed numbers anywhere.</p>
+
+    <div class="figs">
+      <figure>
+        <h3>1 &middot; Detection per scenario, with ablation</h3>
+        <img src="/api/figure/benchmark_perday.png" alt="Per-scenario detection with ablation"/>
+        <figcaption>
+          <b>What it shows:</b> for each fault scenario, the share of days flagged by three
+          detectors. Grey = the engineered signature events alone (no model). Orange = the
+          process model alone, with signature events stripped out. Blue = the combined
+          unified rule.
+          <b>What to notice:</b> signature events catch 100% of days on every actuator
+          fault; the stripped model still flags ~11% of valve-fault days by spotting
+          <i>missing</i> cooling behaviour; sensor-bias scenarios sit near zero for
+          everything.
+          <b>What it means:</b> on this dataset the domain events carry detection, the
+          model adds a complementary signal, and subtle sensor bias is the honest open
+          problem.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <h3>2 &middot; Why fitness alone is not enough</h3>
+        <img src="/api/figure/fitness_distributions.png" alt="Per-day fitness distributions"/>
+        <figcaption>
+          <b>What it shows:</b> the distribution of per-day conformance fitness for
+          held-out healthy days (green), actuator-fault days (blue), and sensor-bias days
+          (orange), with the learned detection threshold in red.
+          <b>What to notice:</b> fault days overlap the healthy range heavily &mdash; a
+          day's trace is short, so one bad event barely dents its fitness score.
+          <b>What it means:</b> a fitness threshold alone cannot separate faulty from
+          healthy days on this data. That is exactly why the unified rule also listens for
+          signature events, and it is an honest, evidence-backed answer to "what does the
+          Petri net contribute?" &mdash; explanation and missing-behaviour coverage, not
+          the raw detection.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <h3>3 &middot; Three detectors head-to-head</h3>
+        <img src="/api/figure/detector_summary.png" alt="Detector comparison summary"/>
+        <figcaption>
+          <b>What it shows:</b> recall, precision, and false-positive rate for the three
+          detectors over ~4,540 out-of-sample fault days and 438 healthy days.
+          <b>What to notice:</b> recall counts the sensor-bias days as faults, which are
+          essentially undetected &mdash; on actuator faults alone, recall is 100%.
+          Precision stays above 99% and the false-positive rate at ~1%.
+          <b>What it means:</b> the system flags real problems, almost never cries wolf,
+          and its known blind spot (subtle sensor bias) is quantified rather than hidden
+          &mdash; the motivation for the planned hybrid with machine learning.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <h3>4 &middot; The model itself</h3>
+        <img src="/api/figure/healthy_net.png" alt="Discovered Petri net"/>
+        <figcaption>
+          <b>What it shows:</b> the Petri net discovered automatically from healthy
+          training days &mdash; circles are states, labelled boxes are operating events,
+          black boxes are routing.
+          <b>What to notice:</b> fault events like <code>damper_command_mismatch</code>
+          appear nowhere on it, because they never occur in healthy operation.
+          <b>What it means:</b> unlike a neural network, the model is fully inspectable
+          &mdash; the diagnosis is read off the model rather than explained after the
+          fact. This is the artefact that transfers to a new building.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  ProcessHeal &middot; Yassh Singh &middot; Supervisors: Dr. Anthony Aighobahi, Dr. Mridula Sharma
+</footer>
+
+<script src="/static/app.js?v=3"></script>
+</body>
+</html>

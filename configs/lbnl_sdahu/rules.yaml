@@ -1,0 +1,90 @@
+# Event-abstraction rules for the LBNL SDAHU dataset.
+#
+# Every rule is dispatched by its `kind`; the abstraction layer iterates THIS
+# file, so adding a rule here adds it to the pipeline with no code change.
+# `sustained_min` values are MINUTES of consecutive violation (converted to
+# samples using the data's actual logging interval).
+#
+# Grounding: LBNL SDAHU documentation section 1.2 (ASHRAE Guideline 36-2020).
+
+climate:
+  ashrae_zone: 5A
+  notes: "Chicago, IL TMY (humid). Documentation only; not read by code."
+
+detection:
+  # Per-day fault threshold is CALIBRATED on held-out healthy days at this
+  # false-positive quantile (no hand-picked margins).
+  fpr_quantile: 0.01
+  # Last N days of each month are held out for threshold calibration;
+  # the model is discovered from the remaining days.
+  holdout_days_per_month: 8
+
+events:
+  occupancy:
+    kind: occupancy
+    alphabet: state
+    signal: OCCUPIED
+    on_event: system_started
+    off_event: system_stopped
+
+  cooling:
+    kind: mode
+    alphabet: state
+    signal: CHWC_VLV_POS
+    on_above: 0.05
+    on_event: cooling_active
+    off_event: cooling_inactive
+
+  economizer:
+    kind: window
+    alphabet: state
+    signal: OA_TEMP
+    low: 33.8
+    high: 60.0
+    enter_event: economizer_window_entered
+    exit_event: economizer_window_exited
+
+  # Actuator command vs position mismatches (stuck actuators).
+  # A healthy actuator mismatches only in brief transients; a stuck one
+  # mismatches for hours, so 60 CONSECUTIVE minutes separates them cleanly.
+  damper_command_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: OA_DMPR_POS
+    cmd: OA_DMPR_CMD
+    threshold: 0.05
+    sustained_min: 60
+
+  valve_command_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: CHWC_VLV_POS
+    cmd: CHWC_VLV_CMD
+    threshold: 0.05
+    sustained_min: 60
+
+  # Valve leaking: commanded (near-)closed but position open.
+  # idle_below is an epsilon so a small idle command (dither/residue) does not
+  # hide a real leak behind an exact-zero comparison.
+  valve_leak:
+    kind: leak
+    alphabet: signature
+    pos: CHWC_VLV_POS
+    cmd: CHWC_VLV_CMD
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+
+  # Supply-air setpoint deviation, GATED on mechanical cooling being active:
+  # G36 only guarantees SAT tracking while the cooling coil is controlling.
+  # Ungated, this fired on ~95% of all days (winter drift; the AHU has no
+  # heating coil) and carried no fault signal.
+  setpoint_deviation:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: SA_TEMP
+    sp: SA_TEMP_SP
+    threshold: 2.0
+    sustained_min: 15
+    gate_signal: CHWC_VLV_POS
+    gate_above: 0.05

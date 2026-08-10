@@ -229,6 +229,38 @@ events:
     leak_above: 0.05
     sustained_min: 15
 
+  # Waterside leak: flow through a CLOSED reheat valve. The position-
+  # based leak rule is deaf to this fault class (position reads closed,
+  # honestly); water flow is the evidence. Positive-control verified.
+  rh_water_leak_I:
+    kind: leak
+    pos: RH_FLOW_I
+    cmd: RH_VLV_CMD_I
+    idle_below: 0.02
+    leak_above: 0.2    # healthy closed-valve flow maxes at 0.10 GPM (measured); 2x margin
+    sustained_min: 15
+  rh_water_leak_W:
+    kind: leak
+    pos: RH_FLOW_W
+    cmd: RH_VLV_CMD_W
+    idle_below: 0.02
+    leak_above: 0.2    # healthy closed-valve flow maxes at 0.10 GPM (measured); 2x margin
+    sustained_min: 15
+  rh_water_leak_S:
+    kind: leak
+    pos: RH_FLOW_S
+    cmd: RH_VLV_CMD_S
+    idle_below: 0.02
+    leak_above: 0.2    # healthy closed-valve flow maxes at 0.10 GPM (measured); 2x margin
+    sustained_min: 15
+  rh_water_leak_E:
+    kind: leak
+    pos: RH_FLOW_E
+    cmd: RH_VLV_CMD_E
+    idle_below: 0.02
+    leak_above: 0.2    # healthy closed-valve flow maxes at 0.10 GPM (measured); 2x margin
+    sustained_min: 15
+
   # Zone flow tracking: the ONLY handle on the command-less zone dampers via
   # rules — measured primary-air flow must track its setpoint while the AHU
   # is delivering air. Threshold to be validated by the healthy-silence gate.

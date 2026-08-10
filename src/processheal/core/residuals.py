@@ -39,7 +39,8 @@ def daily_residual_scores(
     diffs = w["Datetime"].diff().dropna().dt.total_seconds() / 60.0
     interval = float(diffs.median()) if len(diffs) else 1.0
 
-    gated = w[r["occ_signal"]] == 1
+    occ_col = w[r["occ_signal"]]
+    gated = (occ_col > r["occ_above"]) if "occ_above" in r else (occ_col == 1)
     for g in gates:
         if "below" in g:
             gated = gated & (w[g["signal"]] <= g["below"])

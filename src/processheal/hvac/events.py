@@ -154,7 +154,7 @@ def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
                 cond = cond & (w[g["signal"]] > g["above"])
         occ = r.get("occ_signal")
         if occ and occ in w.columns:
-            cond = cond & (w[occ] == 1)
+            cond = cond & ((w[occ] > r["occ_above"]) if "occ_above" in r else (w[occ] == 1))
         return cond
     if kind == "envelope_residual":
         # signal must lie between its two reference signals (physics: mixed
@@ -164,7 +164,7 @@ def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
         cond = (w[r["signal"]] < lo) | (w[r["signal"]] > hi)
         occ = r.get("occ_signal")
         if occ and occ in w.columns:
-            cond = cond & (w[occ] == 1)
+            cond = cond & ((w[occ] > r["occ_above"]) if "occ_above" in r else (w[occ] == 1))
         return cond
     raise ValueError(f"no condition for kind {kind!r}")
 
@@ -227,7 +227,7 @@ def abstract_events(df: pd.DataFrame, cfg: Config) -> pd.DataFrame:
     log = pd.DataFrame(rows, columns=["case_id", "activity", "timestamp"])
     log["alphabet"] = log["activity"].map(event_alphabet_map(cfg))
     log["stratum"] = log["activity"].map(event_stratum_map(cfg))
-    return log.sort_values(["case_id", "timestamp"]).reset_index(drop=True)
+    return log.sort_values(["case_id", "timestamp", "activity"], kind="mergesort").reset_index(drop=True)
 
 
 def rule_stratum(rule: dict) -> str:

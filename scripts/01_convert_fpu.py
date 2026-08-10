@@ -28,6 +28,11 @@ def main() -> None:
                 continue
             df = pd.read_csv(csv)
             df["Datetime"] = pd.to_datetime(df["Datetime"], format="%m/%d/%Y %H:%M")
+            # one raw file ships date-rotated (SFPU_SensorBias_RMTEMP_-2C
+            # starts at Jan 3 and wraps) — sort so downstream positional
+            # comparisons are never misaligned
+            df = df.sort_values("Datetime").reset_index(drop=True)
+            assert df["Datetime"].is_monotonic_increasing
             df.to_parquet(out, compression="snappy")
             print(f"  wrote {out.name:52s} {df.shape[0]:>7,} rows x {df.shape[1]} cols")
     print("done")

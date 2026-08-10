@@ -174,7 +174,11 @@ events:
     leak_above: 0.05
     sustained_min: 15
 
-  # Zone reheat valves: mismatch + leak per zone (the pooled device class)
+  # Zone reheat valves: mismatch per zone (the pooled device class).
+  # NOTE: position-based leak rules were REMOVED after positive controls
+  # proved them structurally deaf here (the leak passes water through a
+  # closed valve; position reads closed, honestly). rh_water_leak_* below
+  # is the working leak detector.
   rh_valve_mismatch_I:
     kind: mismatch
     pos: RH_VLV_POS_I
@@ -200,34 +204,6 @@ events:
     threshold: 0.05
     sustained_min: 60
 
-  rh_valve_leak_I:
-    kind: leak
-    pos: RH_VLV_POS_I
-    cmd: RH_VLV_CMD_I
-    idle_below: 0.02
-    leak_above: 0.05
-    sustained_min: 15
-  rh_valve_leak_W:
-    kind: leak
-    pos: RH_VLV_POS_W
-    cmd: RH_VLV_CMD_W
-    idle_below: 0.02
-    leak_above: 0.05
-    sustained_min: 15
-  rh_valve_leak_S:
-    kind: leak
-    pos: RH_VLV_POS_S
-    cmd: RH_VLV_CMD_S
-    idle_below: 0.02
-    leak_above: 0.05
-    sustained_min: 15
-  rh_valve_leak_E:
-    kind: leak
-    pos: RH_VLV_POS_E
-    cmd: RH_VLV_CMD_E
-    idle_below: 0.02
-    leak_above: 0.05
-    sustained_min: 15
 
   # Waterside leak: flow through a CLOSED reheat valve. The position-
   # based leak rule is deaf to this fault class (position reads closed,
@@ -268,7 +244,10 @@ events:
     kind: setpoint_deviation
     meas: ZONE_FLOW_I
     sp: ZONE_FLOW_SP_I
-    threshold: 150
+    # healthy noise floor: sustained runs vanish above 25 CFM (measured,
+    # FaultFree only); threshold = floor x 2 margin. Was 150 (margin 6x,
+    # needlessly deaf: VAVDMPRStuck_20 132/365 days; at 50 it fires earlier).
+    threshold: 50
     sustained_min: 60
     gate_signal: OCCUPIED
     gate_above: 0.5
@@ -276,7 +255,10 @@ events:
     kind: setpoint_deviation
     meas: ZONE_FLOW_W
     sp: ZONE_FLOW_SP_W
-    threshold: 150
+    # healthy noise floor: sustained runs vanish above 25 CFM (measured,
+    # FaultFree only); threshold = floor x 2 margin. Was 150 (margin 6x,
+    # needlessly deaf: VAVDMPRStuck_20 132/365 days; at 50 it fires earlier).
+    threshold: 50
     sustained_min: 60
     gate_signal: OCCUPIED
     gate_above: 0.5
@@ -284,7 +266,10 @@ events:
     kind: setpoint_deviation
     meas: ZONE_FLOW_S
     sp: ZONE_FLOW_SP_S
-    threshold: 150
+    # healthy noise floor: sustained runs vanish above 25 CFM (measured,
+    # FaultFree only); threshold = floor x 2 margin. Was 150 (margin 6x,
+    # needlessly deaf: VAVDMPRStuck_20 132/365 days; at 50 it fires earlier).
+    threshold: 50
     sustained_min: 60
     gate_signal: OCCUPIED
     gate_above: 0.5
@@ -292,7 +277,10 @@ events:
     kind: setpoint_deviation
     meas: ZONE_FLOW_E
     sp: ZONE_FLOW_SP_E
-    threshold: 150
+    # healthy noise floor: sustained runs vanish above 25 CFM (measured,
+    # FaultFree only); threshold = floor x 2 margin. Was 150 (margin 6x,
+    # needlessly deaf: VAVDMPRStuck_20 132/365 days; at 50 it fires earlier).
+    threshold: 50
     sustained_min: 60
     gate_signal: OCCUPIED
     gate_above: 0.5
@@ -313,6 +301,7 @@ events:
       - signal: HWC_VLV_POS
         below: 0.02
     occ_signal: OCCUPIED
+    occ_above: 0.5        # occupied OR night-cycle: AHU active either way
     sustained_min: 120
 
   mixed_air_envelope:
@@ -322,6 +311,7 @@ events:
     high_ref: RA_TEMP
     tolerance: 2.0
     occ_signal: OCCUPIED
+    occ_above: 0.5
     sustained_min: 60
 
   sat_setpoint_deviation:

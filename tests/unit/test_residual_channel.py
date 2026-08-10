@@ -102,3 +102,52 @@ def test_multi_gate_residual_requires_all_gates_idle():
     df4["HWC_VLV"] = 0.0
     log4 = abstract_events(df4, cfg2)
     assert (log4["activity"] == "supply_air_residual").sum() == 0
+
+
+def test_stratum_routing_excludes_device_events_from_unit_slice():
+    from processheal.hvac.events import device_state_only, state_only
+    from processheal.io.config import Config
+    rules = {
+        "detection": CFG.rules["detection"],
+        "events": {
+            "occupancy": {"kind": "occupancy", "signal": "OCCUPIED",
+                          "on_event": "system_started", "off_event": "system_stopped"},
+            "zone_fan": {"kind": "mode", "signal": "OA_DMPR_POS", "on_above": 0.5,
+                         "on_event": "fan_started", "off_event": "fan_stopped",
+                         "stratum": "device"},
+        },
+    }
+    cfg2 = Config(sensors=CFG.sensors, rules=rules)
+    df = _two_day_frame(61.0)
+    df.loc[df.index[:360], "SYS_CTL"] = 0
+    df.loc[df.index[720:1080], "OA_DMPR"] = 0.9  # fan cycles
+    log = abstract_events(df, cfg2)
+    unit = state_only(log)
+    dev = device_state_only(log)
+    assert set(unit["activity"]) == {"system_started"}
+    assert set(dev["activity"]) <= {"fan_started", "fan_stopped"} and len(dev) > 0
+
+
+def test_occ_above_gate_includes_night_cycle_state():
+    from processheal.io.config import Config
+    rules = {
+        "detection": CFG.rules["detection"],
+        "events": {
+            "supply_air_residual": {
+                "kind": "paired_residual", "a": "SA_TEMP", "b": "MA_TEMP",
+                "low": -2.6, "high": 3.3,
+                "gate_signal": "CHWC_VLV_POS", "gate_below": 0.02,
+                "occ_signal": "OCCUPIED", "occ_above": 0.5,
+                "sustained_min": 120,
+            },
+        },
+    }
+    cfg2 = Config(sensors=CFG.sensors, rules=rules)
+    df = _two_day_frame(68.2)
+    df["SYS_CTL"] = 2  # night-cycle state, biased residual
+    log = abstract_events(df, cfg2)
+    assert (log["activity"] == "supply_air_residual").sum() == 1
+    # default ==1 semantics would have been silent on state 2
+    del rules["events"]["supply_air_residual"]["occ_above"]
+    log2 = abstract_events(df, Config(sensors=CFG.sensors, rules=rules))
+    assert (log2["activity"] == "supply_air_residual").sum() == 0

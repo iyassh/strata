@@ -83,7 +83,7 @@ def day_universe(df: pd.DataFrame) -> pd.DataFrame:
     """Every calendar day in the RAW file, with occupied minutes (G7)."""
     w = df.rename(columns={v: k for k, v in cfg.sensors.items()})
     day = w["Datetime"].dt.date.astype(str)
-    occ = w["OCCUPIED"] == 1
+    occ = w["OCCUPIED"] > 0  # any scheduled operation (incl. night-cycle states)
     diffs = w["Datetime"].diff().dropna().dt.total_seconds() / 60.0
     interval = float(diffs.median()) if len(diffs) else 1.0
     uni = pd.DataFrame({"case_id": day, "occ": occ}).groupby("case_id")["occ"].sum() * interval

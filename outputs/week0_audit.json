@@ -68,904 +68,604 @@
   },
   "zone_ground_truth": {
     "PFPU_RMTEMPUnstable": {
-      "zone_diff_frac": {
-        "I": 0.2781,
-        "W": 0.3234,
-        "S": 0.7814,
-        "E": 0.4856
+      "zone_divergence": {
+        "I": 0.0022,
+        "W": 0.0231,
+        "S": 0.1069,
+        "E": 0.0269
       },
-      "ahu_diff_frac": 0.662,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 3.97
     },
     "PFPU_ReheatCoilFouling_Airside_Minor": {
-      "zone_diff_frac": {
-        "I": 0.3297,
-        "W": 0.3775,
-        "S": 0.8978,
-        "E": 0.4533
+      "zone_divergence": {
+        "I": 0.0015,
+        "W": 0.0229,
+        "S": 0.0263,
+        "E": 0.0259
       },
-      "ahu_diff_frac": 0.886,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.02
     },
     "PFPU_ReheatCoilFouling_Airside_Moderate": {
-      "zone_diff_frac": {
-        "I": 0.5421,
-        "W": 0.5882,
-        "S": 0.9665,
-        "E": 0.5983
+      "zone_divergence": {
+        "I": 0.003,
+        "W": 0.0242,
+        "S": 0.041,
+        "E": 0.0281
       },
-      "ahu_diff_frac": 0.9429,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.46
     },
     "PFPU_ReheatCoilFouling_Airside_Severe": {
-      "zone_diff_frac": {
-        "I": 0.6691,
-        "W": 0.6909,
-        "S": 0.9872,
-        "E": 0.7
+      "zone_divergence": {
+        "I": 0.0055,
+        "W": 0.0266,
+        "S": 0.0695,
+        "E": 0.0301
       },
-      "ahu_diff_frac": 0.9629,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 2.31
     },
     "PFPU_ReheatCoilFouling_Waterside_Minor": {
-      "zone_diff_frac": {
-        "I": 0.172,
-        "W": 0.2467,
-        "S": 0.2628,
-        "E": 0.4045
+      "zone_divergence": {
+        "I": 0.0007,
+        "W": 0.0208,
+        "S": 0.0175,
+        "E": 0.0239
       },
-      "ahu_diff_frac": 0.6061,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.15
     },
     "PFPU_ReheatCoilFouling_Waterside_Moderate": {
-      "zone_diff_frac": {
-        "I": 0.1761,
-        "W": 0.252,
-        "S": 0.2676,
-        "E": 0.4052
+      "zone_divergence": {
+        "I": 0.0008,
+        "W": 0.0209,
+        "S": 0.0191,
+        "E": 0.0245
       },
-      "ahu_diff_frac": 0.6098,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.17
     },
     "PFPU_ReheatCoilFouling_Waterside_Severe": {
-      "zone_diff_frac": {
-        "I": 0.1739,
-        "W": 0.2518,
-        "S": 0.2691,
-        "E": 0.3991
+      "zone_divergence": {
+        "I": 0.0008,
+        "W": 0.0212,
+        "S": 0.0215,
+        "E": 0.0243
       },
-      "ahu_diff_frac": 0.5961,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.13
     },
     "PFPU_ReheatVLVLeak_20%MaxFlow": {
-      "zone_diff_frac": {
-        "I": 0.1947,
-        "W": 0.2709,
-        "S": 0.9987,
-        "E": 0.4417
+      "zone_divergence": {
+        "I": 0.0013,
+        "W": 0.0227,
+        "S": 0.7226,
+        "E": 0.0255
       },
-      "ahu_diff_frac": 0.6394,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 28.34
     },
     "PFPU_ReheatVLVLeak_50%MaxFlow": {
-      "zone_diff_frac": {
-        "I": 0.1934,
-        "W": 0.2691,
-        "S": 0.9991,
-        "E": 0.4365
+      "zone_divergence": {
+        "I": 0.0014,
+        "W": 0.0227,
+        "S": 1.0899,
+        "E": 0.0261
       },
-      "ahu_diff_frac": 0.6377,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 41.76
     },
     "PFPU_ReheatVLVLeak_80%MaxFlow": {
-      "zone_diff_frac": {
-        "I": 0.1955,
-        "W": 0.2715,
-        "S": 0.9991,
-        "E": 0.4368
+      "zone_divergence": {
+        "I": 0.0015,
+        "W": 0.0224,
+        "S": 1.4477,
+        "E": 0.0255
       },
-      "ahu_diff_frac": 0.641,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 56.77
     },
     "PFPU_ReheatVLVStuck_0%": {
-      "zone_diff_frac": {
-        "I": 0.5337,
-        "W": 0.5491,
-        "S": 0.7609,
-        "E": 0.5645
+      "zone_divergence": {
+        "I": 0.0438,
+        "W": 0.0426,
+        "S": 0.344,
+        "E": 0.0467
       },
-      "ahu_diff_frac": 0.7689,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 7.37
     },
     "PFPU_ReheatVLVStuck_100%": {
-      "zone_diff_frac": {
-        "I": 0.192,
-        "W": 0.2684,
-        "S": 0.9992,
-        "E": 0.4335
+      "zone_divergence": {
+        "I": 0.0015,
+        "W": 0.0228,
+        "S": 2.5293,
+        "E": 0.0264
       },
-      "ahu_diff_frac": 0.6352,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 95.81
     },
     "PFPU_ReheatVLVStuck_20%": {
-      "zone_diff_frac": {
-        "I": 0.1952,
-        "W": 0.2682,
-        "S": 1.0,
-        "E": 0.431
+      "zone_divergence": {
+        "I": 0.0022,
+        "W": 0.0234,
+        "S": 0.7217,
+        "E": 0.0263
       },
-      "ahu_diff_frac": 0.6335,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 27.44
     },
     "PFPU_ReheatVLVStuck_50%": {
-      "zone_diff_frac": {
-        "I": 0.1931,
-        "W": 0.2688,
-        "S": 1.0,
-        "E": 0.4356
+      "zone_divergence": {
+        "I": 0.0014,
+        "W": 0.0228,
+        "S": 1.1483,
+        "E": 0.0264
       },
-      "ahu_diff_frac": 0.6337,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 43.5
     },
     "PFPU_ReheatVLVStuck_80%": {
-      "zone_diff_frac": {
-        "I": 0.1933,
-        "W": 0.2673,
-        "S": 1.0,
-        "E": 0.4387
+      "zone_divergence": {
+        "I": 0.0014,
+        "W": 0.0225,
+        "S": 1.9929,
+        "E": 0.026
       },
-      "ahu_diff_frac": 0.6434,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 76.65
     },
     "PFPU_SensorBias_RMTEMP_+2C": {
-      "zone_diff_frac": {
-        "I": 0.7871,
-        "W": 0.7517,
-        "S": 0.9993,
-        "E": 0.7622
+      "zone_divergence": {
+        "I": 0.0084,
+        "W": 0.0283,
+        "S": 0.168,
+        "E": 0.0315
       },
-      "ahu_diff_frac": 0.9981,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 5.33
     },
     "PFPU_SensorBias_RMTEMP_+4C": {
-      "zone_diff_frac": {
-        "I": 0.8834,
-        "W": 0.8517,
-        "S": 0.9993,
-        "E": 0.8548
+      "zone_divergence": {
+        "I": 0.0154,
+        "W": 0.0334,
+        "S": 0.3591,
+        "E": 0.0371
       },
-      "ahu_diff_frac": 0.9988,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 9.68
     },
     "PFPU_SensorBias_RMTEMP_-2C": {
-      "zone_diff_frac": {
-        "I": 0.7959,
-        "W": 0.7452,
-        "S": 0.9993,
-        "E": 0.7573
+      "zone_divergence": {
+        "I": 0.0249,
+        "W": 0.0359,
+        "S": 0.2057,
+        "E": 0.0398
       },
-      "ahu_diff_frac": 0.9981,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 5.17
     },
     "PFPU_SensorBias_RMTEMP_-4C": {
-      "zone_diff_frac": {
-        "I": 0.8785,
-        "W": 0.829,
-        "S": 0.9993,
-        "E": 0.8406
+      "zone_divergence": {
+        "I": 0.0635,
+        "W": 0.0536,
+        "S": 0.4646,
+        "E": 0.0586
       },
-      "ahu_diff_frac": 0.9987,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 7.32
     },
     "PFPU_SensorBias_VAVAirflow_+200CFM": {
-      "zone_diff_frac": {
-        "I": 0.9064,
-        "W": 0.938,
-        "S": 0.9995,
-        "E": 0.9507
+      "zone_divergence": {
+        "I": 0.0608,
+        "W": 0.0612,
+        "S": 0.3722,
+        "E": 0.0653
       },
-      "ahu_diff_frac": 0.996,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 5.7
     },
     "PFPU_SensorBias_VAVAirflow_+400CFM": {
-      "zone_diff_frac": {
-        "I": 0.9085,
-        "W": 0.9383,
-        "S": 0.9995,
-        "E": 0.9502
+      "zone_divergence": {
+        "I": 0.0603,
+        "W": 0.0608,
+        "S": 0.4035,
+        "E": 0.065
       },
-      "ahu_diff_frac": 0.9963,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 6.21
     },
     "PFPU_SensorBias_VAVAirflow_-200CFM": {
-      "zone_diff_frac": {
-        "I": 0.9183,
-        "W": 0.926,
-        "S": 1.0,
-        "E": 0.9388
+      "zone_divergence": {
+        "I": 0.0493,
+        "W": 0.0548,
+        "S": 0.7578,
+        "E": 0.0591
       },
-      "ahu_diff_frac": 1.0,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 12.82
     },
     "PFPU_SensorBias_VAVAirflow_-400CFM": {
-      "zone_diff_frac": {
-        "I": 0.9633,
-        "W": 0.9557,
-        "S": 1.0,
-        "E": 0.967
+      "zone_divergence": {
+        "I": 0.0823,
+        "W": 0.0748,
+        "S": 1.2682,
+        "E": 0.0806
       },
-      "ahu_diff_frac": 1.0,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 15.41
     },
     "PFPU_VAVDMPRStuck_0%": {
-      "zone_diff_frac": {
-        "I": 0.9547,
-        "W": 0.976,
-        "S": 1.0,
-        "E": 0.9822
+      "zone_divergence": {
+        "I": 0.2328,
+        "W": 0.1935,
+        "S": 0.7733,
+        "E": 0.1959
       },
-      "ahu_diff_frac": 0.9991,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 3.32
     },
     "PFPU_VAVDMPRStuck_100%": {
-      "zone_diff_frac": {
-        "I": 0.9755,
-        "W": 0.964,
-        "S": 1.0,
-        "E": 0.9697
+      "zone_divergence": {
+        "I": 0.1073,
+        "W": 0.0903,
+        "S": 1.8865,
+        "E": 0.0965
       },
-      "ahu_diff_frac": 1.0,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 17.58
     },
     "PFPU_VAVDMPRStuck_20%": {
-      "zone_diff_frac": {
-        "I": 0.8029,
-        "W": 0.8459,
-        "S": 0.9991,
-        "E": 0.8535
+      "zone_divergence": {
+        "I": 0.0175,
+        "W": 0.0349,
+        "S": 0.207,
+        "E": 0.0385
       },
-      "ahu_diff_frac": 0.9924,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 5.38
     },
     "PFPU_VAVDMPRStuck_50%": {
-      "zone_diff_frac": {
-        "I": 0.9581,
-        "W": 0.9502,
-        "S": 1.0,
-        "E": 0.9629
+      "zone_divergence": {
+        "I": 0.0752,
+        "W": 0.0712,
+        "S": 0.927,
+        "E": 0.0767
       },
-      "ahu_diff_frac": 1.0,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 12.09
     },
     "PFPU_VAVDMPRStuck_80%": {
-      "zone_diff_frac": {
-        "I": 0.9751,
-        "W": 0.966,
-        "S": 1.0,
-        "E": 0.9689
+      "zone_divergence": {
+        "I": 0.1054,
+        "W": 0.0888,
+        "S": 1.7003,
+        "E": 0.095
       },
-      "ahu_diff_frac": 1.0,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 16.13
     },
     "PFPU_VAVDMPRUnstable": {
-      "zone_diff_frac": {
-        "I": 0.7695,
-        "W": 0.8018,
-        "S": 0.9774,
-        "E": 0.8475
+      "zone_divergence": {
+        "I": 0.0077,
+        "W": 0.0279,
+        "S": 0.0682,
+        "E": 0.0324
       },
-      "ahu_diff_frac": 0.9655,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 2.1
     },
     "PFPU_VAVFanRestrictFlow": {
-      "zone_diff_frac": {
-        "I": 0.728,
-        "W": 0.7417,
-        "S": 0.9965,
-        "E": 0.7505
+      "zone_divergence": {
+        "I": 0.0086,
+        "W": 0.028,
+        "S": 0.1151,
+        "E": 0.0316
       },
-      "ahu_diff_frac": 0.9771,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 3.64
     },
     "SFPU_RMTEMPUnstable": {
-      "zone_diff_frac": {
-        "I": 0.8512,
-        "W": 0.8163,
-        "S": 0.952,
-        "E": 0.8093
+      "zone_divergence": {
+        "I": 0.0154,
+        "W": 0.011,
+        "S": 0.1176,
+        "E": 0.0119
       },
-      "ahu_diff_frac": 0.8973,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 7.64
     },
     "SFPU_ReheatCoilFouling_Airside_Minor": {
-      "zone_diff_frac": {
-        "I": 0.6475,
-        "W": 0.6045,
-        "S": 0.9711,
-        "E": 0.5913
+      "zone_divergence": {
+        "I": 0.0086,
+        "W": 0.0059,
+        "S": 0.0106,
+        "E": 0.0065
       },
-      "ahu_diff_frac": 0.8932,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.23
     },
     "SFPU_ReheatCoilFouling_Airside_Moderate": {
-      "zone_diff_frac": {
-        "I": 0.7453,
-        "W": 0.6246,
-        "S": 0.9899,
-        "E": 0.6171
+      "zone_divergence": {
+        "I": 0.0094,
+        "W": 0.0066,
+        "S": 0.0291,
+        "E": 0.0073
       },
-      "ahu_diff_frac": 0.9148,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 3.1
     },
     "SFPU_ReheatCoilFouling_Airside_Severe": {
-      "zone_diff_frac": {
-        "I": 0.8194,
-        "W": 0.6833,
-        "S": 0.9975,
-        "E": 0.6843
+      "zone_divergence": {
+        "I": 0.013,
+        "W": 0.0094,
+        "S": 0.0957,
+        "E": 0.0095
       },
-      "ahu_diff_frac": 0.9222,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 7.36
     },
     "SFPU_ReheatCoilFouling_Waterside_Minor": {
-      "zone_diff_frac": {
-        "I": 0.6195,
-        "W": 0.5992,
-        "S": 0.6596,
-        "E": 0.5842
+      "zone_divergence": {
+        "I": 0.0085,
+        "W": 0.0061,
+        "S": 0.0072,
+        "E": 0.0068
       },
-      "ahu_diff_frac": 0.8732,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.18
     },
     "SFPU_ReheatCoilFouling_Waterside_Moderate": {
-      "zone_diff_frac": {
-        "I": 0.6227,
-        "W": 0.5956,
-        "S": 0.6683,
-        "E": 0.5845
+      "zone_divergence": {
+        "I": 0.0084,
+        "W": 0.0058,
+        "S": 0.0089,
+        "E": 0.0068
       },
-      "ahu_diff_frac": 0.8757,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.06
     },
     "SFPU_ReheatCoilFouling_Waterside_Severe": {
-      "zone_diff_frac": {
-        "I": 0.624,
-        "W": 0.6053,
-        "S": 0.6909,
-        "E": 0.5902
+      "zone_divergence": {
+        "I": 0.0098,
+        "W": 0.0068,
+        "S": 0.0134,
+        "E": 0.0073
       },
-      "ahu_diff_frac": 0.8782,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.37
     },
     "SFPU_ReheatVLVLeak_20%MaxFlow": {
-      "zone_diff_frac": {
-        "I": 0.9721,
-        "W": 0.8572,
-        "S": 1.0,
-        "E": 0.926
+      "zone_divergence": {
+        "I": 0.0677,
+        "W": 0.0439,
+        "S": 1.7646,
+        "E": 0.0457
       },
-      "ahu_diff_frac": 0.9993,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 26.06
     },
     "SFPU_ReheatVLVLeak_50%MaxFlow": {
-      "zone_diff_frac": {
-        "I": 0.9823,
-        "W": 0.9104,
-        "S": 1.0,
-        "E": 0.9583
+      "zone_divergence": {
+        "I": 0.2151,
+        "W": 0.1426,
+        "S": 2.6651,
+        "E": 0.1473
       },
-      "ahu_diff_frac": 0.9995,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 12.39
     },
     "SFPU_ReheatVLVLeak_80%MaxFlow": {
-      "zone_diff_frac": {
-        "I": 0.987,
-        "W": 0.9324,
-        "S": 1.0,
-        "E": 0.9601
+      "zone_divergence": {
+        "I": 0.2614,
+        "W": 0.1726,
+        "S": 3.3893,
+        "E": 0.1779
       },
-      "ahu_diff_frac": 0.9995,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 12.97
     },
     "SFPU_ReheatVLVStuck_0%": {
-      "zone_diff_frac": {
-        "I": 0.7124,
-        "W": 0.6738,
-        "S": 0.8323,
-        "E": 0.6675
+      "zone_divergence": {
+        "I": 0.0346,
+        "W": 0.0205,
+        "S": 0.1512,
+        "E": 0.0218
       },
-      "ahu_diff_frac": 0.8962,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 4.37
     },
     "SFPU_ReheatVLVStuck_100%": {
-      "zone_diff_frac": {
-        "I": 0.9885,
-        "W": 0.9427,
-        "S": 1.0,
-        "E": 0.9592
+      "zone_divergence": {
+        "I": 0.2839,
+        "W": 0.1863,
+        "S": 4.6736,
+        "E": 0.1923
       },
-      "ahu_diff_frac": 0.9995,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 16.46
     },
     "SFPU_ReheatVLVStuck_20%": {
-      "zone_diff_frac": {
-        "I": 0.9147,
-        "W": 0.7789,
-        "S": 1.0,
-        "E": 0.8031
+      "zone_divergence": {
+        "I": 0.0169,
+        "W": 0.0104,
+        "S": 1.1244,
+        "E": 0.0113
       },
-      "ahu_diff_frac": 0.9989,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 66.53
     },
     "SFPU_ReheatVLVStuck_50%": {
-      "zone_diff_frac": {
-        "I": 0.9723,
-        "W": 0.8527,
-        "S": 1.0,
-        "E": 0.9124
+      "zone_divergence": {
+        "I": 0.0527,
+        "W": 0.0335,
+        "S": 2.0388,
+        "E": 0.0353
       },
-      "ahu_diff_frac": 0.9993,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 38.69
     },
     "SFPU_ReheatVLVStuck_80%": {
-      "zone_diff_frac": {
-        "I": 0.982,
-        "W": 0.9078,
-        "S": 1.0,
-        "E": 0.9577
+      "zone_divergence": {
+        "I": 0.2135,
+        "W": 0.1414,
+        "S": 3.2968,
+        "E": 0.1461
       },
-      "ahu_diff_frac": 0.9995,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 15.44
     },
     "SFPU_SensorBias_RMTEMP_+2C": {
-      "zone_diff_frac": {
-        "I": 0.8822,
-        "W": 0.7436,
-        "S": 0.9989,
-        "E": 0.7634
+      "zone_divergence": {
+        "I": 0.0128,
+        "W": 0.0078,
+        "S": 0.1536,
+        "E": 0.0087
       },
-      "ahu_diff_frac": 0.999,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 12.0
     },
     "SFPU_SensorBias_RMTEMP_+4C": {
-      "zone_diff_frac": {
-        "I": 0.9304,
-        "W": 0.8349,
-        "S": 0.9992,
-        "E": 0.8469
+      "zone_divergence": {
+        "I": 0.0309,
+        "W": 0.0187,
+        "S": 0.3468,
+        "E": 0.0201
       },
-      "ahu_diff_frac": 0.9991,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 11.22
     },
     "SFPU_SensorBias_RMTEMP_-2C": {
-      "zone_diff_frac": {
-        "I": 0.8856,
-        "W": 0.7637,
-        "S": 0.999,
-        "E": 0.7923
+      "zone_divergence": {
+        "I": 0.6396,
+        "W": 0.5999,
+        "S": 0.6751,
+        "E": 0.6085
       },
-      "ahu_diff_frac": 0.9986,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "INDETERMINATE",
+      "top_ratio": 1.06
     },
     "SFPU_SensorBias_RMTEMP_-4C": {
-      "zone_diff_frac": {
-        "I": 0.928,
-        "W": 0.8096,
-        "S": 0.9992,
-        "E": 0.8365
+      "zone_divergence": {
+        "I": 0.076,
+        "W": 0.0471,
+        "S": 0.3636,
+        "E": 0.0505
       },
-      "ahu_diff_frac": 0.9989,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 4.78
     },
     "SFPU_SensorBias_VAVAirflow_+200CFM": {
-      "zone_diff_frac": {
-        "I": 0.9575,
-        "W": 0.8571,
-        "S": 0.9997,
-        "E": 0.929
+      "zone_divergence": {
+        "I": 0.2119,
+        "W": 0.1352,
+        "S": 0.4612,
+        "E": 0.1425
       },
-      "ahu_diff_frac": 0.9945,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 2.18
     },
     "SFPU_SensorBias_VAVAirflow_+400CFM": {
-      "zone_diff_frac": {
-        "I": 0.9587,
-        "W": 0.8577,
-        "S": 0.9997,
-        "E": 0.9299
+      "zone_divergence": {
+        "I": 0.2127,
+        "W": 0.1354,
+        "S": 0.4884,
+        "E": 0.1426
       },
-      "ahu_diff_frac": 0.9949,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 2.3
     },
     "SFPU_SensorBias_VAVAirflow_-200CFM": {
-      "zone_diff_frac": {
-        "I": 0.9873,
-        "W": 0.931,
-        "S": 0.9993,
-        "E": 0.9387
+      "zone_divergence": {
+        "I": 0.2829,
+        "W": 0.1838,
+        "S": 0.6802,
+        "E": 0.1935
       },
-      "ahu_diff_frac": 0.9969,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 2.4
     },
     "SFPU_SensorBias_VAVAirflow_-400CFM": {
-      "zone_diff_frac": {
-        "I": 0.9933,
-        "W": 0.9584,
-        "S": 0.9999,
-        "E": 0.9625
+      "zone_divergence": {
+        "I": 0.3124,
+        "W": 0.2004,
+        "S": 1.0086,
+        "E": 0.2098
       },
-      "ahu_diff_frac": 0.9974,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 3.23
     },
     "SFPU_VAVDMPRStuck_0%": {
-      "zone_diff_frac": {
-        "I": 0.9725,
-        "W": 0.9627,
-        "S": 1.0,
-        "E": 0.9897
+      "zone_divergence": {
+        "I": 0.3557,
+        "W": 0.2378,
+        "S": 1.1149,
+        "E": 0.2463
       },
-      "ahu_diff_frac": 0.9984,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 3.13
     },
     "SFPU_VAVDMPRStuck_100%": {
-      "zone_diff_frac": {
-        "I": 0.9948,
-        "W": 0.9663,
-        "S": 1.0,
-        "E": 0.9717
+      "zone_divergence": {
+        "I": 0.3172,
+        "W": 0.2005,
+        "S": 1.3701,
+        "E": 0.2101
       },
-      "ahu_diff_frac": 0.9979,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 4.32
     },
     "SFPU_VAVDMPRStuck_20%": {
-      "zone_diff_frac": {
-        "I": 0.9677,
-        "W": 0.8809,
-        "S": 0.9999,
-        "E": 0.9483
+      "zone_divergence": {
+        "I": 0.2241,
+        "W": 0.1447,
+        "S": 0.5598,
+        "E": 0.1503
       },
-      "ahu_diff_frac": 0.9946,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 2.5
     },
     "SFPU_VAVDMPRStuck_50%": {
-      "zone_diff_frac": {
-        "I": 0.9859,
-        "W": 0.9279,
-        "S": 0.9993,
-        "E": 0.9403
+      "zone_divergence": {
+        "I": 0.258,
+        "W": 0.1653,
+        "S": 0.5344,
+        "E": 0.175
       },
-      "ahu_diff_frac": 0.9952,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 2.07
     },
     "SFPU_VAVDMPRStuck_80%": {
-      "zone_diff_frac": {
-        "I": 0.9939,
-        "W": 0.9641,
-        "S": 1.0,
-        "E": 0.9678
+      "zone_divergence": {
+        "I": 0.3114,
+        "W": 0.1972,
+        "S": 1.1773,
+        "E": 0.2061
       },
-      "ahu_diff_frac": 0.9993,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 3.78
     },
     "SFPU_VAVDMPRUnstable": {
-      "zone_diff_frac": {
-        "I": 0.9065,
-        "W": 0.7717,
-        "S": 0.9856,
-        "E": 0.888
+      "zone_divergence": {
+        "I": 0.032,
+        "W": 0.0189,
+        "S": 0.0977,
+        "E": 0.0203
       },
-      "ahu_diff_frac": 0.948,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 3.05
     },
     "SFPU_VAVFanRestrictFlow": {
-      "zone_diff_frac": {
-        "I": 0.8613,
-        "W": 0.7364,
-        "S": 0.9996,
-        "E": 0.7625
+      "zone_divergence": {
+        "I": 0.0221,
+        "W": 0.0137,
+        "S": 0.2392,
+        "E": 0.0165
       },
-      "ahu_diff_frac": 0.962,
-      "affected_zones": [
-        "I",
-        "W",
-        "S",
-        "E"
-      ]
+      "injected_zone": "S",
+      "top_ratio": 10.82
     }
   },
   "ttl_coverage": {
@@ -989,5 +689,9 @@
         "RF%SFSPD"
       ]
     }
+  },
+  "monotonic": {
+    "pfpu": [],
+    "sfpu": []
   }
 }

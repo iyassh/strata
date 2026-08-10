@@ -55,40 +55,59 @@ def md5_gate() -> dict:
 
 
 def zone_ground_truth() -> dict:
-    """Which zone columns differ from FaultFree, per scenario (E3 ground truth).
+    """Which zone each fault was injected in (E3 ground truth), v2.
 
-    A column 'differs' if >0.5% of its samples deviate by more than a tiny
-    absolute tolerance — loose enough to ignore solver noise, strict enough
-    to catch any real behavioural change.
+    Pre-registered method (replaces the vacuous v1 whole-column binary diff):
+    per zone, divergence = mean over that zone's own columns of
+    mean(|fault - healthy|) / healthy column std (timestamp-ALIGNED, never
+    positional — one raw file shipped date-rotated). The injected zone must
+    lead the runner-up by >= MARGIN x; otherwise the scenario is recorded
+    INDETERMINATE (scored as such in E3, never force-labeled).
     """
-    print("\n== Gate 2: per-scenario zone-diff ground truth ==")
+    MARGIN = 2.0
+    print("\n== Gate 2 (v2): per-scenario zone ground truth ==")
     truth: dict[str, dict] = {}
     for system, pdir in PROCESSED.items():
-        base = pd.read_parquet(pdir / f"{system.upper()}_FaultFree.parquet")
+        base = pd.read_parquet(pdir / f"{system.upper()}_FaultFree.parquet").set_index("Datetime")
         zone_cols = {z: [c for c in base.columns if c.endswith(f"_{z}")] for z in ZONES}
-        ahu_cols = [c for c in base.columns
-                    if c != "Datetime" and not any(c.endswith(f"_{z}") for z in ZONES)]
+        col_std = base.std()
         for pq in sorted(pdir.glob("*.parquet")):
             if pq.stem == f"{system.upper()}_FaultFree":
                 continue
-            df = pd.read_parquet(pq)
-            n = min(len(df), len(base))
-            rec = {}
+            df = pd.read_parquet(pq).set_index("Datetime")
+            idx = base.index.intersection(df.index)
+            b, f = base.loc[idx], df.loc[idx]
+            div = {}
             for z, cols in zone_cols.items():
-                frac = max(
-                    float(((df[c].iloc[:n].values - base[c].iloc[:n].values) ** 2 > 1e-6).mean())
-                    for c in cols
-                )
-                rec[z] = round(frac, 4)
-            ahu_frac = max(
-                float(((df[c].iloc[:n].values - base[c].iloc[:n].values) ** 2 > 1e-6).mean())
-                for c in ahu_cols
-            )
-            affected = [z for z, f in rec.items() if f > 0.005]
-            truth[pq.stem] = {"zone_diff_frac": rec, "ahu_diff_frac": round(ahu_frac, 4),
-                              "affected_zones": affected}
-            print(f"  {pq.stem:52s} zones {affected or ['-none-']} ahu {ahu_frac:.3f}")
+                vals = []
+                for c in cols:
+                    sd = col_std[c]
+                    if sd > 1e-9:
+                        vals.append(float((f[c] - b[c]).abs().mean()) / float(sd))
+                div[z] = round(sum(vals) / len(vals), 4)
+            ranked = sorted(div.items(), key=lambda kv: -kv[1])
+            (top_z, top_v), (_, second_v) = ranked[0], ranked[1]
+            zone = top_z if (second_v == 0 or top_v / max(second_v, 1e-9) >= MARGIN) else "INDETERMINATE"
+            truth[pq.stem] = {"zone_divergence": div, "injected_zone": zone,
+                              "top_ratio": round(top_v / max(second_v, 1e-9), 2)}
+            print(f"  {pq.stem:52s} -> {zone:13s} (ratio {truth[pq.stem]['top_ratio']:.1f}) {div}")
     return truth
+
+
+def monotonic_gate() -> dict:
+    """Every parquet must be strictly time-ordered with the FaultFree date index."""
+    print("\n== Gate 4: timestamp monotonicity / calendar identity ==")
+    report = {}
+    for system, pdir in PROCESSED.items():
+        base_idx = pd.read_parquet(pdir / f"{system.upper()}_FaultFree.parquet", columns=["Datetime"])["Datetime"]
+        bad = []
+        for pq in sorted(pdir.glob("*.parquet")):
+            dt = pd.read_parquet(pq, columns=["Datetime"])["Datetime"]
+            if not dt.is_monotonic_increasing or len(dt) != len(base_idx) or not (dt.values == base_idx.values).all():
+                bad.append(pq.stem)
+        print(f"  [{system}] {'ALL OK' if not bad else 'BAD: ' + ', '.join(bad)}")
+        report[system] = bad
+    return report
 
 
 def ttl_coverage() -> dict:
@@ -123,6 +142,8 @@ if __name__ == "__main__":
         result["md5"] = md5_gate()
     if which in ("zones", "all"):
         result["zone_ground_truth"] = zone_ground_truth()
+    if which in ("mono", "all"):
+        result["monotonic"] = monotonic_gate()
     if which in ("ttl", "all"):
         result["ttl_coverage"] = ttl_coverage()
     OUT.parent.mkdir(exist_ok=True)

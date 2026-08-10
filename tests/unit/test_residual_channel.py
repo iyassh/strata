@@ -63,3 +63,42 @@ def test_residual_scores_empty_when_sensors_missing():
     df = _two_day_frame(68.2).drop(columns=["MA_TEMP"])
     s = daily_residual_scores(df, CFG)
     assert s.empty
+
+
+def test_multi_gate_residual_requires_all_gates_idle():
+    """FPU-style: SA-MA residual gated on cooling AND heating coils (gates list)."""
+    from processheal.io.config import Config
+    rules = {
+        "detection": CFG.rules["detection"],
+        "events": {
+            "supply_air_residual": {
+                "kind": "paired_residual", "a": "SA_TEMP", "b": "MA_TEMP",
+                "low": -2.6, "high": 3.3,
+                "gates": [
+                    {"signal": "CHWC_VLV_POS", "below": 0.02},
+                    {"signal": "HWC_VLV_POS", "below": 0.02},
+                ],
+                "occ_signal": "OCCUPIED", "sustained_min": 120,
+            },
+        },
+    }
+    cfg2 = Config(sensors={**CFG.sensors, "HWC_VLV_POS": "HWC_VLV"}, rules=rules)
+    df = _two_day_frame(68.2)
+    df["HWC_VLV"] = 0.0
+    log = abstract_events(df, cfg2)
+    assert (log["activity"] == "supply_air_residual").sum() >= 1  # both coils off: fires
+    df2 = _two_day_frame(68.2)
+    df2["HWC_VLV"] = 0.5  # heating coil ACTIVE: residual hidden -> silent
+    log2 = abstract_events(df2, cfg2)
+    assert (log2["activity"] == "supply_air_residual").sum() == 0
+    df3 = _two_day_frame(68.2).drop(columns=["SA_TEMPSPT"])  # unrelated col fine
+    df3 = df3.drop(columns=[])  # no-op
+    df3 = df3.drop(columns=["OA_DMPR"])  # still fine: not needed by this rule
+    df3["HWC_VLV"] = 0.0
+    log3 = abstract_events(df3, cfg2)
+    assert (log3["activity"] == "supply_air_residual").sum() >= 1
+    # gates list fail-closed: drop a gate sensor -> rule skipped
+    df4 = _two_day_frame(68.2).drop(columns=["CHWC_VLV"])
+    df4["HWC_VLV"] = 0.0
+    log4 = abstract_events(df4, cfg2)
+    assert (log4["activity"] == "supply_air_residual").sum() == 0

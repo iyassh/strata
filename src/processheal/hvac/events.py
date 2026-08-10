@@ -109,6 +109,26 @@ def _first_sustained_run(cond: pd.Series, min_samples: int) -> int | None:
     return None
 
 
+def residual_gates(r: dict) -> list[dict]:
+    """Gate list for paired_residual: either the legacy single-gate keys
+    (``gate_signal`` + ``gate_below``/``gate_above``) or a ``gates:`` list of
+    ``{signal, below|above}`` mappings (needed when several control loops can
+    each hide the residual — e.g. cooling AND heating coils)."""
+    if "gates" in r:
+        return list(r["gates"])
+    if "gate_signal" in r:
+        g: dict = {"signal": r["gate_signal"]}
+        if "gate_below" in r:
+            g["below"] = r["gate_below"]
+        if "gate_above" in r:
+            g["above"] = r["gate_above"]
+        return [g]
+    return []
+
+
+_residual_gates = residual_gates  # internal alias
+
+
 def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
     if kind == "mismatch":
         return (w[r["pos"]] - w[r["cmd"]]).abs() > r["threshold"]
@@ -122,16 +142,16 @@ def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
         return cond
     if kind == "paired_residual":
         # (a - b) must stay inside the healthy band [low, high]; only
-        # meaningful while the gate holds (e.g. cooling coil NOT controlling,
-        # so no control loop is hiding the residual).
+        # meaningful while EVERY gate holds (e.g. cooling AND heating coils
+        # both idle, so no control loop is hiding the residual). Gates are
+        # required to be mapped — fail closed is enforced upstream.
         resid = w[r["a"]] - w[r["b"]]
         cond = (resid < r["low"]) | (resid > r["high"])
-        gate = r.get("gate_signal")
-        if gate and gate in w.columns:
-            if "gate_below" in r:
-                cond = cond & (w[gate] <= r["gate_below"])
-            if "gate_above" in r:
-                cond = cond & (w[gate] > r["gate_above"])
+        for g in _residual_gates(r):
+            if "below" in g:
+                cond = cond & (w[g["signal"]] <= g["below"])
+            if "above" in g:
+                cond = cond & (w[g["signal"]] > g["above"])
         occ = r.get("occ_signal")
         if occ and occ in w.columns:
             cond = cond & (w[occ] == 1)
@@ -184,6 +204,7 @@ def abstract_events(df: pd.DataFrame, cfg: Config) -> pd.DataFrame:
         # ungated on a new building would be an alarm storm, silently.
         needed = [r[k] for k in _SENSOR_KEYS[kind] if k in r]
         needed += [r[k] for k in ("gate_signal", "occ_signal") if k in r]
+        needed += [g["signal"] for g in r.get("gates", [])]
         if any(col not in w.columns for col in needed):
             continue
 

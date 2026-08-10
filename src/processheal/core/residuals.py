@@ -27,16 +27,24 @@ def daily_residual_scores(
     Returns a DataFrame with columns ``case_id``, ``score`` (median gated
     residual; NaN when the day has no adequate window) and ``window_min``.
     """
+    from processheal.hvac.events import residual_gates
+
     r = cfg.rules["events"][rule_name]
     w = df.rename(columns={v: k for k, v in cfg.sensors.items()}).sort_values("Datetime")
-    needed = [r["a"], r["b"], r["gate_signal"], r["occ_signal"]]
+    gates = residual_gates(r)
+    needed = [r["a"], r["b"], r["occ_signal"]] + [g["signal"] for g in gates]
     if any(c not in w.columns for c in needed):
         return pd.DataFrame(columns=["case_id", "score", "window_min"])
 
     diffs = w["Datetime"].diff().dropna().dt.total_seconds() / 60.0
     interval = float(diffs.median()) if len(diffs) else 1.0
 
-    gated = (w[r["gate_signal"]] <= r["gate_below"]) & (w[r["occ_signal"]] == 1)
+    gated = w[r["occ_signal"]] == 1
+    for g in gates:
+        if "below" in g:
+            gated = gated & (w[g["signal"]] <= g["below"])
+        if "above" in g:
+            gated = gated & (w[g["signal"]] > g["above"])
     day = w["Datetime"].dt.date.astype(str)
     resid = (w[r["a"]] - w[r["b"]]).where(gated)
 

@@ -1,0 +1,993 @@
+{
+  "md5": {
+    "hashes": {
+      "PFPU_FaultFree.csv": "4b394dec0a0a678fd3b5f121f2f95548",
+      "PFPU_RMTEMPUnstable.csv": "8d86fd60b503694897a7f51a873739a9",
+      "PFPU_ReheatCoilFouling_Airside_Minor.csv": "b340283c194fa442095d64cbf1aecbc5",
+      "PFPU_ReheatCoilFouling_Airside_Moderate.csv": "e4bc89ef87abe6affc6c712bd6435030",
+      "PFPU_ReheatCoilFouling_Airside_Severe.csv": "6acbd85bdae1a0af5ad38be36e399759",
+      "PFPU_ReheatCoilFouling_Waterside_Minor.csv": "3af3fc89d8555f6819a5e3f0b241085c",
+      "PFPU_ReheatCoilFouling_Waterside_Moderate.csv": "93720f59fbdb7b0a704de8f98311b5f0",
+      "PFPU_ReheatCoilFouling_Waterside_Severe.csv": "8f3dd51fd00a63bc0a0ef878c1cae2b8",
+      "PFPU_ReheatVLVLeak_20%MaxFlow.csv": "5a70c593e0ddf8d7003989f91a634d2a",
+      "PFPU_ReheatVLVLeak_50%MaxFlow.csv": "f9f40b36f5e68e57a59566e4474342b9",
+      "PFPU_ReheatVLVLeak_80%MaxFlow.csv": "b75c38fee34eba8af0bb30742fbeee03",
+      "PFPU_ReheatVLVStuck_0%.csv": "3e806890441d603ceded0161639bdb20",
+      "PFPU_ReheatVLVStuck_100%.csv": "1f4e6e999f4163478a750130d78f3894",
+      "PFPU_ReheatVLVStuck_20%.csv": "f06e81c1e492e5ed8231349495d71f9c",
+      "PFPU_ReheatVLVStuck_50%.csv": "7b533b594f57643e02b7a12cc99a06de",
+      "PFPU_ReheatVLVStuck_80%.csv": "7b146dd639a0b82867abe996f61befad",
+      "PFPU_SensorBias_RMTEMP_+2C.csv": "042f3531e49b7a7e21c25e68aa243d85",
+      "PFPU_SensorBias_RMTEMP_+4C.csv": "96e255ccb9dbde59fa2cf015f3e0b631",
+      "PFPU_SensorBias_RMTEMP_-2C.csv": "98b86d7ce41e36b0230e800358a1ba53",
+      "PFPU_SensorBias_RMTEMP_-4C.csv": "b8c9ca9fe4758f8475a1b3f71b9cc8a9",
+      "PFPU_SensorBias_VAVAirflow_+200CFM.csv": "99cb19d39541c5fdcdf9a6fca699e0b6",
+      "PFPU_SensorBias_VAVAirflow_+400CFM.csv": "a708f34f8cef103e58689f8179e3d1c9",
+      "PFPU_SensorBias_VAVAirflow_-200CFM.csv": "4afbced4ac6fe89d5602e135d23df6cd",
+      "PFPU_SensorBias_VAVAirflow_-400CFM.csv": "78b4778f3cd9dd51e2d630abfc15348b",
+      "PFPU_VAVDMPRStuck_0%.csv": "83ac8c6a299907dec8e3906416ddea39",
+      "PFPU_VAVDMPRStuck_100%.csv": "e3861dad183763413e3e7f280db3933c",
+      "PFPU_VAVDMPRStuck_20%.csv": "8c70be5cc0036cbeb9041ce8bb428c3c",
+      "PFPU_VAVDMPRStuck_50%.csv": "13b73f3586fa7a362da32212f1ee64ec",
+      "PFPU_VAVDMPRStuck_80%.csv": "55280ecac003fb786497c7d5ae209258",
+      "PFPU_VAVDMPRUnstable.csv": "1ca8ccc698ec8641f2dd57f17c408a4f",
+      "PFPU_VAVFanRestrictFlow.csv": "6babce6de2c6a35ede1c42f7b6fb2152",
+      "SFPU_FaultFree.csv": "b6eb92cb674918cfdbb2599e05307f4f",
+      "SFPU_RMTEMPUnstable.csv": "1bd17b7cfbd7298c4fdcb6890a59d48f",
+      "SFPU_ReheatCoilFouling_Airside_Minor.csv": "80e4229bdddb65e99027730eac833abe",
+      "SFPU_ReheatCoilFouling_Airside_Moderate.csv": "7edef6eff7175b17365213ff02051c99",
+      "SFPU_ReheatCoilFouling_Airside_Severe.csv": "ea1239d1d4c08dc5b920644de7c6e6c9",
+      "SFPU_ReheatCoilFouling_Waterside_Minor.csv": "2750ede1f1dec44d85dbc1038614b895",
+      "SFPU_ReheatCoilFouling_Waterside_Moderate.csv": "9cbad5e98d7b3d5a66d8767b9ef9cb66",
+      "SFPU_ReheatCoilFouling_Waterside_Severe.csv": "62550beb64270fd9a960de8997b608a1",
+      "SFPU_ReheatVLVLeak_20%MaxFlow.csv": "0e5fa5b1ffbeb2debbd45dc03b6f8476",
+      "SFPU_ReheatVLVLeak_50%MaxFlow.csv": "150c72e2f5343c840c5b702dc70630f0",
+      "SFPU_ReheatVLVLeak_80%MaxFlow.csv": "e411e16df9f8551230e61e3405614691",
+      "SFPU_ReheatVLVStuck_0%.csv": "0f330d32295d947a3102bc47a4171c9b",
+      "SFPU_ReheatVLVStuck_100%.csv": "d3291cd3e6657504a3a1242403d8228e",
+      "SFPU_ReheatVLVStuck_20%.csv": "e699343c5a13a0b744192c8fc077212b",
+      "SFPU_ReheatVLVStuck_50%.csv": "85ee0422d0d6d86e023d9350e1baa357",
+      "SFPU_ReheatVLVStuck_80%.csv": "9058aa47bb1f4c7bf0107a4733523492",
+      "SFPU_SensorBias_RMTEMP_+2C.csv": "63bea7c4bb5014b21a9945997a88f0da",
+      "SFPU_SensorBias_RMTEMP_+4C.csv": "d430e0433508de4049d093edb3a9a308",
+      "SFPU_SensorBias_RMTEMP_-2C.csv": "62cf26f5a3b0ce532f0fd419dacd7aed",
+      "SFPU_SensorBias_RMTEMP_-4C.csv": "ef6c8861dee8ffb588cf431b36a89d01",
+      "SFPU_SensorBias_VAVAirflow_+200CFM.csv": "6a4e43534bea4c9b9dc227db97cb6444",
+      "SFPU_SensorBias_VAVAirflow_+400CFM.csv": "090cc4760f35472197962c098e68ac2b",
+      "SFPU_SensorBias_VAVAirflow_-200CFM.csv": "73e9b9d81d919cf67a471b594acdc279",
+      "SFPU_SensorBias_VAVAirflow_-400CFM.csv": "c41e79c7e819f46c6d755c37bfc08065",
+      "SFPU_VAVDMPRStuck_0%.csv": "1f51b5c4211a3cc7f891c1411629a3d4",
+      "SFPU_VAVDMPRStuck_100%.csv": "b65eaea0efb5e69af6bdba8e80bb3ad5",
+      "SFPU_VAVDMPRStuck_20%.csv": "ab47001bd1bbb398cff232d2556d3710",
+      "SFPU_VAVDMPRStuck_50%.csv": "230650113aab7cef733e50298fcf2114",
+      "SFPU_VAVDMPRStuck_80%.csv": "c5eb393c0f0b85ac508ee319fd38b299",
+      "SFPU_VAVDMPRUnstable.csv": "bb0050a0f9c9b100bd327071a47f1e0f",
+      "SFPU_VAVFanRestrictFlow.csv": "eb6d26afd15966674ff696602734997e"
+    },
+    "duplicates": {}
+  },
+  "zone_ground_truth": {
+    "PFPU_RMTEMPUnstable": {
+      "zone_diff_frac": {
+        "I": 0.2781,
+        "W": 0.3234,
+        "S": 0.7814,
+        "E": 0.4856
+      },
+      "ahu_diff_frac": 0.662,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatCoilFouling_Airside_Minor": {
+      "zone_diff_frac": {
+        "I": 0.3297,
+        "W": 0.3775,
+        "S": 0.8978,
+        "E": 0.4533
+      },
+      "ahu_diff_frac": 0.886,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatCoilFouling_Airside_Moderate": {
+      "zone_diff_frac": {
+        "I": 0.5421,
+        "W": 0.5882,
+        "S": 0.9665,
+        "E": 0.5983
+      },
+      "ahu_diff_frac": 0.9429,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatCoilFouling_Airside_Severe": {
+      "zone_diff_frac": {
+        "I": 0.6691,
+        "W": 0.6909,
+        "S": 0.9872,
+        "E": 0.7
+      },
+      "ahu_diff_frac": 0.9629,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatCoilFouling_Waterside_Minor": {
+      "zone_diff_frac": {
+        "I": 0.172,
+        "W": 0.2467,
+        "S": 0.2628,
+        "E": 0.4045
+      },
+      "ahu_diff_frac": 0.6061,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatCoilFouling_Waterside_Moderate": {
+      "zone_diff_frac": {
+        "I": 0.1761,
+        "W": 0.252,
+        "S": 0.2676,
+        "E": 0.4052
+      },
+      "ahu_diff_frac": 0.6098,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatCoilFouling_Waterside_Severe": {
+      "zone_diff_frac": {
+        "I": 0.1739,
+        "W": 0.2518,
+        "S": 0.2691,
+        "E": 0.3991
+      },
+      "ahu_diff_frac": 0.5961,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatVLVLeak_20%MaxFlow": {
+      "zone_diff_frac": {
+        "I": 0.1947,
+        "W": 0.2709,
+        "S": 0.9987,
+        "E": 0.4417
+      },
+      "ahu_diff_frac": 0.6394,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatVLVLeak_50%MaxFlow": {
+      "zone_diff_frac": {
+        "I": 0.1934,
+        "W": 0.2691,
+        "S": 0.9991,
+        "E": 0.4365
+      },
+      "ahu_diff_frac": 0.6377,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatVLVLeak_80%MaxFlow": {
+      "zone_diff_frac": {
+        "I": 0.1955,
+        "W": 0.2715,
+        "S": 0.9991,
+        "E": 0.4368
+      },
+      "ahu_diff_frac": 0.641,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatVLVStuck_0%": {
+      "zone_diff_frac": {
+        "I": 0.5337,
+        "W": 0.5491,
+        "S": 0.7609,
+        "E": 0.5645
+      },
+      "ahu_diff_frac": 0.7689,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatVLVStuck_100%": {
+      "zone_diff_frac": {
+        "I": 0.192,
+        "W": 0.2684,
+        "S": 0.9992,
+        "E": 0.4335
+      },
+      "ahu_diff_frac": 0.6352,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatVLVStuck_20%": {
+      "zone_diff_frac": {
+        "I": 0.1952,
+        "W": 0.2682,
+        "S": 1.0,
+        "E": 0.431
+      },
+      "ahu_diff_frac": 0.6335,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatVLVStuck_50%": {
+      "zone_diff_frac": {
+        "I": 0.1931,
+        "W": 0.2688,
+        "S": 1.0,
+        "E": 0.4356
+      },
+      "ahu_diff_frac": 0.6337,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_ReheatVLVStuck_80%": {
+      "zone_diff_frac": {
+        "I": 0.1933,
+        "W": 0.2673,
+        "S": 1.0,
+        "E": 0.4387
+      },
+      "ahu_diff_frac": 0.6434,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_SensorBias_RMTEMP_+2C": {
+      "zone_diff_frac": {
+        "I": 0.7871,
+        "W": 0.7517,
+        "S": 0.9993,
+        "E": 0.7622
+      },
+      "ahu_diff_frac": 0.9981,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_SensorBias_RMTEMP_+4C": {
+      "zone_diff_frac": {
+        "I": 0.8834,
+        "W": 0.8517,
+        "S": 0.9993,
+        "E": 0.8548
+      },
+      "ahu_diff_frac": 0.9988,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_SensorBias_RMTEMP_-2C": {
+      "zone_diff_frac": {
+        "I": 0.7959,
+        "W": 0.7452,
+        "S": 0.9993,
+        "E": 0.7573
+      },
+      "ahu_diff_frac": 0.9981,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_SensorBias_RMTEMP_-4C": {
+      "zone_diff_frac": {
+        "I": 0.8785,
+        "W": 0.829,
+        "S": 0.9993,
+        "E": 0.8406
+      },
+      "ahu_diff_frac": 0.9987,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_SensorBias_VAVAirflow_+200CFM": {
+      "zone_diff_frac": {
+        "I": 0.9064,
+        "W": 0.938,
+        "S": 0.9995,
+        "E": 0.9507
+      },
+      "ahu_diff_frac": 0.996,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_SensorBias_VAVAirflow_+400CFM": {
+      "zone_diff_frac": {
+        "I": 0.9085,
+        "W": 0.9383,
+        "S": 0.9995,
+        "E": 0.9502
+      },
+      "ahu_diff_frac": 0.9963,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_SensorBias_VAVAirflow_-200CFM": {
+      "zone_diff_frac": {
+        "I": 0.9183,
+        "W": 0.926,
+        "S": 1.0,
+        "E": 0.9388
+      },
+      "ahu_diff_frac": 1.0,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_SensorBias_VAVAirflow_-400CFM": {
+      "zone_diff_frac": {
+        "I": 0.9633,
+        "W": 0.9557,
+        "S": 1.0,
+        "E": 0.967
+      },
+      "ahu_diff_frac": 1.0,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_VAVDMPRStuck_0%": {
+      "zone_diff_frac": {
+        "I": 0.9547,
+        "W": 0.976,
+        "S": 1.0,
+        "E": 0.9822
+      },
+      "ahu_diff_frac": 0.9991,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_VAVDMPRStuck_100%": {
+      "zone_diff_frac": {
+        "I": 0.9755,
+        "W": 0.964,
+        "S": 1.0,
+        "E": 0.9697
+      },
+      "ahu_diff_frac": 1.0,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_VAVDMPRStuck_20%": {
+      "zone_diff_frac": {
+        "I": 0.8029,
+        "W": 0.8459,
+        "S": 0.9991,
+        "E": 0.8535
+      },
+      "ahu_diff_frac": 0.9924,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_VAVDMPRStuck_50%": {
+      "zone_diff_frac": {
+        "I": 0.9581,
+        "W": 0.9502,
+        "S": 1.0,
+        "E": 0.9629
+      },
+      "ahu_diff_frac": 1.0,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_VAVDMPRStuck_80%": {
+      "zone_diff_frac": {
+        "I": 0.9751,
+        "W": 0.966,
+        "S": 1.0,
+        "E": 0.9689
+      },
+      "ahu_diff_frac": 1.0,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_VAVDMPRUnstable": {
+      "zone_diff_frac": {
+        "I": 0.7695,
+        "W": 0.8018,
+        "S": 0.9774,
+        "E": 0.8475
+      },
+      "ahu_diff_frac": 0.9655,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "PFPU_VAVFanRestrictFlow": {
+      "zone_diff_frac": {
+        "I": 0.728,
+        "W": 0.7417,
+        "S": 0.9965,
+        "E": 0.7505
+      },
+      "ahu_diff_frac": 0.9771,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_RMTEMPUnstable": {
+      "zone_diff_frac": {
+        "I": 0.8512,
+        "W": 0.8163,
+        "S": 0.952,
+        "E": 0.8093
+      },
+      "ahu_diff_frac": 0.8973,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatCoilFouling_Airside_Minor": {
+      "zone_diff_frac": {
+        "I": 0.6475,
+        "W": 0.6045,
+        "S": 0.9711,
+        "E": 0.5913
+      },
+      "ahu_diff_frac": 0.8932,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatCoilFouling_Airside_Moderate": {
+      "zone_diff_frac": {
+        "I": 0.7453,
+        "W": 0.6246,
+        "S": 0.9899,
+        "E": 0.6171
+      },
+      "ahu_diff_frac": 0.9148,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatCoilFouling_Airside_Severe": {
+      "zone_diff_frac": {
+        "I": 0.8194,
+        "W": 0.6833,
+        "S": 0.9975,
+        "E": 0.6843
+      },
+      "ahu_diff_frac": 0.9222,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatCoilFouling_Waterside_Minor": {
+      "zone_diff_frac": {
+        "I": 0.6195,
+        "W": 0.5992,
+        "S": 0.6596,
+        "E": 0.5842
+      },
+      "ahu_diff_frac": 0.8732,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatCoilFouling_Waterside_Moderate": {
+      "zone_diff_frac": {
+        "I": 0.6227,
+        "W": 0.5956,
+        "S": 0.6683,
+        "E": 0.5845
+      },
+      "ahu_diff_frac": 0.8757,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatCoilFouling_Waterside_Severe": {
+      "zone_diff_frac": {
+        "I": 0.624,
+        "W": 0.6053,
+        "S": 0.6909,
+        "E": 0.5902
+      },
+      "ahu_diff_frac": 0.8782,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatVLVLeak_20%MaxFlow": {
+      "zone_diff_frac": {
+        "I": 0.9721,
+        "W": 0.8572,
+        "S": 1.0,
+        "E": 0.926
+      },
+      "ahu_diff_frac": 0.9993,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatVLVLeak_50%MaxFlow": {
+      "zone_diff_frac": {
+        "I": 0.9823,
+        "W": 0.9104,
+        "S": 1.0,
+        "E": 0.9583
+      },
+      "ahu_diff_frac": 0.9995,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatVLVLeak_80%MaxFlow": {
+      "zone_diff_frac": {
+        "I": 0.987,
+        "W": 0.9324,
+        "S": 1.0,
+        "E": 0.9601
+      },
+      "ahu_diff_frac": 0.9995,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatVLVStuck_0%": {
+      "zone_diff_frac": {
+        "I": 0.7124,
+        "W": 0.6738,
+        "S": 0.8323,
+        "E": 0.6675
+      },
+      "ahu_diff_frac": 0.8962,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatVLVStuck_100%": {
+      "zone_diff_frac": {
+        "I": 0.9885,
+        "W": 0.9427,
+        "S": 1.0,
+        "E": 0.9592
+      },
+      "ahu_diff_frac": 0.9995,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatVLVStuck_20%": {
+      "zone_diff_frac": {
+        "I": 0.9147,
+        "W": 0.7789,
+        "S": 1.0,
+        "E": 0.8031
+      },
+      "ahu_diff_frac": 0.9989,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatVLVStuck_50%": {
+      "zone_diff_frac": {
+        "I": 0.9723,
+        "W": 0.8527,
+        "S": 1.0,
+        "E": 0.9124
+      },
+      "ahu_diff_frac": 0.9993,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_ReheatVLVStuck_80%": {
+      "zone_diff_frac": {
+        "I": 0.982,
+        "W": 0.9078,
+        "S": 1.0,
+        "E": 0.9577
+      },
+      "ahu_diff_frac": 0.9995,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_SensorBias_RMTEMP_+2C": {
+      "zone_diff_frac": {
+        "I": 0.8822,
+        "W": 0.7436,
+        "S": 0.9989,
+        "E": 0.7634
+      },
+      "ahu_diff_frac": 0.999,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_SensorBias_RMTEMP_+4C": {
+      "zone_diff_frac": {
+        "I": 0.9304,
+        "W": 0.8349,
+        "S": 0.9992,
+        "E": 0.8469
+      },
+      "ahu_diff_frac": 0.9991,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_SensorBias_RMTEMP_-2C": {
+      "zone_diff_frac": {
+        "I": 0.8856,
+        "W": 0.7637,
+        "S": 0.999,
+        "E": 0.7923
+      },
+      "ahu_diff_frac": 0.9986,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_SensorBias_RMTEMP_-4C": {
+      "zone_diff_frac": {
+        "I": 0.928,
+        "W": 0.8096,
+        "S": 0.9992,
+        "E": 0.8365
+      },
+      "ahu_diff_frac": 0.9989,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_SensorBias_VAVAirflow_+200CFM": {
+      "zone_diff_frac": {
+        "I": 0.9575,
+        "W": 0.8571,
+        "S": 0.9997,
+        "E": 0.929
+      },
+      "ahu_diff_frac": 0.9945,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_SensorBias_VAVAirflow_+400CFM": {
+      "zone_diff_frac": {
+        "I": 0.9587,
+        "W": 0.8577,
+        "S": 0.9997,
+        "E": 0.9299
+      },
+      "ahu_diff_frac": 0.9949,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_SensorBias_VAVAirflow_-200CFM": {
+      "zone_diff_frac": {
+        "I": 0.9873,
+        "W": 0.931,
+        "S": 0.9993,
+        "E": 0.9387
+      },
+      "ahu_diff_frac": 0.9969,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_SensorBias_VAVAirflow_-400CFM": {
+      "zone_diff_frac": {
+        "I": 0.9933,
+        "W": 0.9584,
+        "S": 0.9999,
+        "E": 0.9625
+      },
+      "ahu_diff_frac": 0.9974,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_VAVDMPRStuck_0%": {
+      "zone_diff_frac": {
+        "I": 0.9725,
+        "W": 0.9627,
+        "S": 1.0,
+        "E": 0.9897
+      },
+      "ahu_diff_frac": 0.9984,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_VAVDMPRStuck_100%": {
+      "zone_diff_frac": {
+        "I": 0.9948,
+        "W": 0.9663,
+        "S": 1.0,
+        "E": 0.9717
+      },
+      "ahu_diff_frac": 0.9979,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_VAVDMPRStuck_20%": {
+      "zone_diff_frac": {
+        "I": 0.9677,
+        "W": 0.8809,
+        "S": 0.9999,
+        "E": 0.9483
+      },
+      "ahu_diff_frac": 0.9946,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_VAVDMPRStuck_50%": {
+      "zone_diff_frac": {
+        "I": 0.9859,
+        "W": 0.9279,
+        "S": 0.9993,
+        "E": 0.9403
+      },
+      "ahu_diff_frac": 0.9952,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_VAVDMPRStuck_80%": {
+      "zone_diff_frac": {
+        "I": 0.9939,
+        "W": 0.9641,
+        "S": 1.0,
+        "E": 0.9678
+      },
+      "ahu_diff_frac": 0.9993,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_VAVDMPRUnstable": {
+      "zone_diff_frac": {
+        "I": 0.9065,
+        "W": 0.7717,
+        "S": 0.9856,
+        "E": 0.888
+      },
+      "ahu_diff_frac": 0.948,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    },
+    "SFPU_VAVFanRestrictFlow": {
+      "zone_diff_frac": {
+        "I": 0.8613,
+        "W": 0.7364,
+        "S": 0.9996,
+        "E": 0.7625
+      },
+      "ahu_diff_frac": 0.962,
+      "affected_zones": [
+        "I",
+        "W",
+        "S",
+        "E"
+      ]
+    }
+  },
+  "ttl_coverage": {
+    "pfpu": {
+      "ttl_points": 109,
+      "csv_cols": 109,
+      "ttl_not_csv": [
+        "RFSFSPD"
+      ],
+      "csv_not_ttl": [
+        "RF%SFSPD"
+      ]
+    },
+    "sfpu": {
+      "ttl_points": 109,
+      "csv_cols": 109,
+      "ttl_not_csv": [
+        "RFSFSPD"
+      ],
+      "csv_not_ttl": [
+        "RF%SFSPD"
+      ]
+    }
+  }
+}

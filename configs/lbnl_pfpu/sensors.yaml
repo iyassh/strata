@@ -1,0 +1,51 @@
+# Canonical sensor name -> LBNL PFPU CSV column name.
+# The pipeline code only ever uses canonical names; this file is the only
+# place this building's actual column names appear.
+canonical_to_csv:
+  # --- AHU level ---
+  OA_TEMP: OA_TEMP
+  MA_TEMP: MA_TEMP
+  RA_TEMP: RA_TEMP
+  SA_TEMP: SA_TEMP
+  SA_TEMP_SP: SA_TEMPSPT
+  CHWC_VLV_POS: CHWC_VLV
+  CHWC_VLV_CMD: CHWC_VLV_DM
+  HWC_VLV_POS: HWC_VLV          # FPU AHU has a heating coil (SDAHU does not)
+  HWC_VLV_CMD: HWC_VLV_DM
+  OA_DMPR_POS: OA_DMPR
+  OA_DMPR_CMD: OA_DMPR_DM
+  RA_DMPR_POS: RA_DMPR
+  RA_DMPR_CMD: RA_DMPR_DM
+  EA_DMPR_POS: EA_DMPR
+  EA_DMPR_CMD: EA_DMPR_DM
+  OCCUPIED: SYS_CTL             # three-state: 0=off, 1=occupied, 2=night-cycle
+  Datetime: Datetime
+  # --- zone terminal units (I=interior, W=west, S=south, E=east) ---
+  RH_VLV_POS_I: RH_VLV_I
+  RH_VLV_CMD_I: RH_VLV_DM_I
+  ZONE_FLOW_I: VAV_PM_CFM_I
+  ZONE_FLOW_SP_I: VAV_PM_CFM_SP_I
+  ZONE_DMPR_POS_I: VAV_DMPR_I   # position ONLY — no command column exists
+  ZONE_FAN_STATUS_I: VAV_FAN_CS_I
+  ZONE_TEMP_I: RM_TEMP_I
+  RH_VLV_POS_W: RH_VLV_W
+  RH_VLV_CMD_W: RH_VLV_DM_W
+  ZONE_FLOW_W: VAV_PM_CFM_W
+  ZONE_FLOW_SP_W: VAV_PM_CFM_SP_W
+  ZONE_DMPR_POS_W: VAV_DMPR_W
+  ZONE_FAN_STATUS_W: VAV_FAN_CS_W
+  ZONE_TEMP_W: RM_TEMP_W
+  RH_VLV_POS_S: RH_VLV_S
+  RH_VLV_CMD_S: RH_VLV_DM_S
+  ZONE_FLOW_S: VAV_PM_CFM_S
+  ZONE_FLOW_SP_S: VAV_PM_CFM_SP_S
+  ZONE_DMPR_POS_S: VAV_DMPR_S
+  ZONE_FAN_STATUS_S: VAV_FAN_CS_S
+  ZONE_TEMP_S: RM_TEMP_S
+  RH_VLV_POS_E: RH_VLV_E
+  RH_VLV_CMD_E: RH_VLV_DM_E
+  ZONE_FLOW_E: VAV_PM_CFM_E
+  ZONE_FLOW_SP_E: VAV_PM_CFM_SP_E
+  ZONE_DMPR_POS_E: VAV_DMPR_E
+  ZONE_FAN_STATUS_E: VAV_FAN_CS_E
+  ZONE_TEMP_E: RM_TEMP_E

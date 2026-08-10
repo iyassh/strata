@@ -226,16 +226,52 @@ def abstract_events(df: pd.DataFrame, cfg: Config) -> pd.DataFrame:
 
     log = pd.DataFrame(rows, columns=["case_id", "activity", "timestamp"])
     log["alphabet"] = log["activity"].map(event_alphabet_map(cfg))
+    log["stratum"] = log["activity"].map(event_stratum_map(cfg))
     return log.sort_values(["case_id", "timestamp"]).reset_index(drop=True)
 
 
+def rule_stratum(rule: dict) -> str:
+    """Which stratum a rule's events feed: ``unit`` (default — the day-cycle
+    coordination net) or ``device`` (per-device lifecycles, e.g. zone fans
+    that cycle 20x/day: genuine rhythm, but at device granularity — folding
+    them into day traces bloats the unit net into an unminable tangle)."""
+    return rule.get("stratum", "unit")
+
+
+def event_stratum_map(cfg: Config) -> dict[str, str]:
+    """Map every emitted event name to its stratum (unit | device)."""
+    out: dict[str, str] = {}
+    for name, r in cfg.rules["events"].items():
+        s = rule_stratum(r)
+        for key in ("on_event", "off_event", "enter_event", "exit_event"):
+            if key in r:
+                out[r[key]] = s
+        if r.get("kind") in _SUSTAINED_KINDS:
+            out[name] = s
+    return out
+
+
 def state_only(log: pd.DataFrame) -> pd.DataFrame:
-    """The state-alphabet slice of an event log — the only slice discovery and
-    conformance are allowed to see. Logs without an ``alphabet`` column (built
-    before the split) pass through unchanged."""
-    if "alphabet" not in log.columns:
-        return log
-    return log[log["alphabet"] == "state"].reset_index(drop=True)
+    """The unit-stratum state slice of an event log — the only slice UNIT
+    discovery and conformance are allowed to see. Device-stratum events are
+    consumed by the device lifecycle models instead. Logs without the
+    ``alphabet``/``stratum`` columns (built before the split) pass through."""
+    out = log
+    if "alphabet" in out.columns:
+        out = out[out["alphabet"] == "state"]
+    if "stratum" in out.columns:
+        out = out[out["stratum"] == "unit"]
+    return out.reset_index(drop=True)
+
+
+def device_state_only(log: pd.DataFrame) -> pd.DataFrame:
+    """The device-stratum state slice (input to device lifecycle models)."""
+    out = log
+    if "alphabet" in out.columns:
+        out = out[out["alphabet"] == "state"]
+    if "stratum" in out.columns:
+        out = out[out["stratum"] == "device"]
+    return out.reset_index(drop=True)
 
 
 def emitted_event_names(cfg: Config, kinds: tuple[str, ...] | None = None) -> set[str]:

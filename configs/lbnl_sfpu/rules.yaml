@@ -1,0 +1,304 @@
+# Event-abstraction rules for the LBNL SFPU dataset (series fan-powered
+# terminal units, 4 zones I/W/S/E + one AHU with heating AND cooling coils).
+#
+# Same seven+two rule KINDS as SDAHU — zero code changes; everything below
+# is configuration. Thresholds follow the G1 discipline: initial values from
+# physics/APAR conventions, then validated (and if needed loosened) against
+# the FaultFree year ONLY, via the healthy-silence gate. No fault file is
+# consulted.
+
+climate:
+  ashrae_zone: 5A
+  notes: "Same 2018 simulated year family as SDAHU. Documentation only."
+
+detection:
+  fpr_quantile: 0.01
+  holdout_days_per_month: 8
+
+events:
+  # ---------------- state alphabet (feeds model discovery) ----------------
+  occupancy:
+    kind: occupancy
+    signal: OCCUPIED           # ==1: occupied
+    on_event: system_started
+    off_event: system_stopped
+    alphabet: state
+
+  night_cycle:
+    kind: mode
+    signal: OCCUPIED           # ==2: night-cycle operation; mode fires >1.5
+    on_above: 1.5
+    on_event: night_cycle_started
+    off_event: night_cycle_ended
+    alphabet: state
+
+  cooling:
+    kind: mode
+    signal: CHWC_VLV_POS
+    on_above: 0.05
+    on_event: cooling_active
+    off_event: cooling_inactive
+    alphabet: state
+
+  heating:
+    kind: mode
+    signal: HWC_VLV_POS
+    on_above: 0.05
+    on_event: heating_active
+    off_event: heating_inactive
+    alphabet: state
+
+  economizer:
+    kind: window
+    signal: OA_TEMP
+    low: 33.8
+    high: 60.0
+    enter_event: economizer_window_entered
+    exit_event: economizer_window_exited
+    alphabet: state
+
+  # Zone lifecycles: the SERIES fan runs whenever the zone needs air — the
+  # signature rhythm of THIS system type (a series fan would run whenever
+  # occupied; the discovered models must show that difference on their own).
+  zone_fan_I:
+    kind: mode
+    signal: ZONE_FAN_STATUS_I
+    on_above: 0.5
+    on_event: zone_fan_I_started
+    off_event: zone_fan_I_stopped
+    alphabet: state
+    stratum: device
+  zone_fan_W:
+    kind: mode
+    signal: ZONE_FAN_STATUS_W
+    on_above: 0.5
+    on_event: zone_fan_W_started
+    off_event: zone_fan_W_stopped
+    alphabet: state
+    stratum: device
+  zone_fan_S:
+    kind: mode
+    signal: ZONE_FAN_STATUS_S
+    on_above: 0.5
+    on_event: zone_fan_S_started
+    off_event: zone_fan_S_stopped
+    alphabet: state
+    stratum: device
+  zone_fan_E:
+    kind: mode
+    signal: ZONE_FAN_STATUS_E
+    on_above: 0.5
+    on_event: zone_fan_E_started
+    off_event: zone_fan_E_stopped
+    alphabet: state
+    stratum: device
+
+  zone_heating_I:
+    kind: mode
+    signal: RH_VLV_POS_I
+    on_above: 0.05
+    on_event: zone_heating_I_active
+    off_event: zone_heating_I_inactive
+    alphabet: state
+    stratum: device
+  zone_heating_W:
+    kind: mode
+    signal: RH_VLV_POS_W
+    on_above: 0.05
+    on_event: zone_heating_W_active
+    off_event: zone_heating_W_inactive
+    alphabet: state
+    stratum: device
+  zone_heating_S:
+    kind: mode
+    signal: RH_VLV_POS_S
+    on_above: 0.05
+    on_event: zone_heating_S_active
+    off_event: zone_heating_S_inactive
+    alphabet: state
+    stratum: device
+  zone_heating_E:
+    kind: mode
+    signal: RH_VLV_POS_E
+    on_above: 0.05
+    on_event: zone_heating_E_active
+    off_event: zone_heating_E_inactive
+    alphabet: state
+    stratum: device
+
+  # ------------- signature alphabet (bypasses discovery) ------------------
+  # AHU actuators: command-vs-position (APAR-style; thresholds as SDAHU)
+  chwc_valve_mismatch:
+    kind: mismatch
+    pos: CHWC_VLV_POS
+    cmd: CHWC_VLV_CMD
+    threshold: 0.05
+    sustained_min: 60
+  hwc_valve_mismatch:
+    kind: mismatch
+    pos: HWC_VLV_POS
+    cmd: HWC_VLV_CMD
+    threshold: 0.05
+    sustained_min: 60
+  oa_damper_mismatch:
+    kind: mismatch
+    pos: OA_DMPR_POS
+    cmd: OA_DMPR_CMD
+    threshold: 0.05
+    sustained_min: 60
+  ra_damper_mismatch:
+    kind: mismatch
+    pos: RA_DMPR_POS
+    cmd: RA_DMPR_CMD
+    threshold: 0.05
+    sustained_min: 60
+  ea_damper_mismatch:
+    kind: mismatch
+    pos: EA_DMPR_POS
+    cmd: EA_DMPR_CMD
+    threshold: 0.05
+    sustained_min: 60
+
+  chwc_valve_leak:
+    kind: leak
+    pos: CHWC_VLV_POS
+    cmd: CHWC_VLV_CMD
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+  hwc_valve_leak:
+    kind: leak
+    pos: HWC_VLV_POS
+    cmd: HWC_VLV_CMD
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+
+  # Zone reheat valves: mismatch + leak per zone (the pooled device class)
+  rh_valve_mismatch_I:
+    kind: mismatch
+    pos: RH_VLV_POS_I
+    cmd: RH_VLV_CMD_I
+    threshold: 0.05
+    sustained_min: 60
+  rh_valve_mismatch_W:
+    kind: mismatch
+    pos: RH_VLV_POS_W
+    cmd: RH_VLV_CMD_W
+    threshold: 0.05
+    sustained_min: 60
+  rh_valve_mismatch_S:
+    kind: mismatch
+    pos: RH_VLV_POS_S
+    cmd: RH_VLV_CMD_S
+    threshold: 0.05
+    sustained_min: 60
+  rh_valve_mismatch_E:
+    kind: mismatch
+    pos: RH_VLV_POS_E
+    cmd: RH_VLV_CMD_E
+    threshold: 0.05
+    sustained_min: 60
+
+  rh_valve_leak_I:
+    kind: leak
+    pos: RH_VLV_POS_I
+    cmd: RH_VLV_CMD_I
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+  rh_valve_leak_W:
+    kind: leak
+    pos: RH_VLV_POS_W
+    cmd: RH_VLV_CMD_W
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+  rh_valve_leak_S:
+    kind: leak
+    pos: RH_VLV_POS_S
+    cmd: RH_VLV_CMD_S
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+  rh_valve_leak_E:
+    kind: leak
+    pos: RH_VLV_POS_E
+    cmd: RH_VLV_CMD_E
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+
+  # Zone flow tracking: the ONLY handle on the command-less zone dampers via
+  # rules — measured primary-air flow must track its setpoint while the AHU
+  # is delivering air. Threshold to be validated by the healthy-silence gate.
+  zone_flow_tracking_I:
+    kind: setpoint_deviation
+    meas: ZONE_FLOW_I
+    sp: ZONE_FLOW_SP_I
+    threshold: 150
+    sustained_min: 60
+    gate_signal: OCCUPIED
+    gate_above: 0.5
+  zone_flow_tracking_W:
+    kind: setpoint_deviation
+    meas: ZONE_FLOW_W
+    sp: ZONE_FLOW_SP_W
+    threshold: 150
+    sustained_min: 60
+    gate_signal: OCCUPIED
+    gate_above: 0.5
+  zone_flow_tracking_S:
+    kind: setpoint_deviation
+    meas: ZONE_FLOW_S
+    sp: ZONE_FLOW_SP_S
+    threshold: 150
+    sustained_min: 60
+    gate_signal: OCCUPIED
+    gate_above: 0.5
+  zone_flow_tracking_E:
+    kind: setpoint_deviation
+    meas: ZONE_FLOW_E
+    sp: ZONE_FLOW_SP_E
+    threshold: 150
+    sustained_min: 60
+    gate_signal: OCCUPIED
+    gate_above: 0.5
+
+  # Physics residuals (= APAR Rules 7 / 26-27, statistically calibrated).
+  # The FPU AHU has BOTH coils, so the SA-MA residual needs both idle
+  # (gates list). Band here is DISPLAY-ONLY for localization; detection uses
+  # the per-day continuous channel calibrated blind on train days.
+  supply_air_residual:
+    kind: paired_residual
+    a: SA_TEMP
+    b: MA_TEMP
+    low: -6.0
+    high: 6.0
+    gates:
+      - signal: CHWC_VLV_POS
+        below: 0.02
+      - signal: HWC_VLV_POS
+        below: 0.02
+    occ_signal: OCCUPIED
+    sustained_min: 120
+
+  mixed_air_envelope:
+    kind: envelope_residual
+    signal: MA_TEMP
+    low_ref: OA_TEMP
+    high_ref: RA_TEMP
+    tolerance: 2.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+
+  sat_setpoint_deviation:
+    kind: setpoint_deviation
+    meas: SA_TEMP
+    sp: SA_TEMP_SP
+    threshold: 2.0
+    # healthy-silence tuning (FaultFree only): healthy >2F excursions last
+    # at most 17 consecutive minutes; 30 silences them with ~2x margin
+    sustained_min: 30
+    gate_signal: CHWC_VLV_POS
+    gate_above: 0.05

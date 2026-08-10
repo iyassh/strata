@@ -75,6 +75,50 @@ events:
     leak_above: 0.05
     sustained_min: 15
 
+  # ---- Analytic-redundancy rules (Phase 2) -------------------------------
+  # Physics checks that catch faults producing NO sequence anomaly. A biased
+  # sensor is invisible to behavioural rules: the controller trusts the
+  # biased reading, so recorded values track setpoints and everything above
+  # stays silent. But physics still binds the sensors to each other.
+  #
+  # Thresholds are grounded in the measured healthy distributions
+  # (coil-off, occupied; see PHASE2_RESULTS.md): SA-MA residual is fan heat,
+  # median +1.05F, p1 -2.18F, p99.9 +3.02F. The +-2C biases shift the
+  # residual median to +-3.6F, the +-4C biases to +-7.2F.
+
+  # With the cooling coil NOT controlling, supply air must equal mixed air
+  # plus fan heat. A bias in the SA sensor appears verbatim in this residual.
+  supply_air_residual:
+    kind: paired_residual
+    a: SA_TEMP
+    b: MA_TEMP
+    low: -2.6        # healthy p1 is -2.2; the -2C bias median sits at -3.6
+    high: 3.3        # healthy p99.9 is +3.0; the +2C bias median sits at +3.6
+    gate_signal: CHWC_VLV_POS
+    gate_below: 0.02 # residual is only physics-bound while the coil is off
+    occ_signal: OCCUPIED
+    sustained_min: 120  # rides out coil-shutdown decay transients
+
+  # Mixed air is a blend of outdoor and return air, so MA_TEMP must lie
+  # between them (healthy occupied violation p99.9 = 0.13F; tolerance 2F).
+  mixed_air_envelope:
+    kind: envelope_residual
+    signal: MA_TEMP
+    low_ref: OA_TEMP
+    high_ref: RA_TEMP
+    tolerance: 2.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+
+  # Return-air damper: third actuator with both wires; the mismatch kind is
+  # reused unchanged — config only, no code.
+  ra_damper_command_mismatch:
+    kind: mismatch
+    pos: RA_DMPR_POS
+    cmd: RA_DMPR_CMD
+    threshold: 0.05
+    sustained_min: 60
+
   # Supply-air setpoint deviation, GATED on mechanical cooling being active:
   # G36 only guarantees SAT tracking while the cooling coil is controlling.
   # Ungated, this fired on ~95% of all days (winter drift; the AHU has no

@@ -27,7 +27,22 @@ _SENSOR_KEYS = {
     "mismatch": ["pos", "cmd"],
     "leak": ["pos", "cmd"],
     "setpoint_deviation": ["meas", "sp"],
+    # Analytic-redundancy kinds (Phase 2): physics relations between sensors.
+    # These catch faults that produce NO sequence anomaly (e.g. sensor bias:
+    # the controller trusts the biased reading, so every recorded value tracks
+    # its setpoint and all behavioural rules stay silent).
+    "paired_residual": ["a", "b"],
+    "envelope_residual": ["signal", "low_ref", "high_ref"],
 }
+
+# Sustained-condition kinds emit ONE event per day named after the rule.
+_SUSTAINED_KINDS = (
+    "mismatch",
+    "leak",
+    "setpoint_deviation",
+    "paired_residual",
+    "envelope_residual",
+)
 
 # Alphabet split (STRATA v2): `state` events describe what the equipment is
 # doing and are the ONLY events model discovery and conformance may see;
@@ -41,6 +56,8 @@ _DEFAULT_ALPHABET = {
     "mismatch": "signature",
     "leak": "signature",
     "setpoint_deviation": "signature",
+    "paired_residual": "signature",
+    "envelope_residual": "signature",
 }
 
 
@@ -57,7 +74,7 @@ def event_alphabet_map(cfg: Config) -> dict[str, str]:
         for key in ("on_event", "off_event", "enter_event", "exit_event"):
             if key in r:
                 out[r[key]] = a
-        if r.get("kind") in ("mismatch", "leak", "setpoint_deviation"):
+        if r.get("kind") in _SUSTAINED_KINDS:
             out[name] = a
     return out
 
@@ -102,6 +119,32 @@ def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
         gate = r.get("gate_signal")
         if gate and gate in w.columns:
             cond = cond & (w[gate] > r["gate_above"])
+        return cond
+    if kind == "paired_residual":
+        # (a - b) must stay inside the healthy band [low, high]; only
+        # meaningful while the gate holds (e.g. cooling coil NOT controlling,
+        # so no control loop is hiding the residual).
+        resid = w[r["a"]] - w[r["b"]]
+        cond = (resid < r["low"]) | (resid > r["high"])
+        gate = r.get("gate_signal")
+        if gate and gate in w.columns:
+            if "gate_below" in r:
+                cond = cond & (w[gate] <= r["gate_below"])
+            if "gate_above" in r:
+                cond = cond & (w[gate] > r["gate_above"])
+        occ = r.get("occ_signal")
+        if occ and occ in w.columns:
+            cond = cond & (w[occ] == 1)
+        return cond
+    if kind == "envelope_residual":
+        # signal must lie between its two reference signals (physics: mixed
+        # air is a blend of outdoor and return air), with tolerance.
+        lo = w[[r["low_ref"], r["high_ref"]]].min(axis=1) - r["tolerance"]
+        hi = w[[r["low_ref"], r["high_ref"]]].max(axis=1) + r["tolerance"]
+        cond = (w[r["signal"]] < lo) | (w[r["signal"]] > hi)
+        occ = r.get("occ_signal")
+        if occ and occ in w.columns:
+            cond = cond & (w[occ] == 1)
         return cond
     raise ValueError(f"no condition for kind {kind!r}")
 
@@ -179,7 +222,7 @@ def emitted_event_names(cfg: Config, kinds: tuple[str, ...] | None = None) -> se
         for key in ("on_event", "off_event", "enter_event", "exit_event"):
             if key in r:
                 names.add(r[key])
-        if r.get("kind") in ("mismatch", "leak", "setpoint_deviation"):
+        if r.get("kind") in _SUSTAINED_KINDS:
             names.add(name)
     return names
 
@@ -194,13 +237,14 @@ def event_sensor_map(cfg: Config) -> dict[str, str]:
     out: dict[str, str] = {}
     for name, r in cfg.rules["events"].items():
         kind = r.get("kind")
-        primary = {"mismatch": "pos", "leak": "pos", "setpoint_deviation": "meas"}.get(
+        primary = {"mismatch": "pos", "leak": "pos", "setpoint_deviation": "meas",
+                   "paired_residual": "a", "envelope_residual": "signal"}.get(
             kind, "signal"
         )
         canonical = r.get(primary)
         raw = cfg.sensors.get(canonical, canonical)
         event_names = [r[k] for k in ("on_event", "off_event", "enter_event", "exit_event") if k in r]
-        if kind in ("mismatch", "leak", "setpoint_deviation"):
+        if kind in _SUSTAINED_KINDS:
             event_names.append(name)
         for ev in event_names:
             out[ev] = raw

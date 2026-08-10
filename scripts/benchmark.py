@@ -41,7 +41,7 @@ import pandas as pd
 warnings.filterwarnings("ignore")
 
 from processheal.core.detection import build_detector, classify_days
-from processheal.hvac.events import abstract_events, emitted_event_names
+from processheal.hvac.events import abstract_events, event_alphabet_map
 from processheal.io.config import load_config
 
 DATA = Path("data/processed/sdahu")
@@ -65,7 +65,11 @@ SCENARIOS = [
     ("oa_bias_4_annual", "independent healthy-like run", False),
 ]
 
-SIGNATURE_EVENTS = emitted_event_names(cfg, kinds=("mismatch", "leak"))
+# The rules channel = EVERY signature-alphabet event (v4: now includes the
+# analytic-redundancy rules and setpoint_deviation, not just mismatch/leak;
+# all are healthy-silent by the validation gate, so the negative side of
+# the ledger is unchanged).
+SIGNATURE_EVENTS = {e for e, a in event_alphabet_map(cfg).items() if a == "signature"}
 
 
 def wilson_ci(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
@@ -184,7 +188,7 @@ print(f"model channel UNIQUE contribution: {unique_model_days} fault days flagge
 
 out = Path("outputs")
 out.mkdir(exist_ok=True)
-(out / "benchmark_v3.json").write_text(json.dumps({
+(out / "benchmark_v4.json").write_text(json.dumps({
     "alphabet_split": True,
     "threshold": det.threshold, "train_days": det.n_train_days,
     "holdout_days": n_hold, "holdout_fpr": det.holdout_fpr,
@@ -192,4 +196,4 @@ out.mkdir(exist_ok=True)
     "holdout_fitness": [round(float(f), 4) for f in det.holdout_per_day["fitness"]],
     "scenarios": rows, "summary": summary,
 }, indent=2, default=str))
-print("\nwrote outputs/benchmark_v3.json")
+print("\nwrote outputs/benchmark_v4.json")

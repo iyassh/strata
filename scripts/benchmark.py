@@ -46,6 +46,7 @@ def binom_sf(k: int, n: int, p: float) -> float:
 warnings.filterwarnings("ignore")
 
 from processheal.core.detection import build_detector, classify_days, holdout_mask
+from processheal.core.devices import absence_days, build_device_detector, classify_device_days
 from processheal.core.residuals import calibrate_band, daily_residual_scores, flag_days
 from processheal.hvac.events import abstract_events, event_alphabet_map, event_device_map
 from processheal.io.config import load_config
@@ -110,7 +111,27 @@ def evaluate(fname: str):
     res_flag = res["flagged"].reindex(days).fillna(False)
     res_eval = res["evaluable"].reindex(days).fillna(False)
 
-    combined = rules | model | res_flag
+    # device stratum: pooled-model conformance per instance + absence channel
+    dev_flag = pd.Series(False, index=days)
+    abs_flag = pd.Series(False, index=days)
+    top_dev_channel, dev_case_days, abs_days_sig = None, 0, {}
+    if dev_det is not None:
+        per_dev = classify_device_days(dev_det, log, cfg)
+        if len(per_dev):
+            fl = per_dev[per_dev["flagged"]]
+            dev_case_days = int(len(fl))
+            dev_flag = dev_flag | pd.Series(days.isin(set(fl["day"])), index=days)
+            if len(fl):
+                top_dev_channel = fl.groupby("device")["day"].nunique().idxmax()
+        sched = [d for d in days if uni.loc[d, "occupied_min"] > 0]
+        ab = absence_days(dev_det, log, cfg, sched)
+        # a silent day flags only for devices whose healthy silence is rare
+        rare = ab[(ab["silent"]) & (ab["healthy_rate"] <= 0.05)]
+        abs_flag = abs_flag | pd.Series(days.isin(set(rare["day"])), index=days)
+        abs_days_sig = {dev: [int(g["silent"].sum()), len(g), float(g["healthy_rate"].iloc[0])]
+                        for dev, g in ab.groupby("device")}
+
+    combined = rules | model | res_flag | dev_flag | abs_flag
 
     # E3: top-firing device among signature events (fire-days per device)
     top_device, loc_days = None, 0
@@ -126,6 +147,9 @@ def evaluate(fname: str):
         "n_model_unique": int((model & ~rules & ~res_flag).sum()),
         "top_device": top_device, "top_device_days": loc_days,
         "model_minrobust": model_minrobust,
+        "dev_flag": dev_flag, "abs_flag": abs_flag,
+        "top_dev_channel": top_dev_channel, "dev_case_days": dev_case_days,
+        "abs_days_sig": abs_days_sig,
     }
 
 
@@ -144,6 +168,10 @@ healthy_df = pd.read_parquet(DATA / f"{HEALTHY_FILE}.parquet")
 healthy_log = abstract_events(healthy_df, cfg)
 det = build_detector(cfg, healthy_log)
 
+h_uni_early = day_universe(healthy_df).set_index("case_id")
+HEALTHY_SCHED = [d for d in h_uni_early.index if h_uni_early.loc[d, "occupied_min"] > 0]
+dev_det = build_device_detector(cfg, healthy_log, HEALTHY_SCHED)
+
 res_healthy = daily_residual_scores(healthy_df, cfg)
 hold = holdout_mask(res_healthy["case_id"], cfg.rules["detection"]["holdout_days_per_month"])
 BAND = calibrate_band(res_healthy, ~hold,
@@ -160,11 +188,19 @@ print(f"\nresidual band (TRAIN-only): [{BAND[0]:+.2f}, {BAND[1]:+.2f}] F | "
 print(f"model threshold: {det.threshold:.4f} (min-calibration on {len(det.holdout_per_day)} holdout days; "
       f"holdout FP {model_hold_fp})")
 print(f"rules on FULL healthy year: {len(h_sig)} signature days (computed)")
+if dev_det is not None:
+    print(f"device stratum: pooled model from {dev_det.n_train_cases} train cases; "
+          f"threshold {dev_det.threshold:.4f}; holdout case FP "
+          f"{int((dev_det.holdout_per_case['fitness'] < dev_det.threshold).sum())}"
+          f"/{len(dev_det.holdout_per_case)}; healthy absence rates "
+          f"{ {k: round(v, 3) for k, v in dev_det.healthy_absence.items()} }")
+else:
+    print("device stratum: no device-tagged rules in this config (n/a)")
 print("false-alarm evidence = held-out healthy days ONLY (no independent negative exists; stated).")
 
 rows = []
-print(f"\n{'scenario':34s} {'days':>4} {'eval':>4} {'win':>4} "
-      f"{'rules':>5} {'resid':>5} {'model':>5} {'comb':>5} {'TTD':>4} {'locz':>10}")
+print(f"\n{'scenario':34s} {'days':>4} {'eval':>4} "
+      f"{'rules':>5} {'resid':>5} {'model':>5} {'dev':>5} {'abs':>5} {'comb':>5} {'TTD':>4} {'locz':>10}")
 print("-" * 106)
 
 for sc in SCENARIOS:
@@ -173,7 +209,8 @@ for sc in SCENARIOS:
     uni = e["uni"]
     n_days, n_eval = len(uni), int(uni["evaluable"].sum())
     n_win = int(e["res_eval"].sum())
-    c = {ch: int(e[ch].sum()) for ch in ("rules", "res_flag", "model", "combined")}
+    c = {ch: int(e[ch].sum()) for ch in ("rules", "res_flag", "model", "combined",
+                                          "dev_flag", "abs_flag")}
 
     # significance vs each channel's own holdout noise floor
     p_model = max(model_hold_fp, 1) / max(len(det.holdout_per_day), 1)
@@ -183,8 +220,18 @@ for sc in SCENARIOS:
     sig_rules = binom_sf(c["rules"], n_eval, 3.0 / 365.0) < 1e-3
     sig_resid = bool(n_win) and binom_sf(c["res_flag"], n_win, p_resid) < 1e-3
     sig_model = binom_sf(c["model"], n_eval, p_model) < 1e-3
+    p_dev = (max(int((dev_det.holdout_per_case["fitness"] < dev_det.threshold).sum()), 1)
+             / max(len(dev_det.holdout_per_case), 1)) if dev_det else 1.0
+    sig_dev = dev_det is not None and binom_sf(c["dev_flag"], n_eval, min(4 * p_dev, 1.0)) < 1e-3
+    # absence: significant if ANY rare-silence device is silent far above its
+    # healthy rate (rule-of-three floor when the healthy rate is zero)
+    sig_abs = False
+    for _dev, (k_sil, n_sched_d, hrate) in e["abs_days_sig"].items():
+        if hrate <= 0.05 and n_sched_d:
+            sig_abs = sig_abs or binom_sf(k_sil, n_sched_d, max(hrate, 3.0 / 365.0)) < 1e-3
     meaningful = "+".join(x for x, s_ in
-                          (("rules", sig_rules), ("resid", sig_resid), ("model", sig_model)) if s_)
+                          (("rules", sig_rules), ("resid", sig_resid), ("model", sig_model),
+                           ("device", sig_dev), ("absence", sig_abs)) if s_)
 
     # TTD only means something when detection beats noise (audit 5)
     t = ttd(e["combined"], uni) if meaningful else None
@@ -195,9 +242,9 @@ for sc in SCENARIOS:
         loc = "excl(GT?)"
     elif gt and e["top_device"]:
         loc = "OK" if e["top_device"] == f"TU_{gt}" else f"MISS({e['top_device']})"
-    print(f"{label:34s} {n_days:>4} {n_eval:>4} {n_win:>4} "
-          f"{c['rules']:>5} {c['res_flag']:>5} {c['model']:>5} {c['combined']:>5} "
-          f"{str(t) if t else '-':>4} {loc:>10}")
+    print(f"{label:34s} {n_days:>4} {n_eval:>4} "
+          f"{c['rules']:>5} {c['res_flag']:>5} {c['model']:>5} {c['dev_flag']:>5} "
+          f"{c['abs_flag']:>5} {c['combined']:>5} {str(t) if t else '-':>4} {loc:>10}")
     rows.append({
         "file": fname, "family": family, "label": label, "is_fault": is_fault,
         "days": n_days, "evaluable_days": n_eval, "window_days": n_win,
@@ -208,6 +255,10 @@ for sc in SCENARIOS:
         "ground_truth_zone": gt, "localization": loc,
         "meaningful_channels": meaningful or None,
         "model_days_minrobust": e["model_minrobust"],
+        "device_days": c["dev_flag"], "absence_days": c["abs_flag"],
+        "top_device_channel": e["top_dev_channel"],
+        "device_case_days": e["dev_case_days"],
+        "absence_by_device": e["abs_days_sig"],
     })
 
 by_hash: dict[str, list[str]] = {}

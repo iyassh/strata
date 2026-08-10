@@ -24,7 +24,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 2,
-      "combined_days": 2,
+      "combined_days": 17,
       "model_unique_days": 2,
       "ttd_days": null,
       "log_hash": "ec700c5d",
@@ -32,7 +32,33 @@
       "ground_truth_zone": "S",
       "localization": "-",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 15,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 15,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatCoilFouling_Airside_Minor",
@@ -45,7 +71,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 2,
-      "combined_days": 2,
+      "combined_days": 14,
       "model_unique_days": 2,
       "ttd_days": null,
       "log_hash": "21927f41",
@@ -53,7 +79,33 @@
       "ground_truth_zone": "INDETERMINATE",
       "localization": "excl(GT?)",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 16,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
@@ -66,7 +118,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 2,
-      "combined_days": 2,
+      "combined_days": 14,
       "model_unique_days": 2,
       "ttd_days": null,
       "log_hash": "6540b258",
@@ -74,7 +126,33 @@
       "ground_truth_zone": "S",
       "localization": "-",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 17,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatCoilFouling_Airside_Severe",
@@ -87,7 +165,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 3,
-      "combined_days": 3,
+      "combined_days": 16,
       "model_unique_days": 3,
       "ttd_days": null,
       "log_hash": "e01bd88e",
@@ -95,7 +173,33 @@
       "ground_truth_zone": "S",
       "localization": "-",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 13,
+      "absence_days": 0,
+      "top_device_channel": "TU_S",
+      "device_case_days": 19,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
@@ -108,7 +212,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 2,
-      "combined_days": 2,
+      "combined_days": 14,
       "model_unique_days": 2,
       "ttd_days": null,
       "log_hash": "a2040a3a",
@@ -116,7 +220,33 @@
       "ground_truth_zone": "INDETERMINATE",
       "localization": "excl(GT?)",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 15,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
@@ -129,7 +259,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 2,
-      "combined_days": 2,
+      "combined_days": 14,
       "model_unique_days": 2,
       "ttd_days": null,
       "log_hash": "2107b2e1",
@@ -137,7 +267,33 @@
       "ground_truth_zone": "INDETERMINATE",
       "localization": "excl(GT?)",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 15,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
@@ -150,7 +306,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 2,
-      "combined_days": 2,
+      "combined_days": 14,
       "model_unique_days": 2,
       "ttd_days": null,
       "log_hash": "89d375c2",
@@ -158,7 +314,33 @@
       "ground_truth_zone": "INDETERMINATE",
       "localization": "excl(GT?)",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 15,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
@@ -179,7 +361,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 11,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 11,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
@@ -200,7 +408,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 12,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
@@ -221,7 +455,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 11,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 11,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatVLVStuck_0%",
@@ -242,7 +502,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 6,
+      "absence_days": 0,
+      "top_device_channel": "TU_E",
+      "device_case_days": 6,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatVLVStuck_100%",
@@ -263,7 +549,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 13,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 13,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatVLVStuck_20%",
@@ -284,7 +596,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 11,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 11,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatVLVStuck_50%",
@@ -305,7 +643,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 11,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 11,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_ReheatVLVStuck_80%",
@@ -326,7 +690,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 12,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_+2C",
@@ -339,7 +729,7 @@
       "rules_days": 2,
       "residual_days": 0,
       "model_days": 2,
-      "combined_days": 4,
+      "combined_days": 17,
       "model_unique_days": 2,
       "ttd_days": null,
       "log_hash": "67f31907",
@@ -347,7 +737,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 13,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 13,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_+4C",
@@ -360,15 +776,41 @@
       "rules_days": 99,
       "residual_days": 0,
       "model_days": 3,
-      "combined_days": 102,
+      "combined_days": 113,
       "model_unique_days": 3,
-      "ttd_days": 108,
+      "ttd_days": 11,
       "log_hash": "6eaa6b94",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 11,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 11,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_-2C",
@@ -381,7 +823,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 2,
-      "combined_days": 2,
+      "combined_days": 16,
       "model_unique_days": 2,
       "ttd_days": null,
       "log_hash": "b3a0bc33",
@@ -389,7 +831,33 @@
       "ground_truth_zone": "INDETERMINATE",
       "localization": "excl(GT?)",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 15,
+      "absence_days": 0,
+      "top_device_channel": "TU_S",
+      "device_case_days": 16,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_-4C",
@@ -402,15 +870,41 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 4,
-      "combined_days": 4,
+      "combined_days": 39,
       "model_unique_days": 4,
-      "ttd_days": null,
+      "ttd_days": 11,
       "log_hash": "9f688e88",
       "top_device": null,
       "ground_truth_zone": "S",
       "localization": "-",
-      "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "meaningful_channels": "device",
+      "model_days_minrobust": 0,
+      "device_days": 36,
+      "absence_days": 0,
+      "top_device_channel": "TU_S",
+      "device_case_days": 37,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
@@ -431,7 +925,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 12,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
@@ -452,7 +972,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 12,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
@@ -473,7 +1019,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules+model",
-      "model_days_minrobust": 22
+      "model_days_minrobust": 22,
+      "device_days": 17,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 17,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
@@ -493,8 +1065,34 @@
       "top_device": "TU_S",
       "ground_truth_zone": "S",
       "localization": "OK",
-      "meaningful_channels": "rules+model",
-      "model_days_minrobust": 25
+      "meaningful_channels": "rules+model+device",
+      "model_days_minrobust": 25,
+      "device_days": 49,
+      "absence_days": 0,
+      "top_device_channel": "TU_S",
+      "device_case_days": 49,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_VAVDMPRStuck_0%",
@@ -514,8 +1112,34 @@
       "top_device": "TU_S",
       "ground_truth_zone": "S",
       "localization": "OK",
-      "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "meaningful_channels": "rules+device",
+      "model_days_minrobust": 0,
+      "device_days": 93,
+      "absence_days": 0,
+      "top_device_channel": "TU_I",
+      "device_case_days": 93,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_VAVDMPRStuck_100%",
@@ -536,7 +1160,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules+model",
-      "model_days_minrobust": 26
+      "model_days_minrobust": 26,
+      "device_days": 10,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 10,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_VAVDMPRStuck_20%",
@@ -557,7 +1207,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 13,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 13,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_VAVDMPRStuck_50%",
@@ -578,7 +1254,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules+model",
-      "model_days_minrobust": 23
+      "model_days_minrobust": 23,
+      "device_days": 19,
+      "absence_days": 0,
+      "top_device_channel": "TU_S",
+      "device_case_days": 19,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_VAVDMPRStuck_80%",
@@ -599,7 +1301,33 @@
       "ground_truth_zone": "S",
       "localization": "OK",
       "meaningful_channels": "rules+model",
-      "model_days_minrobust": 25
+      "model_days_minrobust": 25,
+      "device_days": 10,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 10,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_VAVDMPRUnstable",
@@ -612,7 +1340,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 1,
-      "combined_days": 1,
+      "combined_days": 12,
       "model_unique_days": 1,
       "ttd_days": null,
       "log_hash": "16c17b07",
@@ -620,7 +1348,33 @@
       "ground_truth_zone": "S",
       "localization": "-",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 11,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 16,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     },
     {
       "file": "SFPU_VAVFanRestrictFlow",
@@ -633,7 +1387,7 @@
       "rules_days": 0,
       "residual_days": 0,
       "model_days": 4,
-      "combined_days": 4,
+      "combined_days": 16,
       "model_unique_days": 4,
       "ttd_days": null,
       "log_hash": "9f91592d",
@@ -641,7 +1395,33 @@
       "ground_truth_zone": "S",
       "localization": "-",
       "meaningful_channels": null,
-      "model_days_minrobust": 0
+      "model_days_minrobust": 0,
+      "device_days": 12,
+      "absence_days": 0,
+      "top_device_channel": "TU_W",
+      "device_case_days": 15,
+      "absence_by_device": {
+        "TU_E": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_I": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_S": [
+          0,
+          365,
+          0.0
+        ],
+        "TU_W": [
+          0,
+          365,
+          0.0
+        ]
+      }
     }
   ],
   "event_identical_groups": {}

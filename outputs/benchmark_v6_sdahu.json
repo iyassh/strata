@@ -32,7 +32,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 5
+      "model_days_minrobust": 5,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "damper_stuck_025_annual",
@@ -53,7 +58,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 5
+      "model_days_minrobust": 5,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "damper_stuck_075_annual",
@@ -74,7 +84,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "rules+resid",
-      "model_days_minrobust": 5
+      "model_days_minrobust": 5,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "damper_stuck_100_annual_short",
@@ -95,7 +110,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "rules+resid",
-      "model_days_minrobust": 3
+      "model_days_minrobust": 3,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "coi_stuck_010_annual",
@@ -116,7 +136,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 9
+      "model_days_minrobust": 9,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "coi_stuck_025_annual",
@@ -137,7 +162,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 9
+      "model_days_minrobust": 9,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "coi_stuck_050_annual",
@@ -158,7 +188,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 9
+      "model_days_minrobust": 9,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "coi_stuck_075_annual",
@@ -179,7 +214,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 9
+      "model_days_minrobust": 9,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "coi_leakage_010_annual",
@@ -200,7 +240,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "rules",
-      "model_days_minrobust": 9
+      "model_days_minrobust": 9,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "coi_bias_-4_annual",
@@ -221,7 +266,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "resid",
-      "model_days_minrobust": 4
+      "model_days_minrobust": 4,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "coi_bias_-2_annual",
@@ -242,7 +292,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "resid",
-      "model_days_minrobust": 4
+      "model_days_minrobust": 4,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "coi_bias_2_annual",
@@ -263,7 +318,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "resid",
-      "model_days_minrobust": 5
+      "model_days_minrobust": 5,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "coi_bias_4_annual",
@@ -284,7 +344,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "resid",
-      "model_days_minrobust": 5
+      "model_days_minrobust": 5,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     },
     {
       "file": "oa_bias_4_annual",
@@ -305,7 +370,12 @@
       "ground_truth_zone": null,
       "localization": "-",
       "meaningful_channels": "resid",
-      "model_days_minrobust": 5
+      "model_days_minrobust": 5,
+      "device_days": 0,
+      "absence_days": 0,
+      "top_device_channel": null,
+      "device_case_days": 0,
+      "absence_by_device": {}
     }
   ],
   "event_identical_groups": {}

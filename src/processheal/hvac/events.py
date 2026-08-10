@@ -178,8 +178,12 @@ def abstract_events(df: pd.DataFrame, cfg: Config) -> pd.DataFrame:
         kind = r.get("kind")
         if kind not in _SENSOR_KEYS:
             raise ValueError(f"rule {name!r} has unknown kind {kind!r}")
-        # portability: skip rules whose sensors this building does not expose
+        # portability: skip rules whose sensors this building does not expose.
+        # Gates FAIL CLOSED (gap G8): a rule that declares a gate/occupancy
+        # signal is skipped entirely when that signal is unmapped — running it
+        # ungated on a new building would be an alarm storm, silently.
         needed = [r[k] for k in _SENSOR_KEYS[kind] if k in r]
+        needed += [r[k] for k in ("gate_signal", "occ_signal") if k in r]
         if any(col not in w.columns for col in needed):
             continue
 

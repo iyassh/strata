@@ -227,7 +227,25 @@ def abstract_events(df: pd.DataFrame, cfg: Config) -> pd.DataFrame:
     log = pd.DataFrame(rows, columns=["case_id", "activity", "timestamp"])
     log["alphabet"] = log["activity"].map(event_alphabet_map(cfg))
     log["stratum"] = log["activity"].map(event_stratum_map(cfg))
+    log["device"] = log["activity"].map(event_device_map(cfg))
     return log.sort_values(["case_id", "timestamp", "activity"], kind="mergesort").reset_index(drop=True)
+
+
+def event_device_map(cfg: Config) -> dict[str, str]:
+    """Map emitted event names to their physical device instance (the rule's
+    optional ``device:`` tag, e.g. TU_S for the south terminal unit). Events
+    from untagged rules have no device (unit-level)."""
+    out: dict[str, str] = {}
+    for name, r in cfg.rules["events"].items():
+        dev = r.get("device")
+        if not dev:
+            continue
+        for key in ("on_event", "off_event", "enter_event", "exit_event"):
+            if key in r:
+                out[r[key]] = dev
+        if r.get("kind") in _SUSTAINED_KINDS:
+            out[name] = dev
+    return out
 
 
 def rule_stratum(rule: dict) -> str:

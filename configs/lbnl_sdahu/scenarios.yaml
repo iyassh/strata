@@ -1,0 +1,18 @@
+# Evaluation manifest: (file, family, label, is_fault) per scenario.
+healthy_file: AHU_annual
+scenarios:
+  - {file: damper_stuck_010_annual, family: damper_stuck, label: "damper stuck 10%", is_fault: true}
+  - {file: damper_stuck_025_annual, family: damper_stuck, label: "damper stuck 25%", is_fault: true}
+  - {file: damper_stuck_075_annual, family: damper_stuck, label: "damper stuck 75%", is_fault: true}
+  - {file: damper_stuck_100_annual_short, family: damper_stuck, label: "damper stuck 100%", is_fault: true}
+  - {file: coi_stuck_010_annual, family: valve_stuck, label: "valve stuck 10%", is_fault: true}
+  - {file: coi_stuck_025_annual, family: valve_stuck, label: "valve stuck 25%", is_fault: true}
+  - {file: coi_stuck_050_annual, family: valve_stuck, label: "valve stuck 50%", is_fault: true}
+  - {file: coi_stuck_075_annual, family: valve_stuck, label: "valve stuck 75%", is_fault: true}
+  - {file: coi_leakage_010_annual, family: valve_leak, label: "valve leaking", is_fault: true}
+  - {file: coi_bias_-4_annual, family: sensor_bias, label: "SA sensor bias -4C", is_fault: true}
+  - {file: coi_bias_-2_annual, family: sensor_bias, label: "SA sensor bias -2C", is_fault: true}
+  - {file: coi_bias_2_annual, family: sensor_bias, label: "SA sensor bias +2C", is_fault: true}
+  - {file: coi_bias_4_annual, family: sensor_bias, label: "SA sensor bias +4C", is_fault: true}
+  # relabel overturned 2026-08-10: controller-side OA bias (see benchmark v5 notes)
+  - {file: oa_bias_4_annual, family: oa_bias, label: "OA sensor bias (controller-side)", is_fault: true}

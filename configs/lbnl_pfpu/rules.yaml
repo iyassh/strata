@@ -68,6 +68,7 @@ events:
     off_event: zone_fan_I_stopped
     alphabet: state
     stratum: device
+    device: TU_I
   zone_fan_W:
     kind: mode
     signal: ZONE_FAN_STATUS_W
@@ -76,6 +77,7 @@ events:
     off_event: zone_fan_W_stopped
     alphabet: state
     stratum: device
+    device: TU_W
   zone_fan_S:
     kind: mode
     signal: ZONE_FAN_STATUS_S
@@ -84,6 +86,7 @@ events:
     off_event: zone_fan_S_stopped
     alphabet: state
     stratum: device
+    device: TU_S
   zone_fan_E:
     kind: mode
     signal: ZONE_FAN_STATUS_E
@@ -92,6 +95,7 @@ events:
     off_event: zone_fan_E_stopped
     alphabet: state
     stratum: device
+    device: TU_E
 
   zone_heating_I:
     kind: mode
@@ -101,6 +105,7 @@ events:
     off_event: zone_heating_I_inactive
     alphabet: state
     stratum: device
+    device: TU_I
   zone_heating_W:
     kind: mode
     signal: RH_VLV_POS_W
@@ -109,6 +114,7 @@ events:
     off_event: zone_heating_W_inactive
     alphabet: state
     stratum: device
+    device: TU_W
   zone_heating_S:
     kind: mode
     signal: RH_VLV_POS_S
@@ -117,6 +123,7 @@ events:
     off_event: zone_heating_S_inactive
     alphabet: state
     stratum: device
+    device: TU_S
   zone_heating_E:
     kind: mode
     signal: RH_VLV_POS_E
@@ -125,6 +132,7 @@ events:
     off_event: zone_heating_E_inactive
     alphabet: state
     stratum: device
+    device: TU_E
 
   # ------------- signature alphabet (bypasses discovery) ------------------
   # AHU actuators: command-vs-position (APAR-style; thresholds as SDAHU)
@@ -185,24 +193,28 @@ events:
     cmd: RH_VLV_CMD_I
     threshold: 0.05
     sustained_min: 60
+    device: TU_I
   rh_valve_mismatch_W:
     kind: mismatch
     pos: RH_VLV_POS_W
     cmd: RH_VLV_CMD_W
     threshold: 0.05
     sustained_min: 60
+    device: TU_W
   rh_valve_mismatch_S:
     kind: mismatch
     pos: RH_VLV_POS_S
     cmd: RH_VLV_CMD_S
     threshold: 0.05
     sustained_min: 60
+    device: TU_S
   rh_valve_mismatch_E:
     kind: mismatch
     pos: RH_VLV_POS_E
     cmd: RH_VLV_CMD_E
     threshold: 0.05
     sustained_min: 60
+    device: TU_E
 
 
   # Waterside leak: flow through a CLOSED reheat valve. The position-
@@ -215,6 +227,7 @@ events:
     idle_below: 0.02
     leak_above: 0.2    # healthy closed-valve flow maxes at 0.10 GPM (measured); 2x margin
     sustained_min: 15
+    device: TU_I
   rh_water_leak_W:
     kind: leak
     pos: RH_FLOW_W
@@ -222,6 +235,7 @@ events:
     idle_below: 0.02
     leak_above: 0.2    # healthy closed-valve flow maxes at 0.10 GPM (measured); 2x margin
     sustained_min: 15
+    device: TU_W
   rh_water_leak_S:
     kind: leak
     pos: RH_FLOW_S
@@ -229,6 +243,7 @@ events:
     idle_below: 0.02
     leak_above: 0.2    # healthy closed-valve flow maxes at 0.10 GPM (measured); 2x margin
     sustained_min: 15
+    device: TU_S
   rh_water_leak_E:
     kind: leak
     pos: RH_FLOW_E
@@ -236,6 +251,7 @@ events:
     idle_below: 0.02
     leak_above: 0.2    # healthy closed-valve flow maxes at 0.10 GPM (measured); 2x margin
     sustained_min: 15
+    device: TU_E
 
   # Zone flow tracking: the ONLY handle on the command-less zone dampers via
   # rules — measured primary-air flow must track its setpoint while the AHU
@@ -251,6 +267,7 @@ events:
     sustained_min: 60
     gate_signal: OCCUPIED
     gate_above: 0.5
+    device: TU_I
   zone_flow_tracking_W:
     kind: setpoint_deviation
     meas: ZONE_FLOW_W
@@ -262,6 +279,7 @@ events:
     sustained_min: 60
     gate_signal: OCCUPIED
     gate_above: 0.5
+    device: TU_W
   zone_flow_tracking_S:
     kind: setpoint_deviation
     meas: ZONE_FLOW_S
@@ -273,6 +291,7 @@ events:
     sustained_min: 60
     gate_signal: OCCUPIED
     gate_above: 0.5
+    device: TU_S
   zone_flow_tracking_E:
     kind: setpoint_deviation
     meas: ZONE_FLOW_E
@@ -284,6 +303,7 @@ events:
     sustained_min: 60
     gate_signal: OCCUPIED
     gate_above: 0.5
+    device: TU_E
 
   # Physics residuals (= APAR Rules 7 / 26-27, statistically calibrated).
   # The FPU AHU has BOTH coils, so the SA-MA residual needs both idle

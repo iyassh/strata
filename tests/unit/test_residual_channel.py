@@ -151,3 +151,33 @@ def test_occ_above_gate_includes_night_cycle_state():
     del rules["events"]["supply_air_residual"]["occ_above"]
     log2 = abstract_events(df, Config(sensors=CFG.sensors, rules=rules))
     assert (log2["activity"] == "supply_air_residual").sum() == 0
+
+
+def test_holdout_mask_handles_composite_device_cases():
+    import pandas as pd
+    from processheal.core.detection import holdout_mask
+    ids = pd.Series(["2018-06-01", "2018-06-28", "2018-06-01__TU_S", "2018-06-28__TU_S"])
+    m = holdout_mask(ids, 8)
+    assert list(m) == [False, True, False, True]  # same day -> same side, always
+
+
+def test_device_column_from_rule_tag():
+    from processheal.io.config import Config
+    rules = {
+        "detection": CFG.rules["detection"],
+        "events": {
+            "occupancy": {"kind": "occupancy", "signal": "OCCUPIED",
+                          "on_event": "system_started", "off_event": "system_stopped"},
+            "rh_valve_mismatch_S": {"kind": "mismatch", "pos": "OA_DMPR_POS",
+                                    "cmd": "OA_DMPR_CMD", "threshold": 0.05,
+                                    "sustained_min": 60, "device": "TU_S"},
+        },
+    }
+    cfg2 = Config(sensors=CFG.sensors, rules=rules)
+    df = _two_day_frame(61.0)
+    df.loc[df.index[:360], "SYS_CTL"] = 0
+    df["OA_DMPR"] = 0.9  # mismatch vs cmd 0.1 -> sustained
+    log = abstract_events(df, cfg2)
+    got = log.loc[log["activity"] == "rh_valve_mismatch_S", "device"].unique()
+    assert list(got) == ["TU_S"]
+    assert log.loc[log["activity"] == "system_started", "device"].isna().all()

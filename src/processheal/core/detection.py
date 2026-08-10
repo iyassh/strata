@@ -25,8 +25,14 @@ from processheal.io.config import Config
 
 
 def holdout_mask(case_ids: pd.Series, holdout_days_per_month: int) -> pd.Series:
-    """True for day-cases in the last N days of their month."""
-    dates = pd.to_datetime(case_ids)
+    """True for cases whose DAY falls in the last N days of its month.
+
+    Case ids are either plain days ("2018-06-01") or composite
+    day-x-device cases ("2018-06-01__TU_S", the device stratum). The split
+    is always calendar-based: every case of the same day lands on the same
+    side, so pooled device cases can never leak a day across the split.
+    """
+    dates = pd.to_datetime(case_ids.str.split("__").str[0])
     return dates.dt.day > (dates.dt.days_in_month - holdout_days_per_month)
 
 

@@ -1,0 +1,32 @@
+healthy_file: SFPU_FaultFree
+scenarios:
+  - {file: "SFPU_RMTEMPUnstable", family: instability, label: "RMTEMPUnstable", is_fault: true}
+  - {file: "SFPU_ReheatCoilFouling_Airside_Minor", family: coil_fouling, label: "ReheatCoilFouling Airside Minor", is_fault: true}
+  - {file: "SFPU_ReheatCoilFouling_Airside_Moderate", family: coil_fouling, label: "ReheatCoilFouling Airside Moderate", is_fault: true}
+  - {file: "SFPU_ReheatCoilFouling_Airside_Severe", family: coil_fouling, label: "ReheatCoilFouling Airside Severe", is_fault: true}
+  - {file: "SFPU_ReheatCoilFouling_Waterside_Minor", family: coil_fouling, label: "ReheatCoilFouling Waterside Minor", is_fault: true}
+  - {file: "SFPU_ReheatCoilFouling_Waterside_Moderate", family: coil_fouling, label: "ReheatCoilFouling Waterside Moderate", is_fault: true}
+  - {file: "SFPU_ReheatCoilFouling_Waterside_Severe", family: coil_fouling, label: "ReheatCoilFouling Waterside Severe", is_fault: true}
+  - {file: "SFPU_ReheatVLVLeak_20%MaxFlow", family: reheat_leak, label: "ReheatVLVLeak 20%MaxFlow", is_fault: true}
+  - {file: "SFPU_ReheatVLVLeak_50%MaxFlow", family: reheat_leak, label: "ReheatVLVLeak 50%MaxFlow", is_fault: true}
+  - {file: "SFPU_ReheatVLVLeak_80%MaxFlow", family: reheat_leak, label: "ReheatVLVLeak 80%MaxFlow", is_fault: true}
+  - {file: "SFPU_ReheatVLVStuck_0%", family: reheat_stuck, label: "ReheatVLVStuck 0%", is_fault: true}
+  - {file: "SFPU_ReheatVLVStuck_100%", family: reheat_stuck, label: "ReheatVLVStuck 100%", is_fault: true}
+  - {file: "SFPU_ReheatVLVStuck_20%", family: reheat_stuck, label: "ReheatVLVStuck 20%", is_fault: true}
+  - {file: "SFPU_ReheatVLVStuck_50%", family: reheat_stuck, label: "ReheatVLVStuck 50%", is_fault: true}
+  - {file: "SFPU_ReheatVLVStuck_80%", family: reheat_stuck, label: "ReheatVLVStuck 80%", is_fault: true}
+  - {file: "SFPU_SensorBias_RMTEMP_+2C", family: rmtemp_bias, label: "SensorBias RMTEMP +2C", is_fault: true}
+  - {file: "SFPU_SensorBias_RMTEMP_+4C", family: rmtemp_bias, label: "SensorBias RMTEMP +4C", is_fault: true}
+  - {file: "SFPU_SensorBias_RMTEMP_-2C", family: rmtemp_bias, label: "SensorBias RMTEMP -2C", is_fault: true}
+  - {file: "SFPU_SensorBias_RMTEMP_-4C", family: rmtemp_bias, label: "SensorBias RMTEMP -4C", is_fault: true}
+  - {file: "SFPU_SensorBias_VAVAirflow_+200CFM", family: airflow_bias, label: "SensorBias VAVAirflow +200CFM", is_fault: true}
+  - {file: "SFPU_SensorBias_VAVAirflow_+400CFM", family: airflow_bias, label: "SensorBias VAVAirflow +400CFM", is_fault: true}
+  - {file: "SFPU_SensorBias_VAVAirflow_-200CFM", family: airflow_bias, label: "SensorBias VAVAirflow -200CFM", is_fault: true}
+  - {file: "SFPU_SensorBias_VAVAirflow_-400CFM", family: airflow_bias, label: "SensorBias VAVAirflow -400CFM", is_fault: true}
+  - {file: "SFPU_VAVDMPRStuck_0%", family: other, label: "VAVDMPRStuck 0%", is_fault: true}
+  - {file: "SFPU_VAVDMPRStuck_100%", family: other, label: "VAVDMPRStuck 100%", is_fault: true}
+  - {file: "SFPU_VAVDMPRStuck_20%", family: other, label: "VAVDMPRStuck 20%", is_fault: true}
+  - {file: "SFPU_VAVDMPRStuck_50%", family: other, label: "VAVDMPRStuck 50%", is_fault: true}
+  - {file: "SFPU_VAVDMPRStuck_80%", family: other, label: "VAVDMPRStuck 80%", is_fault: true}
+  - {file: "SFPU_VAVDMPRUnstable", family: instability, label: "VAVDMPRUnstable", is_fault: true}
+  - {file: "SFPU_VAVFanRestrictFlow", family: fan_restrict, label: "VAVFanRestrictFlow", is_fault: true}

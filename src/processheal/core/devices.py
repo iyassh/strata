@@ -107,20 +107,28 @@ def build_device_detector(
     conf = check_conformance(hold_log[["case_id", "activity", "timestamp"]], net, im, fm)
     threshold = float(conf["per_day"]["fitness"].quantile(d["fpr_quantile"]))
 
+    # absence baselines from TRAIN days only (audit E: calibration must not
+    # see holdout); holdout silence kept separately as the validation count
+    hold_days = set(pd.Series(healthy_scheduled_days)[
+        holdout_mask(pd.Series(healthy_scheduled_days), d["holdout_days_per_month"])])
+    train_days = [x for x in healthy_scheduled_days if x not in hold_days]
     devices = sorted(dlog["device"].unique())
-    absence = {}
-    n_sched = max(len(healthy_scheduled_days), 1)
+    absence, absence_holdout_fp = {}, {}
     for dev in devices:
         active_days = set(dlog.loc[dlog["device"] == dev, "case_id"].str.split("__").str[0])
-        silent = [day for day in healthy_scheduled_days if day not in active_days]
-        absence[dev] = len(silent) / n_sched
+        absence[dev] = (sum(1 for x in train_days if x not in active_days)
+                        / max(len(train_days), 1))
+        absence_holdout_fp[dev] = [sum(1 for x in hold_days if x not in active_days),
+                                   len(hold_days)]
 
-    return DeviceDetector(
+    det = DeviceDetector(
         net=net, im=im, fm=fm, threshold=threshold,
         n_train_cases=train["case_id"].nunique(),
         holdout_per_case=conf["per_day"],
         healthy_absence=absence,
     )
+    det.absence_holdout_fp = absence_holdout_fp
+    return det
 
 
 def classify_device_days(det: DeviceDetector, log: pd.DataFrame, cfg: Config) -> pd.DataFrame:
@@ -152,3 +160,34 @@ def absence_days(
         for day in scheduled_days:
             rows.append((day, dev, day not in active, healthy_rate))
     return pd.DataFrame(rows, columns=["day", "device", "silent", "healthy_rate"])
+
+
+def pooling_homogeneity(det: DeviceDetector) -> dict:
+    """Are the pooled instances behaviourally alike in health? (The design
+    justification for pooling: identical units under one control sequence are
+    one behavioural population. Trace-clustering literature says pooling
+    heterogeneous populations harms discovery — so we verify, per system,
+    that each device's held-out healthy fitness is indistinguishable from
+    the pool. Descriptive check + a conservative flag; formal paired tests
+    arrive with the Phase-4 statistics battery.)"""
+    per = det.holdout_per_case.copy()
+    per["device"] = per["case_id"].str.split("__").str[1]
+    by = per.groupby("device")["fitness"]
+    stats = {d: {"n": int(g.count()), "mean": float(g.mean()), "std": float(g.std() or 0)}
+             for d, g in by}
+    # Kruskal-Wallis H against the chi-square critical value (df = groups-1,
+    # p = 0.01). Rank-based, dependency-free; the earlier mean-range heuristic
+    # said "homogeneous" for a distribution the KW test rejects at p ~ 4e-20
+    # (PFPU) — audit finding F. Ties make H slightly conservative; noted.
+    ranked = per["fitness"].rank()
+    n_total = len(per)
+    h_stat = 0.0
+    for _, g in per.assign(_r=ranked).groupby("device"):
+        r_mean = float(g["_r"].mean())
+        h_stat += len(g) * (r_mean - (n_total + 1) / 2.0) ** 2
+    h_stat *= 12.0 / (n_total * (n_total + 1))
+    crit = {1: 6.63, 2: 9.21, 3: 11.34, 4: 13.28}.get(len(stats) - 1, 13.28)
+    return {"per_device": stats,
+            "kruskal_wallis_h": round(h_stat, 2),
+            "critical_value_p01": crit,
+            "homogeneous": bool(h_stat < crit)}

@@ -1,5 +1,6 @@
 {
   "system": "sdahu",
+  "device_stratum": null,
   "residual_band": [
     0.5263020000000012,
     1.3720845000000033
@@ -37,6 +38,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -63,6 +65,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -89,6 +92,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -115,6 +119,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -141,6 +146,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -167,6 +173,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -193,6 +200,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -219,6 +227,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -245,6 +254,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -271,6 +281,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -297,6 +308,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -323,6 +335,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -349,6 +362,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     },
     {
@@ -375,6 +389,7 @@
       "absence_days": 0,
       "top_device_channel": null,
       "device_case_days": 0,
+      "device_days_by_device": {},
       "absence_by_device": {}
     }
   ],

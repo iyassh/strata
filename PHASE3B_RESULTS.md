@@ -75,8 +75,9 @@ see the PFPU heating-day-count collapse that order-only conformance cannot.
 - Coil fouling: 0/12 meaningful (waterside ΔT channel not yet built)
 - Instability: 0/4 meaningful (frequency check is the Phase-4 answer;
   rev 1's "1 of 4" rested on a single rule-day — retracted by the gate)
-- RMTEMP bias: 3/8 meaningful, weak and late; −2/−4 °C undetected
-  (zone-temp comfort residual is the designed increment). The SFPU −2C
+- RMTEMP bias: 1/8 meaningful (SFPU +4C via rules; corrected from a stale
+  3/8 after audit adjudication against the archived artifacts); the
+  device stratum later added −4C (see PHASE3C). The SFPU −2C
   scenario is excluded from family claims (source file calendar-rotated).
 - SFPU residual detections on stuck/leak from rev 1 (21–117 days):
   **retracted** — they rode on 0.02–0.03 °F band exceedances; the 0.5 °F

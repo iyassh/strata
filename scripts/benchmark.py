@@ -46,7 +46,8 @@ def binom_sf(k: int, n: int, p: float) -> float:
 warnings.filterwarnings("ignore")
 
 from processheal.core.detection import build_detector, classify_days, holdout_mask
-from processheal.core.devices import absence_days, build_device_detector, classify_device_days
+from processheal.core.devices import (absence_days, build_device_detector,
+                                       classify_device_days, pooling_homogeneity)
 from processheal.core.residuals import calibrate_band, daily_residual_scores, flag_days
 from processheal.hvac.events import abstract_events, event_alphabet_map, event_device_map
 from processheal.io.config import load_config
@@ -115,6 +116,8 @@ def evaluate(fname: str):
     dev_flag = pd.Series(False, index=days)
     abs_flag = pd.Series(False, index=days)
     top_dev_channel, dev_case_days, abs_days_sig = None, 0, {}
+    dev_by_device: dict[str, int] = {}
+    dev_days_map: dict[str, list] = {}
     if dev_det is not None:
         per_dev = classify_device_days(dev_det, log, cfg)
         if len(per_dev):
@@ -122,7 +125,10 @@ def evaluate(fname: str):
             dev_case_days = int(len(fl))
             dev_flag = dev_flag | pd.Series(days.isin(set(fl["day"])), index=days)
             if len(fl):
-                top_dev_channel = fl.groupby("device")["day"].nunique().idxmax()
+                dev_by_device = {d_: int(n) for d_, n in
+                                 fl.groupby("device")["day"].nunique().items()}
+                dev_days_map = {d_: sorted(set(g["day"])) for d_, g in fl.groupby("device")}
+                top_dev_channel = max(dev_by_device, key=dev_by_device.get)
         sched = [d for d in days if uni.loc[d, "occupied_min"] > 0]
         ab = absence_days(dev_det, log, cfg, sched)
         # a silent day flags only for devices whose healthy silence is rare
@@ -149,7 +155,8 @@ def evaluate(fname: str):
         "model_minrobust": model_minrobust,
         "dev_flag": dev_flag, "abs_flag": abs_flag,
         "top_dev_channel": top_dev_channel, "dev_case_days": dev_case_days,
-        "abs_days_sig": abs_days_sig,
+        "abs_days_sig": abs_days_sig, "dev_by_device": dev_by_device,
+        "dev_days_map": dev_days_map,
     }
 
 
@@ -188,12 +195,27 @@ print(f"\nresidual band (TRAIN-only): [{BAND[0]:+.2f}, {BAND[1]:+.2f}] F | "
 print(f"model threshold: {det.threshold:.4f} (min-calibration on {len(det.holdout_per_day)} holdout days; "
       f"holdout FP {model_hold_fp})")
 print(f"rules on FULL healthy year: {len(h_sig)} signature days (computed)")
+DEV_META = None
 if dev_det is not None:
+    homog = pooling_homogeneity(dev_det)
+    DEV_META = {
+        "threshold": dev_det.threshold,
+        "n_train_cases": dev_det.n_train_cases,
+        "holdout_cases": len(dev_det.holdout_per_case),
+        "holdout_case_fp": int((dev_det.holdout_per_case["fitness"] < dev_det.threshold).sum()),
+        "holdout_fitness_min": float(dev_det.holdout_per_case["fitness"].min()),
+        "healthy_absence_rates": dev_det.healthy_absence,
+        "absence_holdout_fp": getattr(dev_det, "absence_holdout_fp", {}),
+        "pooling_homogeneity": homog,
+    }
     print(f"device stratum: pooled model from {dev_det.n_train_cases} train cases; "
           f"threshold {dev_det.threshold:.4f}; holdout case FP "
-          f"{int((dev_det.holdout_per_case['fitness'] < dev_det.threshold).sum())}"
-          f"/{len(dev_det.holdout_per_case)}; healthy absence rates "
+          f"{DEV_META['holdout_case_fp']}/{DEV_META['holdout_cases']}; "
+          f"absence rates (train-only) "
           f"{ {k: round(v, 3) for k, v in dev_det.healthy_absence.items()} }")
+    print(f"  pooling homogeneity: KW H={homog['kruskal_wallis_h']} "
+          f"vs crit(p=.01)={homog['critical_value_p01']} -> "
+          f"{'HOMOGENEOUS' if homog['homogeneous'] else 'HETEROGENEOUS (pooling caveat applies)'}")
 else:
     print("device stratum: no device-tagged rules in this config (n/a)")
 print("false-alarm evidence = held-out healthy days ONLY (no independent negative exists; stated).")
@@ -220,9 +242,20 @@ for sc in SCENARIOS:
     sig_rules = binom_sf(c["rules"], n_eval, 3.0 / 365.0) < 1e-3
     sig_resid = bool(n_win) and binom_sf(c["res_flag"], n_win, p_resid) < 1e-3
     sig_model = binom_sf(c["model"], n_eval, p_model) < 1e-3
-    p_dev = (max(int((dev_det.holdout_per_case["fitness"] < dev_det.threshold).sum()), 1)
-             / max(len(dev_det.holdout_per_case), 1)) if dev_det else 1.0
-    sig_dev = dev_det is not None and binom_sf(c["dev_flag"], n_eval, min(4 * p_dev, 1.0)) < 1e-3
+    # Device significance is PER DEVICE (audit A4: the any-of-4 day-level test
+    # dies under holdout-estimation uncertainty; the per-instance test is the
+    # stratum's own logic and is CI-robust). Bonferroni across the 4 devices,
+    # and required to hold at 2x the estimated case rate (sensitivity margin).
+    p_case = (max(int((dev_det.holdout_per_case["fitness"] < dev_det.threshold).sum()), 1)
+              / max(len(dev_det.holdout_per_case), 1)) if dev_det else 1.0
+    sig_dev, sig_devices = False, []
+    if dev_det is not None and e["dev_by_device"]:
+        n_dev = max(len(dev_det.healthy_absence), 1)
+        for _d, k_days in e["dev_by_device"].items():
+            if (binom_sf(k_days, n_eval, p_case) < 1e-3 / n_dev
+                    and binom_sf(k_days, n_eval, min(2 * p_case, 1.0)) < 1e-3 / n_dev):
+                sig_dev = True
+                sig_devices.append(_d)
     # absence: significant if ANY rare-silence device is silent far above its
     # healthy rate (rule-of-three floor when the healthy rate is zero)
     sig_abs = False
@@ -233,8 +266,24 @@ for sc in SCENARIOS:
                           (("rules", sig_rules), ("resid", sig_resid), ("model", sig_model),
                            ("device", sig_dev), ("absence", sig_abs)) if s_)
 
-    # TTD only means something when detection beats noise (audit 5)
-    t = ttd(e["combined"], uni) if meaningful else None
+    # TTD only from channels that PASSED their gates (audit G: a noise-day
+    # from an insignificant channel must not set time-to-detection)
+    sig_union = pd.Series(False, index=e["uni"].index)
+    if sig_rules:
+        sig_union = sig_union | e["rules"]
+    if sig_resid:
+        sig_union = sig_union | e["res_flag"]
+    if sig_model:
+        sig_union = sig_union | e["model"]
+    if sig_dev:
+        # only the SIGNIFICANT devices' days set TTD (residual audit-G nit:
+        # a noise day from an insignificant sibling must not lead)
+        sig_days = [d for dv in sig_devices for d in e["dev_days_map"].get(dv, [])]
+        sig_union = sig_union | pd.Series(e["uni"].index.isin(sig_days),
+                                          index=e["uni"].index)
+    if sig_abs:
+        sig_union = sig_union | e["abs_flag"]
+    t = ttd(sig_union, uni) if meaningful else None
 
     gt = GROUND_TRUTH.get(fname, {}).get("injected_zone")
     loc = "-"
@@ -258,6 +307,7 @@ for sc in SCENARIOS:
         "device_days": c["dev_flag"], "absence_days": c["abs_flag"],
         "top_device_channel": e["top_dev_channel"],
         "device_case_days": e["dev_case_days"],
+        "device_days_by_device": e["dev_by_device"],
         "absence_by_device": e["abs_days_sig"],
     })
 
@@ -287,7 +337,7 @@ for f, rs in sorted(fam.items()):
 out = Path("outputs")
 out.mkdir(exist_ok=True)
 (out / f"benchmark_v6_{SYSTEM}.json").write_text(json.dumps({
-    "system": SYSTEM, "residual_band": BAND,
+    "system": SYSTEM, "device_stratum": DEV_META, "residual_band": BAND,
     "residual_holdout_fp": [hold_fp, hold_n],
     "model_threshold": det.threshold, "model_holdout_fp": model_hold_fp,
     "train_days": det.n_train_days, "healthy_sig_days": len(h_sig),

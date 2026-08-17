@@ -1,5 +1,63 @@
 {
   "system": "sfpu",
+  "device_stratum": {
+    "threshold": 0.7962222222222223,
+    "n_train_cases": 1076,
+    "holdout_cases": 384,
+    "holdout_case_fp": 4,
+    "holdout_fitness_min": 0.75,
+    "healthy_absence_rates": {
+      "TU_E": 0.0,
+      "TU_I": 0.0,
+      "TU_S": 0.0,
+      "TU_W": 0.0
+    },
+    "absence_holdout_fp": {
+      "TU_E": [
+        0,
+        96
+      ],
+      "TU_I": [
+        0,
+        96
+      ],
+      "TU_S": [
+        0,
+        96
+      ],
+      "TU_W": [
+        0,
+        96
+      ]
+    },
+    "pooling_homogeneity": {
+      "per_device": {
+        "TU_E": {
+          "n": 96,
+          "mean": 0.9558240191417742,
+          "std": 0.0601737692095996
+        },
+        "TU_I": {
+          "n": 96,
+          "mean": 0.9525898696279477,
+          "std": 0.04938563620852421
+        },
+        "TU_S": {
+          "n": 96,
+          "mean": 0.9599670021069824,
+          "std": 0.05379607468339707
+        },
+        "TU_W": {
+          "n": 96,
+          "mean": 0.9583583299820059,
+          "std": 0.056476098217735284
+        }
+      },
+      "kruskal_wallis_h": 0.9,
+      "critical_value_p01": 11.34,
+      "homogeneous": true
+    }
+  },
   "residual_band": [
     1.2199999999999989,
     1.7199999999999989
@@ -37,6 +95,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 15,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -84,6 +147,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 16,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 5,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -131,6 +199,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 17,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 6,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -178,6 +251,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_S",
       "device_case_days": 19,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 8,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -225,6 +303,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 15,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -272,6 +355,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 15,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -319,6 +407,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 15,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -366,6 +459,10 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 11,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -413,6 +510,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 12,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_I": 1,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -460,6 +562,10 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 11,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -507,6 +613,10 @@
       "absence_days": 0,
       "top_device_channel": "TU_E",
       "device_case_days": 6,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_W": 2
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -554,6 +664,10 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 13,
+      "device_days_by_device": {
+        "TU_E": 5,
+        "TU_W": 8
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -601,6 +715,10 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 11,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -648,6 +766,10 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 11,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -695,6 +817,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 12,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_I": 1,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -742,6 +869,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 13,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 2,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -778,7 +910,7 @@
       "model_days": 3,
       "combined_days": 113,
       "model_unique_days": 3,
-      "ttd_days": 11,
+      "ttd_days": 108,
       "log_hash": "6eaa6b94",
       "top_device": "TU_S",
       "ground_truth_zone": "S",
@@ -789,6 +921,10 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 11,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -836,6 +972,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_S",
       "device_case_days": 16,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 7,
+        "TU_W": 5
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -883,6 +1024,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_S",
       "device_case_days": 37,
+      "device_days_by_device": {
+        "TU_E": 6,
+        "TU_S": 27,
+        "TU_W": 4
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -930,6 +1076,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 12,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 1,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -977,6 +1128,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 12,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 1,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -1024,6 +1180,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 17,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 6,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -1071,6 +1232,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_S",
       "device_case_days": 49,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 38,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -1118,6 +1284,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_I",
       "device_case_days": 93,
+      "device_days_by_device": {
+        "TU_E": 5,
+        "TU_I": 81,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -1165,6 +1336,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 10,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 1,
+        "TU_W": 5
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -1212,6 +1388,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 13,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 3,
+        "TU_W": 6
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -1259,6 +1440,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_S",
       "device_case_days": 19,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 8,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -1306,6 +1492,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 10,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 1,
+        "TU_W": 5
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -1353,6 +1544,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 16,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 5,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,
@@ -1400,6 +1596,11 @@
       "absence_days": 0,
       "top_device_channel": "TU_W",
       "device_case_days": 15,
+      "device_days_by_device": {
+        "TU_E": 4,
+        "TU_S": 4,
+        "TU_W": 7
+      },
       "absence_by_device": {
         "TU_E": [
           0,

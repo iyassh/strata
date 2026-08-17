@@ -1,0 +1,150 @@
+{
+  "system": "sdahu",
+  "healthy_fp": {
+    "mr1": 231,
+    "mr2": 0,
+    "mr3": 0
+  },
+  "scenarios": [
+    {
+      "file": "damper_stuck_010_annual",
+      "mr1": 246,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 211,
+      "model": 5,
+      "device": 0
+    },
+    {
+      "file": "damper_stuck_025_annual",
+      "mr1": 246,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 211,
+      "model": 5,
+      "device": 0
+    },
+    {
+      "file": "damper_stuck_075_annual",
+      "mr1": 242,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 217,
+      "model": 5,
+      "device": 0
+    },
+    {
+      "file": "damper_stuck_100_annual_short",
+      "mr1": 146,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 77,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "coi_stuck_010_annual",
+      "mr1": 231,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 306,
+      "model": 9,
+      "device": 0
+    },
+    {
+      "file": "coi_stuck_025_annual",
+      "mr1": 231,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 306,
+      "model": 9,
+      "device": 0
+    },
+    {
+      "file": "coi_stuck_050_annual",
+      "mr1": 231,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 306,
+      "model": 9,
+      "device": 0
+    },
+    {
+      "file": "coi_stuck_075_annual",
+      "mr1": 231,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 306,
+      "model": 9,
+      "device": 0
+    },
+    {
+      "file": "coi_leakage_010_annual",
+      "mr1": 231,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 306,
+      "model": 9,
+      "device": 0
+    },
+    {
+      "file": "coi_bias_-4_annual",
+      "mr1": 248,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 12,
+      "rate": 213,
+      "model": 4,
+      "device": 0
+    },
+    {
+      "file": "coi_bias_-2_annual",
+      "mr1": 247,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 185,
+      "model": 4,
+      "device": 0
+    },
+    {
+      "file": "coi_bias_2_annual",
+      "mr1": 247,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 3,
+      "rate": 172,
+      "model": 5,
+      "device": 0
+    },
+    {
+      "file": "coi_bias_4_annual",
+      "mr1": 248,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 8,
+      "rate": 168,
+      "model": 5,
+      "device": 0
+    },
+    {
+      "file": "oa_bias_4_annual",
+      "mr1": 247,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 131,
+      "model": 5,
+      "device": 0
+    }
+  ]
+}

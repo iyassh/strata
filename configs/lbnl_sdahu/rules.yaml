@@ -18,6 +18,7 @@ detection:
   # Last N days of each month are held out for threshold calibration;
   # the model is discovered from the remaining days.
   holdout_days_per_month: 8
+  residual_min_exceedance: 0.5
 
 events:
   occupancy:

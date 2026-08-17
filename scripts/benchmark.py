@@ -48,6 +48,11 @@ warnings.filterwarnings("ignore")
 from processheal.core.detection import build_detector, classify_days, holdout_mask
 from processheal.core.devices import (absence_days, build_device_detector,
                                        classify_device_days, pooling_homogeneity)
+from processheal.core.oscillation import build_oscillation_detector, daily_direction_changes
+from processheal.core.frequency import _flag_matrix
+from processheal.core.frequency import (build_frequency_detector, build_rate_detector_monthly,
+                                        classify_frequency_days, classify_rate_days_monthly,
+                                        device_day_counts, unit_day_counts)
 from processheal.core.residuals import calibrate_band, daily_residual_scores, flag_days
 from processheal.hvac.events import abstract_events, event_alphabet_map, event_device_map
 from processheal.io.config import load_config
@@ -108,9 +113,24 @@ def evaluate(fname: str):
     minrob = per_day[per_day["fitness"] < strict]["case_id"]
     model_minrobust = int(len(set(minrob)))
 
-    res = flag_days(daily_residual_scores(df, cfg), BAND).set_index("case_id")
-    res_flag = res["flagged"].reindex(days).fillna(False)
-    res_eval = res["evaluable"].reindex(days).fillna(False)
+    res_flag = pd.Series(False, index=days)
+    res_eval = pd.Series(False, index=days)
+    for rname, band_r in RES.items():
+        rs = daily_residual_scores(df, cfg, rule_name=rname)
+        if rs.empty:
+            continue
+        rf = flag_days(rs, band_r,
+                       min_margin=cfg.rules["detection"].get("residual_min_exceedance", 0.0)
+                       ).set_index("case_id")
+        res_flag = res_flag | rf["flagged"].reindex(days).fillna(False)
+        res_eval = res_eval | rf["evaluable"].reindex(days).fillna(False)
+    osc_flag = pd.Series(False, index=days)
+    if osc_det is not None:
+        oc = daily_direction_changes(df, cfg)
+        if not oc.empty:
+            om = _flag_matrix(oc, osc_det.bands).any(axis=1)
+            om.index = oc.index.astype(str)
+            osc_flag = osc_flag | om.reindex(days).fillna(False)
 
     # device stratum: pooled-model conformance per instance + absence channel
     dev_flag = pd.Series(False, index=days)
@@ -137,7 +157,29 @@ def evaluate(fname: str):
         abs_days_sig = {dev: [int(g["silent"].sum()), len(g), float(g["healthy_rate"].iloc[0])]
                         for dev, g in ab.groupby("device")}
 
-    combined = rules | model | res_flag | dev_flag | abs_flag
+    # frequency channels (Phase 4): per-day count-bands + seasonal rate
+    freq_flag = pd.Series(False, index=days)
+    freq_viol: dict[str, int] = {}
+    if freq_unit is not None:
+        fu = classify_frequency_days(freq_unit, unit_day_counts(log)).set_index("day")
+        freq_flag = freq_flag | fu["flagged"].reindex(days).fillna(False)
+        for v in fu.loc[fu["flagged"], "violations"]:
+            for k in v:
+                freq_viol[k] = freq_viol.get(k, 0) + 1
+    if freq_dev is not None:
+        fd = classify_frequency_days(freq_dev, device_day_counts(log, cfg)).set_index("day")
+        freq_flag = freq_flag | fd["flagged"].reindex(days).fillna(False)
+        for v in fd.loc[fd["flagged"], "violations"]:
+            for k in v:
+                freq_viol[k] = freq_viol.get(k, 0) + 1
+    rate_flag = pd.Series(False, index=days)
+    if rate_det is not None:
+        rr = classify_rate_days_monthly(rate_det, unit_day_counts(log))
+        if len(rr):
+            rr = rr.set_index("day")
+            rate_flag = rate_flag | rr["flagged"].reindex(days).fillna(False)
+
+    combined = rules | model | res_flag | dev_flag | abs_flag | freq_flag | rate_flag | osc_flag
 
     # E3: top-firing device among signature events (fire-days per device)
     top_device, loc_days = None, 0
@@ -157,6 +199,8 @@ def evaluate(fname: str):
         "top_dev_channel": top_dev_channel, "dev_case_days": dev_case_days,
         "abs_days_sig": abs_days_sig, "dev_by_device": dev_by_device,
         "dev_days_map": dev_days_map,
+        "freq_flag": freq_flag, "rate_flag": rate_flag, "freq_viol": freq_viol,
+        "osc_flag": osc_flag,
     }
 
 
@@ -179,12 +223,42 @@ h_uni_early = day_universe(healthy_df).set_index("case_id")
 HEALTHY_SCHED = [d for d in h_uni_early.index if h_uni_early.loc[d, "occupied_min"] > 0]
 dev_det = build_device_detector(cfg, healthy_log, HEALTHY_SCHED)
 
-res_healthy = daily_residual_scores(healthy_df, cfg)
-hold = holdout_mask(res_healthy["case_id"], cfg.rules["detection"]["holdout_days_per_month"])
-BAND = calibrate_band(res_healthy, ~hold,
-                      min_width=cfg.rules["detection"].get("residual_min_band_width", 0.0))
-res_hold = flag_days(res_healthy[hold], BAND)
-hold_fp, hold_n = int(res_hold["flagged"].sum()), int(res_hold["evaluable"].sum())
+HOLD_N = cfg.rules["detection"]["holdout_days_per_month"]
+freq_unit = build_frequency_detector(unit_day_counts(healthy_log), HOLD_N)
+freq_dev = build_frequency_detector(device_day_counts(healthy_log, cfg), HOLD_N)
+rate_det = build_rate_detector_monthly(unit_day_counts(healthy_log), HOLD_N, window=30)
+if freq_unit:
+    dev_part = (f"device bands {len(freq_dev.bands)} "
+                f"(FP {freq_dev.holdout_fp_days}/{freq_dev.holdout_days})"
+                if freq_dev else "device bands n/a")
+    print(f"frequency channel: unit bands {len(freq_unit.bands)} "
+          f"(holdout FP {freq_unit.holdout_fp_days}/{freq_unit.holdout_days}), " + dev_part)
+else:
+    print("frequency channel: n/a")
+if rate_det:
+    print(f"rate channel (30d, seasonal): holdout FP {rate_det['holdout_fp_days']}"
+          f"/{rate_det['holdout_days']}")
+
+RES_CHANNELS = cfg.rules["detection"].get("residual_channels", [RESIDUAL_RULE])
+RES = {}
+hold_fp, hold_n = 0, 0
+for rname in RES_CHANNELS:
+    rh = daily_residual_scores(healthy_df, cfg, rule_name=rname)
+    if rh.empty:
+        continue
+    hmask = holdout_mask(rh["case_id"], cfg.rules["detection"]["holdout_days_per_month"])
+    band_r = calibrate_band(rh, ~hmask,
+                            min_width=cfg.rules["detection"].get("residual_min_band_width", 0.0))
+    rhold = flag_days(rh[hmask], band_r,
+                      min_margin=cfg.rules["detection"].get("residual_min_exceedance", 0.0))
+    RES[rname] = band_r
+    hold_fp += int(rhold["flagged"].sum())
+    hold_n += int(rhold["evaluable"].sum())
+BAND = RES.get(RESIDUAL_RULE, (0.0, 0.0))
+osc_det = build_oscillation_detector(healthy_df, cfg)
+if osc_det:
+    print(f"oscillation channel: {len(osc_det.bands)} signals, holdout FP "
+          f"{osc_det.holdout_fp_days}/{osc_det.holdout_days}")
 
 h_uni = day_universe(healthy_df).set_index("case_id")
 h_sig = set(healthy_log.loc[healthy_log["activity"].isin(SIGNATURE_EVENTS), "case_id"])
@@ -221,18 +295,21 @@ else:
 print("false-alarm evidence = held-out healthy days ONLY (no independent negative exists; stated).")
 
 rows = []
-print(f"\n{'scenario':34s} {'days':>4} {'eval':>4} "
-      f"{'rules':>5} {'resid':>5} {'model':>5} {'dev':>5} {'abs':>5} {'comb':>5} {'TTD':>4} {'locz':>10}")
+print(f"\n{'scenario':34s} {'eval':>4} "
+      f"{'rules':>5} {'resid':>5} {'model':>5} {'dev':>5} {'freq':>5} {'rate':>5} "
+      f"{'comb':>5} {'TTD':>4} {'locz':>10}")
 print("-" * 106)
 
 for sc in SCENARIOS:
     fname, family, label, is_fault = sc["file"], sc["family"], sc["label"], sc["is_fault"]
+    excluded = bool(sc.get("exclude"))
     e = evaluate(fname)
     uni = e["uni"]
     n_days, n_eval = len(uni), int(uni["evaluable"].sum())
     n_win = int(e["res_eval"].sum())
     c = {ch: int(e[ch].sum()) for ch in ("rules", "res_flag", "model", "combined",
-                                          "dev_flag", "abs_flag")}
+                                          "dev_flag", "abs_flag", "freq_flag",
+                                          "rate_flag", "osc_flag")}
 
     # significance vs each channel's own holdout noise floor
     p_model = max(model_hold_fp, 1) / max(len(det.holdout_per_day), 1)
@@ -262,9 +339,33 @@ for sc in SCENARIOS:
     for _dev, (k_sil, n_sched_d, hrate) in e["abs_days_sig"].items():
         if hrate <= 0.05 and n_sched_d:
             sig_abs = sig_abs or binom_sf(k_sil, n_sched_d, max(hrate, 3.0 / 365.0)) < 1e-3
+    # frequency: day-level binomial vs holdout rate (rule-of-three floored)
+    p_freq = 1.0
+    if freq_unit is not None:
+        p_freq = freq_unit.holdout_fp_days / max(freq_unit.holdout_days, 1)
+        if freq_dev is not None:
+            p_freq += freq_dev.holdout_fp_days / max(freq_dev.holdout_days, 1)
+        p_freq = max(p_freq, 3.0 / max(freq_unit.holdout_days, 1))
+    sig_freq = freq_unit is not None and binom_sf(c["freq_flag"], n_eval, min(p_freq, 1.0)) < 1e-3
+    # rate: overlapping 30d windows -> effective n = days/30, conservative
+    p_osc = (max(osc_det.holdout_fp_days, 3) / max(osc_det.holdout_days, 1)) if osc_det else 1.0
+    sig_osc = osc_det is not None and binom_sf(c["osc_flag"], n_eval, min(p_osc, 1.0)) < 1e-3
+    # rate: score only every-30th calendar day (non-overlapping windows ->
+    # clean Bernoulli sample, audit A2; ONE margin policy = rule-of-three
+    # floor, no ad hoc multipliers)
+    sig_rate = False
+    if rate_det is not None:
+        decision_days = [d for i, d in enumerate(e["uni"].index) if i % 30 == 29]
+        k_rate = int(sum(bool(e["rate_flag"].get(d, False)) for d in decision_days))
+        n_rate = max(len(decision_days), 1)
+        p_rate = max(rate_det["holdout_fp_days"] / max(rate_det["holdout_days"], 1),
+                     3.0 / 365.0)
+        sig_rate = binom_sf(k_rate, n_rate, min(p_rate, 1.0)) < 1e-3
     meaningful = "+".join(x for x, s_ in
                           (("rules", sig_rules), ("resid", sig_resid), ("model", sig_model),
-                           ("device", sig_dev), ("absence", sig_abs)) if s_)
+                           ("device", sig_dev), ("absence", sig_abs),
+                           ("freq", sig_freq), ("rate", sig_rate),
+                           ("osc", sig_osc)) if s_)
 
     # TTD only from channels that PASSED their gates (audit G: a noise-day
     # from an insignificant channel must not set time-to-detection)
@@ -283,17 +384,26 @@ for sc in SCENARIOS:
                                           index=e["uni"].index)
     if sig_abs:
         sig_union = sig_union | e["abs_flag"]
+    if sig_freq:
+        sig_union = sig_union | e["freq_flag"]
+    if sig_rate:
+        sig_union = sig_union | e["rate_flag"]
+    if sig_osc:
+        sig_union = sig_union | e["osc_flag"]
     t = ttd(sig_union, uni) if meaningful else None
 
+    if excluded:
+        meaningful = ""  # calendar-misaligned source: never counted (audit F2)
     gt = GROUND_TRUTH.get(fname, {}).get("injected_zone")
     loc = "-"
     if gt == "INDETERMINATE":
         loc = "excl(GT?)"
     elif gt and e["top_device"]:
         loc = "OK" if e["top_device"] == f"TU_{gt}" else f"MISS({e['top_device']})"
-    print(f"{label:34s} {n_days:>4} {n_eval:>4} "
+    print(f"{label:34s} {n_eval:>4} "
           f"{c['rules']:>5} {c['res_flag']:>5} {c['model']:>5} {c['dev_flag']:>5} "
-          f"{c['abs_flag']:>5} {c['combined']:>5} {str(t) if t else '-':>4} {loc:>10}")
+          f"{c['freq_flag']:>5} {c['rate_flag']:>5} {c['combined']:>5} "
+          f"{str(t) if t else '-':>4} {loc:>10}")
     rows.append({
         "file": fname, "family": family, "label": label, "is_fault": is_fault,
         "days": n_days, "evaluable_days": n_eval, "window_days": n_win,
@@ -302,9 +412,25 @@ for sc in SCENARIOS:
         "model_unique_days": e["n_model_unique"], "ttd_days": t,
         "log_hash": e["log_hash"], "top_device": e["top_device"],
         "ground_truth_zone": gt, "localization": loc,
-        "meaningful_channels": meaningful or None,
+        "meaningful_channels": (meaningful or None) if not excluded else None,
+        "excluded": excluded,
+        "meaningful_channels_raw": meaningful or None,
         "model_days_minrobust": e["model_minrobust"],
         "device_days": c["dev_flag"], "absence_days": c["abs_flag"],
+        "frequency_days": c["freq_flag"], "rate_days": c["rate_flag"],
+        "oscillation_days": c["osc_flag"],
+        "flag_days": {
+            "rules": sorted(e["rules"][e["rules"]].index.tolist()),
+            "residual": sorted(e["res_flag"][e["res_flag"]].index.tolist()),
+            "model": sorted(e["model"][e["model"]].index.tolist()),
+            "device": sorted(e["dev_flag"][e["dev_flag"]].index.tolist()),
+            "freq": sorted(e["freq_flag"][e["freq_flag"]].index.tolist()),
+            "osc": sorted(e["osc_flag"][e["osc_flag"]].index.tolist()),
+            "rate": sorted(e["rate_flag"][e["rate_flag"]].index.tolist()),
+            "sig_union": sorted(sig_union[sig_union].index.tolist()),
+        },
+        "frequency_violations": dict(sorted(e["freq_viol"].items(),
+                                            key=lambda kv: -kv[1])[:6]),
         "top_device_channel": e["top_dev_channel"],
         "device_case_days": e["dev_case_days"],
         "device_days_by_device": e["dev_by_device"],
@@ -328,7 +454,8 @@ print(f"\n{'family':14s} {'scen':>4} {'detected':>8} {'medTTD':>7} {'med alarm%'
 for f, rs in sorted(fam.items()):
     det_n = sum(1 for r in rs if r["ttd_days"] is not None)
     ttds = sorted(r["ttd_days"] for r in rs if r["ttd_days"] is not None)
-    fracs = sorted(r["combined_days"] / r["evaluable_days"] for r in rs)
+    fracs = sorted(len(r.get("flag_days", {}).get("sig_union", []))
+                   / max(r["evaluable_days"], 1) for r in rs)
     scored = [r for r in rs if r["localization"] in ("OK",) or r["localization"].startswith("MISS")]
     ok = sum(1 for r in scored if r["localization"] == "OK")
     print(f"{f:14s} {len(rs):>4} {det_n:>8} {str(ttds[len(ttds)//2]) if ttds else '-':>7} "
@@ -338,6 +465,13 @@ out = Path("outputs")
 out.mkdir(exist_ok=True)
 (out / f"benchmark_v6_{SYSTEM}.json").write_text(json.dumps({
     "system": SYSTEM, "device_stratum": DEV_META, "residual_band": BAND,
+    "frequency": {
+        "unit_bands": len(freq_unit.bands) if freq_unit else 0,
+        "unit_holdout_fp": [freq_unit.holdout_fp_days, freq_unit.holdout_days] if freq_unit else None,
+        "device_bands": len(freq_dev.bands) if freq_dev else 0,
+        "device_holdout_fp": [freq_dev.holdout_fp_days, freq_dev.holdout_days] if freq_dev else None,
+        "rate_holdout_fp": [rate_det["holdout_fp_days"], rate_det["holdout_days"]] if rate_det else None,
+    },
     "residual_holdout_fp": [hold_fp, hold_n],
     "model_threshold": det.threshold, "model_holdout_fp": model_hold_fp,
     "train_days": det.n_train_days, "healthy_sig_days": len(h_sig),

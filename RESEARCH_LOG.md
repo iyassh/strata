@@ -115,6 +115,29 @@ threats-to-validity section, pre-answered.
 | L14 | Localization 38/38 unfalsifiable as discrimination | Ground truth has zero variance (all faults in Zone S) | Reframed as specificity (non-S zones ≤1/365 days across 61 files). **Rule: check the ground truth's variance before claiming discrimination.** |
 | L15 | Artifacts lagged the code (3b) | Post-hoc analysis not folded back | All benchmarks regenerated after every harness change. **Rule: the stored artifact must reproduce every published number.** |
 
+### Phase-4 additions to the ledger (L16–L21)
+
+| # | Gap | Root cause | Fix + standing rule |
+|---|-----|-----------|---------------------|
+| L16 | Any-of-N day-level significance died under noise-floor uncertainty | Union tests amplify estimation error | Per-instance tests (the stratum's own logic), Bonferroni, 2× margin. **Rule: test at the granularity the channel claims.** |
+| L17 | Q1 "McNemar" awarded stars to noise (c=0 by construction) | Impossible null | Channel-noise-null binomial. **Rule: the null is always the channel's own measured noise, never a convention.** |
+| L18 | Baseline detected file provenance, not faults (erratum columns) | Forgot our own gap ledger when building new code | Erratum columns dropped; cross-file consistency gate. **Rule: consult the erratum ledger before ANY new consumer of the data.** |
+| L19 | Precision floor padded band WIDTH; detections rode sub-precision MARGINS | Floor bound the wrong quantity | Exceedance-margin floor. **Rule: floors bind the decision quantity, not a proxy.** |
+| L20 | Oscillation counted temperature reversals at quantization scale | One deadband for all signal classes | Per-signal-class deadbands (≥ sensor precision for temps). **Rule: L13 applies to every derived statistic, not just residuals.** |
+| L21 | Instrument iterated toward a known fault signature (P1 rate channel), then failed its own gate | Prediction-shaped instrument + ad hoc significance constants | Non-overlapping windows, ONE margin policy, mechanism re-attributed honestly. **Rule: an instrument shaped by fault-side knowledge tests engineering, not prediction — label it.** |
+
+### Phase-4 discoveries for Part I
+
+- **D6. The invariant-location claim, triple-tested:** MR2 = freq channel
+  exactly (141=141) on RMTEMPUnstable → discovery-automation; MR1 fires 124
+  healthy days on PFPU where the rhythm doesn't exist → the models tell you
+  WHERE invariants hold; oscillation (calibrated classical rule) stands
+  alone on VAVDMPRUnstable (349 vs 0) → some faults need the classical
+  instrument, calibrated. One experiment, three verdicts, one coherent story.
+- **D7. Dataset erratum #4:** SDAHU healthy file's SA_SP/SA_SPSPT differ in
+  units/roles from all fault files — any ML baseline fed those columns
+  scores file identity. Found by auditing OUR OWN baseline.
+
 ## Part III — Why these gaps kept appearing (the honest meta-analysis)
 
 1. **Simulation flatters.** Noise-free EnergyPlus years make 0-FP thresholds

@@ -17,7 +17,7 @@ scenarios:
   - {file: "SFPU_ReheatVLVStuck_80%", family: reheat_stuck, label: "ReheatVLVStuck 80%", is_fault: true}
   - {file: "SFPU_SensorBias_RMTEMP_+2C", family: rmtemp_bias, label: "SensorBias RMTEMP +2C", is_fault: true}
   - {file: "SFPU_SensorBias_RMTEMP_+4C", family: rmtemp_bias, label: "SensorBias RMTEMP +4C", is_fault: true}
-  - {file: "SFPU_SensorBias_RMTEMP_-2C", family: rmtemp_bias, label: "SensorBias RMTEMP -2C", is_fault: true}
+  - {file: "SFPU_SensorBias_RMTEMP_-2C", family: rmtemp_bias, label: "SensorBias RMTEMP -2C", is_fault: true, exclude: true}
   - {file: "SFPU_SensorBias_RMTEMP_-4C", family: rmtemp_bias, label: "SensorBias RMTEMP -4C", is_fault: true}
   - {file: "SFPU_SensorBias_VAVAirflow_+200CFM", family: airflow_bias, label: "SensorBias VAVAirflow +200CFM", is_fault: true}
   - {file: "SFPU_SensorBias_VAVAirflow_+400CFM", family: airflow_bias, label: "SensorBias VAVAirflow +400CFM", is_fault: true}

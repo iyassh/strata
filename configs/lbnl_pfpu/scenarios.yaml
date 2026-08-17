@@ -31,4 +31,5 @@ scenarios:
   - {file: "PFPU_VAVDMPRUnstable", family: instability, label: "VAVDMPRUnstable", is_fault: true}
   - {file: "PFPU_VAVFanRestrictFlow", family: fan_restrict, label: "VAVFanRestrictFlow", is_fault: true}
 
-detection_extra_note: "SensorBias_RMTEMP_-2C source file is calendar-misaligned (rotated at origin); excluded from family-level claims."
+# note: the calendar-rotated file is SFPU_SensorBias_RMTEMP_-2C (verified corr 0.904);
+# the PFPU file is weather-identical (corr 1.0000) — earlier note was a copy-paste error.

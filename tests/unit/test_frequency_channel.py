@@ -74,3 +74,40 @@ def test_unit_day_counts_uses_state_slice_only():
     c = unit_day_counts(log)
     assert c.loc["2018-06-01", "cooling_active"] == 2
     assert "mismatch" not in c.columns  # signature events never counted
+
+
+def test_mcnemar_exact_and_bh():
+    import importlib.util, sys
+    spec = importlib.util.spec_from_file_location("stats_mod", "scripts/stats.py")
+    # import only the functions (module body needs artifacts; guard via __main__?)
+    src = open("scripts/stats.py").read()
+    ns = {}
+    exec(src.split('bench = ')[0], ns)  # functions only, no artifact loading
+    mc, bh = ns["mcnemar_exact"], ns["bh"]
+    assert mc(0, 0) == 1.0
+    assert mc(10, 0) < 0.01          # strongly one-sided discordance
+    assert abs(mc(1, 1) - 1.0) < 1e-9
+    keep = bh([0.001, 0.04, 0.9], q=0.05)
+    assert keep[0] and not keep[2]
+
+
+def test_oscillation_channel_counts_direction_changes():
+    import pandas as pd
+    from processheal.core.oscillation import daily_direction_changes
+    from processheal.io.config import Config
+    cfg = Config(sensors={"DMPR": "DMPR", "OCCUPIED": "SYS", "Datetime": "Datetime"},
+                 rules={"detection": {"oscillation_signals": ["DMPR"],
+                                      "oscillation_deadband": 0.02,
+                                      "holdout_days_per_month": 8}, "events": {}})
+    idx = pd.date_range("2018-06-01 00:00", periods=2880, freq="1min")
+    steady = [0.5] * 1440
+    hunting = [0.3 if (i // 10) % 2 == 0 else 0.7 for i in range(1440)]  # reverses every 10 min
+    df = pd.DataFrame({"DMPR": steady + hunting, "SYS": 1, "Datetime": idx})
+    c = daily_direction_changes(df, cfg)
+    assert c.loc["2018-06-01", "DMPR"] <= 1          # steady: ~no reversals
+    assert c.loc["2018-06-02", "DMPR"] > 100         # hunting: constant reversals
+    # jitter below the deadband must NOT count
+    jitter = [0.5 + (0.005 if i % 2 else -0.005) for i in range(1440)]
+    df2 = pd.DataFrame({"DMPR": jitter + steady, "SYS": 1, "Datetime": idx})
+    c2 = daily_direction_changes(df2, cfg)
+    assert c2.loc["2018-06-01", "DMPR"] <= 1

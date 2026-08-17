@@ -13,9 +13,20 @@ climate:
 
 detection:
   fpr_quantile: 0.01
+  # oscillation channel (Hagglund-style daily direction-change counts):
+  # zone dampers have no command wire and no event vocabulary; hunting is
+  # only visible in the position signal itself. Deadband 0.02 = 2% travel.
+  oscillation_signals: [ZONE_DMPR_POS_I, ZONE_DMPR_POS_W, ZONE_DMPR_POS_S, ZONE_DMPR_POS_E,
+                        ZONE_TEMP_I, ZONE_TEMP_W, ZONE_TEMP_S, ZONE_TEMP_E]
+  oscillation_deadband: 0.02
+  # temperature reversals below sensor precision are noise (audit B2)
+  oscillation_deadbands: {ZONE_TEMP_I: 0.5, ZONE_TEMP_W: 0.5, ZONE_TEMP_S: 0.5, ZONE_TEMP_E: 0.5}
   # sensor-precision floor for the daily residual band (audit: SFPU raw
   # band was 0.22F wide; sub-0.1F exceedances are simulation-grade only)
   residual_min_band_width: 0.5
+  residual_min_exceedance: 0.5   # margin floor (audit C1)
+  residual_channels: [supply_air_residual, rh_waterside_dT_I, rh_waterside_dT_W,
+                      rh_waterside_dT_S, rh_waterside_dT_E]
   holdout_days_per_month: 8
 
 events:
@@ -306,6 +317,70 @@ events:
     sustained_min: 60
     gate_signal: OCCUPIED
     gate_above: 0.5
+    device: TU_E
+
+  # Waterside heat-transfer residuals (fouling target; PCA confirmed the
+  # signal exists). Display bands wide; DETECTION uses the calibrated
+  # daily-median channel (residual_channels below).
+  rh_waterside_dT_I:
+    kind: paired_residual
+    a: RH_EWT_I
+    b: RH_LWT_I
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: RH_VLV_POS_I
+        above: 0.10
+      - signal: RH_FLOW_I
+        above: 0.10
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
+    device: TU_I
+  rh_waterside_dT_W:
+    kind: paired_residual
+    a: RH_EWT_W
+    b: RH_LWT_W
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: RH_VLV_POS_W
+        above: 0.10
+      - signal: RH_FLOW_W
+        above: 0.10
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
+    device: TU_W
+  rh_waterside_dT_S:
+    kind: paired_residual
+    a: RH_EWT_S
+    b: RH_LWT_S
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: RH_VLV_POS_S
+        above: 0.10
+      - signal: RH_FLOW_S
+        above: 0.10
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
+    device: TU_S
+  rh_waterside_dT_E:
+    kind: paired_residual
+    a: RH_EWT_E
+    b: RH_LWT_E
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: RH_VLV_POS_E
+        above: 0.10
+      - signal: RH_FLOW_E
+        above: 0.10
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
     device: TU_E
 
   # Physics residuals (= APAR Rules 7 / 26-27, statistically calibrated).

@@ -1,0 +1,310 @@
+{
+  "system": "sfpu",
+  "healthy_fp": {
+    "mr1": 0,
+    "mr2": 0,
+    "mr3": 0
+  },
+  "scenarios": [
+    {
+      "file": "SFPU_RMTEMPUnstable",
+      "mr1": 1,
+      "mr2": 141,
+      "mr3": 1,
+      "freq": 141,
+      "rate": 11,
+      "model": 2,
+      "device": 15
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Minor",
+      "mr1": 1,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 0,
+      "model": 2,
+      "device": 12
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "mr1": 3,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 1,
+      "rate": 39,
+      "model": 2,
+      "device": 12
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Severe",
+      "mr1": 6,
+      "mr2": 1,
+      "mr3": 1,
+      "freq": 3,
+      "rate": 40,
+      "model": 3,
+      "device": 13
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
+      "mr1": 0,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 0,
+      "model": 2,
+      "device": 12
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
+      "mr1": 1,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 15,
+      "model": 2,
+      "device": 12
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
+      "mr1": 2,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 3,
+      "rate": 18,
+      "model": 2,
+      "device": 12
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "mr1": 5,
+      "mr2": 1,
+      "mr3": 1,
+      "freq": 17,
+      "rate": 36,
+      "model": 2,
+      "device": 11
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "mr1": 6,
+      "mr2": 3,
+      "mr3": 2,
+      "freq": 30,
+      "rate": 35,
+      "model": 2,
+      "device": 12
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "mr1": 3,
+      "mr2": 3,
+      "mr3": 1,
+      "freq": 33,
+      "rate": 41,
+      "model": 1,
+      "device": 11
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_0%",
+      "mr1": 1,
+      "mr2": 2,
+      "mr3": 0,
+      "freq": 5,
+      "rate": 24,
+      "model": 2,
+      "device": 6
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_100%",
+      "mr1": 7,
+      "mr2": 2,
+      "mr3": 2,
+      "freq": 35,
+      "rate": 54,
+      "model": 1,
+      "device": 13
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_20%",
+      "mr1": 3,
+      "mr2": 1,
+      "mr3": 1,
+      "freq": 2,
+      "rate": 34,
+      "model": 2,
+      "device": 11
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_50%",
+      "mr1": 5,
+      "mr2": 1,
+      "mr3": 1,
+      "freq": 16,
+      "rate": 36,
+      "model": 2,
+      "device": 11
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_80%",
+      "mr1": 2,
+      "mr2": 3,
+      "mr3": 0,
+      "freq": 32,
+      "rate": 15,
+      "model": 2,
+      "device": 12
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_+2C",
+      "mr1": 3,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 27,
+      "model": 2,
+      "device": 13
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_+4C",
+      "mr1": 2,
+      "mr2": 2,
+      "mr3": 0,
+      "freq": 3,
+      "rate": 25,
+      "model": 3,
+      "device": 11
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_-2C",
+      "mr1": 8,
+      "mr2": 13,
+      "mr3": 0,
+      "freq": 14,
+      "rate": 2,
+      "model": 2,
+      "device": 15
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_-4C",
+      "mr1": 2,
+      "mr2": 33,
+      "mr3": 0,
+      "freq": 37,
+      "rate": 24,
+      "model": 4,
+      "device": 36
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
+      "mr1": 0,
+      "mr2": 3,
+      "mr3": 1,
+      "freq": 19,
+      "rate": 30,
+      "model": 2,
+      "device": 12
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
+      "mr1": 0,
+      "mr2": 3,
+      "mr3": 0,
+      "freq": 19,
+      "rate": 0,
+      "model": 2,
+      "device": 12
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
+      "mr1": 201,
+      "mr2": 2,
+      "mr3": 11,
+      "freq": 3,
+      "rate": 336,
+      "model": 140,
+      "device": 17
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "mr1": 194,
+      "mr2": 1,
+      "mr3": 11,
+      "freq": 4,
+      "rate": 336,
+      "model": 139,
+      "device": 49
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_0%",
+      "mr1": 76,
+      "mr2": 78,
+      "mr3": 5,
+      "freq": 139,
+      "rate": 146,
+      "model": 3,
+      "device": 93
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_100%",
+      "mr1": 193,
+      "mr2": 1,
+      "mr3": 11,
+      "freq": 4,
+      "rate": 336,
+      "model": 136,
+      "device": 10
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_20%",
+      "mr1": 2,
+      "mr2": 2,
+      "mr3": 0,
+      "freq": 21,
+      "rate": 25,
+      "model": 3,
+      "device": 13
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_50%",
+      "mr1": 196,
+      "mr2": 2,
+      "mr3": 11,
+      "freq": 3,
+      "rate": 336,
+      "model": 137,
+      "device": 19
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_80%",
+      "mr1": 192,
+      "mr2": 1,
+      "mr3": 11,
+      "freq": 4,
+      "rate": 336,
+      "model": 135,
+      "device": 10
+    },
+    {
+      "file": "SFPU_VAVDMPRUnstable",
+      "mr1": 0,
+      "mr2": 2,
+      "mr3": 0,
+      "freq": 16,
+      "rate": 0,
+      "model": 1,
+      "device": 11
+    },
+    {
+      "file": "SFPU_VAVFanRestrictFlow",
+      "mr1": 5,
+      "mr2": 3,
+      "mr3": 2,
+      "freq": 5,
+      "rate": 45,
+      "model": 4,
+      "device": 12
+    }
+  ]
+}

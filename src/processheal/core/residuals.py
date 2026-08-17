@@ -78,11 +78,15 @@ def calibrate_band(
     return lo, hi
 
 
-def flag_days(scores: pd.DataFrame, band: tuple[float, float]) -> pd.DataFrame:
-    """Flag = score strictly outside the healthy band. NaN score = abstain."""
+def flag_days(scores: pd.DataFrame, band: tuple[float, float],
+              min_margin: float = 0.0) -> pd.DataFrame:
+    """Flag = score outside the healthy band BY AT LEAST min_margin (the
+    sensor-precision exceedance floor — Phase-4 audit C1: the width floor
+    never engages on wide water-dT bands; the MARGIN is what must exceed
+    sensor physics). NaN score = abstain."""
     lo, hi = band
     out = scores.copy()
-    out["flagged"] = (out["score"] < lo) | (out["score"] > hi)
+    out["flagged"] = (out["score"] < lo - min_margin) | (out["score"] > hi + min_margin)
     out.loc[out["score"].isna(), "flagged"] = False
     out["evaluable"] = out["score"].notna()
     return out

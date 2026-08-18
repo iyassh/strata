@@ -3,18 +3,25 @@
  "healthy_file": "SFPU_FaultFree",
  "holdout_days": 96,
  "total_days": 365,
+ "exposure": {
+  "occupied_holdout_days": 96,
+  "residual_evaluable_holdout_days": 41,
+  "rate_windowed_holdout_days": 90
+ },
  "channels": {
   "rules": {
    "holdout_fp_days": 0,
    "holdout_days": 96,
    "full_year_days": 0,
-   "holdout_fp_dates": []
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "resid": {
    "holdout_fp_days": 0,
    "holdout_days": 96,
    "full_year_days": 0,
-   "holdout_fp_dates": []
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "model": {
    "holdout_fp_days": 1,
@@ -22,7 +29,8 @@
    "full_year_days": 2,
    "holdout_fp_dates": [
     "2018-11-29"
-   ]
+   ],
+   "threshold_provenance": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"
   },
   "device": {
    "holdout_fp_days": 3,
@@ -32,13 +40,15 @@
     "2018-01-25",
     "2018-01-30",
     "2018-12-28"
-   ]
+   ],
+   "threshold_provenance": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"
   },
   "absence": {
    "holdout_fp_days": 0,
    "holdout_days": 96,
    "full_year_days": 0,
-   "holdout_fp_dates": []
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "freq": {
    "holdout_fp_days": 1,
@@ -46,19 +56,22 @@
    "full_year_days": 1,
    "holdout_fp_dates": [
     "2018-11-29"
-   ]
+   ],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "rate": {
    "holdout_fp_days": 0,
    "holdout_days": 96,
    "full_year_days": 0,
-   "holdout_fp_dates": []
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "osc": {
    "holdout_fp_days": 0,
    "holdout_days": 96,
    "full_year_days": 0,
-   "holdout_fp_dates": []
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   }
  },
  "union_all8": {
@@ -68,6 +81,44 @@
  "union_minus_rate": {
   "holdout_fp_days": 4,
   "rate": 0.041666666666666664
+ },
+ "split_half_demotion_robustness": {
+  "even_months": {
+   "decision_half_fp": {
+    "rules": 0,
+    "resid": 0,
+    "model": 0,
+    "device": 1,
+    "absence": 0,
+    "freq": 0,
+    "rate": 0,
+    "osc": 0
+   },
+   "worst_channel_on_decision_half": "device",
+   "rate_is_worst_or_tied": false,
+   "deployed_fpr_on_report_half": {
+    "fp_days": 3,
+    "n": 48
+   }
+  },
+  "odd_months": {
+   "decision_half_fp": {
+    "rules": 0,
+    "resid": 0,
+    "model": 1,
+    "device": 2,
+    "absence": 0,
+    "freq": 1,
+    "rate": 0,
+    "osc": 0
+   },
+   "worst_channel_on_decision_half": "device",
+   "rate_is_worst_or_tied": false,
+   "deployed_fpr_on_report_half": {
+    "fp_days": 1,
+    "n": 48
+   }
+  }
  },
  "detector_definition": "The STRATA detector = OR of the significance-gated channels {rules, residual, model, device, absence, freq, osc}; the seasonal rate channel is diagnostic-only (corroboration and explanation, never a lone alarm).",
  "rate_demotion": {
@@ -98,7 +149,7 @@
     "channels": "rules+resid+model+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
-    "rate_only_alarm_days": 59
+    "rate_only_alarm_days": 61
    },
    {
     "label": "VAVDMPRStuck 50%",
@@ -112,10 +163,15 @@
     "channels": "rules+resid+model+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
-    "rate_only_alarm_days": 73
+    "rate_only_alarm_days": 75
    }
   ],
   "violations": []
  },
- "caveat": "Healthy negatives are the calibration year's shared calendar holdout; no independent healthy negative exists on any LBNL system (D2). Per-day autocorrelation makes any binomial p on these counts optimistic."
+ "caveats": [
+  "Healthy negatives are the calibration year's shared calendar holdout; no independent healthy negative exists on any LBNL system (D2). Per-day autocorrelation makes any binomial p on these counts optimistic.",
+  "The model- and device-conformance thresholds are quantile-calibrated on these same holdout days (fpr_quantile); for those two channels the holdout-FP row is the calibration target, not an out-of-sample measurement. No healthy data unseen by every calibration step exists.",
+  "The rate demotion was decided after observing this holdout, so the deployed FPR is a post-selection estimate; the all-8 union is reported alongside it and the split-half probe shows the decision reproduces on both holdout halves.",
+  "Per-channel exposure differs from the day denominator: residual abstains without an adequate physics window, rate needs a full 30-day window, and unoccupied days cannot fire most channels (see 'exposure')."
+ ]
 }

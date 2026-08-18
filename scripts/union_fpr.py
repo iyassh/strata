@@ -117,6 +117,7 @@ model = per_day.set_index("case_id")["flagged"].reindex(days).fillna(False)
 model = model | (~has_events & (uni["occupied_min"] > 0))
 
 res_flag = pd.Series(False, index=days)
+res_eval = pd.Series(False, index=days)
 for rname, band_r in RES.items():
     rs = daily_residual_scores(df, cfg, rule_name=rname)
     if rs.empty:
@@ -125,6 +126,7 @@ for rname, band_r in RES.items():
         rs, band_r, min_margin=cfg.rules["detection"].get("residual_min_exceedance", 0.0)
     ).set_index("case_id")
     res_flag = res_flag | rf["flagged"].reindex(days).fillna(False)
+    res_eval = res_eval | rf["evaluable"].reindex(days).fillna(False)
 
 osc_flag = pd.Series(False, index=days)
 if osc_det is not None:
@@ -154,9 +156,11 @@ if freq_dev is not None:
     freq_flag = freq_flag | fd["flagged"].reindex(days).fillna(False)
 
 rate_flag = pd.Series(False, index=days)
+rate_windowed = pd.Series(False, index=days)
 if rate_det is not None:
     rr = classify_rate_days_monthly(rate_det, unit_day_counts(log))
     if len(rr):
+        rate_windowed = pd.Series(days.isin(set(rr["day"])), index=days)
         rr = rr.set_index("day")
         rate_flag = rate_flag | rr["flagged"].reindex(days).fillna(False)
 
@@ -168,7 +172,28 @@ chans = {
     "absence": abs_flag, "freq": freq_flag, "rate": rate_flag, "osc": osc_flag,
 }
 
+# Threshold provenance (Phase 6 hostile audit, finding #1): the model and
+# device thresholds are quantile-fit ON the holdout days/cases themselves
+# (detection.py build_detector, devices.py build_device_detector). Their
+# holdout-FP rows are therefore the CALIBRATION TARGET (~fpr_quantile by
+# construction), not out-of-sample measurements. All other channels use
+# train-only min/max thresholds and their rows are honest holdout counts.
+PROVENANCE = {
+    "model": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample",
+    "device": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample",
+}
+
+# Per-channel exposure: not every channel can alarm on all holdout days.
+exposure = {
+    "occupied_holdout_days": int((uni.loc[hd, "occupied_min"] > 0).sum()),
+    "residual_evaluable_holdout_days": int(res_eval.reindex(hd).fillna(False).sum()),
+    "rate_windowed_holdout_days": int(rate_windowed.reindex(hd).fillna(False).sum()),
+}
+
 print(f"== {SYSTEM} == healthy year, shared calendar holdout: {len(hd)} of {len(days)} days")
+print(f"  exposure: occupied {exposure['occupied_holdout_days']}/{len(hd)}, "
+      f"residual-evaluable {exposure['residual_evaluable_holdout_days']}/{len(hd)}, "
+      f"rate-windowed {exposure['rate_windowed_holdout_days']}/{len(hd)}")
 union = pd.Series(False, index=days)
 union_norate = pd.Series(False, index=days)
 out_channels = {}
@@ -180,8 +205,10 @@ for name, fl in chans.items():
         "holdout_days": len(hd),
         "full_year_days": int(fl.sum()),
         "holdout_fp_dates": sorted(on_hold[on_hold].index.tolist()),
+        "threshold_provenance": PROVENANCE.get(name, "train-only thresholds; holdout is out-of-sample"),
     }
-    print(f"  {name:8s} holdout FP {k:3d}/{len(hd)}  ({k / len(hd):.1%})   full-year {int(fl.sum())}")
+    mark = " *calib-target*" if name in PROVENANCE else ""
+    print(f"  {name:8s} holdout FP {k:3d}/{len(hd)}  ({k / len(hd):.1%})   full-year {int(fl.sum())}{mark}")
     union = union | fl
     if name != "rate":
         union_norate = union_norate | fl
@@ -190,10 +217,42 @@ kn = int(union_norate.reindex(hd).fillna(False).sum())
 print(f"  UNION (all 8)        {ku:3d}/{len(hd)}  ({ku / len(hd):.1%})")
 print(f"  UNION minus rate     {kn:3d}/{len(hd)}  ({kn / len(hd):.1%})   <- the STRATA detector")
 
+# ---- split-half demotion robustness (post-selection defense) ---------------
+# The demotion decision was made after observing this holdout. Defense: split
+# the holdout by calendar month parity, re-make the decision on each half
+# (is rate the worst channel there?), and quote the deployed FPR on the
+# OPPOSITE half. If the decision reproduces on both halves, the day-level
+# selection optimism is second-order.
+split_half = {}
+for decide_name, decide_parity in (("even_months", 0), ("odd_months", 1)):
+    hd_dec = [d for d in hd if int(d[5:7]) % 2 == decide_parity]
+    hd_rep = [d for d in hd if int(d[5:7]) % 2 != decide_parity]
+    fp_dec = {n: int(fl.reindex(hd_dec).fillna(False).sum()) for n, fl in chans.items()}
+    worst = max(fp_dec, key=fp_dec.get)
+    rep_norate = int(union_norate.reindex(hd_rep).fillna(False).sum())
+    split_half[decide_name] = {
+        "decision_half_fp": fp_dec,
+        "worst_channel_on_decision_half": worst,
+        "rate_is_worst_or_tied": fp_dec["rate"] == fp_dec[worst],
+        "deployed_fpr_on_report_half": {"fp_days": rep_norate, "n": len(hd_rep)},
+    }
+    print(f"  split-half [{decide_name} decide]: worst={worst} "
+          f"(rate {'is' if fp_dec['rate'] == fp_dec[worst] else 'is NOT'} worst/tied); "
+          f"deployed on other half {rep_norate}/{len(hd_rep)}")
+
 # ---- rate-demotion verification against the committed v12 artifact ----------
 # The deployed detector = significance-gated union of all channels EXCEPT the
 # seasonal rate channel (diagnostic-only). Assert the demotion is free.
 bench = json.loads(Path(f"outputs/benchmark_v6_{SYSTEM}.json").read_text())
+# meaningful_channels name -> flag_days key. device is EXCLUDED on purpose
+# (audit C-i: flag_days["device"] merges insignificant devices, a superset of
+# what the significant union used — using it could pass a day the deployed
+# detector would not alarm on). absence has no day list at all (audit C-ii);
+# a rate-significant scenario relying on absence is flagged for manual review
+# rather than silently passed. Both exclusions make the check PESSIMISTIC:
+# it can only fail scenarios the loose check would pass, never the reverse.
+_COVERAGE_KEYS = {"rules": "rules", "resid": "residual", "model": "model",
+                  "freq": "freq", "osc": "osc"}
 demotion = {"scenarios_with_rate_significant": [], "violations": []}
 for s in bench["scenarios"]:
     mc = (s.get("meaningful_channels") or "").split("+")
@@ -201,37 +260,41 @@ for s in bench["scenarios"]:
         continue
     fd_ = s.get("flag_days", {})
     rate_days = set(fd_.get("rate", []))
+    sig_nonrate = [c for c in mc if c != "rate"]
+    # significance-gated coverage sets only (audit C-i fix)
+    cover_sets = {c: set(fd_.get(_COVERAGE_KEYS[c], []))
+                  for c in sig_nonrate if c in _COVERAGE_KEYS}
+    covered_all = set().union(*cover_sets.values()) if cover_sets else set()
     entry = {
         "label": s["label"],
         "channels": s["meaningful_channels"],
         "ttd_days": s["ttd_days"],
         "first_rate_day": min(rate_days) if rate_days else None,
         "rate_only_alarm_days": len(
-            [x for x in fd_.get("sig_union", [])
-             if x in rate_days
-             and not any(x in set(fd_.get(ch, []))
-                         for ch in ("rules", "residual", "model", "device", "freq", "osc"))]
+            [x for x in fd_.get("sig_union", []) if x in rate_days and x not in covered_all]
         ),
     }
     demotion["scenarios_with_rate_significant"].append(entry)
     # (a) rate must never be the only significant channel
-    if mc == ["rate"]:
+    if not sig_nonrate:
         demotion["violations"].append(f"{s['label']}: carried SOLELY by rate")
-    # (b) rate must never set the TTD: the first significant-union day must be
-    # covered by at least one non-rate channel's day list. (Structurally, the
-    # 30-day rolling rate windows cannot flag before ~day 30 anyway; this
-    # checks the decisive fact directly instead of relying on that argument.)
-    su = fd_.get("sig_union", [])
-    if s["ttd_days"] is not None and su:
-        first = min(su)
-        covered = any(
-            first in set(fd_.get(ch, []))
-            for ch in ("rules", "residual", "model", "device", "freq", "osc")
+        continue
+    # (b) absence has no day list — cannot verify coverage through it
+    if "absence" in sig_nonrate and not (set(sig_nonrate) - {"absence", "device"}):
+        demotion["violations"].append(
+            f"{s['label']}: coverage depends on absence/device only — needs manual review"
         )
-        if not covered:
-            demotion["violations"].append(
-                f"{s['label']}: first alarm day {first} is rate-only — demotion would delay TTD"
-            )
+        continue
+    # (c) rate must never set the TTD: the first significant-union day must be
+    # covered by a SIGNIFICANT non-rate channel's day list (device excluded,
+    # pessimistic). Structurally the 30-day rate windows cannot flag before
+    # ~day 30 anyway; this checks the decisive fact directly.
+    su = fd_.get("sig_union", [])
+    if s["ttd_days"] is not None and su and min(su) not in covered_all:
+        demotion["violations"].append(
+            f"{s['label']}: first alarm day {min(su)} not covered by a significant "
+            f"non-rate channel — demotion would delay TTD"
+        )
 
 n_rate_sig = len(demotion["scenarios_with_rate_significant"])
 print(f"\nrate-demotion check: {n_rate_sig} scenarios have rate significant; "
@@ -245,9 +308,11 @@ out = {
     "healthy_file": HEALTHY_FILE,
     "holdout_days": len(hd),
     "total_days": len(days),
+    "exposure": exposure,
     "channels": out_channels,
     "union_all8": {"holdout_fp_days": ku, "rate": ku / len(hd)},
     "union_minus_rate": {"holdout_fp_days": kn, "rate": kn / len(hd)},
+    "split_half_demotion_robustness": split_half,
     "detector_definition": (
         "The STRATA detector = OR of the significance-gated channels "
         "{rules, residual, model, device, absence, freq, osc}; the seasonal "
@@ -255,11 +320,22 @@ out = {
         "never a lone alarm)."
     ),
     "rate_demotion": demotion,
-    "caveat": (
+    "caveats": [
         "Healthy negatives are the calibration year's shared calendar holdout; "
         "no independent healthy negative exists on any LBNL system (D2). "
-        "Per-day autocorrelation makes any binomial p on these counts optimistic."
-    ),
+        "Per-day autocorrelation makes any binomial p on these counts optimistic.",
+        "The model- and device-conformance thresholds are quantile-calibrated on "
+        "these same holdout days (fpr_quantile); for those two channels the "
+        "holdout-FP row is the calibration target, not an out-of-sample "
+        "measurement. No healthy data unseen by every calibration step exists.",
+        "The rate demotion was decided after observing this holdout, so the "
+        "deployed FPR is a post-selection estimate; the all-8 union is reported "
+        "alongside it and the split-half probe shows the decision reproduces on "
+        "both holdout halves.",
+        "Per-channel exposure differs from the day denominator: residual "
+        "abstains without an adequate physics window, rate needs a full 30-day "
+        "window, and unoccupied days cannot fire most channels (see 'exposure').",
+    ],
 }
 Path(f"outputs/union_fpr_{SYSTEM}.json").write_text(json.dumps(out, indent=1))
 print(f"\nwrote outputs/union_fpr_{SYSTEM}.json")

@@ -18,12 +18,11 @@ detection:
   # Last N days of each month are held out for threshold calibration;
   # the model is discovered from the remaining days.
   holdout_days_per_month: 8
-  # ONE margin policy across all systems (Phase 6, gap S8): same floors as
-  # the FPU configs. Both are numeric no-ops here (calibrated band width
-  # 0.846 F > 0.5; bias-fault margins >> 0.5 F) — verified by full re-run
-  # diff against the committed v12 artifact.
+  # ONE margin policy across all systems: exceedance floor since Phase 4
+  # (audit C1); band-width floor added Phase 6 (gap S8) to match the FPU
+  # configs. Numeric no-op here (calibrated band width 0.846 F > 0.5) —
+  # verified by full re-run, byte-identical to the committed v12 artifact.
   residual_min_band_width: 0.5
-  residual_min_exceedance: 0.5
   residual_min_exceedance: 0.5
 
 events:

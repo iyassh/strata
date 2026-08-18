@@ -159,6 +159,14 @@ threats-to-validity section, pre-answered.
   configuration-model null. H-CS failed its pre-registered falsifier
   (CP-gated 0-1 detections per rotation): portability stays config-only.
 
+### Phase-6 additions (L23-L25)
+
+| # | Gap | Root cause | Fix + standing rule |
+|---|-----|-----------|---------------------|
+| L23 | No artifact measured the OR of all channels on healthy data; naive union false-alarmed 15.6% of SDAHU holdout days while the docs implied 0 | Each channel calibrated alone; nobody owned the composite | `union_fpr.py` + regression guards; rate channel demoted to diagnostic-only (verified zero scorecard/TTD cost). **Rule: per-channel FP floors do not compose — the union is a first-class, tested artifact.** |
+| L24 | Model/device "holdout FP" rows are the calibration target (~fpr_quantile) by construction — their thresholds are quantile-fit ON the holdout days being reported | One day-set doing two jobs (set threshold AND certify it) | Provenance labels in artifact + table; caveat sentence standard. **Rule: the same data cannot both set a threshold and certify it; label calibration-target rows or three-way split (discover/calibrate/test — toolkit facade, Phase 9).** |
+| L25 | First demotion-verification check accepted coverage from insignificant channels/devices — weaker than the property it claimed to verify (property held anyway, proven by the audit's strict recheck) | Guard written to pass the current data, not to enforce the stated property | Significance-gated, device-pessimistic check shipped; absence-dependence flags for manual review. **Rule: a guard must enforce the property at the strictness the CLAIM states — guards are part of the result.** |
+
 ## Part III — Why these gaps kept appearing (the honest meta-analysis)
 
 1. **Simulation flatters.** Noise-free EnergyPlus years make 0-FP thresholds

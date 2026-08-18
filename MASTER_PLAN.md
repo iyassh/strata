@@ -92,7 +92,13 @@ run the missing experiments, then build the toolkit on the cleaned
 core, then write the two papers. Timelines intentionally omitted per
 direction; phases are dependency-ordered.
 
-### Phase 6 — Defend the headline (S1, S2, S8)
+### Phase 6 — Defend the headline (S1, S2, S8) — ✅ DONE 2026-08-17
+(commits 51ccae3 + 1e9b009; hostile-audited, all six required fixes
+applied; see PHASE6_RESULTS.md. Union 15.6/12.5/4.2% naive →
+1.0/5.2/4.2% deployed, zero cost verified; model/device threshold
+circularity disclosed as L24; novelty claim narrowed. NEW ITEM fed
+forward to Phase 9: three-way discover/calibrate/test split in the
+toolkit facade so model/device FP becomes a measurement.)
 1. Commit `scripts/union_fpr.py` (cleaned from scratchpad), emit the
    per-channel healthy-holdout FP table + union row into the
    benchmark artifacts.

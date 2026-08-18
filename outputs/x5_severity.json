@@ -225,6 +225,62 @@
    "n": 3,
    "rungs_at_ceiling": 0
   },
+  "pfpu_airflow_bias_abs": {
+   "rungs": [
+    {
+     "severity": 200,
+     "deployed_alarm_days": 271,
+     "file": "PFPU_SensorBias_VAVAirflow_+200CFM"
+    },
+    {
+     "severity": 200,
+     "deployed_alarm_days": 271,
+     "file": "PFPU_SensorBias_VAVAirflow_-200CFM"
+    },
+    {
+     "severity": 400,
+     "deployed_alarm_days": 271,
+     "file": "PFPU_SensorBias_VAVAirflow_+400CFM"
+    },
+    {
+     "severity": 400,
+     "deployed_alarm_days": 271,
+     "file": "PFPU_SensorBias_VAVAirflow_-400CFM"
+    }
+   ],
+   "spearman_rho": null,
+   "p_value_naive": null,
+   "n": 4,
+   "rungs_at_ceiling": 0
+  },
+  "sfpu_airflow_bias_abs": {
+   "rungs": [
+    {
+     "severity": 200,
+     "deployed_alarm_days": 263,
+     "file": "SFPU_SensorBias_VAVAirflow_+200CFM"
+    },
+    {
+     "severity": 200,
+     "deployed_alarm_days": 278,
+     "file": "SFPU_SensorBias_VAVAirflow_-200CFM"
+    },
+    {
+     "severity": 400,
+     "deployed_alarm_days": 263,
+     "file": "SFPU_SensorBias_VAVAirflow_+400CFM"
+    },
+    {
+     "severity": 400,
+     "deployed_alarm_days": 288,
+     "file": "SFPU_SensorBias_VAVAirflow_-400CFM"
+    }
+   ],
+   "spearman_rho": 0.236,
+   "p_value_naive": 0.7643,
+   "n": 4,
+   "rungs_at_ceiling": 0
+  },
   "pfpu_rmtemp_bias_abs": {
    "rungs": [
     {

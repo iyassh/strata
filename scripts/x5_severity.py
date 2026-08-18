@@ -28,8 +28,8 @@ LADDERS = {  # ladder name -> (system, regex with severity group, parser)
     "sfpu_fouling_air": ("sfpu", r"Fouling_Airside_(\w+)", lambda s: SEVERITY_ORDER[s]),
     "pfpu_fouling_water": ("pfpu", r"Fouling_Waterside_(\w+)", lambda s: SEVERITY_ORDER[s]),
     "sfpu_fouling_water": ("sfpu", r"Fouling_Waterside_(\w+)", lambda s: SEVERITY_ORDER[s]),
-    "pfpu_airflow_bias_abs": ("pfpu", r"VAVAirflow_-?(\d+)CFM", int),
-    "sfpu_airflow_bias_abs": ("sfpu", r"VAVAirflow_-?(\d+)CFM", int),
+    "pfpu_airflow_bias_abs": ("pfpu", r"VAVAirflow_[+-](\d+)CFM", int),
+    "sfpu_airflow_bias_abs": ("sfpu", r"VAVAirflow_[+-](\d+)CFM", int),
     "pfpu_rmtemp_bias_abs": ("pfpu", r"RMTEMP_[+-](\d)C", int),
     "sfpu_rmtemp_bias_abs": ("sfpu", r"RMTEMP_[+-](\d)C", int),
 }

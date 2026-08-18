@@ -131,24 +131,49 @@ evidence.)*
 **Files:** `AHU_annual` (healthy) vs all 20 fault files.
 
 **Evidence** (`uv run python scripts/02_week0_audit.py sdahu`,
-`config_branch` block): during occupied hours (SF_CS > 0.5) the healthy
-file's OA damper minimum is **0.000**; every fault file floors at exactly
-**0.100** (the three damper_stuck files at 0.25/0.75/1.0 sit at their stuck
-value above the floor). Occupied-row counts also differ materially
-(healthy 303,703; faults 163,186–351,441 — different fan schedules). The
-healthy run used a different minimum-outdoor-air-damper policy (and
-schedule settings) than the fault runs.
+`config_branch` block; integration-review corrections 2026-08-18):
+- **Damper floor:** during fan-on hours (SF_CS > 0.5) the healthy file's
+  OA damper minimum is **0.000**; every fault file floors at exactly
+  **0.100** (the three damper_stuck files at 0.25/0.75/1.0 sit at their
+  stuck value above the floor).
+- **Schedule:** on the pipeline's own occupancy signal (SYS_CTL) the day
+  universe and daily occupied minutes are IDENTICAL between branches
+  (same 303 occupied days, ±2 min/day) — the branch difference is a
+  **one-hour phase shift** (healthy starts 05:01–05:02 on ~200 days;
+  every fault file starts 06:01) plus ~74 min/day more fan runtime
+  (SF_CS) in healthy. *(An earlier version of this erratum quoted
+  "occupied rows 163,186–351,441" — that range conflated a short 215-day
+  file, plausible fault-driven night cycling, and the branch effect, and
+  was measured on SF_CS, a sensor the pipeline does not read. Corrected
+  per L26/L27.)*
+- **Simulation-physics offset (audit-measured, gate ownership queued in
+  X11):** the residual channel's no-fault baseline differs by
+  **−1.06 °F** between branches — fault-branch fault-free level +0.008 °F
+  (five concordant measurements: all four coi_bias files after
+  subtracting their nominal bias, plus oa_bias) vs healthy branch
+  +1.071 °F (band [0.526, 1.372]). The offset is uniform across occupied
+  hours and survives restricting healthy to the fault schedule — it lives
+  in the simulated temperatures, not in any harmonizable input column.
 
 **Consequence:** healthy-vs-fault comparisons on SDAHU carry a
 **configuration-branch offset on top of the fault**. Most of the
 degree-scale MA/SA divergence quoted against the healthy file (E1) is this
 branch offset — fault-vs-fault cross-family divergence is ~0.05–0.14 °F.
 Any healthy-trained detector on SDAHU (ours included) may partially detect
-branch provenance rather than fault physics; results on SDAHU should be
-read with this caveat, and cross-checked on the FPU systems (whose healthy
-and fault files share one branch). **A targeted sensitivity check (does
-any STRATA detection change if the branch-signature columns are floored to
-match?) is queued as X11 in MASTER_PLAN Phase 8.**
+branch provenance rather than fault physics. Concretely, for THIS project
+(integration review, 2026-08-18): the **oa_bias residual detection sits
+exactly on the fault-branch no-fault baseline (+0.007 vs +0.008) — it is
+likely branch provenance, and SDAHU's scorecard is expected to become
+13/14 under branch correction**; the coi_bias detections survive by an
+order of magnitude (±3.6/±7.2 °F vs the 1.06 °F offset); the nine
+rules-carried scenarios are branch-immune (signature rules compare a
+device's position to its own command within the same file — verified: the
+command floors wherever the position does); the seasonal rate channel is
+branch-confounded on SDAHU and stays diagnostic-only. FPU systems are
+single-branch on the schedule axis (verified) — cross-checks live there.
+**Adjudication is X11 in MASTER_PLAN Phase 8 (fault-vs-fault branch-offset
+estimation + branch-corrected re-scoring — column harmonization alone is
+provably insufficient).**
 
 **Who it bites:** every method — classical, ML, or ours — trained on
 `AHU_annual` and scored on the fault files. This erratum bites our own

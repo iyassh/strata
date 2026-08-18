@@ -29,7 +29,7 @@ Standing verdicts the plan builds on:
 
 | ID | Gap | Severity | Status |
 |----|-----|----------|--------|
-| S1 | **No joint/union FPR number anywhere** (promised as G9, "a claimable first"). Auditor computed it: naive 9-channel OR false-alarms 15/96 healthy days on SDAHU (15.6%), 12/96 PFPU, 4/96 SFPU. The seasonal **rate channel is the entire problem** (14 and 7 of those days); no scenario anywhere is carried solely by rate. Demoting rate to diagnostic-only → **1.0% / 5.2% / 4.2%** union at zero scorecard cost. | CRITICAL — flips the "0 false-alarm days" headline if a reviewer computes it first | ✅ DONE Phase 6 |
+| S1 | **No joint/union FPR number anywhere** (promised as G9, "a claimable first"). Auditor computed it: naive 8-channel OR false-alarms 15/96 healthy days on SDAHU (15.6%), 12/96 PFPU, 4/96 SFPU. The seasonal **rate channel is the entire problem** (14 and 7 of those days); no scenario anywhere is carried solely by rate. Demoting rate to diagnostic-only → **1.0% / 5.2% / 4.2%** union at zero scorecard cost. | CRITICAL — flips the "0 false-alarm days" headline if a reviewer computes it first | ✅ DONE Phase 6 |
 | S2 | **No single "STRATA detector" definition** — paper currently reads as 9 detectors glued by per-scenario significance gates | CRITICAL (same fix as S1) | ✅ DONE Phase 6 |
 | S3 | **X8 contamination experiment absent.** Web sweep: training-set contamination is a hot named 2025–26 topic at ICPM and attacks our core assumption ("what if the fault-free year isn't?"). Priority ABOVE X7 (reverses the strategist's initial ranking). Cheap version: inject k∈{2,5,10}% fault days into SDAHU train, rerun calibration + healthy silence, report threshold drift only | HIGH | Open |
 | S4 | **X7 noise/15-min downsample absent.** Deferrable with a citable argument (event abstraction + sustained-minutes discretize amplitude noise); do after X8 if capacity allows, else limitations paragraph | MEDIUM | Open |
@@ -138,20 +138,44 @@ E→X, guards strengthened. See PHASE7_RESULTS.md.)
    Exit: a stranger can clone, fetch data, and reproduce every quoted number.
 
 ### Phase 8 — The missing experiments (S3, S6, then S4)
-1. **X8 contamination** (priority per web sweep): inject k∈{2,5,10}%
+
+**ORDER REVISED by the 2026-08-18 integration review: X11 FIRST** — it
+changes what the headline numbers ARE (expected SDAHU 13/14; PCA "dead
+heat 61=61" becomes 60v61 "near-tie with complementary misses"; the D2
+narrative partially reverses), whereas X8/X5 characterize robustness and
+must run on the CORRECTED detector or be re-run.
+
+1. **X11 branch-offset adjudication (from ERRATA E5)** — REDESIGNED: the
+   original "harmonize the floored columns" idea is provably insufficient
+   (the −1.06 °F residual offset lives in simulated temperatures, is
+   uniform across hours, and survives schedule matching). Instead:
+   a. Fault-vs-fault branch-offset estimation per channel, owned by
+      gate 5 (residual: coi_bias-ladder debias + oa_bias concordance —
+      five values at +0.007…0.008 vs healthy +1.071). Pre-registered
+      falsifier: if the branch-corrected band still flags oa_bias above
+      the noise floor, the branch story is incomplete.
+   b. Branch-corrected re-scoring of the residual channel on all SDAHU
+      scenarios; publish the corrected scorecard (expected 13/14) and the
+      corrected PCA comparison sentence.
+   c. Rate channel: declare branch-confounded on SDAHU (no correction
+      without a fault-branch no-fault run); demotion doubly motivated.
+   d. FPU config-branch homogeneity battery as a committed gate
+      (schedule + floors + residual-analog baselines) — turn "FPU
+      unaffected" from assertion into artifact.
+   e. Amend D2/E1/F1/Part-V reframes; add guards (fault-branch residual
+      baseline pin; FPU homogeneity).
+2. **X8 contamination** (priority per web sweep): inject k∈{2,5,10}%
    fault days into SDAHU training; rerun calibration + healthy
    silence ×3; report threshold drift and any FP-guarantee erosion.
    Pre-register expectations + falsifier before running (project law).
-2. **X5 severity Spearman ρ** over existing v12 flag_days
-   (stuck 0–100%, leak 20/50/80, fouling grades) + autocorrelation caveat.
-3. **X11 branch-sensitivity check (NEW, from ERRATA E5)**: does any
-   SDAHU detection change when the branch-signature columns (occupied
-   OA_DMPR floor) are harmonized between healthy and fault files? The
-   FPU systems (single branch) are the control.
+3. **X5 severity Spearman ρ** over v12 flag_days — FPU ladders only
+   (SDAHU stuck families saturate at 365/365 → Spearman degenerate;
+   coi_leakage ladder is E2-vacuous) + autocorrelation caveat.
 4. **X7 15-min downsample** — only after X8, only if capacity: 3
    healthy years + one fault per family, rules/resid/freq channels.
    Otherwise: limitations paragraph with the discretization argument.
-   Exit: the two reviewer-anticipated experiments answered or honestly scoped.
+   Exit: headline numbers adjudicated post-E5; the two
+   reviewer-anticipated experiments answered or honestly scoped.
 
 ### Phase 9 — Toolkit Tier A: stranger-runnable (T1–T6)
 1. **LICENSE: MIT** + pyproject license metadata + CITATION.cff.

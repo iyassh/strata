@@ -6,11 +6,11 @@ in this phase — it makes the existing numbers quotable, recomputable, and
 internally consistent. New artifacts: `outputs/crywolf.json`,
 `outputs/sensor_coverage.json`, `outputs/benchmark_v2_processheal_v1.json`,
 `week0_audit.json` gate 5. New docs: `ERRATA.md`, `REPRODUCING.md`.
-Guards: `tests/test_phase7_artifacts.py` (92 tests total passing).
+Guards: `tests/test_phase7_artifacts.py` (94 tests total passing after the audit fixes below).
 
 ## 1. ERRATA.md — the dataset-quality contribution, now citable (S9)
 
-All four LBNL dataset errata consolidated in one canonical file (E1–E4)
+All four then-known LBNL dataset errata consolidated in one canonical file (E1–E4; the hostile audit below added a fifth, E5)
 with per-erratum evidence, recompute command, consequence, and who-it-bites,
 backed by a new machine-readable evidence gate
 (`scripts/02_week0_audit.py sdahu` → `week0_audit.json.sdahu_errata_evidence`):

@@ -84,7 +84,7 @@ Companion docs: `GAP_ANALYSIS_AUG2026.md` (gaps G1–G11), `PHASE1_RESULTS.md`,
   see the PFPU heating-count collapse that order-only conformance cannot.
 
 ### D5. Onboarding evidence (the scalability claim, measured)
-- Two new systems onboarded config-only: 48 sensor mappings + ~35 rules each;
+- Two new systems onboarded config-only: 48 *[corrected 2026-08-18: 45 at the onboarding commit — see ONBOARDING_LOG]* sensor mappings + ~35 rules each;
   SFPU derived from PFPU in minutes; ONE threshold tuned (on healthy data, with
   the measurement recorded: healthy SAT excursions max 17 consecutive minutes).
   Healthy-silence perfect on both FaultFree years. Field anchors: SeeQ's
@@ -234,6 +234,13 @@ for the claim→artifact map). The Aug-10 list predates Phases 3c–6.
 
 - **Scorecards (v12):** SDAHU **14/14**, PFPU **23/30**, SFPU **24/29**
   (SFPU excludes the rotated-calendar file, ERRATA.md E4). NOT 17/30, 18/30.
+  **E5 caveat (2026-08-18): SDAHU healthy-vs-fault numbers carry the
+  configuration-branch offset (ERRATA E5). The oa_bias detection rests on
+  the residual channel, whose audit-measured fault-branch no-fault
+  baseline (+0.008 °F) sits 1.06 °F below healthy's (+1.071 °F) —
+  oa_bias's residual sits exactly on that baseline, so its detection is
+  likely branch provenance. Expect 13/14 pending X11 adjudication; FPU
+  scorecards are single-branch and unaffected.**
 - **TTD:** **median 1 day**, with an honest tail — SDAHU {1×9, 2×5}; PFPU
   {1×19, 4, 11, 15, 21}; SFPU {1×19, 3, 15, 15, 37, 108}. Never write
   "TTD 1–2 days" without "median".
@@ -264,7 +271,7 @@ for the claim→artifact map). The Aug-10 list predates Phases 3c–6.
   **45 sensor mappings + 35 rules** (the log's "48" was a miscount);
   today's configs: 57 mappings + 39 rules (Phase-4 waterside ΔT +
   oscillation additions).
-- **Errata:** canonical numbering and evidence now in **ERRATA.md** (E1–E4)
+- **Errata:** canonical numbering and evidence now in **ERRATA.md** (E1–E5)
   + `week0_audit.json` gate 5. G5's "five event-log-identical scenarios"
   was true under the v1 alphabet only; under the current alphabet all 14
   SDAHU logs are distinct (`event_identical_groups: {}` in v12) — the

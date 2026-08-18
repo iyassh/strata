@@ -1,0 +1,424 @@
+{
+  "canonical_alphabet": [
+    "system_started",
+    "system_stopped",
+    "night_cycle_started",
+    "night_cycle_ended",
+    "heating_active",
+    "heating_inactive",
+    "cooling_active",
+    "cooling_inactive",
+    "economizer_window_entered",
+    "economizer_window_exited"
+  ],
+  "alphabets": {
+    "sdahu": [
+      "cooling_active",
+      "cooling_inactive",
+      "economizer_window_entered",
+      "economizer_window_exited",
+      "system_started",
+      "system_stopped"
+    ],
+    "pfpu": [
+      "cooling_active",
+      "cooling_inactive",
+      "economizer_window_entered",
+      "economizer_window_exited",
+      "heating_active",
+      "heating_inactive",
+      "night_cycle_ended",
+      "night_cycle_started",
+      "system_started",
+      "system_stopped"
+    ],
+    "sfpu": [
+      "cooling_active",
+      "cooling_inactive",
+      "economizer_window_entered",
+      "economizer_window_exited",
+      "heating_active",
+      "heating_inactive",
+      "night_cycle_ended",
+      "night_cycle_started",
+      "system_started",
+      "system_stopped"
+    ]
+  },
+  "bands": {
+    "sdahu": {
+      "system_started": [
+        0.0,
+        1.0
+      ],
+      "system_stopped": [
+        0.0,
+        1.0
+      ],
+      "cooling_active": [
+        0.0,
+        6.0
+      ],
+      "cooling_inactive": [
+        0.0,
+        6.0
+      ],
+      "economizer_window_entered": [
+        0.0,
+        3.0
+      ],
+      "economizer_window_exited": [
+        0.0,
+        3.0
+      ]
+    },
+    "pfpu": {
+      "system_started": [
+        0.0,
+        1.0
+      ],
+      "system_stopped": [
+        0.0,
+        1.0
+      ],
+      "night_cycle_started": [
+        4.0,
+        18.0
+      ],
+      "night_cycle_ended": [
+        3.0,
+        18.0
+      ],
+      "heating_active": [
+        0.0,
+        9.0
+      ],
+      "heating_inactive": [
+        0.0,
+        9.0
+      ],
+      "cooling_active": [
+        0.0,
+        19.0
+      ],
+      "cooling_inactive": [
+        0.0,
+        19.0
+      ],
+      "economizer_window_entered": [
+        0.0,
+        3.0
+      ],
+      "economizer_window_exited": [
+        0.0,
+        3.0
+      ]
+    },
+    "sfpu": {
+      "system_started": [
+        0.0,
+        1.0
+      ],
+      "system_stopped": [
+        0.0,
+        1.0
+      ],
+      "night_cycle_started": [
+        4.0,
+        38.0
+      ],
+      "night_cycle_ended": [
+        4.0,
+        39.0
+      ],
+      "heating_active": [
+        0.0,
+        10.0
+      ],
+      "heating_inactive": [
+        0.0,
+        10.0
+      ],
+      "cooling_active": [
+        4.0,
+        44.0
+      ],
+      "cooling_inactive": [
+        4.0,
+        44.0
+      ],
+      "economizer_window_entered": [
+        0.0,
+        3.0
+      ],
+      "economizer_window_exited": [
+        0.0,
+        3.0
+      ]
+    }
+  },
+  "M1": {
+    "sdahu_on_sdahu": {
+      "n": 87,
+      "mean": 0.8861,
+      "median": 1.0,
+      "p10": 0.6667,
+      "frac_perfect": 0.6667
+    },
+    "pfpu_on_sdahu": {
+      "n": 96,
+      "mean": 0.4999,
+      "median": 0.5156,
+      "p10": 0.4161,
+      "frac_perfect": 0.0
+    },
+    "sfpu_on_sdahu": {
+      "n": 96,
+      "mean": 0.4146,
+      "median": 0.4118,
+      "p10": 0.3601,
+      "frac_perfect": 0.0
+    },
+    "sdahu_on_pfpu": {
+      "n": 87,
+      "mean": 0.4455,
+      "median": 0.5,
+      "p10": 0.1357,
+      "frac_perfect": 0.0
+    },
+    "pfpu_on_pfpu": {
+      "n": 96,
+      "mean": 0.9021,
+      "median": 0.9062,
+      "p10": 0.8318,
+      "frac_perfect": 0.0938
+    },
+    "sfpu_on_pfpu": {
+      "n": 96,
+      "mean": 0.8435,
+      "median": 0.8333,
+      "p10": 0.7806,
+      "frac_perfect": 0.0104
+    },
+    "sdahu_on_sfpu": {
+      "n": 87,
+      "mean": 0.3694,
+      "median": 0.4,
+      "p10": 0.1067,
+      "frac_perfect": 0.0
+    },
+    "pfpu_on_sfpu": {
+      "n": 96,
+      "mean": 0.9023,
+      "median": 0.9091,
+      "p10": 0.8209,
+      "frac_perfect": 0.0521
+    },
+    "sfpu_on_sfpu": {
+      "n": 96,
+      "mean": 0.9533,
+      "median": 0.96,
+      "p10": 0.9074,
+      "frac_perfect": 0.1458
+    }
+  },
+  "M1_null": {
+    "sdahu_on_sdahu": {
+      "null_mean_of_means": 0.6636,
+      "observed_mean": 0.8861,
+      "order_signal": 0.2225
+    },
+    "pfpu_on_sdahu": {
+      "null_mean_of_means": 0.3171,
+      "observed_mean": 0.4999,
+      "order_signal": 0.1828
+    },
+    "sfpu_on_sdahu": {
+      "null_mean_of_means": 0.2609,
+      "observed_mean": 0.4146,
+      "order_signal": 0.1537
+    },
+    "sdahu_on_pfpu": {
+      "null_mean_of_means": 0.4502,
+      "observed_mean": 0.4455,
+      "order_signal": -0.0047
+    },
+    "pfpu_on_pfpu": {
+      "null_mean_of_means": 0.9028,
+      "observed_mean": 0.9021,
+      "order_signal": -0.0007
+    },
+    "sfpu_on_pfpu": {
+      "null_mean_of_means": 0.8437,
+      "observed_mean": 0.8435,
+      "order_signal": -0.0002
+    },
+    "sdahu_on_sfpu": {
+      "null_mean_of_means": 0.3734,
+      "observed_mean": 0.3694,
+      "order_signal": -0.004
+    },
+    "pfpu_on_sfpu": {
+      "null_mean_of_means": 0.903,
+      "observed_mean": 0.9023,
+      "order_signal": -0.0007
+    },
+    "sfpu_on_sfpu": {
+      "null_mean_of_means": 0.9534,
+      "observed_mean": 0.9533,
+      "order_signal": -0.0001
+    }
+  },
+  "M2": {
+    "sdahu_on_sdahu": {
+      "violation_rate": 0.0115,
+      "n_days": 87
+    },
+    "pfpu_on_sdahu": {
+      "violation_rate": 0.6771,
+      "n_days": 96
+    },
+    "sfpu_on_sdahu": {
+      "violation_rate": 0.9375,
+      "n_days": 96
+    },
+    "sdahu_on_pfpu": {
+      "violation_rate": 1.0,
+      "n_days": 87
+    },
+    "pfpu_on_pfpu": {
+      "violation_rate": 0.0104,
+      "n_days": 96
+    },
+    "sfpu_on_pfpu": {
+      "violation_rate": 0.0312,
+      "n_days": 96
+    },
+    "sdahu_on_sfpu": {
+      "violation_rate": 1.0,
+      "n_days": 87
+    },
+    "pfpu_on_sfpu": {
+      "violation_rate": 0.0312,
+      "n_days": 96
+    },
+    "sfpu_on_sfpu": {
+      "violation_rate": 0.0104,
+      "n_days": 96
+    }
+  },
+  "M3": {
+    "sdahu_vs_sdahu": 0.0,
+    "sdahu_vs_pfpu": 2.9817,
+    "sdahu_vs_sfpu": 4.4129,
+    "pfpu_vs_sdahu": 2.9817,
+    "pfpu_vs_pfpu": 0.0,
+    "pfpu_vs_sfpu": 1.4312,
+    "sfpu_vs_sdahu": 4.4129,
+    "sfpu_vs_pfpu": 1.4312,
+    "sfpu_vs_sfpu": 0.0
+  },
+  "engineering_truth": {
+    "sdahu": {
+      "has_night_cycle": false,
+      "has_heating": false,
+      "heating_active_day_fraction": 0.0,
+      "heating_daily_rhythm": false,
+      "has_economizer": true
+    },
+    "pfpu": {
+      "has_night_cycle": true,
+      "has_heating": true,
+      "heating_active_day_fraction": 0.468,
+      "heating_daily_rhythm": false,
+      "has_economizer": true
+    },
+    "sfpu": {
+      "has_night_cycle": true,
+      "has_heating": true,
+      "heating_active_day_fraction": 0.978,
+      "heating_daily_rhythm": true,
+      "has_economizer": true
+    }
+  },
+  "coldstart": {
+    "sdahu": {
+      "sources": [
+        "pfpu",
+        "sfpu"
+      ],
+      "shared_activities": [
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "system_started",
+        "system_stopped"
+      ],
+      "zero_shot_fp_rate_on_target_holdout": 0.0,
+      "detected": 0,
+      "of": 14,
+      "per_family": {
+        "damper_stuck": "0/4",
+        "oa_bias": "0/1",
+        "sensor_bias": "0/4",
+        "valve_leak": "0/1",
+        "valve_stuck": "0/4"
+      }
+    },
+    "pfpu": {
+      "sources": [
+        "sdahu",
+        "sfpu"
+      ],
+      "shared_activities": [
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "system_started",
+        "system_stopped"
+      ],
+      "zero_shot_fp_rate_on_target_holdout": 0.0104,
+      "detected": 1,
+      "of": 30,
+      "per_family": {
+        "airflow_bias": "0/4",
+        "coil_fouling": "0/6",
+        "damper_stuck": "1/5",
+        "fan_restrict": "0/1",
+        "instability": "0/2",
+        "reheat_leak": "0/3",
+        "reheat_stuck": "0/5",
+        "rmtemp_bias": "0/4"
+      }
+    },
+    "sfpu": {
+      "sources": [
+        "sdahu",
+        "pfpu"
+      ],
+      "shared_activities": [
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "system_started",
+        "system_stopped"
+      ],
+      "zero_shot_fp_rate_on_target_holdout": 0.0312,
+      "detected": 5,
+      "of": 29,
+      "per_family": {
+        "airflow_bias": "0/4",
+        "coil_fouling": "0/6",
+        "damper_stuck": "1/5",
+        "fan_restrict": "0/1",
+        "instability": "0/2",
+        "reheat_leak": "2/3",
+        "reheat_stuck": "2/5",
+        "rmtemp_bias": "0/3"
+      }
+    }
+  }
+}

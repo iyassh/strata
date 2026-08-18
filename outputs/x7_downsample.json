@@ -1,0 +1,398 @@
+{
+ "pre_registration": "PHASE8_PLAN.md X7 addendum",
+ "systems": {
+  "sdahu": {
+   "healthy_signature_days_15min": 28,
+   "residual_band_15min": [
+    0.5526,
+    1.3738
+   ],
+   "residual_windows_15min": 365,
+   "families": {
+    "damper_stuck": {
+     "file": "damper_stuck_010_annual",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       365,
+       365
+      ],
+      "residual_days": [
+       0,
+       0
+      ],
+      "freq_days": [
+       0,
+       2
+      ]
+     }
+    },
+    "valve_stuck": {
+     "file": "coi_stuck_010_annual",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       365,
+       365
+      ],
+      "residual_days": [
+       0,
+       0
+      ],
+      "freq_days": [
+       0,
+       0
+      ]
+     }
+    },
+    "valve_leak": {
+     "file": "coi_leakage_010_annual",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       365,
+       365
+      ],
+      "residual_days": [
+       0,
+       0
+      ],
+      "freq_days": [
+       0,
+       0
+      ]
+     }
+    },
+    "sensor_bias": {
+     "file": "coi_bias_-4_annual",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       0,
+       46
+      ],
+      "residual_days": [
+       164,
+       165
+      ],
+      "freq_days": [
+       12,
+       15
+      ]
+     }
+    },
+    "oa_bias": {
+     "file": "oa_bias_4_annual",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       0,
+       44
+      ],
+      "residual_days": [
+       148,
+       148
+      ],
+      "freq_days": [
+       0,
+       4
+      ]
+     }
+    }
+   }
+  },
+  "pfpu": {
+   "healthy_signature_days_15min": 64,
+   "residual_band_15min": [
+    -1.64,
+    2.17
+   ],
+   "residual_windows_15min": 365,
+   "families": {
+    "instability": {
+     "file": "PFPU_RMTEMPUnstable",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       1,
+       217
+      ],
+      "residual_days": [
+       2,
+       0
+      ],
+      "freq_days": [
+       206,
+       2
+      ]
+     }
+    },
+    "coil_fouling": {
+     "file": "PFPU_ReheatCoilFouling_Airside_Minor",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       0,
+       65
+      ],
+      "residual_days": [
+       2,
+       0
+      ],
+      "freq_days": [
+       5,
+       1
+      ]
+     }
+    },
+    "reheat_leak": {
+     "file": "PFPU_ReheatVLVLeak_20%MaxFlow",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       365,
+       365
+      ],
+      "residual_days": [
+       2,
+       1
+      ],
+      "freq_days": [
+       3,
+       1
+      ]
+     }
+    },
+    "reheat_stuck": {
+     "file": "PFPU_ReheatVLVStuck_0%",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       193,
+       252
+      ],
+      "residual_days": [
+       12,
+       1
+      ],
+      "freq_days": [
+       2,
+       6
+      ]
+     }
+    },
+    "rmtemp_bias": {
+     "file": "PFPU_SensorBias_RMTEMP_+2C",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       3,
+       62
+      ],
+      "residual_days": [
+       7,
+       0
+      ],
+      "freq_days": [
+       3,
+       2
+      ]
+     }
+    },
+    "airflow_bias": {
+     "file": "PFPU_SensorBias_VAVAirflow_+200CFM",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       271,
+       279
+      ],
+      "residual_days": [
+       9,
+       0
+      ],
+      "freq_days": [
+       5,
+       2
+      ]
+     }
+    },
+    "damper_stuck": {
+     "file": "PFPU_VAVDMPRStuck_0%",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       313,
+       321
+      ],
+      "residual_days": [
+       5,
+       2
+      ],
+      "freq_days": [
+       135,
+       8
+      ]
+     }
+    },
+    "fan_restrict": {
+     "file": "PFPU_VAVFanRestrictFlow",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       0,
+       60
+      ],
+      "residual_days": [
+       31,
+       1
+      ],
+      "freq_days": [
+       8,
+       2
+      ]
+     }
+    }
+   }
+  },
+  "sfpu": {
+   "healthy_signature_days_15min": 64,
+   "residual_band_15min": [
+    1.22,
+    1.72
+   ],
+   "residual_windows_15min": 365,
+   "families": {
+    "instability": {
+     "file": "SFPU_RMTEMPUnstable",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       0,
+       260
+      ],
+      "residual_days": [
+       2,
+       0
+      ],
+      "freq_days": [
+       141,
+       3
+      ]
+     }
+    },
+    "coil_fouling": {
+     "file": "SFPU_ReheatCoilFouling_Airside_Minor",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       0,
+       70
+      ],
+      "residual_days": [
+       0,
+       0
+      ],
+      "freq_days": [
+       1,
+       2
+      ]
+     }
+    },
+    "reheat_leak": {
+     "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       365,
+       365
+      ],
+      "residual_days": [
+       0,
+       0
+      ],
+      "freq_days": [
+       17,
+       3
+      ]
+     }
+    },
+    "reheat_stuck": {
+     "file": "SFPU_ReheatVLVStuck_0%",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       137,
+       186
+      ],
+      "residual_days": [
+       1,
+       0
+      ],
+      "freq_days": [
+       5,
+       3
+      ]
+     }
+    },
+    "rmtemp_bias": {
+     "file": "SFPU_SensorBias_RMTEMP_+2C",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       2,
+       76
+      ],
+      "residual_days": [
+       3,
+       0
+      ],
+      "freq_days": [
+       1,
+       2
+      ]
+     }
+    },
+    "airflow_bias": {
+     "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       263,
+       283
+      ],
+      "residual_days": [
+       0,
+       0
+      ],
+      "freq_days": [
+       19,
+       5
+      ]
+     }
+    },
+    "damper_stuck": {
+     "file": "SFPU_VAVDMPRStuck_0%",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       302,
+       317
+      ],
+      "residual_days": [
+       0,
+       2
+      ],
+      "freq_days": [
+       139,
+       111
+      ]
+     }
+    },
+    "fan_restrict": {
+     "file": "SFPU_VAVFanRestrictFlow",
+     "coverage_1min_vs_15min": {
+      "rules_days": [
+       0,
+       63
+      ],
+      "residual_days": [
+       16,
+       1
+      ],
+      "freq_days": [
+       5,
+       3
+      ]
+     }
+    }
+   }
+  }
+ },
+ "falsifiers_fired": [
+  "F-X7.a: sdahu healthy gains 28 signature days at 15-min",
+  "F-X7.a: pfpu healthy gains 64 signature days at 15-min",
+  "F-X7.b: pfpu/fan_restrict residual coverage dropped >25% at 15-min",
+  "F-X7.a: sfpu healthy gains 64 signature days at 15-min"
+ ]
+}

@@ -1,0 +1,286 @@
+{
+ "pre_registration": "PHASE8_PLAN.md @ 65fe3b8",
+ "ladders": {
+  "pfpu_reheat_stuck": {
+   "rungs": [
+    {
+     "severity": 0,
+     "deployed_alarm_days": 193,
+     "file": "PFPU_ReheatVLVStuck_0%"
+    },
+    {
+     "severity": 20,
+     "deployed_alarm_days": 365,
+     "file": "PFPU_ReheatVLVStuck_20%"
+    },
+    {
+     "severity": 50,
+     "deployed_alarm_days": 365,
+     "file": "PFPU_ReheatVLVStuck_50%"
+    },
+    {
+     "severity": 80,
+     "deployed_alarm_days": 365,
+     "file": "PFPU_ReheatVLVStuck_80%"
+    },
+    {
+     "severity": 100,
+     "deployed_alarm_days": 365,
+     "file": "PFPU_ReheatVLVStuck_100%"
+    }
+   ],
+   "spearman_rho": 0.707,
+   "p_value_naive": 0.1817,
+   "n": 5,
+   "rungs_at_ceiling": 4
+  },
+  "sfpu_reheat_stuck": {
+   "rungs": [
+    {
+     "severity": 0,
+     "deployed_alarm_days": 137,
+     "file": "SFPU_ReheatVLVStuck_0%"
+    },
+    {
+     "severity": 20,
+     "deployed_alarm_days": 365,
+     "file": "SFPU_ReheatVLVStuck_20%"
+    },
+    {
+     "severity": 50,
+     "deployed_alarm_days": 365,
+     "file": "SFPU_ReheatVLVStuck_50%"
+    },
+    {
+     "severity": 80,
+     "deployed_alarm_days": 365,
+     "file": "SFPU_ReheatVLVStuck_80%"
+    },
+    {
+     "severity": 100,
+     "deployed_alarm_days": 365,
+     "file": "SFPU_ReheatVLVStuck_100%"
+    }
+   ],
+   "spearman_rho": 0.707,
+   "p_value_naive": 0.1817,
+   "n": 5,
+   "rungs_at_ceiling": 4
+  },
+  "pfpu_damper_stuck": {
+   "rungs": [
+    {
+     "severity": 0,
+     "deployed_alarm_days": 313,
+     "file": "PFPU_VAVDMPRStuck_0%"
+    },
+    {
+     "severity": 20,
+     "deployed_alarm_days": 177,
+     "file": "PFPU_VAVDMPRStuck_20%"
+    },
+    {
+     "severity": 50,
+     "deployed_alarm_days": 271,
+     "file": "PFPU_VAVDMPRStuck_50%"
+    },
+    {
+     "severity": 80,
+     "deployed_alarm_days": 271,
+     "file": "PFPU_VAVDMPRStuck_80%"
+    },
+    {
+     "severity": 100,
+     "deployed_alarm_days": 272,
+     "file": "PFPU_VAVDMPRStuck_100%"
+    }
+   ],
+   "spearman_rho": -0.051,
+   "p_value_naive": 0.9347,
+   "n": 5,
+   "rungs_at_ceiling": 0
+  },
+  "sfpu_damper_stuck": {
+   "rungs": [
+    {
+     "severity": 0,
+     "deployed_alarm_days": 313,
+     "file": "SFPU_VAVDMPRStuck_0%"
+    },
+    {
+     "severity": 20,
+     "deployed_alarm_days": 262,
+     "file": "SFPU_VAVDMPRStuck_20%"
+    },
+    {
+     "severity": 50,
+     "deployed_alarm_days": 277,
+     "file": "SFPU_VAVDMPRStuck_50%"
+    },
+    {
+     "severity": 80,
+     "deployed_alarm_days": 283,
+     "file": "SFPU_VAVDMPRStuck_80%"
+    },
+    {
+     "severity": 100,
+     "deployed_alarm_days": 297,
+     "file": "SFPU_VAVDMPRStuck_100%"
+    }
+   ],
+   "spearman_rho": 0.0,
+   "p_value_naive": 1.0,
+   "n": 5,
+   "rungs_at_ceiling": 0
+  },
+  "pfpu_fouling_air": {
+   "rungs": [
+    {
+     "severity": 1,
+     "deployed_alarm_days": 0,
+     "file": "PFPU_ReheatCoilFouling_Airside_Minor"
+    },
+    {
+     "severity": 2,
+     "deployed_alarm_days": 0,
+     "file": "PFPU_ReheatCoilFouling_Airside_Moderate"
+    },
+    {
+     "severity": 3,
+     "deployed_alarm_days": 0,
+     "file": "PFPU_ReheatCoilFouling_Airside_Severe"
+    }
+   ],
+   "spearman_rho": null,
+   "p_value_naive": null,
+   "n": 3,
+   "rungs_at_ceiling": 0
+  },
+  "sfpu_fouling_air": {
+   "rungs": [
+    {
+     "severity": 1,
+     "deployed_alarm_days": 0,
+     "file": "SFPU_ReheatCoilFouling_Airside_Minor"
+    },
+    {
+     "severity": 2,
+     "deployed_alarm_days": 0,
+     "file": "SFPU_ReheatCoilFouling_Airside_Moderate"
+    },
+    {
+     "severity": 3,
+     "deployed_alarm_days": 7,
+     "file": "SFPU_ReheatCoilFouling_Airside_Severe"
+    }
+   ],
+   "spearman_rho": 0.866,
+   "p_value_naive": 0.3333,
+   "n": 3,
+   "rungs_at_ceiling": 0
+  },
+  "pfpu_fouling_water": {
+   "rungs": [
+    {
+     "severity": 1,
+     "deployed_alarm_days": 0,
+     "file": "PFPU_ReheatCoilFouling_Waterside_Minor"
+    },
+    {
+     "severity": 2,
+     "deployed_alarm_days": 0,
+     "file": "PFPU_ReheatCoilFouling_Waterside_Moderate"
+    },
+    {
+     "severity": 3,
+     "deployed_alarm_days": 0,
+     "file": "PFPU_ReheatCoilFouling_Waterside_Severe"
+    }
+   ],
+   "spearman_rho": null,
+   "p_value_naive": null,
+   "n": 3,
+   "rungs_at_ceiling": 0
+  },
+  "sfpu_fouling_water": {
+   "rungs": [
+    {
+     "severity": 1,
+     "deployed_alarm_days": 0,
+     "file": "SFPU_ReheatCoilFouling_Waterside_Minor"
+    },
+    {
+     "severity": 2,
+     "deployed_alarm_days": 0,
+     "file": "SFPU_ReheatCoilFouling_Waterside_Moderate"
+    },
+    {
+     "severity": 3,
+     "deployed_alarm_days": 15,
+     "file": "SFPU_ReheatCoilFouling_Waterside_Severe"
+    }
+   ],
+   "spearman_rho": 0.866,
+   "p_value_naive": 0.3333,
+   "n": 3,
+   "rungs_at_ceiling": 0
+  },
+  "pfpu_rmtemp_bias_abs": {
+   "rungs": [
+    {
+     "severity": 2,
+     "deployed_alarm_days": 0,
+     "file": "PFPU_SensorBias_RMTEMP_+2C"
+    },
+    {
+     "severity": 2,
+     "deployed_alarm_days": 55,
+     "file": "PFPU_SensorBias_RMTEMP_-2C"
+    },
+    {
+     "severity": 4,
+     "deployed_alarm_days": 13,
+     "file": "PFPU_SensorBias_RMTEMP_+4C"
+    },
+    {
+     "severity": 4,
+     "deployed_alarm_days": 229,
+     "file": "PFPU_SensorBias_RMTEMP_-4C"
+    }
+   ],
+   "spearman_rho": 0.447,
+   "p_value_naive": 0.5528,
+   "n": 4,
+   "rungs_at_ceiling": 0
+  },
+  "sfpu_rmtemp_bias_abs": {
+   "rungs": [
+    {
+     "severity": 2,
+     "deployed_alarm_days": 0,
+     "file": "SFPU_SensorBias_RMTEMP_+2C"
+    },
+    {
+     "severity": 4,
+     "deployed_alarm_days": 73,
+     "file": "SFPU_SensorBias_RMTEMP_-4C"
+    },
+    {
+     "severity": 4,
+     "deployed_alarm_days": 99,
+     "file": "SFPU_SensorBias_RMTEMP_+4C"
+    }
+   ],
+   "spearman_rho": 0.866,
+   "p_value_naive": 0.3333,
+   "n": 3,
+   "rungs_at_ceiling": 0
+  }
+ },
+ "caveats": [
+  "p-values are naive (per-day autocorrelation; tiny n) \u2014 report rho, not stars",
+  "deployed alarm days = sig_union minus rate-only days",
+  "ceiling effects reported per ladder; a saturated ladder cannot show monotonicity"
+ ],
+ "falsifiers_fired": []
+}

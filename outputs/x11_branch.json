@@ -1,0 +1,273 @@
+{
+ "pre_registration": "PHASE8_PLAN.md @ commit 65fe3b8",
+ "healthy": {
+  "band": [
+   0.5263020000000012,
+   1.3720845000000033
+  ],
+  "median": 1.0706,
+  "window_days": 365
+ },
+ "fault_branch_baseline": {
+  "estimators": {
+   "coi_bias_-4_annual": 0.0082,
+   "coi_bias_-2_annual": 0.008,
+   "coi_bias_2_annual": 0.008,
+   "coi_bias_4_annual": 0.0081,
+   "oa_bias_4_annual": 0.0072
+  },
+  "spread": 0.001,
+  "baseline": 0.008,
+  "delta": 1.0625
+ },
+ "corrected_band": [
+  -0.5362,
+  0.3096
+ ],
+ "noise_floor": {
+  "healthy_out_of_band_rate": 0.0,
+  "p0": 0.00822
+ },
+ "corrected_rescoring": {
+  "damper_stuck_010_annual": {
+   "window_days": 365,
+   "flagged": 0,
+   "significant": false,
+   "median": NaN
+  },
+  "damper_stuck_025_annual": {
+   "window_days": 365,
+   "flagged": 0,
+   "significant": false,
+   "median": NaN
+  },
+  "damper_stuck_075_annual": {
+   "window_days": 365,
+   "flagged": 155,
+   "significant": true,
+   "median": 4.743
+  },
+  "damper_stuck_100_annual_short": {
+   "window_days": 215,
+   "flagged": 70,
+   "significant": true,
+   "median": 3.3551
+  },
+  "coi_stuck_010_annual": {
+   "window_days": 365,
+   "flagged": 0,
+   "significant": false,
+   "median": NaN
+  },
+  "coi_stuck_025_annual": {
+   "window_days": 365,
+   "flagged": 0,
+   "significant": false,
+   "median": NaN
+  },
+  "coi_stuck_050_annual": {
+   "window_days": 365,
+   "flagged": 0,
+   "significant": false,
+   "median": NaN
+  },
+  "coi_stuck_075_annual": {
+   "window_days": 365,
+   "flagged": 0,
+   "significant": false,
+   "median": NaN
+  },
+  "coi_leakage_010_annual": {
+   "window_days": 365,
+   "flagged": 0,
+   "significant": false,
+   "median": NaN
+  },
+  "coi_bias_-4_annual": {
+   "window_days": 365,
+   "flagged": 164,
+   "significant": true,
+   "median": -7.1918
+  },
+  "coi_bias_-2_annual": {
+   "window_days": 365,
+   "flagged": 164,
+   "significant": true,
+   "median": -3.592
+  },
+  "coi_bias_2_annual": {
+   "window_days": 365,
+   "flagged": 139,
+   "significant": true,
+   "median": 3.608
+  },
+  "coi_bias_4_annual": {
+   "window_days": 365,
+   "flagged": 137,
+   "significant": true,
+   "median": 7.2081
+  },
+  "oa_bias_4_annual": {
+   "window_days": 365,
+   "flagged": 0,
+   "significant": false,
+   "median": 0.0072
+  }
+ },
+ "debias_consistency": {
+  "coi_bias_-4_annual": {
+   "debiased_flag_rate": 0.0
+  },
+  "coi_bias_-2_annual": {
+   "debiased_flag_rate": 0.0
+  },
+  "coi_bias_2_annual": {
+   "debiased_flag_rate": 0.0
+  },
+  "coi_bias_4_annual": {
+   "debiased_flag_rate": 0.0
+  }
+ },
+ "adjudicated_scorecard": {
+  "detected": 13,
+  "of": 14,
+  "scenarios": [
+   {
+    "file": "damper_stuck_010_annual",
+    "label": "damper stuck 10%",
+    "naive_channels": "rules",
+    "adjudicated_deployed_channels": "rules",
+    "detected": true
+   },
+   {
+    "file": "damper_stuck_025_annual",
+    "label": "damper stuck 25%",
+    "naive_channels": "rules",
+    "adjudicated_deployed_channels": "rules",
+    "detected": true
+   },
+   {
+    "file": "damper_stuck_075_annual",
+    "label": "damper stuck 75%",
+    "naive_channels": "rules+resid",
+    "adjudicated_deployed_channels": "resid+rules",
+    "detected": true
+   },
+   {
+    "file": "damper_stuck_100_annual_short",
+    "label": "damper stuck 100%",
+    "naive_channels": "rules+resid",
+    "adjudicated_deployed_channels": "resid+rules",
+    "detected": true
+   },
+   {
+    "file": "coi_stuck_010_annual",
+    "label": "valve stuck 10%",
+    "naive_channels": "rules+rate",
+    "adjudicated_deployed_channels": "rules",
+    "detected": true
+   },
+   {
+    "file": "coi_stuck_025_annual",
+    "label": "valve stuck 25%",
+    "naive_channels": "rules+rate",
+    "adjudicated_deployed_channels": "rules",
+    "detected": true
+   },
+   {
+    "file": "coi_stuck_050_annual",
+    "label": "valve stuck 50%",
+    "naive_channels": "rules+rate",
+    "adjudicated_deployed_channels": "rules",
+    "detected": true
+   },
+   {
+    "file": "coi_stuck_075_annual",
+    "label": "valve stuck 75%",
+    "naive_channels": "rules+rate",
+    "adjudicated_deployed_channels": "rules",
+    "detected": true
+   },
+   {
+    "file": "coi_leakage_010_annual",
+    "label": "valve leaking",
+    "naive_channels": "rules+rate",
+    "adjudicated_deployed_channels": "rules",
+    "detected": true
+   },
+   {
+    "file": "coi_bias_-4_annual",
+    "label": "SA sensor bias -4C",
+    "naive_channels": "resid+rate",
+    "adjudicated_deployed_channels": "resid",
+    "detected": true
+   },
+   {
+    "file": "coi_bias_-2_annual",
+    "label": "SA sensor bias -2C",
+    "naive_channels": "resid",
+    "adjudicated_deployed_channels": "resid",
+    "detected": true
+   },
+   {
+    "file": "coi_bias_2_annual",
+    "label": "SA sensor bias +2C",
+    "naive_channels": "resid",
+    "adjudicated_deployed_channels": "resid",
+    "detected": true
+   },
+   {
+    "file": "coi_bias_4_annual",
+    "label": "SA sensor bias +4C",
+    "naive_channels": "resid",
+    "adjudicated_deployed_channels": "resid",
+    "detected": true
+   },
+   {
+    "file": "oa_bias_4_annual",
+    "label": "OA sensor bias (controller-side)",
+    "naive_channels": "resid",
+    "adjudicated_deployed_channels": null,
+    "detected": false
+   }
+  ]
+ },
+ "fpu_homogeneity": {
+  "pfpu": {
+   "max_scheduled_occupancy_daydiff_min": 0.0,
+   "max_night_cycle_daydiff_min_fault_responsive": 1201.0,
+   "damper_floor_mismatches": {},
+   "healthy_band": [
+    0.6,
+    2.17
+   ],
+   "rmtemp_bias_residual_medians": {
+    "PFPU_SensorBias_RMTEMP_+2C": 2.16,
+    "PFPU_SensorBias_RMTEMP_-2C": 2.16
+   },
+   "rmtemp_medians_inside_band": {
+    "PFPU_SensorBias_RMTEMP_+2C": true,
+    "PFPU_SensorBias_RMTEMP_-2C": true
+   },
+   "instrument_note": "schedule leg compares SYS_CTL==1 only; night-cycle (==2) is fault-responsive and reported separately; E4-excluded file skipped (first-run F-X11.d firing was this conflation \u2014 diagnosed and corrected)"
+  },
+  "sfpu": {
+   "max_scheduled_occupancy_daydiff_min": 0.0,
+   "max_night_cycle_daydiff_min_fault_responsive": 1230.0,
+   "damper_floor_mismatches": {},
+   "healthy_band": [
+    1.22,
+    1.72
+   ],
+   "rmtemp_bias_residual_medians": {
+    "SFPU_SensorBias_RMTEMP_+2C": 1.42
+   },
+   "rmtemp_medians_inside_band": {
+    "SFPU_SensorBias_RMTEMP_+2C": true
+   },
+   "instrument_note": "schedule leg compares SYS_CTL==1 only; night-cycle (==2) is fault-responsive and reported separately; E4-excluded file skipped (first-run F-X11.d firing was this conflation \u2014 diagnosed and corrected)"
+  }
+ },
+ "falsifiers_fired": [],
+ "verdict": "ADJUDICATED"
+}

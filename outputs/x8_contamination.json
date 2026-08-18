@@ -1,0 +1,139 @@
+{
+ "pre_registration": "PHASE8_PLAN.md @ 65fe3b8",
+ "baseline": {
+  "band": [
+   0.5263,
+   1.3721
+  ],
+  "coverage": {
+   "coi_bias_-4_annual": "164/164",
+   "coi_bias_-2_annual": "164/164",
+   "coi_bias_2_annual": "139/139",
+   "coi_bias_4_annual": "137/137"
+  },
+  "holdout_fp": 0
+ },
+ "runs": [
+  {
+   "source": "worst_coi_bias_-4",
+   "k": 0.02,
+   "n_contaminated": 5,
+   "band": [
+    -7.1985,
+    1.3721
+   ],
+   "band_width": 8.5705,
+   "band_width_baseline": 0.8458,
+   "coverage": {
+    "coi_bias_-4_annual": "0/164",
+    "coi_bias_-2_annual": "0/164",
+    "coi_bias_2_annual": "139/139",
+    "coi_bias_4_annual": "137/137"
+   },
+   "holdout_fp": 0,
+   "freq_keys_widened": 0,
+   "contaminated_days_with_signature_events": 0
+  },
+  {
+   "source": "worst_coi_bias_-4",
+   "k": 0.05,
+   "n_contaminated": 13,
+   "band": [
+    -7.1985,
+    1.3721
+   ],
+   "band_width": 8.5705,
+   "band_width_baseline": 0.8458,
+   "coverage": {
+    "coi_bias_-4_annual": "0/164",
+    "coi_bias_-2_annual": "0/164",
+    "coi_bias_2_annual": "139/139",
+    "coi_bias_4_annual": "137/137"
+   },
+   "holdout_fp": 0,
+   "freq_keys_widened": 0,
+   "contaminated_days_with_signature_events": 0
+  },
+  {
+   "source": "worst_coi_bias_-4",
+   "k": 0.1,
+   "n_contaminated": 27,
+   "band": [
+    -7.2266,
+    1.3721
+   ],
+   "band_width": 8.5987,
+   "band_width_baseline": 0.8458,
+   "coverage": {
+    "coi_bias_-4_annual": "0/164",
+    "coi_bias_-2_annual": "0/164",
+    "coi_bias_2_annual": "139/139",
+    "coi_bias_4_annual": "137/137"
+   },
+   "holdout_fp": 0,
+   "freq_keys_widened": 0,
+   "contaminated_days_with_signature_events": 0
+  },
+  {
+   "source": "mild_damper_stuck_010",
+   "k": 0.02,
+   "n_contaminated": 5,
+   "band": [
+    0.5263,
+    1.3721
+   ],
+   "band_width": 0.8458,
+   "band_width_baseline": 0.8458,
+   "coverage": {
+    "coi_bias_-4_annual": "164/164",
+    "coi_bias_-2_annual": "164/164",
+    "coi_bias_2_annual": "139/139",
+    "coi_bias_4_annual": "137/137"
+   },
+   "holdout_fp": 0,
+   "freq_keys_widened": 0,
+   "contaminated_days_with_signature_events": 5
+  },
+  {
+   "source": "mild_damper_stuck_010",
+   "k": 0.05,
+   "n_contaminated": 13,
+   "band": [
+    0.5263,
+    1.3721
+   ],
+   "band_width": 0.8458,
+   "band_width_baseline": 0.8458,
+   "coverage": {
+    "coi_bias_-4_annual": "164/164",
+    "coi_bias_-2_annual": "164/164",
+    "coi_bias_2_annual": "139/139",
+    "coi_bias_4_annual": "137/137"
+   },
+   "holdout_fp": 0,
+   "freq_keys_widened": 0,
+   "contaminated_days_with_signature_events": 13
+  },
+  {
+   "source": "mild_damper_stuck_010",
+   "k": 0.1,
+   "n_contaminated": 27,
+   "band": [
+    0.5263,
+    1.3721
+   ],
+   "band_width": 0.8458,
+   "band_width_baseline": 0.8458,
+   "coverage": {
+    "coi_bias_-4_annual": "164/164",
+    "coi_bias_-2_annual": "164/164",
+    "coi_bias_2_annual": "139/139",
+    "coi_bias_4_annual": "137/137"
+   },
+   "holdout_fp": 0,
+   "freq_keys_widened": 0,
+   "contaminated_days_with_signature_events": 27
+  }
+ ],
+ "falsifiers_fired": []
+}

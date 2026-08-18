@@ -112,12 +112,29 @@ hit the ceiling; per-day autocorrelation caveat standard.
 **Falsifier F-X5.a:** any ladder significantly anti-monotone → report as
 a finding against the dose-response narrative.
 
-## X7 — decision deferred to after X8
+## X7 — 15-min downsample (pre-registration appended 2026-08-18, before running)
 
-If wall-clock permits after X11 + X8 + X5 and their audit: 15-min
-downsample, 3 healthy years + one fault per family, rules/resid/freq
-channels only. Otherwise the limitations paragraph carries the
-discretization argument (event abstraction + sustained-minutes).
+Capacity permits; running after X5. **Procedure** (`scripts/x7_downsample.py`
+→ `outputs/x7_downsample.json`): take every 15th row (data is 1-min) of
+each healthy year and one fault file per family; recompute rules
+(signature-event days), residual (band recalibrated ON the 15-min data,
+train-only, same floors), and frequency (bands rebuilt) — no model/device
+re-discovery (scoped out, stated). Compare per-scenario day-coverage
+against the 1-min artifacts.
+
+**Pre-registered expectations:**
+- H-X7.1: healthy silence preserved at 15-min (0 signature days on all
+  three healthy years).
+- H-X7.2: rules fault coverage within 10% of the 1-min day counts
+  (sustained_min thresholds are minute-denominated and interval-aware).
+- H-X7.3: residual coverage of the bias families ≈ unchanged (daily
+  medians are robust to 15× thinning); band position within 0.2 °F.
+
+**Falsifiers:**
+- F-X7.a: any healthy year gains signature days at 15-min (rules channel
+  not sampling-robust → transfer claim scoped to 1-min data).
+- F-X7.b: any family's coverage drops > 25% → that channel's portability
+  claim carries a sampling-rate caveat.
 
 ## Order and audit
 

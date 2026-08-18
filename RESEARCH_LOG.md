@@ -138,6 +138,27 @@ threats-to-validity section, pre-answered.
   units/roles from all fault files — any ML baseline fed those columns
   scores file identity. Found by auditing OUR OWN baseline.
 
+### Phase-5 additions (L22, D8-D9)
+
+| # | Gap | Root cause | Fix + standing rule |
+|---|-----|-----------|---------------------|
+| L22 | L6 and the L16 pattern BOTH recurred in Phase 5 (event-log day universe; point-estimate cold-start gate) | Rules documented but not mechanized | Raw-calendar universes via a shared helper; CP-upper gating standard. **Rule: a lesson isn't closed until a helper/test ENFORCES it — documentation alone decays.** |
+
+- **D8. The reversal probe:** reversing every trace and re-scoring certifies
+  in one number whether a discovered net encodes order at all. Our three
+  models split cleanly (SDAHU 0.886→0.553; FPU nets identical to 3-4
+  decimals). Cheap, decisive, reusable — and it converted a mushy causal
+  claim ("alphabet complexity") into demonstrated facts.
+- **D9. The grammar geometry:** no symmetric clades — a tight FPU family
+  (1-3% cross-violations, 0.58 profile distance) with SDAHU as a
+  low-activity dialect NESTED in PFPU's count space (the 1.00 rejection was
+  alphabet-presence artifact; shared-alphabet control collapsed it to
+  0.00), behaviourally separated in 3 of 4 directional cells. The
+  cross-system order finding: FPU logs beat their shuffles on the SDAHU
+  net (+0.15/+0.18, 99% of days) — the shared start/stop grammar, above a
+  configuration-model null. H-CS failed its pre-registered falsifier
+  (CP-gated 0-1 detections per rotation): portability stays config-only.
+
 ## Part III — Why these gaps kept appearing (the honest meta-analysis)
 
 1. **Simulation flatters.** Noise-free EnergyPlus years make 0-FP thresholds

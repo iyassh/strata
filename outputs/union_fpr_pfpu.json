@@ -1,0 +1,96 @@
+{
+ "system": "pfpu",
+ "healthy_file": "PFPU_FaultFree",
+ "holdout_days": 96,
+ "total_days": 365,
+ "channels": {
+  "rules": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "resid": {
+   "holdout_fp_days": 2,
+   "holdout_days": 96,
+   "full_year_days": 2,
+   "holdout_fp_dates": [
+    "2018-10-29",
+    "2018-12-24"
+   ]
+  },
+  "model": {
+   "holdout_fp_days": 1,
+   "holdout_days": 96,
+   "full_year_days": 2,
+   "holdout_fp_dates": [
+    "2018-11-29"
+   ]
+  },
+  "device": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "absence": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "freq": {
+   "holdout_fp_days": 1,
+   "holdout_days": 96,
+   "full_year_days": 1,
+   "holdout_fp_dates": [
+    "2018-11-29"
+   ]
+  },
+  "rate": {
+   "holdout_fp_days": 7,
+   "holdout_days": 96,
+   "full_year_days": 7,
+   "holdout_fp_dates": [
+    "2018-05-28",
+    "2018-05-29",
+    "2018-05-30",
+    "2018-05-31",
+    "2018-08-29",
+    "2018-08-30",
+    "2018-08-31"
+   ]
+  },
+  "osc": {
+   "holdout_fp_days": 2,
+   "holdout_days": 96,
+   "full_year_days": 2,
+   "holdout_fp_dates": [
+    "2018-01-28",
+    "2018-07-24"
+   ]
+  }
+ },
+ "union_all8": {
+  "holdout_fp_days": 12,
+  "rate": 0.125
+ },
+ "union_minus_rate": {
+  "holdout_fp_days": 5,
+  "rate": 0.052083333333333336
+ },
+ "detector_definition": "The STRATA detector = OR of the significance-gated channels {rules, residual, model, device, absence, freq, osc}; the seasonal rate channel is diagnostic-only (corroboration and explanation, never a lone alarm).",
+ "rate_demotion": {
+  "scenarios_with_rate_significant": [
+   {
+    "label": "VAVDMPRStuck 0%",
+    "channels": "rules+freq+rate+osc",
+    "ttd_days": 1,
+    "first_rate_day": "2018-02-04",
+    "rate_only_alarm_days": 25
+   }
+  ],
+  "violations": []
+ },
+ "caveat": "Healthy negatives are the calibration year's shared calendar holdout; no independent healthy negative exists on any LBNL system (D2). Per-day autocorrelation makes any binomial p on these counts optimistic."
+}

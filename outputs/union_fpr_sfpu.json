@@ -1,0 +1,121 @@
+{
+ "system": "sfpu",
+ "healthy_file": "SFPU_FaultFree",
+ "holdout_days": 96,
+ "total_days": 365,
+ "channels": {
+  "rules": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "resid": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "model": {
+   "holdout_fp_days": 1,
+   "holdout_days": 96,
+   "full_year_days": 2,
+   "holdout_fp_dates": [
+    "2018-11-29"
+   ]
+  },
+  "device": {
+   "holdout_fp_days": 3,
+   "holdout_days": 96,
+   "full_year_days": 12,
+   "holdout_fp_dates": [
+    "2018-01-25",
+    "2018-01-30",
+    "2018-12-28"
+   ]
+  },
+  "absence": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "freq": {
+   "holdout_fp_days": 1,
+   "holdout_days": 96,
+   "full_year_days": 1,
+   "holdout_fp_dates": [
+    "2018-11-29"
+   ]
+  },
+  "rate": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "osc": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  }
+ },
+ "union_all8": {
+  "holdout_fp_days": 4,
+  "rate": 0.041666666666666664
+ },
+ "union_minus_rate": {
+  "holdout_fp_days": 4,
+  "rate": 0.041666666666666664
+ },
+ "detector_definition": "The STRATA detector = OR of the significance-gated channels {rules, residual, model, device, absence, freq, osc}; the seasonal rate channel is diagnostic-only (corroboration and explanation, never a lone alarm).",
+ "rate_demotion": {
+  "scenarios_with_rate_significant": [
+   {
+    "label": "SensorBias VAVAirflow -200CFM",
+    "channels": "rules+resid+model+rate",
+    "ttd_days": 1,
+    "first_rate_day": "2018-01-30",
+    "rate_only_alarm_days": 80
+   },
+   {
+    "label": "SensorBias VAVAirflow -400CFM",
+    "channels": "rules+resid+model+device+rate+osc",
+    "ttd_days": 1,
+    "first_rate_day": "2018-01-30",
+    "rate_only_alarm_days": 72
+   },
+   {
+    "label": "VAVDMPRStuck 0%",
+    "channels": "rules+device+freq+rate+osc",
+    "ttd_days": 1,
+    "first_rate_day": "2018-05-29",
+    "rate_only_alarm_days": 3
+   },
+   {
+    "label": "VAVDMPRStuck 100%",
+    "channels": "rules+resid+model+rate+osc",
+    "ttd_days": 1,
+    "first_rate_day": "2018-01-30",
+    "rate_only_alarm_days": 59
+   },
+   {
+    "label": "VAVDMPRStuck 50%",
+    "channels": "rules+resid+model+rate",
+    "ttd_days": 1,
+    "first_rate_day": "2018-01-30",
+    "rate_only_alarm_days": 81
+   },
+   {
+    "label": "VAVDMPRStuck 80%",
+    "channels": "rules+resid+model+rate+osc",
+    "ttd_days": 1,
+    "first_rate_day": "2018-01-30",
+    "rate_only_alarm_days": 73
+   }
+  ],
+  "violations": []
+ },
+ "caveat": "Healthy negatives are the calibration year's shared calendar holdout; no independent healthy negative exists on any LBNL system (D2). Per-day autocorrelation makes any binomial p on these counts optimistic."
+}

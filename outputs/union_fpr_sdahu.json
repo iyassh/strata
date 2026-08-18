@@ -1,0 +1,130 @@
+{
+ "system": "sdahu",
+ "healthy_file": "AHU_annual",
+ "holdout_days": 96,
+ "total_days": 365,
+ "channels": {
+  "rules": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "resid": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "model": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 9,
+   "holdout_fp_dates": []
+  },
+  "device": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "absence": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  },
+  "freq": {
+   "holdout_fp_days": 1,
+   "holdout_days": 96,
+   "full_year_days": 1,
+   "holdout_fp_dates": [
+    "2018-10-31"
+   ]
+  },
+  "rate": {
+   "holdout_fp_days": 14,
+   "holdout_days": 96,
+   "full_year_days": 14,
+   "holdout_fp_dates": [
+    "2018-02-21",
+    "2018-03-26",
+    "2018-03-27",
+    "2018-03-28",
+    "2018-03-30",
+    "2018-03-31",
+    "2018-05-25",
+    "2018-05-26",
+    "2018-05-27",
+    "2018-05-30",
+    "2018-05-31",
+    "2018-12-28",
+    "2018-12-29",
+    "2018-12-30"
+   ]
+  },
+  "osc": {
+   "holdout_fp_days": 0,
+   "holdout_days": 96,
+   "full_year_days": 0,
+   "holdout_fp_dates": []
+  }
+ },
+ "union_all8": {
+  "holdout_fp_days": 15,
+  "rate": 0.15625
+ },
+ "union_minus_rate": {
+  "holdout_fp_days": 1,
+  "rate": 0.010416666666666666
+ },
+ "detector_definition": "The STRATA detector = OR of the significance-gated channels {rules, residual, model, device, absence, freq, osc}; the seasonal rate channel is diagnostic-only (corroboration and explanation, never a lone alarm).",
+ "rate_demotion": {
+  "scenarios_with_rate_significant": [
+   {
+    "label": "valve stuck 10%",
+    "channels": "rules+rate",
+    "ttd_days": 1,
+    "first_rate_day": "2018-02-02",
+    "rate_only_alarm_days": 0
+   },
+   {
+    "label": "valve stuck 25%",
+    "channels": "rules+rate",
+    "ttd_days": 1,
+    "first_rate_day": "2018-02-02",
+    "rate_only_alarm_days": 0
+   },
+   {
+    "label": "valve stuck 50%",
+    "channels": "rules+rate",
+    "ttd_days": 1,
+    "first_rate_day": "2018-02-02",
+    "rate_only_alarm_days": 0
+   },
+   {
+    "label": "valve stuck 75%",
+    "channels": "rules+rate",
+    "ttd_days": 1,
+    "first_rate_day": "2018-02-02",
+    "rate_only_alarm_days": 0
+   },
+   {
+    "label": "valve leaking",
+    "channels": "rules+rate",
+    "ttd_days": 1,
+    "first_rate_day": "2018-02-02",
+    "rate_only_alarm_days": 0
+   },
+   {
+    "label": "SA sensor bias -4C",
+    "channels": "resid+rate",
+    "ttd_days": 2,
+    "first_rate_day": "2018-02-05",
+    "rate_only_alarm_days": 116
+   }
+  ],
+  "violations": []
+ },
+ "caveat": "Healthy negatives are the calibration year's shared calendar holdout; no independent healthy negative exists on any LBNL system (D2). Per-day autocorrelation makes any binomial p on these counts optimistic."
+}

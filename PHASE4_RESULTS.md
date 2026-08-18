@@ -11,7 +11,8 @@ artifacts.
 | | SDAHU | PFPU | SFPU |
 |---|---|---|---|
 | meaningfully detected | **14/14** | **23/30** | **24/29** * |
-| median TTD (significant channels only) | 1–2 d | 1 d | 1 d |
+| median TTD (significant channels only) | 1 d | 1 d | 1 d |
+| TTD tail (full distribution in Part V addendum) | max 2 d | max 21 d | max 108 d |
 | healthy-year false-alarm days (rules) | 0 | 0 | 0 |
 
 \* SFPU denominator excludes SensorBias_RMTEMP_−2C (source file calendar-

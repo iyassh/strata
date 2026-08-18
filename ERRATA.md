@@ -5,7 +5,8 @@ Documented dataset-quality findings in the LBNL fault-detection datasets
 STRATA project's week-0 audits and phase audits. Each erratum states the
 affected files, the evidence with a recompute command, the consequence, and
 who it bites. Machine-readable evidence: `outputs/week0_audit.json`
-(gates 1–5; gate 5 = `sdahu_errata_evidence`).
+(gates 1–6; gate 5 = `sdahu_errata_evidence`, gate 6 =
+`sfpu_rotation_evidence`).
 
 These findings do not diminish the datasets — they remain the largest
 labeled HVAC fault corpus available — but any benchmark built on them
@@ -17,7 +18,9 @@ RESEARCH_LOG D2 ("erratum #1"); E2 (coi_leakage duplication) was previously
 unnumbered (noted in GAP_ANALYSIS G5); E3 = RESEARCH_LOG D7's "erratum #4"
 and the vault v2 revision's coi_leakage_050 note ("#3" — same phenomenon,
 first sighting); E4 = RESEARCH_LOG L10's rotated file ("erratum #2" in some
-lists). Cite this file, not the historical numbers.
+lists); E5 is new (Phase-7 hostile audit, no historical number). Cite this
+file, not the historical numbers. (Experiments from the v2 revision use the
+X-namespace — X1–X11 — to avoid collision with these E-tags.)
 
 ---
 
@@ -29,13 +32,25 @@ lists). Cite this file, not the historical numbers.
 - All four files are **byte-identical** (raw CSV MD5 `89b13704…`, parquet
   `63b857d7…`): one simulation run shipped under four severity labels. The
   ±2/±4 severity labels carry no information.
-- The recorded `OA_TEMP` tracks the healthy file's weather to within
-  0.33 °F (mean 0.02 °F) — nowhere near the labeled ±2–4 °F bias — while
-  behaviour diverges by degrees (MA_TEMP mean |Δ| 1.72 °F, SA_TEMP
-  2.10 °F). `OA_CFM` is bit-identical to healthy. A sensor-side bias would
-  appear in the recorded stream; it does not. **The bias was injected into
-  the controller's reading**, so the run behaves faulty while its sensor
-  data looks healthy.
+- **The labeled sensor-side bias is absent from the recorded stream**: the
+  recorded `OA_TEMP` tracks the healthy file's weather to within 0.33 °F
+  (mean 0.02 °F, signed mean ≈ 0, 38% exact zeros; the sub-degree residual
+  is intake-node flow feedback) — nowhere near ±2–4 °F — and the OA_TEMP
+  column is bit-identical across ALL fault files, so it carries no
+  fault-specific signal at all. Yet the run misbehaves: relative to other
+  fault families, oa_bias holds the cooling valve closed until ~2 °F
+  warmer outdoor conditions, leaving SA_TEMP ≈ 2.8 °F above setpoint on
+  ~2,000 occupied rows, while the 60 °F economizer lockout shows **no**
+  shift. (Caution on the degree-scale MA/SA divergence vs the healthy
+  file: most of it is the configuration-branch offset shared by every
+  fault file — see E5 — not this fault; the fault-specific signal is the
+  cooling-interlock shift above.)
+- **Mechanism, honestly bounded:** the evidence is consistent with a −2 °F
+  bias injected only into the cooling interlock's outdoor-air input
+  ("controller-side"), but is observationally indistinguishable from a
+  mislabeled cooling-lockout-setpoint fault. What is proven: the labeled
+  sensor bias is not in the data, the run is faulty, and the ±2/±4
+  labels are fiction.
 
 **Consequence:** the oa_bias runs are **fault runs, not healthy negatives**.
 Early in this project one oa_bias file was provisionally treated as an
@@ -70,10 +85,12 @@ scenarios; any severity-monotonicity analysis including this family.
 
 **Files:** `AHU_annual` (healthy) vs all fault files.
 
-**Evidence** (same gate): healthy `SA_SP` ≈ 402 (Pa-scale constant),
-`SA_SPSPT` ≈ 1.607; every fault file `SA_SP` ≈ 0.86 (inH₂O-scale),
-`SA_SPSPT` ≈ −400.25. First noticed on `coi_leakage_050` (vault v2
-revision note); the week-0-style recheck shows it holds healthy-vs-ALL-faults.
+**Evidence** (same gate): healthy `SA_SP` ≈ 402 Pa-scale (varying over a
+~9 Pa range), `SA_SPSPT` exactly constant 1.607460; **every one of the 20
+fault files** has `SA_SP` on the inH₂O scale (means 0.84–0.97) and
+`SA_SPSPT` exactly constant −400.252530. Zero overlap — either column
+alone separates healthy from fault by provenance. First noticed on
+`coi_leakage_050` (vault v2 revision note); verified healthy-vs-ALL-faults.
 
 **Consequence:** any data-driven model fed these columns separates healthy
 from fault **by file provenance**, not by fault physics. Our own PCA-SPE
@@ -90,10 +107,12 @@ be read with this in mind.
 
 **Files:** `SFPU_SensorBias_RMTEMP_-2C.csv`.
 
-**Evidence:** the raw file's rows are date-rotated relative to every other
-SFPU file (found by the week-0 monotonicity/calendar-identity gate:
-`uv run python scripts/02_week0_audit.py mono`; conversion sorts and
-asserts — see `scripts/01_convert_fpu.py`). `RESEARCH_LOG.md` L10.
+**Evidence:** the raw file is a pure rotation by exactly 2,880 rows
+(2 days): identical timestamp SET to FaultFree, non-monotonic with exactly
+one wrap point, first row 2018-01-03 00:00. Machine evidence:
+`uv run python scripts/02_week0_audit.py rotation` (gate 6 — reads the RAW
+csv; the parquet gates cannot exhibit the defect because conversion sorts,
+see `scripts/01_convert_fpu.py`). `RESEARCH_LOG.md` L10.
 
 **Consequence:** naive positional (row-index) comparison against the
 healthy file misaligns every timestamp. We sort on conversion, enforce
@@ -104,16 +123,48 @@ calendar identity, and **exclude the scenario from scoring** (marked
 **Who it bites:** any pipeline that aligns files positionally rather than
 by timestamp; any SFPU scenario count of 30.
 
+## Erratum E5 — SDAHU healthy file simulated on a different configuration branch than every fault file
+
+*(Found by the Phase-7 hostile audit, 2026-08-18, while attacking E1's
+evidence.)*
+
+**Files:** `AHU_annual` (healthy) vs all 20 fault files.
+
+**Evidence** (`uv run python scripts/02_week0_audit.py sdahu`,
+`config_branch` block): during occupied hours (SF_CS > 0.5) the healthy
+file's OA damper minimum is **0.000**; every fault file floors at exactly
+**0.100** (the three damper_stuck files at 0.25/0.75/1.0 sit at their stuck
+value above the floor). Occupied-row counts also differ materially
+(healthy 303,703; faults 163,186–351,441 — different fan schedules). The
+healthy run used a different minimum-outdoor-air-damper policy (and
+schedule settings) than the fault runs.
+
+**Consequence:** healthy-vs-fault comparisons on SDAHU carry a
+**configuration-branch offset on top of the fault**. Most of the
+degree-scale MA/SA divergence quoted against the healthy file (E1) is this
+branch offset — fault-vs-fault cross-family divergence is ~0.05–0.14 °F.
+Any healthy-trained detector on SDAHU (ours included) may partially detect
+branch provenance rather than fault physics; results on SDAHU should be
+read with this caveat, and cross-checked on the FPU systems (whose healthy
+and fault files share one branch). **A targeted sensitivity check (does
+any STRATA detection change if the branch-signature columns are floored to
+match?) is queued as X11 in MASTER_PLAN Phase 8.**
+
+**Who it bites:** every method — classical, ML, or ours — trained on
+`AHU_annual` and scored on the fault files. This erratum bites our own
+benchmark and we say so.
+
 ---
 
 ## Handling summary (what this repo does)
 
 | Erratum | Mitigation in this repo |
 |---|---|
-| E1 | oa_bias = ONE fault scenario, relabeled controller-side; never a negative |
+| E1 | oa_bias = ONE fault scenario, relabeled as a fault; never a negative |
 | E2 | coi_leakage = ONE scenario in `scenarios.yaml` |
 | E3 | `ERRATUM_COLS` dropped in baselines; STRATA configs never mapped them |
 | E4 | sort-on-convert + calendar gate + `exclude: true` |
+| E5 | disclosed; branch-sensitivity check queued (X11); FPU systems unaffected |
 
 Week-0 gate battery (MD5, zone ground truth, monotonicity/calendar, TTL
 coverage, errata evidence): `scripts/02_week0_audit.py` — reusable on any

@@ -24,6 +24,9 @@ DST.mkdir(parents=True, exist_ok=True)
 
 def main() -> None:
     csvs = sorted(SRC.glob("*.csv"))
+    if not csvs:
+        sys.exit(f"ERROR: no CSVs found under {SRC} — set STRATA_SDAHU_RAW or "
+                 f"pass the source directory as the first argument (REPRODUCING.md §3)")
     print(f"Converting {len(csvs)} CSV files from {SRC}")
     for csv in csvs:
         out = DST / (csv.stem + ".parquet")

@@ -31,6 +31,9 @@ def main() -> None:
         dst = Path(f"data/processed/{system}")
         dst.mkdir(parents=True, exist_ok=True)
         csvs = sorted(src.glob("*.csv"))
+        if not csvs:
+            sys.exit(f"ERROR: no CSVs found under {src} — set STRATA_FPU_RAW or "
+                     f"pass the root directory as the first argument (REPRODUCING.md §3)")
         print(f"[{system}] converting {len(csvs)} CSVs from {src}")
         for csv in csvs:
             out = dst / (csv.stem + ".parquet")

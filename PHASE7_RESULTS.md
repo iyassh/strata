@@ -68,6 +68,46 @@ v1 quick-start demo as legacy.
   0.066%** (SDAHU/PFPU/SFPU) — of all alarm-days raised, fewer than 1 in
   1000 are false, with the exposure asymmetry stated in the artifact.
 
+## Hostile-audit fixes (2026-08-18, applied post-fb80099)
+
+The audit verdict was "NOT paper-citable as committed" — arithmetic all
+sound (every number reproduced, several byte-identically), but eight
+required fixes. All applied:
+
+1. **E1 mechanism reworded**: "bias injected into the controller's
+   reading" demoted to "consistent with a controller-side injection
+   confined to the cooling interlock; a mislabeled cooling-lockout fault
+   cannot be excluded." The vacuous OA_CFM leg (a constant column) is
+   descoped; the degree-scale MA/SA divergence is re-attributed to E5.
+2. **NEW ERRATUM E5** (found by the audit attacking E1): the healthy SDAHU
+   file was simulated on a different configuration branch than every fault
+   file (occupied OA-damper floor 0.000 vs exactly 0.100; different fan
+   schedules). Verified across all 20 fault files; evidence in gate 5's
+   `config_branch` block. It bites every healthy-trained SDAHU evaluation
+   including ours — branch-sensitivity check queued as X11 (Phase 8).
+   Fault-vs-fault cross-family divergence is ~0.05–0.14 °F vs degrees
+   against healthy: most healthy-vs-fault "behaviour divergence" was
+   branch, not fault.
+3. **Gate 6 added** (E4 raw-rotation evidence: set-identical timestamps,
+   1 wrap, starts Jan 3) — E4 now has machine evidence; the previously
+   cited `mono` gate could never exhibit the defect (conversion sorts).
+4. **8 missed stale locations fixed**: gate-5 docstring (still asserted
+   the falsified "bit-identical" claim!), PHASE4 median TTD row + tail
+   row, PHASE3B banner, PHASE3C marker, RESEARCH_LOG D2/D3 in-place
+   corrections, GAP_ANALYSIS G6 + F1 scope notes, DAYLOG top banner.
+   MASTER_PLAN statuses updated (S1–S2/S5/S7–S11 done).
+5. **Experiment tags renamed E→X** (X1–X11) repo-wide, ending the
+   collision with ERRATA E-tags; stats.py's third "audit E1" namespace
+   removed.
+6. **Guards de-tautologized**: crywolf TP and coverage `mapped` are now
+   RECOMPUTED from upstream sources in the tests; E5 + gate-6 guards
+   added (94 tests passing).
+7. **Converters fail loudly** on an empty source glob (was a silent no-op
+   printing "Converting 0 CSV files").
+8. **Cry-wolf denominators** ship in the artifact and print
+   (FP 1/96 healthy days vs TP 3886/4891 fault-scenario days, etc.);
+   definition text forbids quoting the ratio without them.
+
 ## Ledger
 
 - **L26**: evidence packaging is itself an audit — turning the narrated
@@ -75,3 +115,14 @@ v1 quick-start demo as legacy.
   ("bit-identical") while strengthening the conclusion (the labeled bias
   is absent from the recorded stream). Every claim promoted into a citable
   document must be recomputed on promotion, not copied.
+- **L27** (from the hostile audit): a "make the record true" pass is
+  itself a record that can be stale — the sweep missed 8 locations, one
+  INSIDE the function computing the correction, and left the master plan
+  stale about itself. Staleness sweeps need a grep-list of the retired
+  numbers ("17/30", "38–45%", "51/60", "bit-identical", …) run over the
+  WHOLE repo, docs and code comments alike, not a curated file list.
+- **L28**: healthy-vs-fault divergence is only fault evidence after a
+  fault-vs-fault control — E5 hid for six phases because every comparison
+  ran against the healthy file; one cross-family diff (0.05 °F vs
+  degrees) exposed the branch offset immediately. The control is now part
+  of the week-0 battery's logic.

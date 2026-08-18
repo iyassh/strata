@@ -59,7 +59,7 @@ print(f"PCA strict holdout FP: {base['pca_holdout_fp_strict']} "
       f"(vs 99th-pct {base['pca_holdout_fp']}) — strict matches our calibration style")
 
 # Q1: marginal contribution of freq/rate over rules — tested against the
-# CHANNELS' OWN holdout noise rate (audit E1: the c=0 "McNemar" was a sign
+# CHANNELS' OWN holdout noise rate (Phase-4 audit fix: the c=0 "McNemar" was a sign
 # test against an impossible 50/50 null; any 11 noise days earned a star).
 fq = bench.get("frequency") or {}
 u_fp = (fq.get("unit_holdout_fp") or [0, 1])

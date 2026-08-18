@@ -1,5 +1,9 @@
 # Phase 3b Results — Cross-System Benchmark (2026-08-10, rev 2 post-audit)
 
+> **SUPERSEDED (banner added 2026-08-18): the 17/30 and 18/30 scorecards
+> below predate Phase 4's channels; v12 = PFPU 23/30, SFPU 24/29. Median
+> TTD is 1 day. Quote `benchmark_v6_*.json` / RESEARCH_LOG Part V addendum.**
+
 Rev 2 supersedes the same-day rev 1 after a hostile audit of the results
 (two agents + recomputation from raw data). Every change made the numbers
 smaller and the claims harder. The audit record: see the "audit corrections"
@@ -61,7 +65,7 @@ rule can express." It is: **the discovered model found the load-bearing
 healthy rhythm unsupervised — nobody had to know, in advance, that "AHU
 heating runs daily" was the invariant a zone damper fault would break.**
 The rule exists only after the model showed where to look. (The matched
-rule becomes a permanent E2 ablation arm in Phase 4.)
+rule becomes a permanent X2 ablation arm in Phase 4.)
 
 **The PFPU contrast, corrected:** the fault couples into PFPU heating too
 (healthy 166 heating-days → 90–92 under fault) — the earlier "parallel

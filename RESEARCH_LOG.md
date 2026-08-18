@@ -31,9 +31,9 @@ Companion docs: `GAP_ANALYSIS_AUG2026.md` (gaps G1–G11), `PHASE1_RESULTS.md`,
 
 ### D2. The oa_bias relabel, overturned twice
 - **Found:** LBNL's four oa_bias files are byte-identical to each other and the
-  logged OA_TEMP matches healthy to 2e-5 °F — so v1 relabeled them "healthy-like."
+  logged OA_TEMP matches healthy to 2e-5 °F *[correction 2026-08-18: mean |Δ| is 0.02 °F, max 0.33 °F — see ERRATA.md E1; conclusion unchanged]* — so v1 relabeled them "healthy-like."
   Then the blind residual channel "false-alarmed" on 148/303 days of that file —
-  which forced a re-examination: under bit-identical weather inputs, the building
+  which forced a re-examination: with the labeled bias absent from the recorded stream *[was "bit-identical weather" — falsified by gate 5, see ERRATA.md E1/E5: much of the divergence vs healthy is the config-branch offset]*, the building
   BEHAVES differently (MA/SA/RA correlations 0.78–0.84, damper corr 0.91). Verdict:
   it is a real fault run with a CONTROLLER-SIDE OA bias — the fault is applied to
   what the controller reads and never appears in the logged column.
@@ -49,15 +49,15 @@ Companion docs: `GAP_ANALYSIS_AUG2026.md` (gaps G1–G11), `PHASE1_RESULTS.md`,
   be detections.
 
 ### D3. Physics windows, not recall ceilings
-- **Found:** sensor-bias recall looked like "38–45%" until decomposed: detection
+- **Found:** sensor-bias recall looked like "38–45%" *[v12: 39–47%]* until decomposed: detection
   windows (coil off + zone occupied, ≥120 min) exist on ~40–45% of days in this
   climate, and the residual rule detects on essentially every window day
-  (conditional recall ≈98–100%).
+  (conditional recall ≈98–100% *[v12: measured 100% — 164/164 ×2, 139/139, 137/137, 148/148]*).
 - **Why:** the residual is only physics-bound when no control loop is hiding it;
   summer all-day cooling gives no window. The fault itself changes window
   prevalence (bias alters coil duty) — explaining the −bias > +bias asymmetry.
 - **Fix:** report window prevalence × window-conditional recall, never pooled
-  recall; TTD as the operational metric (median 1–2 days).
+  recall; TTD as the operational metric (median 1 day; tails in the Part V addendum).
 - **Paper value:** an evaluation-methodology point: for gated detectors, pooled
   recall confounds climate with capability.
 
@@ -166,6 +166,14 @@ threats-to-validity section, pre-answered.
 | L23 | No artifact measured the OR of all channels on healthy data; naive union false-alarmed 15.6% of SDAHU holdout days while the docs implied 0 | Each channel calibrated alone; nobody owned the composite | `union_fpr.py` + regression guards; rate channel demoted to diagnostic-only (verified zero scorecard/TTD cost). **Rule: per-channel FP floors do not compose — the union is a first-class, tested artifact.** |
 | L24 | Model/device "holdout FP" rows are the calibration target (~fpr_quantile) by construction — their thresholds are quantile-fit ON the holdout days being reported | One day-set doing two jobs (set threshold AND certify it) | Provenance labels in artifact + table; caveat sentence standard. **Rule: the same data cannot both set a threshold and certify it; label calibration-target rows or three-way split (discover/calibrate/test — toolkit facade, Phase 9).** |
 | L25 | First demotion-verification check accepted coverage from insignificant channels/devices — weaker than the property it claimed to verify (property held anyway, proven by the audit's strict recheck) | Guard written to pass the current data, not to enforce the stated property | Significance-gated, device-pessimistic check shipped; absence-dependence flags for manual review. **Rule: a guard must enforce the property at the strictness the CLAIM states — guards are part of the result.** |
+
+### Phase-7 additions (L26-L28, erratum E5)
+
+| # | Gap | Root cause | Fix + standing rule |
+|---|-----|-----------|---------------------|
+| L26 | Promoting the narrated oa_bias claim into ERRATA.md falsified its strongest wording ("OA_TEMP bit-identical" — actually max 0.33 °F node feedback) while STRENGTHENING the conclusion | Claims copied between docs without recomputation | Gate-5 artifact computes the real stats. **Rule: every claim promoted into a citable document is recomputed on promotion, never copied.** |
+| L27 | The Phase-7 staleness sweep itself missed 8 stale locations — one inside the function computing the correction — and left MASTER_PLAN stale about itself | Curated file list instead of exhaustive search | Grep-list of retired numbers ("17/30", "38–45%", "51/60", "bit-identical", "1–2 days"…) over the WHOLE repo, code comments included. **Rule: a staleness sweep is defined by its search list, not its file list.** |
+| L28 | **Erratum E5** hid for six phases: the healthy SDAHU file is on a different config branch than every fault file (occupied damper floor 0.0 vs 0.1; different schedules) — healthy-vs-fault divergence partly measures BRANCH, not fault | Every comparison ran against the healthy file; no fault-vs-fault control existed | ERRATA.md E5 + gate-5 config_branch evidence; X11 branch-sensitivity check queued. **Rule: healthy-vs-fault divergence is fault evidence only after a fault-vs-fault control.** |
 
 ## Part III — Why these gaps kept appearing (the honest meta-analysis)
 

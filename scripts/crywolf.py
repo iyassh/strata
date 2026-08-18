@@ -35,14 +35,26 @@ for system in ("sdahu", "pfpu", "sfpu"):
         if not s["is_fault"] or s.get("excluded") or not s.get("meaningful_channels"):
             continue
         tp += len(s["flag_days"]["sig_union"]) - rate_only.get(s["label"], 0)
+    n_fault_days = sum(s["evaluable_days"] for s in b["scenarios"]
+                       if s["is_fault"] and not s.get("excluded")
+                       and s.get("meaningful_channels"))
     ratio = fp / (fp + tp) if (fp + tp) else 0.0
-    out[system] = {"fp_days_healthy_holdout": fp, "tp_alarm_days_fault_scenarios": tp,
+    out[system] = {"fp_days_healthy_holdout": fp,
+                   "healthy_holdout_days": u["holdout_days"],
+                   "tp_alarm_days_fault_scenarios": tp,
+                   "fault_scenario_days_observed": n_fault_days,
                    "cry_wolf_ratio": round(ratio, 5)}
-    print(f"[{system}] FP {fp} | TP {tp} | cry-wolf {ratio:.4%}")
+    print(f"[{system}] FP {fp}/{u['holdout_days']} healthy-holdout days | "
+          f"TP {tp} over {n_fault_days} fault-scenario days | cry-wolf {ratio:.4%}")
 
 out["definition"] = ("FP_days/(FP_days+TP_days) for the deployed detector "
                      "(significance-gated union, rate diagnostic-only); FP on the "
                      "96-day healthy holdout, TP across non-excluded detected "
-                     "fault scenarios' significant-union days minus rate-only days")
+                     "fault scenarios' significant-union days minus rate-only days. "
+                     "ALWAYS quote with both denominators: exposure is 96 healthy "
+                     "days vs thousands of fault-scenario days from 14-24 "
+                     "simultaneous year-long single-fault runs no real operator "
+                     "experiences at once — an operator-experience summary, not a "
+                     "symmetric error rate.")
 Path("outputs/crywolf.json").write_text(json.dumps(out, indent=1))
 print("wrote outputs/crywolf.json")

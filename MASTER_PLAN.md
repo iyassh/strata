@@ -29,17 +29,17 @@ Standing verdicts the plan builds on:
 
 | ID | Gap | Severity | Status |
 |----|-----|----------|--------|
-| S1 | **No joint/union FPR number anywhere** (promised as G9, "a claimable first"). Auditor computed it: naive 9-channel OR false-alarms 15/96 healthy days on SDAHU (15.6%), 12/96 PFPU, 4/96 SFPU. The seasonal **rate channel is the entire problem** (14 and 7 of those days); no scenario anywhere is carried solely by rate. Demoting rate to diagnostic-only → **1.0% / 5.2% / 4.2%** union at zero scorecard cost. | CRITICAL — flips the "0 false-alarm days" headline if a reviewer computes it first | Script drafted (scratchpad union_fpr.py); needs commit + section |
-| S2 | **No single "STRATA detector" definition** — paper currently reads as 9 detectors glued by per-scenario significance gates | CRITICAL (same fix as S1) | Open |
-| S3 | **E8 contamination experiment absent.** Web sweep: training-set contamination is a hot named 2025–26 topic at ICPM and attacks our core assumption ("what if the fault-free year isn't?"). Priority ABOVE E7 (reverses the strategist's initial ranking). Cheap version: inject k∈{2,5,10}% fault days into SDAHU train, rerun calibration + healthy silence, report threshold drift only | HIGH | Open |
-| S4 | **E7 noise/15-min downsample absent.** Deferrable with a citable argument (event abstraction + sustained-minutes discretize amplitude noise); do after E8 if capacity allows, else limitations paragraph | MEDIUM | Open |
-| S5 | **Stale numbers that will bite** if the paper is drafted from old docs: RESEARCH_LOG Part V frozen at Aug 10 ("PFPU 17/30"); GAP_ANALYSIS G5's "five identical logs" claim is FALSE under the current alphabet (true only for v1 alphabet — refutable from our own artifacts); ONBOARDING_LOG counts (48/35) vs commit-time recount (45/35) vs today (57/39); PHASE1 "18 unique model days" is 23 in v12; PHASE2_RESULTS superseded three ways (never quote directly); D3 "≈98–100%" is measured 100% (164/164 ×2, 139/139, 137/137, 148/148). **Post-Phase-6 reconciliation additions (2026-08-17):** (a) week-0 zone GT is **50 Zone S + 10 INDETERMINATE** in the artifact; DAYLOG/summaries say 51/9 — artifact wins; (b) "TTD 1–2 days" is only true as a MEDIAN — the honest distribution is SDAHU {1:9, 2:5}, PFPU {1:19, 4,11,15,21}, SFPU {1:19, 3,15,15,37,108}; always write "median TTD 1 day" with the tail stated; scope union_fpr.py's docstring phrase to rate-significant scenarios; (c) MR2=freq exact identity holds on BOTH FPU systems (SFPU 141=141 AND PFPU 206=206 — stronger than the doc's single example) and MR1 fires **231** healthy SDAHU days (only PFPU's 124 is documented); (d) PCA-strict head-to-head on comparable universes is a **dead heat: 61=61 total (14v13, 23v23, 24v25) with complementary misses** — sharper honest sentence than "comparable-to-better"; (e) residual denominators differ by design: benchmark's residual_holdout_fp n (124/121) is channel-day pairs summed over the 4 residual channels, union_fpr's exposure (36–41) is distinct days — label both or a reviewer sees a contradiction | HIGH (1 hour total) | Open |
-| S6 | **E5 severity monotonicity (Spearman ρ)** never computed; dose-response only narrated. ~30 lines over existing v12 flag_days per family ladder | MEDIUM | Open |
-| S7 | **Cry-wolf ratio** (FP_days/(FP+TP alarm days)) — derivable from artifacts, one number | LOW | Open |
+| S1 | **No joint/union FPR number anywhere** (promised as G9, "a claimable first"). Auditor computed it: naive 9-channel OR false-alarms 15/96 healthy days on SDAHU (15.6%), 12/96 PFPU, 4/96 SFPU. The seasonal **rate channel is the entire problem** (14 and 7 of those days); no scenario anywhere is carried solely by rate. Demoting rate to diagnostic-only → **1.0% / 5.2% / 4.2%** union at zero scorecard cost. | CRITICAL — flips the "0 false-alarm days" headline if a reviewer computes it first | ✅ DONE Phase 6 |
+| S2 | **No single "STRATA detector" definition** — paper currently reads as 9 detectors glued by per-scenario significance gates | CRITICAL (same fix as S1) | ✅ DONE Phase 6 |
+| S3 | **X8 contamination experiment absent.** Web sweep: training-set contamination is a hot named 2025–26 topic at ICPM and attacks our core assumption ("what if the fault-free year isn't?"). Priority ABOVE X7 (reverses the strategist's initial ranking). Cheap version: inject k∈{2,5,10}% fault days into SDAHU train, rerun calibration + healthy silence, report threshold drift only | HIGH | Open |
+| S4 | **X7 noise/15-min downsample absent.** Deferrable with a citable argument (event abstraction + sustained-minutes discretize amplitude noise); do after X8 if capacity allows, else limitations paragraph | MEDIUM | Open |
+| S5 | **Stale numbers that will bite** if the paper is drafted from old docs: RESEARCH_LOG Part V frozen at Aug 10 ("PFPU 17/30"); GAP_ANALYSIS G5's "five identical logs" claim is FALSE under the current alphabet (true only for v1 alphabet — refutable from our own artifacts); ONBOARDING_LOG counts (48/35) vs commit-time recount (45/35) vs today (57/39); PHASE1 "18 unique model days" is 23 in v12; PHASE2_RESULTS superseded three ways (never quote directly); D3 "≈98–100%" is measured 100% (164/164 ×2, 139/139, 137/137, 148/148). **Post-Phase-6 reconciliation additions (2026-08-17):** (a) week-0 zone GT is **50 Zone S + 10 INDETERMINATE** in the artifact; DAYLOG/summaries say 51/9 — artifact wins; (b) "TTD 1–2 days" is only true as a MEDIAN — the honest distribution is SDAHU {1:9, 2:5}, PFPU {1:19, 4,11,15,21}, SFPU {1:19, 3,15,15,37,108}; always write "median TTD 1 day" with the tail stated; scope union_fpr.py's docstring phrase to rate-significant scenarios; (c) MR2=freq exact identity holds on BOTH FPU systems (SFPU 141=141 AND PFPU 206=206 — stronger than the doc's single example) and MR1 fires **231** healthy SDAHU days (only PFPU's 124 is documented); (d) PCA-strict head-to-head on comparable universes is a **dead heat: 61=61 total (14v13, 23v23, 24v25) with complementary misses** — sharper honest sentence than "comparable-to-better"; (e) residual denominators differ by design: benchmark's residual_holdout_fp n (124/121) is channel-day pairs summed over the 4 residual channels, union_fpr's exposure (36–41) is distinct days — label both or a reviewer sees a contradiction | HIGH (1 hour total) | ✅ DONE Phase 7 (+ 8 audit-found locations fixed post-audit) |
+| S6 | **X5 severity monotonicity (Spearman ρ)** never computed; dose-response only narrated. ~30 lines over existing v12 flag_days per family ladder | MEDIUM | Open |
+| S7 | **Cry-wolf ratio** (FP_days/(FP+TP alarm days)) — derivable from artifacts, one number | LOW | ✅ DONE Phase 7 (crywolf.json) |
 | S8 | **SDAHU config missing `residual_min_band_width: 0.5`** (FPU configs have it; no numeric effect — SDAHU band is 0.846 wide — but breaks the "one margin policy" uniformity claim) | LOW (one line) | Open |
-| S9 | **Errata scattered, not citable**: 4 dataset errata live as fragments across GAP_ANALYSIS/RESEARCH_LOG/code comments/vault; erratum #3 (coi_leakage_050 SA_SP swap) is not in the repo at all; oa_bias byte-identity evidence narrated but stored nowhere as an artifact | HIGH as a contribution (docs claim "a dataset-quality contribution the community needs" without a citable object) | Open |
-| S10 | **Reproducibility broken for a stranger**: no dataset acquisition docs/DOIs; hardcoded absolute paths in convert scripts; data/ is a gitignored symlink into ~/Downloads/processheal; no runbook (00→01→02→benchmark×3→baselines×3→matched_rules×3→stats×3→grammar documented nowhere); make_figures.py dead (reads nonexistent benchmark_v2.json); the 3.4pp claim's v1 side (5.2%) lives in the OTHER repo | HIGH (and ironic — we cite the 72%-irreproducibility statistic) | Open |
-| S11 | **Sensor-coverage honesty list** now computed definitively: FPU 53/110 columns unmapped (incl. VAV_FAN_DP_* — the sensor PCA used to beat us on SFPU airside fouling), SDAHU 18/31 (incl. ZONE_TEMP_1..5, flow-balance CFMs). Zero cost — paste into honesty section | LOW as gap, HIGH as honesty ammunition | Computed; needs placement |
+| S9 | **Errata scattered, not citable**: 4 dataset errata live as fragments across GAP_ANALYSIS/RESEARCH_LOG/code comments/vault; erratum #3 (coi_leakage_050 SA_SP swap) is not in the repo at all; oa_bias byte-identity evidence narrated but stored nowhere as an artifact | HIGH as a contribution (docs claim "a dataset-quality contribution the community needs" without a citable object) | ✅ DONE Phase 7 (ERRATA.md E1–E5 + gates 5/6; E5 config-branch erratum NEW from the Phase-7 hostile audit) |
+| S10 | **Reproducibility broken for a stranger**: no dataset acquisition docs/DOIs; hardcoded absolute paths in convert scripts; data/ is a gitignored symlink into ~/Downloads/processheal; no runbook (00→01→02→benchmark×3→baselines×3→matched_rules×3→stats×3→grammar documented nowhere); make_figures.py dead (reads nonexistent benchmark_v2.json); the 3.4pp claim's v1 side (5.2%) lives in the OTHER repo | HIGH (and ironic — we cite the 72%-irreproducibility statistic) | ✅ DONE Phase 7 (REPRODUCING.md; env-var paths; v1 artifact imported; make_figures deleted) |
+| S11 | **Sensor-coverage honesty list** now computed definitively: FPU 53/110 columns unmapped (incl. VAV_FAN_DP_* — the sensor PCA used to beat us on SFPU airside fouling), SDAHU 18/31 (incl. ZONE_TEMP_1..5, flow-balance CFMs). Zero cost — paste into honesty section | LOW as gap, HIGH as honesty ammunition | ✅ DONE Phase 7 (sensor_coverage.json; artifact says 12/30 + 56/109 excl. Datetime) |
 | S12 | **Paper-text items** from the web sweep: terminology "fault-free/baseline" (not "healthy-only"); must-cite Vitale et al. JMS 2026 (closest rival pipeline — differentiate explicitly), vanden Broucke artificial negative events (ancestor of our falsifiers), ICPM 2025 "Hypothesis Testing for Processes"; "stratified" is safe, "hierarchical" is taken; reversal probe is claimably novel (no precedent found) | HIGH for review survival | Open |
 | S13 | Never-built physics (flow_balance, fan cmd-vs-status, zone-comfort residual) and the heterogeneity stress test | LOW — honesty-table lines, don't build | Document only |
 
@@ -51,7 +51,7 @@ Standing verdicts the plan builds on:
 | T2 | **pm4py is AGPL** — a hard dependency makes the whole toolkit effectively AGPL (poison for consultant/vendor adoption). Must become optional extra (`strata[pm4py]`) or be replaced natively for our restricted event-log class. ARCHITECTURAL — decide before repo goes public | BLOCKING |
 | T3 | **The real detector exists only inside scripts/benchmark.py** (480 lines welded to fault manifests, ground truth, data/ symlink). All significance gates — the scientific heart — are script-local, un-importable, untested. Needs a `StrataDetector` facade: `load_config → fit(healthy_df) → score(new_df) → report()` (~3–5 days; channel modules need almost no change) | BLOCKING |
 | T4 | **No fault-free-only entry point**: shipped `processheal run` CLI is the stale v1 single-channel pipeline (also demands a --faulty file and equipment.ttl); processheal-web crashes at import on a fresh clone | BLOCKING |
-| T5 | **Data ingestion**: convert scripts hardcode /Users/yassh/... paths; data/ dangling symlink on fresh clones; no tz handling (naive dt.date); needs `strata ingest` | BLOCKING |
+| T5 | **Data ingestion**: convert scripts default to /Users/yassh/... paths (env-var overridable since Phase 7, but they no-op silently on empty source dirs); data/ dangling symlink on fresh clones; no tz handling (naive dt.date); needs `strata ingest` | BLOCKING |
 | T6 | **Zero config validation**; typo'd sensor silently disables a rule with no warning; `OCCUPIED` is a hardcoded mandatory canonical (oscillation.py:36); `supply_air_residual` name + `occ_signal` KeyError traps; **no units declared anywhere** (°C user copies °F thresholds → silent garbage) | HIGH |
 | T7 | **No config template/schema docs**: canonical-sensor vocabulary implicit across three configs; OCCUPIED 0/1/2 semantics buried in a comment; the SFPU-minutes onboarding story holds for strangers only with template + vocab + validate command | HIGH |
 | T8 | **LBNL leaks in src/**: io/loader.py reads raw LBNL column names bypassing sensors.yaml; web/app.py hardcodes lbnl_sdahu at import; grammar.py CANONICAL hardcodes 10 event names; devices.py zone-parsing assumes TU_<zone> naming; rate channel's validity caveat (shared simulated weather year) lives in research prose not user docs | MEDIUM |
@@ -114,7 +114,11 @@ toolkit facade so model/device FP becomes a measurement.)
    Exit: G9 delivered — the "first joint alarm-budget in building FDD"
    claim becomes real.
 
-### Phase 7 — Make the record true (S5, S9, S10, S11, S7)
+### Phase 7 — Make the record true (S5, S7, S9, S10, S11) — ✅ DONE 2026-08-18
+(commit fb80099 + audit-fix commit; hostile-audited: E1 mechanism reworded,
+NEW erratum E5 (healthy file on a different config branch — occupied damper
+floor 0.0 vs 0.1), 8 missed stale locations fixed, experiment tags renamed
+E→X, guards strengthened. See PHASE7_RESULTS.md.)
 1. Staleness sweep: dated addendum to RESEARCH_LOG Part V; rescope
    G5 to "under the v1 event alphabet"; timestamp + recount
    ONBOARDING_LOG (at commit aa92970 vs today); banner on
@@ -134,13 +138,17 @@ toolkit facade so model/device FP becomes a measurement.)
    Exit: a stranger can clone, fetch data, and reproduce every quoted number.
 
 ### Phase 8 — The missing experiments (S3, S6, then S4)
-1. **E8 contamination** (priority per web sweep): inject k∈{2,5,10}%
+1. **X8 contamination** (priority per web sweep): inject k∈{2,5,10}%
    fault days into SDAHU training; rerun calibration + healthy
    silence ×3; report threshold drift and any FP-guarantee erosion.
    Pre-register expectations + falsifier before running (project law).
-2. **E5 severity Spearman ρ** over existing v12 flag_days
+2. **X5 severity Spearman ρ** over existing v12 flag_days
    (stuck 0–100%, leak 20/50/80, fouling grades) + autocorrelation caveat.
-3. **E7 15-min downsample** — only after E8, only if capacity: 3
+3. **X11 branch-sensitivity check (NEW, from ERRATA E5)**: does any
+   SDAHU detection change when the branch-signature columns (occupied
+   OA_DMPR floor) are harmonized between healthy and fault files? The
+   FPU systems (single branch) are the control.
+4. **X7 15-min downsample** — only after X8, only if capacity: 3
    healthy years + one fault per family, rules/resid/freq channels.
    Otherwise: limitations paragraph with the discretization argument.
    Exit: the two reviewer-anticipated experiments answered or honestly scoped.
@@ -211,7 +219,7 @@ toolkit facade so model/device FP becomes a measurement.)
 - **Brick auto-config** (`strata configure --brick site.ttl`) — the
   headline differentiator; map Brick hierarchy → three strata.
 - Native discovery/conformance core (drop pm4py entirely → clean MIT).
-- E10 external dataset (2025 Sci-Data AHU) — journal extension.
+- X10 external dataset (2025 Sci-Data AHU) — journal extension.
 - Multi-year/real-weather seasonal rate support; tz/DST test suite.
 - TRU deployment (WebCTRL CSV export path); VOLTTRON agent wrapper;
   open-fdd-style operator stack. SKIP: DFM (per feasibility study).

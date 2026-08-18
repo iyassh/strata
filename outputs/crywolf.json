@@ -1,18 +1,24 @@
 {
  "sdahu": {
   "fp_days_healthy_holdout": 1,
+  "healthy_holdout_days": 96,
   "tp_alarm_days_fault_scenarios": 3886,
+  "fault_scenario_days_observed": 4891,
   "cry_wolf_ratio": 0.00026
  },
  "pfpu": {
   "fp_days_healthy_holdout": 5,
+  "healthy_holdout_days": 96,
   "tp_alarm_days_fault_scenarios": 5991,
+  "fault_scenario_days_observed": 8395,
   "cry_wolf_ratio": 0.00083
  },
  "sfpu": {
   "fp_days_healthy_holdout": 4,
+  "healthy_holdout_days": 96,
   "tp_alarm_days_fault_scenarios": 6037,
+  "fault_scenario_days_observed": 8760,
   "cry_wolf_ratio": 0.00066
  },
- "definition": "FP_days/(FP_days+TP_days) for the deployed detector (significance-gated union, rate diagnostic-only); FP on the 96-day healthy holdout, TP across non-excluded detected fault scenarios' significant-union days minus rate-only days"
+ "definition": "FP_days/(FP_days+TP_days) for the deployed detector (significance-gated union, rate diagnostic-only); FP on the 96-day healthy holdout, TP across non-excluded detected fault scenarios' significant-union days minus rate-only days. ALWAYS quote with both denominators: exposure is 96 healthy days vs thousands of fault-scenario days from 14-24 simultaneous year-long single-fault runs no real operator experiences at once \u2014 an operator-experience summary, not a symmetric error rate."
 }

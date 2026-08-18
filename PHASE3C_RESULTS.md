@@ -81,6 +81,7 @@ a commit message and are superseded here.
 ## Standing verdicts after 3c
 
 - Scorecards: SDAHU 14/14 · PFPU 17/30 · SFPU 19/30 (noise-gated).
+  *[stale as of Phase 4 — v12: PFPU 23/30, SFPU 24/29; quote the addendum]*
 - The stratified thesis now has catches at BOTH discovered-model levels
   (unit: heating-rhythm absence; device: per-zone count deviations), each
   honest-sized by its falsifier, each feeding the same conclusion: the

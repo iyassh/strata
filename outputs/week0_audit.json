@@ -814,6 +814,64 @@
         "OA_DMPR": 0.0221
       },
       "note": "recorded OA_TEMP tracks healthy weather to within 0.33 F (mean 0.02) \u2014 nowhere near the labeled +/-2-4 F bias \u2014 while MA/SA behaviour diverges by degrees. A sensor-side bias would appear in the recorded stream; it does not. The bias therefore lives in the CONTROLLER's reading: the oa_bias run is a fault run, not a healthy negative (relabel saga, D2/F1). NOTE: the earlier prose claim 'OA_TEMP bit-identical to healthy' was IMPRECISE \u2014 the sub-0.33 F residual is intake-node flow feedback; the conclusion stands on the absence of the labeled bias."
+    },
+    "config_branch": {
+      "occupied_oa_dmpr_min": {
+        "AHU_annual": 0.0,
+        "coi_bias_-2_annual": 0.1,
+        "coi_bias_-4_annual": 0.1,
+        "coi_bias_2_annual": 0.1,
+        "coi_bias_4_annual": 0.1,
+        "coi_leakage_010_annual": 0.1,
+        "coi_leakage_025_annual": 0.1,
+        "coi_leakage_040_annual": 0.1,
+        "coi_leakage_050_annual": 0.1,
+        "coi_stuck_010_annual": 0.1,
+        "coi_stuck_025_annual": 0.1,
+        "coi_stuck_050_annual": 0.1,
+        "coi_stuck_075_annual": 0.1,
+        "damper_stuck_010_annual": 0.1,
+        "damper_stuck_025_annual": 0.25,
+        "damper_stuck_075_annual": 0.75,
+        "damper_stuck_100_annual_short": 1.0,
+        "oa_bias_-2_annual": 0.1,
+        "oa_bias_-4_annual": 0.1,
+        "oa_bias_2_annual": 0.1,
+        "oa_bias_4_annual": 0.1
+      },
+      "occupied_rows": {
+        "AHU_annual": 303703,
+        "coi_bias_-2_annual": 277137,
+        "coi_bias_-4_annual": 282799,
+        "coi_bias_2_annual": 277623,
+        "coi_bias_4_annual": 279828,
+        "coi_leakage_010_annual": 276890,
+        "coi_leakage_025_annual": 276890,
+        "coi_leakage_040_annual": 276890,
+        "coi_leakage_050_annual": 276890,
+        "coi_stuck_010_annual": 351441,
+        "coi_stuck_025_annual": 312772,
+        "coi_stuck_050_annual": 277970,
+        "coi_stuck_075_annual": 278699,
+        "damper_stuck_010_annual": 276877,
+        "damper_stuck_025_annual": 276826,
+        "damper_stuck_075_annual": 281717,
+        "damper_stuck_100_annual_short": 163186,
+        "oa_bias_-2_annual": 276844,
+        "oa_bias_-4_annual": 276844,
+        "oa_bias_2_annual": 276844,
+        "oa_bias_4_annual": 276844
+      },
+      "healthy_floor": 0.0,
+      "fault_floor_mode": 0.1,
+      "note": "healthy simulated with occupied min-OA-damper 0.0; every fault file floors at 0.1 (damper_stuck 025/075/100 sit at their stuck value above it). Healthy-vs-fault comparisons on SDAHU carry this branch offset on top of the fault."
     }
+  },
+  "sfpu_rotation_evidence": {
+    "timestamp_set_identical_to_faultfree": true,
+    "monotonic": false,
+    "wrap_points": 1,
+    "first_timestamp": "01/03/2018 00:00",
+    "faultfree_first_timestamp": "01/01/2018 00:00"
   }
 }

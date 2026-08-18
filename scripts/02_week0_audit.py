@@ -4,7 +4,7 @@ Three gates, all BEFORE any design decision touches FPU data:
 1. MD5 every raw CSV — the SDAHU lesson (byte-identical fault files shipped
    under different names; oa_bias relabel saga) makes this non-negotiable.
 2. Per-scenario zone-column diff vs FaultFree -> WHICH zones each fault
-   actually touches = the localization ground truth for E3. (Fault file
+   actually touches = the localization ground truth for X3 (zone localization). (Fault file
    names do not carry the zone; the data must say.)
 3. TTL-vs-CSV point-name coverage — every Brick point must exist as a CSV
    column and vice versa, or localization silently breaks.
@@ -63,14 +63,14 @@ def md5_gate() -> dict:
 
 
 def zone_ground_truth() -> dict:
-    """Which zone each fault was injected in (E3 ground truth), v2.
+    """Which zone each fault was injected in (X3 ground truth), v2.
 
     Pre-registered method (replaces the vacuous v1 whole-column binary diff):
     per zone, divergence = mean over that zone's own columns of
     mean(|fault - healthy|) / healthy column std (timestamp-ALIGNED, never
     positional — one raw file shipped date-rotated). The injected zone must
     lead the runner-up by >= MARGIN x; otherwise the scenario is recorded
-    INDETERMINATE (scored as such in E3, never force-labeled).
+    INDETERMINATE (scored as such in X3, never force-labeled).
     """
     MARGIN = 2.0
     print("\n== Gate 2 (v2): per-scenario zone ground truth ==")
@@ -144,19 +144,25 @@ def ttl_coverage() -> dict:
 
 
 def sdahu_evidence() -> dict:
-    """SDAHU dataset-errata evidence as an artifact (ERRATA.md #1, #2, #4).
+    """SDAHU dataset-errata evidence as an artifact (ERRATA.md E1, E2, E3, E5).
 
-    Phase 7: the errata were narrated across docs but the evidence lived
-    nowhere recomputable. This gate emits:
+    Phase 7 (+ hostile-audit fixes): the errata were narrated across docs
+    but the evidence lived nowhere recomputable. This gate emits:
       - MD5 of every raw CSV and processed parquet, with duplicate groups
-        (errata #1/#2: oa_bias x4 and coi_leakage x4 are one run each);
-      - healthy-vs-fault SA_SP / SA_SPSPT summary stats (erratum #4: units
-        and roles swapped between the healthy file and EVERY fault file —
-        any ML baseline fed these columns scores file provenance);
-      - the controller-side proof for oa_bias (erratum #1): weather input
-        OA_TEMP is bit-identical to healthy while behaviour columns
-        diverge, so the bias was injected in the controller, not the sensor
-        stream — there is no independent healthy negative run.
+        (E1/E2: oa_bias x4 and coi_leakage x4 are one run each);
+      - healthy-vs-fault SA_SP / SA_SPSPT summary stats (E3: units and
+        roles swapped between the healthy file and EVERY fault file — any
+        ML baseline fed these columns scores file provenance);
+      - the oa_bias evidence (E1): the labeled +/-2-4 F bias is ABSENT from
+        the recorded OA_TEMP (max |diff| 0.33 F vs healthy) while behaviour
+        diverges — so the run misbehaves without a sensor-side bias in the
+        data and is never a healthy negative. (The stronger old claim
+        'OA_TEMP bit-identical' was FALSIFIED by this very gate: the
+        sub-0.33 F residual is intake-node flow feedback.)
+      - the configuration-branch evidence (E5): the healthy file was
+        simulated with a 0.0 occupied minimum-OA-damper policy; EVERY
+        fault file uses 0.1 (or its stuck value above it) — a healthy-vs-
+        fault offset that is branch provenance, not fault physics.
     """
     print("\n== Gate 5: SDAHU errata evidence ==")
     out: dict = {}
@@ -224,7 +230,60 @@ def sdahu_evidence() -> dict:
         }
         print(f"  oa_bias: OA_TEMP |diff| mean {oat.mean():.4f} max {oat.max():.4f} "
               f"(labeled bias 2.0 F); behaviour divergence={diverging}")
+
+        # E5: occupied-hours OA_DMPR floor per file (healthy 0.0, faults 0.1+)
+        floors, occ_rows = {}, {}
+        for pq in sorted(pdir.glob("*.parquet")):
+            d = pd.read_parquet(pq, columns=["SF_CS", "OA_DMPR"])
+            o = d[d["SF_CS"] > 0.5]
+            floors[pq.stem] = round(float(o["OA_DMPR"].min()), 4)
+            occ_rows[pq.stem] = int(len(o))
+        fault_floors = {k: v for k, v in floors.items() if k != "AHU_annual"}
+        out["config_branch"] = {
+            "occupied_oa_dmpr_min": floors,
+            "occupied_rows": occ_rows,
+            "healthy_floor": floors.get("AHU_annual"),
+            "fault_floor_mode": 0.1,
+            "note": "healthy simulated with occupied min-OA-damper 0.0; every "
+                    "fault file floors at 0.1 (damper_stuck 025/075/100 sit at "
+                    "their stuck value above it). Healthy-vs-fault comparisons "
+                    "on SDAHU carry this branch offset on top of the fault.",
+        }
+        exceptions = {k: v for k, v in fault_floors.items() if abs(v - 0.1) > 1e-6}
+        print(f"  config branch: healthy floor {floors.get('AHU_annual')} vs fault "
+              f"floor 0.1 (exceptions = stuck-above-floor: {exceptions})")
     return out
+
+
+def sfpu_rotation_evidence() -> dict:
+    """E4 machine evidence: the raw SFPU RMTEMP -2C CSV is date-rotated.
+
+    The parquet-side gates cannot exhibit this defect (conversion sorts), so
+    this check reads the RAW csv: same timestamp SET as FaultFree, different
+    ORDER, first timestamp != calendar start, exactly one wrap point.
+    Skips gracefully if the raw files are not present.
+    """
+    print("\n== Gate 6: SFPU raw-file rotation evidence (E4) ==")
+    src = RAW["sfpu"]
+    bad = src / "SFPU_SensorBias_RMTEMP_-2C.csv"
+    ref = src / "SFPU_FaultFree.csv"
+    if not (bad.exists() and ref.exists()):
+        print(f"  SKIPPED — raw files not present under {src}")
+        return {"skipped": str(src)}
+    tb = pd.read_csv(bad, usecols=[0]).iloc[:, 0]
+    tr = pd.read_csv(ref, usecols=[0]).iloc[:, 0]
+    same_set = set(tb) == set(tr)
+    wraps = int((pd.to_datetime(tb).diff().dt.total_seconds() < 0).sum())
+    ev = {
+        "timestamp_set_identical_to_faultfree": bool(same_set),
+        "monotonic": bool(pd.to_datetime(tb).is_monotonic_increasing),
+        "wrap_points": wraps,
+        "first_timestamp": str(tb.iloc[0]),
+        "faultfree_first_timestamp": str(tr.iloc[0]),
+    }
+    print(f"  set-identical={same_set} monotonic={ev['monotonic']} wraps={wraps} "
+          f"starts {ev['first_timestamp']} (FaultFree {ev['faultfree_first_timestamp']})")
+    return ev
 
 
 if __name__ == "__main__":
@@ -234,6 +293,8 @@ if __name__ == "__main__":
         result["md5"] = md5_gate()
     if which in ("sdahu", "all"):
         result["sdahu_errata_evidence"] = sdahu_evidence()
+    if which in ("rotation", "all"):
+        result["sfpu_rotation_evidence"] = sfpu_rotation_evidence()
     if which in ("zones", "all"):
         result["zone_ground_truth"] = zone_ground_truth()
     if which in ("mono", "all"):

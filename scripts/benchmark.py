@@ -8,7 +8,7 @@ zero code difference between systems.
     uv run python scripts/benchmark.py pfpu
     uv run python scripts/benchmark.py sfpu
 
-New in v6: zone localization scoring (E3). For systems with a week-0 zone
+New in v6: zone localization scoring (X3). For systems with a week-0 zone
 ground truth, each detected scenario's rules-channel events are grouped by
 their device tag; localization is correct when the top-firing device matches
 the audited injection zone. INDETERMINATE scenarios are excluded from
@@ -71,7 +71,7 @@ SIGNATURE_EVENTS = {
 } - {RESIDUAL_RULE}
 DEVICE_OF = event_device_map(cfg)
 
-# zone ground truth (E3), if the week-0 audit covered this system
+# zone ground truth (X3), if the week-0 audit covered this system
 _gt_path = Path("outputs/week0_audit.json")
 GROUND_TRUTH = {}
 if _gt_path.exists():
@@ -181,7 +181,7 @@ def evaluate(fname: str):
 
     combined = rules | model | res_flag | dev_flag | abs_flag | freq_flag | rate_flag | osc_flag
 
-    # E3: top-firing device among signature events (fire-days per device)
+    # X3: top-firing device among signature events (fire-days per device)
     top_device, loc_days = None, 0
     if len(sig):
         dev_days = sig.assign(dev=sig["activity"].map(DEVICE_OF)).dropna(subset=["dev"])

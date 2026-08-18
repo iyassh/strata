@@ -1,4 +1,4 @@
-# Onboarding Log — E4 portability evidence
+# Onboarding Log — X4 portability evidence
 
 Honest record of what it took to onboard each system. "Config lines" counts
 non-comment, non-blank YAML lines. Times reconstructed from git commit
@@ -12,7 +12,7 @@ directly.
 - sensors.yaml: **45** canonical mappings AT THE ONBOARDING COMMIT (aa92970;
   corrected 2026-08-18 — the original "48" was a miscount. Today's config
   has 57 mappings + 39 rules after Phase-4 waterside-ΔT and oscillation
-  additions; E4 evidence quotes the onboarding-commit numbers)
+  additions; X4 evidence quotes the onboarding-commit numbers)
 - rules.yaml: 35 rules (14 state + 21 signature) — all seven+two existing
   kinds, no new kind required
 - equipment.ttl: copied from LBNL's published Brick model (0 lines written)

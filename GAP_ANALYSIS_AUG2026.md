@@ -59,7 +59,9 @@ against mixing sample definitions — v5 states its definition explicitly.)
 
 **G6 · The 38–45% bias recall is structural and UNDERSOLD the result — FIXED
 (now the strongest single number).**
-Measured: detection windows (≥120 min coil-off occupied) exist on 134–158 days
+Measured *(v5 numbers; v12: windows 137–164 days, window-conditional recall
+measured 100%, per-scenario recall 39–47% — quote the Part V addendum)*:
+detection windows (≥120 min coil-off occupied) exist on 134–158 days
 per bias year; the rule detected on essentially all of them (conditional recall
 ≈98–100%). v5 reports the decomposition: window prevalence × window-conditional
 recall. The honest claim — "we detect on essentially every day physics permits
@@ -107,10 +109,15 @@ mean 0.02 °F — nowhere near the labeled ±2–4 °F bias, so no sensor-side
 bias exists in the data; the sub-degree residual is intake-node flow
 feedback — precise stats in `week0_audit.json` gate 5 / ERRATA.md E1), the
 building behaves differently — MA/SA/RA correlations drop to 0.78–0.84 with
-|diff| p95 ≈ 15 °F, damper correlation 0.91. A deterministic simulation with
-identical inputs cannot produce divergent behaviour unless the CONTROLLER's
-inputs differ: this is a controller-side OA sensor bias — the fault is applied
-to what the controller reads and never appears in the logged column. (The four
+|diff| p95 ≈ 15 °F, damper correlation 0.91. *(Scope corrections 2026-08-18:
+(1) much of that healthy-vs-fault divergence is the configuration-branch
+offset shared by ALL fault files — ERRATA.md E5 — not this fault; the
+fault-specific signal is a ~2 °F shift in the cooling interlock only.
+(2) The mechanism claim is bounded honestly in ERRATA.md E1: consistent
+with a controller-side bias confined to the cooling interlock, but
+observationally indistinguishable from a mislabeled cooling-lockout fault.
+What is proven: the labeled sensor bias is not in the data and the run is
+faulty.)* (The four
 oa_bias files are byte-identical to each other: one run shipped four times;
 the injected severity is not recoverable.) Consequences: (a) the residual
 channel's 48.8% "FPR" was actually ~100%-of-window-days DETECTION of a fifth

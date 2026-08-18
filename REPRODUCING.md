@@ -22,15 +22,16 @@ Download the three system archives:
 | PFPU (parallel fan-powered unit) | `LBNL_FDD_Data_Sets_FPU_all_3/LBNL_FDD_Data_Sets_PFPU/` | 31 annual CSVs + Brick .ttl |
 | SFPU (series fan-powered unit) | `LBNL_FDD_Data_Sets_FPU_all_3/LBNL_FDD_Data_Sets_SFPU/` | 31 annual CSVs + Brick .ttl |
 
-Known dataset defects and their handling: **ERRATA.md** (byte-duplicate
-fault files, controller-side oa_bias, SA_SP unit swap, one rotated
-calendar). The pipeline handles all four automatically.
+Known dataset defects and their handling: **ERRATA.md** (E1–E5:
+byte-duplicate fault files, the oa_bias mislabel, SA_SP unit swap, one
+rotated calendar, and the healthy file's configuration-branch offset).
+The pipeline handles or discloses all five.
 
 ## 2. Environment
 
 ```sh
 uv sync          # exact pins from uv.lock; Python >= 3.12
-uv run pytest -q # 88 tests, ~10 s, no data needed
+uv run pytest -q # full suite (94 tests), ~10 s, no data needed
 ```
 
 System dependency: `pm4py` visualisations need the Graphviz *binary*

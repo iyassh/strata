@@ -1,0 +1,18 @@
+{
+ "sdahu": {
+  "fp_days_healthy_holdout": 1,
+  "tp_alarm_days_fault_scenarios": 3886,
+  "cry_wolf_ratio": 0.00026
+ },
+ "pfpu": {
+  "fp_days_healthy_holdout": 5,
+  "tp_alarm_days_fault_scenarios": 5991,
+  "cry_wolf_ratio": 0.00083
+ },
+ "sfpu": {
+  "fp_days_healthy_holdout": 4,
+  "tp_alarm_days_fault_scenarios": 6037,
+  "cry_wolf_ratio": 0.00066
+ },
+ "definition": "FP_days/(FP_days+TP_days) for the deployed detector (significance-gated union, rate diagnostic-only); FP on the 96-day healthy holdout, TP across non-excluded detected fault scenarios' significant-union days minus rate-only days"
+}

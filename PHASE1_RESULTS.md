@@ -12,7 +12,7 @@
 | model-only (state alphabet) | **1.8%** | 1.1% | 94.2% | 0.035 |
 | combined | 69.4% | 1.1% | 99.8% | 0.819 |
 
-Model-channel unique contribution: **18 of 4,540 fault days** (0.4%), all in the sensor-bias family — but the healthy-like negative run gets flagged at the same ~1% rate, so those unique flags are statistically indistinguishable from the model's false-alarm rate. **Honest verdict: on SDAHU, the unit-level day-cycle model contributes ≈ nothing beyond the rules.**
+Model-channel unique contribution: **18 of 4,540 fault days** (0.4%), all in the sensor-bias family — but the healthy-like negative run gets flagged at the same ~1% rate, so those unique flags are statistically indistinguishable from the model's false-alarm rate. **Honest verdict: on SDAHU, the unit-level day-cycle model contributes ≈ nothing beyond the rules.** *(v12 update, 2026-08-18: the same quantity is 23 days under v12's silence semantics (audit F2) — same conclusion, ≈ noise; quote 23 from `benchmark_v6_sdahu.json`.)*
 
 ## The circularity, now measured
 

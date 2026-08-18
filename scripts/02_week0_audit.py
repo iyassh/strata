@@ -15,13 +15,21 @@ Usage: uv run python scripts/02_week0_audit.py [md5|zones|ttl|all]
 
 import hashlib
 import json
+import os
 import sys
 from collections import defaultdict
 from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path("/Users/yassh/Downloads/Ureap/LBNL_FDD_Data_Sets_FPU_all_3")
+# Raw-data roots are overridable for other machines (REPRODUCING.md):
+#   STRATA_FPU_RAW   -> directory containing LBNL_FDD_Data_Sets_{PFPU,SFPU}/
+#   STRATA_SDAHU_RAW -> directory containing LBNL_FDD_Dataset_SDAHU/
+ROOT = Path(os.environ.get(
+    "STRATA_FPU_RAW", "/Users/yassh/Downloads/Ureap/LBNL_FDD_Data_Sets_FPU_all_3"))
+SDAHU_RAW = Path(os.environ.get(
+    "STRATA_SDAHU_RAW",
+    "/Users/yassh/Downloads/LBNL_FDD_Data_Sets_SDAHU_all_3")) / "LBNL_FDD_Dataset_SDAHU"
 RAW = {
     "pfpu": ROOT / "LBNL_FDD_Data_Sets_PFPU",
     "sfpu": ROOT / "LBNL_FDD_Data_Sets_SFPU",
@@ -135,11 +143,97 @@ def ttl_coverage() -> dict:
     return report
 
 
+def sdahu_evidence() -> dict:
+    """SDAHU dataset-errata evidence as an artifact (ERRATA.md #1, #2, #4).
+
+    Phase 7: the errata were narrated across docs but the evidence lived
+    nowhere recomputable. This gate emits:
+      - MD5 of every raw CSV and processed parquet, with duplicate groups
+        (errata #1/#2: oa_bias x4 and coi_leakage x4 are one run each);
+      - healthy-vs-fault SA_SP / SA_SPSPT summary stats (erratum #4: units
+        and roles swapped between the healthy file and EVERY fault file —
+        any ML baseline fed these columns scores file provenance);
+      - the controller-side proof for oa_bias (erratum #1): weather input
+        OA_TEMP is bit-identical to healthy while behaviour columns
+        diverge, so the bias was injected in the controller, not the sensor
+        stream — there is no independent healthy negative run.
+    """
+    print("\n== Gate 5: SDAHU errata evidence ==")
+    out: dict = {}
+    for label, folder, pattern in (("raw_csv", SDAHU_RAW, "*.csv"),
+                                   ("parquet", Path("data/processed/sdahu"), "*.parquet")):
+        hashes, by_hash = {}, defaultdict(list)
+        if not folder.exists():
+            print(f"  [{label}] SKIPPED — {folder} not present")
+            out[label] = {"skipped": str(folder)}
+            continue
+        for f in sorted(folder.glob(pattern)):
+            h = hashlib.md5(f.read_bytes()).hexdigest()
+            hashes[f.name] = h
+            by_hash[h].append(f.name)
+        dupes = {h: names for h, names in by_hash.items() if len(names) > 1}
+        print(f"  [{label}] files: {len(hashes)} | distinct: {len(by_hash)}")
+        for h, names in dupes.items():
+            print(f"    DUPLICATE [{h[:8]}]: {', '.join(names)}")
+        out[label] = {"hashes": hashes, "duplicates": dupes}
+
+    pdir = Path("data/processed/sdahu")
+    if pdir.exists():
+        h = pd.read_parquet(pdir / "AHU_annual.parquet")
+        f = pd.read_parquet(pdir / "damper_stuck_010_annual.parquet")
+
+        def stats(d, c):
+            return {"mean": round(float(d[c].mean()), 3),
+                    "min": round(float(d[c].min()), 3),
+                    "max": round(float(d[c].max()), 3)}
+
+        out["sa_sp_mismatch"] = {
+            "healthy": {c: stats(h, c) for c in ("SA_SP", "SA_SPSPT")},
+            "fault_example_damper_stuck_010": {c: stats(f, c) for c in ("SA_SP", "SA_SPSPT")},
+            "note": "healthy: SA_SP~402 (Pa-scale), SPSPT~1.6; every fault "
+                    "file: SA_SP~0.9, SPSPT~-400 — units AND roles swapped",
+        }
+        print(f"  SA_SP  healthy mean {out['sa_sp_mismatch']['healthy']['SA_SP']['mean']} "
+              f"vs fault {out['sa_sp_mismatch']['fault_example_damper_stuck_010']['SA_SP']['mean']}")
+
+        import numpy as np
+
+        ob = pd.read_parquet(pdir / "oa_bias_2_annual.parquet")
+        oat = (h["OA_TEMP"] - ob["OA_TEMP"]).abs()
+        behaviour_cols = [c for c in ("MA_TEMP", "SA_TEMP", "OA_DMPR") if c in h.columns]
+        diverging = {c: round(float((h[c] - ob[c]).abs().mean()), 4) for c in behaviour_cols}
+        out["oa_bias_controller_side"] = {
+            "calendar_identical": h["Datetime"].equals(ob["Datetime"]),
+            "OA_CFM_bit_identical_to_healthy": bool(
+                np.array_equal(h["OA_CFM"].values, ob["OA_CFM"].values, equal_nan=True)
+            ) if "OA_CFM" in h.columns else None,
+            "OA_TEMP_abs_diff": {"mean": round(float(oat.mean()), 4),
+                                 "max": round(float(oat.max()), 4)},
+            "labeled_bias_magnitude_F": 2.0,
+            "behaviour_mean_abs_divergence": diverging,
+            "note": "recorded OA_TEMP tracks healthy weather to within 0.33 F "
+                    "(mean 0.02) — nowhere near the labeled +/-2-4 F bias — "
+                    "while MA/SA behaviour diverges by degrees. A sensor-side "
+                    "bias would appear in the recorded stream; it does not. "
+                    "The bias therefore lives in the CONTROLLER's reading: the "
+                    "oa_bias run is a fault run, not a healthy negative "
+                    "(relabel saga, D2/F1). NOTE: the earlier prose claim "
+                    "'OA_TEMP bit-identical to healthy' was IMPRECISE — the "
+                    "sub-0.33 F residual is intake-node flow feedback; the "
+                    "conclusion stands on the absence of the labeled bias.",
+        }
+        print(f"  oa_bias: OA_TEMP |diff| mean {oat.mean():.4f} max {oat.max():.4f} "
+              f"(labeled bias 2.0 F); behaviour divergence={diverging}")
+    return out
+
+
 if __name__ == "__main__":
     which = sys.argv[1] if len(sys.argv) > 1 else "all"
     result = {}
     if which in ("md5", "all"):
         result["md5"] = md5_gate()
+    if which in ("sdahu", "all"):
+        result["sdahu_errata_evidence"] = sdahu_evidence()
     if which in ("zones", "all"):
         result["zone_ground_truth"] = zone_ground_truth()
     if which in ("mono", "all"):

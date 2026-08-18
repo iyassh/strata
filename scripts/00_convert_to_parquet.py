@@ -1,11 +1,22 @@
-"""One-time conversion of LBNL SDAHU CSVs to Parquet for fast downstream loading."""
+"""One-time conversion of LBNL SDAHU CSVs to Parquet for fast downstream loading.
 
+Usage: uv run python scripts/00_convert_to_parquet.py [src_dir]
+src_dir defaults to $STRATA_SDAHU_RAW/LBNL_FDD_Dataset_SDAHU (see
+REPRODUCING.md for the dataset download source).
+"""
+
+import os
+import sys
 from pathlib import Path
 
 import pandas as pd
 
 SRC = Path(
-    "/Users/yassh/Downloads/LBNL_FDD_Data_Sets_SDAHU_all_3/LBNL_FDD_Dataset_SDAHU"
+    sys.argv[1]
+    if len(sys.argv) > 1
+    else Path(os.environ.get("STRATA_SDAHU_RAW",
+                             "/Users/yassh/Downloads/LBNL_FDD_Data_Sets_SDAHU_all_3"))
+    / "LBNL_FDD_Dataset_SDAHU"
 )
 DST = Path("data/processed/sdahu")
 DST.mkdir(parents=True, exist_ok=True)

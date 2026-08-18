@@ -2,13 +2,24 @@
 
 FPU datetime format differs from SDAHU (MM/DD/YYYY HH:MM vs ISO) — parsed
 explicitly so no row is silently misread (dataset-audit quirk #8).
+
+Usage: uv run python scripts/01_convert_fpu.py [root_dir]
+root_dir defaults to $STRATA_FPU_RAW (must contain
+LBNL_FDD_Data_Sets_PFPU/ and LBNL_FDD_Data_Sets_SFPU/; see REPRODUCING.md).
 """
 
+import os
+import sys
 from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path("/Users/yassh/Downloads/Ureap/LBNL_FDD_Data_Sets_FPU_all_3")
+ROOT = Path(
+    sys.argv[1]
+    if len(sys.argv) > 1
+    else os.environ.get("STRATA_FPU_RAW",
+                        "/Users/yassh/Downloads/Ureap/LBNL_FDD_Data_Sets_FPU_all_3")
+)
 SYSTEMS = {
     "pfpu": ROOT / "LBNL_FDD_Data_Sets_PFPU",
     "sfpu": ROOT / "LBNL_FDD_Data_Sets_SFPU",

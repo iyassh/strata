@@ -45,9 +45,13 @@ thesis, now enforced in the reporting code.
 **G5 · Pooled per-day F1 over 4,540 correlated days was the wrong headline —
 MAJOR — FIXED.**
 Faults persist all year (day-recall = "a detection window existed that day");
-five scenarios are event-log-identical copies (verified: coi_stuck_010/025/
-050/075 + coi_leakage_010 share one log; damper_stuck_010=025); 69% of positive
-days were the saturated stuck/leak family. v5 reports per scenario — detected
+under the V1 EVENT ALPHABET five scenarios were event-log-identical copies
+(coi_stuck_010/025/050/075 + coi_leakage_010 shared one log;
+damper_stuck_010=025) — **scope note (2026-08-18): true for the v1 alphabet
+only; under the current alphabet all 14 SDAHU logs are distinct
+(`event_identical_groups: {}` in v12). The BYTE-identical duplicate groups
+(oa_bias ×4, coi_leakage ×4) are dataset facts and stand — see ERRATA.md
+E1/E2**; 69% of positive days were the saturated stuck/leak family. v5 reports per scenario — detected
 y/n, time-to-first-detection, alarm-day fraction — aggregates per family, tags
 event-identical groups automatically by log hash, and demotes pooled rates to a
 JSON appendix. (Frank et al. 2019 licenses day-slice samples; it also warns
@@ -97,8 +101,11 @@ the day the run completes.
 **F1 · The oa_bias "healthy re-run" relabel is OVERTURNED — oa_bias_4 is a real
 fault file, and SDAHU therefore has NO independent healthy negative.**
 The blind residual channel "false-alarmed" on 148/303 days of the supposed
-healthy-like run — which prompted a re-examination. Evidence: under
-bit-identical weather inputs (OA_TEMP, OA_CFM match healthy exactly), the
+healthy-like run — which prompted a re-examination. Evidence: with the same
+weather (OA_CFM bit-identical to healthy; recorded OA_TEMP within 0.33 °F,
+mean 0.02 °F — nowhere near the labeled ±2–4 °F bias, so no sensor-side
+bias exists in the data; the sub-degree residual is intake-node flow
+feedback — precise stats in `week0_audit.json` gate 5 / ERRATA.md E1), the
 building behaves differently — MA/SA/RA correlations drop to 0.78–0.84 with
 |diff| p95 ≈ 15 °F, damper correlation 0.91. A deterministic simulation with
 identical inputs cannot produce divergent behaviour unless the CONTROLLER's

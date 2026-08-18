@@ -14,7 +14,9 @@ with. This script
      seasonal RATE channel to diagnostic-only costs nothing:
        (a) no scenario's significant-channel set is {rate} alone, and
        (b) no TTD is set by rate (rolling 30-day windows cannot flag before
-           ~day 30; all measured TTDs are 1-2 days) —
+           ~day 30; every RATE-SIGNIFICANT scenario's TTD is 1-2 days —
+           the overall TTD distribution has longer tails, see Part V
+           addendum) —
      both checked as hard assertions, not narrated;
   3. writes outputs/union_fpr_<system>.json with counts, day lists, and the
      demotion verification, so the paper's joint-FPR table is a recomputable

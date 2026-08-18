@@ -1,5 +1,13 @@
 # Phase 2 Results — Analytic-Redundancy Events (2026-08-10)
 
+> **SUPERSEDED — historical record only (banner added 2026-08-18). Never
+> quote this document's numbers: (a) its FPR was measured against oa_bias
+> as a negative, overturned by F1/ERRATA.md E1; (b) "38–45%" bias recall is
+> 39–47% in v12 (windows 137–164 days), with window-conditional recall
+> measured at 100%; (c) its residual band was the G1 data-snooped band,
+> replaced by the train-only [0.53, 1.37]. Current numbers:
+> `outputs/benchmark_v6_sdahu.json` + RESEARCH_LOG Part V addendum.**
+
 **Question:** can physics-residual events catch the sensor-bias family that sequence logic detects at 0%?
 
 **Answer: yes — bias-family recall moved from 0% to 38–45%, with zero cost in false alarms.**

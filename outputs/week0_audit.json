@@ -693,5 +693,127 @@
   "monotonic": {
     "pfpu": [],
     "sfpu": []
+  },
+  "sdahu_errata_evidence": {
+    "raw_csv": {
+      "hashes": {
+        "AHU_annual.csv": "ed0eba8c45ec9f867703e528600a0cb9",
+        "coi_bias_-2_annual.csv": "d7e13a4e24535e567d163e2f8bee24b8",
+        "coi_bias_-4_annual.csv": "681b8c330914fda8f51b737fcec26049",
+        "coi_bias_2_annual.csv": "147a4b2a304384e792561be6a3ee6a0c",
+        "coi_bias_4_annual.csv": "1b30cf3c0b6c77ee49eca1701f1350d1",
+        "coi_leakage_010_annual.csv": "a9fdfc50c53441ff4aaf7c34000b1087",
+        "coi_leakage_025_annual.csv": "a9fdfc50c53441ff4aaf7c34000b1087",
+        "coi_leakage_040_annual.csv": "a9fdfc50c53441ff4aaf7c34000b1087",
+        "coi_leakage_050_annual.csv": "a9fdfc50c53441ff4aaf7c34000b1087",
+        "coi_stuck_010_annual.csv": "e15bd020c8c17c7ca6d213a2fb76418b",
+        "coi_stuck_025_annual.csv": "1b0c8ab270dab0aa399223507dd0ec3f",
+        "coi_stuck_050_annual.csv": "c306fbacdef59a8fd6e42b8c995ece26",
+        "coi_stuck_075_annual.csv": "46eb34e90d0f02c1327d412471ecaedb",
+        "damper_stuck_010_annual.csv": "acf3cd950032d58fce391abcfe613756",
+        "damper_stuck_025_annual.csv": "65614949acdd5683ad5d837cd6eed151",
+        "damper_stuck_075_annual.csv": "e03fcafdc5790f2382d5c8d240ce89d5",
+        "damper_stuck_100_annual_short.csv": "4d9266ec0564505b938af8157bb08486",
+        "oa_bias_-2_annual.csv": "89b1370416db7b93c4da858c196751e7",
+        "oa_bias_-4_annual.csv": "89b1370416db7b93c4da858c196751e7",
+        "oa_bias_2_annual.csv": "89b1370416db7b93c4da858c196751e7",
+        "oa_bias_4_annual.csv": "89b1370416db7b93c4da858c196751e7"
+      },
+      "duplicates": {
+        "a9fdfc50c53441ff4aaf7c34000b1087": [
+          "coi_leakage_010_annual.csv",
+          "coi_leakage_025_annual.csv",
+          "coi_leakage_040_annual.csv",
+          "coi_leakage_050_annual.csv"
+        ],
+        "89b1370416db7b93c4da858c196751e7": [
+          "oa_bias_-2_annual.csv",
+          "oa_bias_-4_annual.csv",
+          "oa_bias_2_annual.csv",
+          "oa_bias_4_annual.csv"
+        ]
+      }
+    },
+    "parquet": {
+      "hashes": {
+        "AHU_annual.parquet": "a517d2a7a697f1535cf411ddd4ffaa60",
+        "coi_bias_-2_annual.parquet": "17cc4c2dcd6dbf8c221b4e2ce38d0132",
+        "coi_bias_-4_annual.parquet": "fc165bd704d5c363e298e005da828672",
+        "coi_bias_2_annual.parquet": "13f966989072bb99b42f03b0d466cad7",
+        "coi_bias_4_annual.parquet": "02f5f1186ea129e9f2fba15c96c01ae6",
+        "coi_leakage_010_annual.parquet": "5133132d62505bbbf6976bb4b77e8f97",
+        "coi_leakage_025_annual.parquet": "5133132d62505bbbf6976bb4b77e8f97",
+        "coi_leakage_040_annual.parquet": "5133132d62505bbbf6976bb4b77e8f97",
+        "coi_leakage_050_annual.parquet": "5133132d62505bbbf6976bb4b77e8f97",
+        "coi_stuck_010_annual.parquet": "a909379a1594c8799f610d3666c3a729",
+        "coi_stuck_025_annual.parquet": "abe2c6bd735ae9e0b3a38ab708ce2f6c",
+        "coi_stuck_050_annual.parquet": "d36bc5aae0416d1555015497b3487586",
+        "coi_stuck_075_annual.parquet": "d428a472054b74dd2278659e9ce2526e",
+        "damper_stuck_010_annual.parquet": "c893568c01bc4d07b3cac94abd12543d",
+        "damper_stuck_025_annual.parquet": "63ad92e194e99ba3ac4dc0deac431eca",
+        "damper_stuck_075_annual.parquet": "cb1c47ead35d9124be8fa42da228b09d",
+        "damper_stuck_100_annual_short.parquet": "ebc89f21cacd8ad898af5e41ec9134fd",
+        "oa_bias_-2_annual.parquet": "63b857d71288853819438bf870f08ee6",
+        "oa_bias_-4_annual.parquet": "63b857d71288853819438bf870f08ee6",
+        "oa_bias_2_annual.parquet": "63b857d71288853819438bf870f08ee6",
+        "oa_bias_4_annual.parquet": "63b857d71288853819438bf870f08ee6"
+      },
+      "duplicates": {
+        "5133132d62505bbbf6976bb4b77e8f97": [
+          "coi_leakage_010_annual.parquet",
+          "coi_leakage_025_annual.parquet",
+          "coi_leakage_040_annual.parquet",
+          "coi_leakage_050_annual.parquet"
+        ],
+        "63b857d71288853819438bf870f08ee6": [
+          "oa_bias_-2_annual.parquet",
+          "oa_bias_-4_annual.parquet",
+          "oa_bias_2_annual.parquet",
+          "oa_bias_4_annual.parquet"
+        ]
+      }
+    },
+    "sa_sp_mismatch": {
+      "healthy": {
+        "SA_SP": {
+          "mean": 402.788,
+          "min": 401.836,
+          "max": 410.573
+        },
+        "SA_SPSPT": {
+          "mean": 1.607,
+          "min": 1.607,
+          "max": 1.607
+        }
+      },
+      "fault_example_damper_stuck_010": {
+        "SA_SP": {
+          "mean": 0.86,
+          "min": -1.528,
+          "max": 6.864
+        },
+        "SA_SPSPT": {
+          "mean": -400.253,
+          "min": -400.253,
+          "max": -400.253
+        }
+      },
+      "note": "healthy: SA_SP~402 (Pa-scale), SPSPT~1.6; every fault file: SA_SP~0.9, SPSPT~-400 \u2014 units AND roles swapped"
+    },
+    "oa_bias_controller_side": {
+      "calendar_identical": true,
+      "OA_CFM_bit_identical_to_healthy": true,
+      "OA_TEMP_abs_diff": {
+        "mean": 0.0214,
+        "max": 0.3331
+      },
+      "labeled_bias_magnitude_F": 2.0,
+      "behaviour_mean_abs_divergence": {
+        "MA_TEMP": 1.7207,
+        "SA_TEMP": 2.1043,
+        "OA_DMPR": 0.0221
+      },
+      "note": "recorded OA_TEMP tracks healthy weather to within 0.33 F (mean 0.02) \u2014 nowhere near the labeled +/-2-4 F bias \u2014 while MA/SA behaviour diverges by degrees. A sensor-side bias would appear in the recorded stream; it does not. The bias therefore lives in the CONTROLLER's reading: the oa_bias run is a fault run, not a healthy negative (relabel saga, D2/F1). NOTE: the earlier prose claim 'OA_TEMP bit-identical to healthy' was IMPRECISE \u2014 the sub-0.33 F residual is intake-node flow feedback; the conclusion stands on the absence of the labeled bias."
+    }
   }
 }

@@ -218,3 +218,46 @@ threats-to-validity section, pre-answered.
   PFPU frequency-channel prediction (Phase 4); matched-rule ablation arm
   (Phase 4); fouling waterside-ΔT channel; zone-temp comfort residual;
   cross-replay grammar with null model (Phase 5).
+
+### Part V addendum — 2026-08-18 (the numbers above are FROZEN AT AUG 10; quote THESE)
+
+Everything below recomputed from committed artifacts (see REPRODUCING.md §7
+for the claim→artifact map). The Aug-10 list predates Phases 3c–6.
+
+- **Scorecards (v12):** SDAHU **14/14**, PFPU **23/30**, SFPU **24/29**
+  (SFPU excludes the rotated-calendar file, ERRATA.md E4). NOT 17/30, 18/30.
+- **TTD:** **median 1 day**, with an honest tail — SDAHU {1×9, 2×5}; PFPU
+  {1×19, 4, 11, 15, 21}; SFPU {1×19, 3, 15, 15, 37, 108}. Never write
+  "TTD 1–2 days" without "median".
+- **Joint FPR (Phase 6):** naive all-8 union 15.6/12.5/4.2% of healthy
+  holdout days; deployed STRATA detector (rate diagnostic-only)
+  **1.0/5.2/4.2%**, demotion verified zero-cost. Cry-wolf < 0.1% all
+  systems (`outputs/crywolf.json`). Model/device rows are calibration
+  targets, not out-of-sample (L24).
+- **Week-0 zone ground truth:** **50** Zone-S + **10** INDETERMINATE (the
+  artifact; earlier "51/9" was a transcription slip).
+- **Matched rules:** MR2 = freq EXACTLY on both FPU systems (SFPU 141=141
+  AND PFPU 206=206); MR1 fires 231 healthy SDAHU days and 124 PFPU days
+  (both numbers, not just PFPU's).
+- **PCA-strict head-to-head (comparable universes):** a dead heat —
+  **61 = 61** (14v13, 23v23, 24v25) with complementary misses; STRATA-only:
+  oa_bias+4, VAVDMPRUnstable, waterside-fouling-severe; PCA-only:
+  RMTEMP+2C ×2, airside-fouling-moderate (via the unmapped zone-fan DP
+  sensor — `outputs/sensor_coverage.json`).
+- **Bias windows (v12):** window-conditional recall is measured **100%**
+  (164/164, 164/164, 139/139, 137/137, 148/148); windows 137–164 days/yr.
+- **Residual denominators:** benchmark's `residual_holdout_fp` n
+  (36/124/121) counts channel-day pairs across residual channels;
+  union_fpr's exposure (36/41/41) counts distinct days. Label whichever is
+  used.
+- **Model channel (SDAHU):** 23 unique model days in v12 (≈ noise, same
+  conclusion as v5's "18" — silence-semantics change in F2).
+- **Onboarding counts (corrected):** at onboarding commit aa92970 PFPU had
+  **45 sensor mappings + 35 rules** (the log's "48" was a miscount);
+  today's configs: 57 mappings + 39 rules (Phase-4 waterside ΔT +
+  oscillation additions).
+- **Errata:** canonical numbering and evidence now in **ERRATA.md** (E1–E4)
+  + `week0_audit.json` gate 5. G5's "five event-log-identical scenarios"
+  was true under the v1 alphabet only; under the current alphabet all 14
+  SDAHU logs are distinct (`event_identical_groups: {}` in v12) — the
+  BYTE-level duplicates (E1, E2) are unchanged.

@@ -9,7 +9,10 @@ directly.
 - Not comparable (the pipeline itself was developed against this system).
 
 ## lbnl_pfpu (2026-08-10, commits 7715db9 -> aa92970)
-- sensors.yaml: 48 canonical mappings
+- sensors.yaml: **45** canonical mappings AT THE ONBOARDING COMMIT (aa92970;
+  corrected 2026-08-18 — the original "48" was a miscount. Today's config
+  has 57 mappings + 39 rules after Phase-4 waterside-ΔT and oscillation
+  additions; E4 evidence quotes the onboarding-commit numbers)
 - rules.yaml: 35 rules (14 state + 21 signature) — all seven+two existing
   kinds, no new kind required
 - equipment.ttl: copied from LBNL's published Brick model (0 lines written)

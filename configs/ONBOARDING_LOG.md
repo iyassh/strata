@@ -1,5 +1,12 @@
 # Onboarding Log — X4 portability evidence
 
+**Sampling-rate scope (L31/X7, added 2026-08-19):** all evidence below is
+1-min → 1-min transfer. Tuned configs are SAMPLING-RATE-SPECIFIC: X7 showed
+1-min-tuned thresholds gain 28–64 healthy signature days at 15-min
+(threshold degeneration + run merging). Onboarding a site at another rate
+REQUIRES re-running the healthy-silence gate on that site's data at its
+rate — which is this workflow's designed job, not an exception to it.
+
 Honest record of what it took to onboard each system. "Config lines" counts
 non-comment, non-blank YAML lines. Times reconstructed from git commit
 timestamps and session records; future onboardings should log wall-clock

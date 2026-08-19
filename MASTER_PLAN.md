@@ -31,10 +31,10 @@ Standing verdicts the plan builds on:
 |----|-----|----------|--------|
 | S1 | **No joint/union FPR number anywhere** (promised as G9, "a claimable first"). Auditor computed it: naive 8-channel OR false-alarms 15/96 healthy days on SDAHU (15.6%), 12/96 PFPU, 4/96 SFPU. The seasonal **rate channel is the entire problem** (14 and 7 of those days); no scenario anywhere is carried solely by rate. Demoting rate to diagnostic-only → **1.0% / 5.2% / 4.2%** union at zero scorecard cost. | CRITICAL — flips the "0 false-alarm days" headline if a reviewer computes it first | ✅ DONE Phase 6 |
 | S2 | **No single "STRATA detector" definition** — paper currently reads as 9 detectors glued by per-scenario significance gates | CRITICAL (same fix as S1) | ✅ DONE Phase 6 |
-| S3 | **X8 contamination experiment absent.** Web sweep: training-set contamination is a hot named 2025–26 topic at ICPM and attacks our core assumption ("what if the fault-free year isn't?"). Priority ABOVE X7 (reverses the strategist's initial ranking). Cheap version: inject k∈{2,5,10}% fault days into SDAHU train, rerun calibration + healthy silence, report threshold drift only | HIGH | Open |
-| S4 | **X7 noise/15-min downsample absent.** Deferrable with a citable argument (event abstraction + sustained-minutes discretize amplitude noise); do after X8 if capacity allows, else limitations paragraph | MEDIUM | Open |
-| S5 | **Stale numbers that will bite** if the paper is drafted from old docs: RESEARCH_LOG Part V frozen at Aug 10 ("PFPU 17/30"); GAP_ANALYSIS G5's "five identical logs" claim is FALSE under the current alphabet (true only for v1 alphabet — refutable from our own artifacts); ONBOARDING_LOG counts (48/35) vs commit-time recount (45/35) vs today (57/39); PHASE1 "18 unique model days" is 23 in v12; PHASE2_RESULTS superseded three ways (never quote directly); D3 "≈98–100%" is measured 100% (164/164 ×2, 139/139, 137/137, 148/148). **Post-Phase-6 reconciliation additions (2026-08-17):** (a) week-0 zone GT is **50 Zone S + 10 INDETERMINATE** in the artifact; DAYLOG/summaries say 51/9 — artifact wins; (b) "TTD 1–2 days" is only true as a MEDIAN — the honest distribution is SDAHU {1:9, 2:5}, PFPU {1:19, 4,11,15,21}, SFPU {1:19, 3,15,15,37,108}; always write "median TTD 1 day" with the tail stated; scope union_fpr.py's docstring phrase to rate-significant scenarios; (c) MR2=freq exact identity holds on BOTH FPU systems (SFPU 141=141 AND PFPU 206=206 — stronger than the doc's single example) and MR1 fires **231** healthy SDAHU days (only PFPU's 124 is documented); (d) PCA-strict head-to-head on comparable universes is a **dead heat: 61=61 total (14v13, 23v23, 24v25) with complementary misses** — sharper honest sentence than "comparable-to-better"; (e) residual denominators differ by design: benchmark's residual_holdout_fp n (124/121) is channel-day pairs summed over the 4 residual channels, union_fpr's exposure (36–41) is distinct days — label both or a reviewer sees a contradiction | HIGH (1 hour total) | ✅ DONE Phase 7 (+ 8 audit-found locations fixed post-audit) |
-| S6 | **X5 severity monotonicity (Spearman ρ)** never computed; dose-response only narrated. ~30 lines over existing v12 flag_days per family ladder | MEDIUM | Open |
+| S3 | **X8 contamination experiment absent.** Web sweep: training-set contamination is a hot named 2025–26 topic at ICPM and attacks our core assumption ("what if the fault-free year isn't?"). Priority ABOVE X7 (reverses the strategist's initial ranking). Cheap version: inject k∈{2,5,10}% fault days into SDAHU train, rerun calibration + healthy silence, report threshold drift only | HIGH | ✅ DONE Phase 8 (X8: one-silent-day breakdown demonstrated + visibility split) |
+| S4 | **X7 noise/15-min downsample absent.** Deferrable with a citable argument (event abstraction + sustained-minutes discretize amplitude noise); do after X8 if capacity allows, else limitations paragraph | MEDIUM | ✅ DONE Phase 8 (X7: falsifiers fired+honored; configs sampling-rate-specific; snapshot-only) |
+| S5 | **Stale numbers that will bite** if the paper is drafted from old docs: RESEARCH_LOG Part V frozen at Aug 10 ("PFPU 17/30"); GAP_ANALYSIS G5's "five identical logs" claim is FALSE under the current alphabet (true only for v1 alphabet — refutable from our own artifacts); ONBOARDING_LOG counts (48/35) vs commit-time recount (45/35) vs today (57/39); PHASE1 "18 unique model days" is 23 in v12; PHASE2_RESULTS superseded three ways (never quote directly); D3 "≈98–100%" is measured 100% (164/164 ×2, 139/139, 137/137, 148/148). **Post-Phase-6 reconciliation additions (2026-08-17):** (a) week-0 zone GT is **50 Zone S + 10 INDETERMINATE** in the artifact; DAYLOG/summaries say 51/9 — artifact wins; (b) "TTD 1–2 days" is only true as a MEDIAN — the honest distribution is SDAHU {1:9, 2:5}, PFPU {1:19, 4,11,15,21}, SFPU {1:19, 3,15,15,37,108}; always write "median TTD 1 day" with the tail stated; scope union_fpr.py's docstring phrase to rate-significant scenarios; (c) MR2=freq exact identity holds on BOTH FPU systems (SFPU 141=141 AND PFPU 206=206 — stronger than the doc's single example) and MR1 fires **231** healthy SDAHU days (only PFPU's 124 is documented); (d) PCA-strict head-to-head is **60v61 after X11 (was 61=61); oa_bias a shared miss** — sharper honest sentence than "comparable-to-better"; (e) residual denominators differ by design: benchmark's residual_holdout_fp n (124/121) is channel-day pairs summed over the 4 residual channels, union_fpr's exposure (36–41) is distinct days — label both or a reviewer sees a contradiction | HIGH (1 hour total) | ✅ DONE Phase 7 (+ 8 audit-found locations fixed post-audit) |
+| S6 | **X5 severity monotonicity (Spearman ρ)** never computed; dose-response only narrated. ~30 lines over existing v12 flag_days per family ladder | MEDIUM | ✅ DONE Phase 8 (X5; position ladders scoped) |
 | S7 | **Cry-wolf ratio** (FP_days/(FP+TP alarm days)) — derivable from artifacts, one number | LOW | ✅ DONE Phase 7 (crywolf.json) |
 | S8 | **SDAHU config missing `residual_min_band_width: 0.5`** (FPU configs have it; no numeric effect — SDAHU band is 0.846 wide — but breaks the "one margin policy" uniformity claim) | LOW (one line) | Open |
 | S9 | **Errata scattered, not citable**: 4 dataset errata live as fragments across GAP_ANALYSIS/RESEARCH_LOG/code comments/vault; erratum #3 (coi_leakage_050 SA_SP swap) is not in the repo at all; oa_bias byte-identity evidence narrated but stored nowhere as an artifact | HIGH as a contribution (docs claim "a dataset-quality contribution the community needs" without a citable object) | ✅ DONE Phase 7 (ERRATA.md E1–E5 + gates 5/6; E5 config-branch erratum NEW from the Phase-7 hostile audit) |
@@ -183,6 +183,30 @@ must run on the CORRECTED detector or be re-run.
    Otherwise: limitations paragraph with the discretization argument.
    Exit: headline numbers adjudicated post-E5; the two
    reviewer-anticipated experiments answered or honestly scoped.
+
+## FORWARD PLAN (revised 2026-08-19, post-Phase-8 coherence review — GO verdict)
+
+**The binding constraint is the ICPM deadline: abstract Sep 4, paper
+Sep 11 (16/23 days out).** The science is done and coherent; the paper
+quotes committed artifacts, not the future toolkit — so **Phase 11
+drafting starts NOW, with Phase 9 proceeding in parallel** on days the
+paper doesn't need. Revised order:
+
+1. **Phase 11a (immediate): paper skeleton + abstract v1** — framing
+   "Discovery Locates, Calibration Detects"; scorecards quoted as
+   "14/14 naive; 13/14 adjudicated"; terminology sweep to
+   "fault-free/baseline"; must-cites in; abstract to Anthony & Medulla
+   for a mentor loop with ≥1 week before Sep 4.
+2. **Phase 11b: figures pipeline** (make_figures successor over v12 +
+   Phase-6/8 artifacts, ~1-2 d) + full draft; hostile manuscript audit
+   (project law) ≥2 days before Sep 11; AI disclosure in
+   acknowledgments; submit one day early on both deadlines.
+3. **Phase 9 (parallel, non-blocking):** T1 LICENSE (MIT) and T2 pm4py
+   optionalization decision FIRST (architectural); then T3 StrataDetector
+   facade carrying the L24 three-way discover/calibrate/test split; T4-T6.
+4. **Phase 10 after paper submission:** public release + JOSS.
+5. Phase 12 unchanged (Brick auto-config, native PM core, X10 external
+   dataset, TRU deployment).
 
 ### Phase 9 — Toolkit Tier A: stranger-runnable (T1–T6)
 1. **LICENSE: MIT** + pyproject license metadata + CITATION.cff.

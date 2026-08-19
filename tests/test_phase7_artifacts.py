@@ -72,26 +72,34 @@ def test_crywolf_consistent_with_union():
     """TP is RECOMPUTED from benchmark_v6 + union artifacts (hostile-audit
     fix — the arithmetic-only guard accepted a consistently-halved TP)."""
     cw = _load("crywolf.json")
+    x11 = _load("x11_branch.json")
+    adj_excluded = {s["file"] for s in x11["adjudicated_scorecard"]["scenarios"]
+                    if not s["detected"]}
     for system in ("sdahu", "pfpu", "sfpu"):
         u = _load(f"union_fpr_{system}.json")
         b = _load(f"benchmark_v6_{system}.json")
-        e = cw[system]
-        assert e["fp_days_healthy_holdout"] == u["union_minus_rate"]["holdout_fp_days"]
         rate_only = {s["label"]: s["rate_only_alarm_days"]
                      for s in u["rate_demotion"]["scenarios_with_rate_significant"]}
-        tp_expected = sum(
-            len(s["flag_days"]["sig_union"]) - rate_only.get(s["label"], 0)
-            for s in b["scenarios"]
-            if s["is_fault"] and not s.get("excluded") and s.get("meaningful_channels")
-        )
-        assert e["tp_alarm_days_fault_scenarios"] == tp_expected, system
-        fp, tp = e["fp_days_healthy_holdout"], e["tp_alarm_days_fault_scenarios"]
-        # artifact rounds to 5 decimals -> tolerance is the rounding half-step
-        assert abs(e["cry_wolf_ratio"] - fp / (fp + tp)) <= 5e-6
-        assert e["cry_wolf_ratio"] < 0.001  # the quoted "<0.1%" claim
-        # denominators must ship with the ratio (post-audit requirement)
-        assert e["healthy_holdout_days"] == u["holdout_days"]
-        assert e["fault_scenario_days_observed"] > 0
+        for block, skip in (("naive", set()),
+                            ("adjudicated", adj_excluded if system == "sdahu" else set())):
+            e = cw[system][block]
+            assert e["fp_days_healthy_holdout"] == u["union_minus_rate"]["holdout_fp_days"]
+            tp_expected = sum(
+                len(s["flag_days"]["sig_union"]) - rate_only.get(s["label"], 0)
+                for s in b["scenarios"]
+                if s["is_fault"] and not s.get("excluded")
+                and s.get("meaningful_channels") and s["file"] not in skip
+            )
+            assert e["tp_alarm_days_fault_scenarios"] == tp_expected, (system, block)
+            fp, tp = e["fp_days_healthy_holdout"], e["tp_alarm_days_fault_scenarios"]
+            # artifact rounds to 5 decimals -> tolerance is the rounding half-step
+            assert abs(e["cry_wolf_ratio"] - fp / (fp + tp)) <= 5e-6
+            assert e["cry_wolf_ratio"] < 0.001  # the quoted "<0.1%" claim
+            assert e["healthy_holdout_days"] == u["holdout_days"]
+            assert e["fault_scenario_days_observed"] > 0
+        # adjudicated SDAHU must actually exclude oa_bias days
+        assert (cw["sdahu"]["adjudicated"]["tp_alarm_days_fault_scenarios"]
+                < cw["sdahu"]["naive"]["tp_alarm_days_fault_scenarios"])
 
 
 def test_config_branch_erratum_evidence():

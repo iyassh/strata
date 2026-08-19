@@ -79,7 +79,7 @@ be flagged for manual review, not passed). Violations found: **0**.
 1. **No scenario is carried solely by rate.** Rate is significant on 13
    scenarios (6 SDAHU, 1 PFPU, 6 SFPU); every one has another
    independently significant channel. Scorecards unchanged:
-   **14/14, 23/30, 24/29.**
+   **14/14, 23/30, 24/29** *(naive; X11 later adjudicated SDAHU to 13/14 — oa_bias is not rate-carried, so the demotion's zero-cost conclusion is unaffected; see PHASE8_RESULTS)*.
 2. **No TTD is set by rate.** Every rate-significant scenario's first
    significant alarm day is covered by significant rules (12 scenarios)
    or significant residual (SA bias −4C). All TTDs (1–2 days) unchanged.

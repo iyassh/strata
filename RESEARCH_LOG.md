@@ -27,7 +27,10 @@ Companion docs: `GAP_ANALYSIS_AUG2026.md` (gaps G1–G11), `PHASE1_RESULTS.md`,
   invariant (injecting signature events cannot change a day's fitness).
 - **Paper value:** a *measured* quantification of a methodological trap the whole
   PM-on-sensor-data literature warns about abstractly. Few papers measure their
-  own circularity; ours does, to one decimal.
+  own circularity; ours does, to one decimal. *(E5 insurance note, 2026-08-19:
+  both terms are measured across the same branch pair, so any branch component
+  is common-mode and cancels in the 3.4pp delta; the v1 signature events are
+  position-vs-command rules, which E5's own evidence certifies branch-immune.)*
 
 ### D2. The oa_bias relabel, overturned twice
 - **Found:** LBNL's four oa_bias files are byte-identical to each other and the
@@ -225,7 +228,7 @@ threats-to-validity section, pre-answered.
   SFPU unit-model 22–26 robust days/scenario with 15–17 unique.
 - **Contributions list (running):** measured circularity; alphabet split;
   window-decomposition evaluation; week-0 dataset-audit battery (+ two dataset
-  errata: oa_bias, rotated file); config-only onboarding evidence; stratum
+  errata: oa_bias, rotated file); config-only onboarding evidence (1-min→1-min; sampling-rate scope per L31); stratum
   routing; discovery-automation finding with honored falsifier; specificity-
   grade localization; noise-floor significance harness.
 - **Must-cite ledger:** Schein & Bushby 2006 / House 2001 / NISTIR 7365 (APAR

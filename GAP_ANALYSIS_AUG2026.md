@@ -90,6 +90,10 @@ each); OR-ing seven rules compounds. The joint-FPR budget was already planned;
 the audit adds: report the union bound alongside observed zeros. Web sweep
 found NO prior building-FDD work on joint alarm budgeting across a rule
 battery — this is a claimable first if done properly (cite Benjamini-Hochberg).
+*[Marker 2026-08-19: DELIVERED in Phase 6, but the "first" claim was
+RETRACTED by the Phase-6 audit (tool-level FPRs exist: Frank 2019,
+LBNL/Granderson); the claimed novelty is the per-channel DECOMPOSITION
+driving a verified zero-cost detector definition — see PHASE6_RESULTS.]*
 
 **G10 · Sustained runs split at midnight — MINOR — SCHEDULED.**
 Bites only when the residual gate extends to unoccupied hours (the known next
@@ -122,8 +126,8 @@ provenance: oa_bias is a real fault run that our deployed channels do NOT
 detect — SDAHU 13/14 adjudicated.)* (The four
 oa_bias files are byte-identical to each other: one run shipped four times;
 the injected severity is not recoverable.) Consequences: (a) the residual
-channel's 48.8% "FPR" was actually ~100%-of-window-days DETECTION of a fifth
-fault family that rules, model, and every prior version missed entirely;
+channel's 48.8% "FPR" was actually ~100%-of-window-days response to that file
+*(X11 adjudicated it as E5 branch provenance, not fault detection)*;
 (b) v1–v4's FPR numbers were measured against a fault file (conservative,
 in our disfavor — the honest direction); (c) SDAHU now has no independent
 negative run — false-alarm evidence is holdout days only, until the FPU

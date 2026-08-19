@@ -15,6 +15,8 @@ artifacts.
 | TTD tail (full distribution in Part V addendum) | max 2 d | max 21 d | max 108 d |
 | healthy-year false-alarm days (rules) | 0 | 0 | 0 |
 
+† *Naive scorecard. X11 (Phase 8) adjudicated SDAHU to **13/14** — the oa_bias residual detection is ERRATA E5 branch provenance. Quote "14/14 naive; 13/14 adjudicated"; see PHASE8_RESULTS.md.*
+
 \* SFPU denominator excludes SensorBias_RMTEMP_−2C (source file calendar-
 rotated; weather-mismatched vs calibration year — counted nowhere).
 

@@ -162,18 +162,17 @@ branch offset — fault-vs-fault cross-family divergence is ~0.05–0.14 °F.
 Any healthy-trained detector on SDAHU (ours included) may partially detect
 branch provenance rather than fault physics. Concretely, for THIS project
 (integration review, 2026-08-18): the **oa_bias residual detection sits
-exactly on the fault-branch no-fault baseline (+0.007 vs +0.008) — it is
-likely branch provenance, and SDAHU's scorecard is expected to become
-13/14 under branch correction**; the coi_bias detections survive by an
+exactly on the fault-branch no-fault baseline (+0.007 vs +0.008) — it IS
+branch provenance, and SDAHU's scorecard is 13/14 under branch correction
+(X11, Phase 8; `outputs/x11_branch.json`)**; the coi_bias detections survive by an
 order of magnitude (±3.6/±7.2 °F vs the 1.06 °F offset); the nine
 rules-carried scenarios are branch-immune (signature rules compare a
 device's position to its own command within the same file — verified: the
 command floors wherever the position does); the seasonal rate channel is
 branch-confounded on SDAHU and stays diagnostic-only. FPU systems are
 single-branch on the schedule axis (verified) — cross-checks live there.
-**Adjudication is X11 in MASTER_PLAN Phase 8 (fault-vs-fault branch-offset
-estimation + branch-corrected re-scoring — column harmonization alone is
-provably insufficient).**
+**Adjudicated by X11 (Phase 8): 14/14 → 13/14; falsifier-clean under the
+pre-registered procedure; FPU homogeneity verified as an artifact.**
 
 **Who it bites:** every method — classical, ML, or ours — trained on
 `AHU_annual` and scored on the fault files. This erratum bites our own
@@ -189,7 +188,7 @@ benchmark and we say so.
 | E2 | coi_leakage = ONE scenario in `scenarios.yaml` |
 | E3 | `ERRATUM_COLS` dropped in baselines; STRATA configs never mapped them |
 | E4 | sort-on-convert + calendar gate + `exclude: true` |
-| E5 | disclosed; branch-sensitivity check queued (X11); FPU systems unaffected |
+| E5 | adjudicated by X11: 14/14→13/14; oa_bias resid = branch provenance; FPU homogeneity verified (0-min scheduled-occupancy diff; L29 caveat on the leg-(a) reading) |
 
 Week-0 gate battery (MD5, zone ground truth, monotonicity/calendar, TTL
 coverage, errata evidence): `scripts/02_week0_audit.py` — reusable on any

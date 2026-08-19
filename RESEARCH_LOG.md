@@ -40,13 +40,18 @@ Companion docs: `GAP_ANALYSIS_AUG2026.md` (gaps G1–G11), `PHASE1_RESULTS.md`,
 - **Why it happened:** dataset packaging error (one run shipped four times) plus
   a subtle injection convention (bias at the controller input, not the logger).
 - **Fix:** relabeled as a fifth SDAHU fault family (detected on ~100% of physics-
-  window days by the residual channel); consequence accepted: SDAHU has NO
+  window days by the residual channel) *(X11, Phase 8: those flags are the
+  E5 branch offset, not the fault — oa_bias is undetected in the
+  adjudicated scorecard; the fault evidence is the cooling-interlock
+  shift)*; consequence accepted: SDAHU has NO
   independent healthy negative, stated on every output.
 - **Paper value:** (a) a dataset-quality contribution the community needs; (b) the
   published AFGCN paper trained its OA-bias class on this file believing the
   logged column carries the bias — citable, carefully; (c) a case study in why
-  "false positives" deserve investigation before dismissal — ours turned out to
-  be detections.
+  "false positives" deserve investigation before dismissal — ours turned out
+  to be a real fault file but a BRANCH-PROVENANCE flag: the investigation
+  found E5, and X11 removed the detection. The moral survives with the sign
+  flipped: false positives deserve investigation — and so do true positives.
 
 ### D3. Physics windows, not recall ceilings
 - **Found:** sensor-bias recall looked like "38–45%" *[v12: 39–47%]* until decomposed: detection
@@ -175,6 +180,14 @@ threats-to-validity section, pre-answered.
 | L27 | The Phase-7 staleness sweep itself missed 8 stale locations — one inside the function computing the correction — and left MASTER_PLAN stale about itself | Curated file list instead of exhaustive search | Grep-list of retired numbers ("17/30", "38–45%", "51/60", "bit-identical", "1–2 days"…) over the WHOLE repo, code comments included. **Rule: a staleness sweep is defined by its search list, not its file list.** |
 | L28 | **Erratum E5** hid for six phases: the healthy SDAHU file is on a different config branch than every fault file (occupied damper floor 0.0 vs 0.1; different schedules) — healthy-vs-fault divergence partly measures BRANCH, not fault | Every comparison ran against the healthy file; no fault-vs-fault control existed | ERRATA.md E5 + gate-5 config_branch evidence; X11 branch-sensitivity check queued. **Rule: healthy-vs-fault divergence is fault evidence only after a fault-vs-fault control.** |
 
+### Phase-8 additions (L29-L31)
+
+| # | Gap | Root cause | Fix + standing rule |
+|---|-----|-----------|---------------------|
+| L29 | X11's FPU battery first fired F-X11.d: SYS_CTL>0 occupancy counted night-cycle (fault-responsive) as branch difference | "Fault-responsive" and "branch-constant" are different axes | Schedule leg conditions on SYS_CTL==1; night-cycle reported separately; post-hoc re-specification DISCLOSED as a resolved pre-registration ambiguity, not a clean pass. **Rule: homogeneity instruments must condition on the scheduled state, or fault behaviour masquerades as branch difference** (third member of the L21/L28 conflation family). |
+| L30 | Extreme-value calibration collapses at ONE silent-fault training day (demonstrated: single day -> both negative bias ladders 0/164) | min/max thresholds have breakdown point 1/n | Report with the visibility split: rules-visible contamination announces itself on 100% of days; signature-silent contamination is the dangerous case. **Rule: quote the breakdown AND the detectability split together, or the finding misleads in either direction.** |
+| L31 | Configs tuned at 1-min gained 28-64 healthy signature days at 15-min (threshold degeneration when sustained_min <= interval; run merging under aliasing) | A silence-tuned threshold is a claim about that sampling rate's noise process, not about the building | Transfer claim scoped: method transfers via the silence gate re-run at the deployment rate; configs never transplant across rates; freq/osc are fine-sampling instruments. **Rule: re-run the healthy-silence gate at the deployment sampling rate, always.** |
+
 ## Part III — Why these gaps kept appearing (the honest meta-analysis)
 
 1. **Simulation flatters.** Noise-free EnergyPlus years make 0-FP thresholds
@@ -234,14 +247,16 @@ for the claim→artifact map). The Aug-10 list predates Phases 3c–6.
 
 - **Scorecards (v12):** SDAHU **14/14**, PFPU **23/30**, SFPU **24/29**
   (SFPU excludes the rotated-calendar file, ERRATA.md E4). NOT 17/30, 18/30.
-  **E5 caveat (2026-08-18): SDAHU healthy-vs-fault numbers carry the
-  configuration-branch offset (ERRATA E5). The oa_bias detection rests on
-  the residual channel, whose audit-measured fault-branch no-fault
-  baseline (+0.008 °F) sits 1.06 °F below healthy's (+1.071 °F) —
-  oa_bias's residual sits exactly on that baseline, so its detection is
-  likely branch provenance. Expect 13/14 pending X11 adjudication; FPU
-  scorecards are single-branch and unaffected.**
-- **TTD:** **median 1 day**, with an honest tail — SDAHU {1×9, 2×5}; PFPU
+  **X11 ADJUDICATED (Phase 8, `outputs/x11_branch.json`): SDAHU is
+  "14/14 naive; 13/14 after branch correction (ERRATA E5)" — quote both
+  numbers together. oa_bias's only deployed channel (residual) was branch
+  provenance: 0 flags on its 148 evaluable window days under the
+  branch-corrected band; all four coi_bias scenarios keep every detection.
+  FPU scorecards verified single-branch (homogeneity battery, 0-min
+  scheduled-occupancy difference) and unaffected.**
+- **TTD:** **median 1 day**, with an honest tail — SDAHU {1×9, 2×5} naive,
+  **{1×9, 2×4} adjudicated** (oa_bias's TTD-2 removed by X11; median
+  unchanged); PFPU
   {1×19, 4, 11, 15, 21}; SFPU {1×19, 3, 15, 15, 37, 108}. Never write
   "TTD 1–2 days" without "median".
 - **Joint FPR (Phase 6):** naive all-8 union 15.6/12.5/4.2% of healthy
@@ -254,13 +269,17 @@ for the claim→artifact map). The Aug-10 list predates Phases 3c–6.
 - **Matched rules:** MR2 = freq EXACTLY on both FPU systems (SFPU 141=141
   AND PFPU 206=206); MR1 fires 231 healthy SDAHU days and 124 PFPU days
   (both numbers, not just PFPU's).
-- **PCA-strict head-to-head (comparable universes):** a dead heat —
-  **61 = 61** (14v13, 23v23, 24v25) with complementary misses; STRATA-only:
-  oa_bias+4, VAVDMPRUnstable, waterside-fouling-severe; PCA-only:
+- **PCA-strict head-to-head (comparable universes):** after X11, a
+  **60 v 61 near-tie** (13v13, 23v23, 24v25); oa_bias+4 is a **shared
+  miss** (both detectors miss it — PCA-strict `pca_sig_strict: false`);
+  STRATA-only: VAVDMPRUnstable, waterside-fouling-severe; PCA-only:
   RMTEMP+2C ×2, airside-fouling-moderate (via the unmapped zone-fan DP
   sensor — `outputs/sensor_coverage.json`).
 - **Bias windows (v12):** window-conditional recall is measured **100%**
   (164/164, 164/164, 139/139, 137/137, 148/148); windows 137–164 days/yr.
+  The oa_bias 148/148 is window-conditional residual RESPONSE, adjudicated
+  as branch provenance (X11), not fault detection — quote only the four
+  coi_bias columns as recall.
 - **Residual denominators:** benchmark's `residual_holdout_fp` n
   (36/124/121) counts channel-day pairs across residual channels;
   union_fpr's exposure (36/41/41) counts distinct days. Label whichever is

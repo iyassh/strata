@@ -96,7 +96,7 @@ Use `caffeinate -i` — a sleeping laptop silently stretches runs by hours.
 
 | Claim | Artifact |
 |---|---|
-| Scorecards 14/14, 23/30, 24/29; TTD; localization | `benchmark_v6_*.json` |
+| Scorecards 14/14 naive / **13/14 adjudicated (E5, X11)**, 23/30, 24/29; TTD; localization | `benchmark_v6_*.json` + `x11_branch.json` |
 | Joint FPR 15.6/12.5/4.2% naive; 1.0/5.2/4.2% deployed | `union_fpr_*.json` |
 | PCA/iForest baselines (13/14 @ 1/79 etc.) | `baselines_*.json` |
 | Discovery-automation (MR2=freq 141=141, 206=206; MR1 231/124 healthy-day fires) | `matched_rules_*.json` |
@@ -105,3 +105,4 @@ Use `caffeinate -i` — a sleeping laptop silently stretches runs by hours.
 | Circularity 5.2% → 1.8% | `benchmark_v2_processheal_v1.json` + `benchmark_v3.json` |
 | Sensor coverage (12/30, 56/109 mapped) | `sensor_coverage.json` |
 | Cry-wolf ratios (<0.1%) | `crywolf.json` |
+| X11 branch adjudication (13/14); X8 contamination breakdown; X5 severity; X7 sampling | `x11_branch.json`, `x8_contamination.json`, `x5_severity.json`, `x7_downsample.json` |

@@ -137,10 +137,17 @@ E→X, guards strengthened. See PHASE7_RESULTS.md.)
    into GAP_ANALYSIS/honesty material.
    Exit: a stranger can clone, fetch data, and reproduce every quoted number.
 
-### Phase 8 — The missing experiments (S3, S6, then S4)
+### Phase 8 — The missing experiments (S3, S6, S4, X11) — ✅ DONE 2026-08-19
+(commits 65fe3b8…; pre-registered, hostile-audited, audit fixes applied.
+X11 ADJUDICATED: SDAHU 14/14 naive → **13/14 branch-corrected**; PCA
+60v61 near-tie, oa_bias a shared miss. X8: one-silent-day breakdown
+demonstrated + visibility split. X5: dose ladders positive (airflow
+regex bug fixed+disclosed); position ladders scoped. X7: falsifiers
+FIRED and honored — configs are sampling-rate-specific; snapshot-only
+caveat. Ledger L29-L31. See PHASE8_RESULTS.md.)
 
 **ORDER REVISED by the 2026-08-18 integration review: X11 FIRST** — it
-changes what the headline numbers ARE (expected SDAHU 13/14; PCA "dead
+changes what the headline numbers ARE (adjudicated: SDAHU 13/14; PCA "dead
 heat 61=61" becomes 60v61 "near-tie with complementary misses"; the D2
 narrative partially reverses), whereas X8/X5 characterize robustness and
 must run on the CORRECTED detector or be re-run.

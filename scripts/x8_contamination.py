@@ -96,9 +96,15 @@ for src_label, src_file in SOURCES.items():
     flog = abstract_events(fdf, cfg)
     fcounts = unit_day_counts(flog)
     fsig_days = set(flog.loc[flog["activity"].isin(SIGNATURE), "case_id"])
-    for k in KS:
-        step = max(int(round(1.0 / k)), 1)
-        chosen = train_days[::step][: int(round(k * len(train_days)))]
+    # audit fix: the ONE-day breakdown claim must be demonstrated, not
+    # inferred — run a single score-carrying contaminated day first
+    carrying = [d for d in train_days if d in frs.index and frs.loc[d, "score"] == frs.loc[d, "score"]]
+    runs_spec = [("1day", [carrying[0]] if carrying else [])] + [
+        (k, None) for k in KS]
+    for k, chosen in runs_spec:
+        if chosen is None:
+            step = max(int(round(1.0 / k)), 1)
+            chosen = train_days[::step][: int(round(k * len(train_days)))]
         # ---- residual band under contamination ----
         rc = rh.set_index("case_id").copy()
         replaced = [d for d in chosen if d in frs.index]
@@ -120,7 +126,10 @@ for src_label, src_file in SOURCES.items():
                     widened += 1
         # ---- detectability of the contamination itself ----
         sig_hit = len([d for d in chosen if d in fsig_days])
+        n_carrying = len([d for d in chosen if d in frs.index
+                          and frs.loc[d, "score"] == frs.loc[d, "score"]])
         run = {"source": src_label, "k": k, "n_contaminated": len(chosen),
+               "n_score_carrying": n_carrying,
                "band": [round(band_c[0], 4), round(band_c[1], 4)],
                "band_width": round(band_c[1] - band_c[0], 4),
                "band_width_baseline": round(band0[1] - band0[0], 4),
@@ -128,7 +137,8 @@ for src_label, src_file in SOURCES.items():
                "freq_keys_widened": widened,
                "contaminated_days_with_signature_events": sig_hit}
         out["runs"].append(run)
-        print(f"[{src_label} k={k:.0%}] n={len(chosen)} band [{band_c[0]:.2f},{band_c[1]:.2f}] "
+        klabel = k if isinstance(k, str) else f"{k:.0%}"
+        print(f"[{src_label} k={klabel}] n={len(chosen)} band [{band_c[0]:.2f},{band_c[1]:.2f}] "
               f"width {band_c[1]-band_c[0]:.2f} | cov {cov_c} | FP {fp_c} | "
               f"freq widened {widened} | sig-visible days {sig_hit}/{len(chosen)}")
 
@@ -139,6 +149,21 @@ if worst10["band_width"] <= worst10["band_width_baseline"] + 1e-9:
     falsifiers.append("F-X8.a: worst-case k=10% left bands unchanged — instrument broken")
 if any(r["holdout_fp"] > fp0 for r in out["runs"]):
     falsifiers.append("F-X8.b: FP increased under contamination — accounting bug")
+out["disclosures"] = [
+    "monthly rate bands were pre-registered but not recomputed (scope-out: "
+    "the rate channel is diagnostic-only since Phase 6 and branch-confounded "
+    "on SDAHU since X11; its calibration drift has no deployed consequence)",
+    "contamination is applied at the daily-aggregate level — exactly "
+    "equivalent to row-level for the residual channel (daily score is a pure "
+    "per-day function; abstains carry over); for frequency, two structural "
+    "caveats: unit_day_counts is state-alphabet-only (signature contamination "
+    "never reaches frequency calibration by construction) and the column "
+    "reindex drops fault-only activity types a row-level replay would add "
+    "as new training keys (neither changes the min/max-band outcome)",
+    "the '1day' rows demonstrate the one-score-carrying-day breakdown "
+    "directly (audit fix); in the k-sweeps 2 of 5 k=2% days abstain in the "
+    "worst-case source (46% of train days are evaluable there)",
+]
 out["falsifiers_fired"] = falsifiers
 Path("outputs/x8_contamination.json").write_text(json.dumps(out, indent=1))
 print(f"\nfalsifiers fired: {falsifiers or 'NONE'}")

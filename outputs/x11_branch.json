@@ -25,94 +25,117 @@
   0.3096
  ],
  "noise_floor": {
-  "healthy_out_of_band_rate": 0.0,
-  "p0": 0.00822
+  "holdout_fp": 0,
+  "holdout_evaluable": 36,
+  "p0": 0.02778,
+  "note": "benchmark.py formula per pre-registration; the first committed run used a healthy all-days rate (0.0082) \u2014 decision-irrelevant (oa_bias k=0 fails under any p0; coi_bias ~45% of days passes under any sane p0), disclosed per audit"
  },
  "corrected_rescoring": {
   "damper_stuck_010_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 0,
+   "calendar_days": 365,
    "flagged": 0,
    "significant": false,
-   "median": NaN
+   "median": null
   },
   "damper_stuck_025_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 0,
+   "calendar_days": 365,
    "flagged": 0,
    "significant": false,
-   "median": NaN
+   "median": null
   },
   "damper_stuck_075_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 156,
+   "calendar_days": 365,
    "flagged": 155,
    "significant": true,
    "median": 4.743
   },
   "damper_stuck_100_annual_short": {
-   "window_days": 215,
+   "evaluable_window_days": 70,
+   "calendar_days": 215,
    "flagged": 70,
    "significant": true,
    "median": 3.3551
   },
   "coi_stuck_010_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 0,
+   "calendar_days": 365,
    "flagged": 0,
    "significant": false,
-   "median": NaN
+   "median": null
   },
   "coi_stuck_025_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 0,
+   "calendar_days": 365,
    "flagged": 0,
    "significant": false,
-   "median": NaN
+   "median": null
   },
   "coi_stuck_050_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 0,
+   "calendar_days": 365,
    "flagged": 0,
    "significant": false,
-   "median": NaN
+   "median": null
   },
   "coi_stuck_075_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 0,
+   "calendar_days": 365,
    "flagged": 0,
    "significant": false,
-   "median": NaN
+   "median": null
   },
   "coi_leakage_010_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 0,
+   "calendar_days": 365,
    "flagged": 0,
    "significant": false,
-   "median": NaN
+   "median": null
   },
   "coi_bias_-4_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 164,
+   "calendar_days": 365,
    "flagged": 164,
    "significant": true,
    "median": -7.1918
   },
   "coi_bias_-2_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 164,
+   "calendar_days": 365,
    "flagged": 164,
    "significant": true,
    "median": -3.592
   },
   "coi_bias_2_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 139,
+   "calendar_days": 365,
    "flagged": 139,
    "significant": true,
    "median": 3.608
   },
   "coi_bias_4_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 137,
+   "calendar_days": 365,
    "flagged": 137,
    "significant": true,
    "median": 7.2081
   },
   "oa_bias_4_annual": {
-   "window_days": 365,
+   "evaluable_window_days": 148,
+   "calendar_days": 365,
    "flagged": 0,
    "significant": false,
    "median": 0.0072
   }
+ },
+ "oa_bias_left_tail": {
+  "min": -0.83,
+  "p1": -0.7088,
+  "days_below_corrected_lo": 4,
+  "days_below_flag_line": 0,
+  "note": "a real left tail exists (audit finding); under ANY band width the tail stays below the significance floor \u2014 the verdict is 'no SIGNIFICANT SA-path deviation', not 'residual identically at baseline'"
  },
  "debias_consistency": {
   "coi_bias_-4_annual": {
@@ -242,12 +265,25 @@
     2.17
    ],
    "rmtemp_bias_residual_medians": {
+    "PFPU_RMTEMPUnstable": 2.16,
     "PFPU_SensorBias_RMTEMP_+2C": 2.16,
-    "PFPU_SensorBias_RMTEMP_-2C": 2.16
+    "PFPU_SensorBias_RMTEMP_+4C": 2.16,
+    "PFPU_SensorBias_RMTEMP_-2C": 2.16,
+    "PFPU_SensorBias_RMTEMP_-4C": 2.15
    },
    "rmtemp_medians_inside_band": {
+    "PFPU_RMTEMPUnstable": true,
     "PFPU_SensorBias_RMTEMP_+2C": true,
-    "PFPU_SensorBias_RMTEMP_-2C": true
+    "PFPU_SensorBias_RMTEMP_+4C": true,
+    "PFPU_SensorBias_RMTEMP_-2C": true,
+    "PFPU_SensorBias_RMTEMP_-4C": true
+   },
+   "rmtemp_margins_to_band_edge": {
+    "PFPU_RMTEMPUnstable": 0.01,
+    "PFPU_SensorBias_RMTEMP_+2C": 0.01,
+    "PFPU_SensorBias_RMTEMP_+4C": 0.01,
+    "PFPU_SensorBias_RMTEMP_-2C": 0.01,
+    "PFPU_SensorBias_RMTEMP_-4C": 0.02
    },
    "instrument_note": "schedule leg compares SYS_CTL==1 only; night-cycle (==2) is fault-responsive and reported separately; E4-excluded file skipped (first-run F-X11.d firing was this conflation \u2014 diagnosed and corrected)"
   },
@@ -260,14 +296,27 @@
     1.72
    ],
    "rmtemp_bias_residual_medians": {
-    "SFPU_SensorBias_RMTEMP_+2C": 1.42
+    "SFPU_RMTEMPUnstable": 1.45,
+    "SFPU_SensorBias_RMTEMP_+2C": 1.42,
+    "SFPU_SensorBias_RMTEMP_+4C": 1.39,
+    "SFPU_SensorBias_RMTEMP_-4C": 1.44
    },
    "rmtemp_medians_inside_band": {
-    "SFPU_SensorBias_RMTEMP_+2C": true
+    "SFPU_RMTEMPUnstable": true,
+    "SFPU_SensorBias_RMTEMP_+2C": true,
+    "SFPU_SensorBias_RMTEMP_+4C": true,
+    "SFPU_SensorBias_RMTEMP_-4C": true
+   },
+   "rmtemp_margins_to_band_edge": {
+    "SFPU_RMTEMPUnstable": 0.23,
+    "SFPU_SensorBias_RMTEMP_+2C": 0.2,
+    "SFPU_SensorBias_RMTEMP_+4C": 0.17,
+    "SFPU_SensorBias_RMTEMP_-4C": 0.22
    },
    "instrument_note": "schedule leg compares SYS_CTL==1 only; night-cycle (==2) is fault-responsive and reported separately; E4-excluded file skipped (first-run F-X11.d firing was this conflation \u2014 diagnosed and corrected)"
   }
  },
  "falsifiers_fired": [],
+ "f_x11d_disclosure": "F-X11.d FIRED on the first run under one admissible reading of battery leg (a) (SYS_CTL>0 \u2014 the reading closest to the pipeline's own residual gating, occ_above 0.5). Diagnosis: the entire day-difference is night-cycle runtime (==2), fault-responsive; scheduled occupancy (==1) is identical to the minute. Leg (a) was re-specified to the scheduled state post hoc \u2014 a resolved ambiguity in the pre-registered text, reported as such, not as a clean pass. Leg (c) independently covers the night-cycle-inclusive windows (medians inside band; PFPU margin 0.01 F).",
  "verdict": "ADJUDICATED"
 }

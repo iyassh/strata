@@ -82,6 +82,8 @@ def test_x7_fired_falsifiers_are_pinned():
     assert any("sdahu healthy gains" in f for f in fired)
     assert any("pfpu healthy gains" in f for f in fired)
     assert any("sfpu healthy gains" in f for f in fired)
+    # F-X7.b firing pinned too (audit fix): pfpu fan_restrict residual 31->1
+    assert any("fan_restrict residual" in f for f in fired)
     # the sampling-robust channel: residual coverage on the bias families
     sd = a["systems"]["sdahu"]["families"]["sensor_bias"]["coverage_1min_vs_15min"]
     r1, r15 = sd["residual_days"]

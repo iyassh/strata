@@ -117,7 +117,9 @@ fault-specific signal is a ~2 °F shift in the cooling interlock only.
 with a controller-side bias confined to the cooling interlock, but
 observationally indistinguishable from a mislabeled cooling-lockout fault.
 What is proven: the labeled sensor bias is not in the data and the run is
-faulty.)* (The four
+faulty. (3) X11 (Phase 8) adjudicated the residual flags as branch
+provenance: oa_bias is a real fault run that our deployed channels do NOT
+detect — SDAHU 13/14 adjudicated.)* (The four
 oa_bias files are byte-identical to each other: one run shipped four times;
 the injected severity is not recoverable.) Consequences: (a) the residual
 channel's 48.8% "FPR" was actually ~100%-of-window-days DETECTION of a fifth

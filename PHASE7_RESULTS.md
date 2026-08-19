@@ -32,7 +32,7 @@ GAP_ANALYSIS F1 was amended. (Ledger L26.)
   quote-from-here block — v12 scorecards, honest TTD distribution
   ("median 1 day" + tails, never bare "1–2 days"), joint FPR + demotion,
   50/10 zone ground truth, MR2=freq on BOTH FPUs (141=141, 206=206),
-  MR1 231/124, the PCA dead heat 61=61, window-conditional recall 100%,
+  MR1 231/124, the PCA dead heat 61=61 *(superseded by X11 → 60v61, oa_bias a shared miss; see PHASE8_RESULTS)*, window-conditional recall 100%,
   residual denominator semantics, onboarding recount.
 - GAP_ANALYSIS G5 rescoped ("event-log-identical" was v1-alphabet-only;
   byte-level duplicates stand); F1 weather-identity phrasing corrected.

@@ -41,7 +41,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from processheal.core.detection import holdout_mask
+from processheal.core.splits import holdout_mask
 from processheal.core.devices import device_log
 from processheal.hvac.events import state_only
 from processheal.io.config import Config

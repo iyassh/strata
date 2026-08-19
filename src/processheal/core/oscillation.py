@@ -22,7 +22,7 @@ from __future__ import annotations
 import pandas as pd
 
 from processheal.core.frequency import FrequencyDetector, _flag_matrix
-from processheal.core.detection import holdout_mask
+from processheal.core.splits import holdout_mask
 from processheal.io.config import Config
 
 

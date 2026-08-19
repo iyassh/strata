@@ -33,9 +33,11 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from processheal.core.conformance import check_conformance
-from processheal.core.detection import holdout_mask
-from processheal.core.discovery import discover_model
+from processheal.core.splits import holdout_mask
+
+# pm4py (AGPL) enters only through discovery/conformance — imported lazily
+# inside the functions that need them so the MIT-clean channel path
+# (frequency imports device_log from here) never loads it (LICENSING-NOTES).
 from processheal.hvac.events import device_state_only
 from processheal.io.config import Config
 
@@ -103,6 +105,9 @@ def build_device_detector(
     hold = holdout_mask(dlog["case_id"], d["holdout_days_per_month"])
     train, hold_log = dlog[~hold].reset_index(drop=True), dlog[hold].reset_index(drop=True)
 
+    from processheal.core.conformance import check_conformance
+    from processheal.core.discovery import discover_model
+
     net, im, fm = discover_model(train[["case_id", "activity", "timestamp"]])
     conf = check_conformance(hold_log[["case_id", "activity", "timestamp"]], net, im, fm)
     threshold = float(conf["per_day"]["fitness"].quantile(d["fpr_quantile"]))
@@ -136,6 +141,8 @@ def classify_device_days(det: DeviceDetector, log: pd.DataFrame, cfg: Config) ->
     dlog = device_log(log, cfg)
     if dlog.empty:
         return pd.DataFrame(columns=["day", "device", "fitness", "flagged"])
+    from processheal.core.conformance import check_conformance
+
     conf = check_conformance(dlog[["case_id", "activity", "timestamp"]], det.net, det.im, det.fm)
     per = conf["per_day"].copy()
     parts = per["case_id"].str.split("__")

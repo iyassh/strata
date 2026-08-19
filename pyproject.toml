@@ -1,8 +1,12 @@
 [project]
 name = "processheal"
 version = "0.1.0"
-description = "Process mining for fault detection and diagnosis in building HVAC systems"
+description = "STRATA: discovered process models + calibrated interpretable channels for building HVAC fault detection (every alarm ships with a name, an explanation, and a false-positive budget)"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Yassh", email = "iyassh28@gmail.com" }]
+keywords = ["fault-detection", "HVAC", "process-mining", "FDD", "buildings", "conformance-checking"]
 requires-python = ">=3.12"
 dependencies = [
     "duckdb>=1.5.4",

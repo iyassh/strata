@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use STRATA, please cite it as below."
+title: "STRATA: Stratified Process Models with Calibrated Interpretable Channels for Building HVAC Fault Detection"
+authors:
+  - given-names: Yassh
+    email: iyassh28@gmail.com
+    affiliation: "Thompson Rivers University"
+version: 0.1.0
+date-released: 2026-08-19
+license: MIT
+repository-code: "https://github.com/iyassh/strata"
+keywords:
+  - fault detection and diagnosis
+  - HVAC
+  - process mining
+  - conformance checking
+  - buildings
+references:
+  - type: data
+    title: "LBNL Fault Detection and Diagnostics Datasets"
+    authors:
+      - family-names: Granderson
+        given-names: Jessica
+      - family-names: Lin
+        given-names: Guanjing
+    doi: 10.25984/1881324

@@ -47,8 +47,8 @@ Standing verdicts the plan builds on:
 
 | ID | Gap | Severity |
 |----|-----|----------|
-| T1 | **No LICENSE file** — nobody can legally reuse anything. Norm in this space: MIT/BSD-3 | BLOCKING |
-| T2 | **pm4py is AGPL** — a hard dependency makes the whole toolkit effectively AGPL (poison for consultant/vendor adoption). Must become optional extra (`strata[pm4py]`) or be replaced natively for our restricted event-log class. ARCHITECTURAL — decide before repo goes public | BLOCKING |
+| T1 | ~~No LICENSE file~~ | ✅ DONE 2026-08-19: MIT + pyproject metadata + CITATION.cff |
+| T2 | pm4py AGPL | ✅ DECIDED 2026-08-19 (LICENSING-NOTES.md): disclosed hard dep now -> lazy-import split in T3 (strata-fdd MIT-clean core + [discovery] extra) -> native miner Phase 12 |
 | T3 | **The real detector exists only inside scripts/benchmark.py** (480 lines welded to fault manifests, ground truth, data/ symlink). All significance gates — the scientific heart — are script-local, un-importable, untested. Needs a `StrataDetector` facade: `load_config → fit(healthy_df) → score(new_df) → report()` (~3–5 days; channel modules need almost no change) | BLOCKING |
 | T4 | **No fault-free-only entry point**: shipped `processheal run` CLI is the stale v1 single-channel pipeline (also demands a --faulty file and equipment.ttl); processheal-web crashes at import on a fresh clone | BLOCKING |
 | T5 | **Data ingestion**: convert scripts default to /Users/yassh/... paths (env-var overridable since Phase 7, but they no-op silently on empty source dirs); data/ dangling symlink on fresh clones; no tz handling (naive dt.date); needs `strata ingest` | BLOCKING |

@@ -122,6 +122,7 @@ class StrataDetector:
         dev_flag = pd.Series(False, index=days)
         abs_flag = pd.Series(False, index=days)
         dev_by_device: dict[str, int] = {}
+        dev_days_map: dict[str, list] = {}
         abs_by_device: dict[str, tuple[int, int, float]] = {}
         if self.unit_model is not None:
             from processheal.core.detection import classify_days
@@ -138,6 +139,7 @@ class StrataDetector:
                 dev_flag = dev_flag | pd.Series(days.isin(set(fl["day"])), index=days)
                 dev_by_device = {d: int(n) for d, n in
                                  fl.groupby("device")["day"].nunique().items()}
+                dev_days_map = {d: sorted(set(g["day"])) for d, g in fl.groupby("device")}
             sched = [d for d in days if uni.loc[d, "occupied_min"] > 0]
             ab = absence_days(self.device_model, log, cfg, sched)
             rare = ab[(ab["silent"]) & (ab["healthy_rate"] <= 0.05)]
@@ -162,6 +164,15 @@ class StrataDetector:
                 rr = rr.set_index("day")
                 rate_flag = rate_flag | rr["flagged"].reindex(days).fillna(False)
 
+        # X3 localization: top-firing device among signature events
+        top_device = None
+        if len(sig):
+            dev_map = event_device_map(cfg)
+            dd = sig.assign(dev=sig["activity"].map(dev_map)).dropna(subset=["dev"])
+            if len(dd):
+                counts = dd.groupby("dev")["case_id"].nunique()
+                top_device = str(counts.idxmax())
+
         channels = {"rules": rules, "residual": res_flag, "model": model,
                     "device": dev_flag, "absence": abs_flag, "frequency": freq_flag,
                     "oscillation": osc_flag}
@@ -172,7 +183,9 @@ class StrataDetector:
                 "rate_diagnostic": rate_flag, "deployed_union": deployed,
                 "residual_evaluable": res_eval,
                 "device_days_by_device": dev_by_device,
+                "device_days_map": dev_days_map,
                 "absence_by_device": abs_by_device,
+                "top_device": top_device,
                 "signature_log": sig}
 
     # ---- significance-gated evaluation --------------------------------------
@@ -213,10 +226,18 @@ class StrataDetector:
         sig["absence"] = S.absence_significant(s["absence_by_device"])
 
         meaningful = [k for k in DEPLOYED_CHANNELS if sig.get(k)]
-        # TTD from significant channels only (audit G)
+        # TTD from significant channels only (audit G) — and for the device
+        # channel, only the SIGNIFICANT devices' days (benchmark.py:380-384:
+        # a noise day from an insignificant sibling must not set TTD)
         sig_union = pd.Series(False, index=uni.index)
         for name in meaningful:
-            sig_union = sig_union | s["channels"][name]
+            if name == "device":
+                sig_days = [d for dv in sig_devices
+                            for d in s["device_days_map"].get(dv, [])]
+                sig_union = sig_union | pd.Series(uni.index.isin(sig_days),
+                                                  index=uni.index)
+            else:
+                sig_union = sig_union | s["channels"][name]
         ttd = None
         for i, d in enumerate(uni.index, start=1):
             if bool(sig_union.get(d, False)):

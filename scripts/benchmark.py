@@ -32,19 +32,10 @@ from pathlib import Path
 
 import pandas as pd
 import yaml
-from math import comb
-
-
-def binom_sf(k: int, n: int, p: float) -> float:
-    """P(X >= k), X ~ Binom(n, p) — is an alarm count above a channel's
-    healthy noise floor, or just the floor itself? (G4 at scenario level:
-    'detected' must mean 'significantly above what noise produces'.)"""
-    if n <= 0:
-        return 1.0
-    return sum(comb(n, i) * p**i * (1 - p)**(n - i) for i in range(min(k, n), n + 1))
 
 warnings.filterwarnings("ignore")
 
+from processheal.core import significance as S
 from processheal.core.detection import build_detector, classify_days, holdout_mask
 from processheal.core.devices import (absence_days, build_device_detector,
                                        classify_device_days, pooling_homogeneity)
@@ -311,56 +302,36 @@ for sc in SCENARIOS:
                                           "dev_flag", "abs_flag", "freq_flag",
                                           "rate_flag", "osc_flag")}
 
-    # significance vs each channel's own holdout noise floor
-    p_model = max(model_hold_fp, 1) / max(len(det.holdout_per_day), 1)
-    p_resid = max(hold_fp, 1) / max(hold_n, 1)
-    # rules floor: 0 observed FP on the healthy year still only bounds the
-    # rate at ~3/365 (rule of three) — 1-3 fire-days are NOT detection
-    sig_rules = binom_sf(c["rules"], n_eval, 3.0 / 365.0) < 1e-3
-    sig_resid = bool(n_win) and binom_sf(c["res_flag"], n_win, p_resid) < 1e-3
-    sig_model = binom_sf(c["model"], n_eval, p_model) < 1e-3
-    # Device significance is PER DEVICE (audit A4: the any-of-4 day-level test
-    # dies under holdout-estimation uncertainty; the per-instance test is the
-    # stratum's own logic and is CI-robust). Bonferroni across the 4 devices,
-    # and required to hold at 2x the estimated case rate (sensitivity margin).
-    p_case = (max(int((dev_det.holdout_per_case["fitness"] < dev_det.threshold).sum()), 1)
-              / max(len(dev_det.holdout_per_case), 1)) if dev_det else 1.0
+    # significance vs each channel's own holdout noise floor — the gate
+    # math now lives in core.significance (T3 facade extraction; identical
+    # formulas, regression-guarded by the byte-identical SDAHU rerun)
+    sig_rules = S.rules_significant(c["rules"], n_eval)
+    sig_resid = S.residual_significant(c["res_flag"], n_win, hold_fp, hold_n)
+    sig_model = S.model_significant(c["model"], n_eval,
+                                    model_hold_fp, len(det.holdout_per_day))
     sig_dev, sig_devices = False, []
     if dev_det is not None and e["dev_by_device"]:
-        n_dev = max(len(dev_det.healthy_absence), 1)
-        for _d, k_days in e["dev_by_device"].items():
-            if (binom_sf(k_days, n_eval, p_case) < 1e-3 / n_dev
-                    and binom_sf(k_days, n_eval, min(2 * p_case, 1.0)) < 1e-3 / n_dev):
-                sig_dev = True
-                sig_devices.append(_d)
-    # absence: significant if ANY rare-silence device is silent far above its
-    # healthy rate (rule-of-three floor when the healthy rate is zero)
-    sig_abs = False
-    for _dev, (k_sil, n_sched_d, hrate) in e["abs_days_sig"].items():
-        if hrate <= 0.05 and n_sched_d:
-            sig_abs = sig_abs or binom_sf(k_sil, n_sched_d, max(hrate, 3.0 / 365.0)) < 1e-3
-    # frequency: day-level binomial vs holdout rate (rule-of-three floored)
-    p_freq = 1.0
-    if freq_unit is not None:
-        p_freq = freq_unit.holdout_fp_days / max(freq_unit.holdout_days, 1)
-        if freq_dev is not None:
-            p_freq += freq_dev.holdout_fp_days / max(freq_dev.holdout_days, 1)
-        p_freq = max(p_freq, 3.0 / max(freq_unit.holdout_days, 1))
-    sig_freq = freq_unit is not None and binom_sf(c["freq_flag"], n_eval, min(p_freq, 1.0)) < 1e-3
-    # rate: overlapping 30d windows -> effective n = days/30, conservative
-    p_osc = (max(osc_det.holdout_fp_days, 3) / max(osc_det.holdout_days, 1)) if osc_det else 1.0
-    sig_osc = osc_det is not None and binom_sf(c["osc_flag"], n_eval, min(p_osc, 1.0)) < 1e-3
-    # rate: score only every-30th calendar day (non-overlapping windows ->
-    # clean Bernoulli sample, audit A2; ONE margin policy = rule-of-three
-    # floor, no ad hoc multipliers)
+        sig_dev, sig_devices = S.device_significant(
+            e["dev_by_device"], n_eval,
+            int((dev_det.holdout_per_case["fitness"] < dev_det.threshold).sum()),
+            len(dev_det.holdout_per_case),
+            len(dev_det.healthy_absence))
+    sig_abs = S.absence_significant(
+        {d: (k, n_, r) for d, (k, n_, r) in e["abs_days_sig"].items()})
+    sig_freq = freq_unit is not None and S.frequency_significant(
+        c["freq_flag"], n_eval,
+        freq_unit.holdout_fp_days, freq_unit.holdout_days,
+        getattr(freq_dev, "holdout_fp_days", 0),
+        getattr(freq_dev, "holdout_days", 0) if freq_dev is not None else 0)
+    sig_osc = osc_det is not None and S.oscillation_significant(
+        c["osc_flag"], n_eval, osc_det.holdout_fp_days, osc_det.holdout_days)
     sig_rate = False
     if rate_det is not None:
         decision_days = [d for i, d in enumerate(e["uni"].index) if i % 30 == 29]
         k_rate = int(sum(bool(e["rate_flag"].get(d, False)) for d in decision_days))
-        n_rate = max(len(decision_days), 1)
-        p_rate = max(rate_det["holdout_fp_days"] / max(rate_det["holdout_days"], 1),
-                     3.0 / 365.0)
-        sig_rate = binom_sf(k_rate, n_rate, min(p_rate, 1.0)) < 1e-3
+        sig_rate = S.rate_significant(k_rate, len(decision_days),
+                                      rate_det["holdout_fp_days"],
+                                      rate_det["holdout_days"])
     meaningful = "+".join(x for x, s_ in
                           (("rules", sig_rules), ("resid", sig_resid), ("model", sig_model),
                            ("device", sig_dev), ("absence", sig_abs),

@@ -29,12 +29,12 @@ invariant holds — transplanted blindly, they false-alarm on up to 231
 days per year.
 
 The evaluation protocol is itself a contribution: pre-registered
-falsifiers (six fired and honored, including one that revealed our own
-strongest detection to be an artifact of a previously undocumented
-dataset defect), a measured 3.4-percentage-point circularity bound on
-model self-confirmation, five machine-verified errata for the most widely
-used public FDD datasets, and full reproducibility from a public
-repository — one command reproduces every table.
+falsifiers whose every firing is honored in print — including one that
+revealed a 14th "detection" to be an artifact of a previously
+undocumented dataset defect — a measured 3.4-percentage-point circularity
+bound on model self-confirmation, five machine-verified errata for the
+most widely used public FDD datasets, and full reproducibility: every
+table regenerates from the public repository's documented runbook.
 
 ---
 
@@ -51,7 +51,11 @@ repository — one command reproduces every table.
   mining for FDD."
 - Terminology: "fault-free/baseline training" (community standard), not
   "healthy-only". "Stratified" is unclaimed in process mining.
-- Word budget: ~250; ICPM abstracts are typically 150–300.
+- Word budget: ~255; ICPM abstracts are typically 150–300.
+- Self-review 2026-08-19: removed an unverifiable falsifier count ("six"),
+  a premature "one command" claim (that CLI is toolkit work in progress),
+  and "strongest detection" puffery — every remaining number traces to
+  RESEARCH_LOG Part V addendum.
 - Ask: does the framing land for a building-science reader? Is anything
   overclaimed or underclaimed? Reply-by hoped: Aug 25, so v2 can loop
   once more before Sep 3 submission (one day early per project law).

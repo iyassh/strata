@@ -84,3 +84,17 @@ def test_facade_reproduces_union_fpr_sdahu():
     assert rep["detected"] is False, rep["meaningful_channels"]
     # provenance disclosure present (L24)
     assert "calibration target" in rep["provenance"]["model"]
+
+    # fault-side regression: damper_stuck_010 is rules-carried, TTD 1 in v12
+    fdf = pd.read_parquet(ROOT / "data/processed/sdahu/damper_stuck_010_annual.parquet")
+    frep = det.evaluate(fdf)
+    assert frep["detected"] is True
+    assert "rules" in frep["meaningful_channels"]
+    assert frep["ttd_days"] == 1
+    assert int(frep["counts"]["rules"]) == 365  # v12: rules_days 365
+    # rate fires 211 raw days on this scenario but its every-30th-day
+    # decision gate is NOT significant in v12 (meaningful_channels ==
+    # "rules" alone) — the facade must agree, and rate must never appear
+    # in the deployed meaningful list regardless
+    assert "rate" not in frep["meaningful_channels"]
+    assert frep["rate_corroborates"] is False

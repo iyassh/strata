@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1230 720" width="1230" height="720" xmlns="http://www.w3.org/2000/svg"
+       font-family="Avenir Next, Segoe UI, Helvetica Neue, Arial, sans-serif">
+    <defs>
+      <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0,0.6 L7.4,4 L0,7.4 Z" fill="#5A6470"/>
+      </marker>
+      <marker id="arrA" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0,0.6 L7.4,4 L0,7.4 Z" fill="#A8642B"/>
+      </marker>
+    </defs>
+
+    <!-- ══════════ phase headers ══════════ -->
+    <g font-size="11.5" font-weight="700" letter-spacing="1.6" fill="#8A8F88">
+      <text x="88"  y="30" text-anchor="middle">INPUTS</text>
+      <text x="248" y="30" text-anchor="middle">WEEK-0 GATES</text>
+      <text x="420" y="30" text-anchor="middle">EVENT ABSTRACTION</text>
+      <text x="663" y="30" text-anchor="middle">FAULT-FREE TRAINING · fit()</text>
+      <text x="937" y="30" text-anchor="middle">DETECTION · score()</text>
+      <text x="1135" y="30" text-anchor="middle">OUTPUT</text>
+    </g>
+    <line x1="20" y1="38" x2="1210" y2="38" stroke="#DDDBD2" stroke-width="1"/>
+
+    <!-- ══════════ INPUTS column ══════════ -->
+    <g font-size="11.5" fill="#212A35">
+      <rect x="24" y="56" width="128" height="52" rx="3" fill="#F6F5F0" stroke="#9AA0A8"/>
+      <text x="88" y="77" text-anchor="middle" font-weight="600">BMS trend data</text>
+      <text x="88" y="93" text-anchor="middle" fill="#6A7069">1-min, one year, fault-free</text>
+
+      <rect x="24" y="120" width="128" height="66" rx="3" fill="#EDF2F8" stroke="#33608F"/>
+      <text x="88" y="140" text-anchor="middle" font-weight="600" fill="#33608F">Building config</text>
+      <text x="88" y="155" text-anchor="middle" fill="#33608F">sensors.yaml · rules.yaml</text>
+      <text x="88" y="171" text-anchor="middle" fill="#6A7069" font-size="10.5">the only building-specific part</text>
+
+      <rect x="24" y="198" width="128" height="44" rx="3" fill="#F6F5F0" stroke="#9AA0A8" stroke-dasharray="4 3"/>
+      <text x="88" y="216" text-anchor="middle" font-weight="600">Brick model</text>
+      <text x="88" y="231" text-anchor="middle" fill="#6A7069">optional · localization</text>
+    </g>
+
+    <!-- ══════════ WEEK-0 GATES ══════════ -->
+    <rect x="192" y="56" width="112" height="186" rx="3" fill="#FDF9F4" stroke="#8C4045"/>
+    <g font-size="11" fill="#212A35">
+      <text x="248" y="76" text-anchor="middle" font-weight="700" fill="#8C4045">Data gates</text>
+      <text x="248" y="92" text-anchor="middle" font-size="10" fill="#6A7069">before any design decision</text>
+      <text x="204" y="112">· MD5 duplicates</text>
+      <text x="204" y="128">· calendar identity</text>
+      <text x="204" y="144">· zone ground truth</text>
+      <text x="204" y="160">· branch homogeneity</text>
+      <text x="204" y="176">· healthy-silence tune</text>
+      <rect x="202" y="190" width="92" height="40" rx="3" fill="#8C4045"/>
+      <text x="248" y="207" text-anchor="middle" fill="#FFF" font-weight="600" font-size="10.5">ERRATA E1–E5</text>
+      <text x="248" y="221" text-anchor="middle" fill="#F0D9DA" font-size="9.5">machine-verified</text>
+    </g>
+
+    <!-- ══════════ EVENT ABSTRACTION + ALPHABET SPLIT ══════════ -->
+    <rect x="344" y="56" width="152" height="60" rx="3" fill="#F6F5F0" stroke="#5A6470"/>
+    <text x="420" y="80" text-anchor="middle" font-size="12" font-weight="600" fill="#212A35">Event abstraction</text>
+    <text x="420" y="97" text-anchor="middle" font-size="10.5" fill="#6A7069">sensor series → typed events</text>
+
+    <!-- state lane -->
+    <rect x="344" y="140" width="152" height="58" rx="3" fill="#EDF2F8" stroke="#33608F" stroke-width="1.5"/>
+    <text x="420" y="161" text-anchor="middle" font-size="11.5" font-weight="700" fill="#33608F">STATE events</text>
+    <text x="420" y="177" text-anchor="middle" font-size="10.5" fill="#33608F">fault-agnostic · train the models</text>
+    <text x="420" y="191" text-anchor="middle" font-size="9.5" fill="#6A7069">the anti-circularity wall: 5.2% → 1.8%</text>
+
+    <!-- signature lane -->
+    <rect x="344" y="214" width="152" height="58" rx="3" fill="#FBF3E9" stroke="#A8642B" stroke-width="1.5"/>
+    <text x="420" y="235" text-anchor="middle" font-size="11.5" font-weight="700" fill="#A8642B">SIGNATURE events</text>
+    <text x="420" y="251" text-anchor="middle" font-size="10.5" fill="#A8642B">physics rules · APAR lineage</text>
+    <text x="420" y="265" text-anchor="middle" font-size="9.5" fill="#6A7069">bypass discovery, rejoin at detection</text>
+
+    <!-- ══════════ TRAINING container ══════════ -->
+    <rect x="530" y="52" width="266" height="470" rx="5" fill="none" stroke="#C6CBC2" stroke-width="1.2"/>
+    <text x="663" y="70" text-anchor="middle" font-size="10.5" fill="#6A7069">train-only thresholds · every channel earns a holdout noise floor</text>
+
+    <!-- three strata -->
+    <rect x="544" y="82" width="238" height="188" rx="4" fill="#EDF2F8" stroke="#33608F" stroke-width="1.5"/>
+    <text x="663" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="#33608F">DISCOVERED MODELS · three strata</text>
+    <g font-size="11" fill="#212A35">
+      <rect x="556" y="112" width="214" height="42" rx="3" fill="#FFFFFF" stroke="#33608F"/>
+      <text x="663" y="129" text-anchor="middle" font-weight="600">S1 · Device lifecycle nets</text>
+      <text x="663" y="144" text-anchor="middle" font-size="10" fill="#6A7069">one class template, pooled across siblings</text>
+      <rect x="556" y="160" width="214" height="42" rx="3" fill="#FFFFFF" stroke="#33608F"/>
+      <text x="663" y="177" text-anchor="middle" font-weight="600">S2 · Unit day-cycle net</text>
+      <text x="663" y="192" text-anchor="middle" font-size="10" fill="#6A7069">the building's daily grammar of operation</text>
+      <rect x="556" y="208" width="214" height="42" rx="3" fill="#FFFFFF" stroke="#33608F"/>
+      <text x="663" y="225" text-anchor="middle" font-weight="600">S3 · Cross-system grammar</text>
+      <text x="663" y="240" text-anchor="middle" font-size="10" fill="#6A7069">reversal probe · family geometry · portability</text>
+    </g>
+    <text x="663" y="262" text-anchor="middle" font-size="9.5" fill="#6A7069" font-style="italic">models tell you WHERE the invariants hold</text>
+
+    <!-- calibrated channels -->
+    <rect x="544" y="284" width="238" height="204" rx="4" fill="#EAF4F0" stroke="#2E7A68" stroke-width="1.5"/>
+    <text x="663" y="304" text-anchor="middle" font-size="12" font-weight="700" fill="#2E7A68">CALIBRATED CHANNELS</text>
+    <g font-size="11" fill="#212A35">
+      <rect x="556" y="314" width="214" height="30" rx="3" fill="#FFFFFF" stroke="#2E7A68"/>
+      <text x="663" y="333" text-anchor="middle">physics residual bands <tspan fill="#6A7069" font-size="9.5">coil-off SA−MA…</tspan></text>
+      <rect x="556" y="350" width="214" height="30" rx="3" fill="#FFFFFF" stroke="#2E7A68"/>
+      <text x="663" y="369" text-anchor="middle">frequency count-bands <tspan fill="#6A7069" font-size="9.5">events/day</tspan></text>
+      <rect x="556" y="386" width="214" height="30" rx="3" fill="#FFFFFF" stroke="#2E7A68"/>
+      <text x="663" y="405" text-anchor="middle">oscillation <tspan fill="#6A7069" font-size="9.5">direction changes, deadbanded</tspan></text>
+      <rect x="556" y="422" width="214" height="30" rx="3" fill="#FFFFFF" stroke="#2E7A68" stroke-dasharray="4 3"/>
+      <text x="663" y="441" text-anchor="middle">seasonal rate <tspan fill="#6A7069" font-size="9.5">→ diagnostic-only</tspan></text>
+      <text x="663" y="472" text-anchor="middle" font-size="9.5" fill="#6A7069" font-style="italic">channels hold the invariants the models located</text>
+    </g>
+
+    <!-- ══════════ DETECTION ══════════ -->
+    <rect x="836" y="52" width="202" height="470" rx="5" fill="none" stroke="#C6CBC2" stroke-width="1.2"/>
+    <text x="937" y="70" text-anchor="middle" font-size="10.5" fill="#6A7069">new data · per-day, per-channel flags</text>
+
+    <g font-size="10.5" fill="#212A35">
+      <rect x="850" y="82"  width="174" height="24" rx="3" fill="#FBF3E9" stroke="#A8642B"/>
+      <text x="937" y="98"  text-anchor="middle" font-weight="600" fill="#A8642B">rules (signature events)</text>
+      <rect x="850" y="112" width="174" height="24" rx="3" fill="#FFFFFF" stroke="#2E7A68"/>
+      <text x="937" y="128" text-anchor="middle">residual</text>
+      <rect x="850" y="142" width="174" height="24" rx="3" fill="#FFFFFF" stroke="#33608F"/>
+      <text x="937" y="158" text-anchor="middle">model conformance</text>
+      <rect x="850" y="172" width="174" height="24" rx="3" fill="#FFFFFF" stroke="#33608F"/>
+      <text x="937" y="188" text-anchor="middle">device conformance</text>
+      <rect x="850" y="202" width="174" height="24" rx="3" fill="#FFFFFF" stroke="#33608F"/>
+      <text x="937" y="218" text-anchor="middle">absence (silent device)</text>
+      <rect x="850" y="232" width="174" height="24" rx="3" fill="#FFFFFF" stroke="#2E7A68"/>
+      <text x="937" y="248" text-anchor="middle">frequency</text>
+      <rect x="850" y="262" width="174" height="24" rx="3" fill="#FFFFFF" stroke="#2E7A68"/>
+      <text x="937" y="278" text-anchor="middle">oscillation</text>
+      <rect x="850" y="292" width="174" height="24" rx="3" fill="#FFFFFF" stroke="#2E7A68" stroke-dasharray="4 3"/>
+      <text x="937" y="308" text-anchor="middle" fill="#6A7069">seasonal rate · corroborates only</text>
+    </g>
+
+    <!-- significance gate -->
+    <rect x="850" y="336" width="174" height="64" rx="3" fill="#F6F5F0" stroke="#5A6470" stroke-width="1.5"/>
+    <text x="937" y="356" text-anchor="middle" font-size="11.5" font-weight="700" fill="#212A35">SIGNIFICANCE GATES</text>
+    <text x="937" y="372" text-anchor="middle" font-size="10" fill="#6A7069">each channel vs its OWN noise floor</text>
+    <text x="937" y="386" text-anchor="middle" font-size="10" fill="#6A7069">binomial p &lt; 10⁻³ · rule-of-three</text>
+
+    <!-- deployed union -->
+    <rect x="850" y="420" width="174" height="58" rx="3" fill="#212A35"/>
+    <text x="937" y="443" text-anchor="middle" font-size="11.5" font-weight="700" fill="#FFFFFF">DEPLOYED UNION</text>
+    <text x="937" y="459" text-anchor="middle" font-size="10" fill="#C9CDC4">7 channels OR-ed · rate excluded</text>
+    <text x="937" y="472" text-anchor="middle" font-size="9.5" fill="#C9CDC4">joint FP budget measured, not assumed</text>
+
+    <!-- ══════════ OUTPUT ══════════ -->
+    <rect x="1064" y="56" width="142" height="150" rx="4" fill="#FBF3E9" stroke="#A8642B" stroke-width="1.6"/>
+    <text x="1135" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#A8642B">THE ALARM</text>
+    <g font-size="10.5" fill="#212A35">
+      <text x="1076" y="100">a NAME</text>
+      <text x="1076" y="115" fill="#6A7069" font-size="9.5">reheat valve, TU_S</text>
+      <text x="1076" y="134">an EXPLANATION</text>
+      <text x="1076" y="149" fill="#6A7069" font-size="9.5">commanded closed, position 0.8</text>
+      <text x="1076" y="168">an FP BUDGET</text>
+      <text x="1076" y="183" fill="#6A7069" font-size="9.5">this detector: 1.0% of clean days</text>
+      <text x="1076" y="198" fill="#6A7069" font-size="9.5">+ zone localization via Brick</text>
+    </g>
+
+    <!-- scoreboard -->
+    <rect x="1064" y="222" width="142" height="176" rx="4" fill="#FFFFFF" stroke="#C6CBC2"/>
+    <text x="1135" y="243" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1" fill="#8A8F88">VALIDATED · LBNL ×3</text>
+    <g font-family="SF Mono, Consolas, Menlo, monospace" font-size="11" fill="#212A35">
+      <text x="1076" y="266">SDAHU 13/14*</text>
+      <text x="1076" y="284">PFPU  23/30</text>
+      <text x="1076" y="302">SFPU  24/29</text>
+      <text x="1076" y="324">TTD median 1 d</text>
+      <text x="1076" y="342">FPR 1.0–5.2%</text>
+      <text x="1076" y="360">cry-wolf &lt;0.1%</text>
+    </g>
+    <text x="1076" y="386" font-size="9" fill="#6A7069">*14/14 naive; one detection adjudicated</text>
+    <text x="1076" y="397" font-size="9" fill="#6A7069">&#xa0;away as dataset-branch provenance</text>
+
+    <!-- onboarding note -->
+    <rect x="1064" y="414" width="142" height="108" rx="4" fill="#EDF2F8" stroke="#33608F"/>
+    <text x="1135" y="436" text-anchor="middle" font-size="10.5" font-weight="700" fill="#33608F">SCALES BY CONFIG</text>
+    <g font-size="9.5" fill="#212A35">
+      <text x="1074" y="456">new building = one YAML file:</text>
+      <text x="1074" y="471">2nd system ≈ 1.5 h · 3rd ≈ minutes</text>
+      <text x="1074" y="486">zero code changes, measured</text>
+      <text x="1074" y="505" fill="#6A7069">same sampling rate; new rate ⇒</text>
+      <text x="1074" y="517" fill="#6A7069">re-run the healthy-silence gate</text>
+    </g>
+
+    <!-- ══════════ connectors ══════════ -->
+    <g stroke="#5A6470" stroke-width="1.4" fill="none">
+      <line x1="152" y1="149" x2="192" y2="149" marker-end="url(#arr)"/>
+      <line x1="304" y1="86"  x2="344" y2="86"  marker-end="url(#arr)"/>
+      <path d="M420,116 L420,140" marker-end="url(#arr)"/>
+      <path d="M420,198 L420,214" stroke-dasharray="3 3"/>
+      <path d="M496,169 L530,169" marker-end="url(#arr)"/>
+      <path d="M796,176 L836,176" marker-end="url(#arr)"/>
+      <path d="M796,386 L836,386" marker-end="url(#arr)"/>
+      <path d="M937,322 L937,336" marker-end="url(#arr)"/>
+      <path d="M937,400 L937,420" marker-end="url(#arr)"/>
+      <path d="M1024,449 L1044,449 L1044,131 L1064,131" marker-end="url(#arr)"/>
+    </g>
+    <!-- signature bypass: the long amber dashed line -->
+    <path d="M496,243 C520,243 520,540 560,540 L810,540 C830,540 830,94 850,94"
+          stroke="#A8642B" stroke-width="1.6" fill="none" stroke-dasharray="6 4" marker-end="url(#arrA)"/>
+    <text x="663" y="533" text-anchor="middle" font-size="9.5" fill="#A8642B" font-style="italic">signature events never touch discovery — they rejoin as the rules channel</text>
+
+    <!-- ══════════ verification ribbon ══════════ -->
+    <rect x="24" y="576" width="1182" height="118" rx="5" fill="#FDF9F4" stroke="#8C4045" stroke-width="1.4"/>
+    <text x="40" y="600" font-size="12" font-weight="700" letter-spacing="1.2" fill="#8C4045">VERIFICATION PROTOCOL — runs under every phase; findings feed back into the record</text>
+    <g font-size="10.5" fill="#212A35">
+      <rect x="40"  y="614" width="180" height="52" rx="3" fill="#FFFFFF" stroke="#8C4045"/>
+      <text x="130" y="634" text-anchor="middle" font-weight="600">pre-registration</text>
+      <text x="130" y="649" text-anchor="middle" font-size="9.5" fill="#6A7069">hypotheses + falsifiers committed first</text>
+
+      <rect x="248" y="614" width="180" height="52" rx="3" fill="#FFFFFF" stroke="#8C4045"/>
+      <text x="338" y="634" text-anchor="middle" font-weight="600">falsifiers honored</text>
+      <text x="338" y="649" text-anchor="middle" font-size="9.5" fill="#6A7069">every firing reported in print</text>
+
+      <rect x="456" y="614" width="180" height="52" rx="3" fill="#FFFFFF" stroke="#8C4045"/>
+      <text x="546" y="634" text-anchor="middle" font-weight="600">hostile audits</text>
+      <text x="546" y="649" text-anchor="middle" font-size="9.5" fill="#6A7069">every phase attacked before it ships</text>
+
+      <rect x="664" y="614" width="196" height="52" rx="3" fill="#FFFFFF" stroke="#8C4045"/>
+      <text x="762" y="634" text-anchor="middle" font-weight="600">adjudication</text>
+      <text x="762" y="649" text-anchor="middle" font-size="9.5" fill="#6A7069">caught our own detector: 14/14 → 13/14</text>
+
+      <rect x="888" y="614" width="150" height="52" rx="3" fill="#FFFFFF" stroke="#8C4045"/>
+      <text x="963" y="634" text-anchor="middle" font-weight="600">dataset errata</text>
+      <text x="963" y="649" text-anchor="middle" font-size="9.5" fill="#6A7069">E1–E5, machine evidence</text>
+
+      <rect x="1066" y="614" width="140" height="52" rx="3" fill="#8C4045"/>
+      <text x="1136" y="634" text-anchor="middle" font-weight="600" fill="#FFFFFF">reproducible</text>
+      <text x="1136" y="649" text-anchor="middle" font-size="9.5" fill="#F0D9DA">clone → every number</text>
+    </g>
+    <g stroke="#8C4045" stroke-width="1.2" fill="none">
+      <line x1="220" y1="640" x2="248" y2="640" marker-end="url(#arr)"/>
+      <line x1="428" y1="640" x2="456" y2="640" marker-end="url(#arr)"/>
+      <line x1="636" y1="640" x2="664" y2="640" marker-end="url(#arr)"/>
+      <line x1="860" y1="640" x2="888" y2="640" marker-end="url(#arr)"/>
+      <line x1="1038" y1="640" x2="1066" y2="640" marker-end="url(#arr)"/>
+    </g>
+  </svg>

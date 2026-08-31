@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 1100 700" width="1100" height="700" xmlns="http://www.w3.org/2000/svg"
+<svg viewBox="0 0 1100 706" width="1100" height="706" xmlns="http://www.w3.org/2000/svg"
        font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
     <defs>
       <marker id="ar" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto">
@@ -55,7 +55,7 @@
       <rect x="502" y="168" width="232" height="30" rx="2" fill="#FFFFFF" stroke="#2F5D8A"/>
       <text x="618" y="187" text-anchor="middle" font-size="11.5" fill="#23282E">Unit stratum — daily operating cycle</text>
       <rect x="502" y="204" width="232" height="30" rx="2" fill="#FFFFFF" stroke="#2F5D8A"/>
-      <text x="618" y="223" text-anchor="middle" font-size="11.5" fill="#23282E">System stratum — cross-system grammar</text>
+      <text x="618" y="223" text-anchor="middle" font-size="11.5" fill="#23282E">System stratum — cross-system grammar &#8225;</text>
       <text x="618" y="252" text-anchor="middle" font-size="11" font-style="italic" fill="#2F5D8A">the models locate the invariants of normal operation</text>
     </g>
 
@@ -69,8 +69,8 @@
       <text x="820" y="162" font-size="11.5" fill="#23282E">· temperature-residual bands</text>
       <text x="820" y="182" font-size="11.5" fill="#23282E">· model-conformance thresholds</text>
       <text x="820" y="202" font-size="11.5" fill="#23282E">· activity frequency &amp; oscillation</text>
-      <text x="820" y="230" font-size="11" font-style="italic" fill="#6A7069">every channel earns a measured</text>
-      <text x="820" y="245" font-size="11" font-style="italic" fill="#6A7069">false-alarm floor, on training data only</text>
+      <text x="820" y="230" font-size="11" font-style="italic" fill="#6A7069">every channel is assigned a false-alarm</text>
+      <text x="820" y="245" font-size="11" font-style="italic" fill="#6A7069">floor using the fault-free year alone</text>
     </g>
 
     <!-- ═══════════════ PHASE B : DEPLOYMENT ═══════════════ -->
@@ -182,5 +182,6 @@
       <text x="552" y="673.5">physics / fault-signature path</text>
       <line x1="726" y1="669" x2="756" y2="669" stroke="#B06A2A" stroke-width="1.5" stroke-dasharray="6 4"/>
       <text x="764" y="673.5">excluded from discovery</text>
+      <text x="330" y="692">&#8225; supports the portability analysis; the deployed channels come from the device and unit strata</text>
     </g>
   </svg>

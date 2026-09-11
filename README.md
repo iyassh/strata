@@ -4,7 +4,7 @@
 calibrated interpretable channels detect violations of them — so every alarm
 ships with a name, an explanation, and a false-positive budget.**
 
-![tests](https://img.shields.io/badge/tests-101%20passing-brightgreen)
+![tests](https://github.com/iyassh/strata/actions/workflows/tests.yml/badge.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![python](https://img.shields.io/badge/python-3.12%2B-blue)
 

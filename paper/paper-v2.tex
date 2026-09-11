@@ -1,0 +1,325 @@
+% =============================================================
+% ProcessHeal — Paper (revised: adds Goals/Objectives + the
+%   commercial-BAS-FDD distinction; tightened intro)
+% paper-v2.tex     — THIS FILE: adds Method, Verification, Results,
+%   Falsified Hypotheses, Errata, Limitations, Conclusion (2026-09-11).
+%   Title/abstract realigned to the post-Phase-3 framing. paper.tex is
+%   preserved unchanged.
+% UREAP 2026, Thompson Rivers University
+% Author: Yassh Singh
+% Supervisors: Dr. Anthony Aighobahi, Dr. Mridula Sharma
+%
+% Version history (all in this folder):
+%   paper-v1.tex      — first pass, pre-critique
+%   paper-draft.tex   — earlier paper-size version
+%   paper.tex         — THIS FILE, current working draft
+%   literature-review.tex — long survey for the UREAP final report
+%
+% Compile in Overleaf: Recompile twice. Bibliography in
+% references.bib (shared across all .tex files in this folder).
+% =============================================================
+
+% =============================================================
+% CLAIM -> ARTIFACT TRACEABILITY MAP  (maintained: 2026-09-11)
+%
+% When an artifact is regenerated, these are the ONLY sentences that
+% can move. Check this list before editing prose, and update it when
+% you add a claim. Authority order: committed artifact > RESEARCH_LOG
+% Part V addendum > ERRATA.md > phase documents (two carry SUPERSEDED
+% banners and must never be quoted directly).
+%
+% Sec.  Claim                                  Artifact
+% ----  -------------------------------------  ---------------------------
+% Meth  circularity 1.8% vs 5.2%, 81 v 238     benchmark_v2_processheal_v1
+%                                              .json + benchmark_v3.json
+% Meth  reversal probe .8861/.5526/.9533/      grammar_results.json
+%       .9021/.9026
+% Meth  retraction 21-117 -> <=2 days;         PHASE3B (rev 2) +
+%       0.5/0.22/0.02-0.03 degF                core/residuals.py
+% Res   scorecards 14/14 naive, 13/14          benchmark_v6_*.json +
+%       adjudicated, 23/30, 24/29              x11_branch.json
+% Res   TTD tails {1x9,2x4} / {1x19,4,11,      benchmark_v6_*.json
+%       15,21} / {1x19,3,15,15,37,108}
+% Res   FPR 15.6/12.5/4.2 naive; 1.0/5.2/4.2   union_fpr_*.json
+%       deployed; genuine-vs-by-construction
+%       decomposition (table caption)
+% Res   cry-wolf < 0.1%  (adjudicated with     crywolf.json
+%       13/14; naive with 14/14)
+% Res   windows 137-164 d; conditional recall  benchmark_v6_sdahu.json
+%       164/164, 164/164, 139/139, 137/137
+% Res   PCA 60v61; 13v13, 23v23, 24v25         baselines_*.json
+% Res   matched rules 141=141, 206=206;        matched_rules_*.json
+%       MR1 231 SDAHU / 124 PFPU / 0 SFPU;
+%       oscillation 349 vs <=2
+% Res   localisation <=1 day in 365, 61 files  week0_audit.json
+% Res   onboarding 45 mappings + 35 rules,     configs/ONBOARDING_LOG.md
+%       ~1.5 h (reconstructed from commits)
+% Fals  192 v 135 (+ min-robust 22-26)         matched_rules_sfpu.json
+% Fals  X11: 0 flags on 148 window days        x11_branch.json
+% Fals  contamination 164/164 -> 0/164;        x8_contamination.json
+%       visibility 5/5,13/13,27/27 vs 0/27
+% Fals  sampling 28/64/64; FOUR falsifiers     x7_downsample.json
+% Ver   101 tests; SDAHU byte-repro standard   tests/ + REPRODUCING.md
+% Erra  E1-E5                                  ERRATA.md + week0_audit.json
+%
+% PENDING (Sec. "Work in Progress" is a placeholder, no numbers):
+%   open-fdd G36 comparison - artifacts VOID, see
+%   strata/docs/plans/NEXT-openfdd-baseline-repair.md
+% =============================================================
+
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cite}
+\usepackage{times}
+
+\title{Discovery Locates, Calibration Detects:\\ Stratified Process Models for Building HVAC Fault Detection}
+\author{Yassh Singh \\
+\small Supervisors: Dr.\ Anthony Aighobahi, Dr.\ Mridula Sharma \\
+\small Thompson Rivers University --- UREAP 2026}
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Heating, ventilation, and air conditioning (HVAC) systems account for a substantial share of building energy use, and 15--30\% of that energy is wasted by faults that operate quietly below the alarm threshold of a building's own control system. Existing detection tools face a trust problem: rule libraries flood operators with unexplained alarms, and machine-learning detectors flag anomalies they cannot name. We present STRATA, a framework in which process models discovered from fault-free operation \emph{locate} a building's behavioural invariants --- which device, which unit, which operating regime --- while calibrated, physically interpretable channels \emph{detect} violations of them, so that every alarm carries a name, an explanation, and a measured false-positive budget. This division of labour is not the one we set out to demonstrate: our original hypothesis, that discovered models would themselves detect faults better than hand-written rules, was refuted by its own pre-registered test and is reported here as such. On three public LBNL benchmark systems --- a single-duct air-handling unit and two fan-powered-unit configurations that had never previously been benchmarked --- STRATA detects 13 of 14, 23 of 30, and 24 of 29 seeded fault scenarios at a median time to detection of one day, with a measured joint false-alarm budget of 1.0--5.2\% of fault-free days and a cry-wolf ratio below 0.1\%. A matched-rule control establishes that the models' contribution is discovery automation: hand-written equivalents match individual channels only after the models reveal where each invariant holds, and transplanted blindly they false-alarm on as many as 231 days per year. The evaluation protocol is offered as a contribution in its own right: pre-registered falsifiers whose every firing is reported, a measured 3.4-percentage-point bound on model self-confirmation, five machine-verified errata in the most widely used public FDD datasets, and full regeneration of every published number from a public repository.
+\end{abstract}
+
+\section{Introduction}
+
+Buildings account for approximately 34\% of global energy-related carbon dioxide emissions, and HVAC systems carry the dominant share within that total \cite{bi2024aihvacreview}. The fraction of HVAC energy wasted by undetected faults has consistently been estimated at 15--30\% across recent reviews \cite{bi2024aihvacreview,pritoni2022faultcorrection}, but until late 2023 these numbers rested on relatively small studies. The first large-scale empirical characterisation appeared when Crowe and colleagues analysed multi-year fault-detection output across more than 60{,}000 pieces of HVAC equipment in 317 commercial buildings \cite{crowe2023faultprevalence}. Their study reports an average of 245 faults per building per month and finds 40\% of all air handling units in a faulted state on any given day. The most common AHU fault in their dataset, a supply-air-temperature setpoint that is never reset, was observed on 55\% of the AHUs surveyed. These buildings were not unmonitored; many run modern building automation systems with alarms and fault-detection features, yet the faults persisted, which points to a gap in the kind of fault these tools can see rather than in their deployment.
+
+The nature of that gap is specific. Of the ten most common AHU faults catalogued by Crowe and colleagues, seven are behaviour-based rather than condition-based: incorrect schedules, unreleased manual overrides, missed setpoint resets, and broken economiser sequences manifest as deviations in the temporal ordering of system states rather than as isolated component failures. A threshold alarm fires when a single variable leaves its acceptable band, and a pre-programmed rule fires when a named fault pattern is matched, but neither mechanism can easily detect a control sequence that executes its steps in the wrong order or skips a step entirely. The structural argument that follows is straightforward: detection methods that model the sequence in which a building moves between operating states have a natural advantage on the fault classes that dominate the empirical landscape.
+
+The dominant research methodology for HVAC fault detection does not model that sequence either. Machine learning has been surveyed across 211 AI-based HVAC FDD studies published between 2013 and 2023 \cite{bi2024aihvacreview}, with reported accuracies on the standard benchmarks saturating at 97--99\% across hybrid random-forest pipelines on RP-1312 data \cite{tun2021hybridrfsvm} and convolutional-and-LSTM hybrids on real-building data \cite{prince2025improved1dcnnlstm}. The most recent work has shifted toward interpretability, but in a specific way: a deep model is paired with a post-hoc explanation method such as layer-wise relevance propagation or attention attribution \cite{deng2024afgcn,wang2025xmhac}. The resulting explanation is at the level of input features rather than at the level of the control sequences the building was supposed to follow. A facility manager told that sensor $X$ had high relevance for a prediction knows that something is unusual about that signal, but is not told how the building was supposed to be behaving instead.
+
+A second problem concerns reproducibility. A recent audit of 65 primary machine-learning HVAC fault detection studies found that only two shared executable code, and that 72\% do not specify whether their dataset is public, proprietary, or commercial \cite{mukhtar2025reproducibility}. The field has plateaued on a metric that may not be the right metric, with little of the existing work independently verifiable, and with the dominant explanation style answering a question (which signal mattered) different from the one operators ask (what should the system have been doing).
+
+The opportunity is to change the model class. Process mining is a methodology in which a discrete event log derived from system observations is used to discover a Petri-net model of expected behaviour, with conformance checking against that model producing an alignment-based deviation signal that carries formal fitness and precision semantics \cite{vanderaalst2016processmining}. We apply this approach to HVAC fault detection, treating sensor-derived events as the input log and ASHRAE Guideline 36 control sequences as the conceptual reference. Our initial hypothesis was that the discovered Petri net would serve as both the expected-behaviour model and the detector. That hypothesis was pre-registered, tested, and refuted: a single hand-written rule out-covered the discovered device models on the same scenarios. What survived the refutation is a more defensible and, we argue, more useful claim. Discovery \emph{locates} the invariants --- it establishes unsupervised which behaviours a particular building holds constant, and where --- while calibrated interpretable channels detect violations of those invariants against a measured noise floor. Section~\ref{sec:falsified} reports the refutation in full.
+
+Four contributions follow. The framework is, to our knowledge, the first application of event-log process mining to building HVAC fault detection, a novelty claim corroborated by four independent systematic reviews. It is evaluated on three public LBNL benchmark systems, two of which had not previously been benchmarked in the literature, at a stated false-alarm budget rather than at accuracy alone. The evaluation protocol --- pre-registration, honoured falsifiers, adversarial recomputation, and full artefact regeneration --- is a methodological contribution in a subfield where an audit of sixty-five primary studies found only two sharing executable code \cite{mukhtar2025reproducibility}. Finally, auditing our own evaluation produced five machine-verified errata in the benchmark datasets themselves. A diagnostic report for facility operators remains the intended deployment artefact, drawing on a planned transfer to real-world data from Thompson Rivers University's Campus Activity Centre, where the framework is designed to complement the rule-based fault detection already present in the building's automation system.
+
+\section{Research Aim and Objectives}
+\label{sec:aims}
+
+The aim of this research is to establish process mining as an interpretable and generalisable approach to fault detection and diagnosis in building HVAC systems. The approach is first validated on a public benchmark dataset, then demonstrated on a real building. Six objectives carry the work from method to deployment:
+
+\begin{enumerate}
+\item \textbf{Abstract events from sensor data.} Convert continuous HVAC sensor streams into discrete event logs, using control-sequence rules grounded in ASHRAE Guideline 36.
+\item \textbf{Discover and check the model.} Learn a Petri-net model of expected control behaviour from fault-free data, and detect faults as conformance deviations localised to specific equipment.
+\item \textbf{Benchmark against known answers.} Evaluate the pipeline on the LBNL Single-Duct AHU dataset and its documented ground-truth faults, comparing accuracy and interpretability with published machine-learning methods on the same data.
+\item \textbf{Test a hybrid extension.} Determine whether combining process-mining features with machine-learning classifiers detects faults more reliably than either method alone.
+\item \textbf{Deploy on a real building.} Apply the validated pipeline to live trend data from a Thompson Rivers University building, delivering a ranked diagnostic report that complements the rule-based fault detection already present in the building's automation system.
+\item \textbf{Release the work openly.} Publish the pipeline and its building configuration as open-source software, evaluated on a public dataset, to address the reproducibility gap identified in the literature.
+\end{enumerate}
+
+\noindent Objectives one to three are pursued on the LBNL benchmark as a controlled testbed and are reported in this paper; objective four and objective five, the real-world deployment phase, both remain outstanding and is discussed in Section~\ref{sec:limitations}; objective six runs throughout the project and is described in Section~\ref{sec:protocol}. Objective two is reported in the reframed form that its own falsification required.
+
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Machine learning for HVAC fault detection, and the move from accuracy to interpretability}
+
+The machine-learning era of HVAC fault detection is well documented. Bi and colleagues survey 211 AI-based HVAC FDD studies published between 2013 and 2023, organising them into traditional machine-learning, deep-learning, hybrid AI, and physical-model branches \cite{bi2024aihvacreview}. Reported accuracies on the standard benchmark datasets have effectively saturated. Tun and colleagues reached 98\% accuracy across thirteen fault types using a hybrid random-forest and support-vector-machine pipeline on RP-1312 AHU data \cite{tun2021hybridrfsvm}. Prince, Yoon, and Kumar reached 97\% accuracy on data from three real buildings using a thirteen-layer one-dimensional convolutional-and-LSTM hybrid that remains robust to Gaussian noise and to 10\% missing values \cite{prince2025improved1dcnnlstm}. The authors of that paper close by explicitly identifying interpretability as the problem they did not solve, proposing grafting SHAP or LIME as future work.
+
+The most directly relevant interpretable benchmark for the LBNL SDAHU subset is Deng and colleagues' adaptive fusion graph convolutional network. The model reaches 88.09\% accuracy at 500 labelled samples and 75.15\% at only seven samples, with per-node sensor importance as the explanation mechanism \cite{deng2024afgcn}. Subsequent work in the same vein pairs multi-head attention with parallel dilated convolutions and applies layer-wise relevance propagation for explanation on chiller fault data, reaching an F1 score of 0.9841 across 27 operating conditions \cite{wang2025xmhac}. The pattern across this body of work is consistent: a deep black-box network is the model, a post-hoc analysis layer provides the explanation, and the explanation is framed at the level of input features rather than control flow. The architectural opportunity is for a method whose model is its explanation.
+
+\subsection{Unsupervised methods and cross-building deployment}
+
+Real buildings rarely come with ground-truth fault labels, and the strongest recent work on unlabelled data uses self-supervised or autoencoder methods. Abdollah and colleagues pretrained a Transformer encoder via masked-token reconstruction on unlabelled HVAC time-series from a heat-pump building at the Polytechnic University of Milan, then used Peak-Over-Threshold detection on reconstruction error to flag a real two-month monitoring fault between October and December \cite{abdollah2024transformerssl}. The most directly relevant precedent for a Canadian-university real-BAS deployment is El Mokhtari and McArthur's autoencoder-based work at Toronto Metropolitan University, which distinguishes equipment-level from system-level faults across five fan coil units and demonstrates cross-unit transfer learning \cite{elmokhtari2024aebas}. These methods share a common limitation. Each produces a learned latent embedding whose deviation signal is a scalar anomaly score, not a process-level explanation.
+
+The cross-building generalisation problem is the binding constraint that prevents most existing HVAC FDD work from being deployed in the field. The canonical reference is Zhu and colleagues' study of fault-detection migration between two different building chillers, where conventional supervised classifiers dropped below 55\% target-domain accuracy despite reaching above 95\% on the source, while a domain-adversarial method recovered to 81.27\% on the first operating cycle and 74.93\% on the second \cite{zhu2021chillertransfer}. The closest precedent for a labelled-source-to-unlabelled-target plan of the kind we propose is Ghalamsiah and colleagues' contrastive adaptation network applied to ASHRAE-1312 simulation as a labelled source and real AHU measurements as an unlabelled target \cite{ghalamsiah2025canhvac}. Both approaches treat the transferable artefact as a set of learned neural-network weights, and the structural form of the model itself remains the same across source and target. A discovered process model is a different kind of object: it is an inspectable diagram of expected control flow, and transferring it from one building to another is therefore a structurally different operation that the existing transfer-learning literature has not addressed.
+
+\subsection{Process mining: foundations, adjacent successes, and the empty quadrant in building energy}
+
+Process mining was formalised by van der Aalst as a methodology for discovering process models from event logs, checking observed behaviour for conformance, and enhancing the resulting models with additional perspectives \cite{vanderaalst2016processmining}. The methodology has been applied successfully across cyber-physical and sensor-driven domains adjacent to building energy. Vitale and colleagues applied a full process-mining pipeline to fault diagnosis on the RoAD robotic-arm dataset, reaching an F1 score of up to 98.925\% with a conformance-checking time as low as 0.020 seconds \cite{vitale2025roadcps}. The same group then demonstrated that combining process-mining-derived alignment features with downstream dimensionality reduction substantially outperforms pure conformance checking across four cross-domain datasets, with F1 improvements ranging from 30 to 70 points \cite{vitale2025kbsfeatures}. Husom and colleagues' UDAVA pipeline extended this hybrid pattern to industrial Internet-of-Things sensor validation \cite{husom2026udava}. Methodologically the closest analogue to building HVAC is Moradbeikie and colleagues' work on pasteurisation, where continuous multivariate sensor signals are abstracted into discrete activity sequences via hidden Markov models and conformance is checked against HACCP critical control points \cite{moradbeikie2025pasteurization}. Pasteurisation, like HVAC operation, is a continuous-flow process governed by an explicit regulatory standard; the conceptual mapping from HACCP rules to ASHRAE Guideline 36 control sequences is direct. The technical barrier common to all these applications is event abstraction, the conversion of continuous sensor time-series into discrete activity sequences, which was formalised in the methodology paper by Janssen and colleagues \cite{janssen2021sensoreventlog}.
+
+Despite these adjacent successes, building HVAC remains an empty quadrant in the literature. The novelty claim for the present work rests on the convergence of four independent systematic reviews, each approaching the question from a different angle. Bi and colleagues' survey of 211 AI-based HVAC FDD studies contains no process-mining entries in any leaf of its method taxonomy \cite{bi2024aihvacreview}. Akhramovich and colleagues' review of 47 process-mining studies in Industry 4.0 covers manufacturing, internal logistics, mining, alarm management, supply-chain logistics, and product lifecycle management; building applications do not appear \cite{akhramovich2024pmindustry40}. Brzychczy and colleagues' more recent review of 36 process-mining studies on sensor data documents the same absence at finer granularity: fourteen industrial applications, eleven smart-home applications (all motion-sensor occupant-activity recognition), seven healthcare applications, two smart-office applications, two smart-product applications, and one other, with no building HVAC \cite{brzychczy2025pmsensorreview}. The Lawrence Berkeley National Laboratory team's canonical FDD-methods taxonomy from 2017 organises automated fault-detection methods into quantitative model-based, qualitative model-based, and process-history-based categories, and process mining is not present at any leaf \cite{granderson2017fddtoolsurvey}. Four independent angles converge on the same finding: no published work applies event-log process mining to building HVAC fault detection.
+
+\subsection{Rule-based fault detection in practice, and what process mining adds}
+
+Fault detection is not absent from real buildings; it is simply rule-based. The most widely deployed form is the fault-detection capability embedded in commercial building automation systems. Modern platforms ship libraries of pre-programmed fault rules: the Automated Logic WebCTRL system used at the deployment building of the present study, for example, includes a standard library that matches over one hundred named faults in common HVAC equipment.\footnote{Automated Logic, \emph{Fault Detection and Diagnostics}, \url{https://www.automatedlogic.com/en/products/webctrl-building-automation-system/integration/fdd-reporting-and-dashboards/}.} The characterisation survey of fourteen commercial FDD tools by Granderson and colleagues confirms that this rule-based and threshold-based style is the norm across the commercial landscape \cite{granderson2017fddtoolsurvey}. The strength of a rule library is that it works immediately on connection and requires no baseline data; its structural limitation is that it can only detect the fault patterns that were coded into it in advance, and so it misses novel failure modes and the gradual, multi-variable, sequence-level deviations that no rule author anticipated.
+
+The same rule-based philosophy characterises the most directly comparable research programme, the Lawrence Berkeley National Laboratory team's automated fault-correction line. Pritoni and colleagues field-tested seven hand-coded correction algorithms across 225 distinct equipment items in four buildings on three building-automation-system platforms, targeting common control problems such as incorrectly programmed schedules, unreleased manual overrides, and missed setpoint resets \cite{pritoni2022faultcorrection}. Each algorithm is a pre-encoded rule matched against BAS data and applied through a two-way BACnet writeback to the building's control system. Both the commercial libraries and the LBNL correction algorithms share the assumption that the faults of interest can be enumerated and encoded ahead of time.
+
+ProcessHeal makes the opposite assumption and is therefore complementary to both. Rather than matching observed data against a fixed catalogue of known faults, it learns the expected control flow from the building's own healthy operating data and flags any departure from it, whether or not anyone anticipated that particular departure. The deviation signal is a conformance alignment with formal Petri-net semantics rather than a triggered rule, and it is localised to a specific transition in the discovered model rather than to a named rule. A practical consequence is that ProcessHeal can run on the same trend data that a commercial system such as WebCTRL already records, catching the behaviour-based and sequence-level faults that fall outside the rule library and below the alarm threshold, while the rule library continues to handle the well-understood patterns it was built for. In principle the conformance traces ProcessHeal produces could even serve as input to the LBNL correction algorithms, extending automated correction beyond the patterns pre-encoded by hand. The LBNL FDD dataset family \cite{granderson2020lbnlfdddata} provides the labelled simulation testbed that supports this complementary positioning.
+
+One adjacent body of work must be cited and explicitly distinguished, because its surface vocabulary is similar. Deabes, Bouazza, and Algthami designed a fuzzy Petri-net controller for HVAC temperature regulation, hand-engineering both the Petri-net structure and the fuzzy rules and using the model as a forward control device for an air-conditioning compressor \cite{deabes2023fuzzyptn}. Their work contains no event log, no process-discovery algorithm, no alignment-based conformance checking, and no fault diagnosis. The present work does the methodological opposite: a Petri net is discovered from a real event log of HVAC operation, then used as a reference against which alignment-based conformance checking diagnoses operational deviations. Hand-designed Petri-net controllers and data-discovered Petri-net diagnostic models are two distinct uses of the Petri-net formalism, and they should not be conflated.
+
+
+\section{Method}
+\label{sec:method}
+
+STRATA consumes one fault-free year of ordinary building-management-system trend data together with a single configuration file naming the building's sensors and control rules. That configuration file is the only site-specific artefact: no code change was required to onboard any system reported here.
+
+\subsection{Event abstraction and the alphabet wall}
+
+Continuous sensor streams are converted into a discrete event log using control-sequence rules grounded in ASHRAE Guideline 36, following the abstraction methodology of Janssen and colleagues \cite{janssen2021sensoreventlog}. The events are then partitioned into two alphabets that are never mixed. \emph{State events} are neutral facts about operation and are the only events admitted to model discovery. \emph{Fault-signature events} already encode engineering suspicion and are withheld from discovery entirely.
+
+The partition exists because of circularity: a model discovered over an alphabet that already names faults will later ``detect'' those faults by recognising the project's own rules. Removing the partition and re-running the pipeline on the single-duct system raises the model channel's apparent recall from 1.8\% to 5.2\% of its 4{,}540 fault days (81 days against 238), both runs sharing the same threshold and the same 248-day train and 87-day holdout split. That 3.4-percentage-point difference is a measured bound on model self-confirmation, and the separation is now enforced by a tested invariant: injecting signature events into a log cannot change a day's fitness. The process-mining literature warns about this trap in the abstract; we are not aware of a prior quantification of it on sensor-derived logs.
+
+\subsection{Discovery at three strata}
+
+Petri nets are discovered from the state-event log with the inductive miner \cite{vanderaalst2016processmining} at three granularities: the device stratum models an individual actuator's lifecycle, the unit stratum models the air handler's daily operating cycle, and a cross-system grammar supports the transfer analysis of Section~\ref{sec:falsified}.
+
+Whether a discovered net encodes temporal order at all --- rather than merely a set of permitted activities --- is established by a \emph{reversal probe}: every trace is reversed and re-scored, and the fitness drop is reported as a single number. The three models separate cleanly. The single-duct net falls from 0.8861 to 0.5526 under reversal, confirming genuine order sensitivity. The series fan-powered net scores identically to four decimal places (0.9533 against 0.9533) and the parallel net shifts by 0.0005 (0.9021 against 0.9026), showing that neither carries meaningful ordering information in its fitness. The probe is cheap, decisive and reusable, and it converted an informal claim about alphabet complexity into a measured fact.
+
+\subsection{Calibrated channels and the noise gate}
+
+Eight channels evaluate each day independently. Physics rules descended from the NIST APAR lineage name direct contradictions between measurements. Temperature-residual bands encode relationships that must hold under known operating modes: with the cooling coil inactive, supply-air minus mixed-air temperature should equal the supply-fan heat rise, so a biased sensor appears as a persistent offset. Conformance channels measure alignment cost against the discovered device and unit models. Statistical channels bound activity frequency and oscillation. A seasonal rate channel corroborates but may not raise an alarm alone, for reasons disclosed in Section~\ref{sec:limitations}.
+
+Calibration uses the fault-free year only, at a false-positive quantile of 0.01 against a calendar-stratified holdout of the last eight days of each month. No threshold may see fault data. Every rule additionally requires a positive control, because silence is not competence: a position-based leak rule proved structurally deaf on the fan-powered units, where the seeded leak passes water through a valve whose position reads closed honestly, and was replaced by a waterside flow rule.
+
+A channel may then report only what exceeds its own measured noise floor, tested as a binomial against that channel's own holdout rate at $p<10^{-3}$. Detection thresholds are additionally floored at sensor physics: an early result reporting 21 to 117 detection-days on the series unit was retracted to at most two when a 0.5\,$^\circ$F sensor-precision floor revealed that the ``detections'' had exceeded a 0.22\,$^\circ$F band by 0.02 to 0.03\,$^\circ$F.
+
+\section{Verification as a First-Class Result}
+\label{sec:protocol}
+
+An audit of sixty-five primary machine-learning HVAC fault-detection studies found that two shared executable code, and that 72\% did not state whether their data was public, proprietary or commercial \cite{mukhtar2025reproducibility}. A field in that condition does not need another accuracy figure; it needs results that can be checked. We therefore treated verification as a deliverable rather than as hygiene, and this section describes the machinery in enough detail to be adopted. The refutations it produced are reported in Section~\ref{sec:falsified}.
+
+\subsection{Pre-registration and honoured falsifiers}
+
+Every experiment is pre-registered: the hypothesis, and the specific observation that would refute it, are committed to version control before the experiment runs. A falsifier that fires is treated as a finding and published, not as a setback to be absorbed by rewriting the hypothesis. Five fired during this project, including against results the project would have preferred to keep, and Section~\ref{sec:falsified} reports each with the claim it killed and the reframing it forced.
+
+The discipline exists because of a failure mode we observed in ourselves. One phase report, drafted the same day as its discovery, contained six distinct overclaims; all six were caught by audit within hours. Positive results attract inflated framing faster than negative ones attract scrutiny, and a falsifier is only protective if it is written down before the result it would kill is known.
+
+\subsection{Gates before science}
+
+Before any detection result is computed, a battery of gates runs against the raw data. It verifies file integrity by MD5, checks that timestamps increase monotonically, confirms that each file's calendar is internally consistent, checks coverage of the Brick semantic model, and hashes each derived event log so that duplicate scenarios cannot masquerade as independent evidence. A separate healthy-silence gate is run per configuration, confirming that the rule set is silent on the fault-free year before it is permitted to score anything.
+
+These gates were not designed in advance; each was added after a dataset defect got past the previous set. Four of the five errata in Section~\ref{sec:errata} were found by this battery rather than by inspection, which is the argument for running it: the defects are not visible in summary statistics, and every one of them would have inflated a published result.
+
+\subsection{Three levels of regression}
+
+Guards run at three levels. At the first, a suite of 101 automated tests executes on every commit through continuous integration; the data-dependent tests skip rather than error when the datasets are absent, so the suite is meaningful on a bare clone. At the second, a regeneration gate re-derives committed artefacts from source and diffs each against its stored copy, reporting per artefact either an identical verdict or a named set of changed values. A changed verdict is a defect or a documented decision, never a silent update. At the third, every newly validated dataset is frozen permanently into the suite as a fixture, so that the examination the method must pass only ever grows.
+
+The single-duct system is the byte-reproducibility standard: re-running its benchmark must reproduce the committed artefact byte-identically, and that requirement is enforced after every change. The fan-powered-unit artefacts are regenerated and diffed but carry no equivalent standing guarantee.
+
+\subsection{Tests that pin refutations and disclosures}
+
+The unusual property of the suite is what it guards. Alongside conventional unit tests of the event, residual, frequency and grammar logic, it pins three things that are not ordinarily thought of as testable.
+
+It pins published values, so that a change which would alter a number quoted in a paper fails the build rather than propagating silently. It pins \emph{fired falsifiers}: the sampling-rate experiment's finding \emph{is} its four refutations, and a regeneration that loses them is treated as a regression exactly as a lost feature would be. And it pins \emph{disclosure obligations}. One test asserts that the artefact continues to declare which channels' false-positive rows are calibration targets rather than out-of-sample measurements --- the caveat reproduced in Section~\ref{sec:limitations}. Another asserts that the post-selection defence ships alongside the result it defends. A third recomputes the cry-wolf ratio from the benchmark and union artefacts rather than reading the stored value, so that an internally consistent but wrong number cannot survive; a fourth recomputes sensor coverage from the configuration files for the same reason.
+
+Encoding an honesty obligation as a test is, to our knowledge, unusual. Its justification is that caveats decay faster than code: a sentence in a document can be dropped in a rewrite without anything failing, whereas a test that enforces the sentence cannot.
+
+\subsection{Adversarial audit}
+
+Before any number is quoted, it is attacked. An audit is briefed adversarially --- to assume the result is wrong and to find the ways its authors have flattered themselves --- and independently recomputes the quantity from raw data rather than re-running the pipeline that produced it, so that a defect in the pipeline cannot confirm itself. Independence of implementation is the point: on more than one occasion the recomputation agreed with the artefact and disagreed with the prose written about it.
+
+The method's value is measurable in what it caught. It found that a baseline was detecting file provenance rather than faults; that a significance test rested on an impossible null; that a set of detections lay below sensor precision; that an evidence sentence was falsified by its own recomputation; and, most recently, that a completed comparison against commercial practice was invalid for three independent reasons (Section~\ref{sec:baseline}). None of these would have been caught by a test suite, because in each case the code was doing what it was written to do.
+
+\subsection{The lesson ledger, and why documentation decays}
+
+Thirty-one numbered lessons record each failure with the standing rule it produced. The ledger is itself a result, because a pattern emerges from it that we did not anticipate.
+
+The first pattern is recurrence: the same lesson reappeared in different clothing. A rule requiring day universes to be derived from the raw calendar rather than from the event log was recorded, documented, and then violated again two phases later. The conclusion drawn, and now standing policy, is that \textbf{a lesson is not closed until a helper or a test mechanically enforces it} --- documentation alone decays. Several of the tests described above exist for precisely that reason.
+
+The second is that every new detection channel recreated the same gap. Each needed its own noise-floor gate, and each time there was a temptation to exempt it; the rules channel was silently exempt until an audit found it. The harness now enforces the gate structurally rather than by convention.
+
+The third is that simulation flatters. Noise-free simulated years make zero-false-positive thresholds cheap, bands razor-thin and silence easy, and a substantial share of the ledger reduces to that observation --- which is why the sensor-precision floor and the noise-floor significance requirement exist at all, and why Section~\ref{sec:limitations} treats the absence of field data as the principal threat to these results.
+
+\subsection{Reproducibility}
+
+The datasets are public and citable by DOI \cite{granderson2020lbnlfdddata}. The environment is pinned by lockfile, random seeds are fixed wherever randomness exists, and the repository documents the complete path from a fresh clone through data conversion, the gate battery, and the result pipeline to regenerated artefacts, with approximate wall-clock times. A claim-to-artifact table maps each published claim family --- scorecards, joint false-alarm rates, baselines, the discovery-automation ablation, the grammar and reversal probe, the zone ground truth, the circularity bound, sensor coverage, cry-wolf ratios, and the four robustness experiments --- onto the specific artefact that backs it, so that a reader wishing to check a single number does not have to regenerate everything to find where it comes from.
+
+One provenance note illustrates the standard we tried to hold. The circularity bound of Section~\ref{sec:method} compares the current pipeline against its pre-split predecessor, which lives in a different repository. Rather than cite that repository, its artefact is committed here, so that both sides of the comparison regenerate from this one.
+
+\section{Results}
+\label{sec:results}
+
+Evaluation used three public LBNL fault-detection datasets \cite{granderson2020lbnlfdddata}: a single-duct air-handling unit (SDAHU) and parallel and series fan-powered-unit configurations (PFPU, SFPU). The two fan-powered-unit datasets had not previously been benchmarked in the published literature.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\hline
+ & SDAHU & PFPU & SFPU \\
+\hline
+Scenarios detected & 14/14 naive; 13/14 adjudicated & 23 / 30 & 24 / 29 \\
+Median time to detection & 1 day & 1 day & 1 day \\
+Deployed false-alarm rate & 1.0\% & 5.2\% & 4.2\% \\
+Naive all-channel union & 15.6\% & 12.5\% & 4.2\% \\
+Wrong alarms / all alarms & \multicolumn{3}{c}{$<0.1\%$ on all systems} \\
+\hline
+\end{tabular}
+\caption{Detection performance over the 96-day healthy holdout (the last eight days of each month). The SDAHU score is reported in both forms for the reason given in Section~\ref{sec:falsified}; the SFPU universe excludes one file with a rotated calendar (erratum E4); the two false-alarm rows differ by the demotion disclosed in Section~\ref{sec:limitations}. The deployed rates are not uniformly out-of-sample: SDAHU's 1/96 is genuine, PFPU's 5/96 is four out-of-sample days plus one true by construction, and SFPU's 4/96 is essentially the model and device calibration target with one genuine overlapping frequency day, because those two channels' thresholds are quantile-fit on these same days.}
+\label{tab:results}
+\end{table}
+
+The median time to detection is one day on all three systems, but the median alone misrepresents the distribution and should not be quoted without its tail. On the single-duct system nine scenarios are detected within one day and four within two. On the parallel unit nineteen are detected within a day, the remainder at four, eleven, fifteen and twenty-one days. On the series unit nineteen are detected within a day, with the remainder at three, fifteen, fifteen, thirty-seven and one hundred and eight days. Gradually developing faults are detected slowly, which is the expected cost of calibrating below a noise floor and is a genuine limitation for the degradation faults that motivate much of this literature.
+
+Sensor-bias detection illustrates why pooled recall misleads for gated detectors. Raw recall of 39--47\% over the 351 to 352 evaluable days appears to be a capability ceiling until it is decomposed. The residual is physics-bound only inside a detection window --- cooling coil off, zone occupied, sustained at least 120 minutes --- and such windows exist on 137 to 164 days of the year in this climate. Within them, window-conditional recall is measured at 100\%, on counts of 164/164, 164/164, 139/139 and 137/137 across the four coil-bias scenarios. The apparent ceiling is climate, not capability, and reporting window prevalence separately from window-conditional recall is a methodological recommendation we would make to others evaluating gated detectors.
+
+Against a principal-component-analysis baseline using squared prediction error, audited and scored on comparable scenario universes, the two methods reach a near-tie: 60 scenarios against 61 in total, at 13 versus 13, 23 versus 23, and 24 versus 25 per system. The misses are complementary rather than nested. STRATA alone detects an unstable VAV damper and severe waterside fouling; the baseline alone detects two room-temperature bias scenarios and moderate airside fouling, the latter through a zone-fan differential-pressure sensor that STRATA's configuration does not map. One scenario is missed by both. Detection counting power is therefore comparable; what differs is that the baseline produces a scalar anomaly score and cannot name the implicated device, explain the evidence, or state how often it is wrong on fault-free data.
+
+The matched-rule control isolates what discovery contributes. For each channel a hand-written equivalent was authored and scored. Two of these reproduce their channel exactly --- 141 detections against 141 on the series unit and 206 against 206 on the parallel unit --- which is the point rather than a disappointment: the models automate the discovery of rules an expert could have written, had they known where to look. Transplanted without that knowledge the same rules are unusable, one of them firing on 231 fault-free days on the single-duct system and 124 on the parallel unit while firing on none at all on the series unit --- the contrast that makes the point, since the same rule is harmless exactly where the model had shown the invariant to hold. Some faults, conversely, need the classical instrument: a calibrated oscillation channel stands alone on the unstable-damper scenario, 349 detections against at most two from any matched rule.
+
+Localisation is reported as specificity rather than discrimination. Because every seeded zone fault in the benchmark occurs in the same zone, the ground truth has no variance and a perfect score would be unfalsifiable as evidence of discriminating between zones. What the artefact supports is that non-implicated zones are flagged on at most one day in 365 across sixty-one files.
+
+Portability was measured. The second building type was onboarded through configuration alone in approximately 1.5 hours of wall-clock time, reconstructed from commit timestamps, comprising 45 sensor mappings and 35 rules; the third was derived from the second in minutes. No pipeline code changed.
+
+\section{Hypotheses That Failed}
+\label{sec:falsified}
+
+Four pre-registered hypotheses were refuted during this work. They are reported because a protocol that only confirms is not a protocol, and because these refutations constrain the contribution more usefully than the confirmations do.
+
+\textbf{Discovered models do not out-detect hand-written rules.} On the series fan-powered unit, zone damper-stuck and negative airflow-bias faults erase the unit's daily heating rhythm, and the discovered healthy net flags the absence. A one-line matched rule --- occupied workday and AHU heating never active, with zero false alarms on 365 healthy days --- covered 192 days against the model channel's 135 on the same scenario. The 135 is a threshold-based count and should be read alongside the min-robust count of 22 to 26 days per scenario, since roughly four fifths of the threshold count is attributable to a threshold interpolated from a single holdout day. The falsifier fired. Rather than defend the original claim we reframed it: the discovered model found the load-bearing invariant without supervision, and the rule became writable only once the model had shown where to look. The matched rule is now a permanent ablation arm. This refutation is why the paper's title claims location rather than detection.
+
+\textbf{Behavioural structure does not transfer zero-shot.} The cross-system grammar was pre-registered with the hypothesis that structure discovered on one building would support detection on another. The grammar analysis did find real shared structure --- fan-powered-unit logs outscore their own shuffled controls on the single-duct net, on 99\% of days --- but the detection hypothesis failed its pre-registered falsifier, yielding zero to one gated detection per rotation. Portability is therefore claimed at configuration level only, which is what the onboarding evidence supports and no more.
+
+\textbf{One of our own detections was an artefact.} The single-duct system originally scored 14 of 14. An audit then established that the dataset's fault-free file was simulated on a different configuration branch than every fault file, differing in occupied damper floor and schedules, so that healthy-versus-fault divergence partly measures the branch rather than the fault. Exactly one scenario, an outside-air temperature bias, turned out to be detected through that provenance difference: under a branch-corrected band its only deployed channel produced zero flags on its 148 evaluable window days. The score is reported as 14/14 naive and 13/14 adjudicated, and both numbers are quoted together. The standing rule this produced is that healthy-versus-fault divergence is fault evidence only after a fault-versus-fault control.
+
+\textbf{One of our own statistical tests was invalid.} A day-level significance test adopted in Phase 4 was found to rest on an impossible null: the discordant cell it tested was zero by construction, so the test awarded significance to noise. It was retracted, thirteen scenario rows on the parallel unit lost their stars, and it was replaced by a binomial against each channel's own measured holdout rate. The standing rule is that the null is always the channel's own noise, never a statistical convention imported for its familiarity.
+
+\textbf{Calibration is fragile to contaminated training data.} Extreme-value calibration has a breakdown point of one observation in $n$, and a single score-carrying contaminated day in the fault-free year is sufficient to collapse the two negative rungs of the coil-bias ladder from 164 detections out of 164 to none, by dragging the band edge to $-7.19$. The finding must be quoted with its detectability split or it misleads in either direction: contamination from a mild source announces itself on 100\% of the contaminated days (5/5, 13/13 and 27/27 signature days) and is therefore caught, whereas the dangerous source is visible on none of its 27 days. A related test found that configurations tuned at one-minute sampling gain 28 to 64 spurious healthy signature-days at fifteen-minute sampling; four falsifiers fired, and the transfer claim was scoped so that the healthy-silence gate is re-run at the deployment sampling rate rather than transplanted.
+
+\section{Defects in the Benchmark Datasets}
+\label{sec:errata}
+
+Auditing the evaluation produced an unanticipated secondary contribution: five defects in the LBNL benchmark datasets, each with machine-verifiable evidence and a reproducing command. Two concern single simulation runs shipped four times under different severity labels. One concerns a fault whose physical origin is controller-side, so that the labelled bias never appears in the logged column at all. One concerns a file whose calendar is rotated relative to its siblings, excluded here from family claims. The fifth is the configuration-branch mismatch described above, which hid for six phases because every comparison ran against the same fault-free file and no fault-versus-fault control existed.
+
+The most consequential for other researchers concerns the supply-air static-pressure columns, whose units and roles differ between the fault-free file and every fault file with no overlap between the two ranges. Either column alone separates fault-free from faulty data by file provenance rather than by fault physics. We discovered this by auditing our own baseline, whose error statistic had reached implausible magnitudes for precisely this reason; the columns are now excluded from all baselines. Published results on this dataset that used the full column set should be read with this in mind.
+
+\section{Work in Progress: Comparison Against Guideline 36 Practice}
+\label{sec:baseline}
+
+The comparison that matters most to practitioners is against the rule-based detection actually deployed in commercial building automation systems \cite{granderson2017fddtoolsurvey}. That work is underway; its methodology is settled and no results are reported here, because the first execution did not survive audit.
+
+The design imports a third-party open-source implementation of the Guideline 36 fault conditions rather than reimplementing them, since writing one's own version of a competing method invites the objection that the comparison was won by construction. Thresholds stay at distributed defaults, that being the condition under which such libraries are deployed. Both methods are scored on the identical examination, and a refutation condition was registered stating that if the rule battery matched STRATA's detection count at an equal or lower false-alarm rate on any system, the improvement claim would be abandoned for that system and reported as abandoned.
+
+An adversarial audit then voided the first execution, and the failure is worth recording. Two fault conditions had been supplied water-side temperatures where the standard specifies air-side measurements, and because one such input is a constant boundary value in the simulation rather than a measurement, the affected condition alarmed on every day of every file. More fundamentally, the fan-powered units are terminal equipment whose seeded faults are terminal-unit faults, and they had been graded with the air-handler rule set: the wrong rulebook for the equipment, applied to faults it was never written to detect. A third defect arose from feeding the adapter the very static-pressure columns documented as provenance-leaking in Section~\ref{sec:errata} --- the project's own erratum ledger, not consulted before building a new consumer of the data, which is a repetition of a lesson already recorded.
+
+The revised protocol will be pre-registered before execution. Air-handler rules will be applied to air handlers and the standard's terminal-unit rules to terminal units, with the equipment-matching criterion fixed in advance and applied uniformly rather than selected after the numbers are visible. The comparison will be reported symmetrically with respect to channel demotion, since permitting STRATA to set aside its noisiest channel while the rule battery retains all of its conditions is not a like-for-like contest. It is possible that the revised comparison will refute the improvement claim on one or both terminal-unit systems, since the standard's terminal-unit rules target precisely the faults seeded there. That outcome would be reported.
+
+\section{Limitations}
+\label{sec:limitations}
+
+All results come from simulation, and simulation flatters. Noise-free years make zero-false-positive thresholds cheap, bands razor-thin and silence easy; a substantial share of the project's own recorded lessons reduce to that single observation. The deployment phase on real building data remains outstanding, and until it is complete the framework should be considered validated in the laboratory rather than in the field. The contamination result of Section~\ref{sec:falsified} bears directly on that gap, because a real building's baseline year is not fault-free by construction.
+
+Two reporting decisions require explicit disclosure. First, the deployed false-alarm rates in Table~\ref{tab:results} treat the seasonal rate channel as corroborating evidence that may not alarm alone. The naive union of all eight channels false-alarms on 15.6\% of fault-free holdout days on the single-duct system, and that channel accounts for nearly all of it. The demotion was adopted after those union figures were known, was verified to cost no detections and no change in time to detection, and both figures are published together --- but it is a post-hoc choice and is identified as such. Readers comparing against methods that report an undemoted union should use 15.6\%.
+
+Second, the model and device channels' holdout false-positive rows are calibration targets rather than out-of-sample measurements, because their thresholds are quantile-fit on the same holdout days those rows report. The remaining six channels use train-only thresholds and their holdout is genuinely out-of-sample. The same data cannot both set a threshold and certify it, and a three-way discover/calibrate/test split is the planned remedy.
+
+Objective four, the hybrid extension combining process-mining features with a machine-learning classifier, has not been attempted. The deferral is deliberate rather than incidental. The adjacent literature suggests such a hybrid would raise detection scores --- Vitale and colleagues report F1 gains of thirty to seventy points from feeding alignment features to downstream classifiers in a robotics domain \cite{vitale2025kbsfeatures} --- but its output is an anomaly score, which is precisely the artefact this framework exists to avoid. The test worth running is therefore not whether a hybrid detects more, which it very likely would, but whether it detects more \emph{at an equal false-alarm budget while still naming the implicated device}. That is a phase of work with its own pre-registration, not an ablation, and it is left to future work.
+
+Beyond these, the long detection tail is a real weakness for gradually developing faults; the comparison against deployed rule-based practice is incomplete; and three systems across two equipment families demonstrate configuration-level portability without establishing generality across the diversity of commercial HVAC equipment.
+
+\section{Conclusion}
+
+Process mining had not previously been applied to fault detection in building HVAC systems, an absence confirmed independently by four systematic reviews. This work establishes that the approach is viable and, more usefully, establishes what it does and does not contribute. Discovered process models did not outperform hand-written rules at detection, and the hypothesis that they would was withdrawn when its own pre-registered test refuted it. What the models do is locate the invariants a particular building holds constant, which makes it possible to calibrate interpretable channels against a measured noise floor and to issue every alarm with a name, an explanation and a stated false-alarm budget. On three public benchmark systems the framework detects the majority of seeded scenarios at a median of one day while false-alarming on 1.0 to 5.2\% of fault-free days, matching a machine-learning baseline on detection count with complementary misses while remaining accountable for its output in a way that baseline is not.
+
+The evaluation protocol is offered as a contribution in its own right. Four pre-registered hypotheses were refuted and all four are reported; thirty-one lessons are recorded with the standing rule each produced; five defects in a widely used public benchmark were documented with reproducible evidence; and an adversarial audit voided a completed comparison against commercial practice rather than allowing it to be published. In a subfield where independent verification is rare, a result that has survived a genuine attempt at refutation is worth more than a larger number that has not.
+
+\section*{Acknowledgements}
+
+The author thanks Dr.\ Anthony Aighobahi and Dr.\ Mridula Sharma for supervision throughout this project. AI coding assistants were used for implementation, analysis scripting, and adversarial auditing of results; all experimental designs, pre-registrations, and claims were reviewed and approved by the author.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

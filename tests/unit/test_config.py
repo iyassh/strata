@@ -1,4 +1,4 @@
-from processheal.io.config import load_config
+from strata.io.config import load_config
 
 
 def test_config_maps_canonical_names():

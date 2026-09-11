@@ -2,15 +2,15 @@
 
 import pandas as pd
 
-from processheal.core.devices import (
+from strata.core.devices import (
     absence_days,
     build_device_detector,
     classify_device_days,
     device_log,
     device_templates,
 )
-from processheal.hvac.events import abstract_events
-from processheal.io.config import Config, load_config
+from strata.hvac.events import abstract_events
+from strata.io.config import Config, load_config
 
 CFG = load_config("configs/lbnl_pfpu")
 
@@ -61,7 +61,7 @@ def test_device_log_pools_instances_into_shared_alphabet():
     assert set(dlog["device"]) == {"TU_S", "TU_E"}
     assert dlog["case_id"].str.contains("__TU_").all()
     # unit slice unaffected
-    from processheal.hvac.events import state_only
+    from strata.hvac.events import state_only
     assert set(state_only(log)["activity"]) == {"system_started", "system_stopped"}
 
 

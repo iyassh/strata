@@ -1,8 +1,8 @@
 import pandas as pd
 import pytest
 
-from processheal.hvac.events import abstract_events, event_sensor_map
-from processheal.io.config import Config, load_config
+from strata.hvac.events import abstract_events, event_sensor_map
+from strata.io.config import Config, load_config
 
 CFG = load_config("configs/lbnl_sdahu")
 

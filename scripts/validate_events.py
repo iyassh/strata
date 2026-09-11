@@ -10,8 +10,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from processheal.hvac.events import abstract_events
-from processheal.io.config import load_config
+from strata.hvac.events import abstract_events
+from strata.io.config import load_config
 
 DATA = Path("data/processed/sdahu")
 cfg = load_config("configs/lbnl_sdahu")

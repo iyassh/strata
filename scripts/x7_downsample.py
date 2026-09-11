@@ -22,15 +22,15 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from processheal.core.detection import holdout_mask
-from processheal.core.frequency import (
+from strata.core.detection import holdout_mask
+from strata.core.frequency import (
     build_frequency_detector,
     classify_frequency_days,
     unit_day_counts,
 )
-from processheal.core.residuals import calibrate_band, daily_residual_scores, flag_days
-from processheal.hvac.events import abstract_events, event_alphabet_map
-from processheal.io.config import load_config
+from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days
+from strata.hvac.events import abstract_events, event_alphabet_map
+from strata.io.config import load_config
 
 STEP = 15
 RULE = "supply_air_residual"

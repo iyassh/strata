@@ -2,9 +2,9 @@
 
 import pandas as pd
 
-from processheal.core.residuals import calibrate_band, daily_residual_scores, flag_days
-from processheal.hvac.events import abstract_events
-from processheal.io.config import load_config
+from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days
+from strata.hvac.events import abstract_events
+from strata.io.config import load_config
 
 CFG = load_config("configs/lbnl_sdahu")
 
@@ -67,7 +67,7 @@ def test_residual_scores_empty_when_sensors_missing():
 
 def test_multi_gate_residual_requires_all_gates_idle():
     """FPU-style: SA-MA residual gated on cooling AND heating coils (gates list)."""
-    from processheal.io.config import Config
+    from strata.io.config import Config
     rules = {
         "detection": CFG.rules["detection"],
         "events": {
@@ -105,8 +105,8 @@ def test_multi_gate_residual_requires_all_gates_idle():
 
 
 def test_stratum_routing_excludes_device_events_from_unit_slice():
-    from processheal.hvac.events import device_state_only, state_only
-    from processheal.io.config import Config
+    from strata.hvac.events import device_state_only, state_only
+    from strata.io.config import Config
     rules = {
         "detection": CFG.rules["detection"],
         "events": {
@@ -129,7 +129,7 @@ def test_stratum_routing_excludes_device_events_from_unit_slice():
 
 
 def test_occ_above_gate_includes_night_cycle_state():
-    from processheal.io.config import Config
+    from strata.io.config import Config
     rules = {
         "detection": CFG.rules["detection"],
         "events": {
@@ -155,14 +155,14 @@ def test_occ_above_gate_includes_night_cycle_state():
 
 def test_holdout_mask_handles_composite_device_cases():
     import pandas as pd
-    from processheal.core.detection import holdout_mask
+    from strata.core.detection import holdout_mask
     ids = pd.Series(["2018-06-01", "2018-06-28", "2018-06-01__TU_S", "2018-06-28__TU_S"])
     m = holdout_mask(ids, 8)
     assert list(m) == [False, True, False, True]  # same day -> same side, always
 
 
 def test_device_column_from_rule_tag():
-    from processheal.io.config import Config
+    from strata.io.config import Config
     rules = {
         "detection": CFG.rules["detection"],
         "events": {

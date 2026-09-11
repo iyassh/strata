@@ -28,10 +28,10 @@ import yaml
 warnings.filterwarnings("ignore")
 sys.path.insert(0, "src")
 
-from processheal.core.detection import holdout_mask
-from processheal.core.frequency import unit_day_counts, device_day_counts, rolling_active_rate
-from processheal.hvac.events import abstract_events
-from processheal.io.config import load_config
+from strata.core.detection import holdout_mask
+from strata.core.frequency import unit_day_counts, device_day_counts, rolling_active_rate
+from strata.hvac.events import abstract_events
+from strata.io.config import load_config
 
 SYSTEM = sys.argv[1] if len(sys.argv) > 1 else "sfpu"
 DATA = Path(f"data/processed/{SYSTEM}")

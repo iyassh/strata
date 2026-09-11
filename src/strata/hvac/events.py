@@ -16,7 +16,7 @@ import math
 
 import pandas as pd
 
-from processheal.io.config import Config
+from strata.io.config import Config
 
 # Which rule keys name canonical sensors, per kind (used for availability
 # checks and for the event->sensor map that powers equipment localisation).

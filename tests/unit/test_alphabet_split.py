@@ -8,14 +8,14 @@ re-scoring the rules (the circularity behind the +0.4pp v1 result).
 
 import pandas as pd
 
-from processheal.core.detection import build_detector, classify_days
-from processheal.hvac.events import (
+from strata.core.detection import build_detector, classify_days
+from strata.hvac.events import (
     abstract_events,
     event_alphabet_map,
     rule_alphabet,
     state_only,
 )
-from processheal.io.config import load_config
+from strata.io.config import load_config
 
 CFG = load_config("configs/lbnl_sdahu")
 

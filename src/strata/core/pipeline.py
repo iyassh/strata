@@ -1,7 +1,7 @@
 """The STRATA detector facade (Phase 9 / T3): fit on fault-free data, score
 anything — the deployable pipeline lifted out of scripts/benchmark.py.
 
-    from processheal.core.pipeline import fit, day_universe
+    from strata.core.pipeline import fit, day_universe
     det = fit(cfg, healthy_df)          # trains + calibrates every channel
     day = det.score(new_df)             # per-day flags per channel
     rep = det.evaluate(new_df)          # + significance gates, deployed union,
@@ -32,8 +32,8 @@ from typing import Any
 
 import pandas as pd
 
-from processheal.core.splits import holdout_mask
-from processheal.core.frequency import (
+from strata.core.splits import holdout_mask
+from strata.core.frequency import (
     _flag_matrix,
     build_frequency_detector,
     build_rate_detector_monthly,
@@ -42,10 +42,10 @@ from processheal.core.frequency import (
     device_day_counts,
     unit_day_counts,
 )
-from processheal.core.oscillation import build_oscillation_detector, daily_direction_changes
-from processheal.core.residuals import calibrate_band, daily_residual_scores, flag_days
-from processheal.hvac.events import abstract_events, event_alphabet_map, event_device_map
-from processheal.io.config import Config
+from strata.core.oscillation import build_oscillation_detector, daily_direction_changes
+from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days
+from strata.hvac.events import abstract_events, event_alphabet_map, event_device_map
+from strata.io.config import Config
 
 DEFAULT_RESIDUAL_RULE = "supply_air_residual"
 DEPLOYED_CHANNELS = ("rules", "residual", "model", "device", "absence",
@@ -125,13 +125,13 @@ class StrataDetector:
         dev_days_map: dict[str, list] = {}
         abs_by_device: dict[str, tuple[int, int, float]] = {}
         if self.unit_model is not None:
-            from processheal.core.detection import classify_days
+            from strata.core.detection import classify_days
 
             per_day = classify_days(self.unit_model, log)
             model = per_day.set_index("case_id")["flagged"].reindex(days).fillna(False)
         model = model | (~has_events & (uni["occupied_min"] > 0))
         if self.device_model is not None:
-            from processheal.core.devices import absence_days, classify_device_days
+            from strata.core.devices import absence_days, classify_device_days
 
             per_dev = classify_device_days(self.device_model, log, cfg)
             if len(per_dev):
@@ -192,7 +192,7 @@ class StrataDetector:
 
     def evaluate(self, df: pd.DataFrame) -> dict[str, Any]:
         """score() + the per-channel significance gates + deployed verdict."""
-        from processheal.core import significance as S
+        from strata.core import significance as S
 
         s = self.score(df)
         uni = s["universe"]
@@ -300,8 +300,8 @@ def fit(cfg: Config, healthy_df: pd.DataFrame,
                   for ch in ("rules", "residual", "frequency", "oscillation", "rate",
                              "absence")}
     try:
-        from processheal.core.detection import build_detector
-        from processheal.core.devices import build_device_detector
+        from strata.core.detection import build_detector
+        from strata.core.devices import build_device_detector
 
         unit_model = build_detector(cfg, log)
         model_holdout = (int((unit_model.holdout_per_day["fitness"]

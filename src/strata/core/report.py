@@ -7,8 +7,8 @@ so localisation works on any building whose config is filled in.
 
 from __future__ import annotations
 
-from processheal.hvac.events import event_sensor_map
-from processheal.io.config import Config
+from strata.hvac.events import event_sensor_map
+from strata.io.config import Config
 
 
 def _equipment_lookup(cfg: Config, point_to_equip: dict[str, str]):

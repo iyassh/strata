@@ -21,9 +21,9 @@ from __future__ import annotations
 
 import pandas as pd
 
-from processheal.core.frequency import FrequencyDetector, _flag_matrix
-from processheal.core.splits import holdout_mask
-from processheal.io.config import Config
+from strata.core.frequency import FrequencyDetector, _flag_matrix
+from strata.core.splits import holdout_mask
+from strata.io.config import Config
 
 
 def daily_direction_changes(df: pd.DataFrame, cfg: Config) -> pd.DataFrame:

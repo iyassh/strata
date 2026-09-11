@@ -42,13 +42,13 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from processheal.core.detection import build_detector, classify_days, holdout_mask
-from processheal.core.devices import (
+from strata.core.detection import build_detector, classify_days, holdout_mask
+from strata.core.devices import (
     absence_days,
     build_device_detector,
     classify_device_days,
 )
-from processheal.core.frequency import (
+from strata.core.frequency import (
     _flag_matrix,
     build_frequency_detector,
     build_rate_detector_monthly,
@@ -57,10 +57,10 @@ from processheal.core.frequency import (
     device_day_counts,
     unit_day_counts,
 )
-from processheal.core.oscillation import build_oscillation_detector, daily_direction_changes
-from processheal.core.residuals import calibrate_band, daily_residual_scores, flag_days
-from processheal.hvac.events import abstract_events, event_alphabet_map
-from processheal.io.config import load_config
+from strata.core.oscillation import build_oscillation_detector, daily_direction_changes
+from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days
+from strata.hvac.events import abstract_events, event_alphabet_map
+from strata.io.config import load_config
 
 SYSTEM = sys.argv[1] if len(sys.argv) > 1 else "sdahu"
 CONFIG_DIR = f"configs/lbnl_{SYSTEM}"

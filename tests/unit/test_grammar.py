@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from processheal.core.grammar import (CANONICAL, band_violation_days, canonical_log,
+from strata.core.grammar import (CANONICAL, band_violation_days, canonical_log,
                                       count_bands, log_profile_distance,
                                       shuffle_within_traces)
 

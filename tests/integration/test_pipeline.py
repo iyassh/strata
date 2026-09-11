@@ -5,10 +5,10 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from processheal.core.conformance import check_conformance
-from processheal.core.discovery import discover_model
-from processheal.hvac.events import abstract_events
-from processheal.io.config import load_config
+from strata.core.conformance import check_conformance
+from strata.core.discovery import discover_model
+from strata.hvac.events import abstract_events
+from strata.io.config import load_config
 
 DATA = Path("data/processed/sdahu")
 

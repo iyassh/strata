@@ -19,10 +19,10 @@ import random
 
 import pandas as pd
 
-from processheal.core.detection import holdout_mask
-from processheal.core.discovery import discover_model
-from processheal.core.conformance import check_conformance
-from processheal.hvac.events import state_only
+from strata.core.detection import holdout_mask
+from strata.core.discovery import discover_model
+from strata.core.conformance import check_conformance
+from strata.hvac.events import state_only
 
 # Pre-registered canonical alphabet (PHASE5_PLAN.md) — identity projection;
 # activities a system lacks simply do not occur in its log.

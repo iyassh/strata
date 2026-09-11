@@ -1,5 +1,5 @@
 [project]
-name = "processheal"
+name = "strata"
 version = "0.1.0"
 description = "STRATA: discovered process models + calibrated interpretable channels for building HVAC fault detection (every alarm ships with a name, an explanation, and a false-positive budget)"
 readme = "README.md"
@@ -29,7 +29,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/processheal"]
+packages = ["src/strata"]
 
 [dependency-groups]
 dev = [
@@ -39,8 +39,8 @@ dev = [
 ]
 
 [project.scripts]
-processheal = "processheal.cli:app"
-processheal-web = "processheal.web.app:main"
+strata = "strata.cli:app"
+strata-web = "strata.web.app:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

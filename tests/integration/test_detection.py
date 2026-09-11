@@ -5,9 +5,9 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from processheal.core.detection import build_detector, classify_days
-from processheal.hvac.events import abstract_events, emitted_event_names
-from processheal.io.config import load_config
+from strata.core.detection import build_detector, classify_days
+from strata.hvac.events import abstract_events, emitted_event_names
+from strata.io.config import load_config
 
 DATA = Path("data/processed/sdahu")
 

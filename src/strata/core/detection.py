@@ -18,14 +18,14 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from processheal.core.conformance import check_conformance
-from processheal.core.discovery import discover_model
-from processheal.hvac.events import state_only
-from processheal.io.config import Config
+from strata.core.conformance import check_conformance
+from strata.core.discovery import discover_model
+from strata.hvac.events import state_only
+from strata.io.config import Config
 
 
 # moved to core.splits (pm4py-free path, T3 facade); re-exported here
-from processheal.core.splits import holdout_mask  # noqa: F401
+from strata.core.splits import holdout_mask  # noqa: F401
 
 
 @dataclass

@@ -25,14 +25,14 @@ from scipy.stats import beta as beta_dist
 
 sys.path.insert(0, "src")
 
-from processheal.core.grammar import (CANONICAL, band_violation_days, canonical_day_counts,
+from strata.core.grammar import (CANONICAL, band_violation_days, canonical_day_counts,
                                       canonical_log, count_bands, fitness_distribution,
                                       log_profile_distance, shuffle_within_traces,
                                       split_train_holdout)
-from processheal.core.discovery import discover_model
-from processheal.core.conformance import check_conformance
-from processheal.hvac.events import abstract_events
-from processheal.io.config import load_config
+from strata.core.discovery import discover_model
+from strata.core.conformance import check_conformance
+from strata.hvac.events import abstract_events
+from strata.io.config import load_config
 
 SYSTEMS = ["sdahu", "pfpu", "sfpu"]
 HEALTHY = {"sdahu": "AHU_annual", "pfpu": "PFPU_FaultFree", "sfpu": "SFPU_FaultFree"}
@@ -83,7 +83,7 @@ for s in SYSTEMS:
     hn = cfg.rules["detection"]["holdout_days_per_month"]
     train, hold = split_train_holdout(log, hn)
     counts = canonical_day_counts(log, all_days=days)  # L6: raw calendar
-    hold_days = set(pd.Series(days)[__import__("processheal.core.detection",
+    hold_days = set(pd.Series(days)[__import__("strata.core.detection",
                     fromlist=["holdout_mask"]).holdout_mask(pd.Series(days), hn)])
     tmask = ~counts.index.astype(str).isin(hold_days)
     data[s] = {

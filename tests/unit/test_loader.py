@@ -1,6 +1,6 @@
 import pandas as pd
 
-from processheal.io.loader import operating_summary
+from strata.io.loader import operating_summary
 
 
 def test_operating_summary_flags_damper_mismatch():

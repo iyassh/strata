@@ -19,8 +19,8 @@ def test_pipeline_import_is_pm4py_free():
     must NOT pull pm4py — the AGPL boundary of LICENSING-NOTES.md."""
     code = (
         "import sys; sys.path.insert(0, 'src');"
-        "import processheal.core.pipeline, processheal.core.significance,"
-        "processheal.core.splits;"
+        "import strata.core.pipeline, strata.core.significance,"
+        "strata.core.splits;"
         "assert 'pm4py' not in sys.modules, 'pm4py leaked into the clean path'"
     )
     r = subprocess.run([sys.executable, "-c", code], cwd=ROOT,
@@ -30,7 +30,7 @@ def test_pipeline_import_is_pm4py_free():
 
 def test_significance_gates_pure():
     sys.path.insert(0, str(ROOT / "src"))
-    from processheal.core import significance as S
+    from strata.core import significance as S
 
     # rule of three: 3 fire-days on 365 evaluable is NOT detection
     assert not S.rules_significant(3, 365)
@@ -57,8 +57,8 @@ def test_facade_reproduces_union_fpr_sdahu():
     sys.path.insert(0, str(ROOT / "src"))
     import pandas as pd
 
-    from processheal.core.pipeline import fit
-    from processheal.io.config import load_config
+    from strata.core.pipeline import fit
+    from strata.io.config import load_config
 
     art = json.loads((ROOT / "outputs/union_fpr_sdahu.json").read_text())
     cfg = load_config(str(ROOT / "configs/lbnl_sdahu"))

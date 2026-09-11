@@ -7,12 +7,12 @@ from pathlib import Path
 import pandas as pd
 import typer
 
-from processheal.core.conformance import check_conformance
-from processheal.core.discovery import discover_model, save_model
-from processheal.core.report import build_report
-from processheal.hvac.events import abstract_events
-from processheal.io.brick import point_to_equipment
-from processheal.io.config import load_config
+from strata.core.conformance import check_conformance
+from strata.core.discovery import discover_model, save_model
+from strata.core.report import build_report
+from strata.hvac.events import abstract_events
+from strata.io.brick import point_to_equipment
+from strata.io.config import load_config
 
 app = typer.Typer(help="Process mining for HVAC fault detection.")
 

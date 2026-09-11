@@ -35,18 +35,18 @@ import yaml
 
 warnings.filterwarnings("ignore")
 
-from processheal.core import significance as S
-from processheal.core.detection import build_detector, classify_days, holdout_mask
-from processheal.core.devices import (absence_days, build_device_detector,
+from strata.core import significance as S
+from strata.core.detection import build_detector, classify_days, holdout_mask
+from strata.core.devices import (absence_days, build_device_detector,
                                        classify_device_days, pooling_homogeneity)
-from processheal.core.oscillation import build_oscillation_detector, daily_direction_changes
-from processheal.core.frequency import _flag_matrix
-from processheal.core.frequency import (build_frequency_detector, build_rate_detector_monthly,
+from strata.core.oscillation import build_oscillation_detector, daily_direction_changes
+from strata.core.frequency import _flag_matrix
+from strata.core.frequency import (build_frequency_detector, build_rate_detector_monthly,
                                         classify_frequency_days, classify_rate_days_monthly,
                                         device_day_counts, unit_day_counts)
-from processheal.core.residuals import calibrate_band, daily_residual_scores, flag_days
-from processheal.hvac.events import abstract_events, event_alphabet_map, event_device_map
-from processheal.io.config import load_config
+from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days
+from strata.hvac.events import abstract_events, event_alphabet_map, event_device_map
+from strata.io.config import load_config
 
 SYSTEM = sys.argv[1] if len(sys.argv) > 1 else "sdahu"
 CONFIG_DIR = f"configs/lbnl_{SYSTEM}"

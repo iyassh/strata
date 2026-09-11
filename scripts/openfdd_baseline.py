@@ -154,7 +154,7 @@ def _flagged_days(frame: pd.DataFrame, poll: float) -> tuple[set[str], dict]:
 
 def _holdout_days(days: list[str], n_per_month: int = 8) -> set[str]:
     """Last N days of each month — the same split STRATA calibrates on."""
-    from processheal.core.splits import holdout_mask
+    from strata.core.splits import holdout_mask
     s = pd.Series(sorted(set(days)))
     return set(s[holdout_mask(s, n_per_month).to_numpy()])
 

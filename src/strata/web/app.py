@@ -10,13 +10,13 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from processheal.core.conformance import check_conformance
-from processheal.core.detection import build_detector, holdout_mask
-from processheal.hvac.events import abstract_events, emitted_event_names, event_sensor_map
-from processheal.io.brick import point_to_equipment
-from processheal.io.config import load_config
+from strata.core.conformance import check_conformance
+from strata.core.detection import build_detector, holdout_mask
+from strata.hvac.events import abstract_events, emitted_event_names, event_sensor_map
+from strata.io.brick import point_to_equipment
+from strata.io.config import load_config
 
-ROOT = Path(__file__).resolve().parents[3]  # processheal/
+ROOT = Path(__file__).resolve().parents[3]  # strata/
 CONFIG = ROOT / "configs" / "lbnl_sdahu"
 DATA = ROOT / "data" / "processed" / "sdahu"
 STATIC = Path(__file__).resolve().parent / "static"
@@ -220,7 +220,7 @@ app.mount("/static", StaticFiles(directory=STATIC), name="static")
 def main() -> None:
     import uvicorn
 
-    uvicorn.run("processheal.web.app:app", host="127.0.0.1", port=8000, reload=False)
+    uvicorn.run("strata.web.app:app", host="127.0.0.1", port=8000, reload=False)
 
 
 if __name__ == "__main__":

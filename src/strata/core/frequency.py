@@ -41,10 +41,10 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from processheal.core.splits import holdout_mask
-from processheal.core.devices import device_log
-from processheal.hvac.events import state_only
-from processheal.io.config import Config
+from strata.core.splits import holdout_mask
+from strata.core.devices import device_log
+from strata.hvac.events import state_only
+from strata.io.config import Config
 
 
 def _daily_counts(log: pd.DataFrame, key: str) -> pd.DataFrame:

@@ -7,8 +7,8 @@ blend of outdoor and return air, so MA must lie between them.
 
 import pandas as pd
 
-from processheal.hvac.events import abstract_events, event_alphabet_map
-from processheal.io.config import load_config
+from strata.hvac.events import abstract_events, event_alphabet_map
+from strata.io.config import load_config
 
 CFG = load_config("configs/lbnl_sdahu")
 

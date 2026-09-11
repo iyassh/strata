@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from processheal.core.frequency import (
+from strata.core.frequency import (
     build_frequency_detector,
     classify_frequency_days,
     unit_day_counts,
@@ -24,7 +24,7 @@ def test_bands_come_from_train_days_only():
     hc = _healthy_counts()
     det = build_frequency_detector(hc, holdout_days_per_month=8)
     days = pd.Series(hc.index)
-    from processheal.core.detection import holdout_mask
+    from strata.core.detection import holdout_mask
     train = hc[~holdout_mask(days, 8).values]
     assert det.bands["cooling_active"] == (train["cooling_active"].min(),
                                            train["cooling_active"].max())
@@ -93,8 +93,8 @@ def test_mcnemar_exact_and_bh():
 
 def test_oscillation_channel_counts_direction_changes():
     import pandas as pd
-    from processheal.core.oscillation import daily_direction_changes
-    from processheal.io.config import Config
+    from strata.core.oscillation import daily_direction_changes
+    from strata.io.config import Config
     cfg = Config(sensors={"DMPR": "DMPR", "OCCUPIED": "SYS", "Datetime": "Datetime"},
                  rules={"detection": {"oscillation_signals": ["DMPR"],
                                       "oscillation_deadband": 0.02,

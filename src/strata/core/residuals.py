@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from processheal.io.config import Config
+from strata.io.config import Config
 
 
 def daily_residual_scores(
@@ -27,7 +27,7 @@ def daily_residual_scores(
     Returns a DataFrame with columns ``case_id``, ``score`` (median gated
     residual; NaN when the day has no adequate window) and ``window_min``.
     """
-    from processheal.hvac.events import residual_gates
+    from strata.hvac.events import residual_gates
 
     r = cfg.rules["events"][rule_name]
     w = df.rename(columns={v: k for k, v in cfg.sensors.items()}).sort_values("Datetime")

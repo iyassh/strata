@@ -1,6 +1,6 @@
-from processheal.core.report import build_report
-from processheal.io.brick import point_to_equipment
-from processheal.io.config import load_config
+from strata.core.report import build_report
+from strata.io.brick import point_to_equipment
+from strata.io.config import load_config
 
 CFG = load_config("configs/lbnl_sdahu")
 

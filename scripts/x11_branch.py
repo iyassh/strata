@@ -34,9 +34,9 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from processheal.core.detection import holdout_mask
-from processheal.core.residuals import calibrate_band, daily_residual_scores, flag_days
-from processheal.io.config import load_config
+from strata.core.detection import holdout_mask
+from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days
+from strata.io.config import load_config
 
 RULE = "supply_air_residual"
 NOMINAL_BIAS_F = {  # LBNL labels are Celsius biases; data is Fahrenheit

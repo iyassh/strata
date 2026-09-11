@@ -34,8 +34,8 @@ from sklearn.decomposition import PCA
 from sklearn.ensemble import IsolationForest
 
 sys.path.insert(0, "src")
-from processheal.core.detection import holdout_mask
-from processheal.io.config import load_config
+from strata.core.detection import holdout_mask
+from strata.io.config import load_config
 
 SYSTEM = sys.argv[1] if len(sys.argv) > 1 else "sdahu"
 DATA = Path(f"data/processed/{SYSTEM}")

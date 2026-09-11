@@ -17,7 +17,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, "src")
-from processheal.io.config import load_config  # noqa: E402
+from strata.io.config import load_config  # noqa: E402
 
 HEALTHY = {"sdahu": "AHU_annual", "pfpu": "PFPU_FaultFree", "sfpu": "SFPU_FaultFree"}
 

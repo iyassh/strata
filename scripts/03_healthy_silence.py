@@ -13,8 +13,8 @@ import sys
 
 import pandas as pd
 
-from processheal.hvac.events import abstract_events, event_alphabet_map
-from processheal.io.config import load_config
+from strata.hvac.events import abstract_events, event_alphabet_map
+from strata.io.config import load_config
 
 
 def main(config_dir: str, parquet: str) -> None:

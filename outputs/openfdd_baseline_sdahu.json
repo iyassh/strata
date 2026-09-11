@@ -1,0 +1,268 @@
+{
+  "system": "sdahu",
+  "openfdd_version": "4.4.1",
+  "rules": [
+    "FC1",
+    "FC2",
+    "FC3",
+    "FC4",
+    "FC5",
+    "FC6",
+    "FC7",
+    "FC8",
+    "FC9",
+    "FC10",
+    "FC11",
+    "FC12",
+    "FC13",
+    "FC14",
+    "FC15"
+  ],
+  "params_overridden": {},
+  "role_map": {
+    "outside-air-temp": "OA_TEMP",
+    "discharge-air-temp": "SA_TEMP",
+    "discharge-air-temp-sp": "SA_TEMPSPT",
+    "mixed-air-temp": "MA_TEMP",
+    "return-air-temp": "RA_TEMP",
+    "cooling-valve": "CHWC_VLV",
+    "outside-air-damper": "OA_DMPR",
+    "duct-static-pressure": "SA_SP",
+    "duct-static-pressure-sp": "SA_SPSPT",
+    "vav-total-airflow": "SA_CFM",
+    "occupied": "SYS_CTL",
+    "fan-cmd": "SF_SPD",
+    "fan-status": "SF_SPD_DM"
+  },
+  "prereg": "docs/plans/2026-09-11-openfdd-prereg.md",
+  "scoring": "a day is flagged if ANY condition fires on ANY row of it",
+  "scenarios": [
+    {
+      "file": "damper_stuck_010_annual",
+      "family": "damper_stuck",
+      "label": "damper stuck 10%",
+      "battery_flag_days": 52,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "damper_stuck_025_annual",
+      "family": "damper_stuck",
+      "label": "damper stuck 25%",
+      "battery_flag_days": 52,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "damper_stuck_075_annual",
+      "family": "damper_stuck",
+      "label": "damper stuck 75%",
+      "battery_flag_days": 191,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "damper_stuck_100_annual_short",
+      "family": "damper_stuck",
+      "label": "damper stuck 100%",
+      "battery_flag_days": 89,
+      "total_days": 215,
+      "detected": true
+    },
+    {
+      "file": "coi_stuck_010_annual",
+      "family": "valve_stuck",
+      "label": "valve stuck 10%",
+      "battery_flag_days": 106,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "coi_stuck_025_annual",
+      "family": "valve_stuck",
+      "label": "valve stuck 25%",
+      "battery_flag_days": 103,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "coi_stuck_050_annual",
+      "family": "valve_stuck",
+      "label": "valve stuck 50%",
+      "battery_flag_days": 57,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "coi_stuck_075_annual",
+      "family": "valve_stuck",
+      "label": "valve stuck 75%",
+      "battery_flag_days": 55,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "coi_leakage_010_annual",
+      "family": "valve_leak",
+      "label": "valve leaking",
+      "battery_flag_days": 69,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "coi_bias_-4_annual",
+      "family": "sensor_bias",
+      "label": "SA sensor bias -4C",
+      "battery_flag_days": 200,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "coi_bias_-2_annual",
+      "family": "sensor_bias",
+      "label": "SA sensor bias -2C",
+      "battery_flag_days": 188,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "coi_bias_2_annual",
+      "family": "sensor_bias",
+      "label": "SA sensor bias +2C",
+      "battery_flag_days": 169,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "coi_bias_4_annual",
+      "family": "sensor_bias",
+      "label": "SA sensor bias +4C",
+      "battery_flag_days": 169,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "oa_bias_4_annual",
+      "family": "oa_bias",
+      "label": "OA sensor bias (controller-side)",
+      "battery_flag_days": 172,
+      "total_days": 365,
+      "detected": true
+    }
+  ],
+  "battery_detected_scenarios": 14,
+  "clean_year": {
+    "healthy_file": "AHU_annual",
+    "holdout_fp_days": 43,
+    "holdout_days": 96,
+    "holdout_fp_rate": 0.4479166666666667,
+    "full_year_fp_days": 171,
+    "full_year_days": 365,
+    "full_year_fp_rate": 0.4684931506849315
+  },
+  "per_condition": {
+    "FC1": {
+      "status": "unrunnable",
+      "missing_roles": [
+        "duct-static-pressure-sp"
+      ],
+      "scenarios_fired": 0
+    },
+    "FC2": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC3": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC4": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 7
+    },
+    "FC5": {
+      "status": "unrunnable",
+      "missing_roles": [
+        "heating-valve"
+      ],
+      "scenarios_fired": 0
+    },
+    "FC6": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC7": {
+      "status": "unrunnable",
+      "missing_roles": [
+        "heating-valve"
+      ],
+      "scenarios_fired": 0
+    },
+    "FC8": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 7
+    },
+    "FC9": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 9
+    },
+    "FC10": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 5
+    },
+    "FC11": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 5
+    },
+    "FC12": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 1
+    },
+    "FC13": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 5
+    },
+    "FC14": {
+      "status": "unrunnable",
+      "missing_roles": [
+        "cooling-coil-entering-temp",
+        "cooling-coil-leaving-temp"
+      ],
+      "scenarios_fired": 0
+    },
+    "FC15": {
+      "status": "unrunnable",
+      "missing_roles": [
+        "heating-coil-entering-temp",
+        "heating-coil-leaving-temp"
+      ],
+      "scenarios_fired": 0
+    }
+  },
+  "strata_reference": {
+    "detected_scenarios": 14,
+    "detected_definition": "scenario has a non-null ttd_days in benchmark_v6",
+    "holdout_fp_days": 1,
+    "holdout_fp_rate": 0.010416666666666666,
+    "holdout_days": 96,
+    "detector": "The STRATA detector = OR of the significance-gated channels {rules, residual, model, device, absence, freq, osc}; the seasonal rate channel is diagnostic-only (corroboration and explanation, never a lone alarm)."
+  },
+  "falsifier_F1": {
+    "statement": "battery detected-scenario count >= STRATA's at a clean-year holdout FP rate <= STRATA's => 'better than traditional' dies for this system",
+    "verdict": "NOT_FIRED",
+    "battery_detected": 14,
+    "strata_detected": 14,
+    "battery_holdout_fp_rate": 0.4479166666666667,
+    "strata_holdout_fp_rate": 0.010416666666666666
+  }
+}

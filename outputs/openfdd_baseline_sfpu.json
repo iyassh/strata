@@ -1,0 +1,381 @@
+{
+  "system": "sfpu",
+  "openfdd_version": "4.4.1",
+  "rules": [
+    "FC1",
+    "FC2",
+    "FC3",
+    "FC4",
+    "FC5",
+    "FC6",
+    "FC7",
+    "FC8",
+    "FC9",
+    "FC10",
+    "FC11",
+    "FC12",
+    "FC13",
+    "FC14",
+    "FC15"
+  ],
+  "params_overridden": {},
+  "role_map": {
+    "outside-air-temp": "OA_TEMP",
+    "discharge-air-temp": "SA_TEMP",
+    "discharge-air-temp-sp": "SA_TEMPSPT",
+    "mixed-air-temp": "MA_TEMP",
+    "return-air-temp": "RA_TEMP",
+    "cooling-valve": "CHWC_VLV",
+    "outside-air-damper": "OA_DMPR",
+    "duct-static-pressure": "SA_SP",
+    "duct-static-pressure-sp": "SA_SPSPT",
+    "vav-total-airflow": "SA_CFM",
+    "occupied": "SYS_CTL",
+    "fan-cmd": "SF_SPD",
+    "fan-status": "SF_CS",
+    "heating-valve": "HWC_VLV",
+    "cooling-coil-entering-temp": "CHWC_EWT",
+    "cooling-coil-leaving-temp": "CHWC_LWT",
+    "heating-coil-entering-temp": "HWC_EWT",
+    "heating-coil-leaving-temp": "HWC_LWT"
+  },
+  "prereg": "docs/plans/2026-09-11-openfdd-prereg.md",
+  "scoring": "a day is flagged if ANY condition fires on ANY row of it",
+  "scenarios": [
+    {
+      "file": "SFPU_RMTEMPUnstable",
+      "family": "instability",
+      "label": "RMTEMPUnstable",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Minor",
+      "family": "coil_fouling",
+      "label": "ReheatCoilFouling Airside Minor",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "family": "coil_fouling",
+      "label": "ReheatCoilFouling Airside Moderate",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Severe",
+      "family": "coil_fouling",
+      "label": "ReheatCoilFouling Airside Severe",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
+      "family": "coil_fouling",
+      "label": "ReheatCoilFouling Waterside Minor",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
+      "family": "coil_fouling",
+      "label": "ReheatCoilFouling Waterside Moderate",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
+      "family": "coil_fouling",
+      "label": "ReheatCoilFouling Waterside Severe",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "family": "reheat_leak",
+      "label": "ReheatVLVLeak 20%MaxFlow",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "family": "reheat_leak",
+      "label": "ReheatVLVLeak 50%MaxFlow",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "family": "reheat_leak",
+      "label": "ReheatVLVLeak 80%MaxFlow",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_0%",
+      "family": "reheat_stuck",
+      "label": "ReheatVLVStuck 0%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_100%",
+      "family": "reheat_stuck",
+      "label": "ReheatVLVStuck 100%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_20%",
+      "family": "reheat_stuck",
+      "label": "ReheatVLVStuck 20%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_50%",
+      "family": "reheat_stuck",
+      "label": "ReheatVLVStuck 50%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_80%",
+      "family": "reheat_stuck",
+      "label": "ReheatVLVStuck 80%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_+2C",
+      "family": "rmtemp_bias",
+      "label": "SensorBias RMTEMP +2C",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_+4C",
+      "family": "rmtemp_bias",
+      "label": "SensorBias RMTEMP +4C",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_-4C",
+      "family": "rmtemp_bias",
+      "label": "SensorBias RMTEMP -4C",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
+      "family": "airflow_bias",
+      "label": "SensorBias VAVAirflow +200CFM",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
+      "family": "airflow_bias",
+      "label": "SensorBias VAVAirflow +400CFM",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
+      "family": "airflow_bias",
+      "label": "SensorBias VAVAirflow -200CFM",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "family": "airflow_bias",
+      "label": "SensorBias VAVAirflow -400CFM",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_0%",
+      "family": "damper_stuck",
+      "label": "VAVDMPRStuck 0%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_100%",
+      "family": "damper_stuck",
+      "label": "VAVDMPRStuck 100%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_20%",
+      "family": "damper_stuck",
+      "label": "VAVDMPRStuck 20%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_50%",
+      "family": "damper_stuck",
+      "label": "VAVDMPRStuck 50%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_80%",
+      "family": "damper_stuck",
+      "label": "VAVDMPRStuck 80%",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_VAVDMPRUnstable",
+      "family": "instability",
+      "label": "VAVDMPRUnstable",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    },
+    {
+      "file": "SFPU_VAVFanRestrictFlow",
+      "family": "fan_restrict",
+      "label": "VAVFanRestrictFlow",
+      "battery_flag_days": 365,
+      "total_days": 365,
+      "detected": true
+    }
+  ],
+  "battery_detected_scenarios": 29,
+  "clean_year": {
+    "healthy_file": "SFPU_FaultFree",
+    "holdout_fp_days": 96,
+    "holdout_days": 96,
+    "holdout_fp_rate": 1.0,
+    "full_year_fp_days": 365,
+    "full_year_days": 365,
+    "full_year_fp_rate": 1.0
+  },
+  "per_condition": {
+    "FC1": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC2": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC3": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC4": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 1
+    },
+    "FC5": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC6": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 29
+    },
+    "FC7": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC8": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 28
+    },
+    "FC9": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 29
+    },
+    "FC10": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC11": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 29
+    },
+    "FC12": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC13": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 29
+    },
+    "FC14": {
+      "status": "not_fired",
+      "missing_roles": [],
+      "scenarios_fired": 0
+    },
+    "FC15": {
+      "status": "fired",
+      "missing_roles": [],
+      "scenarios_fired": 29
+    }
+  },
+  "strata_reference": {
+    "detected_scenarios": 25,
+    "detected_definition": "scenario has a non-null ttd_days in benchmark_v6",
+    "holdout_fp_days": 4,
+    "holdout_fp_rate": 0.041666666666666664,
+    "holdout_days": 96,
+    "detector": "The STRATA detector = OR of the significance-gated channels {rules, residual, model, device, absence, freq, osc}; the seasonal rate channel is diagnostic-only (corroboration and explanation, never a lone alarm)."
+  },
+  "falsifier_F1": {
+    "statement": "battery detected-scenario count >= STRATA's at a clean-year holdout FP rate <= STRATA's => 'better than traditional' dies for this system",
+    "verdict": "NOT_FIRED",
+    "battery_detected": 29,
+    "strata_detected": 25,
+    "battery_holdout_fp_rate": 1.0,
+    "strata_holdout_fp_rate": 0.041666666666666664
+  }
+}

@@ -13,6 +13,7 @@ dependencies = [
     "fastapi>=0.138.0",
     "graphviz>=0.21",
     "matplotlib>=3.11.0",
+    "open-fdd>=4.4.1",
     "pandas>=3.0.3",
     "pm4py>=2.7.22.5",
     "pyarrow>=24.0.0",

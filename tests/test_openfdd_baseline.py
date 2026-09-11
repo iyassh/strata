@@ -143,3 +143,19 @@ def test_sdahu_heating_conditions_recorded_unrunnable():
 def test_defaults_were_not_tuned(system):
     a = _artifact(system)
     assert a["params_overridden"] == {}, "as-deployed defaults are the contract"
+
+
+def test_time_comes_from_the_datetime_column_not_the_range_index():
+    """The LBNL parquets keep time in a COLUMN over a RangeIndex. Reading the
+    index as time maps every row to 1970-01-01 and collapses the 60s interval
+    to 1 ns, silently destroying the day roll-up."""
+    from openfdd_baseline import time_index, poll_seconds_of
+    df = pd.DataFrame({
+        "Datetime": pd.date_range("2018-03-05 00:00", periods=5, freq="min"),
+        "OA_TEMP": [50.0] * 5,
+    })  # RangeIndex, exactly like the real files
+    assert isinstance(df.index, pd.RangeIndex)
+    assert poll_seconds_of(df) == 60.0
+    assert list(day_key(time_index(df))) == ["2018-03-05"] * 5
+    out = to_openfdd_frame(df, "sdahu")
+    assert out.index[0] == pd.Timestamp("2018-03-05 00:00")

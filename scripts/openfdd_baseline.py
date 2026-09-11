@@ -77,9 +77,23 @@ PASCAL_DUCT_STATIC = {"sdahu"}
 OCCUPANCY_THRESHOLDED = {"pfpu", "sfpu"}
 
 
-def day_key(index: pd.DatetimeIndex) -> pd.Index:
+# The LBNL parquets carry a RangeIndex and keep time in a COLUMN. Reading
+# the index as time silently maps every sample to 1970-01-01 and collapses
+# the sampling interval to 1 ns, which destroys both the day roll-up and
+# every confirm-window. Always resolve time through this helper.
+TIME_COL = "Datetime"
+
+
+def time_index(df: pd.DataFrame) -> pd.DatetimeIndex:
+    """The frame's real timestamps, from the Datetime column if present."""
+    if TIME_COL in df.columns:
+        return pd.DatetimeIndex(pd.to_datetime(df[TIME_COL]))
+    return pd.DatetimeIndex(pd.to_datetime(df.index))
+
+
+def day_key(index) -> pd.Index:
     """Calendar day of each sample, as 'YYYY-MM-DD' (matches case ids)."""
-    return pd.to_datetime(index).strftime("%Y-%m-%d")
+    return pd.Index(pd.DatetimeIndex(pd.to_datetime(index)).strftime("%Y-%m-%d"))
 
 
 def to_openfdd_frame(df: pd.DataFrame, system: str) -> pd.DataFrame:
@@ -88,6 +102,7 @@ def to_openfdd_frame(df: pd.DataFrame, system: str) -> pd.DataFrame:
     Row count is preserved; the raw columns are left in place.
     """
     out = df.copy()
+    out.index = time_index(df)
     for role, col in ROLE_MAP[system].items():
         if col in out.columns:
             out[role] = pd.to_numeric(out[col], errors="coerce")
@@ -100,7 +115,7 @@ def to_openfdd_frame(df: pd.DataFrame, system: str) -> pd.DataFrame:
 
 def poll_seconds_of(df: pd.DataFrame) -> float:
     """Sampling interval, read from the data (a descriptor, not a knob)."""
-    deltas = pd.Series(pd.to_datetime(df.index)).diff().dt.total_seconds()
+    deltas = pd.Series(time_index(df)).diff().dt.total_seconds()
     med = float(deltas.median())
     return med if med and med > 0 else 60.0
 
@@ -173,7 +188,7 @@ def run_system(system: str) -> dict:
         frame = to_openfdd_frame(df, system)
         poll = poll_seconds_of(df)
         flagged, per_rule = _flagged_days(frame, poll)
-        total = len(set(day_key(df.index)))
+        total = len(set(day_key(time_index(df))))
         rows.append({"file": sc["file"], "family": sc.get("family"),
                      "label": sc.get("label"), "battery_flag_days": int(len(flagged)),
                      "total_days": int(total), "detected": bool(flagged)})
@@ -193,7 +208,7 @@ def run_system(system: str) -> dict:
     healthy = pd.read_parquet(data / f"{cfg['healthy_file']}.parquet")
     hframe = to_openfdd_frame(healthy, system)
     hflagged, _ = _flagged_days(hframe, poll_seconds_of(healthy))
-    all_days = sorted(set(day_key(healthy.index)))
+    all_days = sorted(set(day_key(time_index(healthy))))
     hold = _holdout_days(all_days)
     clean = {
         "healthy_file": cfg["healthy_file"],

@@ -289,3 +289,10 @@ estimates (L16); day universes from the raw calendar via the shared
 helper (L6/L22 — helpers ENFORCE, not document); caffeinate every
 long run; log every lesson in RESEARCH_LOG with an L-number;
 commit everything.
+
+**The testing treadmill (D5, delivered 2026-09-11 — see TESTING.md):**
+L1 fast guards run on every push (CI + badge); L2 `scripts/regress.py`
+regenerates and diffs every artifact before any release or claim, and a
+CHANGED verdict is a bug or a documented, committed decision — never
+silent; L3 every newly validated dataset's artifacts and guard tests are
+frozen into the suite permanently, so the exam only grows.

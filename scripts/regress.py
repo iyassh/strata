@@ -8,10 +8,8 @@ A CHANGED verdict is a bug or a documented, committed decision — never
 silent (design: docs/plans/2026-09-11-proof-sprint-design.md, D5).
 """
 import json
-import shutil
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,40 +42,55 @@ def _flat(d, prefix=""):
         yield prefix.rstrip("."), d
 
 
-def artifact_verdict(committed: Path, regenerated: Path) -> str:
-    a = dict(_flat(json.loads(committed.read_text())))
-    b = dict(_flat(json.loads(regenerated.read_text())))
+def verdict_from_text(committed_text: str, regenerated_text: str) -> str:
+    a = dict(_flat(json.loads(committed_text)))
+    b = dict(_flat(json.loads(regenerated_text)))
     diffs = [k for k in set(a) | set(b) if a.get(k) != b.get(k)]
     if not diffs:
         return "IDENTICAL"
     return f"CHANGED ({len(diffs)} paths, e.g. {sorted(diffs)[:3]})"
 
 
+def artifact_verdict(committed: Path, regenerated: Path) -> str:
+    return verdict_from_text(committed.read_text(), regenerated.read_text())
+
+
 def main() -> int:
     if "--list" in sys.argv:
         for art, cmd in PIPELINE.items():
-            print(f"{art:34s} <- {cmd}")
+            print(f"{art:34s} <- {cmd}", flush=True)
         return 0
     outputs = ROOT / "outputs"
-    stash = Path(tempfile.mkdtemp(prefix="regress_committed_"))
     failures = []
     for art, cmd in PIPELINE.items():
         committed = outputs / art
         if not committed.exists():
-            print(f"{art:34s} SKIP (no committed artifact)")
+            print(f"{art:34s} SKIP (no committed artifact)", flush=True)
             continue
-        shutil.copy2(committed, stash / art)
+        # Hold the committed copy IN MEMORY. A previous version stashed it in
+        # a scratch directory under TMPDIR; the OS emptied that directory
+        # during a 28-minute regeneration, losing the baseline and killing the
+        # sweep on artifact 2 of 12. Scratch files on disk are not a
+        # dependency this gate can afford.
+        committed_text = committed.read_text()
         r = subprocess.run(cmd.split(), cwd=ROOT, capture_output=True, text=True)
         if r.returncode not in (0, 2):  # 2 = a script's falsifier exit, artifact still written
-            print(f"{art:34s} RUN-ERROR\n{r.stderr[-500:]}")
+            print(f"{art:34s} RUN-ERROR\n{r.stderr[-500:]}", flush=True)
             failures.append(art)
+            committed.write_text(committed_text)  # never leave it half-written
             continue
-        verdict = artifact_verdict(stash / art, committed)
-        print(f"{art:34s} {verdict}")
+        try:
+            verdict = verdict_from_text(committed_text, committed.read_text())
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"{art:34s} READ-ERROR ({exc})", flush=True)
+            failures.append(art)
+            committed.write_text(committed_text)
+            continue
+        print(f"{art:34s} {verdict}", flush=True)
         if verdict != "IDENTICAL":
             failures.append(art)
-            shutil.copy2(stash / art, committed)  # restore committed version
-    print(f"\n{'ALL IDENTICAL' if not failures else 'FAILURES: ' + ', '.join(failures)}")
+            committed.write_text(committed_text)  # restore the committed record
+    print(f"\n{'ALL IDENTICAL' if not failures else 'FAILURES: ' + ', '.join(failures)}", flush=True)
     return 0 if not failures else 1
 
 

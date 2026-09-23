@@ -43,3 +43,25 @@ def test_p2_consistency_is_computed_per_cell():
     a = _art()
     assert len(a["P2"]["rows"]) == 6                                # Amendment 1
     assert a["P2"]["pass"] == all(r["consistent"] for r in a["P2"]["rows"])
+
+
+def test_prereg_and_amendment_predate_the_artifact_in_git():
+    """L22: the pre-commitment is enforced, not merely documented. The
+    commits that fixed the prediction (pre-reg 1155dd0, amendment 4a3723a,
+    scorer bc66755) must be ancestors of the commit that first added the
+    artifact. Skips if the artifact is not yet committed or git is absent."""
+    import subprocess
+    if not ART.exists():
+        pytest.skip("experiment not yet run")
+    try:
+        first = subprocess.run(
+            ["git", "log", "--diff-filter=A", "--format=%H", "--", str(ART.relative_to(ROOT))],
+            cwd=ROOT, capture_output=True, text=True, check=True).stdout.split()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        pytest.skip("git not available")
+    if not first:
+        pytest.skip("artifact exists but is not yet committed")
+    artifact_commit = first[-1]
+    for fixed in ("1155dd0", "4a3723a", "bc66755"):
+        r = subprocess.run(["git", "merge-base", "--is-ancestor", fixed, artifact_commit], cwd=ROOT)
+        assert r.returncode == 0, f"{fixed} is not an ancestor of the artifact commit {artifact_commit[:7]}"

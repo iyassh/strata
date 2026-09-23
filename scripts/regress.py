@@ -48,6 +48,7 @@ PIPELINE = {
     "x12_log_diagnosis.json": "uv run python scripts/x12_log_diagnosis.py",
     "x12_time_perspective.json": "uv run python scripts/x12_time_perspective.py",
     "x13_coil_effectiveness.json": "uv run python scripts/x13_coil_effectiveness.py",
+    "x14_enriched_alphabet.json": "uv run python scripts/x14_enriched_alphabet.py",   # ~30 min
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",
     "discovery_predicts_transfer.json": "uv run python scripts/discovery_predicts_transfer.py --q outputs/discovery_predicts_transfer_q.json",
 }

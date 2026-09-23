@@ -1,4 +1,4 @@
-# Phase 9 Results — Can process mining be made to detect? (X12, X13)
+# Phase 9 Results — Can process mining be made to detect? (X12, X13, X14)
 
 *2026-09-23, overnight. Both experiments pre-registered and committed before
 they ran (`docs/plans/2026-09-23-x12-*.md`, `…-x13-*.md`). Artefacts
@@ -124,6 +124,45 @@ fixed by one more residual. They need either a physics model of the coil
 (UA estimation from flow, ΔT and air-side conditions) or a different
 sensor. Recorded as a fired falsifier; the statistic is not adopted.
 
+## X14 — an enriched state alphabet: was the model starved of vocabulary?
+
+Pre-registered (c9e19f5), amended twice before any fan-powered result was
+read (setpoints excluded and a 15-minute dwell after the first run proved
+infeasible at 804 events/day; alignment-based channels dropped on the
+fan-powered units after the second run's first PFPU scenario had not
+finished in 47 minutes — fit alone took 1,061 s). For every actuator
+position and flow signal, two healthy-derived band states (above the
+occupied 90th percentile; at or below the 10th), wall intact. 3 / 12 / 11
+signals enriched; SDAHU keeps the model channel (12.7 events/day), the
+fan-powered units are tested through frequency and time.
+
+| | SDAHU | PFPU | SFPU |
+|---|---|---|---|
+| enriched state ∪ time holdout FP | **7**/96 | **14**/96 | **18**/96 |
+| newly significant among the 12 misses | 0 | 1 (`SensorBias_RMTEMP_+2C`, time channel, 70 days) | 0 |
+| enriched model channel significant | 14 of 14 (deployed: 5) | not evaluated | not evaluated |
+
+**P1 held** (one missed scenario becomes significant), **P3 held** (the
+single-duct model channel goes from 5 to 14 significant scenarios, with
+model days 30–227 against ≤ 5 before — vocabulary was a real limit on that
+channel), **P2 failed**: the enriched channels false-alarm on 14 and 18 of
+96 holdout days on the fan-powered units. **F-X14.a fired: unusable at the
+budget.**
+
+**Reading.** Vocabulary was part of the limit, and richer vocabulary buys
+detections at false alarms — 7 %, 15 % and 19 % of clean days — which is
+exactly the trade the deployed detector's budget forbids. The one new
+detection (a +2 °C room-sensor bias, whose log the diagnosis had already
+shown changes counts by 39 %) is real but sits on a channel that
+false-alarms one holdout day in seven. Whether a stricter calibration of
+the enriched channels could keep the detection inside the budget is a
+further variant, and the pre-registration forbade further variants
+tonight. The cost finding stands on its own: at this vocabulary,
+alignment-based conformance is computationally impractical on these logs
+(17 minutes to fit, one scenario not scored in 47). Recorded as the ninth
+adverse result on the detection claim; the vocabulary finding stated
+beside it.
+
 ## What this settles
 
 1. **Why control-flow conformance found nothing**: for the faults it missed,
@@ -133,7 +172,10 @@ sensor. Recorded as a fired falsifier; the statistic is not adopted.
 2. **Process mining's remaining contribution here** is the event log and
    its non-control-flow perspectives: counts (the frequency and absence
    channels, deployed), and timing (X12: real, redundant, costly). The
-   discovered net's order structure contributes nothing on these systems.
+   discovered net's order structure contributes nothing on these systems
+   at the deployed vocabulary; with a richer vocabulary (X14) the model
+   channel fires far more, the time channel catches one more scenario, and
+   the false-alarm rate breaks the budget.
 3. **The misses stand.** Eight of the twelve carry no log signal at 5 % in
    any count or duration; four carry count changes the frequency bands did
    not resolve; the coil residual did not carry the fouling ones either.
@@ -144,3 +186,4 @@ sensor. Recorded as a fired falsifier; the statistic is not adopted.
 |---|---|---|---|---|---|
 | X12 | ee33d5e | 2026-09-23 | P1 ✓ P2 ✓ **P3 ✗** P4 ✓ (weak) | none fired | `x12_time_perspective.json` |
 | X13 | 89ae874 | 2026-09-23 | P1 ✗ P2 ✓ P3 ✓ | **F-X13.b fired** (under both the shipped and the deployed denominator convention) | `x13_coil_effectiveness.json` |
+| X14 | c9e19f5 (A1 4187b97, A2 a1f5b3e) | 2026-09-23 | P1 ✓ **P2 ✗** P3 ✓ | **F-X14.a fired** | `x14_enriched_alphabet.json` |

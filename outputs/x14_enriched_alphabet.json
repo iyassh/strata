@@ -1,0 +1,1623 @@
+{
+  "pre_registration": "docs/plans/2026-09-23-x14-enriched-alphabet-prereg.md",
+  "systems": {
+    "sdahu": {
+      "added_signals": {
+        "CHWC_VLV_POS": {
+          "q10": -0.0,
+          "q90": 0.6295
+        },
+        "OA_DMPR_POS": {
+          "q10": 0.1,
+          "q90": 0.9108
+        },
+        "RA_DMPR_POS": {
+          "q10": 0.0915,
+          "q90": 0.9
+        }
+      },
+      "n_added_events": 6,
+      "n_state_pairs_total": 9,
+      "alignment_channels_evaluated": true,
+      "fit_seconds_stdout_only_note": "fit time printed, not committed (machine-dependent)",
+      "holdout_days": 96,
+      "state_channels_holdout_fp_days": 7,
+      "time_holdout_fp_days": 4,
+      "scenarios": [
+        {
+          "file": "damper_stuck_010_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 157,
+            "device": 0,
+            "absence": 0,
+            "frequency": 3
+          },
+          "time_flag_days": 7
+        },
+        {
+          "file": "damper_stuck_025_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 134,
+            "device": 0,
+            "absence": 0,
+            "frequency": 5
+          },
+          "time_flag_days": 7
+        },
+        {
+          "file": "damper_stuck_075_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": false,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 227,
+            "device": 0,
+            "absence": 0,
+            "frequency": 3
+          },
+          "time_flag_days": 112
+        },
+        {
+          "file": "damper_stuck_100_annual_short",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": false,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 127,
+            "device": 0,
+            "absence": 0,
+            "frequency": 3
+          },
+          "time_flag_days": 108
+        },
+        {
+          "file": "coi_stuck_010_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 104,
+            "device": 0,
+            "absence": 0,
+            "frequency": 70
+          },
+          "time_flag_days": 87
+        },
+        {
+          "file": "coi_stuck_025_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 49,
+            "device": 0,
+            "absence": 0,
+            "frequency": 86
+          },
+          "time_flag_days": 93
+        },
+        {
+          "file": "coi_stuck_050_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 35,
+            "device": 0,
+            "absence": 0,
+            "frequency": 35
+          },
+          "time_flag_days": 44
+        },
+        {
+          "file": "coi_stuck_075_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 30,
+            "device": 0,
+            "absence": 0,
+            "frequency": 27
+          },
+          "time_flag_days": 39
+        },
+        {
+          "file": "coi_leakage_010_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 33,
+            "device": 0,
+            "absence": 0,
+            "frequency": 28
+          },
+          "time_flag_days": 45
+        },
+        {
+          "file": "coi_bias_-4_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 35,
+            "device": 0,
+            "absence": 0,
+            "frequency": 61
+          },
+          "time_flag_days": 131
+        },
+        {
+          "file": "coi_bias_-2_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 34,
+            "device": 0,
+            "absence": 0,
+            "frequency": 35
+          },
+          "time_flag_days": 50
+        },
+        {
+          "file": "coi_bias_2_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 130,
+            "device": 0,
+            "absence": 0,
+            "frequency": 31
+          },
+          "time_flag_days": 191
+        },
+        {
+          "file": "coi_bias_4_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 186,
+            "device": 0,
+            "absence": 0,
+            "frequency": 34
+          },
+          "time_flag_days": 202
+        },
+        {
+          "file": "oa_bias_4_annual",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": true,
+            "device": false,
+            "absence": false,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 33,
+            "device": 0,
+            "absence": 0,
+            "frequency": 28
+          },
+          "time_flag_days": 42
+        }
+      ]
+    },
+    "pfpu": {
+      "added_signals": {
+        "CHWC_VLV_POS": {
+          "q10": 0.0,
+          "q90": 0.46
+        },
+        "OA_DMPR_POS": {
+          "q10": 0.0,
+          "q90": 0.89
+        },
+        "RA_DMPR_POS": {
+          "q10": 0.11,
+          "q90": 1.0
+        },
+        "EA_DMPR_POS": {
+          "q10": 0.0,
+          "q90": 0.89
+        },
+        "ZONE_FLOW_I": {
+          "q10": 200.02,
+          "q90": 213.53
+        },
+        "RH_FLOW_I": {
+          "q10": 0.0,
+          "q90": 0.02
+        },
+        "ZONE_FLOW_W": {
+          "q10": 201.27,
+          "q90": 253.8
+        },
+        "RH_FLOW_W": {
+          "q10": 0.0,
+          "q90": 0.19
+        },
+        "ZONE_FLOW_S": {
+          "q10": 201.27,
+          "q90": 231.23
+        },
+        "RH_FLOW_S": {
+          "q10": 0.0,
+          "q90": 0.14
+        },
+        "ZONE_FLOW_E": {
+          "q10": 201.25,
+          "q90": 206.16
+        },
+        "RH_FLOW_E": {
+          "q10": 0.0,
+          "q90": 0.2
+        }
+      },
+      "n_added_events": 24,
+      "n_state_pairs_total": 37,
+      "alignment_channels_evaluated": false,
+      "fit_seconds_stdout_only_note": "fit time printed, not committed (machine-dependent)",
+      "holdout_days": 96,
+      "state_channels_holdout_fp_days": 14,
+      "time_holdout_fp_days": 12,
+      "scenarios": [
+        {
+          "file": "PFPU_RMTEMPUnstable",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": false
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 209
+          },
+          "time_flag_days": 62
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Airside_Minor",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 8
+          },
+          "time_flag_days": 18
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Airside_Moderate",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 11
+          },
+          "time_flag_days": 29
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Airside_Severe",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 12
+          },
+          "time_flag_days": 26
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Waterside_Minor",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 4
+          },
+          "time_flag_days": 13
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Waterside_Moderate",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 4
+          },
+          "time_flag_days": 14
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Waterside_Severe",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 4
+          },
+          "time_flag_days": 12
+        },
+        {
+          "file": "PFPU_ReheatVLVLeak_20%MaxFlow",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 4
+          },
+          "time_flag_days": 20
+        },
+        {
+          "file": "PFPU_ReheatVLVLeak_50%MaxFlow",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 6
+          },
+          "time_flag_days": 26
+        },
+        {
+          "file": "PFPU_ReheatVLVLeak_80%MaxFlow",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 5
+          },
+          "time_flag_days": 26
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_0%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 7
+          },
+          "time_flag_days": 49
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_100%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 6
+          },
+          "time_flag_days": 24
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_20%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 11
+          },
+          "time_flag_days": 20
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_50%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 5
+          },
+          "time_flag_days": 23
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_80%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 5
+          },
+          "time_flag_days": 23
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_+2C",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 14
+          },
+          "time_flag_days": 70
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_+4C",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 37
+          },
+          "time_flag_days": 118
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_-2C",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": false
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 31
+          },
+          "time_flag_days": 51
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_-4C",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": false
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 46
+          },
+          "time_flag_days": 60
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_+200CFM",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 13
+          },
+          "time_flag_days": 84
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_+400CFM",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 9
+          },
+          "time_flag_days": 94
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_-200CFM",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 365
+          },
+          "time_flag_days": 361
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_-400CFM",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 365
+          },
+          "time_flag_days": 359
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_0%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 135
+          },
+          "time_flag_days": 161
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_100%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 365
+          },
+          "time_flag_days": 359
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_20%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 9
+          },
+          "time_flag_days": 16
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_50%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 365
+          },
+          "time_flag_days": 359
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_80%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 365
+          },
+          "time_flag_days": 358
+        },
+        {
+          "file": "PFPU_VAVDMPRUnstable",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 238
+          },
+          "time_flag_days": 358
+        },
+        {
+          "file": "PFPU_VAVFanRestrictFlow",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 17
+          },
+          "time_flag_days": 37
+        }
+      ]
+    },
+    "sfpu": {
+      "added_signals": {
+        "CHWC_VLV_POS": {
+          "q10": 0.0,
+          "q90": 0.55
+        },
+        "OA_DMPR_POS": {
+          "q10": 0.0,
+          "q90": 0.66
+        },
+        "RA_DMPR_POS": {
+          "q10": 0.34,
+          "q90": 1.0
+        },
+        "EA_DMPR_POS": {
+          "q10": 0.0,
+          "q90": 0.66
+        },
+        "ZONE_FLOW_I": {
+          "q10": 200.02,
+          "q90": 270.61
+        },
+        "ZONE_FLOW_W": {
+          "q10": 199.98,
+          "q90": 460.875
+        },
+        "RH_FLOW_W": {
+          "q10": 0.0,
+          "q90": 0.06
+        },
+        "ZONE_FLOW_S": {
+          "q10": 199.98,
+          "q90": 446.34
+        },
+        "RH_FLOW_S": {
+          "q10": 0.0,
+          "q90": 0.04
+        },
+        "ZONE_FLOW_E": {
+          "q10": 199.97,
+          "q90": 427.495
+        },
+        "RH_FLOW_E": {
+          "q10": 0.0,
+          "q90": 0.08
+        }
+      },
+      "n_added_events": 22,
+      "n_state_pairs_total": 35,
+      "alignment_channels_evaluated": false,
+      "fit_seconds_stdout_only_note": "fit time printed, not committed (machine-dependent)",
+      "holdout_days": 96,
+      "state_channels_holdout_fp_days": 18,
+      "time_holdout_fp_days": 16,
+      "scenarios": [
+        {
+          "file": "SFPU_RMTEMPUnstable",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 143
+          },
+          "time_flag_days": 192
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Airside_Minor",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 3
+          },
+          "time_flag_days": 22
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 3
+          },
+          "time_flag_days": 20
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Airside_Severe",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 9
+          },
+          "time_flag_days": 32
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 3
+          },
+          "time_flag_days": 24
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 2
+          },
+          "time_flag_days": 20
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 4
+          },
+          "time_flag_days": 18
+        },
+        {
+          "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 49
+          },
+          "time_flag_days": 274
+        },
+        {
+          "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 176
+          },
+          "time_flag_days": 313
+        },
+        {
+          "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 211
+          },
+          "time_flag_days": 326
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_0%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 7
+          },
+          "time_flag_days": 20
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_100%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 236
+          },
+          "time_flag_days": 328
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_20%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 8
+          },
+          "time_flag_days": 70
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_50%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 41
+          },
+          "time_flag_days": 270
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_80%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 174
+          },
+          "time_flag_days": 312
+        },
+        {
+          "file": "SFPU_SensorBias_RMTEMP_+2C",
+          "deployed_detected": false,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 5
+          },
+          "time_flag_days": 65
+        },
+        {
+          "file": "SFPU_SensorBias_RMTEMP_+4C",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 7
+          },
+          "time_flag_days": 136
+        },
+        {
+          "file": "SFPU_SensorBias_RMTEMP_-4C",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 51
+          },
+          "time_flag_days": 106
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": false
+          },
+          "enriched_any_state": false,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 22
+          },
+          "time_flag_days": 45
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": false
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 24
+          },
+          "time_flag_days": 52
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
+          "deployed_detected": true,
+          "deployed_model_sig": true,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 362
+          },
+          "time_flag_days": 357
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
+          "deployed_detected": true,
+          "deployed_model_sig": true,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 365
+          },
+          "time_flag_days": 364
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_0%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 140
+          },
+          "time_flag_days": 158
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_100%",
+          "deployed_detected": true,
+          "deployed_model_sig": true,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 365
+          },
+          "time_flag_days": 364
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_20%",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": false,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 23
+          },
+          "time_flag_days": 97
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_50%",
+          "deployed_detected": true,
+          "deployed_model_sig": true,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 362
+          },
+          "time_flag_days": 358
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_80%",
+          "deployed_detected": true,
+          "deployed_model_sig": true,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 365
+          },
+          "time_flag_days": 364
+        },
+        {
+          "file": "SFPU_VAVDMPRUnstable",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": true
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 78
+          },
+          "time_flag_days": 318
+        },
+        {
+          "file": "SFPU_VAVFanRestrictFlow",
+          "deployed_detected": true,
+          "deployed_model_sig": false,
+          "enriched_sig": {
+            "model": null,
+            "device": null,
+            "absence": null,
+            "frequency": true,
+            "time": false
+          },
+          "enriched_any_state": true,
+          "counts": {
+            "model": 0,
+            "device": 0,
+            "absence": 0,
+            "frequency": 28
+          },
+          "time_flag_days": 34
+        }
+      ]
+    }
+  },
+  "n_scored": 73,
+  "predictions": {
+    "P1_newly_detected_ge_1": true,
+    "P1_newly_detected": [
+      "PFPU_SensorBias_RMTEMP_+2C"
+    ],
+    "n_missed": 12,
+    "P2_fp_within_budget": false,
+    "P3_model_sig_ge_deployed": true,
+    "model_sig_enriched": 14,
+    "model_sig_deployed": 5
+  },
+  "falsifiers_fired": [
+    "F-X14.a: enriched state channels exceed the false-alarm budget"
+  ]
+}

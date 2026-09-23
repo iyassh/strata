@@ -93,11 +93,15 @@ class StrataDetector:
         uni = day_universe(df, cfg)
         days = uni.index
         log = abstract_events(df, cfg)
-        has_events = pd.Series([d in set(log["case_id"]) for d in days], index=days)
+        # build the day sets once: rebuilding them inside the per-day comprehension
+        # was O(days x events) and took 16 minutes per file on a jitter-inflated log
+        event_days = set(log["case_id"])
+        has_events = pd.Series([d in event_days for d in days], index=days)
         uni["evaluable"] = has_events | (uni["occupied_min"] > 0)
 
         sig = log[log["activity"].isin(self.signature_events)]
-        rules = pd.Series([d in set(sig["case_id"]) for d in days], index=days)
+        sig_days = set(sig["case_id"])
+        rules = pd.Series([d in sig_days for d in days], index=days)
 
         res_flag = pd.Series(False, index=days)
         res_eval = pd.Series(False, index=days)

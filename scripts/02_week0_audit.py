@@ -241,7 +241,7 @@ def sdahu_evidence() -> dict:
         fault_floors = {k: v for k, v in floors.items() if k != "AHU_annual"}
         out["config_branch"] = {
             "occupied_oa_dmpr_min": floors,
-            "occupied_rows": occ_rows,
+            "occupied_rows_RETRACTED_see_ERRATA_E5": occ_rows,
             "healthy_floor": floors.get("AHU_annual"),
             "fault_floor_mode": 0.1,
             "note": "healthy simulated with occupied min-OA-damper 0.0; every "

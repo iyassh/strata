@@ -40,6 +40,15 @@ DEPLOYED = ["rules", "residual", "model", "device", "absence", "frequency", "osc
 # sole = 0; absence is meaningful on no scenario) and lowers SFPU's holdout FP from 4 to 1.
 DEPLOYED_NO_ALIGN = ["rules", "residual", "frequency", "oscillation"]
 NO_ALIGN = "--no-alignment" in sys.argv
+if NO_ALIGN:
+    # skip discovery + holdout alignment inside fit() as well (that, not evaluate(),
+    # was the bottleneck): fit() treats an ImportError from build_detector as
+    # "conformance strata disabled" and builds every other channel normally
+    import strata.core.detection as _detmod
+
+    def _no_alignment(*_a, **_k):
+        raise ImportError("--no-alignment: alignment-based strata disabled for this run")
+    _detmod.build_detector = _no_alignment
 NOISE = {"temp": 0.5, "flow_rel": 0.02, "pos": 0.01, "sp_rel": 0.02}
 
 

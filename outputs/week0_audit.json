@@ -798,7 +798,7 @@
           "max": -400.253
         }
       },
-      "note": "healthy: SA_SP~402 (Pa-scale), SPSPT~1.6; every fault file: SA_SP~0.9, SPSPT~-400 \u2014 units AND roles swapped"
+      "note": "healthy: SA_SP~402, SPSPT~1.6; every fault file: SA_SP~0.9, SPSPT~-400 \u2014 the two branches differ by a single additive constant (401.85999) on both columns; an earlier reading of this as \u0027units and roles swapped\u0027 is retracted (ERRATA E3, 2026-09-23)"
     },
     "oa_bias_controller_side": {
       "calendar_identical": true,

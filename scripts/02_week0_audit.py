@@ -150,9 +150,11 @@ def sdahu_evidence() -> dict:
     but the evidence lived nowhere recomputable. This gate emits:
       - MD5 of every raw CSV and processed parquet, with duplicate groups
         (E1/E2: oa_bias x4 and coi_leakage x4 are one run each);
-      - healthy-vs-fault SA_SP / SA_SPSPT summary stats (E3: units and
-        roles swapped between the healthy file and EVERY fault file — any
-        ML baseline fed these columns scores file provenance);
+      - healthy-vs-fault SA_SP / SA_SPSPT summary stats (E3: a per-branch
+        additive constant of 401.85999 separates the healthy file from EVERY
+        fault file on both columns — any ML baseline fed these columns
+        scores file provenance; the earlier 'units and roles swapped'
+        reading is retracted, see ERRATA E3);
       - the oa_bias evidence (E1): the labeled +/-2-4 F bias is ABSENT from
         the recorded OA_TEMP (max |diff| 0.33 F vs healthy) while behaviour
         diverges — so the run misbehaves without a sensor-side bias in the
@@ -196,8 +198,10 @@ def sdahu_evidence() -> dict:
         out["sa_sp_mismatch"] = {
             "healthy": {c: stats(h, c) for c in ("SA_SP", "SA_SPSPT")},
             "fault_example_damper_stuck_010": {c: stats(f, c) for c in ("SA_SP", "SA_SPSPT")},
-            "note": "healthy: SA_SP~402 (Pa-scale), SPSPT~1.6; every fault "
-                    "file: SA_SP~0.9, SPSPT~-400 — units AND roles swapped",
+            "note": "healthy: SA_SP~402, SPSPT~1.6; every fault file: SA_SP~0.9, "
+                    "SPSPT~-400 — the two branches differ by a single additive constant "
+                    "(401.85999) on both columns; an earlier reading of this as 'units "
+                    "and roles swapped' is retracted (ERRATA E3, 2026-09-23)",
         }
         print(f"  SA_SP  healthy mean {out['sa_sp_mismatch']['healthy']['SA_SP']['mean']} "
               f"vs fault {out['sa_sp_mismatch']['fault_example_damper_stuck_010']['SA_SP']['mean']}")

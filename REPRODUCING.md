@@ -23,7 +23,7 @@ Download the three system archives:
 | SFPU (series fan-powered unit) | `LBNL_FDD_Data_Sets_FPU_all_3/LBNL_FDD_Data_Sets_SFPU/` | 31 annual CSVs + Brick .ttl |
 
 Known dataset defects and their handling: **ERRATA.md** (E1–E5:
-byte-duplicate fault files, the oa_bias mislabel, SA_SP unit swap, one
+byte-duplicate fault files, the oa_bias mislabel, a per-branch additive constant on SA_SP/SA_SPSPT, one
 rotated calendar, and the healthy file's configuration-branch offset).
 The pipeline handles or discloses all five.
 

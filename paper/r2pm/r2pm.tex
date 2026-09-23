@@ -8,13 +8,13 @@
 \begin{document}
 
 \title{Five Defects in the LBNL HVAC Fault-Detection Benchmarks, and the Gate Battery That Found Them}
-% TODO(author): co-authorship of the supervisors (Dr. Anthony Aighobahi, Dr. Mridula Sharma) is the author's decision.
+% TODO(author): settle supervisor co-authorship before submission.
 \author{Yassh Singh}
 \institute{Thompson Rivers University, Kamloops, Canada}
 \maketitle
 
 \begin{abstract}
-The LBNL fault-detection datasets are building HVAC fault detection's nearest thing to a common benchmark. We report five defects, unreported at any distribution point to our knowledge: two families in which one simulation run ships four times under four severity labels, one also mislabelled; two columns carrying a per-branch constant that lets a threshold chosen on the fault-free file alone classify every day of every fault file by provenance with zero error; a file whose calendar is rotated by two days; and a fault-free file simulated on a different configuration branch than every fault file. Each ships with machine evidence and a reproducing command. Three were found by a six-gate battery run before any analysis; its four log-generic gates also pass in under a second on two public process-mining logs. We place the defects against the event-log imperfection patterns and argue that benchmark-level defects need their own taxonomy.
+The LBNL fault-detection datasets are building HVAC fault detection's nearest thing to a common benchmark. We report five defects, unreported at any distribution point to our knowledge: two families in which one simulation run ships four times under four severity labels, one also mislabelled; two columns carrying a per-branch constant that lets a threshold chosen on the fault-free file alone classify every day of every fault file by provenance with zero error; a file whose calendar is rotated by two days; and a fault-free file simulated on a different configuration branch than every fault file. Each ships with machine evidence and a reproducing command. Two were found by the integrity-hash gate of a battery that now runs before any analysis and was assembled defect by defect; its four log-generic gates also pass in under a second on two public process-mining logs. We place the defects against the event-log imperfection patterns and argue that benchmark-level defects need their own taxonomy.
 \keywords{data quality \and event log imperfection \and benchmark leakage \and fault detection}
 \end{abstract}
 
@@ -94,7 +94,7 @@ uv run python scripts/e3_leakage.py
 
 The raw file \texttt{SFPU\_SensorBias\_RMTEMP\_-2C.csv} is a pure rotation by exactly 2{,}880 rows, two days at one-minute sampling: its timestamp set is identical to the fault-free file's, the series is non-monotonic with exactly one wrap point, and its first row is 2018-01-03 00:00 where the fault-free file's is 2018-01-01 00:00. The rotation is invisible to every summary statistic and to any check of the calendar's contents; it lives in row order alone. It maps directly onto Suriadi and colleagues' \emph{inadvertent time travel} pattern \cite{suriadi2017imperfection}, at file rather than event granularity.
 
-\emph{How it was found.} By the raw-file rotation gate, and only because it reads the raw CSV: our conversion step sorts by timestamp, so the converted file cannot exhibit the defect --- the reason a gate must sit upstream of the preprocessing that would mask it. \emph{Consequence and handling.} Positional comparison against the healthy file misaligns every timestamp for a year; the scenario is excluded, leaving SFPU with 29 scored scenarios, and sort-on-convert plus the calendar-identity gate are permanent.
+\emph{How it was found.} By an audit in an early phase, not by a gate: the monotonicity gate then in place runs on converted files, and our conversion step sorts by timestamp, so it could never have exhibited the defect. The raw-file rotation gate was built four phases later so that the defect has machine evidence and cannot recur --- the reason a gate must sit upstream of the preprocessing that would mask it. \emph{Consequence and handling.} Positional comparison against the healthy file misaligns every timestamp for a year; the scenario is excluded, leaving SFPU with 29 scored scenarios, and sort-on-convert plus the calendar-identity gate are permanent.
 
 \begin{verbatim}
 uv run python scripts/02_week0_audit.py rotation
@@ -129,8 +129,8 @@ For maintainers: publish an errata notice at the distribution points, not only i
 
 \section{Disclosure Status}
 \label{sec:disclosure}
-% TODO(author): fill in the date and channel before submission and update with any maintainer response. Do not submit with the placeholder in place.
-These findings were reported to the dataset maintainers on \textbf{<date>}. All evidence, scripts and machine-readable artefacts are public in the project repository under the same terms as the datasets.
+% TODO(author): report the findings through the OpenEI submission contact, then replace this sentence with the date, the channel and any response before submission.
+At the time of writing these findings have not yet been reported to the dataset maintainers; they will be submitted through the dataset's OpenEI submission contact before the camera-ready version, and this section will then record the date, the channel and any response. All evidence, scripts and machine-readable artefacts are public in the project repository under the same terms as the datasets.
 
 \section{Conclusion}
 \label{sec:conclusion}

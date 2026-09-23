@@ -35,7 +35,8 @@ def test_sdahu_errata_evidence_present():
         joined = [" ".join(g) for g in groups]
         assert any("coi_leakage" in j for j in joined)
         assert any("oa_bias" in j for j in joined)
-    # E3: healthy/fault SA_SP scales differ by ~2-3 orders of magnitude
+    # E3: a per-branch additive constant separates healthy from every fault file
+    # on SA_SP / SA_SPSPT (the earlier 'scales differ' reading is retracted, ERRATA E3)
     mm = ev["sa_sp_mismatch"]
     assert mm["healthy"]["SA_SP"]["mean"] > 100
     assert mm["fault_example_damper_stuck_010"]["SA_SP"]["mean"] < 10

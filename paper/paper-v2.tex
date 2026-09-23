@@ -80,6 +80,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{cite}
 \usepackage{times}
+\usepackage{graphicx}
 
 \title{STRATA: A Stratified Process-Mining Framework\\ for HVAC Fault Detection and Diagnosis}
 \author{Yassh Singh \\
@@ -162,7 +163,14 @@ One adjacent body of work must be distinguished as a class, because its vocabula
 \section{Method}
 \label{sec:method}
 
-STRATA consumes one fault-free year of ordinary building-management-system trend data together with a single configuration file naming the building's sensors and control rules. That configuration file is the only site-specific artefact: no code change was required to onboard any system reported here.
+STRATA (Figure~\ref{fig:framework}; code and artefacts at \url{https://github.com/iyassh/strata}) consumes one fault-free year of ordinary building-management-system trend data together with a single configuration file naming the building's sensors and control rules. That configuration file is the only site-specific artefact: no code change was required to onboard any system reported here.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/strata_framework_v2.pdf}
+\caption{The framework. Training (top): one fault-free year and one configuration file; events are split into state and fault-signature alphabets, models are discovered from state events only, and every channel is calibrated to its own noise floor. Deployment (bottom): each day is scored by every channel, only what clears a channel's floor may report, and what survives reaches the operator with a name, the evidence, and that channel's stated false-alarm budget.}
+\label{fig:framework}
+\end{figure*}
 
 \subsection{Event abstraction and the alphabet wall}
 

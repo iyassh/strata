@@ -30,15 +30,46 @@
         "variants_with_empty_shortened_trace": 0,
         "variants_containing_heating": 0,
         "occupied_days_whose_log_contains_heating": 0,
+        "cost0_shortened_examples": [
+          [
+            "economizer_window_entered",
+            "economizer_window_exited",
+            "economizer_window_entered",
+            "system_started",
+            "cooling_active",
+            "economizer_window_exited",
+            "system_stopped",
+            "cooling_inactive",
+            "economizer_window_entered"
+          ],
+          [
+            "economizer_window_entered",
+            "system_started",
+            "cooling_active",
+            "cooling_inactive",
+            "cooling_active",
+            "cooling_inactive",
+            "cooling_active",
+            "economizer_window_exited",
+            "system_stopped",
+            "cooling_inactive"
+          ],
+          [
+            "economizer_window_entered",
+            "system_started",
+            "cooling_active",
+            "cooling_inactive",
+            "cooling_active",
+            "economizer_window_exited",
+            "system_stopped",
+            "cooling_inactive"
+          ]
+        ],
         "n_train_days": 248,
-        "fit_seconds": 5.6,
-        "baseline_original_variants_cost0": 72,
-        "baseline_cost0_variants_containing_heating": 0,
-        "mean_variant_fitness_unmodified": 0.9004
+        "fit_seconds": 3.4
       },
       "device": {
-        "device_model": null,
-        "reason": "no device-stratum rules in configs/lbnl_sdahu/rules.yaml; devices.build_device_detector returns None on an empty device log"
+        "device_model": null
       }
     },
     "pfpu": {
@@ -71,11 +102,76 @@
         "variants_with_empty_shortened_trace": 0,
         "variants_containing_heating": 165,
         "occupied_days_whose_log_contains_heating": 166,
+        "cost0_shortened_examples": [
+          [
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "night_cycle_ended",
+            "night_cycle_started"
+          ],
+          [
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active"
+          ],
+          [
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "cooling_active",
+            "cooling_inactive",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "night_cycle_ended",
+            "night_cycle_started",
+            "night_cycle_ended"
+          ]
+        ],
         "n_train_days": 269,
-        "fit_seconds": 34.9,
-        "baseline_original_variants_cost0": 29,
-        "baseline_cost0_variants_containing_heating": 0,
-        "mean_variant_fitness_unmodified": 0.8976
+        "fit_seconds": 33.7
       },
       "device": {
         "anchor_activity_in_device_net": "zone_heating_active",
@@ -158,12 +254,7 @@
             "zone_heating_inactive"
           ]
         },
-        "n_train_cases": 681,
-        "anchor_sync_moves_all_variants": 200,
-        "anchor_log_only_moves_all_variants": 158,
-        "zone_fan_started_sync_moves": 13491,
-        "zone_fan_started_log_only_moves": 201,
-        "mean_device_variant_fitness": 0.9542
+        "n_train_cases": 681
       }
     },
     "sfpu": {
@@ -197,11 +288,9 @@
         "variants_with_empty_shortened_trace": 0,
         "variants_containing_heating": 356,
         "occupied_days_whose_log_contains_heating": 357,
+        "cost0_shortened_examples": [],
         "n_train_days": 269,
-        "fit_seconds": 36.6,
-        "baseline_original_variants_cost0": 44,
-        "baseline_cost0_variants_containing_heating": 44,
-        "mean_variant_fitness_unmodified": 0.9528
+        "fit_seconds": 33.9
       },
       "device": {
         "anchor_activity_in_device_net": "zone_heating_active",
@@ -284,12 +373,7 @@
             "zone_heating_inactive"
           ]
         },
-        "n_train_cases": 1076,
-        "anchor_sync_moves_all_variants": 35,
-        "anchor_log_only_moves_all_variants": 58,
-        "zone_fan_started_sync_moves": 865,
-        "zone_fan_started_log_only_moves": 16,
-        "mean_device_variant_fitness": 0.9206
+        "n_train_cases": 1076
       }
     }
   },

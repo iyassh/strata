@@ -111,9 +111,20 @@ def main() -> int:
     for g in groups:
         min_p *= math.factorial(g)
     min_p /= math.factorial(len(qs))
+    # Amendment 3: Q is constant within a building, so the valid unit of
+    # replication is the building; the cluster-level minimum one-sided p is
+    # 1/(number of buildings)! regardless of how many cells each contributes.
+    n_buildings = len(set(s for _, s in cells))
+    cluster_min_p = 1.0 / math.factorial(n_buildings)
     power = {"design_cells": len(qs), "q_groups": sorted(groups, reverse=True),
              "min_attainable_p": min_p, "criterion": "p < 0.05",
-             "criterion_attainable": min_p < 0.05}
+             "criterion_attainable": min_p < 0.05,
+             "unit_of_replication": "building", "n_buildings": n_buildings,
+             "cluster_min_attainable_p": cluster_min_p,
+             "criterion_attainable_at_cluster_level": cluster_min_p < 0.05,
+             "F2_informative": False,
+             "F2_note": "the only F2-contradicting cell is MR2, whose anchor is device-stratum and "
+                        "absent from every unit net (Amendment 1 C); its predictor is invalid"}
     if not p1_pass:
         verdict, fired = "F1_FIRED", ["F1"]
     elif not p3_pass:
@@ -137,7 +148,7 @@ def main() -> int:
         "falsifiers_fired": fired,
         "verdict": verdict,
         "power": power,
-        "conclusion_licensed": bool(power["criterion_attainable"]),
+        "conclusion_licensed": bool(power["criterion_attainable"] and power["criterion_attainable_at_cluster_level"]),
         "amendment_2": ("The amended six-cell design cannot attain p < 0.05 (minimum 0.05), so the "
                         "rule outcome above is guaranteed and licenses no conclusion; reported as a "
                         "protocol failure. Exact enumeration replaced the pre-registered Monte Carlo "

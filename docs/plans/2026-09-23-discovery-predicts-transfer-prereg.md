@@ -168,3 +168,41 @@ test needs more buildings and is future work. The descriptive numbers
 (SFPU's net treats heating as obligatory; the unit-stratum support equals
 the raw log count exactly; the device stratum orders the buildings the
 opposite way) are reported as observations, not as a test outcome.
+
+---
+
+## Amendment 3 — 2026-09-23, after round-three review; the test never had power
+
+Amendment 2 diagnosed the loss of power as a consequence of Amendment 1's
+six-cell reduction. That diagnosis was wrong in a way that matters more.
+
+**The unit of replication was the building, not the cell.** Q_support is a
+property of a system's discovered net and is therefore constant across the
+three rules within a building (0.000 / 0.455 / 0.978, identical for MR1,
+MR2 and MR3). The nine "cells" of the original design were three buildings
+pseudo-replicated three times. A permutation null over nine exchangeable
+cells was never valid; the valid null permutes buildings, and with three
+buildings the minimum attainable one-sided p is 1/3! = **0.167** — already
+above the p < 0.05 criterion before Amendment 1 removed anything. The test
+could not have passed as originally registered either. Amendment 2's
+"the nine-cell design had power (minimum p ≈ 0.0006)" is retracted.
+
+**F2 is also void.** Amendment 2 kept F2 (obligatory-form contradiction on
+one cell) as the one data-dependent outcome. That cell is MR2 on the
+parallel unit, and Amendment 1 §C had already recorded that MR2's anchor
+activity is device-stratum and absent from every unit net — its predictor
+is invalid. F2's "contradiction" is a comparison against a quantity that
+does not measure what the rule reads. Nothing in this test is informative
+about the claim.
+
+**The lesson, stated for the record.** Pre-registration fixed the quantity,
+the predictions and the falsifiers before the data. It did not fix the
+unit of analysis, and neither did two amendments written by the same
+author under the same discipline. A power calculation on the wrong unit
+survives pre-registration intact. The remedy is a pre-registration field
+that names the unit of replication and the minimum attainable p under a
+permutation of that unit, computed before any prediction is written.
+
+**Disposition.** The artifact's power block now carries the cluster-level
+minimum p; `conclusion_licensed` stays false. The paper reports the test
+as one that never had power, F2 included, and draws no inference.

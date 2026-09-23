@@ -512,7 +512,13 @@
     ],
     "min_attainable_p": 0.05,
     "criterion": "p < 0.05",
-    "criterion_attainable": false
+    "criterion_attainable": false,
+    "unit_of_replication": "building",
+    "n_buildings": 2,
+    "cluster_min_attainable_p": 0.5,
+    "criterion_attainable_at_cluster_level": false,
+    "F2_informative": false,
+    "F2_note": "the only F2-contradicting cell is MR2, whose anchor is device-stratum and absent from every unit net (Amendment 1 C); its predictor is invalid"
   },
   "conclusion_licensed": false,
   "amendment_2": "The amended six-cell design cannot attain p < 0.05 (minimum 0.05), so the rule outcome above is guaranteed and licenses no conclusion; reported as a protocol failure. Exact enumeration replaced the pre-registered Monte Carlo p post-Q (commit dbffbbb) without a dated amendment; recorded in Amendment 2."

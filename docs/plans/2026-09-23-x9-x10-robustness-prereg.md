@@ -87,3 +87,10 @@ Two review points, recorded before the fan-powered arms are read:
 Predictions, falsifiers and the 1× arm are unchanged. SDAHU arms seen before
 this amendment: 14/14 and 1/96 at every dose; 13/14 and 0/96 under the
 first-8-days split.
+
+## Errata to this pre-registration (2026-09-23, after review, before any fan-powered result)
+
+- `SA_SP` is mapped on none of the three systems, so the static-pressure row above is dead: static pressure was never perturbed.
+- Seeds are per file and shared across doses (common random numbers): the 2×/4× draws are the 1× draws scaled, so the dose arms are perfectly rank-correlated, which strengthens the monotonicity check and is stated wherever they are quoted.
+- `clean_detected` is the naive scorecard count (SDAHU 14), not the branch-adjudicated 13; the noisy side uses `evaluate()["detected"]`, which excludes the advisory rate channel, while the clean count reads `meaningful_channels`; no scenario is rate-only on any scorecard, so the baselines coincide today.
+- P-X9.1 was coded one-sided (`clean − noisy ≤ 3`); the text is two-sided. Fixed to `abs(...) ≤ 3` before the fan-powered arms were read; F-X9.a stays one-sided as written. The running process carries the old code; predictions are recomputed from the committed systems block with `--from-artefact` when it finishes.

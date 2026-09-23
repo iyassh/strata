@@ -87,6 +87,13 @@ def set_split(fn):
 
 def run_condition(system: str, cfg, man, dose: float, split_fn) -> dict:
     set_split(split_fn)
+    try:
+        return _run_condition(system, cfg, man, dose, split_fn)
+    finally:
+        set_split(_last_n)      # restored even if fit/evaluate raises (review item E)
+
+
+def _run_condition(system: str, cfg, man, dose: float, split_fn) -> dict:
     hold_n = cfg.rules["detection"]["holdout_days_per_month"]
     hdf = add_noise(pd.read_parquet(f"data/processed/{system}/{man['healthy_file']}.parquet"), cfg, dose, man["healthy_file"])
     det = fit(cfg, hdf)
@@ -104,15 +111,22 @@ def run_condition(system: str, cfg, man, dose: float, split_fn) -> dict:
         df = add_noise(pd.read_parquet(f"data/processed/{system}/{s['file']}.parquet"), cfg, dose, s["file"])
         r = det.evaluate(df)
         per[s["file"]] = bool(r["detected"]); detected += int(r["detected"])
-    set_split(_last_n)
     return {"detected": detected, "n_scored": len(per), "holdout_fp_days": fp, "holdout_days": nh,
             "holdout_fp_rate": round(fp / max(nh, 1), 4), "per_scenario": per}
 
 
 only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
-out = {"pre_registration": "docs/plans/2026-09-23-x9-x10-robustness-prereg.md", "noise_1x": NOISE, "systems": {}}
+from_artefact = "--from-artefact" in sys.argv     # recompute predictions/falsifiers from the committed systems block
+out = {"pre_registration": "docs/plans/2026-09-23-x9-x10-robustness-prereg.md", "noise_1x": NOISE,
+       "notes": ["noise is i.i.d. per-sample jitter (Amendment 1), not bias or drift",
+                 "seeds are per file and shared across doses: common random numbers, doses perfectly rank-correlated",
+                 "SA_SP is mapped on no system, so static pressure was never perturbed",
+                 "clean_detected is the naive scorecard count (SDAHU 14, not the adjudicated 13)"],
+       "systems": {}}
+if from_artefact:
+    out["systems"] = json.loads(Path("outputs/x9_x10_robustness.json").read_text())["systems"]
 for system in ("sdahu", "pfpu", "sfpu"):
-    if only and system != only:
+    if from_artefact or (only and system != only):
         continue
     cfg = load_config(f"configs/lbnl_{system}")
     man = yaml.safe_load(Path(f"configs/lbnl_{system}/scenarios.yaml").read_text())
@@ -133,7 +147,7 @@ pred, fired = {}, []
 for s, v in out["systems"].items():
     c = v["conditions"]; n1 = c["noise_1x"]; sp = c["split_first8"]
     d1 = v["clean_detected"] - n1["detected"]
-    pred[s] = {"P-X9.1_det_drop_le_3": d1 <= 3, "det_drop_1x": d1,
+    pred[s] = {"P-X9.1_det_change_le_3": abs(d1) <= 3, "det_drop_1x": d1,     # two-sided, as pre-registered
                "P-X9.1_fpr_le_10pct": n1["holdout_fp_rate"] <= 0.10,
                "P-X9.2_monotone": c["noise_4x"]["detected"] <= c["noise_2x"]["detected"] <= n1["detected"],
                "P-X10.1_det_within_3": abs(v["clean_detected"] - sp["detected"]) <= 3,
@@ -147,8 +161,9 @@ for s, v in out["systems"].items():
 out["predictions"] = pred
 out["falsifiers_fired"] = fired
 path = Path("outputs/x9_x10_robustness.json")
-if only and path.exists():   # merge partial runs
+if only and path.exists() and not from_artefact:   # merge a partial run: this system's rows and falsifiers replace its old ones
     prev = json.loads(path.read_text()); prev["systems"].update(out["systems"]); prev["predictions"].update(pred)
-    prev["falsifiers_fired"] = sorted(set(prev.get("falsifiers_fired", [])) | set(fired)); out = prev
+    kept = [f for f in prev.get("falsifiers_fired", []) if f"({only})" not in f]
+    prev["falsifiers_fired"] = sorted(set(kept) | set(fired)); prev["notes"] = out["notes"]; out = prev
 path.write_text(json.dumps(out, indent=2) + "\n")
 print("predictions:", json.dumps(pred, indent=1)); print("falsifiers fired:", fired or "none"); print("wrote", path)

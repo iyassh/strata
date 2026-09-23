@@ -81,6 +81,7 @@
 \usepackage{cite}
 \usepackage{times}
 \usepackage{graphicx}
+\usepackage{array}
 
 \title{STRATA: A Stratified Process-Mining Framework\\ for HVAC Fault Detection and Diagnosis}
 \author{Yassh Singh \\
@@ -141,7 +142,7 @@ The most directly relevant interpretable benchmark for the LBNL SDAHU subset is 
 
 Real buildings rarely come with ground-truth fault labels, and the strongest recent work on unlabelled data uses self-supervised or autoencoder methods. Abdollah and colleagues pretrained a Transformer encoder via masked-token reconstruction on unlabelled HVAC time-series from a heat-pump building at the Polytechnic University of Milan, then used Peak-Over-Threshold detection on reconstruction error to flag a real two-month monitoring fault between October and December \cite{abdollah2024transformerssl}. The most directly relevant precedent for a Canadian-university real-BAS deployment is El Mokhtari and McArthur's autoencoder-based work at Toronto Metropolitan University, which distinguishes equipment-level from system-level faults across five fan coil units and demonstrates cross-unit transfer learning \cite{elmokhtari2024aebas}. These methods share a common limitation. Each produces a learned latent embedding whose deviation signal is a scalar anomaly score, not a process-level explanation.
 
-The cross-building generalisation problem is the binding constraint that prevents most existing HVAC FDD work from being deployed in the field. The canonical reference is Zhu and colleagues' study of fault-detection migration between two different building chillers, where conventional supervised classifiers dropped below 55\% target-domain accuracy despite reaching above 95\% on the source, while a domain-adversarial method recovered to 81.27\% on the first operating cycle and 74.93\% on the second \cite{zhu2021chillertransfer}. The closest precedent for a labelled-source-to-unlabelled-target plan of the kind we propose is Ghalamsiah and colleagues' contrastive adaptation network applied to ASHRAE-1312 simulation as a labelled source and real AHU measurements as an unlabelled target \cite{ghalamsiah2025canhvac}. Both approaches treat the transferable artefact as a set of learned neural-network weights, and the structural form of the model itself remains the same across source and target. A discovered process model is a different kind of object: it is an inspectable diagram of expected control flow, and transferring it from one building to another is therefore a structurally different operation that the existing transfer-learning literature has not addressed.
+The cross-building generalisation problem is the binding constraint that prevents most existing HVAC FDD work from being deployed in the field. The established response is domain adaptation, which transfers learned network weights: Zhu and colleagues migrate fault detection between two different building chillers \cite{zhu2021chillertransfer}, and Ghalamsiah and colleagues apply a contrastive adaptation network to ASHRAE-1312 simulation as a labelled source and real AHU measurements as an unlabelled target \cite{ghalamsiah2025canhvac}. A discovered process model is a different kind of transferable object: it is an inspectable diagram of expected control flow rather than a set of weights. Transferring it from one building to another is therefore a structurally different operation that the existing transfer-learning literature has not addressed.
 
 \subsection{Process mining: foundations, adjacent successes, and the empty quadrant in building energy}
 
@@ -176,7 +177,7 @@ STRATA (Figure~\ref{fig:framework}; code and artefacts at \url{https://github.co
 
 Continuous sensor streams are converted into a discrete event log using control-sequence rules grounded in ASHRAE Guideline 36, following the abstraction methodology of Janssen and colleagues \cite{janssen2021sensoreventlog} and the taxonomy of event abstraction in van Zelst and colleagues \cite{vanzelst2021eventabstraction}. The events are then partitioned into two alphabets that are never mixed. \emph{State events} are neutral facts about operation and are the only events admitted to model discovery. \emph{Fault-signature events} already encode engineering suspicion and are withheld from discovery entirely.
 
-The partition exists because of circularity, the process-mining form of the data-leakage problem \cite{weytjens2022dataleakage}: a model discovered over an alphabet that already names faults will later ``detect'' those faults by recognising the project's own rules. Removing the partition and re-running the pipeline on the single-duct system raises the model channel's apparent recall from 1.8\% to 5.2\% of its 4{,}540 fault days (81 days against 238), both runs sharing the same threshold and the same 248-day train and 87-day holdout split. That 3.5-percentage-point difference (5.24\% against 1.78\%) is a measured bound on model self-confirmation, and the separation is now enforced by a tested invariant: injecting signature events into a log cannot change a day's fitness. The process-mining literature warns about this trap in the abstract; we are not aware of a prior quantification of it on sensor-derived logs.
+The partition --- the alphabet wall --- exists because of circularity, the process-mining form of the data-leakage problem \cite{weytjens2022dataleakage}: a model discovered over an alphabet that already names faults will later ``detect'' those faults by recognising the project's own rules. Removing the partition and re-running the pipeline on the single-duct system raises the model channel's apparent recall from 1.8\% to 5.2\% of its 4{,}540 fault days (81 days against 238), both runs sharing the same threshold and the same 248-day train and 87-day holdout split. That 3.5-percentage-point difference (5.24\% against 1.78\%) is a measured bound on model self-confirmation, and the separation is now enforced by a tested invariant: injecting signature events into a log cannot change a day's fitness. The process-mining literature warns about this trap in the abstract; we are not aware of a prior quantification of it on sensor-derived logs.
 
 \subsection{Discovery at three strata}
 
@@ -288,13 +289,52 @@ Wrong alarms / all alarms & \multicolumn{3}{c}{$<0.1\%$ (96 fault-free vs 4{,}54
 \label{tab:results}
 \end{table}
 
-The median time to detection is one day on all three systems, but the median alone misrepresents the distribution and should not be quoted without its tail. On the single-duct system nine scenarios are detected within one day and four within two. On the parallel unit nineteen are detected within a day, the remainder at four, eleven, fifteen and twenty-one days. On the series unit nineteen are detected within a day, with the remainder at three, fifteen, fifteen, thirty-seven and one hundred and eight days. Gradually developing faults are detected slowly, which is the expected cost of calibrating below a noise floor and is a genuine limitation for the degradation faults that motivate much of this literature.
+The median time to detection is one day on all three systems, but the median alone misrepresents the distribution and should not be quoted without its tail (Table~\ref{tab:ttd}).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccl}
+\hline
+System & Detected & Within 1 day & Within 2 days & Remaining TTDs (days) \\
+\hline
+SDAHU & 13 (adjudicated) & 9 & 4 & --- \\
+PFPU & 23 & 19 & --- & 4, 11, 15, 21 \\
+SFPU & 24 & 19 & --- & 3, 15, 15, 37, 108 \\
+\hline
+\end{tabular}
+\caption{Time-to-detection distribution behind the one-day median, by system.}
+\label{tab:ttd}
+\end{table}
+
+Gradually developing faults are detected slowly, which is the expected cost of calibrating below a noise floor and is a genuine limitation for the degradation faults that motivate much of this literature.
 
 Sensor-bias detection illustrates why pooled recall misleads for gated detectors. Raw recall of 39--47\% over the 351 to 352 evaluable days appears to be a capability ceiling until it is decomposed. The residual is physics-bound only inside a detection window --- cooling coil off, zone occupied, sustained at least 120 minutes --- and such windows exist on 137 to 164 days of the year in this climate. Within them, window-conditional recall is measured at 100\%, on counts of 164/164, 164/164, 139/139 and 137/137 across the four coil-bias scenarios. The apparent ceiling is climate, not capability, and reporting window prevalence separately from window-conditional recall is a methodological recommendation we would make to others evaluating gated detectors.
 
-Against a principal-component-analysis baseline using squared prediction error, audited and scored on comparable scenario universes, the two methods reach a near-tie: 60 scenarios against 61 in total, at 13 versus 13, 23 versus 23, and 24 versus 25 per system. The misses are complementary rather than nested. STRATA alone detects an unstable VAV damper and severe waterside fouling; the baseline alone detects two room-temperature bias scenarios and moderate airside fouling, the latter through a zone-fan differential-pressure sensor that STRATA's configuration does not map. Ten scenarios are missed by both, and nine of them are one family: reheat-coil fouling, airside and waterside, at every severity on the parallel unit and at three severities on the series unit, is invisible to both methods. That is the most useful negative result in the comparison. On false alarms the baseline is at least as good. Its strict holdout rate is 1/79, 1/96 and 1/96 (1.3\%, 1.0\%, 1.0\%; Wilson 95\% intervals [0.2, 6.8], [0.2, 5.7], [0.2, 5.7]) against STRATA's 1/96, 5/96 and 4/96 (1.0\%, 5.2\%, 4.2\%; [0.2, 5.7], [2.2, 11.6], [1.6, 10.2]); the intervals overlap throughout, and an exact McNemar test on detection gives $p = 1.0$. Nor are the inputs symmetric: the baseline consumes 108 and 424 raw daily features on the single-duct and fan-powered systems where STRATA's configurations map 12 of 30 and 56 of 109 columns. What the baseline does not do is name the implicated device or state the evidence behind a flag. That is the whole of the difference; Listing~\ref{lst:alarm} shows it on one seeded fault, and it is the property a scalar score cannot produce.
+Against a principal-component-analysis baseline using squared prediction error, audited and scored on comparable scenario universes, the two methods reach a near-tie (Table~\ref{tab:pca}).
 
-The matched-rule control isolates what discovery contributes. For each channel a hand-written equivalent was authored and scored. Two of these reproduce their channel exactly --- 141 detections against 141 on the series unit and 206 against 206 on the parallel unit --- which is the point rather than a disappointment: the models automate the discovery of rules an expert could have written, had they known where to look. Transplanted without that knowledge the same rules are unusable, one of them firing on 231 fault-free days on the single-duct system and 124 on the parallel unit while firing on none at all on the series unit --- the contrast that makes the point, since the same rule is harmless exactly where the model had shown the invariant to hold. Some faults, conversely, need the classical instrument: a calibrated oscillation channel stands alone on the unstable-damper scenario, 349 detections against at most two from any matched rule.
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}@{}}
+\hline
+ & STRATA & PCA-SPE (strict) \\
+\hline
+Detected (of 73) & 60 & 61 \\
+Per system & 13 / 23 / 24 & 13 / 23 / 25 \\
+Holdout false-alarm rate & 1.0\% [0.2, 5.7] / 5.2\% [2.2, 11.6] / 4.2\% [1.6, 10.2] & 1.3\% [0.2, 6.8] / 1.0\% [0.2, 5.7] / 1.0\% [0.2, 5.7] \\
+Raw daily features consumed & 12 of 30 and 56 of 109 columns mapped & 108 and 424 \\
+Names the implicated device & yes & no \\
+\hline
+\end{tabular}
+\caption{STRATA against the principal-component baseline. Per-system entries are ordered SDAHU / PFPU / SFPU; the counts behind the false-alarm rates are 1/96, 5/96 and 4/96 for STRATA and 1/79, 1/96 and 1/96 for the baseline, with Wilson 95\% intervals in brackets. Feature counts are given for the single-duct and the fan-powered systems.}
+\label{tab:pca}
+\end{table}
+
+The misses are complementary rather than nested. STRATA alone detects an unstable VAV damper and severe waterside fouling; the baseline alone detects two room-temperature bias scenarios and moderate airside fouling, the latter through a zone-fan differential-pressure sensor that STRATA's configuration does not map. Ten scenarios are missed by both, and nine of them are one family: reheat-coil fouling, airside and waterside, at every severity on the parallel unit and at three severities on the series unit, is invisible to both methods. That is the most useful negative result in the comparison. On false alarms the baseline is at least as good: the intervals in Table~\ref{tab:pca} overlap throughout, and an exact McNemar test on detection gives $p = 1.0$. Nor are the inputs symmetric. What the baseline does not do is name the implicated device or state the evidence behind a flag. That is the whole of the difference; Listing~\ref{lst:alarm} shows it on one seeded fault, and it is the property a scalar score cannot produce.
+
+The matched-rule control isolates what discovery contributes. For each channel a hand-written equivalent was authored and scored. Two of these reproduce their channel exactly --- 141 detections against 141 on the series unit and 206 against 206 on the parallel unit --- which is the point rather than a disappointment: the models automate the discovery of rules an expert could have written, had they known where to look. Transplanted without that knowledge the same rules are unusable, one of them firing on 231 fault-free days on the single-duct system and 124 on the parallel unit while firing on none at all on the series unit --- but the single-duct figure is not evidence about the models: that system has no heating rule and no hot-water valve, so a rule reading `heating never active' fires on every occupied day for want of a sensor, not because any model predicted it. The only informative contrast is the parallel unit against the series unit, and whether the discovered models predict that contrast is the subject of a pre-registered test reported in Section~\ref{sec:falsified}. Some faults, conversely, need the classical instrument: a calibrated oscillation channel stands alone on the unstable-damper scenario, 349 detections against at most two from any matched rule.
 
 The decisive ablation is the one the matched-rule control implies. Reading the significance-gated channel credited with each detection from the committed scorecards, no scenario on any system is detected only by the two conformance channels: they are credited with none of the 14 single-duct or 23 parallel-unit detections, and appear in 7 of the 24 series-unit detections but never alone. Removing them leaves every scorecard unchanged. On the series unit they account for 4 of the 4 deployed false-alarm days, so their removal lowers that system's rate from 4/96 to 1/96 at no detection cost. Whatever the discovered models contribute, they do not contribute detections.
 
@@ -305,7 +345,28 @@ Portability was measured. The second building type was onboarded through configu
 \section{What the Protocol Refuted or Withdrew}
 \label{sec:falsified}
 
-Three pre-registered hypotheses were refuted during this work and three of the project's own results were withdrawn. They are reported because a protocol that only confirms is not a protocol, and because these refutations constrain the contribution more usefully than the confirmations do.
+Three pre-registered hypotheses were refuted during this work and three of the project's own results were withdrawn (Table~\ref{tab:refuted}). They are reported because a protocol that only confirms is not a protocol, and because these refutations constrain the contribution more usefully than the confirmations do.
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.02\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.35\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}@{}}
+\hline
+\# & Hypothesis or result & Refutation condition / what fired & What survived \\
+\hline
+1 & Hypothesis: discovered models out-detect hand-written rules. & A one-line matched rule --- occupied workday and AHU heating never active --- covered 192 days against the model channel's 135 on the same scenario, with zero false alarms on 365 healthy days. The falsifier fired. & The model found the load-bearing invariant without supervision, and the rule became writable only once the model had shown where to look. The matched rule is now a permanent ablation arm. \\
+2 & Hypothesis: behavioural structure discovered on one building supports detection on another, zero-shot. & The detection hypothesis failed its pre-registered falsifier, yielding zero to one gated detection per rotation. & Real shared structure: fan-powered-unit logs outscore their own shuffled controls on the single-duct net by 0.15 and 0.18 in mean fitness. Portability is claimed at configuration level only. \\
+3 & Result: the model channels' detections are evidence of their own. & Repeated audits found the discovered nets order-permissive on loop-heavy alphabets, and every genuine model-channel detection was a frequency deviation surfacing through alignment cost. & The frequency channel, which measures those deviations directly and two-sidedly; the conformance channels had nothing left that was uniquely theirs. \\
+4 & Result: the single-duct system scores 14 of 14. & An audit established that the dataset's fault-free file was simulated on a different configuration branch than every fault file; under a branch-corrected band, one scenario's only deployed channel produced zero flags on its 148 evaluable window days. & 13/14 adjudicated, quoted together with 14/14 naive, and the standing rule that healthy-versus-fault divergence is fault evidence only after a fault-versus-fault control. \\
+5 & Result: a day-level significance test adopted in Phase 4. & The test rested on an impossible null --- the discordant cell it tested was zero by construction --- so it awarded significance to noise. & A binomial against each channel's own measured holdout rate, after thirteen scenario rows on the parallel unit lost their stars. The standing rule is that the null is always the channel's own noise. \\
+6 & Result: calibration on a fault-free year is robust. & A single score-carrying contaminated day collapses the two negative rungs of the coil-bias ladder from 164 detections out of 164 to none, by dragging the band edge to $-7.19$; separately, configurations tuned at one-minute sampling gain 28 to 64 spurious healthy signature-days at fifteen-minute sampling, and four falsifiers fired. & Contamination from a mild source announces itself on 100\% of the contaminated days (5/5, 13/13 and 27/27 signature days), whereas the dangerous source is visible on none of its 27. The transfer claim was scoped so that the healthy-silence gate is re-run at the deployment sampling rate. \\
+\hline
+\end{tabular}
+\caption{Six results that went against the project. Each is reported in full in the text that follows.}
+\label{tab:refuted}
+\end{table}
 
 \textbf{Discovered models do not out-detect hand-written rules.} On the series fan-powered unit, zone damper-stuck and negative airflow-bias faults erase the unit's daily heating rhythm, and the discovered healthy net flags the absence. A one-line matched rule --- occupied workday and AHU heating never active, with zero false alarms on 365 healthy days --- covered 192 days against the model channel's 135 on the same scenario. The 135 is a threshold-based count and should be read alongside the min-robust count of 22 to 26 days per scenario, since roughly four fifths of the threshold count is attributable to a threshold interpolated from a single holdout day. The falsifier fired. Rather than defend the original claim we reframed it: the discovered model found the load-bearing invariant without supervision, and the rule became writable only once the model had shown where to look. The matched rule is now a permanent ablation arm. This refutation is why the paper's title claims location rather than detection.
 
@@ -322,20 +383,29 @@ Three pre-registered hypotheses were refuted during this work and three of the p
 \section{Defects in the Benchmark Datasets}
 \label{sec:errata}
 
-Auditing the evaluation produced an unanticipated secondary contribution: five defects in the LBNL benchmark datasets, each with machine-verifiable evidence and a reproducing command. Two concern single simulation runs shipped four times under different severity labels. One concerns a fault whose labelled bias never appears in the logged column; the evidence is observationally indistinguishable from a bias applied at the controller input rather than at the sensor, which is how the erratum records it. One concerns a file whose calendar is rotated relative to its siblings, excluded here from family claims. The fifth is the configuration-branch mismatch described above, which hid for six phases because every comparison ran against the same fault-free file and no fault-versus-fault control existed.
+Auditing the evaluation produced an unanticipated secondary contribution: five defects in the LBNL benchmark datasets, each with machine-verifiable evidence and a reproducing command (Table~\ref{tab:errata}). The last of them, the configuration-branch mismatch described above, hid for six phases because every comparison ran against the same fault-free file and no fault-versus-fault control existed.
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.025\textwidth}>{\raggedright\arraybackslash}p{0.06\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}@{}}
+\hline
+ID & System & Columns / files & Defect & Consequence for evaluation \\
+\hline
+E1 & SDAHU & \texttt{oa\_bias} (four severity files) & One simulation run shipped four times under different severity labels; the labelled bias never appears in the logged column, and the evidence is observationally indistinguishable from a bias applied at the controller input rather than at the sensor. & The four severity labels index one run, not four independent scenarios, and the bias is controller-side rather than sensor-side. \\
+E2 & SDAHU & \texttt{coi\_leakage} (four severity files) & One simulation run shipped four times under different severity labels. & The four severity labels index one run, not four independent scenarios. \\
+E3 & SDAHU & \texttt{SA\_SP}, \texttt{SA\_SPSPT} & Units and roles are swapped between the healthy file and every fault file, with no overlap between the two ranges. & Either column alone separates healthy from fault data by file provenance rather than by fault physics; both are excluded from all baselines here. \\
+E4 & SFPU & \texttt{SensorBias\_RMTEMP\_-2C} & The file's calendar is rotated relative to its siblings. & Excluded here from family claims, so the SFPU scenario universe is scored without it. \\
+E5 & SDAHU & healthy file against every fault file & The healthy file was simulated on a different configuration branch than every fault file, with an occupied damper floor of 0.0 against 0.1 and different schedules. & Healthy-versus-fault divergence partly measures the branch rather than the fault; one single-duct scenario was detected through that provenance difference (14/14 naive, 13/14 adjudicated). \\
+\hline
+\end{tabular}
+\caption{Five machine-verified defects in the LBNL benchmark datasets. Each has a reproducing command in the repository's ERRATA.md.}
+\label{tab:errata}
+\end{table}
 
 The most consequential for other researchers concerns the supply-air static-pressure columns, whose units and roles differ between the fault-free file and every fault file with no overlap between the two ranges. Either column alone separates fault-free from faulty data by file provenance rather than by fault physics. We discovered this by auditing our own baseline, whose error statistic had reached implausible magnitudes for precisely this reason; the columns are now excluded from all baselines. Published results on this dataset that used the full column set should be read with this in mind.
-
-\section{Work in Progress: Comparison Against Guideline 36 Practice}
-\label{sec:baseline}
-
-The comparison that matters most to practitioners is against the rule-based detection actually deployed in commercial building automation systems \cite{granderson2017fddtoolsurvey}. That work is underway; its methodology is settled and no results are reported here, because the first execution did not survive audit.
-
-The design imports a third-party open-source implementation of the Guideline 36 fault conditions \cite{pradhan2021dbng36} rather than reimplementing them, since writing one's own version of a competing method invites the objection that the comparison was won by construction. Thresholds stay at distributed defaults, that being the condition under which such libraries are deployed. Both methods are scored on the identical examination, and a refutation condition was registered stating that if the rule battery matched STRATA's detection count at an equal or lower false-alarm rate on any system, the improvement claim would be abandoned for that system and reported as abandoned.
-
-An adversarial audit then voided the first execution, and the failure is worth recording. Two fault conditions had been supplied water-side temperatures where the standard specifies air-side measurements, and because one such input is a constant boundary value in the simulation rather than a measurement, the affected condition alarmed on every day of every file. More fundamentally, the fan-powered units are terminal equipment whose seeded faults are terminal-unit faults, and they had been graded with the air-handler rule set: the wrong rulebook for the equipment, applied to faults it was never written to detect. A third defect arose from feeding the adapter the very static-pressure columns documented as provenance-leaking in Section~\ref{sec:errata} --- the project's own erratum ledger, not consulted before building a new consumer of the data, which is a repetition of a lesson already recorded.
-
-The revised protocol will be pre-registered before execution. Air-handler rules will be applied to air handlers and the standard's terminal-unit rules to terminal units, with the equipment-matching criterion fixed in advance and applied uniformly rather than selected after the numbers are visible. The comparison will be reported symmetrically with respect to channel demotion, since permitting STRATA to set aside its noisiest channel while the rule battery retains all of its conditions is not a like-for-like contest. It is possible that the revised comparison will refute the improvement claim on one or both terminal-unit systems, since the standard's terminal-unit rules target precisely the faults seeded there. That outcome would be reported.
 
 \section{Limitations}
 \label{sec:limitations}
@@ -353,6 +423,17 @@ The noise-floor gate applies no correction across channels and scenarios. Roughl
 One worked alarm is shown (Listing~\ref{lst:alarm}); it names a symptom and a location, not a root cause, and no systematic scoring of alarm text against seeded fault families has been done.
 
 Beyond these, the long detection tail is a real weakness for gradually developing faults; the comparison against deployed rule-based practice is incomplete; and three systems across two equipment families demonstrate configuration-level portability without establishing generality across the diversity of commercial HVAC equipment.
+
+\subsection{The comparison against commercial practice is incomplete}
+\label{sec:baseline}
+
+The comparison that matters most to practitioners is against the rule-based detection actually deployed in commercial building automation systems \cite{granderson2017fddtoolsurvey}. That work is underway; its methodology is settled and no results are reported here, because the first execution did not survive audit.
+
+The design imports a third-party open-source implementation of the Guideline 36 fault conditions \cite{pradhan2021dbng36} rather than reimplementing them, since writing one's own version of a competing method invites the objection that the comparison was won by construction. Thresholds stay at distributed defaults, that being the condition under which such libraries are deployed. Both methods are scored on the identical examination, and a refutation condition was registered stating that if the rule battery matched STRATA's detection count at an equal or lower false-alarm rate on any system, the improvement claim would be abandoned for that system and reported as abandoned.
+
+An adversarial audit then voided the first execution, and the failure is worth recording. Two fault conditions had been supplied water-side temperatures where the standard specifies air-side measurements, and because one such input is a constant boundary value in the simulation rather than a measurement, the affected condition alarmed on every day of every file. More fundamentally, the fan-powered units are terminal equipment whose seeded faults are terminal-unit faults, and they had been graded with the air-handler rule set: the wrong rulebook for the equipment, applied to faults it was never written to detect. A third defect arose from feeding the adapter the very static-pressure columns documented as provenance-leaking in Section~\ref{sec:errata} --- the project's own erratum ledger, not consulted before building a new consumer of the data, which is a repetition of a lesson already recorded.
+
+The revised protocol will be pre-registered before execution. Air-handler rules will be applied to air handlers and the standard's terminal-unit rules to terminal units, with the equipment-matching criterion fixed in advance and applied uniformly rather than selected after the numbers are visible. The comparison will be reported symmetrically with respect to channel demotion, since permitting STRATA to set aside its noisiest channel while the rule battery retains all of its conditions is not a like-for-like contest. It is possible that the revised comparison will refute the improvement claim on one or both terminal-unit systems, since the standard's terminal-unit rules target precisely the faults seeded there. That outcome would be reported.
 
 \section{Conclusion}
 

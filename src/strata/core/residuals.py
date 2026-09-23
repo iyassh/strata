@@ -47,7 +47,11 @@ def daily_residual_scores(
         if "above" in g:
             gated = gated & (w[g["signal"]] > g["above"])
     day = w["Datetime"].dt.date.astype(str)
-    resid = (w[r["a"]] - w[r["b"]]).where(gated)
+    if r.get("op") == "ratio":
+        # X13: a/b (e.g. coil water-side dT per gallon); b <= 0 is undefined
+        resid = (w[r["a"]] / w[r["b"]].where(w[r["b"]] > 0)).where(gated)
+    else:
+        resid = (w[r["a"]] - w[r["b"]]).where(gated)
 
     g = pd.DataFrame({"case_id": day, "resid": resid}).groupby("case_id")["resid"]
     out = pd.DataFrame({

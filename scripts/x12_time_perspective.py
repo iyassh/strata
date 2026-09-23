@@ -27,6 +27,7 @@ import yaml
 from strata.core.significance import P_SIG, binom_sf
 from strata.core.sojourn import (build_sojourn_detector, classify_sojourn_days,
                                  daily_sojourn_stats)
+from strata.core.splits import holdout_mask
 from strata.hvac.events import abstract_events
 from strata.io.config import load_config
 
@@ -52,7 +53,24 @@ for system in ("sdahu", "pfpu", "sfpu"):
               "bands": {k: [round(v[0], 1), round(v[1], 1)] for k, v in det.bands.items()},
               "scenarios": []}
     p0 = max(det.holdout_fp_days, 1) / max(det.holdout_days, 1)
-    print(f"== {system}: {len(det.bands)} statistics monitored; holdout FP {det.holdout_fp_days}/{det.holdout_days}")
+    # joint false-alarm budget: the deployed union's holdout FP dates (committed
+    # union_fpr artefact, rate excluded) plus this channel's own holdout FP dates
+    hcl = classify_sojourn_days(det, hstats)
+    hold_days = holdout_mask(pd.Series(hstats.index.astype(str), index=hstats.index), hold_n)
+    time_fp_dates = sorted(set(hcl.loc[hcl["flagged"].values & hold_days.values, "day"]))
+    ufpr = json.loads(Path(f"outputs/union_fpr_{system}.json").read_text())
+    deployed_fp = set()
+    for ch, v in ufpr["channels"].items():
+        if ch != "rate":
+            deployed_fp |= set(v.get("holdout_fp_dates", []))
+    joint = deployed_fp | set(time_fp_dates)
+    sysout["holdout_fp_dates"] = time_fp_dates
+    sysout["joint_fpr"] = {"deployed_union_minus_rate_fp_days": len(deployed_fp),
+                           "with_time_channel_fp_days": len(joint),
+                           "holdout_days": ufpr["holdout_days"],
+                           "with_time_channel_rate": round(len(joint) / ufpr["holdout_days"], 4)}
+    print(f"== {system}: {len(det.bands)} statistics monitored; holdout FP {det.holdout_fp_days}/{det.holdout_days}; "
+          f"joint FP {len(deployed_fp)} -> {len(joint)} of {ufpr['holdout_days']}")
     for sc in man["scenarios"]:
         if not sc["is_fault"] or sc.get("exclude"):
             continue
@@ -68,7 +86,12 @@ for system in ("sdahu", "pfpu", "sfpu"):
             union |= set(c.get("flag_days", {}).get(ch, []))
         freq = set(c.get("flag_days", {}).get("frequency", []))
         viol = pd.Series([v for vs in cl.loc[cl["flagged"], "violations"] for v in vs]).value_counts()
+        # time-to-detect: days from the file's first day to the first flagged day
+        # (scorecard ttd_days uses the same origin); None when never flagged
+        day0 = pd.to_datetime(df["Datetime"]).min().normalize()
+        ttd_time = (int((pd.to_datetime(min(flagged)) - day0).days) + 1) if flagged else None
         row = {"file": sc["file"], "family": sc.get("family"), "n_days": n_eval,
+               "ttd_time_days": ttd_time, "ttd_deployed_days": c.get("ttd_days"),
                "time_flag_days": len(flagged), "p": p, "significant": p < P_SIG,
                "deployed_detected": bool(c["meaningful_channels"]),
                "deployed_union_days": len(union),

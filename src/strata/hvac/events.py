@@ -145,7 +145,10 @@ def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
         # meaningful while EVERY gate holds (e.g. cooling AND heating coils
         # both idle, so no control loop is hiding the residual). Gates are
         # required to be mapped — fail closed is enforced upstream.
-        resid = w[r["a"]] - w[r["b"]]
+        if r.get("op") == "ratio":       # X13: a/b, undefined where b <= 0
+            resid = w[r["a"]] / w[r["b"]].where(w[r["b"]] > 0)
+        else:
+            resid = w[r["a"]] - w[r["b"]]
         cond = (resid < r["low"]) | (resid > r["high"])
         for g in _residual_gates(r):
             if "below" in g:

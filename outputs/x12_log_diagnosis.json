@@ -1,0 +1,872 @@
+{
+  "tolerance": 0.05,
+  "systems": {
+    "sdahu": {
+      "healthy": {
+        "events_per_day": 5.79,
+        "activity_per_day": {
+          "cooling_active": 1.397,
+          "cooling_inactive": 1.397,
+          "economizer_window_entered": 0.594,
+          "economizer_window_exited": 0.594,
+          "system_started": 0.904,
+          "system_stopped": 0.904
+        },
+        "on_median_min": {
+          "occupancy:on_med": 960.0,
+          "cooling:on_med": 480.0,
+          "economizer:on_med": 290.0
+        }
+      },
+      "scenarios": [
+        {
+          "file": "damper_stuck_010_annual",
+          "deployed_detected": true,
+          "events_per_day": 5.7,
+          "max_count_change": 0.0421,
+          "max_count_change_activity": "economizer_window_entered",
+          "max_on_duration_change": 0.4938,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "damper_stuck_025_annual",
+          "deployed_detected": true,
+          "events_per_day": 5.7,
+          "max_count_change": 0.0421,
+          "max_count_change_activity": "economizer_window_entered",
+          "max_on_duration_change": 0.4938,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "damper_stuck_075_annual",
+          "deployed_detected": true,
+          "events_per_day": 4.75,
+          "max_count_change": 0.3379,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 0.4875,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "damper_stuck_100_annual_short",
+          "deployed_detected": true,
+          "events_per_day": 5.24,
+          "max_count_change": 0.1389,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 0.4938,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "coi_stuck_010_annual",
+          "deployed_detected": true,
+          "events_per_day": 3.0,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "coi_stuck_025_annual",
+          "deployed_detected": true,
+          "events_per_day": 3.0,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "coi_stuck_050_annual",
+          "deployed_detected": true,
+          "events_per_day": 3.0,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "coi_stuck_075_annual",
+          "deployed_detected": true,
+          "events_per_day": 3.0,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "coi_leakage_010_annual",
+          "deployed_detected": true,
+          "events_per_day": 3.0,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "coi_bias_-4_annual",
+          "deployed_detected": true,
+          "events_per_day": 6.43,
+          "max_count_change": 0.2792,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 0.4775,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "coi_bias_-2_annual",
+          "deployed_detected": true,
+          "events_per_day": 5.18,
+          "max_count_change": 0.1696,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 0.2802,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "coi_bias_2_annual",
+          "deployed_detected": true,
+          "events_per_day": 5.98,
+          "max_count_change": 0.1152,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 0.2942,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "coi_bias_4_annual",
+          "deployed_detected": true,
+          "events_per_day": 6.28,
+          "max_count_change": 0.2262,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 0.3208,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "oa_bias_4_annual",
+          "deployed_detected": true,
+          "events_per_day": 5.38,
+          "max_count_change": 0.0966,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 0.0042,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        }
+      ]
+    },
+    "pfpu": {
+      "healthy": {
+        "events_per_day": 162.36,
+        "activity_per_day": {
+          "cooling_active": 7.427,
+          "cooling_inactive": 7.427,
+          "economizer_window_entered": 0.559,
+          "economizer_window_exited": 0.559,
+          "heating_active": 1.553,
+          "heating_inactive": 1.553,
+          "night_cycle_ended": 7.186,
+          "night_cycle_started": 7.186,
+          "system_started": 0.715,
+          "system_stopped": 0.715,
+          "zone_fan_E_started": 23.238,
+          "zone_fan_E_stopped": 23.238,
+          "zone_fan_I_started": 1.616,
+          "zone_fan_I_stopped": 1.616,
+          "zone_fan_S_started": 16.268,
+          "zone_fan_S_stopped": 16.268,
+          "zone_fan_W_started": 19.984,
+          "zone_fan_W_stopped": 19.984,
+          "zone_heating_E_active": 0.597,
+          "zone_heating_E_inactive": 0.597,
+          "zone_heating_I_active": 0.767,
+          "zone_heating_I_inactive": 0.767,
+          "zone_heating_S_active": 0.658,
+          "zone_heating_S_inactive": 0.658,
+          "zone_heating_W_active": 0.611,
+          "zone_heating_W_inactive": 0.611
+        },
+        "on_median_min": {
+          "occupancy:on_med": 720.0,
+          "night_cycle:on_med": 30.0,
+          "cooling:on_med": 28.5,
+          "zone_fan_I:on_med": 57.0,
+          "zone_fan_W:on_med": 2.0,
+          "zone_fan_S:on_med": 2.0,
+          "zone_fan_E:on_med": 2.0,
+          "zone_heating_I:on_med": 96.0,
+          "zone_heating_W:on_med": 153.0,
+          "zone_heating_S:on_med": 124.0,
+          "zone_heating_E:on_med": 147.0,
+          "economizer:on_med": 297.0,
+          "heating:on_med": 1.0
+        }
+      },
+      "scenarios": [
+        {
+          "file": "PFPU_RMTEMPUnstable",
+          "deployed_detected": true,
+          "events_per_day": 273.06,
+          "max_count_change": 39.2295,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.9919,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Airside_Minor",
+          "deployed_detected": false,
+          "events_per_day": 163.57,
+          "max_count_change": 0.0282,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.0081,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": true
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Airside_Moderate",
+          "deployed_detected": false,
+          "events_per_day": 164.58,
+          "max_count_change": 0.0718,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.0952,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Airside_Severe",
+          "deployed_detected": false,
+          "events_per_day": 169.17,
+          "max_count_change": 0.2201,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.0161,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Waterside_Minor",
+          "deployed_detected": false,
+          "events_per_day": 162.26,
+          "max_count_change": 0.0147,
+          "max_count_change_activity": "zone_fan_W_started",
+          "max_on_duration_change": 0.0,
+          "max_on_duration_change_pair": "",
+          "log_indistinguishable_at_5pct": true
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Waterside_Moderate",
+          "deployed_detected": false,
+          "events_per_day": 163.64,
+          "max_count_change": 0.0259,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.0,
+          "max_on_duration_change_pair": "",
+          "log_indistinguishable_at_5pct": true
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Waterside_Severe",
+          "deployed_detected": false,
+          "events_per_day": 162.84,
+          "max_count_change": 0.0049,
+          "max_count_change_activity": "zone_fan_E_started",
+          "max_on_duration_change": 0.0097,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": true
+        },
+        {
+          "file": "PFPU_ReheatVLVLeak_20%MaxFlow",
+          "deployed_detected": true,
+          "events_per_day": 182.19,
+          "max_count_change": 0.6223,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.8871,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatVLVLeak_50%MaxFlow",
+          "deployed_detected": true,
+          "events_per_day": 182.03,
+          "max_count_change": 0.6344,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.9113,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatVLVLeak_80%MaxFlow",
+          "deployed_detected": true,
+          "events_per_day": 181.97,
+          "max_count_change": 0.6378,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.9194,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_0%",
+          "deployed_detected": true,
+          "events_per_day": 131.26,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 125.0,
+          "max_on_duration_change_pair": "zone_fan_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_100%",
+          "deployed_detected": true,
+          "events_per_day": 182.17,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_20%",
+          "deployed_detected": true,
+          "events_per_day": 173.28,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_50%",
+          "deployed_detected": true,
+          "events_per_day": 179.38,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_80%",
+          "deployed_detected": true,
+          "events_per_day": 182.15,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_+2C",
+          "deployed_detected": false,
+          "events_per_day": 148.87,
+          "max_count_change": 0.3894,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.496,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_+4C",
+          "deployed_detected": true,
+          "events_per_day": 139.03,
+          "max_count_change": 0.7105,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.5806,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_-2C",
+          "deployed_detected": true,
+          "events_per_day": 179.26,
+          "max_count_change": 0.6277,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.2339,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_-4C",
+          "deployed_detected": true,
+          "events_per_day": 193.67,
+          "max_count_change": 1.5486,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.5,
+          "max_on_duration_change_pair": "zone_fan_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_+200CFM",
+          "deployed_detected": true,
+          "events_per_day": 144.24,
+          "max_count_change": 0.5289,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.6895,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_+400CFM",
+          "deployed_detected": true,
+          "events_per_day": 143.65,
+          "max_count_change": 0.5289,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.6935,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_-200CFM",
+          "deployed_detected": true,
+          "events_per_day": 159.24,
+          "max_count_change": 0.807,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.5,
+          "max_on_duration_change_pair": "zone_fan_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_-400CFM",
+          "deployed_detected": true,
+          "events_per_day": 134.12,
+          "max_count_change": 0.9438,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 359.0,
+          "max_on_duration_change_pair": "zone_fan_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_0%",
+          "deployed_detected": true,
+          "events_per_day": 165.65,
+          "max_count_change": 0.9853,
+          "max_count_change_activity": "cooling_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "heating:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_100%",
+          "deployed_detected": true,
+          "events_per_day": 131.61,
+          "max_count_change": 0.931,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 359.0,
+          "max_on_duration_change_pair": "zone_fan_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_20%",
+          "deployed_detected": true,
+          "events_per_day": 160.19,
+          "max_count_change": 0.4127,
+          "max_count_change_activity": "heating_active",
+          "max_on_duration_change": 0.0887,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_50%",
+          "deployed_detected": true,
+          "events_per_day": 148.9,
+          "max_count_change": 1.0395,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 359.0,
+          "max_on_duration_change_pair": "zone_fan_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_80%",
+          "deployed_detected": true,
+          "events_per_day": 132.24,
+          "max_count_change": 0.9313,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 359.0,
+          "max_on_duration_change_pair": "zone_fan_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_VAVDMPRUnstable",
+          "deployed_detected": true,
+          "events_per_day": 167.51,
+          "max_count_change": 0.1571,
+          "max_count_change_activity": "heating_active",
+          "max_on_duration_change": 0.0339,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "PFPU_VAVFanRestrictFlow",
+          "deployed_detected": true,
+          "events_per_day": 168.82,
+          "max_count_change": 0.2381,
+          "max_count_change_activity": "zone_fan_S_started",
+          "max_on_duration_change": 0.25,
+          "max_on_duration_change_pair": "zone_fan_E:on_med",
+          "log_indistinguishable_at_5pct": false
+        }
+      ]
+    },
+    "sfpu": {
+      "healthy": {
+        "events_per_day": 127.15,
+        "activity_per_day": {
+          "cooling_active": 9.156,
+          "cooling_inactive": 9.156,
+          "economizer_window_entered": 0.559,
+          "economizer_window_exited": 0.559,
+          "heating_active": 5.775,
+          "heating_inactive": 5.775,
+          "night_cycle_ended": 8.644,
+          "night_cycle_started": 8.644,
+          "system_started": 0.715,
+          "system_stopped": 0.715,
+          "zone_fan_E_started": 9.222,
+          "zone_fan_E_stopped": 9.222,
+          "zone_fan_I_started": 9.222,
+          "zone_fan_I_stopped": 9.222,
+          "zone_fan_S_started": 9.222,
+          "zone_fan_S_stopped": 9.222,
+          "zone_fan_W_started": 9.222,
+          "zone_fan_W_stopped": 9.222,
+          "zone_heating_E_active": 0.447,
+          "zone_heating_E_inactive": 0.447,
+          "zone_heating_I_active": 0.499,
+          "zone_heating_I_inactive": 0.499,
+          "zone_heating_S_active": 0.447,
+          "zone_heating_S_inactive": 0.447,
+          "zone_heating_W_active": 0.447,
+          "zone_heating_W_inactive": 0.447
+        },
+        "on_median_min": {
+          "occupancy:on_med": 720.0,
+          "night_cycle:on_med": 30.0,
+          "cooling:on_med": 28.0,
+          "heating:on_med": 1.0,
+          "zone_fan_I:on_med": 30.0,
+          "zone_fan_W:on_med": 30.0,
+          "zone_fan_S:on_med": 30.0,
+          "zone_fan_E:on_med": 30.0,
+          "zone_heating_I:on_med": 82.5,
+          "zone_heating_W:on_med": 182.0,
+          "zone_heating_S:on_med": 170.0,
+          "zone_heating_E:on_med": 181.0,
+          "economizer:on_med": 297.0
+        }
+      },
+      "scenarios": [
+        {
+          "file": "SFPU_RMTEMPUnstable",
+          "deployed_detected": true,
+          "events_per_day": 162.13,
+          "max_count_change": 39.1387,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.9824,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Airside_Minor",
+          "deployed_detected": false,
+          "events_per_day": 127.18,
+          "max_count_change": 0.0081,
+          "max_count_change_activity": "heating_active",
+          "max_on_duration_change": 0.0059,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": true
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
+          "deployed_detected": false,
+          "events_per_day": 127.16,
+          "max_count_change": 0.0134,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.0059,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": true
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Airside_Severe",
+          "deployed_detected": true,
+          "events_per_day": 126.55,
+          "max_count_change": 0.0521,
+          "max_count_change_activity": "heating_active",
+          "max_on_duration_change": 0.0176,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
+          "deployed_detected": false,
+          "events_per_day": 127.07,
+          "max_count_change": 0.01,
+          "max_count_change_activity": "zone_heating_I_active",
+          "max_on_duration_change": 0.0061,
+          "max_on_duration_change_pair": "zone_heating_I:on_med",
+          "log_indistinguishable_at_5pct": true
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
+          "deployed_detected": false,
+          "events_per_day": 127.33,
+          "max_count_change": 0.018,
+          "max_count_change_activity": "heating_active",
+          "max_on_duration_change": 0.0,
+          "max_on_duration_change_pair": "",
+          "log_indistinguishable_at_5pct": true
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
+          "deployed_detected": true,
+          "events_per_day": 127.18,
+          "max_count_change": 0.0067,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.0,
+          "max_on_duration_change_pair": "",
+          "log_indistinguishable_at_5pct": true
+        },
+        {
+          "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
+          "deployed_detected": true,
+          "events_per_day": 130.99,
+          "max_count_change": 0.9195,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
+          "deployed_detected": true,
+          "events_per_day": 135.9,
+          "max_count_change": 0.9888,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
+          "deployed_detected": true,
+          "events_per_day": 138.52,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_0%",
+          "deployed_detected": true,
+          "events_per_day": 127.12,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_100%",
+          "deployed_detected": true,
+          "events_per_day": 140.65,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_20%",
+          "deployed_detected": true,
+          "events_per_day": 126.2,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_50%",
+          "deployed_detected": true,
+          "events_per_day": 129.35,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_80%",
+          "deployed_detected": true,
+          "events_per_day": 135.74,
+          "max_count_change": 1.0,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_SensorBias_RMTEMP_+2C",
+          "deployed_detected": false,
+          "events_per_day": 127.08,
+          "max_count_change": 0.3311,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.0765,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_SensorBias_RMTEMP_+4C",
+          "deployed_detected": true,
+          "events_per_day": 126.64,
+          "max_count_change": 0.6085,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.1,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_SensorBias_RMTEMP_-4C",
+          "deployed_detected": true,
+          "events_per_day": 128.79,
+          "max_count_change": 4.2774,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.0294,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
+          "deployed_detected": true,
+          "events_per_day": 131.69,
+          "max_count_change": 0.4787,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "heating:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
+          "deployed_detected": true,
+          "events_per_day": 131.93,
+          "max_count_change": 0.4787,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "heating:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
+          "deployed_detected": true,
+          "events_per_day": 115.24,
+          "max_count_change": 0.8885,
+          "max_count_change_activity": "heating_active",
+          "max_on_duration_change": 0.0706,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
+          "deployed_detected": true,
+          "events_per_day": 114.71,
+          "max_count_change": 1.2931,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 3.2353,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_0%",
+          "deployed_detected": true,
+          "events_per_day": 111.99,
+          "max_count_change": 0.8557,
+          "max_count_change_activity": "zone_heating_I_active",
+          "max_on_duration_change": 1.0,
+          "max_on_duration_change_pair": "heating:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_100%",
+          "deployed_detected": true,
+          "events_per_day": 113.95,
+          "max_count_change": 0.9553,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 3.2353,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_20%",
+          "deployed_detected": true,
+          "events_per_day": 134.36,
+          "max_count_change": 0.3803,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.5,
+          "max_on_duration_change_pair": "heating:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_50%",
+          "deployed_detected": true,
+          "events_per_day": 115.83,
+          "max_count_change": 0.8814,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.0357,
+          "max_on_duration_change_pair": "cooling:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_80%",
+          "deployed_detected": true,
+          "events_per_day": 114.03,
+          "max_count_change": 0.962,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 3.2353,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_VAVDMPRUnstable",
+          "deployed_detected": true,
+          "events_per_day": 130.5,
+          "max_count_change": 0.3023,
+          "max_count_change_activity": "heating_active",
+          "max_on_duration_change": 0.011,
+          "max_on_duration_change_pair": "zone_heating_E:on_med",
+          "log_indistinguishable_at_5pct": false
+        },
+        {
+          "file": "SFPU_VAVFanRestrictFlow",
+          "deployed_detected": true,
+          "events_per_day": 126.66,
+          "max_count_change": 0.2013,
+          "max_count_change_activity": "zone_heating_S_active",
+          "max_on_duration_change": 0.0529,
+          "max_on_duration_change_pair": "zone_heating_S:on_med",
+          "log_indistinguishable_at_5pct": false
+        }
+      ]
+    }
+  },
+  "summary": {
+    "n_scored": 73,
+    "n_missed": 12,
+    "missed_with_indistinguishable_log": [
+      "PFPU_ReheatCoilFouling_Airside_Minor",
+      "PFPU_ReheatCoilFouling_Waterside_Minor",
+      "PFPU_ReheatCoilFouling_Waterside_Moderate",
+      "PFPU_ReheatCoilFouling_Waterside_Severe",
+      "SFPU_ReheatCoilFouling_Airside_Minor",
+      "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "SFPU_ReheatCoilFouling_Waterside_Minor",
+      "SFPU_ReheatCoilFouling_Waterside_Moderate"
+    ],
+    "detected_with_indistinguishable_log": [
+      "SFPU_ReheatCoilFouling_Waterside_Severe"
+    ]
+  }
+}

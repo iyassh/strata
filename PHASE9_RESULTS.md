@@ -26,11 +26,24 @@ the fault-free PFPU year and two missed scenarios and one detected one:
 | PFPU_ReheatCoilFouling_Waterside_Severe (**missed**) | 162.8 | 100 | 16.3 |
 | PFPU_ReheatVLVLeak_50%MaxFlow (detected) | 182.0 | **11** | **26.6** |
 
-Under fouling the state-event log is identical to healthy to the minute:
-the fault lives in heat-transfer magnitudes the abstraction discards. Under
-valve leak the log changes — in **timing** and **counts**, not in the set
-or order of activities. Control-flow conformance is blind to timing by
-construction; the frequency channel already reads counts.
+Under waterside fouling the state-event log is identical to healthy to the
+minute: the fault lives in heat-transfer magnitudes the abstraction
+discards. Under valve leak the log changes — in **timing** and **counts**,
+not in the set or order of activities. Control-flow conformance is blind to
+timing by construction; the frequency channel already reads counts.
+
+Made an artefact over all 73 scenarios (`scripts/x12_log_diagnosis.py` →
+`outputs/x12_log_diagnosis.json`, 5 % tolerance on every activity's daily
+count and every pair's on-duration median): **8 of the 12 scenarios the
+deployed detector misses have a state log indistinguishable from healthy**
+(all reheat-coil fouling; the twelfth miss is the single-duct branch
+adjudication, not in the naive scorecard). The other four misses — PFPU
+airside fouling moderate/severe and both +2 °C room-sensor-bias runs — do
+change a daily count by 7–39 % (zone-S fan starts, zone-S heating
+episodes); the frequency channel's train min/max bands did not turn that
+into significant days. One detected scenario (SFPU waterside fouling,
+severe) also has an indistinguishable log: it is caught by non-log
+channels, which is consistent.
 
 ## X12 — the time perspective of the discovered state model
 
@@ -47,7 +60,8 @@ per-channel flag days (never re-run).
 | joint FP, deployed union → + time channel | 1 → 1 of 96 | 5 → **10** of 96 | 4 → **9** of 96 |
 
 Over the 73 scored scenarios: **significant on 11** (P1 held); **none of the
-nine fouling scenarios** (P2 held — the log carries nothing); **no scenario
+nine fouling scenarios** (P2 held — for eight of the ten fouling misses the log
+carries nothing at 5 %); **no scenario
 the deployed channels miss** (P3, the load-bearing prediction, **false**);
 unique days beyond the frequency channel on 11 (P4 held, but as
 pre-registered P4 was too weak to discriminate: the frequency channel flags
@@ -104,8 +118,9 @@ sensor. Recorded as a fired falsifier; the statistic is not adopted.
    its non-control-flow perspectives: counts (the frequency and absence
    channels, deployed), and timing (X12: real, redundant, costly). The
    discovered net's order structure contributes nothing on these systems.
-3. **The 13 misses stand.** Nine carry no log signal at any perspective;
-   the coil residual did not carry them either.
+3. **The misses stand.** Eight of the twelve carry no log signal at 5 % in
+   any count or duration; four carry count changes the frequency bands did
+   not resolve; the coil residual did not carry the fouling ones either.
 
 ## Ledger
 

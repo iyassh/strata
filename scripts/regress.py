@@ -45,6 +45,7 @@ PIPELINE = {
     "e3_leakage.json": "uv run python scripts/e3_leakage.py",
     "e5_schedule.json": "uv run python scripts/e5_schedule.py",
     # 2026-09-23 night: the two perspectives tested after the conformance null
+    "x12_log_diagnosis.json": "uv run python scripts/x12_log_diagnosis.py",
     "x12_time_perspective.json": "uv run python scripts/x12_time_perspective.py",
     "x13_coil_effectiveness.json": "uv run python scripts/x13_coil_effectiveness.py",
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",

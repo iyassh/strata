@@ -1,4 +1,4 @@
-# Phase 9 Results — Can process mining be made to detect? (X12–X15)
+# Phase 9 Results — Can process mining be made to detect? (X12–X15) and does the detector survive jitter and a different holdout? (X9/X10)
 
 *2026-09-23, overnight. Both experiments pre-registered and committed before
 they ran (`docs/plans/2026-09-23-x12-*.md`, `…-x13-*.md`). Artefacts
@@ -236,6 +236,50 @@ says nothing about alignment-based conformance, which remains at zero
 unique detections and, on this alphabet, computationally impractical on
 the fan-powered units.
 
+## X9 / X10 — jitter and holdout-split robustness of the deployed detector
+
+Pre-registered (289e53f), three amendments each recorded before the result
+it governs: the 2×/4× stress arms made descriptive and the noise named as
+i.i.d. per-sample **jitter**, not bias or drift (A1); the stress arms
+dropped on the fan-powered units for compute (A2); the alignment-based
+channels dropped on the fan-powered units for compute, with the clean
+reference restated as the deployed detector minus those channels — which
+changes no detection count and lowers the series unit's holdout FP from 4
+to 1 (A3). SDAHU ran with every channel at every dose. The detector is
+re-fitted on the jittered healthy year at each dose (1× = 0.5 °F on
+temperatures, 2 % on flows, 0.01 on positions; static pressure is mapped
+on no system and was never perturbed; seeds shared across doses).
+
+| detected / holdout FP | clean reference | 1× jitter | 2× | 4× | first-8-days holdout |
+|---|---|---|---|---|---|
+| SDAHU (all channels) | 14 of 14 / 1 of 96 | 14 / 1 | 14 / 1 | 14 / 1 | 13 / 0 |
+| PFPU (no alignment channels) | 23 of 30 / 5 of 96 | 23 / 4 | — | — | 23 / 2 |
+| SFPU (no alignment channels) | 24 of 29 / 1 of 96 | 24 / 2 | — | — | 25 / 3 |
+
+**Every binding prediction held; no falsifier fired.** Detection counts are
+unchanged at 1× jitter on all three systems and within one under the
+mirrored holdout; false-alarm rates stay at 0–4 of 96.
+
+**What the counts hide.** The count is stable, the membership is not: at 1×
+jitter the parallel unit loses two marginal room-sensor-bias scenarios
+(−2 °C, −4 °C) and gains airside-severe fouling and +2 °C; under the
+mirrored split it loses −2 °C and gains airside-severe; the series unit
+gains waterside-moderate fouling; the single-duct unit loses `oa_bias_4`,
+the very scenario the branch adjudication (X11) had already removed. The
+deployed detector's *count* is robust to jitter and to the split; which
+marginal scenarios sit on either side of the gate is not, and the fouling
+family in particular is at the edge on both fan-powered units.
+
+**What this does not show.** Jitter is not bias or drift, which is the
+limitation the papers state; the 2×/4× arms ran only on SDAHU (identical
+at every dose); the fan-powered arms exclude the conformance channels,
+whose contribution on clean data is nil. A bias/drift arm is future work.
+
+The run also exposed a performance bug in the deployed `score()` — the set
+of event days was rebuilt inside a per-day loop, O(days × events), sixteen
+minutes per file once jitter inflated the event count — fixed with results
+byte-identical (780ec3e).
+
 ## What this settles
 
 1. **Why control-flow conformance found nothing**: for the faults it missed,
@@ -268,3 +312,4 @@ the fan-powered units.
 | X13 | 89ae874 | 2026-09-23 | P1 ✗ P2 ✓ P3 ✓ | **F-X13.b fired** (under both the shipped and the deployed denominator convention) | `x13_coil_effectiveness.json` |
 | X14 | c9e19f5 (A1 4187b97, A2 a1f5b3e, A3 06dea4c) | 2026-09-23 | P1 ✓ (by the letter) **P2 ✗** P3 ✓ | **F-X14.a fired** | `x14_enriched_alphabet.json` + `x14_control.json` |
 | X15 | 0d0c692 (post-hoc-motivated, stated) | 2026-09-23 | P1 ✓ P2 ✓ P3 ✓ P4 ✓ | none fired | `x15_enriched_frequency.json` |
+| X9/X10 | 289e53f (A1 65b7977, A2 823d339, A3 5b2be6d) | 2026-09-23 | all binding predictions ✓ | none fired | `x9_x10_robustness.json` |

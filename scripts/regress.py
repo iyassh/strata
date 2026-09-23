@@ -51,6 +51,7 @@ PIPELINE = {
     "x14_enriched_alphabet.json": "uv run python scripts/x14_enriched_alphabet.py",   # ~30 min
     "x14_control.json": "uv run python scripts/x14_control.py",
     "x15_enriched_frequency.json": "uv run python scripts/x15_enriched_frequency.py",
+    # x9_x10_robustness.json: ~1 h in three per-system processes (see its pre-registration); not in the gate.
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",
     "discovery_predicts_transfer.json": "uv run python scripts/discovery_predicts_transfer.py --q outputs/discovery_predicts_transfer_q.json",
 }

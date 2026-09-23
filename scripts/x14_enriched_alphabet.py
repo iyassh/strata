@@ -78,6 +78,14 @@ for system in ("sdahu", "pfpu", "sfpu"):
     n_state = sum(1 for r in cfg.rules["events"].values() if r.get("alphabet", "state") == "state"
                   and r.get("kind") in ("mode", "window", "occupancy"))
     det = fit(cfg, hdf)
+    # Amendment 2: on the fan-powered units the alignment-based channels
+    # (model, device, absence) are infeasible on the enriched alphabet (fit
+    # 1061 s; the first PFPU scenario had not finished after 47 min). They
+    # are dropped there and marked not evaluated; SDAHU keeps its model channel.
+    alignment_channels_evaluated = system == "sdahu"
+    if not alignment_channels_evaluated:
+        det.unit_model = None
+        det.device_model = None
     hlog = abstract_events(hdf, cfg)
     tdet = build_sojourn_detector(daily_sojourn_stats(hlog, cfg), hold_n)
     # healthy-holdout false alarms of the enriched state channels
@@ -92,6 +100,8 @@ for system in ("sdahu", "pfpu", "sfpu"):
     time_fp = set(hcl[hcl].index) & set(days[hold].astype(str))
     fp_days = set(days[hold & state_union.values].astype(str)) | time_fp
     sysout = {"added_signals": added, "n_added_events": 2 * len(added), "n_state_pairs_total": n_state,
+              "alignment_channels_evaluated": alignment_channels_evaluated,
+              "fit_seconds_stdout_only_note": "fit time printed, not committed (machine-dependent)",
               "holdout_days": int(hold.sum()), "state_channels_holdout_fp_days": len(fp_days),
               "time_holdout_fp_days": len(time_fp), "scenarios": []}
     print(f"== {system}: +{2*len(added)} state events ({len(added)} signals); fit {time.time()-t0:.0f}s; "
@@ -103,7 +113,8 @@ for system in ("sdahu", "pfpu", "sfpu"):
         t1 = time.time()
         df = pd.read_parquet(f"data/processed/{system}/{s['file']}.parquet")
         r = det.evaluate(df)
-        sig = {ch: bool(r["significant"].get(ch, False)) for ch in STATE_CH}
+        sig = {ch: (bool(r["significant"].get(ch, False)) if (alignment_channels_evaluated or ch == "frequency") else None)
+               for ch in STATE_CH}
         log = abstract_events(df, cfg)
         st = daily_sojourn_stats(log, cfg)
         cl = classify_sojourn_days(tdet, st) if tdet else None

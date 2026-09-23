@@ -89,3 +89,25 @@ re-run:
 
 Predictions and falsifiers are unchanged. The stopped run produced no
 numbers, so none were seen.
+
+## Amendment 2 (2026-09-23, after the second run was stopped; SDAHU numbers had been seen, no fan-powered result had)
+
+With the 15-minute dwell the parallel unit's enriched log is 213 state
+events per day (max 1,174). Fitting took 1,061 s and the first scenario's
+alignment-based evaluation had not finished after 47 minutes; thirty
+scenarios on two systems would take days. **Design change:** on the two
+fan-powered units the alignment-based channels — model, device and the
+absence channel that reads the device model — are not evaluated on the
+enriched alphabet; the artefact marks them `null` there. The enriched
+alphabet is tested on those systems through the frequency channel and the
+time perspective. SDAHU (no device stratum, 12.7 events per day) keeps the
+model channel, and its enriched model-channel results, already printed
+before this amendment, stand.
+
+This narrows P1 and P3 on the fan-powered units and is recorded as a
+finding in its own right: at this vocabulary, alignment-based conformance is
+computationally impractical on these logs. Predictions and falsifiers are
+otherwise unchanged. The SDAHU results seen before this amendment: the
+enriched model channel is significant on the four coil-bias runs and
+`oa_bias_4` (model days 33–186 against ≤ 5 before), all already detected;
+holdout FP of state ∪ time 7 of 96.

@@ -94,3 +94,17 @@ first-8-days split.
 - Seeds are per file and shared across doses (common random numbers): the 2×/4× draws are the 1× draws scaled, so the dose arms are perfectly rank-correlated, which strengthens the monotonicity check and is stated wherever they are quoted.
 - `clean_detected` is the naive scorecard count (SDAHU 14), not the branch-adjudicated 13; the noisy side uses `evaluate()["detected"]`, which excludes the advisory rate channel, while the clean count reads `meaningful_channels`; no scenario is rate-only on any scorecard, so the baselines coincide today.
 - P-X9.1 was coded one-sided (`clean − noisy ≤ 3`); the text is two-sided. Fixed to `abs(...) ≤ 3` before the fan-powered arms were read; F-X9.a stays one-sided as written. The running process carries the old code; predictions are recomputed from the committed systems block with `--from-artefact` when it finishes.
+
+## Amendment 2 (2026-09-23, before any fan-powered result was read)
+
+The single-process run reached the parallel unit's 1× arm and had not
+finished it after 2 h 30 (the jitter multiplies state-log events and every
+alignment with them); the four arms on two fan-powered units would take
+the better part of a day. **Design change, for compute only:** the 2× and
+4× stress arms — which Amendment 1 had already made descriptive, with no
+falsifier — are dropped on the fan-powered units; they stay on SDAHU. The
+1× arm and the mirrored-split arm, which carry every binding falsifier,
+are unchanged. The run is restarted as three processes (one per system)
+that merge into one artefact; the SDAHU arms seen earlier (14/14 and 1/96
+at every dose; 13/14 and 0/96 under the split) are recomputed, not reused.
+No fan-powered number had been produced when this was written.

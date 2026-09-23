@@ -134,8 +134,11 @@ for system in ("sdahu", "pfpu", "sfpu"):
     clean_det = sum(1 for c in card if c["is_fault"] and not c["excluded"] and c["meaningful_channels"])
     ufpr = json.loads(Path(f"outputs/union_fpr_{system}.json").read_text())["union_minus_rate"]
     sysout = {"clean_detected": clean_det, "clean_holdout_fp_days": ufpr["holdout_fp_days"], "conditions": {}}
+    arms = sys.argv[sys.argv.index("--arms") + 1].split(",") if "--arms" in sys.argv else None
     for name, dose, split in (("noise_1x", 1, _last_n), ("noise_2x", 2, _last_n), ("noise_4x", 4, _last_n),
                               ("split_first8", 0, first_n_mask)):
+        if arms and name not in arms:      # Amendment 2: fan-powered stress arms dropped for compute
+            continue
         t0 = time.time()
         sysout["conditions"][name] = run_condition(system, cfg, man, dose, split)
         r = sysout["conditions"][name]
@@ -147,9 +150,11 @@ pred, fired = {}, []
 for s, v in out["systems"].items():
     c = v["conditions"]; n1 = c["noise_1x"]; sp = c["split_first8"]
     d1 = v["clean_detected"] - n1["detected"]
+    stress = "noise_2x" in c and "noise_4x" in c
     pred[s] = {"P-X9.1_det_change_le_3": abs(d1) <= 3, "det_drop_1x": d1,     # two-sided, as pre-registered
                "P-X9.1_fpr_le_10pct": n1["holdout_fp_rate"] <= 0.10,
-               "P-X9.2_monotone": c["noise_4x"]["detected"] <= c["noise_2x"]["detected"] <= n1["detected"],
+               "P-X9.2_monotone": (c["noise_4x"]["detected"] <= c["noise_2x"]["detected"] <= n1["detected"]) if stress else None,
+               "stress_arms_run": stress,
                "P-X10.1_det_within_3": abs(v["clean_detected"] - sp["detected"]) <= 3,
                "P-X10.2_fpr_le_10pct": sp["holdout_fp_rate"] <= 0.10}
     if d1 > 3:

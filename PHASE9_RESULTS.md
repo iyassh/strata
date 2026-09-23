@@ -140,12 +140,15 @@ fan-powered units are tested through frequency and time.
 |---|---|---|---|
 | enriched state ∪ time holdout FP | **7**/96 | **14**/96 | **18**/96 |
 | newly significant among the 12 misses | 0 | 1 (`SensorBias_RMTEMP_+2C`, time channel, 70 days) | 0 |
-| enriched model channel significant | 14 of 14 (deployed: 5) | not evaluated | not evaluated |
+| enriched model channel significant | 14 of 14 (deployed: 0 of 14) | not evaluated | not evaluated |
 
 **P1 held** (one missed scenario becomes significant), **P3 held** (the
-single-duct model channel goes from 5 to 14 significant scenarios, with
-model days 30–227 against ≤ 5 before — vocabulary was a real limit on that
-channel), **P2 failed**: the enriched channels false-alarm on 14 and 18 of
+single-duct model channel goes from 0 to 14 significant scenarios, with
+model days 30–227 against ≤ 9 before — vocabulary was a real limit on that
+channel; the deployed detector's five model-significant scenarios are all
+on the series unit, where the enriched model channel was not evaluated, so
+the artefact's global "14 vs 5" compares disjoint sets and the within-system
+figure is the one to quote), **P2 failed**: the enriched channels false-alarm on 14 and 18 of
 96 holdout days on the fan-powered units. **F-X14.a fired: unusable at the
 budget.**
 

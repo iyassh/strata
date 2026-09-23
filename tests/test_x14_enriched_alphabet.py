@@ -1,5 +1,5 @@
 """Guard: X14 (enriched state alphabet, Amendments 1-2) — P1 held on exactly
-one missed scenario, P3 held (SDAHU model channel 14 vs 5), P2 failed and
+one missed scenario, P3 held (SDAHU model channel 14 of 14 vs 0 of 14 deployed; the artefact's global 5 is the series unit's), P2 failed and
 F-X14.a fired: the enriched channels exceed the false-alarm budget."""
 import json
 from pathlib import Path

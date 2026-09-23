@@ -164,7 +164,8 @@ evidence.)*
 - **Damper floor:** during fan-on hours (SF_CS > 0.5) the healthy file's
   OA damper minimum is **0.000**; every fault file floors at exactly
   **0.100** (the three damper_stuck files at 0.25/0.75/1.0 sit at their
-  stuck value above the floor).- **Schedule:** on the pipeline's own occupancy signal (SYS_CTL) the day
+  stuck value above the floor).
+- **Schedule:** on the pipeline's own occupancy signal (SYS_CTL) the day
   universe and daily occupied minutes are IDENTICAL between branches
   (same 303 occupied days, within two minutes per day). The branch
   difference is a one-hour phase shift: the healthy file starts at

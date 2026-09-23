@@ -108,3 +108,22 @@ are unchanged. The run is restarted as three processes (one per system)
 that merge into one artefact; the SDAHU arms seen earlier (14/14 and 1/96
 at every dose; 13/14 and 0/96 under the split) are recomputed, not reused.
 No fan-powered number had been produced when this was written.
+
+## Amendment 3 (2026-09-23, before any fan-powered result was read)
+
+The per-system fan-powered runs were still inside the 1× arm after 4 h 15;
+a timing probe showed a noisy PFPU fit at 334 s and a single noisy scenario
+evaluation not finishing in 25 minutes through the alignment-based
+channels (the jitter multiplies state events, and alignment cost grows
+with trace length and net size). Thirty scenarios × two arms × two
+systems is out of reach. **Design change, for compute only, on the
+fan-powered units:** the alignment-based channels — model, device, and
+the absence channel that reads the device model — are dropped from the
+re-fitted detector (`--no-alignment`). On clean data their removal changes
+no detection count (the ablation's "conformance sole = 0"; absence is
+meaningful on no scenario) and lowers the series unit's holdout
+false-alarm days from 4 to 1, so the clean reference for those arms is the
+deployed detector minus those channels: detections 23 / 24, holdout FP 5 / 1
+of 96. Predictions and falsifiers are otherwise unchanged and are read
+against that reference. SDAHU's completed arms, with every channel, stand.
+No fan-powered number had been produced when this was written.

@@ -35,6 +35,11 @@ from strata.core.splits import holdout_mask as _last_n
 from strata.io.config import load_config
 
 DEPLOYED = ["rules", "residual", "model", "device", "absence", "frequency", "oscillation"]
+# Amendment 3: without the alignment-based channels (model, device, and absence, which reads the
+# device model). On clean data their removal changes no detection count (ablation: conformance
+# sole = 0; absence is meaningful on no scenario) and lowers SFPU's holdout FP from 4 to 1.
+DEPLOYED_NO_ALIGN = ["rules", "residual", "frequency", "oscillation"]
+NO_ALIGN = "--no-alignment" in sys.argv
 NOISE = {"temp": 0.5, "flow_rel": 0.02, "pos": 0.01, "sp_rel": 0.02}
 
 
@@ -97,11 +102,14 @@ def _run_condition(system: str, cfg, man, dose: float, split_fn) -> dict:
     hold_n = cfg.rules["detection"]["holdout_days_per_month"]
     hdf = add_noise(pd.read_parquet(f"data/processed/{system}/{man['healthy_file']}.parquet"), cfg, dose, man["healthy_file"])
     det = fit(cfg, hdf)
+    if NO_ALIGN:     # Amendment 3: alignment-based channels dropped (their removal changes no clean scorecard)
+        det.unit_model = None
+        det.device_model = None
     sc = det.score(hdf)
     days = sc["universe"].index
     hold = split_fn(pd.Series(days.astype(str), index=days), hold_n).values
     union = pd.Series(False, index=days)
-    for ch in DEPLOYED:
+    for ch in (DEPLOYED_NO_ALIGN if NO_ALIGN else DEPLOYED):
         union = union | sc["channels"][ch].reindex(days).fillna(False)
     fp = int(union.values[hold].sum()); nh = int(hold.sum())
     detected, per = 0, {}
@@ -131,9 +139,20 @@ for system in ("sdahu", "pfpu", "sfpu"):
     cfg = load_config(f"configs/lbnl_{system}")
     man = yaml.safe_load(Path(f"configs/lbnl_{system}/scenarios.yaml").read_text())
     card = json.loads(Path(f"outputs/benchmark_v6_{system}.json").read_text())["scenarios"]
-    clean_det = sum(1 for c in card if c["is_fault"] and not c["excluded"] and c["meaningful_channels"])
-    ufpr = json.loads(Path(f"outputs/union_fpr_{system}.json").read_text())["union_minus_rate"]
-    sysout = {"clean_detected": clean_det, "clean_holdout_fp_days": ufpr["holdout_fp_days"], "conditions": {}}
+    if NO_ALIGN:
+        clean_det = sum(1 for c in card if c["is_fault"] and not c["excluded"]
+                        and set(str(c["meaningful_channels"]).split("+")) & {"rules", "resid", "freq", "osc"})
+        uch = json.loads(Path(f"outputs/union_fpr_{system}.json").read_text())["channels"]
+        fp_dates = set()
+        for ch, v in uch.items():
+            if ch not in ("rate", "model", "device"):
+                fp_dates |= set(v["holdout_fp_dates"])
+        ufpr = {"holdout_fp_days": len(fp_dates)}
+    else:
+        clean_det = sum(1 for c in card if c["is_fault"] and not c["excluded"] and c["meaningful_channels"])
+        ufpr = json.loads(Path(f"outputs/union_fpr_{system}.json").read_text())["union_minus_rate"]
+    sysout = {"clean_detected": clean_det, "clean_holdout_fp_days": ufpr["holdout_fp_days"],
+              "alignment_channels": not NO_ALIGN, "conditions": {}}
     arms = sys.argv[sys.argv.index("--arms") + 1].split(",") if "--arms" in sys.argv else None
     for name, dose, split in (("noise_1x", 1, _last_n), ("noise_2x", 2, _last_n), ("noise_4x", 4, _last_n),
                               ("split_first8", 0, first_n_mask)):

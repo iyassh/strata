@@ -227,7 +227,12 @@ frequency channel, detects one reheat-coil fouling scenario the deployed
 detector misses — the airside-moderate file, with its dose-monotone
 zone-damper signature (X14 control) — inside the false-alarm budget under
 two holdouts, and roughly triples the frequency channel's coverage of
-already-detected scenarios. It is a **candidate deployable addition**, not an
+already-detected scenarios. Two bounds on that: the principal-component
+baseline already detects the same scenario from raw features (paper,
+Results), so the gain is within reach of a simpler method and the claim is
+only that an enriched event log carries it too; and like for like the
+enriched channel costs three to eight times the deployed frequency
+channel's own false alarms. It is a **candidate deployable addition**, not an
 adopted one: adoption changes every published scorecard and the false-alarm
 budget accounting, and is a separate decision, to be pre-registered (X16). Like
 for like, the enriched channel costs three to eight times the false alarms

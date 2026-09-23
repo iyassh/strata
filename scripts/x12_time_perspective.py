@@ -85,6 +85,8 @@ for system in ("sdahu", "pfpu", "sfpu"):
         n_eval = int(len(cl))
         p = float(binom_sf(len(flagged), n_eval, p0)) if n_eval else 1.0
         c = card[sc["file"]]
+        missing = [k for k in DEPLOYED + ["freq", "sig_union"] if k not in c.get("flag_days", {})]
+        assert not missing, f"scorecard flag_days lacks {missing} (L36: assert the keys you compare against)"
         union = set()
         for ch in DEPLOYED:
             union |= set(c.get("flag_days", {}).get(ch, []))

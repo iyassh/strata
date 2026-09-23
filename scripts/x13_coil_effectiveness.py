@@ -101,6 +101,8 @@ for system in ("pfpu", "sfpu"):
             by_zone[z] = len(zf); n_win = max(n_win, int(f["evaluable"].sum()))
         sig = residual_significant(len(flagged), n_win, hold_fp, hold_n_days)
         c = card[sc["file"]]
+        missing = [k for k in DEPLOYED if k not in c.get("flag_days", {})]
+        assert not missing, f"scorecard flag_days lacks {missing} (L36: assert the keys you compare against)"
         union = set()
         for ch in DEPLOYED:
             union |= set(c.get("flag_days", {}).get(ch, []))

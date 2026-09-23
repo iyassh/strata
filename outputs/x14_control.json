@@ -1,0 +1,310 @@
+{
+  "band_edge": 0.32,
+  "signal": "ZONE_DMPR_POS_S",
+  "raw_column": "VAV_DMPR_S",
+  "dwell_min": 15,
+  "p0_time": 0.1979,
+  "p0_frequency_rule_of_three_floor": 0.0312,
+  "bonferroni_gate_12_misses_x_2_channels": 0.0020833333333333333,
+  "airside_ladder": {
+    "SFPU_ReheatCoilFouling_Airside_Minor": {
+      "time_flag_days": 28,
+      "frequency_days": 5,
+      "p_time": 0.9999999999673737,
+      "log10_p_time": -1.4169442062778526e-11,
+      "p_frequency_floor": 0.98943301096587,
+      "log10_p_frequency_floor": -0.00461360413844435,
+      "deployed_detected": false,
+      "enriched_sig": {
+        "model": null,
+        "device": null,
+        "absence": null,
+        "frequency": false,
+        "time": false
+      }
+    },
+    "SFPU_ReheatCoilFouling_Airside_Moderate": {
+      "time_flag_days": 365,
+      "frequency_days": 364,
+      "p_time": 1.644615156548201e-257,
+      "log10_p_time": -256.78393571165986,
+      "p_frequency_floor": 0.0,
+      "log10_p_frequency_floor": -300.0,
+      "deployed_detected": false,
+      "enriched_sig": {
+        "model": null,
+        "device": null,
+        "absence": null,
+        "frequency": true,
+        "time": true
+      }
+    },
+    "SFPU_ReheatCoilFouling_Airside_Severe": {
+      "time_flag_days": 365,
+      "frequency_days": 364,
+      "p_time": 1.644615156548201e-257,
+      "log10_p_time": -256.78393571165986,
+      "p_frequency_floor": 0.0,
+      "log10_p_frequency_floor": -300.0,
+      "deployed_detected": true,
+      "enriched_sig": {
+        "model": null,
+        "device": null,
+        "absence": null,
+        "frequency": true,
+        "time": true
+      }
+    }
+  },
+  "files": [
+    {
+      "file": "SFPU_FaultFree",
+      "occupied_share_at_or_below_edge": 0.6434,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.73,
+      "off_gap_median_min": 570.0,
+      "on_median_min": 110.0
+    },
+    {
+      "file": "SFPU_RMTEMPUnstable",
+      "occupied_share_at_or_below_edge": 0.7268,
+      "damper_min": 0.14,
+      "sustained_low_entries_per_day": 0.34,
+      "off_gap_median_min": 595.5,
+      "on_median_min": 104.0
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Minor",
+      "occupied_share_at_or_below_edge": 0.6419,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.73,
+      "off_gap_median_min": 568.0,
+      "on_median_min": 113.5
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "occupied_share_at_or_below_edge": 0.1191,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 9.05,
+      "off_gap_median_min": 30.0,
+      "on_median_min": 48.0
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Severe",
+      "occupied_share_at_or_below_edge": 0.0352,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 8.74,
+      "off_gap_median_min": 30.0,
+      "on_median_min": 42.0
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
+      "occupied_share_at_or_below_edge": 0.6434,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.73,
+      "off_gap_median_min": 570.0,
+      "on_median_min": 110.0
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
+      "occupied_share_at_or_below_edge": 0.6433,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.73,
+      "off_gap_median_min": 571.0,
+      "on_median_min": 110.0
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
+      "occupied_share_at_or_below_edge": 0.6433,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.73,
+      "off_gap_median_min": 570.0,
+      "on_median_min": 110.0
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "occupied_share_at_or_below_edge": 0.3141,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.91,
+      "off_gap_median_min": 26.0,
+      "on_median_min": 108.5
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "occupied_share_at_or_below_edge": 0.1966,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 3.1,
+      "off_gap_median_min": 38.0,
+      "on_median_min": 54.0
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "occupied_share_at_or_below_edge": 0.158,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 3.59,
+      "off_gap_median_min": 40.0,
+      "on_median_min": 59.0
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_0%",
+      "occupied_share_at_or_below_edge": 0.6658,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.68,
+      "off_gap_median_min": 572.0,
+      "on_median_min": 110.0
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_100%",
+      "occupied_share_at_or_below_edge": 0.1448,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 3.69,
+      "off_gap_median_min": 42.0,
+      "on_median_min": 63.0
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_20%",
+      "occupied_share_at_or_below_edge": 0.4746,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.7,
+      "off_gap_median_min": 583.0,
+      "on_median_min": 87.0
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_50%",
+      "occupied_share_at_or_below_edge": 0.3288,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.79,
+      "off_gap_median_min": 122.5,
+      "on_median_min": 55.5
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_80%",
+      "occupied_share_at_or_below_edge": 0.1979,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 3.08,
+      "off_gap_median_min": 37.8,
+      "on_median_min": 54.0
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_+2C",
+      "occupied_share_at_or_below_edge": 0.5264,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.7,
+      "off_gap_median_min": 579.0,
+      "on_median_min": 107.0
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_+4C",
+      "occupied_share_at_or_below_edge": 0.4484,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 0.73,
+      "off_gap_median_min": 565.5,
+      "on_median_min": 87.0
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_-2C",
+      "occupied_share_at_or_below_edge": 0.7525,
+      "damper_min": 0.16,
+      "sustained_low_entries_per_day": 0.5,
+      "off_gap_median_min": 525.5,
+      "on_median_min": 166.5
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_-4C",
+      "occupied_share_at_or_below_edge": 0.8298,
+      "damper_min": 0.14,
+      "sustained_low_entries_per_day": 0.33,
+      "off_gap_median_min": 233.0,
+      "on_median_min": 46.0
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
+      "occupied_share_at_or_below_edge": 0.5889,
+      "damper_min": 0.0,
+      "sustained_low_entries_per_day": 0.7,
+      "off_gap_median_min": 622.0,
+      "on_median_min": 57.0
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
+      "occupied_share_at_or_below_edge": 0.589,
+      "damper_min": 0.0,
+      "sustained_low_entries_per_day": 0.67,
+      "off_gap_median_min": 624.0,
+      "on_median_min": 48.0
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
+      "occupied_share_at_or_below_edge": 0.0,
+      "damper_min": 0.41,
+      "sustained_low_entries_per_day": 0.0,
+      "off_gap_median_min": null,
+      "on_median_min": null
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "occupied_share_at_or_below_edge": 0.0,
+      "damper_min": 0.55,
+      "sustained_low_entries_per_day": 0.0,
+      "off_gap_median_min": null,
+      "on_median_min": null
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_0%",
+      "occupied_share_at_or_below_edge": 1.0,
+      "damper_min": 0.0,
+      "sustained_low_entries_per_day": 0.0,
+      "off_gap_median_min": null,
+      "on_median_min": null
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_100%",
+      "occupied_share_at_or_below_edge": 0.0,
+      "damper_min": 1.0,
+      "sustained_low_entries_per_day": 0.0,
+      "off_gap_median_min": null,
+      "on_median_min": null
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_20%",
+      "occupied_share_at_or_below_edge": 1.0,
+      "damper_min": 0.2,
+      "sustained_low_entries_per_day": 0.0,
+      "off_gap_median_min": null,
+      "on_median_min": null
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_50%",
+      "occupied_share_at_or_below_edge": 0.0,
+      "damper_min": 0.5,
+      "sustained_low_entries_per_day": 0.0,
+      "off_gap_median_min": null,
+      "on_median_min": null
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_80%",
+      "occupied_share_at_or_below_edge": 0.0,
+      "damper_min": 0.8,
+      "sustained_low_entries_per_day": 0.0,
+      "off_gap_median_min": null,
+      "on_median_min": null
+    },
+    {
+      "file": "SFPU_VAVDMPRUnstable",
+      "occupied_share_at_or_below_edge": 0.4692,
+      "damper_min": 0.0,
+      "sustained_low_entries_per_day": 2.54,
+      "off_gap_median_min": 26.0,
+      "on_median_min": 147.5
+    },
+    {
+      "file": "SFPU_VAVFanRestrictFlow",
+      "occupied_share_at_or_below_edge": 0.0245,
+      "damper_min": 0.17,
+      "sustained_low_entries_per_day": 8.66,
+      "off_gap_median_min": 30.0,
+      "on_median_min": 41.0
+    }
+  ],
+  "reading": "Moderate and severe airside fouling both fire on the same statistic (sustained low-band entries and a collapsed off-gap); minor sits at the healthy rate. The occupied share at or below the edge falls monotonically with severity: the fault moves the zone-S damper up, so it crosses the band in sustained stretches instead of resting in it. Dose-monotone, not a threshold coincidence."
+}

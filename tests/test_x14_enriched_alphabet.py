@@ -1,6 +1,6 @@
 """Guard: X14 (enriched state alphabet, Amendments 1-3) — P1 held by the
-letter on exactly one missed scenario (a threshold coincidence on the zone-S
-damper band), P3 held (SDAHU model channel 14 of 14 vs 0 of 14 deployed; the
+letter on exactly one missed scenario (a dose-monotone zone-S damper
+signature; see test_x14_control), P3 held (SDAHU model channel 14 of 14 vs 0 of 14 deployed; the
 artefact's global 5 is the series unit's), P2 failed and F-X14.a fired: the
 enriched channels exceed the false-alarm budget (7 / 18 / 21 of 96)."""
 import json

@@ -150,25 +150,30 @@ channels false-alarm on 18 and 21 of 96 holdout days on the fan-powered
 units — one clean day in five — which is the budget's definition of
 unusable.
 
-**The one new detection needs its mechanism stated before it is believed.**
-It is carried by the device-stratum frequency channel and the time model on
-one added state, the zone-S damper's low band (≤ 0.32, the healthy occupied
-10th percentile): sustained entries into that band 9.0 times a day against
-0.7 on the healthy year, off-gap median 30 minutes against 570. A
-fault-versus-fault control over all 31 series-unit files shows why the
-sibling severities do not show it: airside-minor sits at the healthy rate,
-and airside-severe's damper never drops below 0.34, so the band edge at
-0.32 happens to fall between the moderate and severe regimes. The
-statistic is physically legible (a reheat coil that delivers less heat
-leaves the zone damper lower for longer) but its dose response is a
-threshold coincidence, not a monotone ladder, and it is significant only
-against a channel whose own false-alarm rate is 19 %. It is reported, not
-claimed. Multiplicity: with 12 missed scenarios and two evaluated channels
-the Bonferroni gate would be 4.2 × 10⁻⁵; this detection's p (1.6 × 10⁻²⁵⁷)
-clears it, and the run-3 detection it replaced (PFPU `SensorBias_RMTEMP_+2C`,
-p 1.8 × 10⁻⁴ under the smaller alphabet) would not have; that one vanished
-under the fuller alphabet, whose higher time-channel floor (15 of 96)
-absorbed it.
+**The one new detection, with its mechanism measured.** It is carried by
+the device-stratum frequency channel (SFPU holdout FP 3 of 96) and the time
+model (19 of 96) on one added state, the zone-S damper's low band (≤ 0.32,
+the healthy occupied 10th percentile). A committed fault-versus-fault
+control over all 31 series-unit files (`scripts/x14_control.py` →
+`outputs/x14_control.json`) shows a monotone dose ladder: the share of
+occupied samples at or below the edge is 64.3 % healthy, 64.2 % minor,
+11.9 % moderate, 3.5 % severe — the fault moves the zone-S damper up, so it
+crosses the band in sustained stretches (9.0 and 8.7 entries per day for
+moderate and severe against 0.7) instead of resting in it (off-gap median
+30 minutes against 570). Severe fires on the same statistic at the same
+strength and is simply not "new" because a deployed channel already
+detects it; minor sits at the healthy rate. (A first write-up called this a
+threshold coincidence on a misread of the severe file's 10th percentile as
+its minimum; the control corrected it.) Multiplicity: with 12 missed
+scenarios and two evaluated channels the Bonferroni gate is 2.1 × 10⁻³
+(0.05/24) and, at the suite's own 10⁻³, 4.2 × 10⁻⁵; moderate's p on the time
+channel is 10⁻²⁵⁶·⁸ and below double precision on the frequency channel.
+The run-3 detection it replaced (PFPU `SensorBias_RMTEMP_+2C`, p 1.8 × 10⁻⁴
+under the smaller alphabet) vanished under the fuller alphabet's higher
+time-channel floor (15 of 96). So the enriched alphabet does carry one
+physically legible, dose-monotone fault signature the deployed alphabet
+does not — and the channels that carry it false-alarm on one clean day in
+five.
 
 **Reading.** Vocabulary was part of the model channel's limit — on the
 single-duct unit the enriched model channel is significant on 14 of 14
@@ -183,17 +188,18 @@ vocabulary finding and the one mechanism-stated detection beside it.
 ## What this settles
 
 1. **Why control-flow conformance found nothing**: for the faults it missed,
-   the log carries no signal (fouling) or carries it in time and counts
-   (valve faults), which the net does not encode. This is now measured, not
-   argued.
+   the log at the *deployed alphabet* carries no signal (fouling) or carries
+   it in time and counts (valve faults), which the net does not encode.
+   This is now measured, not argued — and scoped: X14 showed a richer
+   alphabet does carry one of the fouling scenarios.
 2. **Process mining's remaining contribution here** is the event log and
    its non-control-flow perspectives: counts (the frequency and absence
    channels, deployed), and timing (X12: real, redundant, costly). The
    discovered net's order structure contributes nothing on these systems
    at the deployed vocabulary; with a richer vocabulary (X14) the model
    channel fires far more, one more scenario becomes significant through a
-   threshold coincidence on one zone damper, and the false-alarm rate
-   breaks the budget.
+   dose-monotone zone-damper signature, and the false-alarm rate breaks
+   the budget.
 3. **The misses stand.** Eight of the twelve carry no log signal at 5 % in
    any count or duration; four carry count changes the frequency bands did
    not resolve; the coil residual did not carry the fouling ones either.

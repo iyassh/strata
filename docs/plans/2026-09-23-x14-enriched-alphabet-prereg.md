@@ -111,3 +111,20 @@ otherwise unchanged. The SDAHU results seen before this amendment: the
 enriched model channel is significant on the four coil-bias runs and
 `oa_bias_4` (model days 33–186 against ≤ 5 before), all already detected;
 holdout FP of state ∪ time 7 of 96.
+
+## Amendment 3 (2026-09-23, after the third run's results were read and reviewed)
+
+Review found that the signal filter `endswith("_POS")` delivered only 5 of
+the 13 mapped position signals on each fan-powered unit: the terminal-unit
+actuators are named `RH_VLV_POS_z` and `ZONE_DMPR_POS_z`, and all eight were
+silently dropped — on exactly the devices whose fouling misses motivated
+the test. The alphabet section says "every mapped actuator-position
+signal"; the code did not deliver it. Fixed to `"_POS" in name` and re-run
+under the same predictions, falsifiers and Amendments 1–2. The third run's
+fan-powered numbers (holdout FP 14/96 and 18/96; one missed scenario
+significant on the time channel) were seen before this amendment and are
+superseded by the re-run; SDAHU's three position signals all end in `_POS`,
+so its result is unchanged. Two review corrections to the write-up are
+recorded here too: the deployed SDAHU model channel is significant on 0 of
+14 (the "5" is the series unit's count), and deployed SDAHU model days
+reach 9, not 5.

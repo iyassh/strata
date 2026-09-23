@@ -43,7 +43,9 @@ def enrich(cfg, hdf: pd.DataFrame, hold_n: int) -> dict:
     train = ~holdout_mask(day, hold_n).values
     occ = (w["OCCUPIED"] > 0.5).values & train
     # Amendment 1: setpoints excluded (never flows), 15-minute dwell on every added band
-    sigs = [k for k in cfg.sensors if (k.endswith("_POS") or k.startswith("RH_FLOW_") or k.startswith("ZONE_FLOW_"))
+    # Amendment 3: "_POS" anywhere in the name — the zone actuators are named
+    # RH_VLV_POS_z / ZONE_DMPR_POS_z and endswith("_POS") had dropped all eight
+    sigs = [k for k in cfg.sensors if ("_POS" in k or k.startswith("RH_FLOW_") or k.startswith("ZONE_FLOW_"))
             and "_SP" not in k and k in w.columns]
     DWELL = {"min_dwell_min": 15}
     added = {}

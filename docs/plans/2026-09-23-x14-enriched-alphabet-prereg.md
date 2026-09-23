@@ -128,3 +128,11 @@ so its result is unchanged. Two review corrections to the write-up are
 recorded here too: the deployed SDAHU model channel is significant on 0 of
 14 (the "5" is the series unit's count), and deployed SDAHU model days
 reach 9, not 5.
+
+## Errata to this pre-registration (2026-09-23, after review)
+
+- P1 says "13 scenarios the deployed detector misses"; the scored universe has **12** (0 / 7 / 5), the thirteenth being the single-duct branch adjudication, which is not a scorecard miss.
+- P2 says "≤ 9 of 87 on SDAHU"; the driver tests ≤ 9 of **96** (the shared calendar holdout, as the `union_fpr` artefacts count it), which is stricter, not easier. The time channel's own denominator (days on which it has a statistic — 87 on SDAHU) is now recorded in the artefact beside the 96.
+- With `unit_model = None` on the fan-powered units the model flag reduces to the missing-events clause; it is unioned into the healthy false-alarm count (it flagged 0 days on every healthy year) and marked `null` on the fault side. Documented, not patched.
+- Fit and scenario timings (1,061 s; 47 min) are single-laptop console observations, printed and not committed; the artefact carries a note, not the numbers.
+- Per-channel holdout false-alarm days are now recorded so the union can be attributed.

@@ -101,8 +101,15 @@ for system in ("sdahu", "pfpu", "sfpu"):
     hcl = classify_sojourn_days(tdet, hs).set_index("day")["flagged"] if tdet else pd.Series(dtype=bool)
     time_fp = set(hcl[hcl].index) & set(days[hold].astype(str))
     fp_days = set(days[hold & state_union.values].astype(str)) | time_fp
+    per_ch_fp = {ch: int(sc["channels"][ch].reindex(days).fillna(False).values[hold].sum()) for ch in STATE_CH}
     sysout = {"added_signals": added, "n_added_events": 2 * len(added), "n_state_pairs_total": n_state,
               "alignment_channels_evaluated": alignment_channels_evaluated,
+              "per_channel_holdout_fp_days": per_ch_fp,
+              "time_channel_holdout": {"fp_days": tdet.holdout_fp_days if tdet else None,
+                                       "days_with_statistic": tdet.holdout_days if tdet else None},
+              "note_model_flag_when_not_evaluated": "with unit_model=None the model flag reduces to the "
+                                                    "missing-events clause (~has_events & occupied); it is "
+                                                    "unioned into the FP count but marked null on the fault side",
               "fit_seconds_stdout_only_note": "fit time printed, not committed (machine-dependent)",
               "holdout_days": int(hold.sum()), "state_channels_holdout_fp_days": len(fp_days),
               "time_holdout_fp_days": len(time_fp), "scenarios": []}

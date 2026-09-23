@@ -67,3 +67,23 @@ for its mirror; nothing else changes). Metrics as above.
 `scripts/x9_x10_robustness.py` → `outputs/x9_x10_robustness.json`, guarded by
 a test pinning fired/unfired falsifiers. Machine time is printed, not
 committed.
+
+## Amendment 1 (2026-09-23, after the SDAHU arms had been seen, before any fan-powered result)
+
+Two review points, recorded before the fan-powered arms are read:
+
+1. **The 2× and 4× arms carry no falsifier.** They are dose-response
+   description only; they are reported as such and no verdict rests on
+   them. (Position noise at 4× has sd 0.04 against `mode` thresholds of
+   0.05 with no dwell, so chatter is expected there; that is what the arm
+   will show, not a failure of the detector.)
+2. **The noise is i.i.d. per-sample jitter, not bias or drift.** Sensor
+   accuracy specifications describe bias and drift; daily medians and
+   sustained-window rules average white noise away while edge detectors
+   amplify it. X9 therefore measures robustness to **jitter**, not to the
+   bias/drift limitation the papers state. A bias/drift arm is future work
+   and every sentence quoting X9 will say "jitter".
+
+Predictions, falsifiers and the 1× arm are unchanged. SDAHU arms seen before
+this amendment: 14/14 and 1/96 at every dose; 13/14 and 0/96 under the
+first-8-days split.

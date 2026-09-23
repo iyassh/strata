@@ -201,7 +201,9 @@ datasets inherits these issues silently; now there's a citable record.
 ## Using it
 
 The research pipeline is being packaged as a Python toolkit. The core API
-already works:
+already works (note: the `strata run` command is the original single-model
+conformance demo, whose detector this project refuted — it prints a warning
+saying so; the deployed detector is the `fit()`/`evaluate()` API below):
 
 ```python
 from strata.io.config import load_config
@@ -228,7 +230,7 @@ report = det.evaluate(new_data)            # per-channel flags, noise gates,
 | `scripts/` | the evaluation harness that produced every number here |
 | `outputs/` | committed result artifacts (every quoted number lives in one) |
 | `PHASE1–8_RESULTS.md` | the phase-by-phase record |
-| `RESEARCH_LOG.md` | discoveries, lessons L1 onward, the canonical numbers |
+| `RESEARCH_LOG.md` | discoveries, lessons L1 onward (thirty-two at the time of writing), the canonical numbers |
 | `ERRATA.md` / `REPRODUCING.md` | dataset defects / how to regenerate everything |
 | `paper/` | the manuscript in progress (ICPM 2027) |
 

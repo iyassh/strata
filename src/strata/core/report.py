@@ -26,7 +26,7 @@ def build_report(conf: dict, cfg: Config, point_to_equip: dict[str, str], source
     """Render conformance results as a markdown deviation report."""
     lookup = _equipment_lookup(cfg, point_to_equip)
     lines = [
-        f"# ProcessHeal deviation report: {source}",
+        f"# STRATA deviation report: {source}",
         "",
         f"- Average per-day fitness against the healthy model: "
         f"**{conf['average_trace_fitness']:.3f}** (1.000 = perfect match)",

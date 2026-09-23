@@ -1,4 +1,4 @@
-"""ProcessHeal live demo: a FastAPI app that runs the real pipeline interactively."""
+"""STRATA live demo: a FastAPI app that runs the real pipeline interactively."""
 
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ cfg = load_config(CONFIG)
 p2e = point_to_equipment(CONFIG / "equipment.ttl")
 
 # Discover the healthy model once at startup (a few seconds).
-print("ProcessHeal: discovering healthy model ...")
+print("STRATA: discovering healthy model ...")
 _healthy_log = abstract_events(pd.read_parquet(DATA / "AHU_annual.parquet"), cfg)
 _det = build_detector(cfg, _healthy_log)
 NET, IM, FM = _det.net, _det.im, _det.fm
@@ -51,10 +51,10 @@ HEALTHY_VARIANTS = [
 N_TRAIN_TRACES = int(_variant_counts.sum())
 N_VARIANTS = int(len(_variant_counts))
 
-print(f"ProcessHeal: ready. held-out healthy mean fitness={HEALTHY_FIT:.3f}, "
+print(f"STRATA: ready. held-out healthy mean fitness={HEALTHY_FIT:.3f}, "
       f"calibrated threshold={THRESH:.3f}")
 
-app = FastAPI(title="ProcessHeal Live Demo")
+app = FastAPI(title="STRATA Live Demo")
 
 
 def _equipment_for(event: str) -> str:

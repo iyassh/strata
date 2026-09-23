@@ -1,4 +1,5 @@
-"""ProcessHeal command-line interface: run the full four-stage pipeline."""
+import sys
+"""STRATA command-line interface: run the full four-stage pipeline."""
 
 from __future__ import annotations
 
@@ -19,11 +20,15 @@ app = typer.Typer(help="Process mining for HVAC fault detection.")
 
 @app.callback()
 def main() -> None:
-    """ProcessHeal: process mining for HVAC fault detection."""
+    """STRATA: process mining for HVAC fault detection."""
 
 
 @app.command()
 def run(
+    print("NOTE: `strata run` is the original single-model conformance demo. That detector was "
+          "refuted (see paper, Section on refutations): it runs without the alphabet wall, "
+          "without the eight calibrated channels, and without noise gates or a false-alarm budget. "
+          "For the deployed detector use strata.core.pipeline.fit()/evaluate(). See README.", file=sys.stderr)
     config: str = typer.Option(..., help="Building config directory"),
     healthy: str = typer.Option(..., help="Parquet of fault-free reference data"),
     faulty: str = typer.Option(..., help="Parquet of data to diagnose"),

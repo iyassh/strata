@@ -15,7 +15,7 @@ SRC = Path(
     sys.argv[1]
     if len(sys.argv) > 1
     else Path(os.environ.get("STRATA_SDAHU_RAW",
-                             "/Users/yassh/Downloads/LBNL_FDD_Data_Sets_SDAHU_all_3"))
+                             "data/raw/LBNL_FDD_Data_Sets_SDAHU_all_3"))
     / "LBNL_FDD_Dataset_SDAHU"
 )
 DST = Path("data/processed/sdahu")

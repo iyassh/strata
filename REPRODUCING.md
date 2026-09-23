@@ -31,7 +31,7 @@ The pipeline handles or discloses all five.
 
 ```sh
 uv sync          # exact pins from uv.lock; Python >= 3.12
-uv run pytest -q # full suite (98 tests), ~10 s, no data needed
+uv run pytest -q # full suite (109 tests; 5 data-dependent ones skip on a bare clone), ~10 s
 ```
 
 System dependency: `pm4py` visualisations need the Graphviz *binary*
@@ -39,7 +39,7 @@ System dependency: `pm4py` visualisations need the Graphviz *binary*
 
 ## 3. Convert raw CSVs to parquet
 
-Point the converters at your download location (env var or first argument):
+Point the converters at your download location (env var or first argument; the default is `data/raw/<archive folder>` relative to the repo root):
 
 ```sh
 export STRATA_SDAHU_RAW=/path/to/LBNL_FDD_Data_Sets_SDAHU_all_3

@@ -143,6 +143,8 @@ detection count (60 vs 61 across all systems, with complementary misses) —
 but the baseline cannot name a valve, explain a flag, or state its alarm
 budget. Equal counting power; only one side is accountable.
 
+**Not a result:** `outputs/openfdd_baseline_*.json` are marked `"verdict": "VOID"` in-file — a first attempt at the Guideline 36 comparison that failed its own audit; see the repair plan they point to. Quote nothing from them.
+
 Every number above regenerates from this repository —
 see [REPRODUCING.md](REPRODUCING.md) for the clone-to-artifacts runbook.
 
@@ -202,8 +204,8 @@ The research pipeline is being packaged as a Python toolkit. The core API
 already works:
 
 ```python
-from processheal.io.config import load_config
-from processheal.core.pipeline import fit
+from strata.io.config import load_config
+from strata.core.pipeline import fit
 
 cfg = load_config("configs/lbnl_sdahu")   # one YAML per building
 det = fit(cfg, healthy_year_dataframe)     # discover + calibrate everything
@@ -221,7 +223,7 @@ report = det.evaluate(new_data)            # per-channel flags, noise gates,
 
 | | |
 |---|---|
-| `src/processheal/` | the library (event abstraction, discovery, channels, gates, facade) |
+| `src/strata/` | the library (event abstraction, discovery, channels, gates, facade) |
 | `configs/lbnl_*/` | per-building configuration — the entire onboarding cost |
 | `scripts/` | the evaluation harness that produced every number here |
 | `outputs/` | committed result artifacts (every quoted number lives in one) |

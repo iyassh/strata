@@ -1,4 +1,11 @@
 {
+  "status": {
+    "verdict": "VOID",
+    "do_not_quote": true,
+    "reason": "First execution of the open-fdd Guideline 36 comparison. An adversarial audit (2026-09-11) found the adapter graded VAV terminal units with the air-handler rule set, fed FC14/FC15 water-side temperatures where the standard specifies air-side, and used static-pressure columns documented as provenance-leaking in ERRATA.md E3. The 100% false-alarm figures below are artifacts of that adapter, not of Guideline 36.",
+    "repair_plan": "docs/plans/NEXT-openfdd-baseline-repair.md",
+    "superseded_by": null
+  },
   "system": "sdahu",
   "openfdd_version": "4.4.1",
   "rules": [

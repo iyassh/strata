@@ -28,6 +28,18 @@ PIPELINE = {
     "x8_contamination.json": "uv run python scripts/x8_contamination.py",
     "x5_severity.json": "uv run python scripts/x5_severity.py",
     "x7_downsample.json": "uv run python scripts/x7_downsample.py",
+    # Added after the 2026-09-23 repo audit: five claim families the paper
+    # quotes sat outside the gate. (benchmark_v3.json and
+    # benchmark_v2_processheal_v1.json are historical/imported and have no
+    # regenerating script — see REPRODUCING.md §6.)
+    "baselines_sdahu.json": "uv run python scripts/baselines.py sdahu",
+    "baselines_pfpu.json": "uv run python scripts/baselines.py pfpu",
+    "baselines_sfpu.json": "uv run python scripts/baselines.py sfpu",
+    "matched_rules_sdahu.json": "uv run python scripts/matched_rules.py sdahu",
+    "matched_rules_pfpu.json": "uv run python scripts/matched_rules.py pfpu",
+    "matched_rules_sfpu.json": "uv run python scripts/matched_rules.py sfpu",
+    "grammar_results.json": "uv run python scripts/grammar.py",
+    "week0_audit.json": "uv run python scripts/02_week0_audit.py all",
 }
 
 

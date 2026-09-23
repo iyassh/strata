@@ -26,10 +26,10 @@ import pandas as pd
 #   STRATA_FPU_RAW   -> directory containing LBNL_FDD_Data_Sets_{PFPU,SFPU}/
 #   STRATA_SDAHU_RAW -> directory containing LBNL_FDD_Dataset_SDAHU/
 ROOT = Path(os.environ.get(
-    "STRATA_FPU_RAW", "/Users/yassh/Downloads/Ureap/LBNL_FDD_Data_Sets_FPU_all_3"))
+    "STRATA_FPU_RAW", "data/raw/LBNL_FDD_Data_Sets_FPU_all_3"))
 SDAHU_RAW = Path(os.environ.get(
     "STRATA_SDAHU_RAW",
-    "/Users/yassh/Downloads/LBNL_FDD_Data_Sets_SDAHU_all_3")) / "LBNL_FDD_Dataset_SDAHU"
+    "data/raw/LBNL_FDD_Data_Sets_SDAHU_all_3")) / "LBNL_FDD_Dataset_SDAHU"
 RAW = {
     "pfpu": ROOT / "LBNL_FDD_Data_Sets_PFPU",
     "sfpu": ROOT / "LBNL_FDD_Data_Sets_SFPU",

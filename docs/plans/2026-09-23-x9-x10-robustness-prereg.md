@@ -1,0 +1,69 @@
+# X9 (sensor noise) and X10 (holdout split) — robustness of the detector claim (pre-registration)
+
+**Written 2026-09-23 (night), before any computation. Committed before the script runs.**
+
+## Why
+
+Every published number comes from noise-free simulation, and the papers say
+so as a limitation. Two cheap tests turn the limitation into a measurement:
+does the deployed detector survive realistic sensor noise, and does its
+false-alarm rate depend on which eight days of each month were held out?
+
+## X9 — sensor noise
+
+Gaussian noise, seeded per file (seed = CRC32 of the file name), added to
+every mapped sensor of the pipeline's vocabulary before anything else runs,
+on healthy and fault files alike, at a **dose** d ∈ {1, 2, 4}:
+
+| signal family (canonical name pattern) | 1× noise (sd) |
+|---|---|
+| temperatures (`*_TEMP*`, `*_EWT_*`, `*_LWT_*`) | 0.5 °F |
+| flows (`*_FLOW*`, `*_CFM*`) | 2 % of the value |
+| positions (`*_POS*`) | 0.01 (clipped to [0, 1]) |
+| static pressure (`SA_SP`) | 2 % of the value |
+| commands, statuses, occupancy, setpoints | untouched |
+
+1× is a conservative reading of building-grade sensor accuracy (±1 °F, ±2–5 %
+flow); 2× and 4× are the stress arms. The detector is **re-fitted on the
+noisy healthy year** at each dose (bands recalibrate; that is what a
+deployment would do), then every scored scenario is evaluated. Metrics per
+dose and system: detected scenarios (of 14 / 30 / 29, naive, matching the
+scorecards), and healthy-holdout false-alarm days of the deployed union
+(rate advisory excluded).
+
+### Predictions
+
+- **P-X9.1** At 1×, detections change by **≤ 3 scenarios per system** from
+  the clean scorecard and the holdout false-alarm rate stays **≤ 10 %** on
+  every system.
+- **P-X9.2** Degradation is monotone in dose (4× no better than 2× no better
+  than 1× on detections, for each system) — a sanity check on the instrument.
+
+### Falsifiers
+
+- **F-X9.a** At 1×, detections fall by > 3 on any system → the published
+  detection count is a noise-free artefact for that system; report it as such.
+- **F-X9.b** At 1×, holdout false-alarm rate > 10 % on any system → the
+  published false-alarm rate is a noise-free artefact for that system.
+
+## X10 — holdout split
+
+Same detector, same data, holdout = the **first** 8 days of each month
+instead of the last 8 (the `holdout_mask` used by every channel is swapped
+for its mirror; nothing else changes). Metrics as above.
+
+### Predictions
+
+- **P-X10.1** Detections within **± 3 per system** of the scorecards.
+- **P-X10.2** Holdout false-alarm rate ≤ 10 % on every system.
+
+### Falsifier
+
+- **F-X10.a** Either prediction false on any system → the published rates
+  are split-dependent; report the pair.
+
+## Artefact
+
+`scripts/x9_x10_robustness.py` → `outputs/x9_x10_robustness.json`, guarded by
+a test pinning fired/unfired falsifiers. Machine time is printed, not
+committed.

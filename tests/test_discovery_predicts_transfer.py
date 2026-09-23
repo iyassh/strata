@@ -31,13 +31,15 @@ def test_verdict_follows_prereg_rule():
         assert a["verdict"] == "P1_PASS"
 
 
-def test_nine_cells_three_systems():
+def test_nine_cells_three_systems_six_scored():
     a = _art()
     assert len(a["cells"]) == 9
     assert set(a["Q"]) == {"sdahu", "pfpu", "sfpu"}
+    assert sum(1 for c in a["cells"] if c["scored"]) == 6          # Amendment 1
+    assert all(not c["scored"] for c in a["cells"] if c["system"] == "sdahu")
 
 
 def test_p2_consistency_is_computed_per_cell():
     a = _art()
-    assert len(a["P2"]["rows"]) == 9
+    assert len(a["P2"]["rows"]) == 6                                # Amendment 1
     assert a["P2"]["pass"] == all(r["consistent"] for r in a["P2"]["rows"])

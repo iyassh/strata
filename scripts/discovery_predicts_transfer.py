@@ -23,6 +23,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SYSTEMS = ("sdahu", "pfpu", "sfpu")
+# Amendment 1: SDAHU has no heating signal; its cells are reported, not scored.
+SCORED = ("pfpu", "sfpu")
 RULES = ("mr1", "mr2", "mr3")
 N_PERM = 10_000
 SEED = 7
@@ -61,7 +63,8 @@ def main() -> int:
     fp = {s: json.loads((ROOT / "outputs" / f"matched_rules_{s}.json").read_text())["healthy_fp"]
           for s in SYSTEMS}
 
-    cells = [(r, s) for r in RULES for s in SYSTEMS]
+    all_cells = [(r, s) for r in RULES for s in SYSTEMS]
+    cells = [(r, s) for r in RULES for s in SCORED]          # Amendment 1
     qs = [float(q[s]["Q_support"]) for _, s in cells]
     ys = [int(fp[s][r]) for r, s in cells]
 
@@ -88,7 +91,9 @@ def main() -> int:
         p2_rows.append({"rule": r, "system": s, "Q_obligatory": ob, "healthy_firings": y, "consistent": ok})
 
     # P3: secondary, disclosed-as-known: Q_support orders SFPU > PFPU > SDAHU
-    p3_pass = (q["sfpu"]["Q_support"] > q["pfpu"]["Q_support"] > q["sdahu"]["Q_support"])
+    # Amendment 1: SDAHU's Q is 0 by configuration; P3 reduces to SFPU > PFPU,
+    # a consistency check on disclosed values, not a blind prediction.
+    p3_pass = (q["sfpu"]["Q_support"] > q["pfpu"]["Q_support"])
 
     if not p1_pass:
         verdict, fired = "F1_FIRED", ["F1"]
@@ -102,8 +107,11 @@ def main() -> int:
     out = {
         "prereg": "docs/plans/2026-09-23-discovery-predicts-transfer-prereg.md",
         "Q": {s: q[s] for s in SYSTEMS},
-        "cells": [{"rule": r, "system": s, "Q_support": qq, "healthy_firings": y}
-                  for (r, s), qq, y in zip(cells, qs, ys)],
+        "cells": [{"rule": r, "system": s, "Q_support": float(q[s]["Q_support"]),
+                   "healthy_firings": int(fp[s][r]), "scored": s in SCORED}
+                  for (r, s) in all_cells],
+        "amendment_1": "SDAHU excluded from P1/P2: no heating signal in its configuration; "
+                       "P1 scored on six PFPU/SFPU cells; seal holds for MR2/MR3 only",
         "P1": {"rho": rho, "perm_p": p1_p, "n_perm": N_PERM, "seed": SEED, "pass": p1_pass},
         "P2": {"rows": p2_rows, "pass": p2_pass},
         "P3": {"pass": p3_pass, "note": "secondary; MR1 firing order was known to the drafter"},
@@ -113,7 +121,8 @@ def main() -> int:
     (ROOT / "outputs" / "discovery_predicts_transfer.json").write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps({k: out[k] for k in ("P1", "verdict", "falsifiers_fired")}, indent=2))
     for row in out["cells"]:
-        print(f"  {row['rule']} {row['system']:6s} Q_support={row['Q_support']:.3f}  firings={row['healthy_firings']}")
+        tag = "" if row["scored"] else "  (reported, not scored — Amendment 1)"
+        print(f"  {row['rule']} {row['system']:6s} Q_support={row['Q_support']:.3f}  firings={row['healthy_firings']}{tag}")
     return 0
 
 

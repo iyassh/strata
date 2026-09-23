@@ -89,3 +89,44 @@ from n = 3 buildings; no wider generalisation.
 
 `outputs/discovery_predicts_transfer.json` (Q per system, firings per cell,
 rho, p, P2 table) + guard test pinning the verdict, whichever way it goes.
+
+---
+
+## Amendment 1 — 2026-09-23, BEFORE any Q value was computed
+
+Raised by the computing agent from configuration files alone, before any
+fit ran. Recorded here, dated, before the numbers exist.
+
+**A. The seal is narrower than stated.** The disclosure section above
+contains MR1's healthy firings (231 / 124 / 0), and the computing agent was
+instructed to read this document. So the agent has seen MR1's counts. The
+blind-computation property holds ONLY for the six MR2/MR3 cells, which is
+the scope items 2–3 above already claim for the primary test. P3 is
+therefore not blind at all and is demoted from "secondary check" to
+"consistency check on disclosed values". This was the drafter's error.
+
+**B. SDAHU cannot test the claim.** `configs/lbnl_sdahu/rules.yaml` has no
+heating rule: the SDAHU sensor map carries a chilled-water valve and no
+hot-water valve. `heating_active` therefore never occurs in SDAHU's log,
+Q_support(sdahu) = Q_obligatory(sdahu) = 0 by configuration, and MR1 fires
+on every occupied SDAHU day because there is no heating to be active — a
+fact about the building's equipment, not a prediction by any model.
+Including SDAHU would inflate P1 for a reason unrelated to discovery.
+**SDAHU's three cells are reported but excluded from P1 and P2.** The
+same reasoning retracts the research log's reading of "MR1 fires 231
+healthy SDAHU days" as evidence that the models locate invariants: on
+SDAHU it is evidence of a missing sensor.
+
+**C. MR2's anchor is not in the unit net.** `zone_heating_active@<device>`
+events are device-stratum and are removed before unit discovery, so no
+unit net can carry them. MR2's cells use Q_support for `heating_active`
+under the shared-anchor simplification already stated; this is disclosed
+as a weaker test for MR2 than for MR1/MR3.
+
+**D. Consequence for P1.** P1 is now scored on six cells (MR1–MR3 ×
+PFPU/SFPU), in which Q takes only two distinct values. That is a thin
+test — two buildings — and the permutation null over six cells is coarse
+(p can be no smaller than 1/20 for a perfect ordering). It is reported as
+such. If P1 passes it supports the claim on exactly two buildings and
+three rules; it cannot support more. **Falsifiers F1–F3 are unchanged in
+form and apply to the six-cell test.**

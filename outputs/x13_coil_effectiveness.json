@@ -1,0 +1,983 @@
+{
+  "pre_registration": "docs/plans/2026-09-23-x13-coil-effectiveness-prereg.md",
+  "design_disclosure": "fault-informed statistic (chosen after inspecting three fouling files); thresholds from fault-free train days only",
+  "statistic": "(RH_EWT - RH_LWT) / RH_FLOW per terminal unit, daily median over gated minutes",
+  "band": {
+    "min_width": 2.0,
+    "min_exceedance": 1.0,
+    "sustained_min": 120
+  },
+  "systems": {
+    "pfpu": {
+      "bands_F_per_gpm": {
+        "I": [
+          118.24,
+          133.21
+        ],
+        "W": [
+          10.0,
+          97.16
+        ],
+        "S": [
+          0.63,
+          93.52
+        ],
+        "E": [
+          1.26,
+          116.82
+        ]
+      },
+      "holdout_fp_days": 1,
+      "holdout_evaluable_days": 29,
+      "holdout_fp_dates": [
+        "2018-10-29"
+      ],
+      "joint_fpr": {
+        "deployed_union_minus_rate_fp_days": 5,
+        "with_x13_fp_days": 5,
+        "holdout_days": 96,
+        "with_x13_rate": 0.0521
+      },
+      "scenarios": [
+        {
+          "file": "PFPU_RMTEMPUnstable",
+          "fouling": false,
+          "x13_flag_days": 2,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 1
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Airside_Minor",
+          "fouling": true,
+          "x13_flag_days": 3,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 2,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 2
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Airside_Moderate",
+          "fouling": true,
+          "x13_flag_days": 2,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 1
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Airside_Severe",
+          "fouling": true,
+          "x13_flag_days": 1,
+          "n_evaluable": 103,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Waterside_Minor",
+          "fouling": true,
+          "x13_flag_days": 3,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 2,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 1
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Waterside_Moderate",
+          "fouling": true,
+          "x13_flag_days": 2,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 1
+        },
+        {
+          "file": "PFPU_ReheatCoilFouling_Waterside_Severe",
+          "fouling": true,
+          "x13_flag_days": 1,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_ReheatVLVLeak_20%MaxFlow",
+          "fouling": false,
+          "x13_flag_days": 2,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_ReheatVLVLeak_50%MaxFlow",
+          "fouling": false,
+          "x13_flag_days": 3,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 2,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_ReheatVLVLeak_80%MaxFlow",
+          "fouling": false,
+          "x13_flag_days": 3,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 2,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_0%",
+          "fouling": false,
+          "x13_flag_days": 16,
+          "n_evaluable": 102,
+          "significant": true,
+          "by_zone": {
+            "I": 12,
+            "W": 3,
+            "S": 0,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_100%",
+          "fouling": false,
+          "x13_flag_days": 3,
+          "n_evaluable": 364,
+          "significant": false,
+          "by_zone": {
+            "I": 2,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_20%",
+          "fouling": false,
+          "x13_flag_days": 3,
+          "n_evaluable": 364,
+          "significant": false,
+          "by_zone": {
+            "I": 2,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_50%",
+          "fouling": false,
+          "x13_flag_days": 1,
+          "n_evaluable": 364,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_ReheatVLVStuck_80%",
+          "fouling": false,
+          "x13_flag_days": 2,
+          "n_evaluable": 364,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 1,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_+2C",
+          "fouling": false,
+          "x13_flag_days": 6,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 2,
+            "S": 3,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 1
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_+4C",
+          "fouling": false,
+          "x13_flag_days": 7,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 1,
+            "S": 5,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_-2C",
+          "fouling": false,
+          "x13_flag_days": 5,
+          "n_evaluable": 140,
+          "significant": false,
+          "by_zone": {
+            "I": 2,
+            "W": 1,
+            "S": 0,
+            "E": 2
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 3
+        },
+        {
+          "file": "PFPU_SensorBias_RMTEMP_-4C",
+          "fouling": false,
+          "x13_flag_days": 5,
+          "n_evaluable": 192,
+          "significant": false,
+          "by_zone": {
+            "I": 4,
+            "W": 1,
+            "S": 0,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 2
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_+200CFM",
+          "fouling": false,
+          "x13_flag_days": 7,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 1,
+            "S": 5,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_+400CFM",
+          "fouling": false,
+          "x13_flag_days": 7,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 1,
+            "S": 5,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_-200CFM",
+          "fouling": false,
+          "x13_flag_days": 18,
+          "n_evaluable": 154,
+          "significant": true,
+          "by_zone": {
+            "I": 2,
+            "W": 2,
+            "S": 14,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_SensorBias_VAVAirflow_-400CFM",
+          "fouling": false,
+          "x13_flag_days": 11,
+          "n_evaluable": 259,
+          "significant": false,
+          "by_zone": {
+            "I": 4,
+            "W": 2,
+            "S": 5,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_0%",
+          "fouling": false,
+          "x13_flag_days": 4,
+          "n_evaluable": 104,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 1,
+            "S": 2,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_100%",
+          "fouling": false,
+          "x13_flag_days": 5,
+          "n_evaluable": 261,
+          "significant": false,
+          "by_zone": {
+            "I": 3,
+            "W": 2,
+            "S": 0,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_20%",
+          "fouling": false,
+          "x13_flag_days": 6,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 1,
+            "S": 5,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 2
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_50%",
+          "fouling": false,
+          "x13_flag_days": 14,
+          "n_evaluable": 231,
+          "significant": false,
+          "by_zone": {
+            "I": 4,
+            "W": 2,
+            "S": 8,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_VAVDMPRStuck_80%",
+          "fouling": false,
+          "x13_flag_days": 7,
+          "n_evaluable": 261,
+          "significant": false,
+          "by_zone": {
+            "I": 4,
+            "W": 2,
+            "S": 1,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "PFPU_VAVDMPRUnstable",
+          "fouling": false,
+          "x13_flag_days": 3,
+          "n_evaluable": 102,
+          "significant": false,
+          "by_zone": {
+            "I": 1,
+            "W": 1,
+            "S": 1,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 1
+        },
+        {
+          "file": "PFPU_VAVFanRestrictFlow",
+          "fouling": false,
+          "x13_flag_days": 2,
+          "n_evaluable": 112,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 2,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        }
+      ]
+    },
+    "sfpu": {
+      "bands_F_per_gpm": {
+        "I": [
+          NaN,
+          NaN
+        ],
+        "W": [
+          38.22,
+          224.41
+        ],
+        "S": [
+          24.66,
+          253.59
+        ],
+        "E": [
+          31.84,
+          269.67
+        ]
+      },
+      "holdout_fp_days": 0,
+      "holdout_evaluable_days": 28,
+      "holdout_fp_dates": [],
+      "joint_fpr": {
+        "deployed_union_minus_rate_fp_days": 4,
+        "with_x13_fp_days": 4,
+        "holdout_days": 96,
+        "with_x13_rate": 0.0417
+      },
+      "scenarios": [
+        {
+          "file": "SFPU_RMTEMPUnstable",
+          "fouling": false,
+          "x13_flag_days": 3,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 3,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 3
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Airside_Minor",
+          "fouling": true,
+          "x13_flag_days": 0,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
+          "fouling": true,
+          "x13_flag_days": 1,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 1,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Airside_Severe",
+          "fouling": true,
+          "x13_flag_days": 7,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 7,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
+          "fouling": true,
+          "x13_flag_days": 2,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 2,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
+          "fouling": true,
+          "x13_flag_days": 7,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 7,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 1
+        },
+        {
+          "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
+          "fouling": true,
+          "x13_flag_days": 12,
+          "n_evaluable": 97,
+          "significant": true,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 12,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
+          "fouling": false,
+          "x13_flag_days": 0,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
+          "fouling": false,
+          "x13_flag_days": 1,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
+          "fouling": false,
+          "x13_flag_days": 2,
+          "n_evaluable": 98,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 1,
+            "S": 0,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_0%",
+          "fouling": false,
+          "x13_flag_days": 1,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_100%",
+          "fouling": false,
+          "x13_flag_days": 365,
+          "n_evaluable": 365,
+          "significant": true,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 365,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_20%",
+          "fouling": false,
+          "x13_flag_days": 365,
+          "n_evaluable": 365,
+          "significant": true,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 365,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_50%",
+          "fouling": false,
+          "x13_flag_days": 0,
+          "n_evaluable": 365,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_ReheatVLVStuck_80%",
+          "fouling": false,
+          "x13_flag_days": 365,
+          "n_evaluable": 365,
+          "significant": true,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 365,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_SensorBias_RMTEMP_+2C",
+          "fouling": false,
+          "x13_flag_days": 0,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": false,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_SensorBias_RMTEMP_+4C",
+          "fouling": false,
+          "x13_flag_days": 4,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 4,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_SensorBias_RMTEMP_-4C",
+          "fouling": false,
+          "x13_flag_days": 17,
+          "n_evaluable": 163,
+          "significant": true,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 16,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 1
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
+          "fouling": false,
+          "x13_flag_days": 0,
+          "n_evaluable": 98,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
+          "fouling": false,
+          "x13_flag_days": 0,
+          "n_evaluable": 98,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
+          "fouling": false,
+          "x13_flag_days": 13,
+          "n_evaluable": 143,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 12,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
+          "fouling": false,
+          "x13_flag_days": 16,
+          "n_evaluable": 244,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 15,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_0%",
+          "fouling": false,
+          "x13_flag_days": 0,
+          "n_evaluable": 98,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_100%",
+          "fouling": false,
+          "x13_flag_days": 18,
+          "n_evaluable": 261,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 1,
+            "S": 16,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_20%",
+          "fouling": false,
+          "x13_flag_days": 2,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 2,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_50%",
+          "fouling": false,
+          "x13_flag_days": 13,
+          "n_evaluable": 146,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 12,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_VAVDMPRStuck_80%",
+          "fouling": false,
+          "x13_flag_days": 38,
+          "n_evaluable": 261,
+          "significant": true,
+          "by_zone": {
+            "I": 0,
+            "W": 1,
+            "S": 36,
+            "E": 1
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_VAVDMPRUnstable",
+          "fouling": false,
+          "x13_flag_days": 0,
+          "n_evaluable": 97,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 0,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        },
+        {
+          "file": "SFPU_VAVFanRestrictFlow",
+          "fouling": false,
+          "x13_flag_days": 7,
+          "n_evaluable": 103,
+          "significant": false,
+          "by_zone": {
+            "I": 0,
+            "W": 0,
+            "S": 7,
+            "E": 0
+          },
+          "deployed_detected": true,
+          "unique_days_vs_deployed": 0
+        }
+      ]
+    }
+  },
+  "predictions": {
+    "P1_fouling_sig_ge_6": false,
+    "P1_fouling_sig": [
+      "SFPU_ReheatCoilFouling_Waterside_Severe"
+    ],
+    "n_fouling": 12,
+    "P2_own_fp_le_3": true,
+    "P3_joint_fp_le_8_of_96": true,
+    "newly_detected_scenarios": [],
+    "other_significant": [
+      "PFPU_ReheatVLVStuck_0%",
+      "PFPU_SensorBias_VAVAirflow_-200CFM",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_20%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_-4C",
+      "SFPU_VAVDMPRStuck_80%"
+    ]
+  },
+  "falsifiers_fired": [
+    "F-X13.b: fewer than 4 of 9 fouling scenarios significant"
+  ]
+}

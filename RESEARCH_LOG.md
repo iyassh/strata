@@ -298,3 +298,9 @@ for the claim→artifact map). The Aug-10 list predates Phases 3c–6.
   was true under the v1 alphabet only; under the current alphabet all 14
   SDAHU logs are distinct (`event_identical_groups: {}` in v12) — the
   BYTE-level duplicates (E1, E2) are unchanged.
+
+### 2026-09-23 addition (L32) — the SDAHU matched-rule "contrast" was a missing-sensor fact
+
+| # | Gap | Root cause | Fix + standing rule |
+|---|-----|-----------|---------------------|
+| L32 | D6/Part V read "MR1 fires 231 healthy SDAHU days" as evidence that the models tell you WHERE invariants hold. SDAHU has no heating rule and no hot-water valve; `heating_active` never occurs in its log, so "occupied AND heating never active" fires on every occupied day for a reason no model predicted or could have. The SDAHU/SFPU contrast was equipment, not discovery. | A transplant test was run across buildings without first checking that the transplanted rule's sensor existed on the target | Retracted as evidence of invariant location (paper + `docs/plans/2026-09-23-discovery-predicts-transfer-prereg.md` Amendment 1). The only non-degenerate contrast is PFPU vs SFPU. **Rule: before a rule is transplanted to test a model, confirm the target has the rule's sensors — a rule that cannot fire for want of a sensor tests nothing.** Found by the sealed computing agent from configs alone, before any data. |

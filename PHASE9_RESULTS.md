@@ -126,45 +126,59 @@ sensor. Recorded as a fired falsifier; the statistic is not adopted.
 
 ## X14 — an enriched state alphabet: was the model starved of vocabulary?
 
-Pre-registered (c9e19f5), amended twice before any fan-powered result was
-read (setpoints excluded and a 15-minute dwell after the first run proved
-infeasible at 804 events/day; alignment-based channels dropped on the
-fan-powered units after the second run's first PFPU scenario had not
-finished in 47 minutes — fit alone took 1,061 s). For every actuator
-position and flow signal, two healthy-derived band states (above the
-occupied 90th percentile; at or below the 10th), wall intact. 3 / 12 / 11
-signals enriched; SDAHU keeps the model channel (12.7 events/day), the
-fan-powered units are tested through frequency and time.
+Pre-registered (c9e19f5), amended three times, each amendment committed
+before the result it governs was read: setpoints excluded and a 15-minute
+dwell after the first run proved infeasible (804 events/day); the
+alignment-based channels dropped on the fan-powered units after the second
+run's first PFPU scenario had not finished in 47 minutes; and the zone
+actuators (`RH_VLV_POS_z`, `ZONE_DMPR_POS_z`) restored after review found
+`endswith("_POS")` had dropped all eight. For every actuator position and
+flow signal, two healthy-derived band states (above the occupied train 90th
+percentile; at or below the 10th), wall intact: 3 / 20 / 18 signals, 6 /
+40 / 36 events. SDAHU keeps the model channel; the fan-powered units are
+tested through the frequency channel (unit and device strata) and the time
+perspective.
 
 | | SDAHU | PFPU | SFPU |
 |---|---|---|---|
-| enriched state ∪ time holdout FP | **7**/96 | **14**/96 | **18**/96 |
-| newly significant among the 12 misses | 0 | 1 (`SensorBias_RMTEMP_+2C`, time channel, 70 days) | 0 |
+| enriched state ∪ time holdout FP (of 96) | **7** (model 1, frequency 2, time 4) | **18** (frequency 4, time 15) | **21** (frequency 3, time 19) |
+| newly significant among the 12 misses | 0 | 0 | 1 (`ReheatCoilFouling_Airside_Moderate`: frequency 364 days, time 365) |
 | enriched model channel significant | 14 of 14 (deployed: 0 of 14) | not evaluated | not evaluated |
 
-**P1 held** (one missed scenario becomes significant), **P3 held** (the
-single-duct model channel goes from 0 to 14 significant scenarios, with
-model days 30–227 against ≤ 9 before — vocabulary was a real limit on that
-channel; the deployed detector's five model-significant scenarios are all
-on the series unit, where the enriched model channel was not evaluated, so
-the artefact's global "14 vs 5" compares disjoint sets and the within-system
-figure is the one to quote), **P2 failed**: the enriched channels false-alarm on 14 and 18 of
-96 holdout days on the fan-powered units. **F-X14.a fired: unusable at the
-budget.**
+**P1 held by the letter, P3 held, P2 failed; F-X14.a fired.** The enriched
+channels false-alarm on 18 and 21 of 96 holdout days on the fan-powered
+units — one clean day in five — which is the budget's definition of
+unusable.
 
-**Reading.** Vocabulary was part of the limit, and richer vocabulary buys
-detections at false alarms — 7 %, 15 % and 19 % of clean days — which is
-exactly the trade the deployed detector's budget forbids. The one new
-detection (a +2 °C room-sensor bias, whose log the diagnosis had already
-shown changes counts by 39 %) is real but sits on a channel that
-false-alarms one holdout day in seven. Whether a stricter calibration of
-the enriched channels could keep the detection inside the budget is a
-further variant, and the pre-registration forbade further variants
-tonight. The cost finding stands on its own: at this vocabulary,
-alignment-based conformance is computationally impractical on these logs
-(17 minutes to fit, one scenario not scored in 47). Recorded as the ninth
-adverse result on the detection claim; the vocabulary finding stated
-beside it.
+**The one new detection needs its mechanism stated before it is believed.**
+It is carried by the device-stratum frequency channel and the time model on
+one added state, the zone-S damper's low band (≤ 0.32, the healthy occupied
+10th percentile): sustained entries into that band 9.0 times a day against
+0.7 on the healthy year, off-gap median 30 minutes against 570. A
+fault-versus-fault control over all 31 series-unit files shows why the
+sibling severities do not show it: airside-minor sits at the healthy rate,
+and airside-severe's damper never drops below 0.34, so the band edge at
+0.32 happens to fall between the moderate and severe regimes. The
+statistic is physically legible (a reheat coil that delivers less heat
+leaves the zone damper lower for longer) but its dose response is a
+threshold coincidence, not a monotone ladder, and it is significant only
+against a channel whose own false-alarm rate is 19 %. It is reported, not
+claimed. Multiplicity: with 12 missed scenarios and two evaluated channels
+the Bonferroni gate would be 4.2 × 10⁻⁵; this detection's p (1.6 × 10⁻²⁵⁷)
+clears it, and the run-3 detection it replaced (PFPU `SensorBias_RMTEMP_+2C`,
+p 1.8 × 10⁻⁴ under the smaller alphabet) would not have; that one vanished
+under the fuller alphabet, whose higher time-channel floor (15 of 96)
+absorbed it.
+
+**Reading.** Vocabulary was part of the model channel's limit — on the
+single-duct unit the enriched model channel is significant on 14 of 14
+scenarios against 0 of 14 deployed, with model days 30–227 against ≤ 9 —
+and richer vocabulary buys detections at false alarms the budget forbids.
+Alignment-based conformance on the enriched fan-powered logs was also
+computationally impractical (single-laptop console timings, printed and not
+committed: 17 minutes to fit before Amendment 3; one scenario not scored in
+47). Recorded as the ninth adverse result on the detection claim; the
+vocabulary finding and the one mechanism-stated detection beside it.
 
 ## What this settles
 
@@ -177,8 +191,9 @@ beside it.
    channels, deployed), and timing (X12: real, redundant, costly). The
    discovered net's order structure contributes nothing on these systems
    at the deployed vocabulary; with a richer vocabulary (X14) the model
-   channel fires far more, the time channel catches one more scenario, and
-   the false-alarm rate breaks the budget.
+   channel fires far more, one more scenario becomes significant through a
+   threshold coincidence on one zone damper, and the false-alarm rate
+   breaks the budget.
 3. **The misses stand.** Eight of the twelve carry no log signal at 5 % in
    any count or duration; four carry count changes the frequency bands did
    not resolve; the coil residual did not carry the fouling ones either.
@@ -189,4 +204,4 @@ beside it.
 |---|---|---|---|---|---|
 | X12 | ee33d5e | 2026-09-23 | P1 ✓ P2 ✓ **P3 ✗** P4 ✓ (weak) | none fired | `x12_time_perspective.json` |
 | X13 | 89ae874 | 2026-09-23 | P1 ✗ P2 ✓ P3 ✓ | **F-X13.b fired** (under both the shipped and the deployed denominator convention) | `x13_coil_effectiveness.json` |
-| X14 | c9e19f5 (A1 4187b97, A2 a1f5b3e) | 2026-09-23 | P1 ✓ **P2 ✗** P3 ✓ | **F-X14.a fired** | `x14_enriched_alphabet.json` |
+| X14 | c9e19f5 (A1 4187b97, A2 a1f5b3e, A3 06dea4c) | 2026-09-23 | P1 ✓ (by the letter) **P2 ✗** P3 ✓ | **F-X14.a fired** | `x14_enriched_alphabet.json` |

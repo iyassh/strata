@@ -191,8 +191,8 @@ datasets inherits these issues silently; now there's a citable record.
 - **Hostile audits.** Every phase was adversarially attacked (recomputation
   from raw data included) before its numbers were accepted.
 - **Reproducibility.** `git clone` → [REPRODUCING.md](REPRODUCING.md) →
-  every table regenerates. 101 automated tests guard the results against
-  silent drift.
+  every table regenerates. 109 automated tests pin the published numbers and
+  the fired falsifiers, so a change that would alter either fails the build.
 - **The plan is public.** [MASTER_PLAN.md](MASTER_PLAN.md) tracks every gap
   ever found and its status — including the open ones.
 

@@ -162,7 +162,10 @@ crosses the band in sustained stretches (9.0 and 8.7 entries per day for
 moderate and severe against 0.7) instead of resting in it (off-gap median
 30 minutes against 570). Severe fires on the same statistic at the same
 strength and is simply not "new" because a deployed channel already
-detects it; minor sits at the healthy rate. (A first write-up called this a
+detects it; minor sits at the healthy rate. The claim is bounded to
+**airside** fouling: the three waterside files sit exactly at the healthy
+values (share 64.3 %, 0.73 entries per day, off-gap 570 minutes) at every
+severity. (A first write-up called this a
 threshold coincidence on a misread of the severe file's 10th percentile as
 its minimum; the control corrected it.) Multiplicity: with 12 missed
 scenarios and two evaluated channels the Bonferroni gate is 2.1 × 10⁻³

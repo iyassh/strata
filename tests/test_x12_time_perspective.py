@@ -29,4 +29,8 @@ def test_x12_outcome_pinned():
     # never earlier than the deployed detector
     assert all(r["ttd_time_days"] >= r["ttd_deployed_days"] for r in sig)
     big = {r["file"]: r["unique_days_vs_deployed"] for r in sig}
-    assert big["SFPU_RMTEMPUnstable"] == 120 and big["coi_bias_-4_annual"] == 82
+    assert big["SFPU_RMTEMPUnstable"] == 2 and big["coi_bias_-4_annual"] == 81
+    assert big["SFPU_SensorBias_RMTEMP_-4C"] == 16 and big["PFPU_ReheatVLVStuck_0%"] == 9
+    # P4 was computed against the real `freq` key (a first run read a missing key)
+    assert all(r["unique_days_vs_frequency"] <= r["time_flag_days"] for r in sig)
+    assert any(r["unique_days_vs_frequency"] < r["time_flag_days"] for r in sig)

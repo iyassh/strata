@@ -52,7 +52,7 @@
             "E": 0
           },
           "deployed_detected": true,
-          "unique_days_vs_deployed": 1
+          "unique_days_vs_deployed": 0
         },
         {
           "file": "PFPU_ReheatCoilFouling_Airside_Minor",
@@ -322,7 +322,7 @@
             "E": 1
           },
           "deployed_detected": true,
-          "unique_days_vs_deployed": 2
+          "unique_days_vs_deployed": 1
         },
         {
           "file": "PFPU_SensorBias_VAVAirflow_+200CFM",
@@ -472,7 +472,7 @@
             "E": 0
           },
           "deployed_detected": true,
-          "unique_days_vs_deployed": 1
+          "unique_days_vs_deployed": 0
         },
         {
           "file": "PFPU_VAVFanRestrictFlow",
@@ -533,7 +533,7 @@
             "E": 0
           },
           "deployed_detected": true,
-          "unique_days_vs_deployed": 3
+          "unique_days_vs_deployed": 0
         },
         {
           "file": "SFPU_ReheatCoilFouling_Airside_Minor",

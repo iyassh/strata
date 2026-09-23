@@ -63,3 +63,7 @@ One residual per terminal unit (I, W, S, E), on both fan-powered systems:
 guarded by a test pinning fired/unfired falsifiers. Adoption into the
 deployed configs (`residual_channels`) is a separate, later decision and
 changes the published scorecards; it is not made by this test.
+
+## Erratum to this pre-registration (2026-09-23, after review)
+
+"Nine" reheat-coil fouling scenarios is a miscount: the scored universe holds **twelve**, ten of them deployed misses. The falsifier threshold (fewer than 4 significant) fires under either count; the artefact keeps the pre-registered string. The first run's "unique days vs deployed" used non-existent scorecard keys; corrected before anything was quoted.

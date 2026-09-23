@@ -31,7 +31,11 @@ from strata.core.splits import holdout_mask
 from strata.hvac.events import abstract_events
 from strata.io.config import load_config
 
-DEPLOYED = ["rules", "residual", "model", "device", "absence", "frequency", "oscillation"]
+# the scorecards export six channels' day lists (absence is not exported by
+# scripts/benchmark.py) plus `sig_union`, the union of the gated channels;
+# both comparisons are reported. (A first run used non-existent keys for
+# three channels — caught in review, corrected before anything was adopted.)
+DEPLOYED = ["rules", "residual", "model", "device", "freq", "osc"]
 FOULING = "ReheatCoilFouling"
 out = {"pre_registration": "docs/plans/2026-09-23-x12-time-perspective-prereg.md",
        "channel": "time-infused state model: per state pair, day-median on-duration, off-gap, "
@@ -84,7 +88,8 @@ for system in ("sdahu", "pfpu", "sfpu"):
         union = set()
         for ch in DEPLOYED:
             union |= set(c.get("flag_days", {}).get(ch, []))
-        freq = set(c.get("flag_days", {}).get("frequency", []))
+        freq = set(c.get("flag_days", {}).get("freq", []))
+        sig_union = set(c.get("flag_days", {}).get("sig_union", []))
         viol = pd.Series([v for vs in cl.loc[cl["flagged"], "violations"] for v in vs]).value_counts()
         # time-to-detect: days from the file's first day to the first flagged day
         # (scorecard ttd_days uses the same origin); None when never flagged
@@ -96,6 +101,7 @@ for system in ("sdahu", "pfpu", "sfpu"):
                "deployed_detected": bool(c["meaningful_channels"]),
                "deployed_union_days": len(union),
                "unique_days_vs_deployed": len(flagged - union),
+               "unique_days_vs_sig_union": len(flagged - sig_union),
                "unique_days_vs_frequency": len(flagged - freq),
                "top_violations": {k: int(v) for k, v in viol.head(4).items()}}
         sysout["scenarios"].append(row)

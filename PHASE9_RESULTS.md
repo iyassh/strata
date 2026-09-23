@@ -22,8 +22,8 @@ the fault-free PFPU year and two missed scenarios and one detected one:
 
 | file | events/day | zone-S heating-on median (min) | zone-S fan cycles/day |
 |---|---|---|---|
-| PFPU_FaultFree | 162.4 | 100 | 16.3 |
-| PFPU_ReheatCoilFouling_Waterside_Severe (**missed**) | 162.8 | 100 | 16.3 |
+| PFPU_FaultFree | 162.4 | 124 | 16.3 |
+| PFPU_ReheatCoilFouling_Waterside_Severe (**missed**) | 162.8 | 124 | 16.3 |
 | PFPU_ReheatVLVLeak_50%MaxFlow (detected) | 182.0 | **11** | **26.6** |
 
 Under waterside fouling the state-event log is identical to healthy to the
@@ -60,19 +60,24 @@ per-channel flag days (never re-run).
 | joint FP, deployed union → + time channel | 1 → 1 of 96 | 5 → **10** of 96 | 4 → **9** of 96 |
 
 Over the 73 scored scenarios: **significant on 11** (P1 held); **none of the
-nine fouling scenarios** (P2 held — for eight of the ten fouling misses the log
-carries nothing at 5 %); **no scenario
+twelve fouling scenarios** (P2 held — the pre-registration miscounted them as
+nine; for eight of the ten fouling misses the log carries nothing at 5 %); **no scenario
 the deployed channels miss** (P3, the load-bearing prediction, **false**);
-unique days beyond the frequency channel on 11 (P4 held, but as
-pre-registered P4 was too weak to discriminate: the frequency channel flags
-few days on most scenarios, so almost any flagged day is "unique" against
-it — disclosed here, not quietly dropped). Time-to-detect: **never earlier**
+unique days beyond the frequency channel on 11 of 11 (P4 held — but P4 is a
+low bar: unique against *one* channel, not against the deployed union, so it
+cannot rescue P3; and the first run of the script did not compute it at all,
+reading a scorecard key that does not exist, which review caught before
+anything was adopted — disclosed here). Time-to-detect: **never earlier**
 than the deployed detector (0 of 11; typically day 14 vs day 1).
 
-What it does add is **day-level coverage** on scenarios already detected:
-120 unique days on `SFPU_RMTEMPUnstable` (deployed union 19 days), 82 on
-`coi_bias_-4`, 28 on `SFPU_SensorBias_RMTEMP_-4C`, 13 on
-`PFPU_ReheatVLVStuck_0%`. The statistics that carry it are physically
+What it adds is a **small day-level coverage supplement** on scenarios
+already detected, measured against the union of the six exported channel
+day lists (absence is not exported by the scorecards): 81 unique days on
+`coi_bias_-4` (15 against the gated union), 16 on
+`SFPU_SensorBias_RMTEMP_-4C`, 9 on `PFPU_ReheatVLVStuck_0%`, 2 on
+`SFPU_RMTEMPUnstable` (whose deployed union is 263 days), 0 on the six
+series-unit valve scenarios the rules already flag on every day. (A first
+run reported 120 / 82 / 28 / 13 from the wrong scorecard keys; corrected.) The statistics that carry it are physically
 legible: zone-heating on/off medians under an unstable room sensor, zone-fan
 on-durations under a stuck reheat valve, cooling first-on minute under a
 coil-bias fault on the single-duct unit.
@@ -85,8 +90,8 @@ pushes the joint rate from 5.2 % to 10.4 %, over the 10 % budget. No
 falsifier fired, and the honest verdict is still adverse for the claim "a
 discovered model detects faults the hand-written channels miss": **as a
 detector it is redundant; as a coverage supplement it is real and costs
-false alarms.** It is recorded as the project's eighth adverse result on
-the detection claim, with its positive day-level finding stated beside it.
+false alarms.** No falsifier fired, so it is not counted among the adverse results; X13
+below is the eighth.
 
 ## X13 — a coil-effectiveness residual for the fouling misses (fault-informed)
 
@@ -95,7 +100,8 @@ was chosen after inspecting three fouling files' *means* (≈33 healthy, ≈23
 airside, ≈40 waterside on zone S). Thresholds from fault-free train days
 only; the residual channel's own band, floor and gate.
 
-**F-X13.b fired.** One of the nine fouling scenarios significant
+**F-X13.b fired.** One of the twelve fouling scenarios significant (the
+pre-registration miscounted them as nine; the threshold fires either way)
 (`SFPU_ReheatCoilFouling_Waterside_Severe`, already detected by other
 channels); nothing newly detected. The day-median distribution overlaps
 almost entirely with healthy — the bands are 0.6–94 °F/GPM on PFPU zone S

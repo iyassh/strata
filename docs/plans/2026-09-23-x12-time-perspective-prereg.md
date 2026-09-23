@@ -91,3 +91,9 @@ pair becomes a permanent ablation arm (as the heating-absence rule did).
 
 `scripts/x12_time_perspective.py` → `outputs/x12_time_perspective.json`,
 guarded by a test that pins the fired/unfired falsifiers.
+
+## Errata to this pre-registration (2026-09-23, after review)
+
+- The zone-S heating-on median quoted above as 100 minutes was from an ad-hoc pairing; the channel's own statistic gives **124** minutes (`outputs/x12_log_diagnosis.json`). The fall to 11 minutes under the valve leak stands.
+- "Nine" reheat-coil fouling scenarios is a miscount: the scored universe holds **twelve** (six per fan-powered system), ten of them deployed misses. P2 is evaluated over all twelve; it held.
+- The first run of the scorer compared against scorecard keys that do not exist (`absence`, `frequency`, `oscillation`), inflating "unique days vs deployed" and leaving P4 uncomputed. Corrected to the six exported keys plus `sig_union`; P1–P3 unchanged, P4 recomputed and still held; the unique-day figures shrank (120 → 2 on `SFPU_RMTEMPUnstable`).

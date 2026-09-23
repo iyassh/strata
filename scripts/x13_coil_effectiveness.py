@@ -28,7 +28,12 @@ from strata.core.splits import holdout_mask
 from strata.io.config import load_config
 
 MIN_WIDTH, MARGIN, SUSTAINED = 2.0, 1.0, 120     # pre-registered
-DEPLOYED = ["rules", "residual", "model", "device", "absence", "frequency", "oscillation"]
+# scorecards export these six channels' day lists (absence is not exported);
+# a first run used non-existent keys for three channels — corrected in review.
+# The pre-registration says "9 fouling scenarios"; the scored universe holds
+# 12 (six per fan-powered system), of which 10 are deployed misses. The
+# falsifier threshold (< 4 significant) fires under either count.
+DEPLOYED = ["rules", "residual", "model", "device", "freq", "osc"]
 ZONES = "IWSE"
 FOULING = "ReheatCoilFouling"
 

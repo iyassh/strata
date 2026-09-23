@@ -1,0 +1,120 @@
+{
+  "sdahu": {
+    "Q_support": 0.0,
+    "sync_days": 0,
+    "occupied_days": 303,
+    "Q_obligatory": 0,
+    "variants_tested": 102,
+    "variants_cost0_without_heating": 72,
+    "heating_in_log": false,
+    "zone_heating_activities": [],
+    "net": {
+      "places": 16,
+      "transitions": 17,
+      "silent": 11
+    },
+    "_aux": {
+      "net_labels": [
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "system_started",
+        "system_stopped"
+      ],
+      "heating_in_net": false,
+      "n_days_with_state_events": 335,
+      "occupied_days_with_no_state_events": 0,
+      "variants_with_empty_shortened_trace": 0,
+      "variants_containing_heating": 0,
+      "occupied_days_whose_log_contains_heating": 0,
+      "n_train_days": 248,
+      "fit_seconds": 5.6,
+      "baseline_original_variants_cost0": 72,
+      "baseline_cost0_variants_containing_heating": 0,
+      "mean_variant_fitness_unmodified": 0.9004
+    }
+  },
+  "pfpu": {
+    "Q_support": 0.4547945205479452,
+    "sync_days": 166,
+    "occupied_days": 365,
+    "Q_obligatory": 0,
+    "variants_tested": 343,
+    "variants_cost0_without_heating": 29,
+    "heating_in_log": true,
+    "zone_heating_activities": [],
+    "net": {
+      "places": 15,
+      "transitions": 18,
+      "silent": 11
+    },
+    "_aux": {
+      "net_labels": [
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "heating_active",
+        "night_cycle_ended",
+        "night_cycle_started"
+      ],
+      "heating_in_net": true,
+      "n_days_with_state_events": 365,
+      "occupied_days_with_no_state_events": 0,
+      "variants_with_empty_shortened_trace": 0,
+      "variants_containing_heating": 165,
+      "occupied_days_whose_log_contains_heating": 166,
+      "n_train_days": 269,
+      "fit_seconds": 34.9,
+      "baseline_original_variants_cost0": 29,
+      "baseline_cost0_variants_containing_heating": 0,
+      "mean_variant_fitness_unmodified": 0.8976
+    }
+  },
+  "sfpu": {
+    "Q_support": 0.9780821917808219,
+    "sync_days": 357,
+    "occupied_days": 365,
+    "Q_obligatory": 1,
+    "variants_tested": 364,
+    "variants_cost0_without_heating": 0,
+    "heating_in_log": true,
+    "zone_heating_activities": [],
+    "net": {
+      "places": 15,
+      "transitions": 17,
+      "silent": 9
+    },
+    "_aux": {
+      "net_labels": [
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "heating_active",
+        "heating_inactive",
+        "night_cycle_ended",
+        "night_cycle_started"
+      ],
+      "heating_in_net": true,
+      "n_days_with_state_events": 365,
+      "occupied_days_with_no_state_events": 0,
+      "variants_with_empty_shortened_trace": 0,
+      "variants_containing_heating": 356,
+      "occupied_days_whose_log_contains_heating": 357,
+      "n_train_days": 269,
+      "fit_seconds": 36.6,
+      "baseline_original_variants_cost0": 44,
+      "baseline_cost0_variants_containing_heating": 44,
+      "mean_variant_fitness_unmodified": 0.9528
+    }
+  },
+  "_method": {
+    "net": "strata.core.pipeline.fit(cfg, healthy_df).unit_model -> .net/.im/.fm (inductive miner, noise_threshold=0.2, state_only() unit-stratum slice, discovered on TRAIN days only per core.detection.build_detector)",
+    "alignments": "pm4py 2.7.22.5, pm4py.algo.conformance.alignments.petri_net.algorithm.apply(EventLog, net, im, fm, variant=VERSION_STATE_EQUATION_A_STAR) - the default optimal-alignment variant; log-order preserving, so no case-id sort assumption. Each alignment's log-move projection was asserted equal to its input trace.",
+    "sync_move": "a pair (log_move, model_move) with both == 'heating_active'",
+    "Q_support": "aligned once per distinct variant, then mapped to days; denominator is all healthy occupied days from pipeline.day_universe (occupied_min > 0). 0 occupied days lacked state events on any system.",
+    "Q_obligatory": "every distinct variant of the healthy unit-stratum state log, with every heating_active event deleted, aligned; cost 0 == fitness 1.0"
+  }
+}

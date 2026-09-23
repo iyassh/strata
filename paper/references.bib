@@ -450,3 +450,282 @@
   year    = {2023},
   doi     = {10.3390/s23135985}
 }
+% =====================================================================
+% missing_refs.bib  — references absent from strata/paper/references.bib
+% that an ICPM reviewer would expect. Verified against Crossref/OpenAlex
+% 2026-09-22. Grouped by why they are needed.
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% GROUP A — required by the project's own plan
+% ---------------------------------------------------------------------
+
+% (a) Tax et al. on precision in process mining.
+% Needed wherever the paper says conformance "carries formal fitness and
+% precision semantics" (Sec. Introduction, l.101): this paper shows the
+% precision measures do NOT agree with each other and fail basic axioms.
+@article{tax2018imprecisions,
+  author  = {Tax, Niek and Lu, Xixi and Sidorova, Natalia and Fahland, Dirk and van der Aalst, Wil M. P.},
+  title   = {The imprecisions of precision measures in process mining},
+  journal = {Information Processing Letters},
+  volume  = {135},
+  pages   = {1--8},
+  year    = {2018},
+  doi     = {10.1016/j.ipl.2018.01.013}
+}
+
+% (b) vanden Broucke on conformance / process discovery quality.
+% The canonical negative-events treatment of precision and generalisation;
+% directly relevant to the paper's matched-rule ablation and to any claim
+% that a discovered net "locates an invariant".
+@article{vandenbroucke2014negativeevents,
+  author  = {vanden Broucke, Seppe K. L. M. and De Weerdt, Jochen and Vanthienen, Jan and Baesens, Bart},
+  title   = {Determining Process Model Precision and Generalization with Weighted Artificial Negative Events},
+  journal = {IEEE Transactions on Knowledge and Data Engineering},
+  volume  = {26},
+  number  = {8},
+  pages   = {1877--1889},
+  year    = {2014},
+  doi     = {10.1109/TKDE.2013.130}
+}
+
+% (c) ICPM 2025 paper on hypothesis testing in process mining.
+% Needed by Sec. "Hypotheses That Failed" (the retracted day-level test,
+% l.279) and by the binomial-against-own-noise-floor replacement.
+@inproceedings{pitsch2025hypothesistesting,
+  author    = {Pitsch, Cameron and Brockhoff, Tobias and Adams, Jan Niklas and Leemans, Sander J. J. and Celi, Leo Anthony and van der Aalst, Wil M. P.},
+  title     = {Hypothesis Testing for Processes},
+  booktitle = {2025 7th International Conference on Process Mining (ICPM)},
+  pages     = {1--8},
+  year      = {2025},
+  publisher = {IEEE},
+  doi       = {10.1109/ICPM66919.2025.11220677}
+}
+
+% ---------------------------------------------------------------------
+% GROUP B — canonical process mining, currently carried entirely by the
+% single citation \cite{vanderaalst2016processmining}. An ICPM reviewer
+% will read "discovered with the inductive miner \cite{vanderaalst2016
+% processmining}" (l.169) as a mis-citation: the textbook is not the
+% inductive miner paper.
+% ---------------------------------------------------------------------
+
+@inproceedings{leemans2013inductiveminer,
+  author    = {Leemans, Sander J. J. and Fahland, Dirk and van der Aalst, Wil M. P.},
+  title     = {Discovering Block-Structured Process Models from Event Logs --- A Constructive Approach},
+  booktitle = {Application and Theory of Petri Nets and Concurrency (PETRI NETS 2013)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {7927},
+  pages     = {311--329},
+  year      = {2013},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-642-38697-8_17}
+}
+
+% Cite this one if any noise/frequency filtering is used during discovery
+% (IMf). Sensor-derived logs essentially always need it.
+@inproceedings{leemans2014inductiveminerinfrequent,
+  author    = {Leemans, Sander J. J. and Fahland, Dirk and van der Aalst, Wil M. P.},
+  title     = {Discovering Block-Structured Process Models from Event Logs Containing Infrequent Behaviour},
+  booktitle = {Business Process Management Workshops (BPM 2013)},
+  series    = {Lecture Notes in Business Information Processing},
+  volume    = {171},
+  pages     = {66--78},
+  year      = {2014},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-319-06257-0_6}
+}
+
+% Alignment-based conformance checking — the paper's "conformance channels
+% measure alignment cost" (l.175) has no citation for alignments at all.
+@article{vanderaalst2012replaying,
+  author  = {van der Aalst, Wil M. P. and Adriansyah, Arya and van Dongen, Boudewijn},
+  title   = {Replaying history on process models for conformance checking and performance analysis},
+  journal = {WIREs Data Mining and Knowledge Discovery},
+  volume  = {2},
+  number  = {2},
+  pages   = {182--192},
+  year    = {2012},
+  doi     = {10.1002/widm.1045}
+}
+
+@book{carmona2018conformancechecking,
+  author    = {Carmona, Josep and van Dongen, Boudewijn and Solti, Andreas and Weidlich, Matthias},
+  title     = {Conformance Checking: Relating Processes and Models},
+  year      = {2018},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-319-99414-7}
+}
+
+% Original token-replay fitness; the ancestor of the "reversal probe"
+% intuition that a fitness number alone under-determines behaviour.
+@article{rozinat2008conformance,
+  author  = {Rozinat, Anne and van der Aalst, Wil M. P.},
+  title   = {Conformance checking of processes based on monitoring real behavior},
+  journal = {Information Systems},
+  volume  = {33},
+  number  = {1},
+  pages   = {64--95},
+  year    = {2008},
+  doi     = {10.1016/j.is.2007.07.001}
+}
+
+% Quality dimensions. Needed to justify why a fitness threshold is being
+% used as a detector at all, and what it trades against.
+@inproceedings{buijs2012quality,
+  author    = {Buijs, Joos C. A. M. and van Dongen, Boudewijn F. and van der Aalst, Wil M. P.},
+  title     = {On the Role of Fitness, Precision, Generalization and Simplicity in Process Discovery},
+  booktitle = {On the Move to Meaningful Internet Systems: OTM 2012 (CoopIS)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {7565},
+  pages     = {305--322},
+  year      = {2012},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-642-33606-5_19}
+}
+
+@inproceedings{munozgama2010precision,
+  author    = {Mu{\~n}oz-Gama, Jorge and Carmona, Josep},
+  title     = {A Fresh Look at Precision in Process Conformance},
+  booktitle = {Business Process Management (BPM 2010)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {6336},
+  pages     = {211--226},
+  year      = {2010},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-642-15618-2_16}
+}
+
+% Event abstraction — the paper cites only Janssen et al. for the single
+% hardest step in its pipeline. This is the field's review/taxonomy.
+@article{vanzelst2021eventabstraction,
+  author  = {van Zelst, Sebastiaan J. and Mannhardt, Felix and de Leoni, Massimiliano and Koschmider, Agnes},
+  title   = {Event abstraction in process mining: literature review and taxonomy},
+  journal = {Granular Computing},
+  volume  = {6},
+  number  = {3},
+  pages   = {719--736},
+  year    = {2021},
+  doi     = {10.1007/s41066-020-00226-2}
+}
+
+% ---------------------------------------------------------------------
+% GROUP C — conformance-as-anomaly-detection. The paper's core mechanism
+% (fit a model on normal behaviour, alarm on deviation) has a 15-year
+% process mining literature that is not cited anywhere. This is the most
+% likely single cause of an ICPM novelty rejection.
+% ---------------------------------------------------------------------
+
+@article{bezerra2013anomalytraces,
+  author  = {Bezerra, F{\'a}bio and Wainer, Jacques},
+  title   = {Algorithms for anomaly detection of traces in logs of process aware information systems},
+  journal = {Information Systems},
+  volume  = {38},
+  number  = {1},
+  pages   = {33--44},
+  year    = {2013},
+  doi     = {10.1016/j.is.2012.04.004}
+}
+
+@article{nolle2022binet,
+  author  = {Nolle, Timo and Luettgen, Stefan and Seeliger, Alexander and M{\"u}hlh{\"a}user, Max},
+  title   = {{BINet}: Multi-perspective business process anomaly classification},
+  journal = {Information Systems},
+  volume  = {103},
+  pages   = {101458},
+  year    = {2022},
+  doi     = {10.1016/j.is.2019.101458}
+}
+
+% ---------------------------------------------------------------------
+% GROUP D — leakage / circularity. The paper claims (l.165) "we are not
+% aware of a prior quantification of it on sensor-derived logs". The claim
+% survives, but only if this is cited and distinguished: process mining
+% has an explicit data-leakage benchmark literature, just not on
+% sensor-derived logs.
+% ---------------------------------------------------------------------
+
+@inproceedings{weytjens2022dataleakage,
+  author    = {Weytjens, Hans and De Weerdt, Jochen},
+  title     = {Creating Unbiased Public Benchmark Datasets with Data Leakage Prevention for Predictive Process Monitoring},
+  booktitle = {Business Process Management Workshops (BPM 2021)},
+  series    = {Lecture Notes in Business Information Processing},
+  volume    = {436},
+  pages     = {18--29},
+  year      = {2022},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-030-94343-1_2}
+}
+
+% ---------------------------------------------------------------------
+% GROUP E — HVAC FDD threats the paper does not cite. Each one weakens a
+% specific sentence unless addressed.
+% ---------------------------------------------------------------------
+
+% Threatens "false-alarm budget" as a contribution: Yuill & Braun defined
+% the no-fault false-alarm rate as a first-class FDD protocol metric in
+% 2013. The paper should position against it, not around it.
+@article{yuill2013fddprotocol,
+  author  = {Yuill, David P. and Braun, James E.},
+  title   = {Evaluating the performance of fault detection and diagnostics protocols applied to air-cooled unitary air-conditioning equipment},
+  journal = {HVAC\&R Research},
+  volume  = {19},
+  number  = {7},
+  pages   = {882--891},
+  year    = {2013},
+  doi     = {10.1080/10789669.2013.808135}
+}
+
+% Threatens "seven of the ten most common faults are behaviour-based and
+% no existing method models control sequence": this paper detects
+% programming-LOGIC faults in VAV AHUs, i.e. exactly sequence-level,
+% control-flow faults, without process mining.
+@article{gunay2022logicfaults,
+  author  = {Gunay, H. Burak and Bursill, Jayson and Huchuk, Brent and Shillinglaw, Scott},
+  title   = {Inverse model-based detection of programming logic faults in multiple zone {VAV} {AHU} systems},
+  journal = {Building and Environment},
+  volume  = {211},
+  pages   = {108732},
+  year    = {2022},
+  doi     = {10.1016/j.buildenv.2021.108732}
+}
+
+% Threatens "ASHRAE Guideline 36 control sequences as the conceptual
+% reference" being novel: a probabilistic graphical model of G36
+% sequences used for fault diagnosis, by the ASHRAE-1312 group.
+@inproceedings{pradhan2021dbng36,
+  author    = {Pradhan, Ojas and Wen, Jin and Chen, Yimin and Lu, Xing and Chu, Mengyuan and Fu, Yangyang and O'Neill, Zheng and Wu, Teresa and Candan, K. Sel{\c c}uk},
+  title     = {Dynamic Bayesian network-based fault diagnosis for {ASHRAE} guideline 36},
+  booktitle = {Proceedings of the 8th ACM International Conference on Systems for Energy-Efficient Buildings, Cities, and Transportation (BuildSys '21)},
+  pages     = {365--368},
+  year      = {2021},
+  publisher = {ACM},
+  doi       = {10.1145/3486611.3491124}
+}
+
+% Threatens "process mining has never been applied to buildings": it has,
+% to CONSTRUCTION and AEC/FM processes. Cite and distinguish (construction
+% workflow vs. HVAC operational control flow) before a reviewer does.
+@article{martinezlagunas2024constructionpm,
+  author  = {Martinez Lagunas, Araham Jesus and Nik-Bakht, Mazdak},
+  title   = {Process Mining, Modeling, and Management in Construction: A Critical Review of Three Decades of Research Coupled with a Current Industry Perspective},
+  journal = {Journal of Construction Engineering and Management},
+  volume  = {150},
+  number  = {11},
+  year    = {2024},
+  doi     = {10.1061/JCEMD4.COENG-14727}
+}
+
+% ---------------------------------------------------------------------
+% GROUP F — tooling. Cite whichever library actually produced the nets.
+% ---------------------------------------------------------------------
+
+@article{berti2023pm4py,
+  author  = {Berti, Alessandro and van Zelst, Sebastiaan and Schuster, Daniel},
+  title   = {{PM4Py}: A process mining library for {Python}},
+  journal = {Software Impacts},
+  volume  = {17},
+  pages   = {100556},
+  year    = {2023},
+  doi     = {10.1016/j.simpa.2023.100556}
+}

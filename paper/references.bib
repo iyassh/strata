@@ -86,7 +86,8 @@
   title  = {Reproducibility of machine learning-based fault detection and diagnosis for {HVAC} systems in buildings: An empirical study},
   year   = {2025},
   eprint = {2508.00880},
-  archivePrefix = {arXiv}
+  archivePrefix = {arXiv},
+  note = {arXiv preprint 2508.00880; finds two of sixty-five studies shared code links, one of them broken}
 }
 
 @article{jung2025vavfaultdata,
@@ -728,4 +729,54 @@
   pages   = {100556},
   year    = {2023},
   doi     = {10.1016/j.simpa.2023.100556}
+}
+
+% ---- added 2026-09-23 after round-two review ----
+@software{openfdd2025,
+  author  = {{open-fdd contributors}},
+  title   = {open-fdd: open-source fault detection and diagnostics for {HVAC} implementing the {ASHRAE} {Guideline} 36 fault conditions},
+  year    = {2025},
+  version = {4.4.1},
+  license = {MIT},
+  url     = {https://pypi.org/project/open-fdd/},
+  note    = {PyPI package; the Guideline 36 battery imported, not reimplemented, for the comparison in this paper}
+}
+@article{villani2004hybridpetri,
+  author  = {Villani, Emilia and Miyagi, Paulo E.},
+  title   = {A hybrid {Petri} net modeling approach for {HVAC} systems in intelligent buildings},
+  journal = {SBA: Controle \& Automa\c{c}\~{a}o},
+  year    = {2004},
+  volume  = {15},
+  number  = {2},
+  doi     = {10.1590/S0103-17592004000200003}
+}
+@inproceedings{gomes2007petribas,
+  author    = {Gomes, Lu{\'i}s and Costa, Anik{\'o} and Barros, Jo{\~a}o Paulo and Lima, Paulo},
+  title     = {{Petri} Net based Building Automation and Monitoring System},
+  booktitle = {5th IEEE International Conference on Industrial Informatics (INDIN)},
+  year      = {2007},
+  doi       = {10.1109/INDIN.2007.4384731}
+}
+@article{xu2015chillerpetri,
+  author  = {Xu, Xiaodong and others},
+  title   = {Wireless sensors system for the chillers fault diagnostic based on characteristic {Petri} net modelling},
+  journal = {International Journal of Wireless and Mobile Computing},
+  year    = {2015},
+  volume  = {9},
+  number  = {3},
+  doi     = {10.1504/IJWMC.2015.071684}
+}
+@misc{zhong2022pmids,
+  author = {Zhong, Yinzheng and Lisitsa, Alexei},
+  title  = {Can process mining help in anomaly-based intrusion detection?},
+  year   = {2022},
+  howpublished = {arXiv:2206.10379},
+  note   = {Preprint; not peer reviewed. Reports that na\"{i}ve process mining on network event logs was ineffective for intrusion detection}
+}
+@inproceedings{jimenez2017popper,
+  author    = {Jimenez, Ivo and Sevilla, Michael and Watkins, Noah and Maltzahn, Carlos and Lofstead, Jay and Mohror, Kathryn and Arpaci-Dusseau, Andrea and Arpaci-Dusseau, Remzi},
+  title     = {The {Popper} Convention: Making Reproducible Systems Evaluation Practical},
+  booktitle = {IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW)},
+  year      = {2017},
+  doi       = {10.1109/IPDPSW.2017.157}
 }

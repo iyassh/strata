@@ -173,7 +173,13 @@ under the smaller alphabet) vanished under the fuller alphabet's higher
 time-channel floor (15 of 96). So the enriched alphabet does carry one
 physically legible, dose-monotone fault signature the deployed alphabet
 does not — and the channels that carry it false-alarm on one clean day in
-five.
+five. **Post-hoc read, not a pre-registered result:** the per-channel
+false-alarm attribution in the same artefact shows the time model is the
+cost (15 and 19 of 96) while the frequency channel alone, on the enriched
+alphabet, sits at 4 and 3 of 96 — inside the budget — and carries the new
+detection at 364 of 365 days. Whether "enriched alphabet + frequency
+channel only" holds as a deployable addition is the obvious next
+pre-registered test (X15); it is not claimed here.
 
 **Reading.** Vocabulary was part of the model channel's limit — on the
 single-duct unit the enriched model channel is significant on 14 of 14

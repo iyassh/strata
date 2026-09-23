@@ -9,12 +9,14 @@
 
 \title{Five Defects in the LBNL HVAC Fault-Detection Benchmarks, and the Gate Battery That Found Them}
 % TODO(author): settle supervisor co-authorship before submission.
+\titlerunning{Five Defects in the LBNL HVAC FDD Benchmarks}
 \author{Yassh Singh}
+\authorrunning{Y. Singh}
 \institute{Thompson Rivers University, Kamloops, Canada}
 \maketitle
 
 \begin{abstract}
-The LBNL fault-detection datasets are building HVAC fault detection's nearest thing to a common benchmark. We report five defects, unreported at any distribution point to our knowledge: two families in which one simulation run ships four times under four severity labels, one also mislabelled; two columns carrying a per-branch constant that lets a threshold chosen on the fault-free file alone classify every day of every fault file by provenance with zero error; a file whose calendar is rotated by two days; and a fault-free file simulated on a different configuration branch than every fault file. Each ships with machine evidence and a reproducing command. Two were found by the integrity-hash gate of a battery that now runs before any analysis and was assembled defect by defect; its four log-generic gates also pass in under a second on two public process-mining logs. We place the defects against the event-log imperfection patterns and argue that benchmark-level defects need their own taxonomy.
+The LBNL fault-detection datasets are the nearest thing HVAC fault detection has to a common benchmark. We report five defects, unreported to our knowledge: two families in which one simulation run ships four times under four severity labels, one also mislabelled; two columns carrying a per-branch constant that lets a threshold chosen on the fault-free file alone classify every day of every fault file by provenance with zero error; a file whose calendar is rotated by two days; and a fault-free file simulated on a different configuration branch than every fault file. Each ships with machine evidence and a command. Two were found by the hash gate of a battery assembled defect by defect that now runs before any analysis; its four log-generic gates also pass on two public process-mining logs. We place the defects against the event-log imperfection patterns and argue that benchmark-level defects need their own taxonomy.
 \keywords{data quality \and event log imperfection \and benchmark leakage \and fault detection}
 \end{abstract}
 
@@ -30,7 +32,7 @@ The LBNL FDD datasets \cite{granderson2020lbnlfdddata} are simulated annual one-
 \section{The Gate Battery}
 \label{sec:gates}
 
-Six checks run against the raw files before any science, none requiring insight. \emph{MD5 over raw and converted files}, grouped, so that byte-identical files under different names surface immediately; this produced E1 and E2. \emph{Monotonicity} of timestamps, counting wrap points rather than reporting a boolean. \emph{Calendar identity}: each fault file's timestamp set compared with its fault-free sibling's. \emph{Raw-file rotation}: monotonicity and set identity tested together on the raw CSV, before the conversion step that sorts by timestamp and would mask a rotation; this, not the monotonicity gate, produced E4. \emph{Brick/TTL coverage}: on both fan-powered systems, 109 declared points against 109 columns, with one name that does not cross over (\texttt{RFSFSPD} against \texttt{RF\%SFSPD}), reported by name because a mapping layer that fails open would silently drop a point. \emph{Log hashing}, applied to the derived event logs downstream of the battery, so that two scenarios reduced to identical logs cannot count as independent evidence. A per-configuration \emph{healthy-silence} gate additionally confirms that a rule set is silent on the fault-free year before it may score anything.
+Six checks run against the raw files before any science, none requiring insight. \emph{MD5 over raw and converted files}, grouped, so that byte-identical files under different names surface immediately; this produced E1 and E2. \emph{Monotonicity} of timestamps, counting wrap points rather than reporting a boolean. \emph{Calendar identity}: each fault file's timestamp set compared with its fault-free sibling's. \emph{Raw-file rotation}: monotonicity and set identity tested together on the raw CSV, before the conversion step that sorts by timestamp and would mask a rotation; this, not the monotonicity gate, produced E4. \emph{Brick/TTL coverage}: on both fan-powered systems, 109 declared points against 109 columns, with one name that does not cross over (\texttt{RFSFSPD} against \texttt{RF\%SFSPD}), reported by name because a mapping layer that fails open would silently drop a point. \emph{Log hashing}, applied to the derived event logs downstream of the battery, so that two scenarios reduced to identical logs cannot count as independent evidence.\footnote{Its evidence lives in the scorecards, not in \texttt{week0\_audit.json}: \texttt{outputs/benchmark\_v6\_*.json} carries a \texttt{log\_hash} per scenario and an empty \texttt{event\_identical\_groups}. The audit artefact also carries a zone ground-truth check, which found no defect and is not counted here.} A per-configuration \emph{healthy-silence} gate additionally confirms that a rule set is silent on the fault-free year before it may score anything.
 
 \begin{verbatim}
 uv run python scripts/02_week0_audit.py all
@@ -47,6 +49,8 @@ Table~\ref{tab:errata} summarises; the subsections give the evidence. ``Healthy'
 
 \begin{table}[t]
 \centering
+\caption{Five machine-verified defects. Reproducing commands are in the repository's \texttt{ERRATA.md}; machine-readable evidence in \texttt{outputs/week0\_audit.json}, \texttt{e3\_leakage.json} and \texttt{x11\_branch.json}.}
+\label{tab:errata}
 \small
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.04\textwidth}p{0.07\textwidth}p{0.20\textwidth}p{0.30\textwidth}p{0.28\textwidth}@{}}
@@ -60,8 +64,6 @@ E4 & SFPU & \texttt{SensorBias\_RMTEMP\_-2C} & Raw file rotated by exactly 2{,}8
 E5 & SDAHU & healthy vs.\ all 20 fault files & Different configuration branch: damper floor 0.000 vs 0.100, a one-hour schedule shift, a $-1.06\,^\circ$F offset & Healthy-vs-fault divergence carries a branch offset; one of our own detections was provenance \\
 \hline
 \end{tabular}
-\caption{Five machine-verified defects. Reproducing commands are in the repository's \texttt{ERRATA.md}; machine-readable evidence in \texttt{outputs/week0\_audit.json}, \texttt{e3\_leakage.json} and \texttt{x11\_branch.json}.}
-\label{tab:errata}
 \end{table}
 
 \subsection{E1 and E2 --- two families, one run each}
@@ -92,7 +94,7 @@ uv run python scripts/e3_leakage.py
 
 \subsection{E4 --- a date-rotated calendar}
 
-The raw file \texttt{SFPU\_SensorBias\_RMTEMP\_-2C.csv} is a pure rotation by exactly 2{,}880 rows, two days at one-minute sampling: its timestamp set is identical to the fault-free file's, the series is non-monotonic with exactly one wrap point, and its first row is 2018-01-03 00:00 where the fault-free file's is 2018-01-01 00:00. The rotation is invisible to every summary statistic and to any check of the calendar's contents; it lives in row order alone. It maps directly onto Suriadi and colleagues' \emph{inadvertent time travel} pattern \cite{suriadi2017imperfection}, at file rather than event granularity.
+The raw file \texttt{SFPU\_SensorBias\_RMTEMP\_-2C.csv} is a pure rotation by exactly 2{,}880 rows, two days at one-minute sampling: its timestamp set is identical to the fault-free file's, the series is non-monotonic with exactly one wrap point, and its first row is 2018-01-03 00:00 where the fault-free file's is 2018-01-01 00:00. The rotation is invisible to every summary statistic and to any check of the calendar's contents; it lives in row order alone. It is the file-granularity analogue of Suriadi and colleagues' \emph{inadvertent time travel} \cite{suriadi2017imperfection}, though the corruption differs: there the timestamp values are wrong, here they are correct and the row order is not, so a log reader that sorts by timestamp never sees it and only positional comparison does.
 
 \emph{How it was found.} By an audit in an early phase, not by a gate: the monotonicity gate then in place runs on converted files, and our conversion step sorts by timestamp, so it could never have exhibited the defect. The raw-file rotation gate was built four phases later so that the defect has machine evidence and cannot recur --- the reason a gate must sit upstream of the preprocessing that would mask it. \emph{Consequence and handling.} Positional comparison against the healthy file misaligns every timestamp for a year; the scenario is excluded, leaving SFPU with 29 scored scenarios, and sort-on-convert plus the calendar-identity gate are permanent.
 
@@ -120,7 +122,7 @@ We state the implication for the literature carefully and no further. We have re
 \section{Where the Event-Log Taxonomy Ends}
 \label{sec:taxonomy}
 
-Only one of the five maps cleanly onto the event-log imperfection patterns: E4 is inadvertent time travel \cite{suriadi2017imperfection}. E1 and E2 are corpus-level analogues of synonymous labels --- different names for one content --- but at the granularity of files, not events. E3 and E5 are outside the taxonomy altogether: one is a leaked feature, the other a confounded provenance, and both are properties of how a corpus was assembled rather than of any log within it. The patterns were built for a single log extracted from one system; a benchmark is a set of files whose \emph{relationships} carry the labels, and that is where these defects live. A taxonomy of benchmark-level defects --- duplicated instances, per-file constants, confounded provenance, misaligned calendars --- would give the gate battery a principled basis instead of the accidental one it has, and we would welcome it.
+Three of the five have homes, if loose ones, in the existing taxonomies. In Bose and colleagues' grid of attribute against problem type \cite{bose2013dataquality}, E4 sits in the incorrect-position cell and E1's mislabel in the incorrect-activity-name cell; E1 and E2 are corpus-level analogues of Suriadi and colleagues' synonymous labels \cite{suriadi2017imperfection} --- different names for one content --- at the granularity of files rather than events, and our own trace-hash gate, which finds cases with identical activity and timestamp sequences, is their exact event-log counterpart. E3 and E5 are outside both taxonomies: one is a leaked feature, the other a confounded provenance, and both are properties of how a corpus was assembled rather than of any log within it. The patterns were built for a single log extracted from one system; a benchmark is a set of files whose \emph{relationships} carry the labels, and that is where these defects live. A taxonomy of benchmark-level defects --- duplicated instances, per-file constants, confounded provenance, misaligned calendars --- would give the gate battery a principled basis instead of the accidental one it has, and we would welcome it.
 
 \section{Recommendations}
 \label{sec:recs}

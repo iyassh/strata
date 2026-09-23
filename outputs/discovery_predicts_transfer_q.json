@@ -63,8 +63,7 @@
           "cooling_inactive"
         ]
       ],
-      "n_train_days": 248,
-      "fit_seconds": 3.4
+      "n_train_days": 248
     },
     "device": {
       "device_model": null
@@ -168,8 +167,7 @@
           "night_cycle_ended"
         ]
       ],
-      "n_train_days": 269,
-      "fit_seconds": 33.7
+      "n_train_days": 269
     },
     "device": {
       "anchor_activity_in_device_net": "zone_heating_active",
@@ -287,8 +285,7 @@
       "variants_containing_heating": 356,
       "occupied_days_whose_log_contains_heating": 357,
       "cost0_shortened_examples": [],
-      "n_train_days": 269,
-      "fit_seconds": 33.9
+      "n_train_days": 269
     },
     "device": {
       "anchor_activity_in_device_net": "zone_heating_active",

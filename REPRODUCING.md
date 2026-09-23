@@ -31,7 +31,7 @@ The pipeline handles or discloses all five.
 
 ```sh
 uv sync          # exact pins from uv.lock; Python >= 3.12
-uv run pytest -q # full suite (109 tests; 5 data-dependent ones skip on a bare clone), ~10 s
+uv run pytest -q # full suite (over a hundred tests; 5 data-dependent ones skip on a bare clone), ~10 s
 ```
 
 System dependency: `pm4py` visualisations need the Graphviz *binary*

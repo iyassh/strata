@@ -283,6 +283,17 @@ def main() -> int:
     result = {s: compute(s) for s in SPEC}
     for s in SPEC:
         result[s]["device"] = compute_device(s)
+    # Gated artifact: never write wall-clock or host-specific values into it,
+    # or the L2 regression gate reports CHANGED on every run (repo audit
+    # 2026-09-23). Timings go to stdout only.
+    VOLATILE = ("fit_seconds", "seconds", "elapsed", "timestamp", "hostname")
+    def _strip(o):
+        if isinstance(o, dict):
+            return {k: _strip(v) for k, v in o.items() if not any(w in k.lower() for w in VOLATILE)}
+        if isinstance(o, list):
+            return [_strip(v) for v in o]
+        return o
+    result = _strip(result)
     result["_method"] = ("Unit-stratum net from fit().unit_model (inductive miner, noise 0.2, state "
                          "alphabet, train days only); pm4py alignments VERSION_STATE_EQUATION_A_STAR via "
                          "the low-level API in log order, one alignment per distinct variant mapped back "

@@ -191,7 +191,7 @@ datasets inherits these issues silently; now there's a citable record.
 - **Hostile audits.** Every phase was adversarially attacked (recomputation
   from raw data included) before its numbers were accepted.
 - **Reproducibility.** `git clone` → [REPRODUCING.md](REPRODUCING.md) →
-  every table regenerates. 109 automated tests pin the published numbers and
+  every table regenerates. More than a hundred automated tests pin the published numbers and
   the fired falsifiers, so a change that would alter either fails the build.
 - **The plan is public.** [MASTER_PLAN.md](MASTER_PLAN.md) tracks every gap
   ever found and its status — including the open ones.
@@ -228,7 +228,7 @@ report = det.evaluate(new_data)            # per-channel flags, noise gates,
 | `scripts/` | the evaluation harness that produced every number here |
 | `outputs/` | committed result artifacts (every quoted number lives in one) |
 | `PHASE1–8_RESULTS.md` | the phase-by-phase record |
-| `RESEARCH_LOG.md` | discoveries, lessons L1–L31, the canonical numbers |
+| `RESEARCH_LOG.md` | discoveries, lessons L1 onward, the canonical numbers |
 | `ERRATA.md` / `REPRODUCING.md` | dataset defects / how to regenerate everything |
 | `paper/` | the manuscript in progress (ICPM 2027) |
 

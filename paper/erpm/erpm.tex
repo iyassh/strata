@@ -95,6 +95,16 @@ building moves between operating states should have an advantage on exactly the
 fault classes that dominate the field. We pre-registered it, with the
 observation that would refute it, and built the pipeline to test it.
 
+The pre-registration matters to how the rest of this paper should be read.
+Discovery, conformance and detection were built before any of the four results
+below were known, and the falsifier for the founding hypothesis --- that a
+hand-written rule would out-cover the discovered models on the same scenarios
+--- was written down before the rule existed. Nothing here is a method chosen
+after seeing which comparison it would win. That discipline is what turns an
+unsuccessful application into a reportable measurement rather than an
+abandoned project, and it is why we can state not only that the method did not
+work but by how much, against what, and on which of its assumptions it failed.
+
 It was refuted. This paper reports the refutation and the three measurements
 that explain it, because a workshop on empirical research in process mining is
 the right venue for a result of this shape and because the field has almost no
@@ -140,7 +150,22 @@ corpora~\cite{nolle2022binet}. Our null belongs with that migration rather than
 against it: the conformance channels described here are the nearest descendant
 of the earlier approach, and finding that they contribute no detection a
 calibrated statistical channel does not already contribute is consistent with
-why the field moved.
+why the field moved. What the neural line has not done, and what
+Section~\ref{sec:null} attempts, is to hold the comparison fixed at the level
+of the individual channel: to ask not whether an alternative model scores
+better on a corpus but whether the conformance signal, inside one detector on
+one dataset, is ever the thing that catches a fault. That question has a yes-or-no
+answer per scenario, and the answer can be read off a committed artefact.
+
+\paragraph{Replication and negative results.}
+Process mining has an artefact culture --- public logs, shared miners, pm4py ---
+and comparatively little published record of applications that were attempted
+and did not work. Continuous integration has been used to guard that a
+published result regenerates~\cite{jimenez2017popper}, which is the
+infrastructure a replication needs; what is rarer is a paper reporting the
+regenerable measurement of a method's failure to contribute. Section~\ref{sec:null}
+is one, and the artefacts behind every number in it are committed alongside the
+code.
 
 \paragraph{Event abstraction.}
 Turning continuous sensor streams into discrete activity sequences is the
@@ -220,9 +245,22 @@ alphabet has ten activities in five complementary pairs: system started and
 stopped, night cycle started and ended, heating active and inactive, cooling
 active and inactive, economiser window entered and
 exited.\footnote{\texttt{outputs/grammar\_results.json},
-\texttt{canonical\_alphabet}.} Not every system emits all ten: the single-duct
-air handler's configuration yields six activities, and both fan-powered-unit
-configurations yield ten.
+\texttt{canonical\_alphabet}, \texttt{alphabets\_cfg} and \texttt{event\_days}.}
+Not every system emits all ten: the single-duct air handler's configuration
+yields six activities, and both fan-powered-unit configurations yield ten.
+Event-bearing days are 335 of 365 on the single-duct system and 365 of 365 on
+both others, so the case universe is nearly the calendar.
+
+Two properties of this alphabet will matter later. It is built from
+complementary pairs, so every activity that can occur has an inverse that also
+occurs, many times a day; the resulting traces are loop-heavy, and the
+calibrated healthy band for cooling-active occurrences on the series unit runs
+from 4 to 44 in a single day. And it is
+\emph{constructed}, not emitted: no building logs these activities, and each
+one exists because a rule decided that a threshold crossing sustained for a
+given duration counts as a state change. That is ordinary for sensor-domain
+process mining~\cite{vanzelst2021eventabstraction}, and it is also the opening
+through which the analyst's judgement can enter the model.
 
 \subsection{The alphabet wall}
 
@@ -231,7 +269,11 @@ The events are then partitioned into two alphabets that are never mixed.
 started, cooling became active --- and are the only events admitted to model
 discovery. \emph{Fault-signature events} already encode engineering suspicion:
 they exist because an analyst decided that a particular configuration of
-measurements is worth naming. They are withheld from discovery entirely.
+measurements is worth naming --- a valve commanded open while the coil it feeds
+does nothing, a supply temperature that contradicts the mode the unit claims to
+be in. They are withheld from discovery entirely. The two alphabets remain
+available to the detection side, so nothing is thrown away; what is forbidden
+is only that a signature event reach the miner.
 
 The partition exists because of circularity, which is the process-mining form
 of the leakage problem catalogued by Weytjens and
@@ -272,6 +314,17 @@ half is that even the inflated 5.24\% is not a useful detection rate; the
 partition removed two thirds of a capability that was not, in absolute terms,
 worth having. That the pipeline's most defensible methodological decision
 raised no result and lowered one is the honest summary.
+
+The comparison is also as clean as we could make it, which is why we offer the
+number rather than the argument. Both runs use the same miner, the same
+discovery corpus of fault-free days, the same alignment threshold, the same
+train and holdout split, and the same day universe; the single manipulated
+variable is whether fault-signature events are admitted to discovery. Nothing
+else in the pipeline was touched between the two artefacts, and both are
+committed so that the difference can be recomputed without regenerating either.
+That design is generic --- any pipeline that derives events from sensors by rule
+can run it --- and we would like to see the number measured elsewhere, because a
+single 3.5-point bound from one building is a data point, not a constant.
 
 \subsection{Pinning the partition}
 
@@ -329,6 +382,16 @@ is what told us that two thirds of our model estimate was not doing the thing
 the method is chosen for. We recommend it as a routine reporting item
 alongside fitness in any sensor-domain application, and we would have caught
 the problem two phases earlier had we run it first.
+
+Its limits should be stated with it. The probe tests whether \emph{fitness}
+responds to order, not whether the net contains order-encoding structure: a net
+could constrain sequence in a region the log never visits, and the probe would
+report nothing. A null therefore licenses the claim that this net's fitness is
+insensitive to order on this log, which is the operationally relevant claim if
+fitness is what a detector consumes, and not the stronger claim that the net is
+a flower model. Reversal is also only one of several destructions one could
+apply; rotation or pairwise transposition would probe different properties, and
+a battery would be better than the single test we ran.
 
 \subsection{Shared structure exists only where order does}
 
@@ -568,11 +631,12 @@ note.
 
 AI coding agents were used for implementation, analysis scripting and
 adversarial recomputation of results, and one step depended on them
-methodologically rather than incidentally: the sealed quantity behind
-Section~\ref{sec:transfer} was computed by an agent that was denied access to
-the rule-firing artefacts it would be scored against, which is how the
-computation was kept blind. All experimental designs, pre-registrations and
-claims were authored and approved by the author.
+methodologically rather than incidentally: the model-derived quantity behind
+Section~\ref{sec:transfer} was computed by an agent instructed not to open the
+rule-firing artefacts it would be scored against, as a blinding mechanism.
+Section~\ref{sec:transfer} reports how far that seal actually held, which is
+less far than the design intended. All experimental designs, pre-registrations
+and claims were authored and approved by the author.
 
 \subsection{Conclusion}
 
@@ -605,7 +669,7 @@ is not zero.
 The author thanks Dr.\ Anthony Aighobahi and Dr.\ Mridula Sharma for
 supervision. AI coding assistants were used for implementation, analysis
 scripting and adversarial auditing, and a sealed computation by an agent
-blinded to the outcome artefacts is part of the method reported in
+instructed not to read the outcome artefacts is part of the method reported in
 Section~\ref{sec:transfer}; all designs, pre-registrations and claims were
 reviewed and approved by the author.
 

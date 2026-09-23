@@ -1,4 +1,4 @@
-# Phase 9 Results — Can process mining be made to detect? (X12, X13, X14)
+# Phase 9 Results — Can process mining be made to detect? (X12–X15)
 
 *2026-09-23, overnight. Both experiments pre-registered and committed before
 they ran (`docs/plans/2026-09-23-x12-*.md`, `…-x13-*.md`). Artefacts
@@ -194,6 +194,43 @@ committed: 17 minutes to fit before Amendment 3; one scenario not scored in
 47). Recorded as the ninth adverse result on the detection claim; the
 vocabulary finding and the one mechanism-stated detection beside it.
 
+## X15 — enriched alphabet, frequency channel only, under two holdouts: the one gain survives
+
+Pre-registered (0d0c692) with its provenance stated first: motivated by a
+post-hoc read of X14's per-channel attribution, so the test changes the
+one thing that can still falsify it — the holdout. X14's alphabet exactly;
+only the frequency channel (unit and device strata, the deployed code and
+its own gate); bands and the healthy false-alarm rate recomputed under the
+deployed last-8-days split and the mirrored first-8-days split. No
+alignments.
+
+| enriched frequency channel | SDAHU | PFPU | SFPU |
+|---|---|---|---|
+| holdout FP, last-8 / first-8 | 2 / 0 of 87 | 4 / 8 of 96 | 3 / 5 of 96 |
+| significant scenarios, last-8 / first-8 | 10 / 10 of 14 | 11 / 8 of 30 | 21 / 18 of 29 |
+| newly significant under **both** splits | — | — | `ReheatCoilFouling_Airside_Moderate` (365 of 365 days under each) |
+
+**All four predictions held; no falsifier fired.** Inside the budget under
+both splits (P1); the airside-moderate fouling detection survives the
+mirrored split (P2); nothing else new (P3); on the scenarios the deployed
+detector already catches, the enriched frequency channel is significant on
+41 against the deployed frequency channel's 12 (P4). (SDAHU's denominator
+is 87: the days on which the state log has any event, as the frequency
+channel counts them.)
+
+**Reading.** The night's one constructive result. A healthy-derived
+enrichment of the operating-state alphabet, read through the deployed
+frequency channel, detects one reheat-coil fouling scenario the deployed
+detector misses — the airside-moderate file, with its dose-monotone
+zone-damper signature (X14 control) — inside the false-alarm budget under
+two holdouts, and roughly triples the frequency channel's coverage of
+already-detected scenarios. It is a **candidate deployable addition**, not an
+adopted one: adoption changes every published scorecard and the false-alarm
+budget accounting, and is a separate, pre-registered decision (X16). It
+says nothing about alignment-based conformance, which remains at zero
+unique detections and, on this alphabet, computationally impractical on
+the fan-powered units.
+
 ## What this settles
 
 1. **Why control-flow conformance found nothing**: for the faults it missed,
@@ -209,9 +246,14 @@ vocabulary finding and the one mechanism-stated detection beside it.
    channel fires far more, one more scenario becomes significant through a
    dose-monotone zone-damper signature, and the false-alarm rate breaks
    the budget.
-3. **The misses stand.** Eight of the twelve carry no log signal at 5 % in
-   any count or duration; four carry count changes the frequency bands did
-   not resolve; the coil residual did not carry the fouling ones either.
+3. **The misses stand at the deployed alphabet — and one of them falls
+   to a richer one.** Eight of the twelve carry no log signal at 5 % in any
+   count or duration on the deployed alphabet; four carry count changes
+   the frequency bands did not resolve; the coil residual did not carry the
+   fouling ones either. On the enriched alphabet, read through the
+   frequency channel alone (X15), airside-moderate fouling is detected
+   inside the budget under two holdouts — a candidate addition awaiting a
+   pre-registered adoption decision (X16).
 
 ## Ledger
 
@@ -219,4 +261,5 @@ vocabulary finding and the one mechanism-stated detection beside it.
 |---|---|---|---|---|---|
 | X12 | ee33d5e | 2026-09-23 | P1 ✓ P2 ✓ **P3 ✗** P4 ✓ (weak) | none fired | `x12_time_perspective.json` |
 | X13 | 89ae874 | 2026-09-23 | P1 ✗ P2 ✓ P3 ✓ | **F-X13.b fired** (under both the shipped and the deployed denominator convention) | `x13_coil_effectiveness.json` |
-| X14 | c9e19f5 (A1 4187b97, A2 a1f5b3e, A3 06dea4c) | 2026-09-23 | P1 ✓ (by the letter) **P2 ✗** P3 ✓ | **F-X14.a fired** | `x14_enriched_alphabet.json` |
+| X14 | c9e19f5 (A1 4187b97, A2 a1f5b3e, A3 06dea4c) | 2026-09-23 | P1 ✓ (by the letter) **P2 ✗** P3 ✓ | **F-X14.a fired** | `x14_enriched_alphabet.json` + `x14_control.json` |
+| X15 | 0d0c692 (post-hoc-motivated, stated) | 2026-09-23 | P1 ✓ P2 ✓ P3 ✓ P4 ✓ | none fired | `x15_enriched_frequency.json` |

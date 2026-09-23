@@ -85,7 +85,7 @@ def run_split(system: str, split_name: str, split_fn) -> dict:
             c0 = card[s["file"]]
             out["scenarios"].append({"file": s["file"], "flag_days": len(flagged), "n_eval": n_eval, "significant": bool(sig),
                                      "deployed_detected": bool(c0["meaningful_channels"]),
-                                     "deployed_frequency_sig": "frequency" in str(c0["meaningful_channels"])})
+                                     "deployed_frequency_sig": "freq" in str(c0["meaningful_channels"])})   # scorecard vocabulary: "freq"
         print(f"{system} {split_name}: +{len(added)} signals | holdout FP {hold_fp}/{len(hold)} | "
               f"sig {sum(r['significant'] for r in out['scenarios'])}/{len(out['scenarios'])} | newly "
               f"{[r['file'] for r in out['scenarios'] if r['significant'] and not r['deployed_detected']]}", flush=True)

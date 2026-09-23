@@ -1,0 +1,563 @@
+{
+  "source": "benchmark_v6_*.json (committed scorecards; no re-run)",
+  "n_detected": 61,
+  "counts": {
+    "correct": 36,
+    "none": 10,
+    "wrong": 0,
+    "no_device_stratum": 14,
+    "indeterminate_gt": 1
+  },
+  "note": "Zone ground truth has no variance on the FPU sets (all zone S), so 'correct' is specificity; 'wrong' and 'none' are the informative counts. SDAHU has no device stratum and names no device by construction.",
+  "rows": [
+    {
+      "system": "sdahu",
+      "scenario": "damper_stuck_010_annual",
+      "family": "damper_stuck",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "rules",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "damper_stuck_025_annual",
+      "family": "damper_stuck",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "rules",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "damper_stuck_075_annual",
+      "family": "damper_stuck",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "rules+resid",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "damper_stuck_100_annual_short",
+      "family": "damper_stuck",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "rules+resid",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "coi_stuck_010_annual",
+      "family": "valve_stuck",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "rules+rate",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "coi_stuck_025_annual",
+      "family": "valve_stuck",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "rules+rate",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "coi_stuck_050_annual",
+      "family": "valve_stuck",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "rules+rate",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "coi_stuck_075_annual",
+      "family": "valve_stuck",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "rules+rate",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "coi_leakage_010_annual",
+      "family": "valve_leak",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "rules+rate",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "coi_bias_-4_annual",
+      "family": "sensor_bias",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "resid+rate",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "coi_bias_-2_annual",
+      "family": "sensor_bias",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "coi_bias_2_annual",
+      "family": "sensor_bias",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "coi_bias_4_annual",
+      "family": "sensor_bias",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "sdahu",
+      "scenario": "oa_bias_4_annual",
+      "family": "oa_bias",
+      "seeded_zone": null,
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "no_device_stratum"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_RMTEMPUnstable",
+      "family": "instability",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "freq+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_ReheatVLVLeak_20%MaxFlow",
+      "family": "reheat_leak",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_ReheatVLVLeak_50%MaxFlow",
+      "family": "reheat_leak",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_ReheatVLVLeak_80%MaxFlow",
+      "family": "reheat_leak",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_ReheatVLVStuck_0%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_ReheatVLVStuck_100%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_ReheatVLVStuck_20%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_ReheatVLVStuck_50%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_ReheatVLVStuck_80%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_SensorBias_RMTEMP_+4C",
+      "family": "rmtemp_bias",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "none"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_SensorBias_RMTEMP_-2C",
+      "family": "rmtemp_bias",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "osc",
+      "attribution": "none"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_SensorBias_RMTEMP_-4C",
+      "family": "rmtemp_bias",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "freq+osc",
+      "attribution": "none"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_SensorBias_VAVAirflow_+200CFM",
+      "family": "airflow_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_SensorBias_VAVAirflow_+400CFM",
+      "family": "airflow_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_SensorBias_VAVAirflow_-200CFM",
+      "family": "airflow_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_SensorBias_VAVAirflow_-400CFM",
+      "family": "airflow_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+freq+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_VAVDMPRStuck_0%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+freq+rate+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_VAVDMPRStuck_100%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_VAVDMPRStuck_20%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_VAVDMPRStuck_50%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+freq+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_VAVDMPRStuck_80%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_VAVDMPRUnstable",
+      "family": "instability",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "osc",
+      "attribution": "none"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_VAVFanRestrictFlow",
+      "family": "fan_restrict",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "none"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_RMTEMPUnstable",
+      "family": "instability",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "freq+osc",
+      "attribution": "none"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatCoilFouling_Airside_Severe",
+      "family": "coil_fouling",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "none"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatCoilFouling_Waterside_Severe",
+      "family": "coil_fouling",
+      "seeded_zone": "INDETERMINATE",
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "indeterminate_gt"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "family": "reheat_leak",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "family": "reheat_leak",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+freq",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "family": "reheat_leak",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+freq",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatVLVStuck_0%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatVLVStuck_100%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+freq",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatVLVStuck_20%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatVLVStuck_50%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatVLVStuck_80%",
+      "family": "reheat_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+freq",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_SensorBias_RMTEMP_+4C",
+      "family": "rmtemp_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_SensorBias_RMTEMP_-4C",
+      "family": "rmtemp_bias",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "resid+device+freq",
+      "attribution": "none"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_SensorBias_VAVAirflow_+200CFM",
+      "family": "airflow_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_SensorBias_VAVAirflow_+400CFM",
+      "family": "airflow_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_SensorBias_VAVAirflow_-200CFM",
+      "family": "airflow_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+model+rate",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "family": "airflow_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+model+device+rate+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_VAVDMPRStuck_0%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+device+freq+rate+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_VAVDMPRStuck_100%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+model+rate+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_VAVDMPRStuck_20%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_VAVDMPRStuck_50%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+model+rate",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_VAVDMPRStuck_80%",
+      "family": "damper_stuck",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "rules+resid+model+rate+osc",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_VAVDMPRUnstable",
+      "family": "instability",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "osc",
+      "attribution": "none"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_VAVFanRestrictFlow",
+      "family": "fan_restrict",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "none"
+    }
+  ]
+}

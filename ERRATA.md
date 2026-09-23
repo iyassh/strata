@@ -81,27 +81,56 @@ is impossible for this family on SDAHU.
 **Who it bites:** any per-scenario accounting that counts 20 fault
 scenarios; any severity-monotonicity analysis including this family.
 
-## Erratum E3 — SDAHU `SA_SP`/`SA_SPSPT`: units and roles swapped between the healthy file and every fault file
+## Erratum E3 — SDAHU `SA_SP`/`SA_SPSPT`: a constant offset applied to one column in each branch, a different column each
 
-**Files:** `AHU_annual` (healthy) vs all fault files.
+**Correction 2026-09-23.** This erratum previously read "units and roles
+swapped between the healthy file and every fault file". Two independent
+recomputations (2026-09-11 and 2026-09-23) show that reading was wrong,
+and it is retracted here. The consequence (below) is unchanged.
 
-**Evidence** (same gate): healthy `SA_SP` ≈ 402 Pa-scale (varying over a
-~9 Pa range), `SA_SPSPT` exactly constant 1.607460; **every one of the 20
-fault files** has `SA_SP` on the inH₂O scale (means 0.84–0.97) and
-`SA_SPSPT` exactly constant −400.252530. Zero overlap — either column
-alone separates healthy from fault by provenance. First noticed on
-`coi_leakage_050` (vault v2 revision note); verified healthy-vs-ALL-faults.
+**Files:** `AHU_annual` (healthy) vs all 20 fault files.
 
-**Consequence:** any data-driven model fed these columns separates healthy
-from fault **by file provenance**, not by fault physics. Our own PCA-SPE
-baseline initially scored SPE ≈ 1e37 from exactly this (found by auditing
-our own baseline — `RESEARCH_LOG.md` D7, ledger L18); the columns are
-dropped from all baselines (`scripts/baselines.py: ERRATUM_COLS`).
+**Evidence.** The two branches differ by a single additive constant, not
+by a unit:
+
+- healthy `SA_SPSPT` = 1.60746 (constant); every fault file's `SA_SPSPT`
+  = −400.25253 (constant); 1.60746 − (−400.25253) = **401.85999**.
+- healthy `SA_SP` with fan off ≈ 401.86; every fault file's `SA_SP` with
+  fan off ≈ 0.005; difference **401.86** again. Subtracting that constant
+  from the healthy `SA_SP` reproduces the fault files' trace to three
+  decimals: 0.004 inH₂O with the fan off, 1.61 inH₂O with it on, against a
+  1.607 inH₂O setpoint (the physically sensible pair; a duct at 1.6 inH₂O
+  with the fan off is impossible, which is what rules out the old
+  pascal reading).
+
+So the healthy branch has the constant **added to `SA_SP`** and the fault
+branch has it **subtracted from `SA_SPSPT`**. The uncorrupted signals are
+the fault files' `SA_SP` (already inH₂O) and the healthy file's
+`SA_SPSPT`. Zero overlap between branches on either column, as before.
+
+**Consequence (measured, 2026-09-23):** a single threshold on either
+column, chosen from the healthy file alone, classifies all 365 healthy
+days and all 7,150 fault-file days correctly — accuracy 1.0 on both
+columns (`outputs/e3_leakage.json`, `scripts/e3_leakage.py`). Any
+data-driven model fed these columns separates healthy from fault **by
+file provenance**, not by fault physics. Our own PCA-SPE baseline
+initially scored SPE ≈ 1e37 from exactly this (found by auditing our own
+baseline — `RESEARCH_LOG.md` D7, ledger L18); the columns are dropped
+from all baselines (`scripts/baselines.py: ERRATUM_COLS`).
+
+**Probable root cause.** The offset is branch-specific, and E5 documents
+that the healthy file was simulated on a different configuration branch
+than every fault file. E3 is therefore most likely a symptom of the same
+branch divergence, manifesting as a post-processing difference in how
+the static-pressure columns were written. It is listed separately because
+its consequence — provenance leakage into any model — is distinct from
+E5's, but the two should not be counted as independent evidence of
+dataset defects.
 
 **Who it bites:** every ML baseline trained on healthy and scored on fault
 files with these columns included — its SDAHU numbers are provenance
-detection. Published SDAHU ML results that used the full column set should
-be read with this in mind.
+detection. Published SDAHU ML results that used the full column set
+should be read with this in mind.
 
 ## Erratum E4 — SFPU `SensorBias_RMTEMP_-2C`: date-rotated calendar
 

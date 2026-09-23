@@ -164,7 +164,14 @@ evidence.)*
 - **Damper floor:** during fan-on hours (SF_CS > 0.5) the healthy file's
   OA damper minimum is **0.000**; every fault file floors at exactly
   **0.100** (the three damper_stuck files at 0.25/0.75/1.0 sit at their
-  stuck value above the floor). (A runtime-per-day figure once quoted here was measured on a sensor the pipeline does not read and is retracted; see the R2PM review, 2026-09-23.) *(An earlier version of this erratum quoted
+  stuck value above the floor).- **Schedule:** on the pipeline's own occupancy signal (SYS_CTL) the day
+  universe and daily occupied minutes are IDENTICAL between branches
+  (same 303 occupied days, within two minutes per day). The branch
+  difference is a one-hour phase shift: the healthy file starts at
+  05:01–05:02 on 200 of the 303 occupied days, every fault file starts
+  06:01. *(A daily fan-runtime difference once quoted here was measured
+  on SF_CS, a sensor the pipeline does not read, and is retracted —
+  2026-09-23.)* *(An earlier version of this erratum quoted
   "occupied rows 163,186–351,441" — that range conflated a short 215-day
   file, plausible fault-driven night cycling, and the branch effect, and
   was measured on SF_CS, a sensor the pipeline does not read. Corrected

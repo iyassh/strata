@@ -157,5 +157,5 @@
       }
     }
   },
-  "note": "Occupied-day universe is 303 on every full-year file; the one short file (damper_stuck_100_annual_short) has 179. The branch difference is the first occupied minute: 05:01/05:02 on the healthy file for 200 of 303 days (06:02 otherwise), 06:01 on every day of every fault file."
+  "note": "Occupied-day universe is 303 on every full-year file; the one short file (damper_stuck_100_annual_short) has 179. The branch difference is the first occupied minute: 05:01/05:02 on the healthy file for 200 of 303 days (full distribution {'05:01': 79, '05:02': 121, '06:01': 33, '06:02': 70}), 06:01 on every day of every fault file."
 }

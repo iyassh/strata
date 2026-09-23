@@ -30,7 +30,7 @@ import pandas as pd
 import pm4py
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from strata.log_gates import gates  # noqa: E402
+from strata.log_gates import gates, run_gates  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs" / "gates_injection.json"
@@ -80,10 +80,13 @@ def main() -> int:
         pm4py.write_xes(base, str(clean_path))
         clean = gates(clean_path)
         rows.append({"injection": "none", "defect_class": "-", "expected": None, "fired": fired(clean, False)})
-        # G1: same bytes under another name
-        (td / ("copy_of_" + src.name)).write_bytes(clean_path.read_bytes())
+        # G1: same bytes under another name — measured by running the cross-file
+        # gate over the pair, not asserted
+        copy_path = td / ("copy_of_" + src.name)
+        copy_path.write_bytes(clean_path.read_bytes())
+        pair_out, pair_results = run_gates([clean_path, copy_path])
         rows.append({"injection": "dup_file", "defect_class": "E1/E2 duplicate file", "expected": "G1",
-                     "fired": fired(clean, True)})
+                     "fired": fired(pair_results[1], len(pair_out["G1_duplicate_files"]) > 0)})
         for kind, cls, exp in (("dup_case", "E1/E2 duplicate instance", "G4"),
                                ("rotate", "E4 order corruption", "G2"),
                                ("calendar", "E4 calendar", "G3"),

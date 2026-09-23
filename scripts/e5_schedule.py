@@ -44,8 +44,8 @@ res = {
     "note": "Occupied-day universe is 303 on every full-year file; the one short "
             "file (damper_stuck_100_annual_short) has 179. The branch difference is "
             "the first occupied minute: 05:01/05:02 on the healthy file for "
-            f"{early} of {per_file[healthy]['occupied_days']} days (06:02 otherwise), 06:01 on "
-            "every day of every fault file.",
+            f"{early} of {per_file[healthy]['occupied_days']} days (full distribution "
+            f"{dict(sorted(h.items()))}), 06:01 on every day of every fault file.",
 }
 (ROOT / "outputs" / "e5_schedule.json").write_text(json.dumps(res, indent=2) + "\n")
 print(f"healthy: {res['healthy_occupied_days']} occupied days, {early} start 05:01/05:02, "

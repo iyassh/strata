@@ -192,6 +192,27 @@ Calibration uses the fault-free year only, at a false-positive quantile of 0.01 
 
 A channel may then report only what exceeds its own measured noise floor, tested as a binomial against that channel's own holdout rate at $p<10^{-3}$. Detection thresholds are additionally floored at sensor physics: an early result reporting 21 to 117 detection-days on the series unit was retracted to at most two when a 0.5\,$^\circ$F sensor-precision floor revealed that the ``detections'' had exceeded a 0.22\,$^\circ$F band by 0.02 to 0.03\,$^\circ$F.
 
+What survives the gate reaches the operator with the implicated device or zone, the evidence that triggered it, and the channel's own false-alarm budget. Listing~\ref{lst:alarm} is one such alarm from the first day of a seeded fault, every value read from the committed artefacts and the raw data.
+
+\begin{figure}[t]
+\small
+\begin{verbatim}
+STRATA alarm -- series fan-powered unit, 2018-01-01 (day 1 of the fault)
+  what      zone primary-air flow not tracking its setpoint   [channel: rules]
+  where     terminal unit TU_S, zone S
+  evidence  measured 713 CFM against a 200 CFM setpoint -- a 513 CFM excess
+            sustained for 720 min while occupied (rule fires at 50 CFM held
+            60 min); damper position 0.80, fault-free same-day value 0.32
+  budget    rules channel: 0 false-alarm days on the 96-day fault-free
+            holdout; threshold set on training days only, holdout out-of-sample
+  corrob.   seasonal rate channel agrees (advisory; never alarms alone)
+  seeded    zone-S damper stuck at 80% -- location correct, symptom correct,
+            detected on day 1 of 365
+\end{verbatim}
+\caption{A worked alarm. Scenario \texttt{SFPU\_VAVDMPRStuck\_80\%}; rule \texttt{zone\_flow\_tracking\_S}, a setpoint-deviation rule gated on occupancy. On day 3 the unit-model conformance channel also flags; this is the scenario on which a one-line rule later out-covered that model (Section~\ref{sec:falsified}). The alarm names the symptom and its location, not the root cause: mapping symptom-and-channel patterns to fault families is future work.}
+\label{lst:alarm}
+\end{figure}
+
 \section{Verification as a First-Class Result}
 \label{sec:protocol}
 
@@ -271,7 +292,7 @@ The median time to detection is one day on all three systems, but the median alo
 
 Sensor-bias detection illustrates why pooled recall misleads for gated detectors. Raw recall of 39--47\% over the 351 to 352 evaluable days appears to be a capability ceiling until it is decomposed. The residual is physics-bound only inside a detection window --- cooling coil off, zone occupied, sustained at least 120 minutes --- and such windows exist on 137 to 164 days of the year in this climate. Within them, window-conditional recall is measured at 100\%, on counts of 164/164, 164/164, 139/139 and 137/137 across the four coil-bias scenarios. The apparent ceiling is climate, not capability, and reporting window prevalence separately from window-conditional recall is a methodological recommendation we would make to others evaluating gated detectors.
 
-Against a principal-component-analysis baseline using squared prediction error, audited and scored on comparable scenario universes, the two methods reach a near-tie: 60 scenarios against 61 in total, at 13 versus 13, 23 versus 23, and 24 versus 25 per system. The misses are complementary rather than nested. STRATA alone detects an unstable VAV damper and severe waterside fouling; the baseline alone detects two room-temperature bias scenarios and moderate airside fouling, the latter through a zone-fan differential-pressure sensor that STRATA's configuration does not map. Ten scenarios are missed by both, and nine of them are one family: reheat-coil fouling, airside and waterside, at every severity on the parallel unit and at three severities on the series unit, is invisible to both methods. That is the most useful negative result in the comparison. On false alarms the baseline is at least as good. Its strict holdout rate is 1/79, 1/96 and 1/96 (1.3\%, 1.0\%, 1.0\%; Wilson 95\% intervals [0.2, 6.8], [0.2, 5.7], [0.2, 5.7]) against STRATA's 1/96, 5/96 and 4/96 (1.0\%, 5.2\%, 4.2\%; [0.2, 5.7], [2.2, 11.6], [1.6, 10.2]); the intervals overlap throughout, and an exact McNemar test on detection gives $p = 1.0$. Nor are the inputs symmetric: the baseline consumes 108 and 424 raw daily features on the single-duct and fan-powered systems where STRATA's configurations map 12 of 30 and 56 of 109 columns. What the baseline does not do is name the implicated device or state the evidence behind a flag. That is the whole of the difference, and this paper asserts it rather than demonstrates it: no worked alarm is shown, and Section~\ref{sec:limitations} records that as an open gap.
+Against a principal-component-analysis baseline using squared prediction error, audited and scored on comparable scenario universes, the two methods reach a near-tie: 60 scenarios against 61 in total, at 13 versus 13, 23 versus 23, and 24 versus 25 per system. The misses are complementary rather than nested. STRATA alone detects an unstable VAV damper and severe waterside fouling; the baseline alone detects two room-temperature bias scenarios and moderate airside fouling, the latter through a zone-fan differential-pressure sensor that STRATA's configuration does not map. Ten scenarios are missed by both, and nine of them are one family: reheat-coil fouling, airside and waterside, at every severity on the parallel unit and at three severities on the series unit, is invisible to both methods. That is the most useful negative result in the comparison. On false alarms the baseline is at least as good. Its strict holdout rate is 1/79, 1/96 and 1/96 (1.3\%, 1.0\%, 1.0\%; Wilson 95\% intervals [0.2, 6.8], [0.2, 5.7], [0.2, 5.7]) against STRATA's 1/96, 5/96 and 4/96 (1.0\%, 5.2\%, 4.2\%; [0.2, 5.7], [2.2, 11.6], [1.6, 10.2]); the intervals overlap throughout, and an exact McNemar test on detection gives $p = 1.0$. Nor are the inputs symmetric: the baseline consumes 108 and 424 raw daily features on the single-duct and fan-powered systems where STRATA's configurations map 12 of 30 and 56 of 109 columns. What the baseline does not do is name the implicated device or state the evidence behind a flag. That is the whole of the difference; Listing~\ref{lst:alarm} shows it on one seeded fault, and it is the property a scalar score cannot produce.
 
 The matched-rule control isolates what discovery contributes. For each channel a hand-written equivalent was authored and scored. Two of these reproduce their channel exactly --- 141 detections against 141 on the series unit and 206 against 206 on the parallel unit --- which is the point rather than a disappointment: the models automate the discovery of rules an expert could have written, had they known where to look. Transplanted without that knowledge the same rules are unusable, one of them firing on 231 fault-free days on the single-duct system and 124 on the parallel unit while firing on none at all on the series unit --- the contrast that makes the point, since the same rule is harmless exactly where the model had shown the invariant to hold. Some faults, conversely, need the classical instrument: a calibrated oscillation channel stands alone on the unstable-damper scenario, 349 detections against at most two from any matched rule.
 
@@ -329,7 +350,7 @@ Objective four, the hybrid extension combining process-mining features with a ma
 
 The noise-floor gate applies no correction across channels and scenarios. Roughly 584 binomial tests are run at $\alpha = 10^{-3}$ --- eight channels by 73 scenarios --- for a family-wise error near 0.44 under independence, and the per-day observations within a scenario are autocorrelated, a caveat every artefact carries and this paper had not previously stated. Bonferroni correction is applied only across devices within the device channel. Confidence intervals are now given for the false-alarm rates; none is given for the detection counts, which are single-run integers on one simulated year per system.
 
-A worked example of an alarm --- the name, the evidence, and the budget the abstract promises --- is not shown. The claim that STRATA's output is actionable where a scalar anomaly score is not rests on assertion until one is.
+One worked alarm is shown (Listing~\ref{lst:alarm}); it names a symptom and a location, not a root cause, and no systematic scoring of alarm text against seeded fault families has been done.
 
 Beyond these, the long detection tail is a real weakness for gradually developing faults; the comparison against deployed rule-based practice is incomplete; and three systems across two equipment families demonstrate configuration-level portability without establishing generality across the diversity of commercial HVAC equipment.
 

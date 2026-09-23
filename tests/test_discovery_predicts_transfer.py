@@ -82,8 +82,8 @@ def test_amendment_3_cluster_level_power():
     power, and F2's only contradicting cell has an invalid predictor."""
     a = _art()
     assert a["power"]["unit_of_replication"] == "building"
-    assert a["power"]["n_buildings"] == 2 or a["power"]["n_buildings"] == 3
-    assert a["power"]["cluster_min_attainable_p"] >= 1 / 6 - 1e-12
+    assert a["power"]["n_buildings"] == 2                       # the design that ran (Amendment 1)
+    assert a["power"]["cluster_min_attainable_p"] == pytest.approx(0.5)
     assert a["power"]["criterion_attainable_at_cluster_level"] is False
     assert a["power"]["F2_informative"] is False
     assert a["conclusion_licensed"] is False

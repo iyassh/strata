@@ -183,7 +183,9 @@ MR2 and MR3). The nine "cells" of the original design were three buildings
 pseudo-replicated three times. A permutation null over nine exchangeable
 cells was never valid; the valid null permutes buildings, and with three
 buildings the minimum attainable one-sided p is 1/3! = **0.167** — already
-above the p < 0.05 criterion before Amendment 1 removed anything. The test
+above the p < 0.05 criterion before Amendment 1 removed anything — and with
+the two buildings the amended test actually scored it is 1/2! = **0.5**,
+which is the figure the artifact's power block carries. The test
 could not have passed as originally registered either. Amendment 2's
 "the nine-cell design had power (minimum p ≈ 0.0006)" is retracted.
 

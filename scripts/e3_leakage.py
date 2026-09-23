@@ -36,7 +36,8 @@ for c in thr:
     for f in files:
         m = day_medians(f)[c]
         fp = int((m > thr[c]).sum()); per_file[f] = {"days": int(len(m)), "misclassified_as_healthy": fp,
-                                                    "range": [float(m.min()), float(m.max())]}
+                                                    "range": [float(m.min()), float(m.max())],
+                                                    "mean_of_day_medians": float(m.mean())}
         fp_total += fp; n_total += int(len(m))
     res["per_feature"][c] = {
         "healthy_days": hn, "healthy_days_classified_healthy": tp,

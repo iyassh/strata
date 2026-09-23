@@ -28,7 +28,8 @@
           "range": [
             -0.595870975,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.104288223358778
         },
         "coi_bias_-4_annual": {
           "days": 365,
@@ -36,7 +37,8 @@
           "range": [
             -0.29646300999999997,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.128704876670137
         },
         "coi_bias_2_annual": {
           "days": 365,
@@ -44,7 +46,8 @@
           "range": [
             -0.574813835,
             1.6124878
-          ]
+          ],
+          "mean_of_day_medians": 1.1033801834821917
         },
         "coi_bias_4_annual": {
           "days": 365,
@@ -52,7 +55,8 @@
           "range": [
             -0.445373535,
             5.970321650000001
-          ]
+          ],
+          "mean_of_day_medians": 1.123254022209589
         },
         "coi_leakage_010_annual": {
           "days": 365,
@@ -60,7 +64,8 @@
           "range": [
             -0.33203125,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1074518939178082
         },
         "coi_leakage_025_annual": {
           "days": 365,
@@ -68,7 +73,8 @@
           "range": [
             -0.33203125,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1074518939178082
         },
         "coi_leakage_040_annual": {
           "days": 365,
@@ -76,7 +82,8 @@
           "range": [
             -0.33203125,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1074518939178082
         },
         "coi_leakage_050_annual": {
           "days": 365,
@@ -84,7 +91,8 @@
           "range": [
             -0.33203125,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1074518939178082
         },
         "coi_stuck_010_annual": {
           "days": 365,
@@ -92,7 +100,8 @@
           "range": [
             -0.377685545,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.136232807516137
         },
         "coi_stuck_025_annual": {
           "days": 365,
@@ -100,7 +109,8 @@
           "range": [
             -0.43875122,
             2.200943
-          ]
+          ],
+          "mean_of_day_medians": 1.1445050798234246
         },
         "coi_stuck_050_annual": {
           "days": 365,
@@ -108,7 +118,8 @@
           "range": [
             -0.51472473,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1068141983085862
         },
         "coi_stuck_075_annual": {
           "days": 365,
@@ -116,7 +127,8 @@
           "range": [
             -0.557083125,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1042789442026026
         },
         "damper_stuck_010_annual": {
           "days": 365,
@@ -124,7 +136,8 @@
           "range": [
             0.005004883,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1135225969676712
         },
         "damper_stuck_025_annual": {
           "days": 365,
@@ -132,7 +145,8 @@
           "range": [
             0.005004883,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1135943351667124
         },
         "damper_stuck_075_annual": {
           "days": 365,
@@ -140,7 +154,8 @@
           "range": [
             0.005004883,
             5.497284
-          ]
+          ],
+          "mean_of_day_medians": 1.1428645752530135
         },
         "damper_stuck_100_annual_short": {
           "days": 215,
@@ -148,7 +163,8 @@
           "range": [
             0.005004883,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1145241049767443
         },
         "oa_bias_-2_annual": {
           "days": 365,
@@ -156,7 +172,8 @@
           "range": [
             -0.33428955000000005,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1075664395161644
         },
         "oa_bias_-4_annual": {
           "days": 365,
@@ -164,7 +181,8 @@
           "range": [
             -0.33428955000000005,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1075664395161644
         },
         "oa_bias_2_annual": {
           "days": 365,
@@ -172,7 +190,8 @@
           "range": [
             -0.33428955000000005,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1075664395161644
         },
         "oa_bias_4_annual": {
           "days": 365,
@@ -180,7 +199,8 @@
           "range": [
             -0.33428955000000005,
             1.6124573
-          ]
+          ],
+          "mean_of_day_medians": 1.1075664395161644
         }
       }
     },
@@ -201,7 +221,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_bias_-4_annual": {
           "days": 365,
@@ -209,7 +230,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_bias_2_annual": {
           "days": 365,
@@ -217,7 +239,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_bias_4_annual": {
           "days": 365,
@@ -225,7 +248,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_leakage_010_annual": {
           "days": 365,
@@ -233,7 +257,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_leakage_025_annual": {
           "days": 365,
@@ -241,7 +266,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_leakage_040_annual": {
           "days": 365,
@@ -249,7 +275,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_leakage_050_annual": {
           "days": 365,
@@ -257,7 +284,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_stuck_010_annual": {
           "days": 365,
@@ -265,7 +293,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_stuck_025_annual": {
           "days": 365,
@@ -273,7 +302,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_stuck_050_annual": {
           "days": 365,
@@ -281,7 +311,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "coi_stuck_075_annual": {
           "days": 365,
@@ -289,7 +320,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "damper_stuck_010_annual": {
           "days": 365,
@@ -297,7 +329,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "damper_stuck_025_annual": {
           "days": 365,
@@ -305,7 +338,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "damper_stuck_075_annual": {
           "days": 365,
@@ -313,7 +347,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "damper_stuck_100_annual_short": {
           "days": 215,
@@ -321,7 +356,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.2525299999998
         },
         "oa_bias_-2_annual": {
           "days": 365,
@@ -329,7 +365,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "oa_bias_-4_annual": {
           "days": 365,
@@ -337,7 +374,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "oa_bias_2_annual": {
           "days": 365,
@@ -345,7 +383,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         },
         "oa_bias_4_annual": {
           "days": 365,
@@ -353,7 +392,8 @@
           "range": [
             -400.25253,
             -400.25253
-          ]
+          ],
+          "mean_of_day_medians": -400.25252999999987
         }
       }
     }

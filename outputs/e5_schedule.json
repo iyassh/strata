@@ -1,0 +1,161 @@
+{
+  "occupancy_signal": "SYS_CTL > 0.5 (configs/lbnl_sdahu/sensors.yaml OCCUPIED)",
+  "healthy_file": "AHU_annual",
+  "healthy_occupied_days": 303,
+  "healthy_days_starting_0501_0502": 200,
+  "fault_files_all_start_0601": true,
+  "fault_occupied_days": {
+    "coi_bias_-2_annual": 303,
+    "coi_bias_-4_annual": 303,
+    "coi_bias_2_annual": 303,
+    "coi_bias_4_annual": 303,
+    "coi_leakage_010_annual": 303,
+    "coi_leakage_025_annual": 303,
+    "coi_leakage_040_annual": 303,
+    "coi_leakage_050_annual": 303,
+    "coi_stuck_010_annual": 303,
+    "coi_stuck_025_annual": 303,
+    "coi_stuck_050_annual": 303,
+    "coi_stuck_075_annual": 303,
+    "damper_stuck_010_annual": 303,
+    "damper_stuck_025_annual": 303,
+    "damper_stuck_075_annual": 303,
+    "damper_stuck_100_annual_short": 179,
+    "oa_bias_-2_annual": 303,
+    "oa_bias_-4_annual": 303,
+    "oa_bias_2_annual": 303,
+    "oa_bias_4_annual": 303
+  },
+  "per_file": {
+    "AHU_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "05:01": 79,
+        "05:02": 121,
+        "06:01": 33,
+        "06:02": 70
+      }
+    },
+    "coi_bias_-2_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_bias_-4_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_bias_2_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_bias_4_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_leakage_010_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_leakage_025_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_leakage_040_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_leakage_050_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_stuck_010_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_stuck_025_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_stuck_050_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "coi_stuck_075_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "damper_stuck_010_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "damper_stuck_025_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "damper_stuck_075_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "damper_stuck_100_annual_short": {
+      "occupied_days": 179,
+      "first_occupied_minute": {
+        "06:01": 179
+      }
+    },
+    "oa_bias_-2_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "oa_bias_-4_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "oa_bias_2_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    },
+    "oa_bias_4_annual": {
+      "occupied_days": 303,
+      "first_occupied_minute": {
+        "06:01": 303
+      }
+    }
+  },
+  "note": "Occupied-day universe is 303 on every full-year file; the one short file (damper_stuck_100_annual_short) has 179. The branch difference is the first occupied minute: 05:01/05:02 on the healthy file for 200 of 303 days (06:02 otherwise), 06:01 on every day of every fault file."
+}

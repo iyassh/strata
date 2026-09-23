@@ -165,9 +165,11 @@ evidence.)*
   OA damper minimum is **0.000**; every fault file floors at exactly
   **0.100** (the three damper_stuck files at 0.25/0.75/1.0 sit at their
   stuck value above the floor).
-- **Schedule:** on the pipeline's own occupancy signal (SYS_CTL) the day
-  universe and daily occupied minutes are IDENTICAL between branches
-  (same 303 occupied days, within two minutes per day). The branch
+- **Schedule** (`uv run python scripts/e5_schedule.py` → `outputs/e5_schedule.json`,
+  added 2026-09-23; until then this bullet was prose only): on the
+  pipeline's own occupancy signal (SYS_CTL) the day universe is IDENTICAL
+  between branches (303 occupied days on every full-year file; the short
+  damper_stuck_100 file has 179), within two minutes per day. The branch
   difference is a one-hour phase shift: the healthy file starts at
   05:01–05:02 on 200 of the 303 occupied days, every fault file starts
   06:01. *(A daily fan-runtime difference once quoted here was measured

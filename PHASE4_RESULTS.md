@@ -94,7 +94,7 @@ Verdicts:
 
 Exact-binomial tests against each channel's own holdout noise floor
 (the invalid c=0 "McNemar" is retracted — it awarded stars to noise; 13
-PFPU rows lost them), BH correction across scenarios, day universes
+PFPU rows lost them), BH correction across scenarios *(superseded: the deployed detector applies no correction across channels or scenarios, only Bonferroni across devices within the device channel — paper Limitations; noted 2026-09-23)*, day universes
 intersected for every STRATA-vs-PCA comparison, day-level autocorrelation
 stated as a limitation. Per-scenario day lists ship in the artifacts so
 every test is recomputable.

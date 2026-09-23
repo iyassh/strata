@@ -517,6 +517,7 @@
     "n_buildings": 2,
     "cluster_min_attainable_p": 0.5,
     "criterion_attainable_at_cluster_level": false,
+    "design_three_buildings_min_attainable_p": 0.16666666666666666,
     "F2_informative": false,
     "F2_note": "the only F2-contradicting cell is MR2, whose anchor is device-stratum and absent from every unit net (Amendment 1 C); its predictor is invalid"
   },

@@ -122,6 +122,9 @@ def main() -> int:
              "unit_of_replication": "building", "n_buildings": n_buildings,
              "cluster_min_attainable_p": cluster_min_p,
              "criterion_attainable_at_cluster_level": cluster_min_p < 0.05,
+             # the floor of the ORIGINAL three-building design (Amendment 3): recorded here so
+             # the 0.167 the papers quote lives in an artefact, not only in the pre-registration
+             "design_three_buildings_min_attainable_p": 1.0 / math.factorial(3),
              "F2_informative": False,
              "F2_note": "the only F2-contradicting cell is MR2, whose anchor is device-stratum and "
                         "absent from every unit net (Amendment 1 C); its predictor is invalid"}

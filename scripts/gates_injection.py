@@ -101,8 +101,8 @@ def main() -> int:
     for r in rows:
         # caught: the expected gate fired and no other did; for the leak row
         # (no gate expected) the record is simply which gates fired — none.
-        r["caught"] = bool(r["fired"].get(r["expected"], False)) if r["expected"] else False
         r["gates_fired"] = [k for k, v in r["fired"].items() if v]
+        r["caught"] = (r["gates_fired"] == [r["expected"]]) if r["expected"] else False
     out = {"source_log": src.name, "cases": int(base[C].nunique()), "events": int(len(base)),
            "rows": [{k: v for k, v in r.items() if k != "seconds_stdout_only"} for r in rows],
            "reading": "Each structural defect class fires exactly the gate it was built for; the leaked "

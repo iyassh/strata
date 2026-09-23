@@ -13,8 +13,8 @@
         "G3": false,
         "G4": false
       },
-      "caught": false,
-      "gates_fired": []
+      "gates_fired": [],
+      "caught": false
     },
     {
       "injection": "dup_file",
@@ -26,10 +26,10 @@
         "G3": false,
         "G4": false
       },
-      "caught": true,
       "gates_fired": [
         "G1"
-      ]
+      ],
+      "caught": true
     },
     {
       "injection": "dup_case",
@@ -41,10 +41,10 @@
         "G3": false,
         "G4": true
       },
-      "caught": true,
       "gates_fired": [
         "G4"
-      ]
+      ],
+      "caught": true
     },
     {
       "injection": "rotate",
@@ -56,10 +56,10 @@
         "G3": false,
         "G4": false
       },
-      "caught": true,
       "gates_fired": [
         "G2"
-      ]
+      ],
+      "caught": true
     },
     {
       "injection": "calendar",
@@ -71,10 +71,10 @@
         "G3": true,
         "G4": false
       },
-      "caught": true,
       "gates_fired": [
         "G3"
-      ]
+      ],
+      "caught": true
     },
     {
       "injection": "leak",
@@ -86,8 +86,8 @@
         "G3": false,
         "G4": false
       },
-      "caught": false,
-      "gates_fired": []
+      "gates_fired": [],
+      "caught": false
     }
   ],
   "reading": "Each structural defect class fires exactly the gate it was built for; the leaked per-case constant fires none, because no log-generic gate reads the relation between an instance and its label."

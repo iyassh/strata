@@ -51,6 +51,10 @@ def run_split(system: str, split_name: str, split_fn) -> dict:
         man = yaml.safe_load(Path(f"configs/lbnl_{system}/scenarios.yaml").read_text())
         hold_n = cfg.rules["detection"]["holdout_days_per_month"]
         card = {s["file"]: s for s in json.loads(Path(f"outputs/benchmark_v6_{system}.json").read_text())["scenarios"]}
+        # L36: assert the scorecard vocabulary this script compares against (channel tokens are
+        # rules/resid/model/device/freq/rate/osc; a first run tested "frequency" and matched nothing)
+        toks = {t for s in card.values() for t in str(s["meaningful_channels"]).split("+")}
+        assert toks <= {"rules", "resid", "model", "device", "freq", "rate", "osc", "None", ""}, toks
         hdf = pd.read_parquet(f"data/processed/{system}/{man['healthy_file']}.parquet")
         added = enrich(cfg, hdf, hold_n)
         hlog = abstract_events(hdf, cfg)

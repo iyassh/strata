@@ -64,3 +64,20 @@ conformance.
 
 `scripts/x15_enriched_frequency.py` → `outputs/x15_enriched_frequency.json`,
 guarded by a test pinning fired/unfired falsifiers.
+
+## Amendment 1 (2026-09-23, after the first run's output had been read)
+
+1. **Scorecard vocabulary.** The pre-registered driver tested
+   `"frequency" in meaningful_channels`; the scorecards spell that channel
+   `freq`, so P4's comparator (deployed frequency-significant count on
+   detected scenarios) was 0 under the pre-registered code and P4 held
+   trivially. I read the first run's P4 line (41 vs 0), recognised the key
+   error, corrected it to `"freq"` and re-ran; the comparator became 12 and
+   P4 still held. The change made P4 strictly harder and touched nothing
+   else, but it was made after output was read, and that is recorded here.
+   The driver now asserts the scorecard vocabulary (lesson L36).
+2. **Denominator.** "≤ 9 of 96 on SDAHU" — the frequency channel's day
+   universe is the set of days with any state event (87 of the 96 holdout
+   days on SDAHU; 96 on both fan-powered units), so P1 was tested against
+   87 there, an allowed rate of 10.3 % rather than 9.4 %. No consequence
+   (2 and 0), recorded.

@@ -207,6 +207,7 @@ alignments.
 | enriched frequency channel | SDAHU | PFPU | SFPU |
 |---|---|---|---|
 | holdout FP, last-8 / first-8 | 2 / 0 of 87 | 4 / 8 of 96 | 3 / 5 of 96 |
+| deployed frequency channel's own holdout FP (`union_fpr_*.json`) | 1 of 96 | 1 of 96 | 1 of 96 |
 | significant scenarios, last-8 / first-8 | 10 / 10 of 14 | 11 / 8 of 30 | 21 / 18 of 29 |
 | newly significant under **both** splits | — | — | `ReheatCoilFouling_Airside_Moderate` (365 of 365 days under each) |
 
@@ -214,9 +215,11 @@ alignments.
 both splits (P1); the airside-moderate fouling detection survives the
 mirrored split (P2); nothing else new (P3); on the scenarios the deployed
 detector already catches, the enriched frequency channel is significant on
-41 against the deployed frequency channel's 12 (P4). (SDAHU's denominator
+41 of 61 against the deployed frequency channel's 12 of 61 (P4). (SDAHU's denominator
 is 87: the days on which the state log has any event, as the frequency
-channel counts them.)
+channel counts them — an event-log day universe, against the pipeline's
+rule that the day universe comes from the raw calendar; disclosed in the
+pre-registration's amendment, no consequence at 2 and 0.)
 
 **Reading.** The night's one constructive result. A healthy-derived
 enrichment of the operating-state alphabet, read through the deployed
@@ -226,7 +229,9 @@ zone-damper signature (X14 control) — inside the false-alarm budget under
 two holdouts, and roughly triples the frequency channel's coverage of
 already-detected scenarios. It is a **candidate deployable addition**, not an
 adopted one: adoption changes every published scorecard and the false-alarm
-budget accounting, and is a separate, pre-registered decision (X16). It
+budget accounting, and is a separate decision, to be pre-registered (X16). Like
+for like, the enriched channel costs three to eight times the false alarms
+of the channel it enriches — the price of the coverage. It
 says nothing about alignment-based conformance, which remains at zero
 unique detections and, on this alphabet, computationally impractical on
 the fan-powered units.
@@ -253,7 +258,7 @@ the fan-powered units.
    fouling ones either. On the enriched alphabet, read through the
    frequency channel alone (X15), airside-moderate fouling is detected
    inside the budget under two holdouts — a candidate addition awaiting a
-   pre-registered adoption decision (X16).
+   separate adoption decision, to be pre-registered (X16).
 
 ## Ledger
 

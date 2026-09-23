@@ -141,6 +141,12 @@ if not pred["P3_reduces_misses"] and not pred["P4_unique_vs_frequency_ge_3"]:
     fired.append("F-X12.b: no new scenario and no unique days beyond frequency — time perspective redundant")
 if not pred["P2_no_fouling_sig"]:
     fired.append("F-X12.c: a fouling scenario is significant — the 'identical log' diagnosis is wrong somewhere")
+out["notes"] = [
+    "P4 as pre-registered is a low bar: unique days against one channel (frequency), not against the deployed union; it cannot rescue P3.",
+    "A first run compared against scorecard keys that do not exist (absence, frequency, oscillation) and left P4 uncomputed; corrected to the exported keys before anything was adopted (pre-registration erratum).",
+    "ttd_time_days is the channel's first raw flag; the scorecard's ttd_days comes from significance-gated channels, so the comparison is asymmetric in kind and only reported where the time channel is significant.",
+    "The suite carries two significance floors; p is given under both. n_days counts days on which the channel has any statistic (its abstention rule), beside the scorecard's evaluable days.",
+]
 out["n_scored"] = len(rows)
 out["predictions"] = pred
 out["falsifiers_fired"] = fired

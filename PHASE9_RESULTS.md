@@ -71,7 +71,10 @@ low bar: unique against *one* channel, not against the deployed union, so it
 cannot rescue P3; and the first run of the script did not compute it at all,
 reading a scorecard key that does not exist, which review caught before
 anything was adopted — disclosed here). Time-to-detect: **never earlier**
-than the deployed detector (0 of 11; typically day 14 vs day 1).
+than the deployed detector (0 of 11; typically day 14 vs day 1) — a
+comparison asymmetric in kind, the channel's first raw flag against the
+scorecard's gated first flag, which favours the time channel and it still
+loses.
 
 What it adds is a **small day-level coverage supplement** on scenarios
 already detected, measured against the union of the six exported channel

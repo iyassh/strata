@@ -2093,6 +2093,12 @@
       }
     }
   },
+  "notes": [
+    "P4 as pre-registered is a low bar: unique days against one channel (frequency), not against the deployed union; it cannot rescue P3.",
+    "A first run compared against scorecard keys that do not exist (absence, frequency, oscillation) and left P4 uncomputed; corrected to the exported keys before anything was adopted (pre-registration erratum).",
+    "ttd_time_days is the channel's first raw flag; the scorecard's ttd_days comes from significance-gated channels, so the comparison is asymmetric in kind and only reported where the time channel is significant.",
+    "The suite carries two significance floors; p is given under both. n_days counts days on which the channel has any statistic (its abstention rule), beside the scorecard's evaluable days."
+  ],
   "n_scored": 73,
   "predictions": {
     "P1_sig_ge_5": true,

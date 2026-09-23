@@ -19,6 +19,9 @@ sys.path.insert(0, str(REPO / "src"))
 from strata.io.config import load_config          # noqa: E402
 from strata.core.pipeline import fit, day_universe  # noqa: E402
 from strata.hvac.events import abstract_events, state_only  # noqa: E402
+from strata.core.devices import device_log, device_templates  # noqa: E402
+from pm4py.objects.log.obj import EventLog, Trace, Event  # noqa: E402
+from pm4py.algo.conformance.alignments.petri_net import algorithm as ali  # noqa: E402
 
 ROOT = str(REPO) + "/"
 ANCHOR = "heating_active"
@@ -161,10 +164,125 @@ def compute(SYS: str) -> dict:
     return res
 
 
+def compute_device(SYS: str) -> dict:
+    """Device-stratum Q (Amendment 1, addition 1): one pooled device net per
+    system; anchor is the pooled activity (no @device suffix)."""
+    if SYS == "sdahu":
+        return {"device_model": None}
+    CFG, HEA = SPEC[SYS]
+    t0 = time.time()
+    cfg = load_config(ROOT + CFG)
+    df = pd.read_parquet(ROOT + HEA)
+
+    det = fit(cfg, df)
+    dm = det.device_model
+    if dm is None:
+        return {"device_model": None}
+    net, im, fm, ndev_train = dm.net, dm.im, dm.fm, dm.n_train_cases
+    print(f"[{SYS}] device net {len(net.places)}p/{len(net.transitions)}t "
+          f"({sum(1 for t in net.transitions if t.label is None)} silent); "
+          f"labels={sorted({t.label for t in net.transitions if t.label})}", flush=True)
+
+    tpl = device_templates(cfg)
+    heat_tpl = sorted({v[0] for k, v in tpl.items() if "heating" in k and k.endswith("_active")})
+    print(f"[{SYS}] device templates for zone heating 'on' events: {heat_tpl}", flush=True)
+    ANCHOR = heat_tpl[0] if heat_tpl else None
+
+    log = abstract_events(df, cfg)
+    dlog = device_log(log, cfg).sort_values(["case_id", "timestamp"])
+    uni = day_universe(df, cfg)
+    occ_days = [d for d in uni.index if uni.loc[d, "occupied_min"] > 0]
+    devices = sorted(dlog["device"].unique())
+
+    case_var = {c: tuple(g["activity"]) for c, g in dlog.groupby("case_id", sort=True)}
+    variants = sorted(set(case_var.values()))
+    print(f"[{SYS}] {len(devices)} devices {devices}, {len(case_var)} day-device cases, "
+          f"{len(variants)} device variants, {len(occ_days)} occupied days", flush=True)
+
+    def align(traces):
+        base = pd.Timestamp("2000-01-01"); el = EventLog()
+        for t in traces:
+            tr = Trace()
+            for j, a in enumerate(t):
+                tr.append(Event({"concept:name": a, "time:timestamp": base + pd.Timedelta(seconds=j)}))
+            el.append(tr)
+        dg = ali.apply(el, net, im, fm, variant=ali.Variants.VERSION_STATE_EQUATION_A_STAR)
+        assert len(dg) == len(traces)
+        for t, d in zip(traces, dg):
+            assert tuple(lm for lm, mm in d["alignment"] if lm != ">>") == t
+        return dg
+
+    vd = align(variants)
+    vi = {v: i for i, v in enumerate(variants)}
+    sync = {v: any(lm == ANCHOR and mm == ANCHOR for lm, mm in vd[vi[v]]["alignment"])
+            for v in variants}
+    cost0_orig = {v: float(vd[vi[v]]["fitness"]) >= 1 - 1e-12 for v in variants}
+
+    per_dev = {}
+    for dev in devices:
+        n_sync = n_raw = n_present = 0
+        for d in occ_days:
+            v = case_var.get(f"{d}__{dev}")
+            if v is None:
+                continue
+            n_present += 1
+            if ANCHOR in v:
+                n_raw += 1
+            if sync[v]:
+                n_sync += 1
+        per_dev[dev] = {"sync_days": n_sync, "occupied_days": len(occ_days),
+                        "days_with_trace": n_present,
+                        "raw_log_days_with_anchor": n_raw,
+                        "frac": n_sync / len(occ_days)}
+        print(f"[{SYS}] {dev}: sync {n_sync}/{len(occ_days)} raw {n_raw} "
+              f"traces {n_present}", flush=True)
+
+    q_sup_dev = sum(v["frac"] for v in per_dev.values()) / len(per_dev)
+
+    # Q_obligatory_device: pooled over all device variants, and per device
+    short = [tuple(a for a in v if a != ANCHOR) for v in variants]
+    sd = align(short)
+    short_c0 = {variants[i]: float(sd[i]["fitness"]) >= 1 - 1e-12 for i in range(len(variants))}
+    pooled_c0 = sum(short_c0.values())
+    q_obl_dev_pooled = 0 if pooled_c0 > 0 else 1
+
+    per_dev_obl = {}
+    for dev in devices:
+        dvars = sorted({case_var[c] for c in case_var if c.endswith("__" + dev)})
+        c0 = sum(1 for v in dvars if short_c0[v])
+        base_c0 = sum(1 for v in dvars if cost0_orig[v])
+        per_dev_obl[dev] = {"variants": len(dvars), "cost0_without_anchor": c0,
+                            "baseline_cost0_unmodified": base_c0,
+                            "Q_obligatory_device": 0 if c0 > 0 else 1}
+        print(f"[{SYS}] {dev}: variants={len(dvars)} cost0_noanchor={c0} "
+              f"baseline_cost0={base_c0}", flush=True)
+
+    res = {
+      "anchor_activity_in_device_net": ANCHOR,
+      "device_net_is_pooled_across_devices": True,
+      "devices": devices,
+      "Q_support_device": q_sup_dev,
+      "Q_obligatory_device": q_obl_dev_pooled,
+      "per_device": per_dev,
+      "per_device_obligatory": per_dev_obl,
+      "device_variants_tested": len(variants),
+      "device_variants_cost0_without_anchor": pooled_c0,
+      "baseline_device_variants_cost0_unmodified": sum(cost0_orig.values()),
+      "device_net": {"places": len(net.places), "transitions": len(net.transitions),
+                     "silent": sum(1 for t in net.transitions if t.label is None),
+                     "labels": sorted({t.label for t in net.transitions if t.label})},
+      "n_train_cases": ndev_train,
+    }
+
+    return res
+
+
 def main() -> int:
     out_path = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv \
         else REPO / "outputs" / "discovery_predicts_transfer_q.json"
     result = {s: compute(s) for s in SPEC}
+    for s in SPEC:
+        result[s]["device"] = compute_device(s)
     result["_method"] = ("Unit-stratum net from fit().unit_model (inductive miner, noise 0.2, state "
                          "alphabet, train days only); pm4py alignments VERSION_STATE_EQUATION_A_STAR via "
                          "the low-level API in log order, one alignment per distinct variant mapped back "

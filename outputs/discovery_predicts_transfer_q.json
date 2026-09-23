@@ -28,15 +28,43 @@
       "variants_with_empty_shortened_trace": 0,
       "variants_containing_heating": 0,
       "occupied_days_whose_log_contains_heating": 0,
+      "cost0_shortened_examples": [
+        [
+          "economizer_window_entered",
+          "economizer_window_exited",
+          "economizer_window_entered",
+          "system_started",
+          "cooling_active",
+          "economizer_window_exited",
+          "system_stopped",
+          "cooling_inactive",
+          "economizer_window_entered"
+        ],
+        [
+          "economizer_window_entered",
+          "system_started",
+          "cooling_active",
+          "cooling_inactive",
+          "cooling_active",
+          "cooling_inactive",
+          "cooling_active",
+          "economizer_window_exited",
+          "system_stopped",
+          "cooling_inactive"
+        ],
+        [
+          "economizer_window_entered",
+          "system_started",
+          "cooling_active",
+          "cooling_inactive",
+          "cooling_active",
+          "economizer_window_exited",
+          "system_stopped",
+          "cooling_inactive"
+        ]
+      ],
       "n_train_days": 248,
-      "fit_seconds": 5.6,
-      "baseline_original_variants_cost0": 72,
-      "baseline_cost0_variants_containing_heating": 0,
-      "mean_variant_fitness_unmodified": 0.9004
-    },
-    "device": {
-      "device_model": null,
-      "reason": "no device-stratum rules in configs/lbnl_sdahu/rules.yaml; devices.build_device_detector returns None on an empty device log"
+      "fit_seconds": 4.6
     }
   },
   "pfpu": {
@@ -69,99 +97,76 @@
       "variants_with_empty_shortened_trace": 0,
       "variants_containing_heating": 165,
       "occupied_days_whose_log_contains_heating": 166,
-      "n_train_days": 269,
-      "fit_seconds": 34.9,
-      "baseline_original_variants_cost0": 29,
-      "baseline_cost0_variants_containing_heating": 0,
-      "mean_variant_fitness_unmodified": 0.8976
-    },
-    "device": {
-      "anchor_activity_in_device_net": "zone_heating_active",
-      "device_net_is_pooled_across_devices": true,
-      "devices": [
-        "TU_E",
-        "TU_I",
-        "TU_S",
-        "TU_W"
-      ],
-      "Q_support_device": 0.436986301369863,
-      "Q_obligatory_device": 0,
-      "per_device": {
-        "TU_E": {
-          "sync_days": 120,
-          "occupied_days": 365,
-          "days_with_trace": 201,
-          "raw_log_days_with_anchor": 163,
-          "frac": 0.3287671232876712
-        },
-        "TU_I": {
-          "sync_days": 237,
-          "occupied_days": 365,
-          "days_with_trace": 261,
-          "raw_log_days_with_anchor": 261,
-          "frac": 0.6493150684931507
-        },
-        "TU_S": {
-          "sync_days": 143,
-          "occupied_days": 365,
-          "days_with_trace": 223,
-          "raw_log_days_with_anchor": 170,
-          "frac": 0.3917808219178082
-        },
-        "TU_W": {
-          "sync_days": 138,
-          "occupied_days": 365,
-          "days_with_trace": 224,
-          "raw_log_days_with_anchor": 163,
-          "frac": 0.3780821917808219
-        }
-      },
-      "per_device_obligatory": {
-        "TU_E": {
-          "variants": 135,
-          "cost0_without_anchor": 24,
-          "baseline_cost0_unmodified": 24,
-          "Q_obligatory_device": 0
-        },
-        "TU_I": {
-          "variants": 9,
-          "cost0_without_anchor": 0,
-          "baseline_cost0_unmodified": 0,
-          "Q_obligatory_device": 1
-        },
-        "TU_S": {
-          "variants": 131,
-          "cost0_without_anchor": 25,
-          "baseline_cost0_unmodified": 25,
-          "Q_obligatory_device": 0
-        },
-        "TU_W": {
-          "variants": 146,
-          "cost0_without_anchor": 27,
-          "baseline_cost0_unmodified": 27,
-          "Q_obligatory_device": 0
-        }
-      },
-      "device_variants_tested": 284,
-      "device_variants_cost0_without_anchor": 44,
-      "baseline_device_variants_cost0_unmodified": 44,
-      "device_net": {
-        "places": 10,
-        "transitions": 12,
-        "silent": 8,
-        "labels": [
-          "zone_fan_started",
-          "zone_fan_stopped",
-          "zone_heating_active",
-          "zone_heating_inactive"
+      "cost0_shortened_examples": [
+        [
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "night_cycle_ended",
+          "night_cycle_started"
+        ],
+        [
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active"
+        ],
+        [
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "cooling_active",
+          "cooling_inactive",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "night_cycle_ended",
+          "night_cycle_started",
+          "night_cycle_ended"
         ]
-      },
-      "n_train_cases": 681,
-      "anchor_sync_moves_all_variants": 200,
-      "anchor_log_only_moves_all_variants": 158,
-      "zone_fan_started_sync_moves": 13491,
-      "zone_fan_started_log_only_moves": 201,
-      "mean_device_variant_fitness": 0.9542
+      ],
+      "n_train_days": 269,
+      "fit_seconds": 34.0
     }
   },
   "sfpu": {
@@ -195,108 +200,10 @@
       "variants_with_empty_shortened_trace": 0,
       "variants_containing_heating": 356,
       "occupied_days_whose_log_contains_heating": 357,
+      "cost0_shortened_examples": [],
       "n_train_days": 269,
-      "fit_seconds": 36.6,
-      "baseline_original_variants_cost0": 44,
-      "baseline_cost0_variants_containing_heating": 44,
-      "mean_variant_fitness_unmodified": 0.9528
-    },
-    "device": {
-      "anchor_activity_in_device_net": "zone_heating_active",
-      "device_net_is_pooled_across_devices": true,
-      "devices": [
-        "TU_E",
-        "TU_I",
-        "TU_S",
-        "TU_W"
-      ],
-      "Q_support_device": 0.014383561643835616,
-      "Q_obligatory_device": 0,
-      "per_device": {
-        "TU_E": {
-          "sync_days": 4,
-          "occupied_days": 365,
-          "days_with_trace": 365,
-          "raw_log_days_with_anchor": 141,
-          "frac": 0.010958904109589041
-        },
-        "TU_I": {
-          "sync_days": 0,
-          "occupied_days": 365,
-          "days_with_trace": 365,
-          "raw_log_days_with_anchor": 182,
-          "frac": 0.0
-        },
-        "TU_S": {
-          "sync_days": 9,
-          "occupied_days": 365,
-          "days_with_trace": 365,
-          "raw_log_days_with_anchor": 137,
-          "frac": 0.024657534246575342
-        },
-        "TU_W": {
-          "sync_days": 8,
-          "occupied_days": 365,
-          "days_with_trace": 365,
-          "raw_log_days_with_anchor": 137,
-          "frac": 0.021917808219178082
-        }
-      },
-      "per_device_obligatory": {
-        "TU_E": {
-          "variants": 64,
-          "cost0_without_anchor": 33,
-          "baseline_cost0_unmodified": 33,
-          "Q_obligatory_device": 0
-        },
-        "TU_I": {
-          "variants": 52,
-          "cost0_without_anchor": 31,
-          "baseline_cost0_unmodified": 31,
-          "Q_obligatory_device": 0
-        },
-        "TU_S": {
-          "variants": 61,
-          "cost0_without_anchor": 33,
-          "baseline_cost0_unmodified": 33,
-          "Q_obligatory_device": 0
-        },
-        "TU_W": {
-          "variants": 60,
-          "cost0_without_anchor": 33,
-          "baseline_cost0_unmodified": 33,
-          "Q_obligatory_device": 0
-        }
-      },
-      "device_variants_tested": 86,
-      "device_variants_cost0_without_anchor": 33,
-      "baseline_device_variants_cost0_unmodified": 33,
-      "device_net": {
-        "places": 10,
-        "transitions": 12,
-        "silent": 8,
-        "labels": [
-          "zone_fan_started",
-          "zone_fan_stopped",
-          "zone_heating_active",
-          "zone_heating_inactive"
-        ]
-      },
-      "n_train_cases": 1076,
-      "anchor_sync_moves_all_variants": 35,
-      "anchor_log_only_moves_all_variants": 58,
-      "zone_fan_started_sync_moves": 865,
-      "zone_fan_started_log_only_moves": 16,
-      "mean_device_variant_fitness": 0.9206
+      "fit_seconds": 32.6
     }
   },
-  "_method": {
-    "net": "strata.core.pipeline.fit(cfg, healthy_df).unit_model -> .net/.im/.fm (inductive miner, noise_threshold=0.2, state_only() unit-stratum slice, discovered on TRAIN days only per core.detection.build_detector)",
-    "alignments": "pm4py 2.7.22.5, pm4py.algo.conformance.alignments.petri_net.algorithm.apply(EventLog, net, im, fm, variant=VERSION_STATE_EQUATION_A_STAR) - the default optimal-alignment variant; log-order preserving, so no case-id sort assumption. Each alignment's log-move projection was asserted equal to its input trace.",
-    "sync_move": "a pair (log_move, model_move) with both == 'heating_active'",
-    "Q_support": "aligned once per distinct variant, then mapped to days; denominator is all healthy occupied days from pipeline.day_universe (occupied_min > 0). 0 occupied days lacked state events on any system.",
-    "Q_obligatory": "every distinct variant of the healthy unit-stratum state log, with every heating_active event deleted, aligned; cost 0 == fitness 1.0",
-    "device_stratum": "The detector holds ONE POOLED device net (StrataDetector.device_model.net), not one net per device: devices.device_templates strips the zone token, so cases are '<day>__<device>' over pooled class activities. The device-stratum heating activity is therefore named 'zone_heating_active' with NO '@<device>' suffix; device identity lives in the case id. Q_support_device = mean over the 4 devices of (occupied days whose day-device alignment has a sync move on zone_heating_active) / (365 occupied days); a device silent on a day contributes no trace and counts as no sync move. Q_obligatory_device computed pooled over all device variants and also per device.",
-    "amendment_1": "Per team-lead: seal holds only for the six MR2/MR3 cells; SDAHU's three cells are excluded from P1/P2 as degenerate but computed and reported as defined."
-  }
+  "_method": "Unit-stratum net from fit().unit_model (inductive miner, noise 0.2, state alphabet, train days only); pm4py alignments VERSION_STATE_EQUATION_A_STAR via the low-level API in log order, one alignment per distinct variant mapped back to days; Q_support = occupied days whose alignment has a sync move on heating_active; Q_obligatory = 1 iff no variant with heating_active deleted aligns at cost 0. Adopted from the sealed computation of 2026-09-23."
 }

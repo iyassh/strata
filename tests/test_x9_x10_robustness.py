@@ -30,6 +30,7 @@ def test_x9_x10_pinned():
     assert (c["sfpu"]["noise_1x"]["detected"], c["sfpu"]["noise_1x"]["holdout_fp_days"]) == (24, 2)
     assert (c["pfpu"]["split_first8"]["detected"], c["pfpu"]["split_first8"]["holdout_fp_days"]) == (23, 2)
     assert (c["sfpu"]["split_first8"]["detected"], c["sfpu"]["split_first8"]["holdout_fp_days"]) == (25, 3)
+    assert a["systems"]["sdahu"]["alignment_channels"] is True
     assert a["systems"]["pfpu"]["alignment_channels"] is False and a["systems"]["sfpu"]["alignment_channels"] is False
     assert any("jitter" in n for n in a["notes"])
     assert "seconds" not in json.dumps(a)

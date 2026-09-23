@@ -109,7 +109,9 @@
             "oa_bias_4_annual": false
           }
         }
-      }
+      },
+      "alignment_channels": true,
+      "note": "all-channel arms produced by the per-system process launched under Amendment 2, before Amendment 3's --no-alignment path existed; merged into this artefact"
     },
     "sfpu": {
       "clean_detected": 24,

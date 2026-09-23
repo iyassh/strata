@@ -273,12 +273,14 @@ family in particular is at the edge on both fan-powered units.
 **What this does not show.** Jitter is not bias or drift, which is the
 limitation the papers state; the 2×/4× arms ran only on SDAHU (identical
 at every dose); the fan-powered arms exclude the conformance channels,
-whose contribution on clean data is nil. A bias/drift arm is future work.
+whose removal changes no clean detection count (and lowers the series
+unit's holdout FP from 4 to 1). A bias/drift arm is future work.
 
 The run also exposed a performance bug in the deployed `score()` — the set
-of event days was rebuilt inside a per-day loop, O(days × events), sixteen
-minutes per file once jitter inflated the event count — fixed with results
-byte-identical (780ec3e).
+of event days was rebuilt inside a per-day loop, O(days × events); on one
+laptop (console timing, not committed) that was sixteen minutes per file
+once jitter inflated the event count — fixed with results byte-identical
+(780ec3e).
 
 ## What this settles
 
@@ -312,4 +314,4 @@ byte-identical (780ec3e).
 | X13 | 89ae874 | 2026-09-23 | P1 ✗ P2 ✓ P3 ✓ | **F-X13.b fired** (under both the shipped and the deployed denominator convention) | `x13_coil_effectiveness.json` |
 | X14 | c9e19f5 (A1 4187b97, A2 a1f5b3e, A3 06dea4c) | 2026-09-23 | P1 ✓ (by the letter) **P2 ✗** P3 ✓ | **F-X14.a fired** | `x14_enriched_alphabet.json` + `x14_control.json` |
 | X15 | 0d0c692 (post-hoc-motivated, stated) | 2026-09-23 | P1 ✓ P2 ✓ P3 ✓ P4 ✓ | none fired | `x15_enriched_frequency.json` |
-| X9/X10 | 289e53f (A1 65b7977, A2 823d339, A3 5b2be6d) | 2026-09-23 | all binding predictions ✓ | none fired | `x9_x10_robustness.json` |
+| X9/X10 | 289e53f (A1 fd79dfb, errata 65b7977, A2 823d339, A3 5b2be6d) | 2026-09-23 | all binding predictions ✓ | none fired | `x9_x10_robustness.json` |

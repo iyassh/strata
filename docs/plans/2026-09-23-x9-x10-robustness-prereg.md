@@ -127,3 +127,5 @@ deployed detector minus those channels: detections 23 / 24, holdout FP 5 / 1
 of 96. Predictions and falsifiers are otherwise unchanged and are read
 against that reference. SDAHU's completed arms, with every channel, stand.
 No fan-powered number had been produced when this was written.
+
+Note (after review): every timing quoted in the amendments above (334 s, 25 min, 2 h 30, 4 h 15) is a single-laptop console observation, printed and not committed; the artefact carries no timings.

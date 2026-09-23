@@ -42,8 +42,10 @@ def enrich(cfg, hdf: pd.DataFrame, hold_n: int) -> dict:
     day = w["Datetime"].dt.date.astype(str)
     train = ~holdout_mask(day, hold_n).values
     occ = (w["OCCUPIED"] > 0.5).values & train
+    # Amendment 1: setpoints excluded (never flows), 15-minute dwell on every added band
     sigs = [k for k in cfg.sensors if (k.endswith("_POS") or k.startswith("RH_FLOW_") or k.startswith("ZONE_FLOW_"))
-            and k in w.columns]
+            and "_SP" not in k and k in w.columns]
+    DWELL = {"min_dwell_min": 15}
     added = {}
     for s in sigs:
         v = w.loc[occ, s].dropna()
@@ -56,9 +58,9 @@ def enrich(cfg, hdf: pd.DataFrame, hold_n: int) -> dict:
         if s[-2] == "_" and s[-1] in ZONES:
             tag = {"stratum": "device", "device": f"TU_{s[-1]}"}
         cfg.rules["events"][f"x14_{s}_high"] = {"kind": "mode", "alphabet": "state", "signal": s, "on_above": q90,
-                                               "on_event": f"{s}_high_entered", "off_event": f"{s}_high_exited", **tag}
+                                               "on_event": f"{s}_high_entered", "off_event": f"{s}_high_exited", **tag, **DWELL}
         cfg.rules["events"][f"x14_{s}_low"] = {"kind": "window", "alphabet": "state", "signal": s, "low": -1e9, "high": q10,
-                                              "enter_event": f"{s}_low_entered", "exit_event": f"{s}_low_exited", **tag}
+                                              "enter_event": f"{s}_low_entered", "exit_event": f"{s}_low_exited", **tag, **DWELL}
         added[s] = {"q10": round(q10, 4), "q90": round(q90, 4)}
     return added
 

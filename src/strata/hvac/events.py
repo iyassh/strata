@@ -98,6 +98,24 @@ def _falling_edges(cond: pd.Series) -> pd.Series:
     return ~cond & prev.astype(bool)
 
 
+def _debounce(cond: pd.Series, min_samples: int) -> pd.Series:
+    """Drop state runs shorter than ``min_samples`` by absorbing them into the
+    preceding state (X14 `min_dwell_min`): a signal hovering at a band edge
+    then emits one transition per real excursion, not one per sample."""
+    if min_samples <= 1 or cond.empty:
+        return cond
+    v = cond.to_numpy(dtype=bool).copy()
+    change = np.flatnonzero(v[1:] != v[:-1]) + 1
+    starts = np.concatenate([[0], change]); ends = np.concatenate([change, [len(v)]])
+    cur = v[0]
+    for s, e in zip(starts, ends):
+        if e - s < min_samples and s > 0:
+            v[s:e] = cur          # too short: keep the previous state
+        else:
+            cur = v[s]
+    return pd.Series(v, index=cond.index)
+
+
 def _first_sustained_run(cond: pd.Series, min_samples: int) -> int | None:
     """Positional index of the first CONSECUTIVE True-run of >= min_samples."""
     if not cond.any():
@@ -217,10 +235,14 @@ def abstract_events(df: pd.DataFrame, cfg: Config) -> pd.DataFrame:
             emit_edges(_falling_edges(occ), r["off_event"])
         elif kind == "mode":
             on = w[r["signal"]] > r["on_above"]
+            if r.get("min_dwell_min"):
+                on = _debounce(on, max(1, math.ceil(r["min_dwell_min"] / interval)))
             emit_edges(_rising_edges(on), r["on_event"])
             emit_edges(_falling_edges(on), r["off_event"])
         elif kind == "window":
             in_win = (w[r["signal"]] >= r["low"]) & (w[r["signal"]] <= r["high"])
+            if r.get("min_dwell_min"):
+                in_win = _debounce(in_win, max(1, math.ceil(r["min_dwell_min"] / interval)))
             emit_edges(_rising_edges(in_win), r["enter_event"])
             emit_edges(_falling_edges(in_win), r["exit_event"])
         else:  # mismatch / leak / setpoint_deviation

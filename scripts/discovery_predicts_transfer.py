@@ -16,7 +16,9 @@ the result does not depend on an optional dependency.
 """
 from __future__ import annotations
 
+import itertools
 import json
+import math
 import random
 import sys
 from pathlib import Path
@@ -70,14 +72,19 @@ def main() -> int:
 
     # P1: firings decrease in Q_support -> rho < 0, permutation p < 0.05
     rho = spearman(qs, ys)
-    rng = random.Random(SEED)
-    hits = 0
-    for _ in range(N_PERM):
-        perm = ys[:]
-        rng.shuffle(perm)
-        if spearman(qs, perm) <= rho:
-            hits += 1
-    p1_p = hits / N_PERM
+    # Exact enumeration when the cell count permits (6! = 720); Monte Carlo
+    # otherwise. Exactness replaces sampling noise on a boundary result and
+    # changes nothing about the pre-registered rule.
+    if len(ys) <= 8:
+        perms = list(itertools.permutations(ys))
+        hits = sum(1 for perm in perms if spearman(qs, list(perm)) <= rho)
+        p1_p, n_perm_used = hits / len(perms), len(perms)
+    else:
+        rng = random.Random(SEED); hits = 0
+        for _ in range(N_PERM):
+            perm = ys[:]; rng.shuffle(perm)
+            if spearman(qs, perm) <= rho: hits += 1
+        p1_p, n_perm_used = hits / N_PERM, N_PERM
     p1_pass = rho < 0 and p1_p < 0.05
 
     # P2: obligatory <-> zero firings, every cell
@@ -112,7 +119,7 @@ def main() -> int:
                   for (r, s) in all_cells],
         "amendment_1": "SDAHU excluded from P1/P2: no heating signal in its configuration; "
                        "P1 scored on six PFPU/SFPU cells; seal holds for MR2/MR3 only",
-        "P1": {"rho": rho, "perm_p": p1_p, "n_perm": N_PERM, "seed": SEED, "pass": p1_pass},
+        "P1": {"rho": rho, "perm_p": p1_p, "n_perm": n_perm_used, "exact": n_perm_used != N_PERM, "seed": SEED, "pass": p1_pass},
         "P2": {"rows": p2_rows, "pass": p2_pass},
         "P3": {"pass": p3_pass, "note": "secondary; MR1 firing order was known to the drafter"},
         "falsifiers_fired": fired,

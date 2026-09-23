@@ -1,0 +1,362 @@
+{
+  "healthy_file": "AHU_annual",
+  "n_fault_files": 20,
+  "rule_chosen_on": "healthy file only",
+  "thresholds": {
+    "SA_SP": 200.92543,
+    "SA_SPSPT": 0.80373
+  },
+  "rule": {
+    "SA_SP": "SA_SP day-median > 200.9254  => classified as healthy-file day",
+    "SA_SPSPT": "SA_SPSPT day-median > 0.8037  => classified as healthy-file day"
+  },
+  "per_feature": {
+    "SA_SP": {
+      "healthy_days": 365,
+      "healthy_days_classified_healthy": 365,
+      "fault_days": 7150,
+      "fault_days_misclassified_as_healthy": 0,
+      "accuracy": 1.0,
+      "healthy_range": [
+        401.85086,
+        403.478475
+      ],
+      "per_file": {
+        "coi_bias_-2_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.595870975,
+            1.6124573
+          ]
+        },
+        "coi_bias_-4_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.29646300999999997,
+            1.6124573
+          ]
+        },
+        "coi_bias_2_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.574813835,
+            1.6124878
+          ]
+        },
+        "coi_bias_4_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.445373535,
+            5.970321650000001
+          ]
+        },
+        "coi_leakage_010_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.33203125,
+            1.6124573
+          ]
+        },
+        "coi_leakage_025_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.33203125,
+            1.6124573
+          ]
+        },
+        "coi_leakage_040_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.33203125,
+            1.6124573
+          ]
+        },
+        "coi_leakage_050_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.33203125,
+            1.6124573
+          ]
+        },
+        "coi_stuck_010_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.377685545,
+            1.6124573
+          ]
+        },
+        "coi_stuck_025_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.43875122,
+            2.200943
+          ]
+        },
+        "coi_stuck_050_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.51472473,
+            1.6124573
+          ]
+        },
+        "coi_stuck_075_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.557083125,
+            1.6124573
+          ]
+        },
+        "damper_stuck_010_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            0.005004883,
+            1.6124573
+          ]
+        },
+        "damper_stuck_025_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            0.005004883,
+            1.6124573
+          ]
+        },
+        "damper_stuck_075_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            0.005004883,
+            5.497284
+          ]
+        },
+        "damper_stuck_100_annual_short": {
+          "days": 215,
+          "misclassified_as_healthy": 0,
+          "range": [
+            0.005004883,
+            1.6124573
+          ]
+        },
+        "oa_bias_-2_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.33428955000000005,
+            1.6124573
+          ]
+        },
+        "oa_bias_-4_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.33428955000000005,
+            1.6124573
+          ]
+        },
+        "oa_bias_2_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.33428955000000005,
+            1.6124573
+          ]
+        },
+        "oa_bias_4_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -0.33428955000000005,
+            1.6124573
+          ]
+        }
+      }
+    },
+    "SA_SPSPT": {
+      "healthy_days": 365,
+      "healthy_days_classified_healthy": 365,
+      "fault_days": 7150,
+      "fault_days_misclassified_as_healthy": 0,
+      "accuracy": 1.0,
+      "healthy_range": [
+        1.60746,
+        1.60746
+      ],
+      "per_file": {
+        "coi_bias_-2_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_bias_-4_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_bias_2_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_bias_4_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_leakage_010_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_leakage_025_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_leakage_040_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_leakage_050_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_stuck_010_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_stuck_025_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_stuck_050_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "coi_stuck_075_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "damper_stuck_010_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "damper_stuck_025_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "damper_stuck_075_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "damper_stuck_100_annual_short": {
+          "days": 215,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "oa_bias_-2_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "oa_bias_-4_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "oa_bias_2_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        },
+        "oa_bias_4_annual": {
+          "days": 365,
+          "misclassified_as_healthy": 0,
+          "range": [
+            -400.25253,
+            -400.25253
+          ]
+        }
+      }
+    }
+  },
+  "verdict": "A single threshold on either column, chosen from the healthy file alone, separates every healthy day from every fault-file day. Any model given these columns can classify file provenance perfectly without reference to any fault."
+}

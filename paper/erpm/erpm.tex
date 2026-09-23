@@ -1,0 +1,615 @@
+% =============================================================
+% ERPM'27 (Empirical Research in Process Mining @ ICPM'27) — 12pp LNBIP
+% Cut from paper/paper-v2.tex at commit c489460 (the reviewed long version).
+% Bibliography: ../references.bib
+%
+% RULE OBSERVED IN THIS FILE: every number appears either in paper-v2.tex
+% at c489460 or in a committed artefact under strata/outputs/. The artefact
+% behind each is named in a comment beside it.
+%
+% Sections 6 and 7 are PLACEHOLDERS by instruction and are not drafted here.
+% =============================================================
+
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{url}
+
+\begin{document}
+
+\title{Process Mining Did Not Detect the Faults}
+\subtitle{Four measured results from an application to HVAC, and the protocol
+that refuted the hypothesis behind it}
+
+%TODO co-authors: supervisors to be added as \inst{1} co-authors pending
+%     confirmation of authorship order (A. Aighobahi, M. Sharma).
+\author{Yassh Singh}
+\authorrunning{Y. Singh}
+\institute{Thompson Rivers University, Kamloops, BC, Canada
+%TODO contact e-mail
+}
+
+\maketitle
+
+\begin{abstract}
+We report a negative result and the protocol that produced it. Discovering
+Petri nets from fault-free operation of three building HVAC systems, we tested
+whether conformance against them detects seeded faults. Over all 73 seeded
+scenarios no fault is detected only by the two conformance channels; removing
+them changes no scorecard and lowers one system's false-alarm rate from four
+days in 96 to one. Three further measurements support that reading: a measured
+circularity bound, 1.78\% against 5.24\% recall at one threshold, obtained by
+partitioning the event alphabet; a reversal probe showing that two of the three
+discovered nets carry no ordering information in their fitness; and
+alignment-based support that equalled the raw log count exactly at the unit
+stratum, the net's reading adding nothing over counting. We report the
+protocol --- pre-registration with binding falsifiers, adversarial
+recomputation, tests that pin disclosures --- as what made the null checkable.
+
+\keywords{Process mining \and Conformance checking \and Event abstraction \and
+Negative results \and Reproducibility \and Cyber-physical systems.}
+\end{abstract}
+
+% =============================================================
+\section{Introduction: an empty quadrant, and what we found in it}
+\label{sec:intro}
+
+Process mining has spread steadily from business processes into
+cyber-physical and sensor-driven domains, and the spread has been reported
+as a success: discovery plus conformance checking works on robotic arms, on
+industrial IoT streams, on pasteurisation lines governed by an explicit
+regulatory standard. One domain of that kind is missing from the literature.
+Building heating, ventilation and air-conditioning (HVAC) operation is a
+continuous-flow, standard-governed, heavily instrumented process, and it does
+not appear. The nearest systematic review, of 36 process-mining studies on
+sensor data, classifies fourteen industrial applications, eleven smart-home
+applications, seven healthcare, two smart-office, two smart-product and one
+other, and records no building HVAC~\cite{brzychczy2025pmsensorreview}. The
+absence is corroborated from the other side: a survey of 211 AI-based HVAC
+fault-detection studies published between 2013 and 2023 has no process-mining
+entry at any leaf of its method taxonomy~\cite{bi2024aihvacreview}, a review of
+47 process-mining studies in Industry 4.0 covers manufacturing, logistics,
+mining and alarm management but no building
+applications~\cite{akhramovich2024pmindustry40}, where process mining has
+reached the built environment it is for construction and facility-management
+workflows with cases as projects~\cite{martinezlagunas2024constructionpm}, and
+the canonical fault-detection taxonomy for the domain does not list the method
+at all~\cite{granderson2017fddtoolsurvey}.
+
+The quadrant looked worth filling for a specific reason. The largest empirical
+characterisation of HVAC faults to date, across more than 60{,}000 pieces of
+equipment in 317 commercial buildings, finds that of the ten most common air
+handler faults, seven are behavioural rather than
+component-level~\cite{crowe2023faultprevalence}: schedules that run at the
+wrong hours, manual overrides never released, setpoint resets that are skipped,
+economiser sequences that execute their steps out of order. These are
+deviations in the ordering of operating states. Threshold alarms and
+hand-written rule libraries, which is what buildings actually run, fire on a
+variable leaving a band or on a named pattern being matched, and neither
+mechanism sees a sequence executed in the wrong order unless someone wrote a
+rule for that sequence in advance. The structural argument is
+straightforward, and it was our hypothesis: a model of the order in which a
+building moves between operating states should have an advantage on exactly the
+fault classes that dominate the field. We pre-registered it, with the
+observation that would refute it, and built the pipeline to test it.
+
+It was refuted. This paper reports the refutation and the three measurements
+that explain it, because a workshop on empirical research in process mining is
+the right venue for a result of this shape and because the field has almost no
+published record of what happens when the method is carried into a new domain
+and does not work. A precedent exists in another cyber-physical domain: Zhong
+and Lisitsa report, in a preprint, that na\"{\i}ve process mining on network
+event logs was ineffective for intrusion detection~\cite{zhong2022pmids}. Ours
+is the second data point we are aware of, and unlike the first it is
+accompanied by artefacts from which each number regenerates.
+
+Four results follow, in the order in which the protocol produced them. First, a
+\emph{measured circularity bound}: partitioning the event alphabet so that
+events already encoding engineering suspicion are withheld from discovery
+lowers the discovered model's apparent recall from 5.24\% to 1.78\% at the same
+threshold on the same split, a 3.5-percentage-point bound on model
+self-confirmation on a sensor-derived log (Section~\ref{sec:abstraction}).
+Second, the \emph{reversal probe}, a one-line test of whether a discovered net
+encodes order at all: fitness falls from 0.8861 to 0.5526 on one net and does
+not move on the other two (Section~\ref{sec:discovery}). Third, an
+\emph{artefact-verified null}: over 73 seeded scenarios, no fault is detected
+only by the two conformance channels, and removing those channels changes no
+scorecard (Section~\ref{sec:null}). Fourth, at the unit stratum the
+\emph{alignment-based support equalled the raw log count exactly}, so the net's
+reading added nothing over counting, while the device stratum ordered the two
+comparable buildings the opposite way (Section~\ref{sec:discovery}). The HVAC
+domain is the setting for these results; the results themselves are about
+process mining.
+
+% =============================================================
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Conformance as an anomaly detector.}
+Using conformance checking directly as a trace-level anomaly detector is an
+established line: Bezerra and Wainer score traces against a discovered model to
+flag anomalous ones~\cite{bezerra2013anomalytraces}, on conformance
+foundations laid by Rozinat and van der
+Aalst~\cite{rozinat2008conformance,vanderaalst2012replaying,carmona2018conformancechecking}.
+The line then moved elsewhere. Nolle and colleagues' BINet and its successors
+are neural sequence models trained on event logs, and they are reported to
+outperform conformance-based baselines on standard log
+corpora~\cite{nolle2022binet}. Our null belongs with that migration rather than
+against it: the conformance channels described here are the nearest descendant
+of the earlier approach, and finding that they contribute no detection a
+calibrated statistical channel does not already contribute is consistent with
+why the field moved.
+
+\paragraph{Event abstraction.}
+Turning continuous sensor streams into discrete activity sequences is the
+binding technical step for any sensor-domain application. We follow the
+methodology of Janssen and colleagues for deriving event logs from sensor
+data~\cite{janssen2021sensoreventlog} within the abstraction taxonomy of van
+Zelst and colleagues~\cite{vanzelst2021eventabstraction}.
+Section~\ref{sec:abstraction} reports the one decision in that step that
+carried a measurable consequence.
+
+\paragraph{Leakage.}
+That decision is a leakage decision. Weytjens and De Weerdt catalogue data
+leakage in process-mining experiments and show how easily a pipeline can
+evaluate itself~\cite{weytjens2022dataleakage}. The alphabet partition of
+Section~\ref{sec:abstraction} is a leakage control, and its cost --- what the
+model loses when it is no longer allowed to recognise the analyst's own rules
+--- is the first of our four results.
+
+\paragraph{Precision, and why we did not use it.}
+Whether a discovered net constrains order or merely permits a set of activities
+is the question precision metrics are meant to
+answer~\cite{munozgama2010precision,buijs2012quality}. Precision is, however, a
+contested measurement: Tax and colleagues catalogue its
+imprecisions~\cite{tax2018imprecisions}, and vanden Broucke and colleagues show
+how ill-posed it is on logs without negative
+examples~\cite{vandenbroucke2014negativeevents}, which sensor logs never have.
+We therefore replaced the metric with a direct probe
+(Section~\ref{sec:discovery}).
+
+\paragraph{Hypothesis testing in process mining.}
+Pitsch and colleagues argue that process-mining research should adopt explicit
+hypothesis testing~\cite{pitsch2025hypothesistesting}. The protocol behind this
+paper is one attempt to practise that, pre-registration and binding falsifiers
+included; Section~\ref{sec:protocol} describes the part of it that is
+transferable.
+
+\paragraph{HVAC fault detection, in three sentences.}
+The dominant research method in this domain is supervised machine learning,
+surveyed across 211 studies whose reported accuracies have saturated at
+97--99\% on the standard benchmarks~\cite{bi2024aihvacreview}, with the recent
+shift toward interpretability implemented as post-hoc feature attribution on a
+black-box model. What buildings actually deploy is rule-based: commercial
+fault-detection products match libraries of pre-encoded fault
+patterns~\cite{granderson2017fddtoolsurvey}, and the strongest research
+programme in that style field-tested seven hand-coded correction algorithms
+across 225 equipment items~\cite{pritoni2022faultcorrection}. An audit of 65
+primary machine-learning studies in the domain found two that shared code
+links, one of them broken, and 72\% that did not state whether their data was
+public~\cite{mukhtar2025reproducibility}; evaluation here uses the public,
+DOI-citable LBNL benchmark family~\cite{granderson2020lbnlfdddata}.
+
+\paragraph{Hand-designed Petri nets are a different class.}
+Petri nets have modelled HVAC and building systems for two decades --- hybrid
+system modelling~\cite{villani2004hybridpetri}, building-automation
+monitoring~\cite{gomes2007petribas}, chiller fault
+diagnosis~\cite{xu2015chillerpetri} --- but in every case an engineer authored
+the net, there is no event log and no discovery algorithm, and that body of
+work should not be read as a precedent for discovering a net from a log of
+building operation.
+
+% =============================================================
+\section{Event abstraction, the alphabet wall, and a measured circularity
+bound}
+\label{sec:abstraction}
+
+\subsection{The abstraction, and the case notion problem}
+
+HVAC operation offers no natural case boundary. A business process has
+instances; a building runs continuously, with concurrent equipment at several
+granularities and signals that are sampled rather than emitted. We take the
+calendar day as the case, which is the shortest unit over which the control
+sequences of interest --- start-up, occupancy, economiser transitions,
+night cycling, shutdown --- complete. Continuous streams are converted to
+events by control-sequence rules grounded in ASHRAE Guideline 36, following
+Janssen and colleagues~\cite{janssen2021sensoreventlog}. The canonical
+alphabet has ten activities in five complementary pairs: system started and
+stopped, night cycle started and ended, heating active and inactive, cooling
+active and inactive, economiser window entered and
+exited.\footnote{\texttt{outputs/grammar\_results.json},
+\texttt{canonical\_alphabet}.} Not every system emits all ten: the single-duct
+air handler's configuration yields six activities, and both fan-powered-unit
+configurations yield ten.
+
+\subsection{The alphabet wall}
+
+The events are then partitioned into two alphabets that are never mixed.
+\emph{State events} are neutral facts about what the equipment did --- the fan
+started, cooling became active --- and are the only events admitted to model
+discovery. \emph{Fault-signature events} already encode engineering suspicion:
+they exist because an analyst decided that a particular configuration of
+measurements is worth naming. They are withheld from discovery entirely.
+
+The partition exists because of circularity, which is the process-mining form
+of the leakage problem catalogued by Weytjens and
+De~Weerdt~\cite{weytjens2022dataleakage}. A model discovered over an alphabet
+that already names faults will later ``detect'' those faults, but what it has
+recognised is the analyst's own rule, re-encoded as a transition and then read
+back out through alignment cost. The detection is real in the sense that the
+number is correctly computed and vacuous in the sense that it measures the
+pipeline against itself. The literature warns about this in the abstract; we
+are not aware of a prior quantification of it on a sensor-derived log.
+
+\subsection{The bound}
+
+Quantifying it needs only one comparison. We removed the partition and re-ran
+the discovery and scoring pipeline on the single-duct air-handler system,
+holding everything else fixed: the same alignment threshold, the same 248-day
+training and 87-day holdout split, the same 4{,}540 fault days scored. The
+model channel's apparent recall rises from 1.78\% to 5.24\% --- 81 detected
+fault days against 238 --- purely because the discovered net is now allowed to
+contain the activities that name the faults.\footnote{Partitioned run:
+\texttt{outputs/benchmark\_v3.json}. Unpartitioned predecessor:
+\texttt{outputs/benchmark\_v2\_processheal\_v1.json}. Both report threshold
+$0.333$, \texttt{train\_days} 248, \texttt{holdout\_days} 87, and
+\texttt{pos\_days} 4{,}540; the \texttt{structure} channel's true positives are
+81 and 238 respectively.} The difference, 3.5 percentage points, is a measured
+bound on model self-confirmation for this system and this alphabet: it is how
+much of the model channel's performance was the model recognising work that had
+already been done for it.
+
+Three things should be said about what this number is. It is a bound on one
+system, and the size of the effect must depend on how much of the alphabet
+encodes suspicion; a pipeline with a larger signature alphabet would leak more.
+It is a lower bound on the harm in one direction only --- it measures inflated
+recall, not the more insidious possibility that a signature-contaminated net
+becomes \emph{better} at the faults the analyst already understood and no
+better at anything else. And it is the smaller half of a ratio whose larger
+half is that even the inflated 5.24\% is not a useful detection rate; the
+partition removed two thirds of a capability that was not, in absolute terms,
+worth having. That the pipeline's most defensible methodological decision
+raised no result and lowered one is the honest summary.
+
+\subsection{Pinning the partition}
+
+A partition enforced by convention decays. The separation is therefore held by
+a tested invariant: injecting fault-signature events into an event log must not
+change any day's fitness against a discovered net. The test fails if a future
+edit lets signature events reach the discovery path, and it fails at build time
+rather than in a reviewer's reading. We recommend the pattern to anyone
+building a process-mining pipeline over engineered events, independently of
+whether the rest of this paper's results replicate: the alphabet is where the
+leakage lives, and a prose statement that two alphabets are separate is not a
+control.
+
+% =============================================================
+\section{Discovery at three strata, and the reversal probe}
+\label{sec:discovery}
+
+\subsection{Three strata}
+
+Petri nets are discovered from the state-event log with the inductive
+miner~\cite{leemans2013inductiveminer,leemans2014inductiveminerinfrequent} as
+implemented in pm4py~\cite{berti2023pm4py}, at three granularities. The
+\emph{device} stratum models an individual actuator's lifecycle, with one case
+per device per day. The \emph{unit} stratum models the air handler's daily
+operating cycle. A \emph{cross-system grammar} maps each system's alphabet onto
+the canonical ten activities so that a net discovered on one building can be
+replayed against another building's log. All discovery uses fault-free data
+only.
+
+\subsection{The reversal probe}
+
+Whether such a net encodes temporal order, or merely licenses a set of
+activities in any arrangement, is the question precision metrics
+address~\cite{munozgama2010precision,buijs2012quality}, and it is the question
+they answer least reliably on logs with no negative
+examples~\cite{tax2018imprecisions,vandenbroucke2014negativeevents}. We
+therefore use a direct probe. Reverse every trace in the log, re-score it
+against the same net, and report the drop in mean fitness. A net that
+constrains order cannot fit a reversed log as well as the original; a net whose
+fitness is a function of the activity multiset alone will not notice.
+
+The three nets separate cleanly.\footnote{\texttt{outputs/grammar\_results.json},
+\texttt{reversal\_probe}.} The single-duct net falls from 0.8861 to 0.5526,
+a drop of a third of its fitness: it encodes order. The series fan-powered
+net scores 0.9533 forwards and 0.9533 backwards, identical to four decimal
+places. The parallel fan-powered net moves from 0.9021 to 0.9026 --- five
+ten-thousandths, in the wrong direction. Two of the three nets carry no
+ordering information in their fitness at all, and their high absolute fitness
+is a statement about which activities occurred, not about when.
+
+This matters beyond the diagnosis. A fitness of 0.95 reads as an excellent
+model; it is the number one would quote. The probe costs one pass over the log
+and one re-scoring, needs no negative examples and no reference model, and it
+is what told us that two thirds of our model estimate was not doing the thing
+the method is chosen for. We recommend it as a routine reporting item
+alongside fitness in any sensor-domain application, and we would have caught
+the problem two phases earlier had we run it first.
+
+\subsection{Shared structure exists only where order does}
+
+The cross-system grammar gives six off-diagonal cells, each a net discovered on
+one system replayed against another system's log, with a null built by
+replaying five shuffled versions of the same log through the same net and
+taking the mean. Two cells clear their null: fan-powered-unit logs outscore
+their own shuffled controls on the single-duct net by 0.18 and 0.15 in mean
+fitness. The remaining four are null, with order signals between $-0.005$ and
+$0.000$.\footnote{\texttt{outputs/grammar\_results.json}, \texttt{M1\_null}:
+\texttt{order\_signal} $0.1828$ and $0.1537$ for the two positive cells;
+$-0.0047$, $-0.0007$, $-0.0040$ and $-0.0007$ for the four null ones.} The
+pattern is not arbitrary: both positive cells are cells in which the
+\emph{single-duct} net is the model, and the single-duct net is the one the
+reversal probe found order-sensitive. Real shared behavioural structure
+between two buildings is detectable only through a net that encodes structure
+in the first place, which turns the reversal probe from a diagnostic into a
+precondition for cross-system claims.
+
+\subsection{The net's reading added nothing over counting}
+
+A fourth measurement belongs here although it was computed for the test
+reported in Section~\ref{sec:transfer}. For each system we asked how often a
+named activity is genuinely supported by the model, counting the days on which
+that activity is replayed as a synchronous move against the discovered unit
+net. On every system the answer equalled the number of days on which the
+activity simply appears in the raw log: 0 against 0 on the single-duct system,
+166 against 166 on the parallel unit and 357 against 357 on the
+series unit.\footnote{\texttt{outputs/discovery\_predicts\_transfer.json},
+\texttt{Q}: \texttt{sync\_days} against
+\texttt{\_aux.occupied\_days\_whose\_log\_contains\_heating}.} At the unit
+stratum the alignment added nothing that counting occurrences would not have
+given, exactly. The device stratum, whose net is pooled across the four
+terminal units of each building, disagrees with the unit stratum about which of
+the two comparable buildings has the better-supported behaviour: supports of
+$0.455$ and $0.978$ at the unit stratum against $0.437$ and $0.014$ at the
+device stratum, an inversion. A quantity that is reproducible by counting on
+one stratum and reverses on another is not yet a measurement, and
+Section~\ref{sec:transfer} reports what happened when we tried to build a test
+on it.
+
+% =============================================================
+\section{The conformance null over 73 seeded scenarios}
+\label{sec:null}
+
+\subsection{Eight channels, two of them process mining}
+
+Evaluation used three public LBNL fault-detection
+datasets~\cite{granderson2020lbnlfdddata}: a single-duct air-handling unit and
+parallel and series fan-powered-unit configurations, 73 seeded fault scenarios
+in total, scored at day level with the scenario as the unit of analysis
+following the established evaluation
+protocols~\cite{yuill2013fddprotocol,frank2018fddevaluation}. Eight channels
+score each day independently: (1) \emph{rules}, physics rules naming direct
+contradictions between measurements; (2) \emph{residual}, temperature-residual
+bands; (3) \emph{model conformance} and (4) \emph{device conformance},
+alignment cost against the discovered unit and device nets respectively ---
+these two, and only these two, are the process-mining channels; (5)
+\emph{absence}, a scheduled activity that did not occur; (6) \emph{frequency}
+and (7) \emph{oscillation}, statistical bands on activity counts and reversals;
+and (8) a seasonal \emph{rate} channel that corroborates but may not alarm
+alone. Every channel is calibrated on the fault-free year only and may report
+only what exceeds its own measured noise floor, tested as a binomial against
+that channel's own holdout rate at $p < 10^{-3}$. This design is what makes the
+ablation meaningful: the conformance channels are not competing against an
+uncalibrated strawman, and each of the other channels had to clear the same
+gate.
+
+\subsection{The ablation}
+
+Because the committed scorecards record, per scenario, which significance-gated
+channels were credited with the detection, the ablation is a read rather than a
+re-run. The result is in Table~\ref{tab:ablation}. No scenario on any system is
+detected only by the two conformance channels. They are credited with none of
+the 14 single-duct detections and none of the 23 parallel-unit detections, and
+they appear in 7 of the 24 series-unit detections but never alone. Removing
+both channels from the detector therefore leaves every scorecard unchanged.
+
+\begin{table}[t]
+\centering
+\caption{The conformance ablation, read from the committed scorecards
+(\texttt{outputs/benchmark\_v6\_\{sdahu,pfpu,sfpu\}.json},
+\texttt{meaningful\_channels}). ``Credited'' counts detections in which a
+conformance channel was among the gated channels; ``sole detector'' counts
+detections in which conformance was the only one. The single-duct count is the
+naive 14 of 14; one of those detections is later adjudicated out on
+dataset-provenance grounds, which changes no cell of this table because
+conformance is credited with none of them.}
+\label{tab:ablation}
+\begin{tabular}{lrrrr}
+\toprule
+System & Scenarios & Detected & Conformance credited & Conformance sole detector \\
+\midrule
+Single-duct AHU      & 14 & 14 & 0 & 0 \\
+Parallel fan-powered & 30 & 23 & 0 & 0 \\
+Series fan-powered   & 29 & 24 & 7 & 0 \\
+\midrule
+Total                & 73 & 61 & 7 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Removing them is not merely free. On the series unit the two conformance
+channels account for all four false-alarm days on the 96-day fault-free
+holdout; deleting them eliminates three of the four outright, the fourth being
+independently flagged by the frequency channel, so that system's false-alarm
+rate falls from 4 in 96 to 1 in 96 at no detection
+cost.\footnote{\texttt{outputs/union\_fpr\_sfpu.json}: model channel
+\texttt{holdout\_fp\_dates} \{2018-11-29\}, device channel \{2018-01-25,
+2018-01-30, 2018-12-28\}, frequency channel \{2018-11-29\};
+\texttt{union\_all8} 4 days.} The process-mining channels' entire measurable
+contribution to this detector was three false alarms.
+
+\subsection{The matched-rule control, and what it says the models were doing}
+
+A second control was run to establish what discovery contributes as a
+\emph{design-time} activity, separately from what it contributes at run time.
+For each channel we asked a domain expert to hand-write the rule the channel's
+behaviour implied, and scored the rule on the same scenarios. Two of these
+reproduce their channel exactly: 141 detections against 141 on the series unit
+and 206 against 206 on the parallel unit, in both cases the frequency channel
+on the unstable-room-temperature
+scenario.\footnote{\texttt{outputs/matched\_rules\_\{sfpu,pfpu\}.json}: for
+\texttt{SFPU\_RMTEMPUnstable}, \texttt{mr2} $=$ \texttt{freq} $= 141$; for
+\texttt{PFPU\_RMTEMPUnstable}, $=206$.} This is the useful half of the finding.
+Discovery located an invariant nobody had written down, and once it was
+written down the automated channel was exactly redundant with it.
+
+The original hypothesis --- that discovered models out-detect hand-written
+rules --- had a falsifier attached, and the falsifier fired. On the series unit,
+a one-line matched rule reading \emph{occupied workday and air-handler heating
+never active} covered 192 fault days against the model channel's 135 on the
+same scenario, with zero false alarms on 365 fault-free
+days.\footnote{\texttt{outputs/matched\_rules\_sfpu.json},
+\texttt{SFPU\_VAVDMPRStuck\_80\%}: \texttt{mr1} $=192$, \texttt{model} $=135$;
+\texttt{healthy\_fp.mr1} $=0$.} The 135 should not be read without its
+robustness counterpart: replacing the interpolated threshold with the most
+conservative one leaves 22 to 26 days per scenario, so roughly four fifths of
+the threshold count rests on a threshold interpolated from a single holdout
+day.
+
+The control also carries a retraction we owe the reader, because the project
+originally read this number the wrong way round. Transplanted to a building
+whose configuration does not support it, the same one-line rule fires on 231
+fault-free days on the single-duct system and 124 on the parallel unit, and on
+none at all on the series unit.\footnote{\texttt{healthy\_fp.mr1} in
+\texttt{outputs/matched\_rules\_\{sdahu,pfpu,sfpu\}.json}: 231, 124, 0.} We
+first read the 231 as evidence about what the models do and do not predict. It
+is not. The single-duct system has no heating rule and no hot-water valve, so a
+rule reading \emph{heating never active} fires on every occupied day for want
+of a sensor, and no model was involved in producing that number. The only
+informative contrast the transplant offers is the parallel unit against the
+series unit, 124 against 0, and whether the discovered models predict that
+contrast is the subject of Section~\ref{sec:transfer}.
+
+\subsection{Reading the null}
+
+Three readings are available and we prefer the third. The conformance channels
+might be poorly implemented: possible, but they use standard alignment-based
+replay~\cite{vanderaalst2012replaying,carmona2018conformancechecking} through
+pm4py on nets discovered by a standard miner, and the failure is not one of
+tuning --- they detect, they simply detect nothing that is not already detected.
+The domain might be wrong for the method: partly, and the reversal probe says
+which part, since two of the three nets do not encode order and could not have
+supplied the order-sensitivity the hypothesis rested on. The third reading is
+the one the audits converged on. Every genuine model-channel detection we
+inspected was a \emph{count} deviation --- extra heating episodes, collapsed fan
+cycles, a vanished daily rhythm --- surfacing through alignment cost, and once a
+frequency channel existed that measured count deviations directly and
+two-sidedly, the conformance channels had nothing left that was uniquely theirs.
+Alignment cost was acting as a noisy, one-sided, expensive frequency detector.
+If that reading generalises, it predicts that conformance-as-anomaly-detection
+will underperform wherever the discovered net is order-permissive, which is
+wherever the alphabet is loop-heavy --- and sensor-derived alphabets, built from
+complementary activity pairs that cycle many times a day, are loop-heavy almost
+by construction.
+
+% =============================================================
+\section{A pre-registered test that never had power}
+\label{sec:transfer}
+
+% PLACEHOLDER: supplied by the lead after Amendment 3 is folded into the
+% source manuscript.
+
+% =============================================================
+\section{Tests that pin refutations and disclosures}
+\label{sec:protocol}
+
+% PLACEHOLDER
+
+% =============================================================
+\section{Limitations, and what would make this replicable}
+\label{sec:limitations}
+
+\subsection{Limitations}
+
+Every result here comes from simulation, and simulation flatters. Noise-free
+years make zero-false-positive thresholds cheap, bands razor-thin and silence
+easy. The direction of the bias is worth stating precisely for the null: a
+noise-free training year should, if anything, \emph{help} a discovered net,
+because the fault-free behaviour it must generalise from is unusually clean. We
+do not think the null is an artefact of simulation, but we cannot exclude that
+real, noisier logs would change the relative standing of conformance against
+the statistical channels in either direction.
+
+Three buildings is the harder limit, and it is a limit on the unit of
+replication rather than on the number of days scored. There are 73 scenarios
+and roughly a thousand scored days per system, but a building is the unit
+across which a discovered model must transfer, and there are three of them,
+two of which are variants of one equipment family sharing a simulated weather
+year. Any cross-building claim in this paper therefore rests on an $n$ small
+enough that the pre-registered test built on it turned out to have no
+attainable significance under any data (Section~\ref{sec:transfer}). A powered
+version needs more buildings, more than two levels of the predictor, and an
+outcome that is not fitted on the same year it is scored on.
+
+The noise-floor gate applies no correction across channels and scenarios. On
+the order of 584 binomial tests run at $\alpha = 10^{-3}$ --- eight channels by
+73 scenarios, with the device channel additionally run per terminal unit ---
+giving a family-wise error near 0.44 under independence and an expectation of
+about 0.6 false cells across the study; per-day observations within a scenario
+are also autocorrelated. Separately, the two conformance channels'
+false-positive rows are calibration targets rather than out-of-sample
+measurements, because their thresholds are quantile-fit on the same holdout
+days those rows report. Both caveats cut against the conformance channels
+looking \emph{better} than they are, which is the direction that matters for a
+null.
+
+Finally, the evaluation produced five machine-verified defects in the LBNL
+benchmark datasets, including one in which the fault-free file was simulated on
+a different configuration branch from every fault file; these are reported with
+their reproducing evidence in a companion paper (in preparation), and one of
+them is why Table~\ref{tab:ablation}'s single-duct row carries an adjudication
+note.
+
+\subsection{Disclosure: AI agents as part of the method}
+
+AI coding agents were used for implementation, analysis scripting and
+adversarial recomputation of results, and one step depended on them
+methodologically rather than incidentally: the sealed quantity behind
+Section~\ref{sec:transfer} was computed by an agent that was denied access to
+the rule-firing artefacts it would be scored against, which is how the
+computation was kept blind. All experimental designs, pre-registrations and
+claims were authored and approved by the author.
+
+\subsection{Conclusion}
+
+We carried event-log process mining into a domain it had not been applied to,
+with a pre-registered hypothesis and a falsifier attached, and the falsifier
+fired. What survives as a working detector contains no process mining: the
+channels that detect are physics rules, calibrated residual bands and
+statistical bands on activity counts and reversals, and removing both
+conformance channels changes no scorecard and removes three false alarms. The
+honest statement of the outcome is that discovery earned its place at design
+time, by locating an invariant that an expert could then write down as a rule,
+and lost it at run time, exactly and measurably, to the rule it had suggested.
+
+The three supporting measurements are what we would most like replicated,
+because each is cheap and none is specific to buildings. The alphabet partition
+carries a measured cost, 1.78\% against 5.24\% at one threshold on one split,
+and we know of no prior quantification of circularity on a sensor-derived log;
+the number should be measured again on other pipelines, and we expect it to be
+larger where more of the alphabet encodes suspicion. The reversal probe costs
+one re-scoring and told us that two nets with fitness above 0.90 carried no
+order information whatever, which no fitness figure and no precision metric
+communicated. And alignment-based support that reproduces a raw log count
+exactly is a warning that the model is not being read, merely consulted. A
+workshop on empirical research in process mining is the right place to say that
+we ran the method properly, measured what it contributed, and found the
+contribution to be zero; the contribution of the protocol that established this
+is not zero.
+
+\subsubsection*{Acknowledgements.}
+The author thanks Dr.\ Anthony Aighobahi and Dr.\ Mridula Sharma for
+supervision. AI coding assistants were used for implementation, analysis
+scripting and adversarial auditing, and a sealed computation by an agent
+blinded to the outcome artefacts is part of the method reported in
+Section~\ref{sec:transfer}; all designs, pre-registrations and claims were
+reviewed and approved by the author.
+
+\bibliographystyle{splncs04}
+\bibliography{../references}
+
+\end{document}

@@ -42,6 +42,7 @@ PIPELINE = {
     "week0_audit.json": "uv run python scripts/02_week0_audit.py all",
     # 2026-09-23 sealed test: Q first, then the scorer that consumes it.
     "alarm_attribution.json": "uv run python scripts/alarm_attribution.py",
+    "e3_leakage.json": "uv run python scripts/e3_leakage.py",
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",
     "discovery_predicts_transfer.json": "uv run python scripts/discovery_predicts_transfer.py --q outputs/discovery_predicts_transfer_q.json",
 }

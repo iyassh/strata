@@ -1,0 +1,94 @@
+{
+  "source_log": "sepsis.xes",
+  "cases": 1050,
+  "events": 15214,
+  "rows": [
+    {
+      "injection": "none",
+      "defect_class": "-",
+      "expected": null,
+      "fired": {
+        "G1": false,
+        "G2": false,
+        "G3": false,
+        "G4": false
+      },
+      "caught": false,
+      "gates_fired": []
+    },
+    {
+      "injection": "dup_file",
+      "defect_class": "E1/E2 duplicate file",
+      "expected": "G1",
+      "fired": {
+        "G1": true,
+        "G2": false,
+        "G3": false,
+        "G4": false
+      },
+      "caught": true,
+      "gates_fired": [
+        "G1"
+      ]
+    },
+    {
+      "injection": "dup_case",
+      "defect_class": "E1/E2 duplicate instance",
+      "expected": "G4",
+      "fired": {
+        "G1": false,
+        "G2": false,
+        "G3": false,
+        "G4": true
+      },
+      "caught": true,
+      "gates_fired": [
+        "G4"
+      ]
+    },
+    {
+      "injection": "rotate",
+      "defect_class": "E4 order corruption",
+      "expected": "G2",
+      "fired": {
+        "G1": false,
+        "G2": true,
+        "G3": false,
+        "G4": false
+      },
+      "caught": true,
+      "gates_fired": [
+        "G2"
+      ]
+    },
+    {
+      "injection": "calendar",
+      "defect_class": "E4 calendar",
+      "expected": "G3",
+      "fired": {
+        "G1": false,
+        "G2": false,
+        "G3": true,
+        "G4": false
+      },
+      "caught": true,
+      "gates_fired": [
+        "G3"
+      ]
+    },
+    {
+      "injection": "leak",
+      "defect_class": "E3 per-instance constant proxying the label",
+      "expected": null,
+      "fired": {
+        "G1": false,
+        "G2": false,
+        "G3": false,
+        "G4": false
+      },
+      "caught": false,
+      "gates_fired": []
+    }
+  ],
+  "reading": "Each structural defect class fires exactly the gate it was built for; the leaked per-case constant fires none, because no log-generic gate reads the relation between an instance and its label."
+}

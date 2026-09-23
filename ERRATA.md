@@ -213,6 +213,14 @@ benchmark and we say so.
 
 ---
 
+## Documentary notes (not errata)
+
+- **`coi_bias` naming (recorded 2026-09-23).** The dataset documentation's
+  file table names the supply-air-temperature-sensor-bias family
+  `sa_bias_*_annual.csv`; the archive ships `coi_bias_*_annual.csv`. No
+  erratum is raised; the family is scored as shipped. Not investigated
+  further.
+
 ## Handling summary (what this repo does)
 
 | Erratum | Mitigation in this repo |

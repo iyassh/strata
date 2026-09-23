@@ -81,8 +81,9 @@ already detected, measured against the union of the six exported channel
 day lists (absence is not exported by the scorecards): 81 unique days on
 `coi_bias_-4` (15 against the gated union), 16 on
 `SFPU_SensorBias_RMTEMP_-4C`, 9 on `PFPU_ReheatVLVStuck_0%`, 2 on
-`SFPU_RMTEMPUnstable` (whose deployed union is 263 days), 0 on the six
-series-unit valve scenarios the rules already flag on every day. (A first
+`SFPU_RMTEMPUnstable` (whose deployed union is 263 days), 0 on five further
+series-unit scenarios (four reheat-valve faults and a stuck VAV damper)
+that the rules already flag on every day. (A first
 run reported 120 / 82 / 28 / 13 from the wrong scorecard keys; corrected.) The statistics that carry it are physically
 legible: zone-heating on/off medians under an unstable room sensor, zone-fan
 on-durations under a stuck reheat valve, cooling first-on minute under a

@@ -59,7 +59,10 @@ per-channel flag days (never re-run).
 | own holdout FP | 0/87 | 5/96 | 5/96 |
 | joint FP, deployed union → + time channel | 1 → 1 of 96 | 5 → **10** of 96 | 4 → **9** of 96 |
 
-Over the 73 scored scenarios: **significant on 11** (P1 held); **none of the
+Over the 73 scored scenarios: **significant on 11** (P1 held; 10 under the
+rule-of-three floor the rules, frequency and oscillation channels use — the
+suite carries two floors, and `coi_bias_-2` is significant only under the
+permissive `max(fp,1)/n` one; both are in the artefact); **none of the
 twelve fouling scenarios** (P2 held — the pre-registration miscounted them as
 nine; for eight of the ten fouling misses the log carries nothing at 5 %); **no scenario
 the deployed channels miss** (P3, the load-bearing prediction, **false**);
@@ -106,8 +109,12 @@ pre-registration miscounted them as nine; the threshold fires either way)
 channels); nothing newly detected. The day-median distribution overlaps
 almost entirely with healthy — the bands are 0.6–94 °F/GPM on PFPU zone S
 because the ratio explodes at low flow — so a difference of means is not a
-day-level separation. The false-alarm budget held (own FP 1/29 and 0/28;
-joint unchanged), which is the only thing the design got right.
+day-level separation. The false-alarm budget held (own FP 1 of 83 and 0 of 80 holdout
+rule-days, summed over zones as the deployed residual channel counts them;
+joint unchanged), which is the only thing the design got right. SFPU zone I
+has no evaluable healthy day at the 120-minute window, so its band is
+undefined and that zone is disabled — stated in the artefact; the SFPU
+result is over three zones.
 
 **Reading.** The fouling misses are not a process-mining failure and not
 fixed by one more residual. They need either a physics model of the coil
@@ -133,4 +140,4 @@ sensor. Recorded as a fired falsifier; the statistic is not adopted.
 | ID | Pre-registered | Ran | Predictions | Falsifiers | Artefact |
 |---|---|---|---|---|---|
 | X12 | ee33d5e | 2026-09-23 | P1 ✓ P2 ✓ **P3 ✗** P4 ✓ (weak) | none fired | `x12_time_perspective.json` |
-| X13 | 89ae874 | 2026-09-23 | P1 ✗ P2 ✓ P3 ✓ | **F-X13.b fired** | `x13_coil_effectiveness.json` |
+| X13 | 89ae874 | 2026-09-23 | P1 ✗ P2 ✓ P3 ✓ | **F-X13.b fired** (under both the shipped and the deployed denominator convention) | `x13_coil_effectiveness.json` |

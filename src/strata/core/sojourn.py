@@ -23,9 +23,11 @@ SEEN_FRAC = 0.05     # a pair is monitored only if present on >= 5% of train day
 
 def state_pairs(cfg: Config) -> list[tuple[str, str, str]]:
     """(name, on_event, off_event) for every state-alphabet on/off pair."""
+    from strata.hvac.events import rule_alphabet   # the canonical resolver: kind defaults apply
+
     out = []
     for name, spec in cfg.rules["events"].items():
-        if spec.get("alphabet", "state") != "state":
+        if rule_alphabet(spec) != "state":
             continue
         on = spec.get("on_event") or spec.get("enter_event")
         off = spec.get("off_event") or spec.get("exit_event")

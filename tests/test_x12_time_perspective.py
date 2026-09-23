@@ -27,7 +27,11 @@ def test_x12_outcome_pinned():
     assert (j["sfpu"]["deployed_union_minus_rate_fp_days"], j["sfpu"]["with_time_channel_fp_days"]) == (4, 9)
     sig = [r for v in a["systems"].values() for r in v["scenarios"] if r["significant"]]
     # never earlier than the deployed detector
-    assert all(r["ttd_time_days"] >= r["ttd_deployed_days"] for r in sig)
+    assert all(r["ttd_deployed_days"] is not None and r["ttd_time_days"] is not None
+               and r["ttd_time_days"] >= r["ttd_deployed_days"] for r in sig)
+    assert all(r["ttd_time_days"] is None for v in a["systems"].values() for r in v["scenarios"] if not r["significant"])
+    p = a["predictions"]
+    assert p["P1_count_rule_of_three_floor"] == 10 and p["floor_dependent_scenarios"] == ["coi_bias_-2_annual"]
     big = {r["file"]: r["unique_days_vs_deployed"] for r in sig}
     assert big["SFPU_RMTEMPUnstable"] == 2 and big["coi_bias_-4_annual"] == 81
     assert big["SFPU_SensorBias_RMTEMP_-4C"] == 16 and big["PFPU_ReheatVLVStuck_0%"] == 9

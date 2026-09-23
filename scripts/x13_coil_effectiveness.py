@@ -65,23 +65,31 @@ for system in ("pfpu", "sfpu"):
     hold_n = cfg.rules["detection"]["holdout_days_per_month"]
     card = {s["file"]: s for s in json.loads(Path(f"outputs/benchmark_v6_{system}.json").read_text())["scenarios"]}
     hdf = pd.read_parquet(f"data/processed/{system}/{man['healthy_file']}.parquet")
-    bands, hold_fp, hold_n_days, hold_fp_dates = {}, 0, 0, set()
+    # deployed residual convention (scripts/benchmark.py): rule-days summed over
+    # zones on both sides of the gate; the union-of-days view is kept beside it
+    bands, hold_fp, hold_n_days, hold_fp_dates, disabled = {}, 0, 0, set(), []
     for z in ZONES:
         hs = daily_scores(hdf, cfg, z)
         hm = holdout_mask(hs["case_id"], hold_n)
-        bands[z] = calibrate_band(hs, ~hm, min_width=MIN_WIDTH)
-        hf = flag_days(hs[hm.values], bands[z], min_margin=MARGIN)
+        b = calibrate_band(hs, ~hm, min_width=MIN_WIDTH)
+        if not (b[0] == b[0] and b[1] == b[1]):      # NaN band: no evaluable healthy day
+            disabled.append(z); bands[z] = None; continue
+        bands[z] = b
+        hf = flag_days(hs[hm.values], b, min_margin=MARGIN)
         hold_fp_dates |= set(hf.loc[hf["flagged"], "case_id"])
-        hold_n_days = max(hold_n_days, int(hf["evaluable"].sum()))
-    hold_fp = len(hold_fp_dates)
+        hold_fp += int(hf["flagged"].sum()); hold_n_days += int(hf["evaluable"].sum())
     ufpr = json.loads(Path(f"outputs/union_fpr_{system}.json").read_text())
     deployed_fp = set()
     for ch, v in ufpr["channels"].items():
         if ch != "rate":
             deployed_fp |= set(v.get("holdout_fp_dates", []))
     joint = deployed_fp | hold_fp_dates
-    sysout = {"bands_F_per_gpm": {z: [round(b[0], 2), round(b[1], 2)] for z, b in bands.items()},
-              "holdout_fp_days": hold_fp, "holdout_evaluable_days": hold_n_days,
+    sysout = {"bands_F_per_gpm": {z: ([round(b[0], 2), round(b[1], 2)] if b else None) for z, b in bands.items()},
+              "zones_disabled_no_evaluable_healthy_day": disabled,
+              "denominator_convention": "rule-days summed over zones (deployed residual convention); "
+                                        "unique-day counts use the union of days",
+              "holdout_fp_rule_days": hold_fp, "holdout_evaluable_rule_days": hold_n_days,
+              "holdout_fp_days": len(hold_fp_dates),
               "holdout_fp_dates": sorted(hold_fp_dates),
               "joint_fpr": {"deployed_union_minus_rate_fp_days": len(deployed_fp),
                             "with_x13_fp_days": len(joint), "holdout_days": ufpr["holdout_days"],
@@ -93,13 +101,15 @@ for system in ("pfpu", "sfpu"):
         if not sc["is_fault"] or sc.get("exclude"):
             continue
         df = pd.read_parquet(f"data/processed/{system}/{sc['file']}.parquet")
-        flagged, n_win, by_zone = set(), 0, {}
+        flagged, flag_rd, n_win, by_zone = set(), 0, 0, {}
         for z in ZONES:
+            if bands[z] is None:
+                continue
             s = daily_scores(df, cfg, z)
             f = flag_days(s, bands[z], min_margin=MARGIN)
             zf = set(f.loc[f["flagged"], "case_id"]); flagged |= zf
-            by_zone[z] = len(zf); n_win = max(n_win, int(f["evaluable"].sum()))
-        sig = residual_significant(len(flagged), n_win, hold_fp, hold_n_days)
+            by_zone[z] = len(zf); flag_rd += len(zf); n_win += int(f["evaluable"].sum())
+        sig = residual_significant(flag_rd, n_win, hold_fp, hold_n_days)
         c = card[sc["file"]]
         missing = [k for k in DEPLOYED if k not in c.get("flag_days", {})]
         assert not missing, f"scorecard flag_days lacks {missing} (L36: assert the keys you compare against)"
@@ -107,7 +117,8 @@ for system in ("pfpu", "sfpu"):
         for ch in DEPLOYED:
             union |= set(c.get("flag_days", {}).get(ch, []))
         row = {"file": sc["file"], "fouling": FOULING in sc["file"], "x13_flag_days": len(flagged),
-               "n_evaluable": n_win, "significant": bool(sig), "by_zone": by_zone,
+               "x13_flag_rule_days": flag_rd, "n_evaluable_rule_days": n_win,
+               "significant": bool(sig), "by_zone": by_zone,
                "deployed_detected": bool(c["meaningful_channels"]),
                "unique_days_vs_deployed": len(flagged - union)}
         sysout["scenarios"].append(row)

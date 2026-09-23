@@ -84,6 +84,10 @@ for system in ("sdahu", "pfpu", "sfpu"):
         flagged = set(cl.loc[cl["flagged"], "day"])
         n_eval = int(len(cl))
         p = float(binom_sf(len(flagged), n_eval, p0)) if n_eval else 1.0
+        # the suite carries two floors: max(fp,1)/n (residual, model) and a
+        # rule-of-three floor (rules, frequency, oscillation); both are reported
+        p0_r3 = max(det.holdout_fp_days, 3) / max(det.holdout_days, 1)
+        p_r3 = float(binom_sf(len(flagged), n_eval, p0_r3)) if n_eval else 1.0
         c = card[sc["file"]]
         missing = [k for k in DEPLOYED + ["freq", "sig_union"] if k not in c.get("flag_days", {})]
         assert not missing, f"scorecard flag_days lacks {missing} (L36: assert the keys you compare against)"
@@ -97,9 +101,13 @@ for system in ("sdahu", "pfpu", "sfpu"):
         # (scorecard ttd_days uses the same origin); None when never flagged
         day0 = pd.to_datetime(df["Datetime"]).min().normalize()
         ttd_time = (int((pd.to_datetime(min(flagged)) - day0).days) + 1) if flagged else None
-        row = {"file": sc["file"], "family": sc.get("family"), "n_days": n_eval,
-               "ttd_time_days": ttd_time, "ttd_deployed_days": c.get("ttd_days"),
+        row = {"file": sc["file"], "family": sc.get("family"),
+               "n_days": n_eval,                       # days with any sojourn statistic (the channel abstains otherwise)
+               "scorecard_evaluable_days": c.get("evaluable_days"),
+               "ttd_time_days": ttd_time if p < P_SIG else None,   # gated meaning only when significant
+               "ttd_deployed_days": c.get("ttd_days"),
                "time_flag_days": len(flagged), "p": p, "significant": p < P_SIG,
+               "p_rule_of_three_floor": p_r3, "significant_rule_of_three_floor": p_r3 < P_SIG,
                "deployed_detected": bool(c["meaningful_channels"]),
                "deployed_union_days": len(union),
                "unique_days_vs_deployed": len(flagged - union),
@@ -119,7 +127,10 @@ sig_missed = [r["file"] for r in sig if not r["deployed_detected"]]
 sig_fouling = [r["file"] for r in sig if FOULING in r["file"]]
 uniq_vs_freq = [r["file"] for r in sig if r["unique_days_vs_frequency"] > 0]
 worst_fp = max(s["holdout_fp_rate"] for s in out["systems"].values())
+sig_r3 = [r for r in rows if r["significant_rule_of_three_floor"]]
 pred = {"P1_sig_ge_5": len(sig) >= 5, "P1_count": len(sig),
+        "P1_count_rule_of_three_floor": len(sig_r3),
+        "floor_dependent_scenarios": [r["file"] for r in sig if not r["significant_rule_of_three_floor"]],
         "P2_no_fouling_sig": len(sig_fouling) == 0, "P2_fouling_sig": sig_fouling,
         "P3_reduces_misses": len(sig_missed) >= 1, "P3_newly_detected": sig_missed,
         "P4_unique_vs_frequency_ge_3": len(uniq_vs_freq) >= 3, "P4_scenarios": uniq_vs_freq}

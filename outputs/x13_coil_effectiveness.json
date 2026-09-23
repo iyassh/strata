@@ -27,8 +27,11 @@
           116.82
         ]
       },
+      "zones_disabled_no_evaluable_healthy_day": [],
+      "denominator_convention": "rule-days summed over zones (deployed residual convention); unique-day counts use the union of days",
+      "holdout_fp_rule_days": 1,
+      "holdout_evaluable_rule_days": 83,
       "holdout_fp_days": 1,
-      "holdout_evaluable_days": 29,
       "holdout_fp_dates": [
         "2018-10-29"
       ],
@@ -43,7 +46,8 @@
           "file": "PFPU_RMTEMPUnstable",
           "fouling": false,
           "x13_flag_days": 2,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 2,
+          "n_evaluable_rule_days": 297,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -58,7 +62,8 @@
           "file": "PFPU_ReheatCoilFouling_Airside_Minor",
           "fouling": true,
           "x13_flag_days": 3,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 3,
+          "n_evaluable_rule_days": 301,
           "significant": false,
           "by_zone": {
             "I": 2,
@@ -73,7 +78,8 @@
           "file": "PFPU_ReheatCoilFouling_Airside_Moderate",
           "fouling": true,
           "x13_flag_days": 2,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 2,
+          "n_evaluable_rule_days": 301,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -88,7 +94,8 @@
           "file": "PFPU_ReheatCoilFouling_Airside_Severe",
           "fouling": true,
           "x13_flag_days": 1,
-          "n_evaluable": 103,
+          "x13_flag_rule_days": 1,
+          "n_evaluable_rule_days": 308,
           "significant": false,
           "by_zone": {
             "I": 0,
@@ -103,7 +110,8 @@
           "file": "PFPU_ReheatCoilFouling_Waterside_Minor",
           "fouling": true,
           "x13_flag_days": 3,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 3,
+          "n_evaluable_rule_days": 300,
           "significant": false,
           "by_zone": {
             "I": 2,
@@ -118,7 +126,8 @@
           "file": "PFPU_ReheatCoilFouling_Waterside_Moderate",
           "fouling": true,
           "x13_flag_days": 2,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 2,
+          "n_evaluable_rule_days": 301,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -133,7 +142,8 @@
           "file": "PFPU_ReheatCoilFouling_Waterside_Severe",
           "fouling": true,
           "x13_flag_days": 1,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 1,
+          "n_evaluable_rule_days": 301,
           "significant": false,
           "by_zone": {
             "I": 0,
@@ -148,7 +158,8 @@
           "file": "PFPU_ReheatVLVLeak_20%MaxFlow",
           "fouling": false,
           "x13_flag_days": 2,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 2,
+          "n_evaluable_rule_days": 234,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -163,7 +174,8 @@
           "file": "PFPU_ReheatVLVLeak_50%MaxFlow",
           "fouling": false,
           "x13_flag_days": 3,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 3,
+          "n_evaluable_rule_days": 220,
           "significant": false,
           "by_zone": {
             "I": 2,
@@ -178,7 +190,8 @@
           "file": "PFPU_ReheatVLVLeak_80%MaxFlow",
           "fouling": false,
           "x13_flag_days": 3,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 3,
+          "n_evaluable_rule_days": 218,
           "significant": false,
           "by_zone": {
             "I": 2,
@@ -193,7 +206,8 @@
           "file": "PFPU_ReheatVLVStuck_0%",
           "fouling": false,
           "x13_flag_days": 16,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 16,
+          "n_evaluable_rule_days": 222,
           "significant": true,
           "by_zone": {
             "I": 12,
@@ -208,7 +222,8 @@
           "file": "PFPU_ReheatVLVStuck_100%",
           "fouling": false,
           "x13_flag_days": 3,
-          "n_evaluable": 364,
+          "x13_flag_rule_days": 3,
+          "n_evaluable_rule_days": 570,
           "significant": false,
           "by_zone": {
             "I": 2,
@@ -223,7 +238,8 @@
           "file": "PFPU_ReheatVLVStuck_20%",
           "fouling": false,
           "x13_flag_days": 3,
-          "n_evaluable": 364,
+          "x13_flag_rule_days": 3,
+          "n_evaluable_rule_days": 572,
           "significant": false,
           "by_zone": {
             "I": 2,
@@ -238,7 +254,8 @@
           "file": "PFPU_ReheatVLVStuck_50%",
           "fouling": false,
           "x13_flag_days": 1,
-          "n_evaluable": 364,
+          "x13_flag_rule_days": 1,
+          "n_evaluable_rule_days": 570,
           "significant": false,
           "by_zone": {
             "I": 0,
@@ -253,7 +270,8 @@
           "file": "PFPU_ReheatVLVStuck_80%",
           "fouling": false,
           "x13_flag_days": 2,
-          "n_evaluable": 364,
+          "x13_flag_rule_days": 2,
+          "n_evaluable_rule_days": 569,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -268,7 +286,8 @@
           "file": "PFPU_SensorBias_RMTEMP_+2C",
           "fouling": false,
           "x13_flag_days": 6,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 6,
+          "n_evaluable_rule_days": 244,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -283,7 +302,8 @@
           "file": "PFPU_SensorBias_RMTEMP_+4C",
           "fouling": false,
           "x13_flag_days": 7,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 7,
+          "n_evaluable_rule_days": 219,
           "significant": false,
           "by_zone": {
             "I": 0,
@@ -298,7 +318,8 @@
           "file": "PFPU_SensorBias_RMTEMP_-2C",
           "fouling": false,
           "x13_flag_days": 5,
-          "n_evaluable": 140,
+          "x13_flag_rule_days": 5,
+          "n_evaluable_rule_days": 349,
           "significant": false,
           "by_zone": {
             "I": 2,
@@ -313,7 +334,8 @@
           "file": "PFPU_SensorBias_RMTEMP_-4C",
           "fouling": false,
           "x13_flag_days": 5,
-          "n_evaluable": 192,
+          "x13_flag_rule_days": 6,
+          "n_evaluable_rule_days": 403,
           "significant": false,
           "by_zone": {
             "I": 4,
@@ -328,7 +350,8 @@
           "file": "PFPU_SensorBias_VAVAirflow_+200CFM",
           "fouling": false,
           "x13_flag_days": 7,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 7,
+          "n_evaluable_rule_days": 229,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -343,7 +366,8 @@
           "file": "PFPU_SensorBias_VAVAirflow_+400CFM",
           "fouling": false,
           "x13_flag_days": 7,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 7,
+          "n_evaluable_rule_days": 229,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -358,7 +382,8 @@
           "file": "PFPU_SensorBias_VAVAirflow_-200CFM",
           "fouling": false,
           "x13_flag_days": 18,
-          "n_evaluable": 154,
+          "x13_flag_rule_days": 18,
+          "n_evaluable_rule_days": 361,
           "significant": true,
           "by_zone": {
             "I": 2,
@@ -373,7 +398,8 @@
           "file": "PFPU_SensorBias_VAVAirflow_-400CFM",
           "fouling": false,
           "x13_flag_days": 11,
-          "n_evaluable": 259,
+          "x13_flag_rule_days": 11,
+          "n_evaluable_rule_days": 470,
           "significant": false,
           "by_zone": {
             "I": 4,
@@ -388,7 +414,8 @@
           "file": "PFPU_VAVDMPRStuck_0%",
           "fouling": false,
           "x13_flag_days": 4,
-          "n_evaluable": 104,
+          "x13_flag_rule_days": 4,
+          "n_evaluable_rule_days": 227,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -403,7 +430,8 @@
           "file": "PFPU_VAVDMPRStuck_100%",
           "fouling": false,
           "x13_flag_days": 5,
-          "n_evaluable": 261,
+          "x13_flag_rule_days": 6,
+          "n_evaluable_rule_days": 471,
           "significant": false,
           "by_zone": {
             "I": 3,
@@ -418,7 +446,8 @@
           "file": "PFPU_VAVDMPRStuck_20%",
           "fouling": false,
           "x13_flag_days": 6,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 6,
+          "n_evaluable_rule_days": 280,
           "significant": false,
           "by_zone": {
             "I": 0,
@@ -433,7 +462,8 @@
           "file": "PFPU_VAVDMPRStuck_50%",
           "fouling": false,
           "x13_flag_days": 14,
-          "n_evaluable": 231,
+          "x13_flag_rule_days": 14,
+          "n_evaluable_rule_days": 440,
           "significant": false,
           "by_zone": {
             "I": 4,
@@ -448,7 +478,8 @@
           "file": "PFPU_VAVDMPRStuck_80%",
           "fouling": false,
           "x13_flag_days": 7,
-          "n_evaluable": 261,
+          "x13_flag_rule_days": 7,
+          "n_evaluable_rule_days": 471,
           "significant": false,
           "by_zone": {
             "I": 4,
@@ -463,7 +494,8 @@
           "file": "PFPU_VAVDMPRUnstable",
           "fouling": false,
           "x13_flag_days": 3,
-          "n_evaluable": 102,
+          "x13_flag_rule_days": 3,
+          "n_evaluable_rule_days": 296,
           "significant": false,
           "by_zone": {
             "I": 1,
@@ -478,7 +510,8 @@
           "file": "PFPU_VAVFanRestrictFlow",
           "fouling": false,
           "x13_flag_days": 2,
-          "n_evaluable": 112,
+          "x13_flag_rule_days": 2,
+          "n_evaluable_rule_days": 317,
           "significant": false,
           "by_zone": {
             "I": 0,
@@ -493,10 +526,7 @@
     },
     "sfpu": {
       "bands_F_per_gpm": {
-        "I": [
-          NaN,
-          NaN
-        ],
+        "I": null,
         "W": [
           38.22,
           224.41
@@ -510,8 +540,13 @@
           269.67
         ]
       },
+      "zones_disabled_no_evaluable_healthy_day": [
+        "I"
+      ],
+      "denominator_convention": "rule-days summed over zones (deployed residual convention); unique-day counts use the union of days",
+      "holdout_fp_rule_days": 0,
+      "holdout_evaluable_rule_days": 80,
       "holdout_fp_days": 0,
-      "holdout_evaluable_days": 28,
       "holdout_fp_dates": [],
       "joint_fpr": {
         "deployed_union_minus_rate_fp_days": 4,
@@ -524,10 +559,10 @@
           "file": "SFPU_RMTEMPUnstable",
           "fouling": false,
           "x13_flag_days": 3,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 3,
+          "n_evaluable_rule_days": 225,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 3,
             "E": 0
@@ -539,10 +574,10 @@
           "file": "SFPU_ReheatCoilFouling_Airside_Minor",
           "fouling": true,
           "x13_flag_days": 0,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 0,
+          "n_evaluable_rule_days": 279,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 0
@@ -554,10 +589,10 @@
           "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
           "fouling": true,
           "x13_flag_days": 1,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 1,
+          "n_evaluable_rule_days": 279,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 1,
             "E": 0
@@ -569,10 +604,10 @@
           "file": "SFPU_ReheatCoilFouling_Airside_Severe",
           "fouling": true,
           "x13_flag_days": 7,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 7,
+          "n_evaluable_rule_days": 281,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 7,
             "E": 0
@@ -584,10 +619,10 @@
           "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
           "fouling": true,
           "x13_flag_days": 2,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 2,
+          "n_evaluable_rule_days": 279,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 2,
             "E": 0
@@ -599,10 +634,10 @@
           "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
           "fouling": true,
           "x13_flag_days": 7,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 7,
+          "n_evaluable_rule_days": 279,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 7,
             "E": 0
@@ -614,10 +649,10 @@
           "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
           "fouling": true,
           "x13_flag_days": 12,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 12,
+          "n_evaluable_rule_days": 279,
           "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 12,
             "E": 0
@@ -629,10 +664,10 @@
           "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
           "fouling": false,
           "x13_flag_days": 0,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 0,
+          "n_evaluable_rule_days": 191,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 0
@@ -644,10 +679,10 @@
           "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
           "fouling": false,
           "x13_flag_days": 1,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 1,
+          "n_evaluable_rule_days": 191,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 1
@@ -659,10 +694,10 @@
           "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
           "fouling": false,
           "x13_flag_days": 2,
-          "n_evaluable": 98,
+          "x13_flag_rule_days": 2,
+          "n_evaluable_rule_days": 192,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 1,
             "S": 0,
             "E": 1
@@ -674,10 +709,10 @@
           "file": "SFPU_ReheatVLVStuck_0%",
           "fouling": false,
           "x13_flag_days": 1,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 1,
+          "n_evaluable_rule_days": 191,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 1
@@ -689,10 +724,10 @@
           "file": "SFPU_ReheatVLVStuck_100%",
           "fouling": false,
           "x13_flag_days": 365,
-          "n_evaluable": 365,
+          "x13_flag_rule_days": 366,
+          "n_evaluable_rule_days": 558,
           "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 365,
             "E": 1
@@ -704,10 +739,10 @@
           "file": "SFPU_ReheatVLVStuck_20%",
           "fouling": false,
           "x13_flag_days": 365,
-          "n_evaluable": 365,
+          "x13_flag_rule_days": 365,
+          "n_evaluable_rule_days": 556,
           "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 365,
             "E": 0
@@ -719,10 +754,10 @@
           "file": "SFPU_ReheatVLVStuck_50%",
           "fouling": false,
           "x13_flag_days": 0,
-          "n_evaluable": 365,
+          "x13_flag_rule_days": 0,
+          "n_evaluable_rule_days": 556,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 0
@@ -734,10 +769,10 @@
           "file": "SFPU_ReheatVLVStuck_80%",
           "fouling": false,
           "x13_flag_days": 365,
-          "n_evaluable": 365,
+          "x13_flag_rule_days": 366,
+          "n_evaluable_rule_days": 556,
           "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 365,
             "E": 1
@@ -749,10 +784,10 @@
           "file": "SFPU_SensorBias_RMTEMP_+2C",
           "fouling": false,
           "x13_flag_days": 0,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 0,
+          "n_evaluable_rule_days": 236,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 0
@@ -764,10 +799,10 @@
           "file": "SFPU_SensorBias_RMTEMP_+4C",
           "fouling": false,
           "x13_flag_days": 4,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 4,
+          "n_evaluable_rule_days": 215,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 4,
             "E": 0
@@ -779,10 +814,10 @@
           "file": "SFPU_SensorBias_RMTEMP_-4C",
           "fouling": false,
           "x13_flag_days": 17,
-          "n_evaluable": 163,
+          "x13_flag_rule_days": 17,
+          "n_evaluable_rule_days": 354,
           "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 16,
             "E": 1
@@ -794,10 +829,10 @@
           "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
           "fouling": false,
           "x13_flag_days": 0,
-          "n_evaluable": 98,
+          "x13_flag_rule_days": 0,
+          "n_evaluable_rule_days": 227,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 0
@@ -809,10 +844,10 @@
           "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
           "fouling": false,
           "x13_flag_days": 0,
-          "n_evaluable": 98,
+          "x13_flag_rule_days": 0,
+          "n_evaluable_rule_days": 227,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 0
@@ -824,10 +859,10 @@
           "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
           "fouling": false,
           "x13_flag_days": 13,
-          "n_evaluable": 143,
-          "significant": false,
+          "x13_flag_rule_days": 13,
+          "n_evaluable_rule_days": 335,
+          "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 12,
             "E": 1
@@ -839,10 +874,10 @@
           "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
           "fouling": false,
           "x13_flag_days": 16,
-          "n_evaluable": 244,
-          "significant": false,
+          "x13_flag_rule_days": 16,
+          "n_evaluable_rule_days": 436,
+          "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 15,
             "E": 1
@@ -854,10 +889,10 @@
           "file": "SFPU_VAVDMPRStuck_0%",
           "fouling": false,
           "x13_flag_days": 0,
-          "n_evaluable": 98,
+          "x13_flag_rule_days": 0,
+          "n_evaluable_rule_days": 221,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 0
@@ -869,10 +904,10 @@
           "file": "SFPU_VAVDMPRStuck_100%",
           "fouling": false,
           "x13_flag_days": 18,
-          "n_evaluable": 261,
-          "significant": false,
+          "x13_flag_rule_days": 18,
+          "n_evaluable_rule_days": 452,
+          "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 1,
             "S": 16,
             "E": 1
@@ -884,10 +919,10 @@
           "file": "SFPU_VAVDMPRStuck_20%",
           "fouling": false,
           "x13_flag_days": 2,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 2,
+          "n_evaluable_rule_days": 245,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 2,
             "E": 0
@@ -899,10 +934,10 @@
           "file": "SFPU_VAVDMPRStuck_50%",
           "fouling": false,
           "x13_flag_days": 13,
-          "n_evaluable": 146,
-          "significant": false,
+          "x13_flag_rule_days": 13,
+          "n_evaluable_rule_days": 338,
+          "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 12,
             "E": 1
@@ -914,10 +949,10 @@
           "file": "SFPU_VAVDMPRStuck_80%",
           "fouling": false,
           "x13_flag_days": 38,
-          "n_evaluable": 261,
+          "x13_flag_rule_days": 38,
+          "n_evaluable_rule_days": 452,
           "significant": true,
           "by_zone": {
-            "I": 0,
             "W": 1,
             "S": 36,
             "E": 1
@@ -929,10 +964,10 @@
           "file": "SFPU_VAVDMPRUnstable",
           "fouling": false,
           "x13_flag_days": 0,
-          "n_evaluable": 97,
+          "x13_flag_rule_days": 0,
+          "n_evaluable_rule_days": 277,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 0,
             "E": 0
@@ -944,10 +979,10 @@
           "file": "SFPU_VAVFanRestrictFlow",
           "fouling": false,
           "x13_flag_days": 7,
-          "n_evaluable": 103,
+          "x13_flag_rule_days": 7,
+          "n_evaluable_rule_days": 294,
           "significant": false,
           "by_zone": {
-            "I": 0,
             "W": 0,
             "S": 7,
             "E": 0
@@ -974,6 +1009,10 @@
       "SFPU_ReheatVLVStuck_20%",
       "SFPU_ReheatVLVStuck_80%",
       "SFPU_SensorBias_RMTEMP_-4C",
+      "SFPU_SensorBias_VAVAirflow_-200CFM",
+      "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_50%",
       "SFPU_VAVDMPRStuck_80%"
     ]
   },

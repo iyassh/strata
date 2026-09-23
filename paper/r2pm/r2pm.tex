@@ -1,0 +1,212 @@
+% =============================================================
+% R2PM'27 — Robust and Resilient Process Mining (co-located with ICPM'27)
+% Springer LNBIP, 6-8 pages, llncs
+%
+% Source authority for every number in this paper (do not edit a number
+% here without re-reading the source):
+%   ../../ERRATA.md                  — E1-E5, canonical
+%   ../../outputs/week0_audit.json   — gate evidence (gates 1-6)
+%   ../../REPRODUCING.md  sec. 1, 4  — dataset DOI, gate commands
+%   ../../RESEARCH_LOG.md D2 D7 L8 L10 L18 L26 L28 L32, Part III item 3
+%   ../paper-v2.tex  sec:errata      — reviewed wording, tab:errata
+% If ERRATA.md and any other document disagree, ERRATA.md wins.
+% =============================================================
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{url}
+
+\begin{document}
+
+\title{Five Defects in the LBNL HVAC Fault-Detection Benchmarks, and the Gate Battery That Found Them}
+
+% TODO(author): co-authorship of the supervisors (Dr. Anthony Aighobahi,
+% Dr. Mridula Sharma) is not settled; confirm with them before submission
+% and add them to the author block and affiliations if agreed.
+\author{Yassh Singh}
+\institute{Thompson Rivers University, Kamloops, BC, Canada\\
+\email{iyassh28@gmail.com}}
+
+\maketitle
+
+\begin{abstract}
+The LBNL Fault Detection and Diagnostics datasets are the most widely used public benchmarks for HVAC fault detection. An audit produced five machine-verified defects, none documented at the distribution points: two fault families in which one simulation run ships four times under four severity labels; two static-pressure columns with units and roles swapped, and disjoint ranges, between the fault-free file and all twenty fault files; one date-rotated calendar; and a fault-free file simulated on a different configuration branch than every fault file. The swapped columns let any data-driven model separate healthy from faulty by provenance alone; our own principal-component baseline did exactly that, so published results using the full column set should be read with this in mind. Four of the five were found by a battery of cheap gates run before any science; each ships with a command that recomputes its evidence, and the battery is reusable.
+
+\keywords{Benchmark integrity \and Data quality \and Fault detection \and Leakage \and Reproducibility \and HVAC.}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+A benchmark is an argument about what a method can do, and every such argument rests on a premise that is almost never checked: that the files are what their names say they are. In building fault detection and diagnostics (FDD), that premise carries unusual weight. The community's evaluation protocols grade an algorithm against seeded faults of known type and known severity \cite{frank2018fddevaluation,yuill2013fddprotocol}, so a mislabelled severity, a duplicated run or a swapped unit does not merely add noise --- it silently redefines the quantity being scored.
+
+The field is also in poor shape to catch such problems downstream. An empirical audit of sixty-five primary machine-learning HVAC FDD studies found two that shared a code link, one of them broken, and 72\% that did not state whether their data was public, proprietary or commercial; the audit is a preprint \cite{mukhtar2025reproducibility}. When results cannot be re-run, a defect in the shared data is not corrected by replication, because there is no replication. It propagates instead.
+
+The LBNL Fault Detection and Diagnostics datasets \cite{granderson2020lbnlfdddata} are the closest thing the field has to a common yardstick: simulated annual, one-minute data with seeded faults, released CC BY 4.0 under DOI 10.25984/1881324 and hosted on OpenEI.\footnote{\url{https://data.openei.org/submissions/5763}, also indexed at \url{https://faultdetection.lbl.gov/data/}.} We use three of the systems: the single-duct air handler (SDAHU, 21 annual CSVs), and the parallel and series fan-powered units (PFPU and SFPU, 31 annual CSVs each, with Brick semantic models in Turtle). Published work trains on these files; among others, an adaptive-fusion graph convolutional network was trained with an outdoor-air sensor-bias class taken from the SDAHU \texttt{oa\_bias} files \cite{deng2024afgcn}.
+
+This paper reports five defects in those datasets, found while preparing an unrelated detection study and, to our knowledge, unreported at the distribution points. Four were found by a battery of cheap, mechanical gates that we now run against any dataset before a single design decision touches it; the fifth was found by a hostile audit attacking the evidence for the first. Each is stated here with its machine evidence, the command that recomputes it, the consequence for evaluation, and the handling we adopted. One of them --- the static-pressure column swap --- is a textbook provenance leak: either column alone separates the fault-free file from every fault file, so a model given it can score perfectly while learning nothing about HVAC. These findings do not diminish the datasets. They remain the largest labelled HVAC fault corpus available. But any benchmark built on them inherits these properties silently unless they are handled.
+
+\section{The Gate Battery}
+\label{sec:gates}
+
+The gates are unremarkable individually, which is the point: none required insight, and every one of them caught something that inspection and summary statistics did not. Five checks run against the raw files before any science.
+
+\emph{MD5 over raw and converted files.} Every raw CSV and every derived parquet is hashed and the hashes are grouped. Byte-identical files under different scenario names are the single cheapest dataset defect to detect and among the most damaging to leave undetected; this gate alone produced E1 and E2.
+
+\emph{Monotonicity.} Timestamps must increase. The gate counts wrap points rather than merely reporting a boolean, because the count distinguishes a shuffled file from a rotated one. It must be run on the \emph{raw} file: our own conversion step sorts by timestamp, so the converted parquet cannot exhibit the defect that the raw CSV carries. This gate produced E4.
+
+\emph{Calendar identity.} Each fault file's timestamp set is compared against its fault-free sibling's. Identity of the set combined with non-monotonicity is the signature of a rotation; a difference in the set is the signature of a truncated or differently-scheduled run. All 62 fan-powered-unit files pass identity after sort-on-convert.
+
+\emph{Brick/TTL coverage.} For the systems that ship a semantic model, the points declared in the Turtle file are matched against the CSV header. On both fan-powered systems this is 109 declared points against 109 columns, with exactly one name that does not cross over: \texttt{RFSFSPD} in the TTL against \texttt{RF\%SFSPD} in the CSV. Nothing in this paper turns on that mismatch, but a mapping layer that fails open on it would silently drop a point, which is why the gate reports names rather than counts.
+
+\emph{Log-hash.} Every derived event log is hashed, so that two scenarios reduced to identical logs cannot be counted as independent evidence further downstream. This is the abstraction-level analogue of the MD5 gate: duplication can be introduced by the preprocessing as well as by the publisher.
+
+A sixth, per-configuration gate --- healthy silence --- confirms that a rule set is silent on the fault-free year before it is permitted to score anything. The whole battery is one script and runs in seconds:
+
+\begin{verbatim}
+uv run python scripts/02_week0_audit.py all
+uv run python scripts/03_healthy_silence.py configs/lbnl_pfpu \
+    data/processed/pfpu/PFPU_FaultFree.parquet
+\end{verbatim}
+
+None of these gates was designed in advance. Each was added after a defect got past the previous set, which is the honest account of how such a battery comes to exist and the reason we publish it rather than merely describing it. It is governed by one standing rule, learned the hard way after documented lessons were re-learned in a later phase: \emph{a lesson is not closed until a helper or a test enforces it --- documentation alone decays.} Every defect below is therefore represented by an artifact the test suite reads, not by a paragraph in a design document.
+
+\section{The Five Defects}
+\label{sec:defects}
+
+Table~\ref{tab:errata} summarises; the subsections give the evidence. Throughout, ``healthy'' means the fault-free file (\texttt{AHU\_annual} on SDAHU) and the reproducing commands are run from the repository root after the conversion step in Section~\ref{sec:intro}'s data release.
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.03\textwidth}>{\raggedright\arraybackslash}p{0.07\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}@{}}
+\toprule
+ID & System & Files / columns & Defect & Consequence for evaluation \\
+\midrule
+E1 & SDAHU & \texttt{oa\_bias} (four severity files) & One simulation run shipped four times under four severity labels; the labelled sensor bias never appears in the logged column, and the evidence is indistinguishable from a bias applied at the controller input. & The four labels index one run, not four scenarios; the run is a fault run, not a healthy negative, and sensor-space bias detectors evaluated on it test nothing. \\
+E2 & SDAHU & \texttt{coi\_leakage} (four severity files) & One simulation run shipped four times under four severity labels. & The severity ladder is vacuous; SDAHU has one valve-leakage scenario, not four. \\
+E3 & SDAHU & \texttt{SA\_SP}, \texttt{SA\_SPSPT} & Units and roles swapped between the healthy file and every fault file, with no overlap between the two ranges. & Either column alone separates healthy from fault by file provenance rather than by fault physics. \\
+E4 & SFPU & \texttt{SensorBias\_RMTEMP\_-2C} & The raw file is a pure rotation by exactly 2{,}880 rows (two days). & Positional alignment against the healthy file misaligns every timestamp; the scenario is excluded, leaving 29 scored. \\
+E5 & SDAHU & healthy file vs.\ all 20 fault files & The healthy file was simulated on a different configuration branch: damper floor 0.000 against 0.100, a one-hour schedule phase shift, and a $-1.06\,^\circ$F offset in the simulated temperatures. & Healthy-versus-fault divergence carries a branch offset on top of the fault; one of our own detections was branch provenance. \\
+\bottomrule
+\end{tabular}
+\caption{Five machine-verified defects in the LBNL benchmark datasets. Each has a reproducing command in the repository's \texttt{ERRATA.md}; machine-readable evidence is in \texttt{outputs/week0\_audit.json}.}
+\label{tab:errata}
+\end{table}
+
+\subsection{E1 --- \texttt{oa\_bias}: one run shipped four times, and the bias is controller-side}
+
+The four files \texttt{oa\_bias\_-4/-2/2/4\_annual.csv} are byte-identical to each other: one raw CSV MD5, \texttt{89b13704\ldots}, and one parquet MD5, \texttt{63b857d7\ldots}, across all four. The $\pm$2 and $\pm$4 severity labels therefore carry no information.
+
+The second half of the defect is subtler and is the reason the first half matters. The labelled sensor-side bias is absent from the recorded stream. The recorded \texttt{OA\_TEMP} tracks the healthy file's weather to within $0.33\,^\circ$F (mean $0.02\,^\circ$F, signed mean $\approx 0$, 38\% exact zeros; the sub-degree residual is intake-node flow feedback), nowhere near the labelled $\pm$2--$4\,^\circ$F, and the \texttt{OA\_TEMP} column is bit-identical across all fault files, so it carries no fault-specific signal at all. Yet the run misbehaves: relative to other fault families, \texttt{oa\_bias} holds the cooling valve closed until roughly $2\,^\circ$F warmer outdoor conditions, leaving \texttt{SA\_TEMP} about $2.8\,^\circ$F above setpoint on some 2{,}000 occupied rows, while the $60\,^\circ$F economizer lockout shows no shift.
+
+We bound the mechanism honestly. The evidence is consistent with a $-2\,^\circ$F bias injected only into the cooling interlock's outdoor-air input --- ``controller-side'' --- but it is observationally indistinguishable from a mislabelled cooling-lockout-setpoint fault. What is proven is narrower and sufficient: the labelled sensor bias is not in the data, the run is faulty, and the $\pm$2/$\pm$4 labels are fiction.
+
+\emph{How it was found.} The MD5 gate produced the duplication immediately. The mislabel took longer and was overturned twice. The files were first treated as an independent healthy year on the strength of the matching weather column; a blind residual channel then ``false-alarmed'' on that file at a rate we recorded at the time as 48.8\%, which forced a re-examination rather than a dismissal, and the re-examination found a genuine fault. A later hostile audit (E5) revised how much of the degree-scale divergence belongs to this fault at all: most of the MA/SA divergence against the healthy file is the configuration-branch offset shared by every fault file, and the fault-specific evidence is the cooling-interlock shift quoted above.
+
+\emph{Consequence.} The \texttt{oa\_bias} runs are fault runs, not healthy negatives. After the relabel, SDAHU has no independent healthy negative run at all --- a limitation every SDAHU study inherits. This bites any evaluation using \texttt{oa\_bias} as a negative class, any comparison treating the four severities as four scenarios, and any sensor-space method expecting the labelled bias to be in the data: an AFDD sensor-bias detector evaluated on these files tests nothing. Published work has trained an outdoor-air-bias class on these files \cite{deng2024afgcn}; we make no claim about what that work's results would have been, only that the labelled bias is not in the column.
+
+\begin{verbatim}
+uv run python scripts/02_week0_audit.py sdahu
+\end{verbatim}
+
+\emph{Handling.} \texttt{oa\_bias} is a single fault scenario, relabelled as a fault and never used as a negative.
+
+\subsection{E2 --- \texttt{coi\_leakage}: one run shipped four times}
+
+The four files \texttt{coi\_leakage\_010/025/040/050\_annual.csv} are byte-identical: raw MD5 \texttt{a9fdfc50\ldots}, parquet \texttt{5133132d\ldots}. The same gate produces both duplicate groups in one pass.
+
+\emph{Consequence.} The 010/025/040/050 severity ladder is vacuous: SDAHU has one valve-leakage scenario, not four. Taken with E1, the 21-file SDAHU set contains 15 distinct files --- healthy plus 14 distinct fault scenarios. Severity--response analysis for this family on SDAHU, including any rank correlation of response against severity, is not merely underpowered but impossible. This bites any per-scenario accounting that counts twenty SDAHU fault scenarios, and any severity-monotonicity analysis that includes this family. The reproducing command is the one above.
+
+\emph{Handling.} \texttt{coi\_leakage} is one scenario in our scenario configuration.
+
+\subsection{E3 --- \texttt{SA\_SP}/\texttt{SA\_SPSPT}: units and roles swapped}
+
+In the healthy file, \texttt{SA\_SP} is on a Pascal scale, mean 402.8, varying over a range of about 9~Pa, and \texttt{SA\_SPSPT} is exactly constant at 1.607460. In every one of the twenty fault files, \texttt{SA\_SP} is on the inches-of-water scale, with per-file means between 0.84 and 0.97, and \texttt{SA\_SPSPT} is exactly constant at $-400.252530$. The units are swapped and so are the roles: the column named as the measurement carries the setpoint's magnitude and vice versa. The two ranges do not overlap. Either column alone separates healthy from fault.
+
+\emph{How it was found.} The swap was first noticed on a single file, \texttt{coi\_leakage\_050}, during an unrelated revision, and was then generalised and verified healthy-versus-all-faults by the same gate that produces the hashes. Its consequence --- that it is a leak, not a cosmetic inconsistency --- was found by auditing our own principal-component baseline. Section~\ref{sec:leak} treats this defect separately, because it is the one with implications outside this project.
+
+\begin{verbatim}
+uv run python scripts/02_week0_audit.py sdahu
+\end{verbatim}
+
+\emph{Handling.} Both columns are in an explicit erratum-column list that all baselines drop, and our own detector configurations never mapped them.
+
+\subsection{E4 --- \texttt{SFPU\_SensorBias\_RMTEMP\_-2C}: a date-rotated calendar}
+
+The raw file is a pure rotation by exactly 2{,}880 rows --- two days at one-minute sampling. Its timestamp \emph{set} is identical to the fault-free file's; the series is non-monotonic with exactly one wrap point; and the first row is 2018-01-03 00:00 where the fault-free file's first row is 2018-01-01 00:00. The rotation is invisible to any check of the calendar's contents and to every summary statistic; it is visible only in the row order.
+
+\emph{How it was found.} By the monotonicity gate, and only because that gate reads the raw CSV. Our own conversion step sorts by timestamp, so the parquet cannot exhibit the defect --- a good illustration of why a gate must be placed upstream of the preprocessing that would mask it.
+
+\emph{Consequence.} Naive positional (row-index) comparison against the healthy file misaligns every timestamp in the file, silently, for an entire year. This bites any pipeline that aligns files positionally rather than by timestamp, and any SFPU scenario count of 30.
+
+\begin{verbatim}
+uv run python scripts/02_week0_audit.py rotation
+\end{verbatim}
+
+\emph{Handling.} Sort-on-convert, a calendar-identity gate, and exclusion of the scenario from scoring, leaving SFPU with 29 scored fault scenarios.
+
+\subsection{E5 --- the healthy file is on a different configuration branch}
+
+The SDAHU fault-free file was simulated on a different configuration branch than every one of its twenty fault files. Three independent measurements agree.
+
+\emph{Damper floor.} During fan-on hours the healthy file's outdoor-air damper minimum is 0.000; every fault file floors at exactly 0.100. (The three \texttt{damper\_stuck} files at 0.25, 0.75 and 1.0 sit at their stuck value, above the floor.)
+
+\emph{Schedule.} On the pipeline's own occupancy signal, the day universe and the daily occupied minutes are identical between branches: the same 303 occupied days, within two minutes per day. The branch difference is a one-hour phase shift --- the healthy file starts at 05:01--05:02 on roughly 200 days, every fault file at 06:01 --- plus about 74 minutes per day more fan runtime in the healthy file. An earlier version of this erratum quoted a range of occupied-row counts instead; that reading conflated a short 215-day file, plausible fault-driven night cycling, and the branch effect, and was measured on a sensor the pipeline does not read. It is corrected here, and the correction is the reason we now recompute every claim at the moment it is promoted into a citable document rather than copying it between documents.
+
+\emph{Simulation-physics offset.} The residual channel's no-fault baseline differs by $-1.06\,^\circ$F between the branches: the fault branch's fault-free level is $+0.008\,^\circ$F, from five concordant measurements (all four \texttt{coi\_bias} files after subtracting their nominal bias, plus \texttt{oa\_bias}), against $+1.071\,^\circ$F on the healthy branch, with a band of $[0.526, 1.372]$. The offset is uniform across occupied hours and survives restricting the healthy file to the fault branch's schedule, so it lives in the simulated temperatures and not in any input column that could be harmonised away.
+
+\emph{How it was found.} By a hostile audit whose assignment was to attack E1's evidence, not to look for a new defect. It had hidden for six phases for a structural reason worth naming: every comparison in the project ran against the healthy file, and no fault-versus-fault control existed. The standing rule it produced is that healthy-versus-fault divergence is fault evidence only after a fault-versus-fault control.
+
+\emph{Consequence.} Every healthy-versus-fault comparison on SDAHU carries a configuration-branch offset on top of the fault, and any healthy-trained detector on this system may partially be detecting branch provenance. The magnitudes decide which claims survive. Fault-versus-fault cross-family divergence is $0.05$--$0.14\,^\circ$F, an order of magnitude below the branch offset, which is why most of the degree-scale divergence quoted against the healthy file in E1 belongs to the branch. In our own benchmark, the \texttt{oa\_bias} residual detection sits exactly on the fault-branch no-fault baseline ($+0.007$ against $+0.008$): it \emph{is} branch provenance, and the SDAHU scorecard is 13 of 14 under branch correction rather than 14 of 14. The \texttt{coi\_bias} detections survive by an order of magnitude ($\pm3.6$ and $\pm7.2\,^\circ$F against a $1.06\,^\circ$F offset); nine rules-carried scenarios are branch-immune, because a signature rule compares a device's position to its own command within the same file; and one seasonal channel is branch-confounded on SDAHU and is reported as diagnostic-only. The fan-powered systems are single-branch on the schedule axis, verified, which is where cross-checks now live.
+
+\begin{verbatim}
+uv run python scripts/02_week0_audit.py sdahu
+\end{verbatim}
+
+\emph{Handling.} Adjudicated by a pre-registered branch-sensitivity experiment: 14/14 becomes 13/14, the \texttt{oa\_bias} residual detection is withdrawn as branch provenance, and the fan-powered systems' homogeneity is verified as an artifact. This erratum bites our own benchmark, and we say so.
+
+\section{E3 as a Leakage Demonstration}
+\label{sec:leak}
+
+E1, E2 and E4 corrupt an accounting: they change what a scenario count or a severity ladder means. E3 is different in kind, because it hands every data-driven model a free discriminator.
+
+The structure of the leak is as clean as a synthetic example. One class --- healthy --- is represented by exactly one file. The other class is represented by twenty. Two columns take values on one scale in the first file and on a different scale in all twenty, and the ranges are disjoint: healthy \texttt{SA\_SP} near 402 against fault-file means of 0.84 to 0.97, healthy \texttt{SA\_SPSPT} constant at 1.607460 against a constant $-400.252530$ everywhere else. A threshold on either column alone achieves perfect separation of healthy from fault. That separation is of file provenance, not of fault physics, and it is available to any model at any capacity: a decision stump exploits it as completely as a deep network.
+
+We know it is exploited in practice because we caught ourselves doing it. Our principal-component baseline, fitted on the healthy file and scored on the fault files, reached a squared prediction error of order $10^{37}$ --- a number with no physical reading, and the reason the baseline was audited rather than celebrated. The columns were the entire explanation. They are now dropped by name before any baseline sees the data, and the standing rule attached to that lesson is to consult the erratum ledger before building any new consumer of the data, because the lesson had already been recorded once when we repeated it.
+
+The implication for the literature is one we state carefully and no further. We have not re-run anyone else's method, and we assert nothing about the correctness of any specific published result. What we assert is a property of the data: any model trained on healthy and scored on fault files with these columns included has a provenance discriminator available to it on this system. Published SDAHU machine-learning results that used the full column set should be read with this in mind. The remedy for a reader is cheap --- check whether \texttt{SA\_SP} and \texttt{SA\_SPSPT} were in the feature set --- and the remedy for an author is cheaper still: re-run without them and report both numbers.
+
+The general lesson is the one that motivates this venue. Leakage in benchmark data is usually discussed as a property of a \emph{split} --- the same entity on both sides of a train/test boundary. Here it is a property of the \emph{corpus}: the class label is confounded with the file, and any per-file constant becomes a perfect feature. Wherever a class is carried by a small number of files, every column that is constant within a file deserves the same check.
+
+\section{Recommendations}
+\label{sec:recs}
+
+\emph{For the dataset maintainers.} Publish an errata notice at the distribution points --- the DOI landing page and the project site --- rather than in a paper only. Two changes would remove most of the risk at no cost to existing users: drop or flag \texttt{SA\_SP} and \texttt{SA\_SPSPT} on SDAHU, since a column that cannot be compared across files in a corpus is worse than a missing column; and either republish the four distinct \texttt{oa\_bias} and \texttt{coi\_leakage} severity runs or withdraw the severity labels, which currently promise four scenarios where the archive contains one. The rotated SFPU file should be republished in calendar order. Where a fault-free file was generated on a different configuration branch than its fault files, that fact belongs in the metadata, because it is invisible in the data and decisive for every comparison made with it. Publishing per-file checksums alongside the archives would let any user detect duplication in seconds.
+
+\emph{For users of these datasets.} Hash the files before using them and group the hashes; it costs one command and it is the highest-yield check available. Verify calendars on the raw files, before any preprocessing step that sorts, and check for rotation by testing monotonicity and timestamp-set identity together rather than either alone. Build a fault-versus-fault control into the evaluation design: a divergence measured only against the fault-free file cannot distinguish the fault from anything else that differs between the files, and this is exactly how E5 evaded six phases of our own review. Before training, ask of every feature whether it is constant within a file, and drop the erratum columns by name. Finally, report scenario counts as \emph{distinct} runs: on SDAHU that is 14 fault scenarios, not 20, and on SFPU 29, not 30.
+
+\emph{For reviewers.} A benchmark result on shared data is checkable at the level of which columns were used and how many distinct files backed each class. Those two questions cost a reviewer nothing and would have caught E3 in any paper that used it.
+
+\section{Disclosure Status}
+\label{sec:disclosure}
+
+% TODO(author): fill in the date and the channel before submission, and
+% update this section with any maintainer response. Do not submit with
+% the placeholder in place.
+These findings were reported to the dataset maintainers on \textbf{<date>}. All evidence, the audit script and the machine-readable artifact are public in the project repository under the same terms as the datasets, so the defects can be confirmed independently of this paper.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Five defects in the most widely used public HVAC FDD benchmarks were found not by insight but by five mechanical gates run before any science: hashes, monotonicity, calendar identity, semantic-model coverage and log hashing. Four of the five fell out of the battery directly, the fifth from a hostile audit of the first, and every one of them would have inflated a published result --- two by inflating a scenario count, one by making a severity ladder out of a single run, one by misaligning a year of data, one by letting a configuration difference masquerade as a detection, and one by offering every model a perfect discriminator that has nothing to do with HVAC. The datasets remain the best the field has, and that is precisely the argument for repairing them in public: a defect in a shared benchmark is not a local error but a multiplier, and in a subfield where almost nothing is re-run, it is a multiplier that no amount of downstream replication will catch.
+
+\bibliographystyle{splncs04}
+\bibliography{../references}
+
+\end{document}

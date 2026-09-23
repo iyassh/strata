@@ -130,3 +130,41 @@ test — two buildings — and the permutation null over six cells is coarse
 such. If P1 passes it supports the claim on exactly two buildings and
 three rules; it cannot support more. **Falsifiers F1–F3 are unchanged in
 form and apply to the six-cell test.**
+
+---
+
+## Amendment 2 — 2026-09-23, AFTER computation; a protocol failure, recorded as one
+
+Raised by the round-two hostile review of the paper. Both points are
+correct and neither was disclosed at the time.
+
+**A. The amended test could not pass.** Amendment 1 reduced P1 to six cells
+in two Q-groups of three. Under that design the smallest exact permutation
+p attainable by any data is 3!·3!/6! = 36/720 = **0.05**, and F1 fires at
+p ≥ 0.05. Amendment 1 §D recorded the bound ("p can be no smaller than
+1/20") and the test was run anyway. The reported p = 0.200 is the floor the
+observed firing multiset {124, 1, 0, 0, 0, 0} permits, not a measurement
+against a null the design could have rejected. **P(F1 fires) = 1 by
+construction. The verdict F1_FIRED licenses no conclusion about whether
+discovery predicts transfer.** The nine-cell design had power (minimum p
+≈ 0.0006); excluding SDAHU was scientifically correct and destroyed it;
+the obligation at that moment was to declare the test unpowered, not to
+run it.
+
+**B. The scorer was changed after Q existed without an amendment.** Commit
+dbffbbb replaced the pre-registered 10,000-draw Monte Carlo p with exact
+enumeration over 720 permutations. Exact enumeration is strictly better
+and the change cannot alter the verdict, but it was made as a commit
+message rather than as a dated amendment under this document's own
+discipline. Recorded here as the deviation it was.
+
+**Disposition.** The artifact keeps the computed values and adds a
+`power` block stating the design's minimum attainable p and that the
+criterion was unattainable; `conclusion_licensed` is set false. The paper
+reports this test as a pre-registered design that, as amended, had no
+power — a failure of the protocol's authors, not a refutation of the
+claim — and draws no inference from it in either direction. A powered
+test needs more buildings and is future work. The descriptive numbers
+(SFPU's net treats heating as obligatory; the unit-stratum support equals
+the raw log count exactly; the device stratum orders the buildings the
+opposite way) are reported as observations, not as a test outcome.

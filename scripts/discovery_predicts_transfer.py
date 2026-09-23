@@ -102,6 +102,18 @@ def main() -> int:
     # a consistency check on disclosed values, not a blind prediction.
     p3_pass = (q["sfpu"]["Q_support"] > q["pfpu"]["Q_support"])
 
+    # Amendment 2: with two Q-groups the minimum attainable exact p is
+    # (g1! * g2!) / n!; if that is not below the criterion the design has no
+    # power and the rule-outcome below licenses no conclusion.
+    from collections import Counter
+    groups = Counter(qs).values()
+    min_p = 1.0
+    for g in groups:
+        min_p *= math.factorial(g)
+    min_p /= math.factorial(len(qs))
+    power = {"design_cells": len(qs), "q_groups": sorted(groups, reverse=True),
+             "min_attainable_p": min_p, "criterion": "p < 0.05",
+             "criterion_attainable": min_p < 0.05}
     if not p1_pass:
         verdict, fired = "F1_FIRED", ["F1"]
     elif not p3_pass:
@@ -124,6 +136,12 @@ def main() -> int:
         "P3": {"pass": p3_pass, "note": "secondary; MR1 firing order was known to the drafter"},
         "falsifiers_fired": fired,
         "verdict": verdict,
+        "power": power,
+        "conclusion_licensed": bool(power["criterion_attainable"]),
+        "amendment_2": ("The amended six-cell design cannot attain p < 0.05 (minimum 0.05), so the "
+                        "rule outcome above is guaranteed and licenses no conclusion; reported as a "
+                        "protocol failure. Exact enumeration replaced the pre-registered Monte Carlo "
+                        "p post-Q (commit dbffbbb) without a dated amendment; recorded in Amendment 2."),
     }
     (ROOT / "outputs" / "discovery_predicts_transfer.json").write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps({k: out[k] for k in ("P1", "verdict", "falsifiers_fired")}, indent=2))

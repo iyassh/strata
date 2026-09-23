@@ -65,3 +65,12 @@ def test_prereg_and_amendment_predate_the_artifact_in_git():
     for fixed in ("1155dd0", "4a3723a", "bc66755"):
         r = subprocess.run(["git", "merge-base", "--is-ancestor", fixed, artifact_commit], cwd=ROOT)
         assert r.returncode == 0, f"{fixed} is not an ancestor of the artifact commit {artifact_commit[:7]}"
+
+
+def test_amendment_2_power_block_and_no_conclusion():
+    """The amended design cannot reach p < 0.05; the artifact must say so
+    and must not claim a conclusion."""
+    a = _art()
+    assert a["power"]["min_attainable_p"] == pytest.approx(0.05)
+    assert a["power"]["criterion_attainable"] is False
+    assert a["conclusion_licensed"] is False

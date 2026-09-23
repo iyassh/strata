@@ -506,5 +506,17 @@
     "F1",
     "F2"
   ],
-  "verdict": "F1_FIRED"
+  "verdict": "F1_FIRED",
+  "power": {
+    "design_cells": 6,
+    "q_groups": [
+      3,
+      3
+    ],
+    "min_attainable_p": 0.05,
+    "criterion": "p < 0.05",
+    "criterion_attainable": false
+  },
+  "conclusion_licensed": false,
+  "amendment_2": "The amended six-cell design cannot attain p < 0.05 (minimum 0.05), so the rule outcome above is guaranteed and licenses no conclusion; reported as a protocol failure. Exact enumeration replaced the pre-registered Monte Carlo p post-Q (commit dbffbbb) without a dated amendment; recorded in Amendment 2."
 }

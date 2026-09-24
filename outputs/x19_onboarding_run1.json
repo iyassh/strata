@@ -1,0 +1,155 @@
+{
+  "pre_registration": "docs/plans/2026-09-24-x19-fcu-onboarding-prereg.md",
+  "effort": {
+    "sensor_mappings": 30,
+    "state_rules": 7,
+    "signature_rules": 16,
+    "healthy_silence_iterations": 2,
+    "src_diff_since_prereg": "none"
+  },
+  "gates": {
+    "files": 49,
+    "duplicates": [
+      [
+        "FCU_Fouling_Cooling_Airside_Minor.csv",
+        "FCU_Fouling_Heating_Airside_Minor.csv"
+      ]
+    ],
+    "rotation": [],
+    "ttl_columns_not_declared": [
+      "FAN_CTRL",
+      "FCU_CLG_EWT",
+      "FCU_CLG_GPM",
+      "FCU_CLG_RWT",
+      "FCU_CTRL",
+      "FCU_CVLV",
+      "FCU_CVLV_DM",
+      "FCU_DAT",
+      "FCU_DA_CFM",
+      "FCU_DA_HUMD",
+      "FCU_DMPR",
+      "FCU_DMPR_DM",
+      "FCU_HTG_EWT",
+      "FCU_HTG_GPM",
+      "FCU_HTG_RWT",
+      "FCU_HVLV",
+      "FCU_HVLV_DM",
+      "FCU_MAT",
+      "FCU_MA_HUMD",
+      "FCU_OAT",
+      "FCU_OA_CFM",
+      "FCU_OA_HUMD",
+      "FCU_RAT",
+      "FCU_RA_HUMD",
+      "RMCLGSPT",
+      "RMHTGSPT",
+      "RM_TEMP"
+    ],
+    "excluded_scenarios": [
+      "FCU_Fouling_Heating_Airside_Minor"
+    ]
+  },
+  "scorecard": {
+    "detected": 47,
+    "scored": 47,
+    "by_family": {
+      "oa_damper_leak": [
+        3,
+        3
+      ],
+      "oa_damper_stuck": [
+        5,
+        5
+      ],
+      "valve_leak": [
+        6,
+        6
+      ],
+      "valve_stuck": [
+        10,
+        10
+      ],
+      "sensor_bias": [
+        4,
+        4
+      ],
+      "coil_fouling": [
+        11,
+        11
+      ],
+      "airflow_restriction": [
+        5,
+        5
+      ],
+      "control_fault": [
+        3,
+        3
+      ]
+    },
+    "channels": {
+      "rules": 25,
+      "resid": 37,
+      "model": 33,
+      "device": 0,
+      "absence": 0,
+      "freq": 23,
+      "osc": 18,
+      "rate": 1
+    },
+    "misses": [],
+    "holdout_fp_days_union_minus_rate": 28,
+    "holdout_days": 96,
+    "per_channel_fp": {
+      "rules": 0,
+      "resid": 3,
+      "model": 25,
+      "device": 0,
+      "absence": 0,
+      "freq": 0,
+      "rate": 17,
+      "osc": 0
+    }
+  },
+  "predictions": {
+    "P1_config_only": true,
+    "P2_gates": false,
+    "P2_axes": {
+      "G1_no_duplicates": false,
+      "G2_monotonic": true,
+      "G3_calendar_identical": true,
+      "G4_no_rotation": true,
+      "G5_ttl_covers_columns_by_name": false,
+      "G6_healthy_inside_cluster": true
+    },
+    "P3_healthy_silence_iterations": 2,
+    "P3_le_3": true,
+    "P3_residual_healthy_signature_days": 0,
+    "P4_holdout_fp_days": 28,
+    "P4_fp_le_10_of_96": false,
+    "P5_detected": 47,
+    "P5_n_scored": 47,
+    "P5_frac": 1.0,
+    "P5_ge_60pct": true,
+    "P6_fouling_detected": 11,
+    "P6_fouling_scored": 11,
+    "P6_le_6": false,
+    "P7_conformance_only_scenarios": [
+      "FCU_OADMPRLeak_20",
+      "FCU_Fouling_Cooling_Waterside_Minor",
+      "FCU_Fouling_Cooling_Waterside_Moderate",
+      "FCU_Fouling_Cooling_Waterside_Severe",
+      "FCU_Fouling_Heating_Waterside_Minor",
+      "FCU_Fouling_Heating_Waterside_Moderate"
+    ],
+    "P7_null_generalises": false,
+    "P8_airflow_detected": 5,
+    "P8_airflow_scored": 5,
+    "P8_control_detected": 3,
+    "P8_control_scored": 3,
+    "P8_holds": true
+  },
+  "falsifiers_fired": [
+    "F-X19.b: holdout false alarms exceed 10 of 96",
+    "F-X19.d: a scenario is detected only by the conformance channels"
+  ]
+}

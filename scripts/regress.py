@@ -56,6 +56,10 @@ PIPELINE = {
     "union_fpr_ddahu.json": "uv run python scripts/union_fpr.py ddahu",
     "x17_onboarding.json": "uv run python scripts/x17_onboarding.py",
     "x18_ddahu_enriched_frequency.json": "uv run python scripts/x18_ddahu_enriched_frequency.py",
+    # 2026-09-24 fifth system (X19), the fan coil unit
+    "benchmark_v6_fcu.json": "uv run python scripts/benchmark.py fcu",
+    "union_fpr_fcu.json": "uv run python scripts/union_fpr.py fcu",
+    "x19_onboarding.json": "uv run python scripts/x19_onboarding.py",
     # x9_x10_robustness.json: ~1 h in three per-system processes (see its pre-registration); not in the gate.
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",
     "discovery_predicts_transfer.json": "uv run python scripts/discovery_predicts_transfer.py --q outputs/discovery_predicts_transfer_q.json",

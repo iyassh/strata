@@ -234,3 +234,32 @@ benchmark and we say so.
 Week-0 gate battery (MD5, zone ground truth, monotonicity/calendar, TTL
 coverage, errata evidence): `scripts/02_week0_audit.py` — reusable on any
 new dataset before any design decision touches it.
+
+## Erratum E6 — FCU `Fouling_Cooling_Airside_Minor` and `Fouling_Heating_Airside_Minor`: one run shipped under two family labels
+
+**Files:** `FCU_Fouling_Cooling_Airside_Minor.csv`, `FCU_Fouling_Heating_Airside_Minor.csv`
+(LBNL FDD Data Sets: Fan Coil Unit, DOI 10.25984/1881324).
+
+**Evidence** (`uv run python scripts/gates_system.py fcu … FCU_FaultFree`,
+`outputs/week0_audit_fcu.json`, G1): the two raw CSVs are **byte-identical**
+(MD5 `a0b885fe…`), the only duplicate group among the 49 files. Unlike the
+SDAHU cases (E1, E2) the two labels name different *families* — a cooling
+coil and a heating coil — so one of them is simply wrong, and nothing in
+the data can say which.
+
+**Treatment:** the content is scored once, under the cooling-file entry,
+with a label that records the identity; the heating-file entry is kept in
+the manifest with `exclude:` so it appears in the scorecard as excluded and
+cannot count as independent evidence. The coil-fouling family is therefore
+11 scored scenarios on this system, not the documentation's 12, and the
+minor-airside cell is attributable to neither coil.
+
+**Related observation (not a defect):** four fault files have fewer
+occupied days than the fault-free year (261): `OADMPRStuck_80` 215,
+`OADMPRStuck_50` 242, `OADMPRStuck_100` 249, `Control_Unstable` 250. In each
+the controller enters shutdown (`FCU_CTRL = 0`) — 94 days in the stuck-80 %
+file, mixed-air temperature down to 2 °F — which is the documented
+low-temperature protection (mixed air below 35 °F) responding to a damper
+held open in winter. The fault-free file has no shutdown minute. These are
+physical consequences of the seeded faults and the G6 healthy-inside-cluster
+check passes; they are noted because the absence channel sees them.

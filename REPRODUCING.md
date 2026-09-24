@@ -48,6 +48,8 @@ uv run python scripts/00_convert_to_parquet.py   # -> data/processed/sdahu/
 uv run python scripts/01_convert_fpu.py          # -> data/processed/{pfpu,sfpu}/
 export STRATA_DDAHU_RAW=/path/to/LBNL_FDD_Data_Sets_DDAHU_all_3   # fourth system (X17)
 uv run python scripts/05_convert_ddahu.py        # -> data/processed/ddahu/
+export STRATA_FCU_RAW=/path/to/LBNL_FDD_Data_Sets_FCU_all_3       # fifth system (X19)
+uv run python scripts/06_convert_fcu.py          # -> data/processed/fcu/
 ```
 
 `data/` is gitignored; any location works if `data/processed/<system>/`
@@ -67,6 +69,8 @@ For a new system the generic gate battery replaces the audit script:
 ```sh
 uv run python scripts/gates_system.py ddahu $STRATA_DDAHU_RAW/LBNL_FDD_Dataset_DDAHU DualDuct_FaultFree configs/lbnl_ddahu/equipment.ttl
 uv run python scripts/03_healthy_silence.py configs/lbnl_ddahu data/processed/ddahu/DualDuct_FaultFree.parquet
+uv run python scripts/gates_system.py fcu $STRATA_FCU_RAW/LBNL_FDD_Dataset_FCU FCU_FaultFree configs/lbnl_fcu/equipment.ttl
+uv run python scripts/03_healthy_silence.py configs/lbnl_fcu data/processed/fcu/FCU_FaultFree.parquet
 ```
 
 ## 5. The result pipeline (order matters only within a system)
@@ -82,6 +86,9 @@ done
 caffeinate -i uv run python scripts/benchmark.py ddahu       # fourth system (X17) -> outputs/benchmark_v6_ddahu.json
 caffeinate -i uv run python scripts/union_fpr.py ddahu       # absence-channel coverage the check cannot see is recorded as unresolved
 uv run python scripts/x17_onboarding.py                      # -> outputs/x17_onboarding.json
+caffeinate -i uv run python scripts/benchmark.py fcu         # fifth system (X19) -> outputs/benchmark_v6_fcu.json
+caffeinate -i uv run python scripts/union_fpr.py fcu
+uv run python scripts/x19_onboarding.py                      # -> outputs/x19_onboarding.json
 caffeinate -i uv run python scripts/grammar.py               # Phase 5 -> outputs/grammar_results.json
 uv run python scripts/sensor_coverage.py                     # -> outputs/sensor_coverage.json
 uv run python scripts/crywolf.py                             # -> outputs/crywolf.json (artifacts only)

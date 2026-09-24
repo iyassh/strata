@@ -1,0 +1,1085 @@
+{
+  "system": "fcu",
+  "raw_dir": "/Users/yassh/Downloads/Ureap/LBNL_FDD_Data_Sets_FCU_all_3/LBNL_FDD_Dataset_FCU",
+  "n_files": 49,
+  "G1_md5": {
+    "hashes": {
+      "FCU_Control_CoolingReverse.csv": "1685b220b15eb654348b0d2d0d0ee33c",
+      "FCU_Control_HeatingReverse.csv": "fe8633974dc13963faf46318a1ec1503",
+      "FCU_Control_Unstable.csv": "a655d00e3303a1f6032e21b8bf2a47f8",
+      "FCU_FanOutletBlockage.csv": "0ad58947cef4fe7f39e9ce5c31239912",
+      "FCU_FaultFree.csv": "21c712eaf80d4684c0af8933782507e0",
+      "FCU_FilterRestriction_10%.csv": "241639549a0a44f336d38ee9692e5b48",
+      "FCU_FilterRestriction_20%.csv": "f69d2d95bea2bf1f7a8a395fc1d65064",
+      "FCU_FilterRestriction_50%.csv": "400c823e38025b29cc91a558e29ac7d8",
+      "FCU_Fouling_Cooling_Airside_Minor.csv": "a0b885fedb6e17bd1fa3fb34a59e4255",
+      "FCU_Fouling_Cooling_Airside_Moderate.csv": "612ae1b4f85b9fb142535f728e6fb5e5",
+      "FCU_Fouling_Cooling_Airside_Severe.csv": "90f997e3f9de37500155820a41fd1314",
+      "FCU_Fouling_Cooling_Waterside_Minor.csv": "c4981c09c46de659fade03d35e75873b",
+      "FCU_Fouling_Cooling_Waterside_Moderate.csv": "81d3f69b4f1820b91e2503ef6676a1b1",
+      "FCU_Fouling_Cooling_Waterside_Severe.csv": "11477a56f87ee5937d531777bcb7c46d",
+      "FCU_Fouling_Heating_Airside_Minor.csv": "a0b885fedb6e17bd1fa3fb34a59e4255",
+      "FCU_Fouling_Heating_Airside_Moderate.csv": "f98852490a3b92b6614f9188dffa41f9",
+      "FCU_Fouling_Heating_Airside_Severe.csv": "bf56a93f53efacb28e4a746613619ca9",
+      "FCU_Fouling_Heating_Waterside_Minor.csv": "49733212eeb69b45eb1db740835ae771",
+      "FCU_Fouling_Heating_Waterside_Moderate.csv": "86321d6799b6dd99660fe47c83cb8c4b",
+      "FCU_Fouling_Heating_Waterside_Severe.csv": "3caee941d5872e6fa1db0d71535d3af7",
+      "FCU_OABlockage.csv": "eeda67a6dc8309093ff4c8b534ae7667",
+      "FCU_OADMPRLeak_20.csv": "00be27990e5770a515950af3ebb045cc",
+      "FCU_OADMPRLeak_50.csv": "e74854d3e85467890809b9f40a7e5cc8",
+      "FCU_OADMPRLeak_80.csv": "46d12a50175b41615f48b6105c5bf1f9",
+      "FCU_OADMPRStuck_0.csv": "bf1cca807c7e1d569c4e4a9b7858f030",
+      "FCU_OADMPRStuck_100.csv": "4f289085e067e175b794e7acbeb42324",
+      "FCU_OADMPRStuck_30.csv": "f17d5dfc6a6f14f6938bf549ff1361cb",
+      "FCU_OADMPRStuck_50.csv": "1aa3a6ab235275f39b1ed6223d2d3f08",
+      "FCU_OADMPRStuck_80.csv": "2ea1ae5cf3fd79b3a9ca72110f94269b",
+      "FCU_SensorBias_RMTemp_+2C.csv": "56fd14cbfe33bd4a012bd110ed59f538",
+      "FCU_SensorBias_RMTemp_+4C.csv": "dc5e91a72f97ab61d051310330d4cb6d",
+      "FCU_SensorBias_RMTemp_-2C.csv": "9cd2220a556ac1da5c835b6f41f774c8",
+      "FCU_SensorBias_RMTemp_-4C.csv": "93be4c5b7f2c0a8e6ca340f8b351e8e8",
+      "FCU_VLVLeak_Cooling_20.csv": "be82c8e8e20502d8071f9d463844fb86",
+      "FCU_VLVLeak_Cooling_50.csv": "bc85929cac7539d098919aed023c4a61",
+      "FCU_VLVLeak_Cooling_80.csv": "42bc6b8cda885aee5cf01d4900a93b33",
+      "FCU_VLVLeak_Heating_20.csv": "309e5ed36ee35700bcc95854f320fe11",
+      "FCU_VLVLeak_Heating_50.csv": "b97c13c8bf621800dcc0f1009529b564",
+      "FCU_VLVLeak_Heating_80.csv": "75cc9071217e2aed0e333632f3a691cd",
+      "FCU_VLVStuck_Cooling_0.csv": "92e2aaffe1a9d52a3c03deb5be8c44f6",
+      "FCU_VLVStuck_Cooling_100.csv": "37aad94969763697e3d5c9d0cbf18707",
+      "FCU_VLVStuck_Cooling_20.csv": "fea62954ae066d6d78a8ee1754aa0ac2",
+      "FCU_VLVStuck_Cooling_50.csv": "64394e56be33d1a27e351eeff3137310",
+      "FCU_VLVStuck_Cooling_80.csv": "2291803b0a4d6bbf2d9b221217e39646",
+      "FCU_VLVStuck_Heating_0.csv": "fa5b07a01d9c6543b063cf8bbdd55ca2",
+      "FCU_VLVStuck_Heating_100.csv": "fe6f2d8772ad614a14fcbff0822b1239",
+      "FCU_VLVStuck_Heating_20.csv": "21d52835b77da644de8bede34e9bc3d9",
+      "FCU_VLVStuck_Heating_50.csv": "afb057730e5706792bd924a052a8ee58",
+      "FCU_VLVStuck_Heating_80.csv": "ebbcdd84d352d9657ae7b5ef602913ea"
+    },
+    "duplicate_groups": [
+      [
+        "FCU_Fouling_Cooling_Airside_Minor.csv",
+        "FCU_Fouling_Heating_Airside_Minor.csv"
+      ]
+    ]
+  },
+  "G2_monotonic": {
+    "FCU_Control_CoolingReverse.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Control_HeatingReverse.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Control_Unstable.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_FanOutletBlockage.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_FaultFree.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_FilterRestriction_10%.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_FilterRestriction_20%.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_FilterRestriction_50%.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Cooling_Airside_Minor.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Cooling_Airside_Moderate.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Cooling_Airside_Severe.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Cooling_Waterside_Minor.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Cooling_Waterside_Moderate.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Cooling_Waterside_Severe.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Heating_Airside_Minor.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Heating_Airside_Moderate.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Heating_Airside_Severe.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Heating_Waterside_Minor.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Heating_Waterside_Moderate.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_Fouling_Heating_Waterside_Severe.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_OABlockage.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_OADMPRLeak_20.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_OADMPRLeak_50.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_OADMPRLeak_80.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_OADMPRStuck_0.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_OADMPRStuck_100.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_OADMPRStuck_30.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_OADMPRStuck_50.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_OADMPRStuck_80.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_SensorBias_RMTemp_+2C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_SensorBias_RMTemp_+4C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_SensorBias_RMTemp_-2C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_SensorBias_RMTemp_-4C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVLeak_Cooling_20.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVLeak_Cooling_50.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVLeak_Cooling_80.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVLeak_Heating_20.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVLeak_Heating_50.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVLeak_Heating_80.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Cooling_0.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Cooling_100.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Cooling_20.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Cooling_50.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Cooling_80.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Heating_0.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Heating_100.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Heating_20.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Heating_50.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "FCU_VLVStuck_Heating_80.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    }
+  },
+  "G3_calendar": {
+    "FCU_Control_CoolingReverse.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Control_HeatingReverse.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Control_Unstable.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_FanOutletBlockage.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_FaultFree.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_FilterRestriction_10%.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_FilterRestriction_20%.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_FilterRestriction_50%.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Cooling_Airside_Minor.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Cooling_Airside_Moderate.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Cooling_Airside_Severe.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Cooling_Waterside_Minor.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Cooling_Waterside_Moderate.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Cooling_Waterside_Severe.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Heating_Airside_Minor.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Heating_Airside_Moderate.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Heating_Airside_Severe.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Heating_Waterside_Minor.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Heating_Waterside_Moderate.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_Fouling_Heating_Waterside_Severe.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_OABlockage.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_OADMPRLeak_20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_OADMPRLeak_50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_OADMPRLeak_80.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_OADMPRStuck_0.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_OADMPRStuck_100.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_OADMPRStuck_30.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_OADMPRStuck_50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_OADMPRStuck_80.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_SensorBias_RMTemp_+2C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_SensorBias_RMTemp_+4C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_SensorBias_RMTemp_-2C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_SensorBias_RMTemp_-4C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVLeak_Cooling_20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVLeak_Cooling_50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVLeak_Cooling_80.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVLeak_Heating_20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVLeak_Heating_50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVLeak_Heating_80.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Cooling_0.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Cooling_100.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Cooling_20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Cooling_50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Cooling_80.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Heating_0.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Heating_100.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Heating_20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Heating_50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "FCU_VLVStuck_Heating_80.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    }
+  },
+  "G4_raw_rotation": {},
+  "G5_ttl": {
+    "columns": 29,
+    "declared_points": 31,
+    "columns_not_declared": [
+      "FAN_CTRL",
+      "FCU_CLG_EWT",
+      "FCU_CLG_GPM",
+      "FCU_CLG_RWT",
+      "FCU_CTRL",
+      "FCU_CVLV",
+      "FCU_CVLV_DM",
+      "FCU_DAT",
+      "FCU_DA_CFM",
+      "FCU_DA_HUMD",
+      "FCU_DMPR",
+      "FCU_DMPR_DM",
+      "FCU_HTG_EWT",
+      "FCU_HTG_GPM",
+      "FCU_HTG_RWT",
+      "FCU_HVLV",
+      "FCU_HVLV_DM",
+      "FCU_MAT",
+      "FCU_MA_HUMD",
+      "FCU_OAT",
+      "FCU_OA_CFM",
+      "FCU_OA_HUMD",
+      "FCU_RAT",
+      "FCU_RA_HUMD",
+      "RMCLGSPT",
+      "RMHTGSPT",
+      "RM_TEMP"
+    ],
+    "declared_not_in_columns": [
+      "Chilled_Water_Supply_Flow_Sensor",
+      "Damper_Position_Command",
+      "Damper_Position_Sensor",
+      "Discharge_Air_Flow_Sensor",
+      "Discharge_Air_Humidity_Sensor",
+      "Discharge_Air_Temperature_Sensor",
+      "Entering_Water_Temperature_Sensor",
+      "FCU_CV",
+      "FCU_CWC",
+      "FCU_FAN",
+      "FCU_HV",
+      "FCU_HWV",
+      "FCU_OD",
+      "Hot_Water_Supply_Flow_Sensor",
+      "Leaving_Water_Temperature_Sensor",
+      "Mixed_Air_Humidity_Sensor",
+      "Mixed_Air_Temperature_Sensor",
+      "Mode_Command",
+      "Outside_Air_Flow_Sensor",
+      "Outside_Air_Humidity_Sensor",
+      "Outside_Air_Temperature_Sensor",
+      "Return_Air_Humidity_Sensor",
+      "Return_Air_Temperature_Sensor",
+      "Speed_Status",
+      "Valve_Command",
+      "Valve_Position_Sensor",
+      "Zone_Air_Cooling_Temperature_Setpoint",
+      "Zone_Air_Heating_Temperature_Setpoint",
+      "Zone_Air_Temperature_Sensor"
+    ]
+  },
+  "G6_branch": {
+    "healthy": {
+      "occupied_days": 261,
+      "first_occupied_minute_mode": 361,
+      "oa_damper_floor_fan_on": 0.0,
+      "setpoint_constants": {
+        "RMCLGSPT": "varies(2)",
+        "RMHTGSPT": "varies(2)"
+      }
+    },
+    "healthy_inside_fault_range": {
+      "occupied_days": true,
+      "first_occupied_minute_mode": true,
+      "oa_damper_floor_fan_on": true
+    },
+    "healthy_constant_setpoints": {},
+    "setpoint_constants_identical_to_healthy": true,
+    "files_with_different_setpoint_constants": [],
+    "per_file": {
+      "FCU_Control_CoolingReverse.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Control_HeatingReverse.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Control_Unstable.csv": {
+        "occupied_days": 250,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_FanOutletBlockage.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_FaultFree.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_FilterRestriction_10%.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_FilterRestriction_20%.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_FilterRestriction_50%.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Cooling_Airside_Minor.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Cooling_Airside_Moderate.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Cooling_Airside_Severe.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Cooling_Waterside_Minor.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Cooling_Waterside_Moderate.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Cooling_Waterside_Severe.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Heating_Airside_Minor.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Heating_Airside_Moderate.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Heating_Airside_Severe.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Heating_Waterside_Minor.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Heating_Waterside_Moderate.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_Fouling_Heating_Waterside_Severe.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_OABlockage.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_OADMPRLeak_20.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_OADMPRLeak_50.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_OADMPRLeak_80.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_OADMPRStuck_0.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_OADMPRStuck_100.csv": {
+        "occupied_days": 249,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 1.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_OADMPRStuck_30.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.3,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_OADMPRStuck_50.csv": {
+        "occupied_days": 242,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.5,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_OADMPRStuck_80.csv": {
+        "occupied_days": 215,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.8,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_SensorBias_RMTemp_+2C.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_SensorBias_RMTemp_+4C.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_SensorBias_RMTemp_-2C.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_SensorBias_RMTemp_-4C.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVLeak_Cooling_20.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVLeak_Cooling_50.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVLeak_Cooling_80.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVLeak_Heating_20.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVLeak_Heating_50.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVLeak_Heating_80.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Cooling_0.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Cooling_100.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Cooling_20.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Cooling_50.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Cooling_80.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Heating_0.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Heating_100.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Heating_20.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Heating_50.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      },
+      "FCU_VLVStuck_Heating_80.csv": {
+        "occupied_days": 261,
+        "first_occupied_minute_mode": 361,
+        "oa_damper_floor_fan_on": 0.0,
+        "setpoint_constants": {
+          "RMCLGSPT": "varies(2)",
+          "RMHTGSPT": "varies(2)"
+        }
+      }
+    }
+  }
+}

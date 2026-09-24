@@ -798,7 +798,7 @@
           "max": -400.253
         }
       },
-      "note": "healthy: SA_SP~402, SPSPT~1.6; every fault file: SA_SP~0.9, SPSPT~-400 \u2014 the two branches differ by a single additive constant (401.85999) on both columns; an earlier reading of this as \u0027units and roles swapped\u0027 is retracted (ERRATA E3, 2026-09-23)"
+      "note": "healthy: SA_SP~402, SPSPT~1.6; every fault file: SA_SP~0.9, SPSPT~-400 \u2014 the two branches differ by a single additive constant (401.85999) on both columns; an earlier reading of this as 'units and roles swapped' is retracted (ERRATA E3, 2026-09-23)"
     },
     "oa_bias_controller_side": {
       "calendar_identical": true,
@@ -839,9 +839,6 @@
         "oa_bias_2_annual": 0.1,
         "oa_bias_4_annual": 0.1
       },
-      "healthy_floor": 0.0,
-      "fault_floor_mode": 0.1,
-      "note": "healthy simulated with occupied min-OA-damper 0.0; every fault file floors at 0.1 (damper_stuck 025/075/100 sit at their stuck value above it). Healthy-vs-fault comparisons on SDAHU carry this branch offset on top of the fault.",
       "occupied_rows_RETRACTED_see_ERRATA_E5": {
         "AHU_annual": 303703,
         "coi_bias_-2_annual": 277137,
@@ -865,6 +862,9 @@
         "oa_bias_2_annual": 276844,
         "oa_bias_4_annual": 276844
       },
+      "healthy_floor": 0.0,
+      "fault_floor_mode": 0.1,
+      "note": "healthy simulated with occupied min-OA-damper 0.0; every fault file floors at 0.1 (damper_stuck 025/075/100 sit at their stuck value above it). Healthy-vs-fault comparisons on SDAHU carry this branch offset on top of the fault.",
       "occupied_rows_retraction": "This range was computed on SF_CS, a sensor the pipeline never reads, and conflated a 215-day file, night cycling and the branch offset; ERRATA.md E5 retracts it. The branch evidence is the damper floor (0.000 vs 0.100) and the schedule shift."
     }
   },

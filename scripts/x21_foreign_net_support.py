@@ -90,11 +90,27 @@ def main() -> int:
         sync = {v: any(lm == ANCHOR and mm == ANCHOR for lm, mm in d["alignment"]) for v, d in zip(variants, dg)}
         sync_days = sum(1 for d in B[b]["occ"] if d in B[b]["day_variant"] and sync[B[b]["day_variant"][d]])
         n_occ = len(B[b]["occ"]); raw = B[b]["raw_days"]
+        # move-type accounting (hostile review, X21 finding 17): what the alignment does
+        # with the anchor and with the rest of the foreign trace, per variant
+        acts_b = sorted({x for v in variants for x in v})
+        anchor_sync = anchor_log = other_log = model_moves = 0
+        for d in dg:
+            for lm, mm in d["alignment"]:
+                if lm == ANCHOR and mm == ANCHOR: anchor_sync += 1
+                elif lm == ANCHOR and mm == ">>": anchor_log += 1
+                elif lm != ">>" and mm == ">>": other_log += 1
+                elif lm == ">>" and mm is not None: model_moves += 1
         pairs[f"{a}->{b}"] = {"net_from": a, "log_of": b, "variants_aligned": len(variants),
                               "sync_days": sync_days, "raw_days_with_anchor": raw, "occupied_days": n_occ,
                               "Q_AB": sync_days / n_occ, "raw_B": raw / n_occ,
                               "diff": sync_days / n_occ - raw / n_occ,
-                              "anchor_in_net": ANCHOR in B[a]["labels"]}
+                              "anchor_in_net": ANCHOR in B[a]["labels"],
+                              "label_overlap": {"net_labels": len(B[a]["labels"]), "log_activities": len(acts_b),
+                                                "shared": len(set(B[a]["labels"]) & set(acts_b)),
+                                                "frac_of_log_activities_in_net": len(set(B[a]["labels"]) & set(acts_b)) / len(acts_b)},
+                              "moves_over_variants": {"anchor_sync": anchor_sync, "anchor_log_move": anchor_log,
+                                                      "other_log_moves": other_log, "model_moves": model_moves,
+                                                      "mean_fitness": sum(float(d["fitness"]) for d in dg) / len(dg)}}
         print(f"{a:5s} net -> {b:5s} log: sync {sync_days:3d} raw {raw:3d} / {n_occ}  Q_AB={sync_days / n_occ:.3f} raw_B={raw / n_occ:.3f}", flush=True)
     p1 = all(p["Q_AB"] <= p["raw_B"] + 1e-12 for p in pairs.values())
     p2_viol = {k: p["diff"] for k, p in pairs.items() if abs(p["diff"]) > TOL}
@@ -103,6 +119,10 @@ def main() -> int:
     raw_b = {b: B[b]["raw_days"] / len(B[b]["occ"]) for b in BUILDINGS}
     xs = [q_foreign[b] for b in BUILDINGS]; xr = [raw_b[b] for b in BUILDINGS]; ys = [fp[b] for b in BUILDINGS]
     same_order = _ranks(xs) == _ranks(xr)
+    # sensitivity (finding 20): the FCU net returns 0 on every foreign log and enters three of the four means
+    q_foreign_no_fcu_net = {b: (sum(p["Q_AB"] for p in pairs.values() if p["log_of"] == b and p["net_from"] != "fcu")
+                                / sum(1 for p in pairs.values() if p["log_of"] == b and p["net_from"] != "fcu")) for b in BUILDINGS}
+    same_order_no_fcu_net = _ranks([q_foreign_no_fcu_net[b] for b in BUILDINGS]) == _ranks(xs)
     rho_f, rho_c = spearman(xs, ys), spearman(xr, ys)
     perms = list(itertools.permutations(ys))
     p_f = sum(1 for pp in perms if spearman(xs, list(pp)) <= rho_f + 1e-12) / len(perms)
@@ -118,9 +138,15 @@ def main() -> int:
            "P1_bound": p1, "P2_within_tolerance": {"pass": p2, "tolerance": TOL, "violations": p2_viol,
                                                    "max_abs_diff": max(abs(p["diff"]) for p in pairs.values())},
            "Q_foreign": q_foreign, "raw_B": raw_b, "mr1_healthy_firings": fp,
+           "sensitivity_drop_fcu_net": {"Q_foreign": q_foreign_no_fcu_net, "same_ordering_as_full": same_order_no_fcu_net},
+           "overlap_orders_pairs": None,   # filled below
            "P3_ordering": {"same_ordering_as_raw": same_order, "rho_foreign_vs_mr1": rho_f, "exact_one_sided_p_foreign": p_f,
                            "rho_control_vs_mr1": rho_c},
            "falsifiers_fired": fired}
+    # does label overlap order the pairs' sync fraction? (Spearman over the 12 pairs)
+    ov = [p["label_overlap"]["frac_of_log_activities_in_net"] for p in pairs.values()]
+    sf = [p["sync_days"] / max(p["raw_days_with_anchor"], 1) for p in pairs.values()]
+    out["overlap_orders_pairs"] = {"spearman_overlap_vs_sync_fraction": spearman(ov, sf), "n_pairs": len(pairs)}
     (REPO / "outputs/x21_foreign_net_support.json").write_text(json.dumps(out, indent=2) + "\n")
     print("P1", p1, "| P2", p2, "max |diff|", round(out["P2_within_tolerance"]["max_abs_diff"], 4), "| P3 same ordering", same_order,
           f"rho_foreign={rho_f:.3f} p={p_f:.4f} rho_control={rho_c:.3f}")

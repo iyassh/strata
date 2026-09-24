@@ -1,9 +1,10 @@
 """Guard: X21 — a net's reading of a FOREIGN building's year. Fan-powered nets
-synchronise heating exactly at the foreign log's count (PFPU/SFPU nets on
-every log); the DDAHU net on a fraction; the FCU net on none. F-X21.a fired
-(6 of 12 pairs differ by > 0.05). The foreign predictor orders the buildings
-differently from the raw count and predicts MR1 firings worse (rho -0.6,
-p 0.21 vs the count's -1, 1/24)."""
+synchronise heating at the foreign log's count on five of six foreign logs
+(PFPU net on DDAHU: 204 of 208); the DDAHU net on a fraction; the FCU net on
+none. F-X21.a fired (6 of 12 pairs differ by > 0.05). The foreign predictor
+orders the buildings differently from the raw count and, at n = 4, no better
+(rho -0.6, p 5/24 vs -1, 1/24: one rank swap). Label overlap does not order
+the pairs (rho -0.24 over 12)."""
 import json
 from pathlib import Path
 
@@ -30,4 +31,6 @@ def test_x21_pinned():
     assert abs(p3["rho_foreign_vs_mr1"] + 0.6) < 1e-9 and abs(p3["exact_one_sided_p_foreign"] - 5 / 24) < 1e-9
     assert abs(p3["rho_control_vs_mr1"] + 1.0) < 1e-9
     assert [f.split(":")[0] for f in a["falsifiers_fired"]] == ["F-X21.a"]
+    assert a["sensitivity_drop_fcu_net"]["same_ordering_as_full"] is True
+    assert a["overlap_orders_pairs"]["spearman_overlap_vs_sync_fraction"] < 0 and a["pairs"]["pfpu->fcu"]["label_overlap"]["shared"] == 3
     assert "heating_inactive" not in a["nets"]["fcu"]["labels"] and "heating_inactive" not in a["nets"]["pfpu"]["labels"]

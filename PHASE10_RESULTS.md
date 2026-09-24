@@ -352,7 +352,7 @@ run.
 *Pre-registered (`docs/plans/2026-09-24-x20-transfer-four-buildings-prereg.md`,
 fd95da3) after X19 and before any quantity was computed on the two new
 buildings. Artefacts: `outputs/discovery_predicts_transfer_q_four.json`
-(the sealed Q code run on DDAHU and FCU via a `--systems` switch added for the purpose; the three-system default regenerates the committed artefact byte-identically, `outputs/x20_q_regression.json`),
+(the sealed Q *definitions*, unchanged, run on DDAHU and FCU — the script gained a `--systems` switch and two `SPEC` entries for the purpose; the three-system default regenerates the committed artefact byte-identically, `outputs/x20_q_regression.json`),
 `matched_rules_{ddahu,fcu}.json`, `x20_transfer_four.json`; guard
 `tests/test_x20_transfer_four.py`. The original three-system Q artefact is
 untouched.*
@@ -398,7 +398,9 @@ disclosure motivates it; it was added after the result).
   the *raw* heating-day set — MR1 is that set's workday complement — and
   the FCU is exactly the case where the sync set is not the raw set.
 - **P2 (four buildings)**: rho = −1.000, exact one-sided permutation
-  p = 1/24 = **0.042** < 0.05: the ordering is exactly reversed (the
+  p = 1/24 = **0.042** < 0.05; the attainable floor given the observed tie
+  structure, computed before the p, is 1/24 (four distinct MR1 counts, no
+  ties): the ordering is exactly reversed (the
   pre-registration wrongly stated distinct counts as the condition; a
   correction is appended to it). The pre-registered criterion is met.
 - **Control**: the raw heating-day fraction orders the four buildings
@@ -412,6 +414,10 @@ disclosure motivates it; it was added after the result).
   heating-less days' traces do not fit the net for other reasons. The
   structural form is a property of which variants the noise-filtered net
   admits, not of the year (a correction is appended to the pre-registration).
+  A traced-day variant of the criterion (every occupied day *with a trace*
+  has heating) was added to the script after the pre-registration and is
+  in the artefact as an observation only; it is also false on SFPU and
+  DDAHU.
 
 ### Reading
 
@@ -461,31 +467,37 @@ own heating-day fraction.*
 
 - **P1 (bound)** holds on every pair.
 - **P2 (the tautology persists)** fails on six pairs — **F-X21.a fired**.
-  A fan-powered unit's net synchronises heating on every foreign log at
-  exactly that log's count; the dual-duct net does so on a fraction; the
-  fan coil unit's net never does. The alignments say why: the alphabets
-  barely overlap (the fan-powered nets carry `night_cycle_*` and no
-  `system_started`; the FCU net carries `fan_*`, `oa_damper_*`, `setback_*`
-  and no `heating_inactive`), so a foreign trace's heating episode sits
-  outside the block structure the net expects and the cheapest alignment
-  moves it on the log side. `Q_AB` measures alphabet and block-structure
-  overlap between two buildings, not where an invariant holds.
-- **P3 (ordering)** fails: the foreign predictor (mean over the three
-  foreign nets) orders the buildings PFPU 0.17 < FCU 0.27 < SFPU 0.46 <
-  DDAHU 0.48, not the count's order, and against MR1 firings gives
+  The asymmetry is in the net that reads, not the log that is read. A
+  fan-powered unit's net synchronises heating on five of its six foreign
+  logs at exactly that log's count and falls 4 days short on the sixth
+  (PFPU net on DDAHU: 204 of 208 — the one fan-powered non-identity, not
+  explained here); the dual-duct net synchronises a fraction (24/166,
+  147/357, 55/118); the fan coil unit's net never does. Label overlap does
+  not order the pairs: the PFPU net shares 3 of the FCU log's 14 activities
+  and still synchronises 118 of 118, and the Spearman correlation between
+  overlap fraction and sync fraction over the 12 pairs is −0.24
+  (`label_overlap`, `moves_over_variants` and `overlap_orders_pairs` in
+  the artefact). What in the FCU and DDAHU nets' structure turns a foreign
+  heating episode into a log move is not measured here; it is a property
+  of the reading net.
+- **P3 (ordering)** fails — and P3 carried no falsifier, so nothing was
+  bound to follow from its failure. The foreign predictor (mean over the
+  three foreign nets) orders the buildings PFPU 0.17 < FCU 0.27 < SFPU 0.46
+  < DDAHU 0.48, not the count's order, and against MR1 firings gives
   rho = −0.6, exact one-sided p = 5/24 = 0.21, where the count gives −1
-  and 1/24.
+  and 1/24. Dropping the FCU net (which returns 0 on every foreign log and
+  enters three of the four means) leaves the ordering unchanged
+  (`sensitivity_drop_fcu_net`).
 
 **Reading.** X20 asked whether alignment-based support could be anything
-other than the log's own count; X21 answers that it can — and that what it
-becomes when it is not the count is a measure of how much of one
-building's vocabulary and daily block structure another building's net
-recognises, which predicts a transplanted rule's firings *worse* than the
-count does. The pre-registration said that a differing ordering would be
-"the first thing in this project that discovery contributes to transfer";
-it is, and the contribution is negative. With n = 4 neither rho is a
-measurement; the per-pair table is the result. Discovery locates alphabet
-overlap; the transfer claim has no support in either direction of this
+other than the log's own count; X21 answers that it can. What it is
+instead depends on which net does the reading, and as a predictor of a
+transplanted rule's firings it orders four buildings no better than the
+count — one rank swap at n = 4, where neither rho is a measurement. The
+pre-registration bound the author to report a differing ordering as "the
+first thing in this project that discovery contributes to transfer"; it
+is reported as such, and it runs the wrong way. The per-pair table is the
+result. The transfer claim has no support in either direction of this
 framework.
 
 ### Ledger

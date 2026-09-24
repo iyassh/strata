@@ -75,7 +75,20 @@
       "Q_AB": 0.9780821917808219,
       "raw_B": 0.9780821917808219,
       "diff": 0.0,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 7,
+        "log_activities": 10,
+        "shared": 7,
+        "frac_of_log_activities_in_net": 0.7
+      },
+      "moves_over_variants": {
+        "anchor_sync": 2102,
+        "anchor_log_move": 0,
+        "other_log_moves": 3017,
+        "model_moves": 0,
+        "mean_fitness": 0.8405302233364699
+      }
     },
     "pfpu->ddahu": {
       "net_from": "pfpu",
@@ -87,7 +100,20 @@
       "Q_AB": 0.7157894736842105,
       "raw_B": 0.7298245614035088,
       "diff": -0.01403508771929829,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 7,
+        "log_activities": 14,
+        "shared": 5,
+        "frac_of_log_activities_in_net": 0.35714285714285715
+      },
+      "moves_over_variants": {
+        "anchor_sync": 175,
+        "anchor_log_move": 4,
+        "other_log_moves": 1651,
+        "model_moves": 224,
+        "mean_fitness": 0.24914870531138367
+      }
     },
     "pfpu->fcu": {
       "net_from": "pfpu",
@@ -99,7 +125,20 @@
       "Q_AB": 0.3232876712328767,
       "raw_B": 0.3232876712328767,
       "diff": 0.0,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 7,
+        "log_activities": 14,
+        "shared": 3,
+        "frac_of_log_activities_in_net": 0.21428571428571427
+      },
+      "moves_over_variants": {
+        "anchor_sync": 72,
+        "anchor_log_move": 0,
+        "other_log_moves": 1858,
+        "model_moves": 232,
+        "mean_fitness": 0.12638367612340087
+      }
     },
     "sfpu->pfpu": {
       "net_from": "sfpu",
@@ -111,7 +150,20 @@
       "Q_AB": 0.4547945205479452,
       "raw_B": 0.4547945205479452,
       "diff": 0.0,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 8,
+        "log_activities": 10,
+        "shared": 8,
+        "frac_of_log_activities_in_net": 0.8
+      },
+      "moves_over_variants": {
+        "anchor_sync": 566,
+        "anchor_log_move": 0,
+        "other_log_moves": 870,
+        "model_moves": 364,
+        "mean_fitness": 0.9053023142369375
+      }
     },
     "sfpu->ddahu": {
       "net_from": "sfpu",
@@ -123,7 +175,20 @@
       "Q_AB": 0.7298245614035088,
       "raw_B": 0.7298245614035088,
       "diff": 0.0,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 8,
+        "log_activities": 14,
+        "shared": 6,
+        "frac_of_log_activities_in_net": 0.42857142857142855
+      },
+      "moves_over_variants": {
+        "anchor_sync": 178,
+        "anchor_log_move": 1,
+        "other_log_moves": 1474,
+        "model_moves": 279,
+        "mean_fitness": 0.33073417433039703
+      }
     },
     "sfpu->fcu": {
       "net_from": "sfpu",
@@ -135,7 +200,20 @@
       "Q_AB": 0.3232876712328767,
       "raw_B": 0.3232876712328767,
       "diff": 0.0,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 8,
+        "log_activities": 14,
+        "shared": 4,
+        "frac_of_log_activities_in_net": 0.2857142857142857
+      },
+      "moves_over_variants": {
+        "anchor_sync": 72,
+        "anchor_log_move": 0,
+        "other_log_moves": 1785,
+        "model_moves": 253,
+        "mean_fitness": 0.211014416706611
+      }
     },
     "ddahu->pfpu": {
       "net_from": "ddahu",
@@ -147,7 +225,20 @@
       "Q_AB": 0.06575342465753424,
       "raw_B": 0.4547945205479452,
       "diff": -0.38904109589041097,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 14,
+        "log_activities": 10,
+        "shared": 8,
+        "frac_of_log_activities_in_net": 0.8
+      },
+      "moves_over_variants": {
+        "anchor_sync": 24,
+        "anchor_log_move": 542,
+        "other_log_moves": 5482,
+        "model_moves": 373,
+        "mean_fitness": 0.4967414912774823
+      }
     },
     "ddahu->sfpu": {
       "net_from": "ddahu",
@@ -159,7 +250,20 @@
       "Q_AB": 0.40273972602739727,
       "raw_B": 0.9780821917808219,
       "diff": -0.5753424657534246,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 14,
+        "log_activities": 10,
+        "shared": 8,
+        "frac_of_log_activities_in_net": 0.8
+      },
+      "moves_over_variants": {
+        "anchor_sync": 146,
+        "anchor_log_move": 1956,
+        "other_log_moves": 6715,
+        "model_moves": 512,
+        "mean_fitness": 0.5116174849163148
+      }
     },
     "ddahu->fcu": {
       "net_from": "ddahu",
@@ -171,7 +275,20 @@
       "Q_AB": 0.1506849315068493,
       "raw_B": 0.3232876712328767,
       "diff": -0.1726027397260274,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 14,
+        "log_activities": 14,
+        "shared": 8,
+        "frac_of_log_activities_in_net": 0.5714285714285714
+      },
+      "moves_over_variants": {
+        "anchor_sync": 28,
+        "anchor_log_move": 44,
+        "other_log_moves": 1687,
+        "model_moves": 33,
+        "mean_fitness": 0.23903414573402285
+      }
     },
     "fcu->pfpu": {
       "net_from": "fcu",
@@ -183,7 +300,20 @@
       "Q_AB": 0.0,
       "raw_B": 0.4547945205479452,
       "diff": -0.4547945205479452,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 13,
+        "log_activities": 10,
+        "shared": 5,
+        "frac_of_log_activities_in_net": 0.5
+      },
+      "moves_over_variants": {
+        "anchor_sync": 0,
+        "anchor_log_move": 566,
+        "other_log_moves": 8740,
+        "model_moves": 1695,
+        "mean_fitness": 0.16482557298855846
+      }
     },
     "fcu->sfpu": {
       "net_from": "fcu",
@@ -195,7 +325,20 @@
       "Q_AB": 0.0,
       "raw_B": 0.9780821917808219,
       "diff": -0.9780821917808219,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 13,
+        "log_activities": 10,
+        "shared": 5,
+        "frac_of_log_activities_in_net": 0.5
+      },
+      "moves_over_variants": {
+        "anchor_sync": 0,
+        "anchor_log_move": 2102,
+        "other_log_moves": 12379,
+        "model_moves": 1820,
+        "mean_fitness": 0.14687753569645937
+      }
     },
     "fcu->ddahu": {
       "net_from": "fcu",
@@ -207,7 +350,20 @@
       "Q_AB": 0.0,
       "raw_B": 0.7298245614035088,
       "diff": -0.7298245614035088,
-      "anchor_in_net": true
+      "anchor_in_net": true,
+      "label_overlap": {
+        "net_labels": 13,
+        "log_activities": 14,
+        "shared": 7,
+        "frac_of_log_activities_in_net": 0.5
+      },
+      "moves_over_variants": {
+        "anchor_sync": 0,
+        "anchor_log_move": 179,
+        "other_log_moves": 1717,
+        "model_moves": 196,
+        "mean_fitness": 0.117699228057373
+      }
     }
   },
   "P1_bound": true,
@@ -241,6 +397,19 @@
     "sfpu": 0,
     "ddahu": 66,
     "fcu": 149
+  },
+  "sensitivity_drop_fcu_net": {
+    "Q_foreign": {
+      "pfpu": 0.2602739726027397,
+      "sfpu": 0.6904109589041096,
+      "ddahu": 0.7228070175438597,
+      "fcu": 0.2657534246575342
+    },
+    "same_ordering_as_full": true
+  },
+  "overlap_orders_pairs": {
+    "spearman_overlap_vs_sync_fraction": -0.24455181586320357,
+    "n_pairs": 12
   },
   "P3_ordering": {
     "same_ordering_as_raw": false,

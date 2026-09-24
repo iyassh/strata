@@ -20,7 +20,7 @@
   },
   "residual_holdout_fp": [
     0,
-    110
+    74
   ],
   "model_threshold": 0.19999999999999996,
   "model_holdout_fp": 0,

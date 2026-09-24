@@ -1,6 +1,6 @@
 {
   "prereg": "docs/plans/2026-09-24-x25-statistical-repair-prereg.md",
-  "before_commit": "5bd7c5e",
+  "before_commit": "fbc95bb",
   "systems": {
     "sdahu": {
       "detected_before": 14,
@@ -10,7 +10,7 @@
       "lost": [],
       "status_changed": {},
       "conformance_only_after": [],
-      "model_threshold_before": 0.33333333333333337,
+      "model_threshold_before": 0.19999999999999996,
       "model_threshold_after": 0.19999999999999996,
       "model_holdout_fp_before": 0,
       "model_holdout_fp_after": 0,
@@ -60,13 +60,13 @@
         ]
       },
       "conformance_only_after": [],
-      "model_threshold_before": 0.7933235867446393,
+      "model_threshold_before": 0.8072517730496455,
       "model_threshold_after": 0.8072517730496455,
-      "model_holdout_fp_before": 1,
+      "model_holdout_fp_before": 4,
       "model_holdout_fp_after": 4,
       "model_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
       "device_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
-      "deployed_fp_before": 5,
+      "deployed_fp_before": 7,
       "deployed_fp_after": 7,
       "per_channel_fp_after": {
         "rules": 0,
@@ -81,7 +81,7 @@
       "per_channel_fp_before": {
         "rules": 0,
         "resid": 2,
-        "model": 1,
+        "model": 4,
         "device": 0,
         "absence": 0,
         "freq": 1,
@@ -92,20 +92,15 @@
       "model_credits_after": 0
     },
     "sfpu": {
-      "detected_before": 24,
+      "detected_before": 23,
       "detected_after": 21,
       "scored": 29,
       "gained": [],
       "lost": [
-        "SFPU_ReheatCoilFouling_Airside_Severe",
         "SFPU_ReheatCoilFouling_Waterside_Severe",
         "SFPU_VAVFanRestrictFlow"
       ],
       "status_changed": {
-        "SFPU_ReheatCoilFouling_Airside_Severe": [
-          "resid",
-          null
-        ],
         "SFPU_ReheatCoilFouling_Waterside_Severe": [
           "resid",
           null
@@ -122,23 +117,19 @@
           "rules+resid+model+rate+osc",
           "rules+model+rate+osc"
         ],
-        "SFPU_VAVDMPRStuck_50%": [
-          "rules+resid+model+rate",
-          "rules+model+rate"
-        ],
         "SFPU_VAVFanRestrictFlow": [
           "resid",
           null
         ]
       },
       "conformance_only_after": [],
-      "model_threshold_before": 0.881763925729443,
+      "model_threshold_before": 0.9015427769985974,
       "model_threshold_after": 0.9015427769985974,
-      "model_holdout_fp_before": 1,
+      "model_holdout_fp_before": 5,
       "model_holdout_fp_after": 5,
       "model_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
       "device_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
-      "deployed_fp_before": 4,
+      "deployed_fp_before": 6,
       "deployed_fp_after": 6,
       "per_channel_fp_after": {
         "rules": 0,
@@ -153,8 +144,8 @@
       "per_channel_fp_before": {
         "rules": 0,
         "resid": 0,
-        "model": 1,
-        "device": 3,
+        "model": 5,
+        "device": 1,
         "absence": 0,
         "freq": 1,
         "rate": 0,
@@ -164,43 +155,39 @@
       "model_credits_after": 5
     },
     "ddahu": {
-      "detected_before": 45,
+      "detected_before": 48,
       "detected_after": 45,
       "scored": 55,
-      "gained": [
-        "DualDuct_SensorBias_CSP_+2inwg"
-      ],
+      "gained": [],
       "lost": [
-        "DualDuct_SensorBias_HSA_+2C"
+        "DualDuct_Fouling_Cooling_Airside_Moderate",
+        "DualDuct_SensorBias_HSA_+2C",
+        "DualDuct_SensorBias_HSP_-4inwg"
       ],
       "status_changed": {
-        "DualDuct_DMPRStuck_Cold_0": [
-          "rules+resid+absence+freq+rate+osc",
-          "rules+resid+model+absence+freq+rate+osc"
-        ],
-        "DualDuct_DMPRStuck_Cold_20": [
-          "rules+resid+absence+freq+rate+osc",
-          "rules+resid+model+absence+freq+rate+osc"
-        ],
         "DualDuct_DMPRStuck_Cold_50": [
           "rules+resid+absence",
           "rules+absence"
+        ],
+        "DualDuct_Fouling_Cooling_Airside_Moderate": [
+          "resid",
+          null
         ],
         "DualDuct_Fouling_Heating_Waterside_Severe": [
           "rules+resid",
           "rules"
         ],
-        "DualDuct_SensorBias_CSP_+2inwg": [
-          null,
-          "resid"
-        ],
         "DualDuct_SensorBias_HSA_+2C": [
+          "resid",
+          null
+        ],
+        "DualDuct_SensorBias_HSP_-4inwg": [
           "resid",
           null
         ]
       },
       "conformance_only_after": [],
-      "model_threshold_before": 0.25,
+      "model_threshold_before": 0.5,
       "model_threshold_after": 0.5,
       "model_holdout_fp_before": 0,
       "model_holdout_fp_after": 0,
@@ -228,7 +215,7 @@
         "rate": 7,
         "osc": 0
       },
-      "model_credits_before": 0,
+      "model_credits_before": 2,
       "model_credits_after": 2
     },
     "fcu": {
@@ -252,14 +239,10 @@
         "FCU_OADMPRStuck_30": [
           "rules+resid",
           "rules"
-        ],
-        "FCU_OADMPRStuck_50": [
-          "rules+resid+model+freq",
-          "rules+resid+freq"
         ]
       },
       "conformance_only_after": [],
-      "model_threshold_before": 0.36228571428571427,
+      "model_threshold_before": 0.3711111111111111,
       "model_threshold_after": 0.3711111111111111,
       "model_holdout_fp_before": 1,
       "model_holdout_fp_after": 1,
@@ -287,7 +270,7 @@
         "rate": 17,
         "osc": 0
       },
-      "model_credits_before": 7,
+      "model_credits_before": 6,
       "model_credits_after": 6
     }
   },
@@ -301,6 +284,6 @@
     "P4_le_3": false
   },
   "falsifiers_fired": [
-    "F-X25.c: sfpu lost more than 2 detections: ['SFPU_ReheatCoilFouling_Airside_Severe', 'SFPU_ReheatCoilFouling_Waterside_Severe', 'SFPU_VAVFanRestrictFlow']"
+    "F-X25.c: ddahu lost more than 2 detections: ['DualDuct_Fouling_Cooling_Airside_Moderate', 'DualDuct_SensorBias_HSA_+2C', 'DualDuct_SensorBias_HSP_-4inwg']"
   ]
 }

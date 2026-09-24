@@ -80,7 +80,7 @@
   },
   "residual_holdout_fp": [
     2,
-    124
+    41
   ],
   "model_threshold": 0.8072517730496455,
   "model_holdout_fp": 4,
@@ -4311,9 +4311,9 @@
       "top_device": "TU_S",
       "ground_truth_zone": "S",
       "localization": "OK",
-      "meaningful_channels": "rules+resid",
+      "meaningful_channels": "rules",
       "excluded": false,
-      "meaningful_channels_raw": "rules+resid",
+      "meaningful_channels_raw": "rules",
       "model_days_minrobust": 0,
       "device_days": 0,
       "absence_days": 0,
@@ -9855,14 +9855,14 @@
       "model_days": 6,
       "combined_days": 77,
       "model_unique_days": 6,
-      "ttd_days": 15,
+      "ttd_days": null,
       "log_hash": "ad625a16",
       "top_device": null,
       "ground_truth_zone": "S",
       "localization": "-",
-      "meaningful_channels": "resid",
+      "meaningful_channels": null,
       "excluded": false,
-      "meaningful_channels_raw": "resid",
+      "meaningful_channels_raw": null,
       "model_days_minrobust": 0,
       "device_days": 0,
       "absence_days": 0,
@@ -9964,21 +9964,7 @@
           "2018-11-29",
           "2018-11-30"
         ],
-        "sig_union": [
-          "2018-01-15",
-          "2018-01-22",
-          "2018-01-23",
-          "2018-01-24",
-          "2018-01-29",
-          "2018-02-02",
-          "2018-02-06",
-          "2018-02-07",
-          "2018-02-12",
-          "2018-10-29",
-          "2018-12-18",
-          "2018-12-19",
-          "2018-12-24"
-        ]
+        "sig_union": []
       },
       "frequency_violations": {
         "night_cycle_ended": 2,

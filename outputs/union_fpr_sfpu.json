@@ -127,14 +127,14 @@
   "scenarios_with_rate_significant": [
    {
     "label": "SensorBias VAVAirflow -200CFM",
-    "channels": "rules+resid+model+rate",
+    "channels": "rules+model+rate",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
     "rate_only_alarm_days": 70
    },
    {
     "label": "SensorBias VAVAirflow -400CFM",
-    "channels": "rules+resid+model+device+rate+osc",
+    "channels": "rules+model+device+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
     "rate_only_alarm_days": 64
@@ -148,7 +148,7 @@
    },
    {
     "label": "VAVDMPRStuck 100%",
-    "channels": "rules+resid+model+rate+osc",
+    "channels": "rules+model+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
     "rate_only_alarm_days": 54

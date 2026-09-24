@@ -1,4 +1,4 @@
-# Phase 10 Results — A fourth system: the LBNL dual-duct AHU, onboarded blind (X17), the X15 gain that did not replicate (X18), a fifth system, the fan coil unit, that broke a rule the first four never exercised (X19), and the transfer test re-run with four buildings (X20)
+# Phase 10 Results — A fourth system: the LBNL dual-duct AHU, onboarded blind (X17), the X15 gain that did not replicate (X18), a fifth system, the fan coil unit, that broke a rule the first four never exercised (X19), the transfer test re-run with four buildings (X20), and a net's reading of a foreign year (X21)
 
 *2026-09-24. Pre-registered (`docs/plans/2026-09-24-x17-ddahu-onboarding-prereg.md`,
 b8fadc8) after the documentation was read and before any data file was
@@ -428,3 +428,57 @@ B's log. Not run.
 | P1 identity | P2 four buildings | control | P3 obligatory | falsifiers |
 |---|---|---|---|---|
 | DDAHU exact; **FCU 74 ≠ 118 → F-X20.a** | rho −1, p 0.042 ✓ | rho −1, p 0.042, same order | **✗** on all four → F-X20.b | a, b fired; verdict: informative by rule, uninformative by control |
+
+
+## X21 — can a net's reading of a *foreign* year escape being that year's count?
+
+*Pre-registered (`docs/plans/2026-09-24-x21-foreign-net-support-prereg.md`,
+7f75efc) after X20 and before any cross-building alignment. Artefact
+`outputs/x21_foreign_net_support.json`; guard
+`tests/test_x21_foreign_net_support.py`. Twelve ordered pairs of the four
+heating-coil buildings: fit the unit net on A's fault-free training days,
+align every variant of B's fault-free state log to it, `Q_AB` = fraction of
+B's occupied days with a synchronous `heating_active` move; `raw_B` = B's
+own heating-day fraction.*
+
+| net from ↓ / log of → | PFPU (raw 0.455) | SFPU (0.978) | DDAHU (0.730) | FCU (0.323) |
+|---|---|---|---|---|
+| PFPU | — | 0.978 | 0.716 | 0.323 |
+| SFPU | 0.455 | — | 0.730 | 0.323 |
+| DDAHU | **0.066** | **0.403** | — | **0.151** |
+| FCU | **0.000** | **0.000** | **0.000** | — |
+
+- **P1 (bound)** holds on every pair.
+- **P2 (the tautology persists)** fails on six pairs — **F-X21.a fired**.
+  A fan-powered unit's net synchronises heating on every foreign log at
+  exactly that log's count; the dual-duct net does so on a fraction; the
+  fan coil unit's net never does. The alignments say why: the alphabets
+  barely overlap (the fan-powered nets carry `night_cycle_*` and no
+  `system_started`; the FCU net carries `fan_*`, `oa_damper_*`, `setback_*`
+  and no `heating_inactive`), so a foreign trace's heating episode sits
+  outside the block structure the net expects and the cheapest alignment
+  moves it on the log side. `Q_AB` measures alphabet and block-structure
+  overlap between two buildings, not where an invariant holds.
+- **P3 (ordering)** fails: the foreign predictor (mean over the three
+  foreign nets) orders the buildings PFPU 0.17 < FCU 0.27 < SFPU 0.46 <
+  DDAHU 0.48, not the count's order, and against MR1 firings gives
+  rho = −0.6, exact one-sided p = 5/24 = 0.21, where the count gives −1
+  and 1/24.
+
+**Reading.** X20 asked whether alignment-based support could be anything
+other than the log's own count; X21 answers that it can — and that what it
+becomes when it is not the count is a measure of how much of one
+building's vocabulary and daily block structure another building's net
+recognises, which predicts a transplanted rule's firings *worse* than the
+count does. The pre-registration said that a differing ordering would be
+"the first thing in this project that discovery contributes to transfer";
+it is, and the contribution is negative. With n = 4 neither rho is a
+measurement; the per-pair table is the result. Discovery locates alphabet
+overlap; the transfer claim has no support in either direction of this
+framework.
+
+### Ledger
+
+| P1 | P2 | P3 | falsifiers |
+|---|---|---|---|
+| ✓ | **✗** 6 of 12 pairs → F-X21.a | **✗** different ordering; rho −0.6 (p 0.21) vs control −1 (p 0.042) | F-X21.a fired |

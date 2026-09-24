@@ -1,0 +1,254 @@
+{
+  "prereg": "docs/plans/2026-09-24-x21-foreign-net-support-prereg.md",
+  "nets": {
+    "pfpu": {
+      "labels": [
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "heating_active",
+        "night_cycle_ended",
+        "night_cycle_started"
+      ],
+      "n_train_days": 269
+    },
+    "sfpu": {
+      "labels": [
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "heating_active",
+        "heating_inactive",
+        "night_cycle_ended",
+        "night_cycle_started"
+      ],
+      "n_train_days": 269
+    },
+    "ddahu": {
+      "labels": [
+        "cold_fan_started",
+        "cold_fan_stopped",
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "heating_active",
+        "heating_inactive",
+        "hot_fan_started",
+        "hot_fan_stopped",
+        "setback_ended",
+        "setback_started",
+        "system_started",
+        "system_stopped"
+      ],
+      "n_train_days": 234
+    },
+    "fcu": {
+      "labels": [
+        "cooling_active",
+        "cooling_inactive",
+        "fan_high_entered",
+        "fan_high_exited",
+        "fan_started",
+        "fan_stopped",
+        "heating_active",
+        "oa_damper_closed",
+        "oa_damper_opened",
+        "setback_ended",
+        "setback_started",
+        "system_started",
+        "system_stopped"
+      ],
+      "n_train_days": 196
+    }
+  },
+  "pairs": {
+    "pfpu->sfpu": {
+      "net_from": "pfpu",
+      "log_of": "sfpu",
+      "variants_aligned": 364,
+      "sync_days": 357,
+      "raw_days_with_anchor": 357,
+      "occupied_days": 365,
+      "Q_AB": 0.9780821917808219,
+      "raw_B": 0.9780821917808219,
+      "diff": 0.0,
+      "anchor_in_net": true
+    },
+    "pfpu->ddahu": {
+      "net_from": "pfpu",
+      "log_of": "ddahu",
+      "variants_aligned": 79,
+      "sync_days": 204,
+      "raw_days_with_anchor": 208,
+      "occupied_days": 285,
+      "Q_AB": 0.7157894736842105,
+      "raw_B": 0.7298245614035088,
+      "diff": -0.01403508771929829,
+      "anchor_in_net": true
+    },
+    "pfpu->fcu": {
+      "net_from": "pfpu",
+      "log_of": "fcu",
+      "variants_aligned": 74,
+      "sync_days": 118,
+      "raw_days_with_anchor": 118,
+      "occupied_days": 365,
+      "Q_AB": 0.3232876712328767,
+      "raw_B": 0.3232876712328767,
+      "diff": 0.0,
+      "anchor_in_net": true
+    },
+    "sfpu->pfpu": {
+      "net_from": "sfpu",
+      "log_of": "pfpu",
+      "variants_aligned": 343,
+      "sync_days": 166,
+      "raw_days_with_anchor": 166,
+      "occupied_days": 365,
+      "Q_AB": 0.4547945205479452,
+      "raw_B": 0.4547945205479452,
+      "diff": 0.0,
+      "anchor_in_net": true
+    },
+    "sfpu->ddahu": {
+      "net_from": "sfpu",
+      "log_of": "ddahu",
+      "variants_aligned": 79,
+      "sync_days": 208,
+      "raw_days_with_anchor": 208,
+      "occupied_days": 285,
+      "Q_AB": 0.7298245614035088,
+      "raw_B": 0.7298245614035088,
+      "diff": 0.0,
+      "anchor_in_net": true
+    },
+    "sfpu->fcu": {
+      "net_from": "sfpu",
+      "log_of": "fcu",
+      "variants_aligned": 74,
+      "sync_days": 118,
+      "raw_days_with_anchor": 118,
+      "occupied_days": 365,
+      "Q_AB": 0.3232876712328767,
+      "raw_B": 0.3232876712328767,
+      "diff": 0.0,
+      "anchor_in_net": true
+    },
+    "ddahu->pfpu": {
+      "net_from": "ddahu",
+      "log_of": "pfpu",
+      "variants_aligned": 343,
+      "sync_days": 24,
+      "raw_days_with_anchor": 166,
+      "occupied_days": 365,
+      "Q_AB": 0.06575342465753424,
+      "raw_B": 0.4547945205479452,
+      "diff": -0.38904109589041097,
+      "anchor_in_net": true
+    },
+    "ddahu->sfpu": {
+      "net_from": "ddahu",
+      "log_of": "sfpu",
+      "variants_aligned": 364,
+      "sync_days": 147,
+      "raw_days_with_anchor": 357,
+      "occupied_days": 365,
+      "Q_AB": 0.40273972602739727,
+      "raw_B": 0.9780821917808219,
+      "diff": -0.5753424657534246,
+      "anchor_in_net": true
+    },
+    "ddahu->fcu": {
+      "net_from": "ddahu",
+      "log_of": "fcu",
+      "variants_aligned": 74,
+      "sync_days": 55,
+      "raw_days_with_anchor": 118,
+      "occupied_days": 365,
+      "Q_AB": 0.1506849315068493,
+      "raw_B": 0.3232876712328767,
+      "diff": -0.1726027397260274,
+      "anchor_in_net": true
+    },
+    "fcu->pfpu": {
+      "net_from": "fcu",
+      "log_of": "pfpu",
+      "variants_aligned": 343,
+      "sync_days": 0,
+      "raw_days_with_anchor": 166,
+      "occupied_days": 365,
+      "Q_AB": 0.0,
+      "raw_B": 0.4547945205479452,
+      "diff": -0.4547945205479452,
+      "anchor_in_net": true
+    },
+    "fcu->sfpu": {
+      "net_from": "fcu",
+      "log_of": "sfpu",
+      "variants_aligned": 364,
+      "sync_days": 0,
+      "raw_days_with_anchor": 357,
+      "occupied_days": 365,
+      "Q_AB": 0.0,
+      "raw_B": 0.9780821917808219,
+      "diff": -0.9780821917808219,
+      "anchor_in_net": true
+    },
+    "fcu->ddahu": {
+      "net_from": "fcu",
+      "log_of": "ddahu",
+      "variants_aligned": 79,
+      "sync_days": 0,
+      "raw_days_with_anchor": 208,
+      "occupied_days": 285,
+      "Q_AB": 0.0,
+      "raw_B": 0.7298245614035088,
+      "diff": -0.7298245614035088,
+      "anchor_in_net": true
+    }
+  },
+  "P1_bound": true,
+  "P2_within_tolerance": {
+    "pass": false,
+    "tolerance": 0.05,
+    "violations": {
+      "ddahu->pfpu": -0.38904109589041097,
+      "ddahu->sfpu": -0.5753424657534246,
+      "ddahu->fcu": -0.1726027397260274,
+      "fcu->pfpu": -0.4547945205479452,
+      "fcu->sfpu": -0.9780821917808219,
+      "fcu->ddahu": -0.7298245614035088
+    },
+    "max_abs_diff": 0.9780821917808219
+  },
+  "Q_foreign": {
+    "pfpu": 0.1735159817351598,
+    "sfpu": 0.4602739726027398,
+    "ddahu": 0.4818713450292398,
+    "fcu": 0.2657534246575342
+  },
+  "raw_B": {
+    "pfpu": 0.4547945205479452,
+    "sfpu": 0.9780821917808219,
+    "ddahu": 0.7298245614035088,
+    "fcu": 0.3232876712328767
+  },
+  "mr1_healthy_firings": {
+    "pfpu": 124,
+    "sfpu": 0,
+    "ddahu": 66,
+    "fcu": 149
+  },
+  "P3_ordering": {
+    "same_ordering_as_raw": false,
+    "rho_foreign_vs_mr1": -0.5999999999999999,
+    "exact_one_sided_p_foreign": 0.20833333333333334,
+    "rho_control_vs_mr1": -0.9999999999999998
+  },
+  "falsifiers_fired": [
+    "F-X21.a: a foreign net reads a year differently from its count on 6 pair(s)"
+  ]
+}

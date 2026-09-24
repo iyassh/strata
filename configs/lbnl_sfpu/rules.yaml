@@ -28,6 +28,9 @@ detection:
   residual_channels: [supply_air_residual, rh_waterside_dT_I, rh_waterside_dT_W,
                       rh_waterside_dT_S, rh_waterside_dT_E]
   holdout_days_per_month: 8
+  # X25: the 8 days before the holdout block calibrate the conformance thresholds,
+  # so the holdout is out-of-sample for every channel (discovery trains on the rest)
+  calibration_days_per_month: 8
 
 events:
   # ---------------- state alphabet (feeds model discovery) ----------------

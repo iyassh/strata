@@ -18,6 +18,9 @@ detection:
   # Last N days of each month are held out for threshold calibration;
   # the model is discovered from the remaining days.
   holdout_days_per_month: 8
+  # X25: the 8 days before the holdout block calibrate the conformance thresholds,
+  # so the holdout is out-of-sample for every channel (discovery trains on the rest)
+  calibration_days_per_month: 8
   # ONE margin policy across all systems: exceedance floor since Phase 4
   # (audit C1); band-width floor added Phase 6 (gap S8) to match the FPU
   # configs. Numeric no-op here (calibrated band width 0.846 F > 0.5) —

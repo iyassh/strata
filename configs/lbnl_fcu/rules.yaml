@@ -25,6 +25,9 @@ detection:
                       chwc_waterside_dT, hwc_waterside_dT, flow_per_speed,
                       oa_fraction_residual]   # X24
   holdout_days_per_month: 8
+  # X25: the 8 days before the holdout block calibrate the conformance thresholds,
+  # so the holdout is out-of-sample for every channel (discovery trains on the rest)
+  calibration_days_per_month: 8
 
 events:
   # ---------------- state alphabet ----------------

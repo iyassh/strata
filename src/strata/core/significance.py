@@ -10,9 +10,8 @@ Conventions (all from the phase audits):
 - rules: 0 observed FP on a healthy year still only bounds the rate at
   ~3/365 (rule of three) — 1-3 fire-days are NOT detection.
 - residual/model: exact binomial vs the channel's holdout rate, p < 1e-3,
-  floored at ONE holdout false alarm (max(fp, 1)/n) — a weaker floor than
-  the rules channel's rule of three; recorded as L36 and, on the five
-  systems, no verdict changes under the stricter floor (checked 2026-09-24).
+  rule-of-three floored (X25, 2026-09-24; before that, floored at one
+  holdout false alarm, max(fp, 1)/n — recorded as L36).
 - freq/osc: exact binomial vs the holdout rate, rule-of-three floored
   where the observed floor is zero.
 - device: PER DEVICE (audit A4), Bonferroni across devices, and required
@@ -42,13 +41,14 @@ def residual_significant(flag_days: int, n_windows: int,
                          holdout_fp: int, holdout_n: int) -> bool:
     if not n_windows:
         return False
-    p0 = max(holdout_fp, 1) / max(holdout_n, 1)
+    # X25: uniform rule-of-three floor (was max(fp, 1)/n, a weaker floor than the rules channel's)
+    p0 = max(holdout_fp / max(holdout_n, 1), RULE_OF_THREE)
     return binom_sf(flag_days, n_windows, p0) < P_SIG
 
 
 def model_significant(flag_days: int, n_eval: int,
                       holdout_fp: int, holdout_days: int) -> bool:
-    p0 = max(holdout_fp, 1) / max(holdout_days, 1)
+    p0 = max(holdout_fp / max(holdout_days, 1), RULE_OF_THREE)   # X25: uniform rule-of-three floor
     return binom_sf(flag_days, n_eval, p0) < P_SIG
 
 

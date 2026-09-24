@@ -158,6 +158,55 @@ split's (the P4 claim above rests on the two applied together).
 |---|---|---|---|---|---|
 | ✓ byte-identical | ✓ out-of-sample | ✓ ≤ 10/96 | ✓ counts, none by conformance | ✓ 0 flips | none |
 
+### Steps 3 and 4: the floor, done properly, costs detections
+
+Step 2's floor was 3/365 at every n — at 96 holdout days *looser* than the
+one-false-alarm floor it replaced. Step 3 (4db776e) made it max(fp, 3)/n
+on the residual gate's n, which was holdout *window-days pooled over
+channels* (509 on the dual-duct unit, 124 on the series unit): the same
+rule was 3/509 on one system and 3/124 on another, so step 3 *gained* a
+dual-duct scenario (hot-deck static bias −0.4 in.wg, 8 flagged days) while
+losing a series-unit one. Amendment 1 (fbc95bb) made the null per day: the
+residual channel's flag is an OR over its channels per day, so its
+false-alarm count and denominator are holdout *days* flagged by any channel
+over holdout days any channel could evaluate — the quantities the
+false-alarm artefact reports — with the floor max(fp, 3)/n on those days
+(3/41 on the fan-powered units, 3/72 on the fan coil, 3/74–75 on the air
+handlers). That is a heavier floor than the pooled one wherever the
+residual channels can evaluate few holdout days, and it removed
+detections.
+
+| system | before X25 | after step 4 | lost | gained | deployed FP |
+|---|---|---|---|---|---|
+| SDAHU | 14 / 14 | 14 / 14 | — | — | 1 → 1 |
+| PFPU | 23 / 30 | **22 / 30** | room-temperature bias +4 °C | — | 5 → 7 |
+| SFPU | 24 / 29 | **21 / 29** | reheat fouling airside severe, waterside severe; fan restrict-flow | — | 4 → 6 |
+| DDAHU | 45 / 55 | 45 / 55 | hot-deck SAT bias +2 °C | cold static +0.2 in.wg (X27) | 3 → 3 |
+| FCU | 42 / 47 | **40 / 47** | OA damper leaking 20 % (the X24 gain), 50 % | — | 4 → 4 |
+
+**F-X25.c fired** on the series unit (three detections lost, more than the
+two the pre-registration allowed), so the repair is reported as what it is:
+a detector change. Every lost scenario was carried by the residual channel
+alone with a flagged-day count that the pooled null had certified and the
+per-day null does not (fan-powered residual channels evaluate 41 holdout
+days, so three false alarms is 7 %; a scenario needs roughly one flagged
+day in six to clear it). No detection is conformance-only (P3 half holds);
+eight scenario statuses changed in all (P4 failed as written). The
+budgets are unchanged by steps 3–4. The step-3 → step-4 diff is
+`outputs/x25_step4_perday.json`; the overall diff is regenerated in
+`outputs/x25_statistical_repair.json`.
+
+What the final gate is: every channel's null is a per-day rate on its own
+evaluable holdout days, floored at three days, with conformance thresholds
+calibrated on a separate slice. The papers' counts are now 13/14, 22/30,
+21/29, 45/55, 40/47 at 1.0–7.3 % false-alarm days, all out-of-sample.
+
+| step | P0 | P1 | P2 | P3 | P4 | falsifiers |
+|---|---|---|---|---|---|---|
+| 2 (split + 3/365) | ✓ | ✓ | ✓ | ✓ | ✓ 0 flips | none |
+| 3 (max(fp,3)/pooled n) | — | ✓ | ✓ | ✓ (±1) | ✗ 2 flips | none |
+| 4 (per-day null) | — | ✓ | ✓ | **✗ SFPU −3** | ✗ 8 flips | **F-X25.c** |
+
 ## X26 — the false-alarm budget on a real building
 
 *Pre-registered (`docs/plans/2026-09-24-x26-real-data-budget-prereg.md`,

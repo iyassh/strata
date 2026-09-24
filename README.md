@@ -38,9 +38,9 @@ you:
 > is wrong on ~1% of fault-free days — measured, not hoped")
 
 Tested on five public benchmark systems (LBNL datasets), it detects
-**13 of 14, 23 of 30, 24 of 29 — 45 of 55 on a dual-duct AHU and 41 of 47 on a fan coil unit, both onboarded
-blind, by configuration alone, after the protocol was fixed (42 of 47 after a later
-pre-registered outdoor-air-fraction residual)** — typically
+**13 of 14, 22 of 30, 21 of 29 — 45 of 55 on a dual-duct AHU and 40 of 47 on a fan coil unit, both onboarded
+blind, by configuration alone, after the protocol was fixed** (counts under the final,
+fully out-of-sample gate of X25; the blind-onboarding runs scored 45 and 41 under the earlier gate) — typically
 within **one day**, while false-alarming on only **1.0–7.3%** of fault-free days (every threshold out-of-sample since X25) —
 and on the first *measured* building (an LBNL field rooftop unit, 182 clean days,
 no schedule point) the same deployed detector false-alarms on **6.1%** of
@@ -135,7 +135,7 @@ fan coil unit):
 
 | | SDAHU | PFPU | SFPU | DDAHU (X17) | FCU (X19) |
 |---|---|---|---|---|---|
-| fault scenarios detected | **13 / 14** * | **23 / 30** | **24 / 29** | **45 / 55** | **42 / 47** |
+| fault scenarios detected | **13 / 14** * | **22 / 30** | **21 / 29** | **45 / 55** | **40 / 47** |
 | median time-to-detect (all significant channels, rate included) | 1 day | 1 day | 1 day | 1 day | 1 day |
 | time-to-detect tail (longest first alarm among detected scenarios) | 2 days | 21 days | 108 days | 114 days | 15 days |
 | false-alarm budget, deployed detector (fault-free holdout days; conformance thresholds out-of-sample, X25) | 1.0% | 7.3% | 6.2% | 3.1% | 4.2% |
@@ -149,10 +149,11 @@ process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)).
 FCU: 29 sensor mappings, 23 rules, two healthy-silence iterations, no source
 change; the hash gate found a byte-identical pair under two family labels
 (scored once, [ERRATA.md](ERRATA.md) E6); both new scorecard families — airflow
-restriction and reverse/unstable control, four at the documentation's granularity — caught in full; misses are five of
-six waterside-fouling files (the cooling coil's leave the recorded points
-within about 3% of healthy); the 20% damper leak was caught once an
-outdoor-air-fraction residual was added (X24, [PHASE11_RESULTS.md](PHASE11_RESULTS.md)). Its first run fired two falsifiers (28/96 false alarms; six
+restriction and reverse/unstable control, four at the documentation's granularity — caught in full; misses under the final gate are
+five of six waterside-fouling files (the cooling coil's leave the recorded points
+within about 3% of healthy) and the two smaller damper leaks; an
+outdoor-air-fraction residual (X24) caught the 20% leak under the earlier gate
+and the per-day residual null of X25 took it back ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)). Its first run fired two falsifiers (28/96 false alarms; six
 "detections" by the model channel alone) that traced to a scoring-script
 assumption — any non-zero mode is scheduled operation — which this unit's
 idle setback weekends broke; the repair was pre-registered, the four earlier

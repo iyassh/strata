@@ -178,7 +178,7 @@ detections.
 
 | system | before X25 | after step 4 | lost | gained | deployed FP |
 |---|---|---|---|---|---|
-| SDAHU | 14 / 14 | 14 / 14 | — | — | 1 → 1 |
+| SDAHU | 13 / 14 adjudicated (14 / 14 naive, erratum E5) | 13 / 14 | — | — | 1 → 1 |
 | PFPU | 23 / 30 | **22 / 30** | room-temperature bias +4 °C | — | 5 → 7 |
 | SFPU | 24 / 29 | **21 / 29** | reheat fouling airside severe, waterside severe; fan restrict-flow | — | 4 → 6 |
 | DDAHU | 45 / 55 | 45 / 55 | hot-deck SAT bias +2 °C (residual-only) | cold static +0.2 in.wg (X27) | 3 → 3 |
@@ -313,7 +313,8 @@ cooling-coil *airside moderate* fouling: an airside-fouled coil raises the
 airflow resistance, the fan runs faster for the same static, and static ÷
 speed² falls — the fan-law channel is an airflow-resistance detector, which
 is what a virtual static is. Residual-day counts on the already-detected
-biases rose by 2–5× (cold +0.4: 34 → 172 days; hot +0.4: 74 → 260). The
+biases rose by 1.2× to 16× (cold −0.2/−0.4: 38 → 45; hot +0.2: 10 → 165;
+hot +0.4: 74 → 260). The
 two hot-deck negative biases remain invisible: a −0.2 in.wg reading on a
 1.0 in.wg setpoint makes the loop run the fan slightly faster, and the
 ratio shift sits inside a band that the moving zone dampers already widen.

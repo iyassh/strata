@@ -95,7 +95,7 @@ def test_crywolf_consistent_with_union():
             fp, tp = e["fp_days_healthy_holdout"], e["tp_alarm_days_fault_scenarios"]
             # artifact rounds to 5 decimals -> tolerance is the rounding half-step
             assert abs(e["cry_wolf_ratio"] - fp / (fp + tp)) <= 5e-6
-            assert e["cry_wolf_ratio"] < 0.001  # the quoted "<0.1%" claim
+            assert e["cry_wolf_ratio"] < 0.002  # X25 (2026-09-24): out-of-sample rows raised PFPU to 0.12%; the ratio is no longer a README headline
             assert e["healthy_holdout_days"] == u["holdout_days"]
             assert e["fault_scenario_days_observed"] > 0
         # adjudicated SDAHU must actually exclude oa_bias days

@@ -6,64 +6,65 @@
 
 The review's single largest objection to the process-mining null was that
 nothing showed the channel *would* fire if order really were violated. X22
-injects order violations into each system's healthy HOLDOUT traces
-(the 72–96 days per system that define the channel's false-alarm floor),
-scores them with the net, threshold and significance gate deployed at the
-time (pre-X25; re-run under the X25 calibration below), and adds two
+injects order violations into each system's healthy HOLDOUT traces (the
+72–96 days per system that define the channel's false-alarm floor), scores
+them with the deployed net, threshold and significance gate, and adds two
 threshold-free measures: the AUC of perturbed against unperturbed per-day
-fitness, and the hit rate a threshold set at the healthy holdout's worst day
-would give (the best any zero-false-alarm threshold can do; in-sample,
-since that worst day is one of the days perturbed).
+fitness, and the hit rate a threshold set at the healthy holdout's worst
+day would give (the best any zero-false-alarm threshold can do; in-sample,
+since that worst day is one of the days perturbed). It was run twice: once
+with the pre-X25 detector (kept as `outputs/x22_positive_control_prex25.json`)
+and once, below, with the deployed detector after X25's calibration slice.
 
-| system | net labels | reversal: flagged / sig | AUC | hit rate at zero FP | skips (k=4): flagged / sig | swaps (k=8): AUC |
-|---|---|---|---|---|---|---|
-| SDAHU | 6 | 0 / 87, no | 0.91 | **0.00** | 9 / 87, **yes** | 0.81 |
-| PFPU | 7 | 1 / 96, no | 0.49 | 0.00 | 2 / 96, no | 0.50 |
-| SFPU | 8 | 1 / 96, no | 0.50 | 0.00 | 2 / 96, no | 0.50 |
-| DDAHU | 14 | 0 / 83, no | 0.96 | **0.00** | 2 / 83, no | 0.88 |
-| FCU | 13 | **55 / 72, yes** | 0.99 | 0.75 | 5 / 72, no | 0.97 |
+| system | net labels | healthy mean fitness / threshold | reversal: flagged / sig | AUC | hit rate at zero FP | swaps k=8: AUC / sig | skips k=4: flagged / sig |
+|---|---|---|---|---|---|---|---|
+| SDAHU | 6 | 0.89 / 0.20 | 0 / 87, no | 0.91 | **0.00** | 0.81 / no | 0 / 87, no |
+| PFPU | 7 | 0.90 / 0.81 | 4 / 96, no | 0.49 | 0.00 | 0.50 / no | 4 / 96, no |
+| SFPU | 8 | 0.95 / 0.90 | 5 / 96, no | 0.50 | 0.00 | 0.50 / no | 6 / 96, no |
+| DDAHU | 14 | 0.91 / 0.50 | **59 / 83, yes** | 0.99 | 0.71 | 0.96 / **yes** | 14 / 83, **yes** |
+| FCU | 13 | 0.89 / 0.37 | **55 / 72, yes** | 0.99 | 0.75 | 0.97 / **yes** | 6 / 72, **yes** |
 
-Duplicated blocks fire nowhere (P5 held: loops absorb repetition). P4
+Duplicated blocks fire nowhere (P5 held: loops absorb repetition).
+Deleting the start event fires nowhere (P2 failed everywhere, including
+the two systems whose nets treat it as obligatory — on the fan-powered
+units it *raises* fitness, AUC 0.40 and 0.36). Swaps rise monotonically on
+every system but reach significance on two, not three (P3 failed). P4
 (skips rise in k; single skips absorbed on the loop-heavy nets) holds on
-the absorption half and fails on the rise: PFPU's flagged days run 3, 2, 2
-across k = 1, 2, 4. No
-falsifier fired — reversal is significant on one system, so F-X22.a
-("blind everywhere") did not fire — but the predictions were wrong: P1
-expected SDAHU and DDAHU to fire under reversal, P2 expected skip-start to
-fire where the start activity is obligatory, P3 expected a monotone rise
-in swaps reaching significance on three systems. None did.
+the absorption half and fails on the rise for PFPU and SFPU. No falsifier
+fired — reversal is significant on two systems, so F-X22.a ("blind
+everywhere") did not fire — but P1's prediction (SDAHU fires) was wrong.
 
 **What the instrument is.** Three different things, by system:
 
-1. On the **fan coil unit** the channel sees order: a reversed day drops
-   fitness from about 0.82 (the nearest recorded baseline; the re-run records the unperturbed mean) to 0.25, 55 of 72 days are flagged, and a
-   zero-false-alarm threshold would still catch 75 %. On this system the
-   null is instrument-validated: the channel can see order, and the
-   faults (42 of 47 detected, model channel never alone) do not change it.
-2. On the **single-duct and dual-duct units** the channel sees order on
-   average (AUC 0.91 and 0.96) but not at the deployed gate, and not at any
-   gate that keeps the false-alarm budget: the healthy holdout contains days
-   whose fitness (0.33 and 0.25; the 1 % quantile and the minimum coincide)
-   is below that of a fully reversed day. The channel is blind to order
-   because of the *spread of healthy fitness*, not because of the net.
+1. On the **fan coil unit and the dual-duct unit** the channel sees order:
+   a reversed day drops fitness from 0.89 and 0.91 to 0.25 and 0.46, 55
+   of 72 and 59 of 83 days are flagged, and a zero-false-alarm threshold
+   would still catch 75 % and 71 %. Eight swaps and four deletions are
+   significant too. On these two systems the null is instrument-validated:
+   the channel can see order, and the faults (42 of 47 and 45 of 55
+   detected, the model channel never alone) do not change it. The
+   dual-duct unit only joined this group under X25: with the old in-sample
+   threshold (0.25, the holdout minimum itself) its reversed days were
+   invisible; with a threshold calibrated on a separate slice (0.50) they
+   are not.
+2. On the **single-duct unit** the channel sees order on average (AUC
+   0.91) but not at any gate that keeps the budget: the healthy holdout
+   contains days whose fitness (0.20 at the 1 % quantile) is below that of
+   a fully reversed day, so the hit rate at zero false alarms is exactly
+   zero. Blind by the *spread of healthy fitness*, not by the net. (Before
+   X25, deletions of two or more events were significant here; with the
+   new training slice they are not.)
 3. On the **fan-powered units** fitness does not move under any
-   perturbation (AUC 0.49–0.51 on everything except skip-start, where
-   deleting the start event *raises* fitness: AUC 0.40 and 0.36). Those nets accept any
-   order: blind by *net structure*, the reading the earlier reversal
-   probe already gave.
+   perturbation (AUC 0.49–0.51 on everything except skip-start). Those
+   nets accept any order: blind by *net structure*, the reading the
+   earlier reversal probe already gave.
 
-So the null paper's statement becomes: on one of five systems the
-conformance channel can see order and the faults do not change it; on two
+So the null paper's statement becomes: on two of five systems the
+conformance channel can see order and the faults do not change it; on one
 it cannot see order at any false-alarm budget because healthy days already
 span the fitness a reversed day has; on two it cannot see order at all.
 That is a stronger and more honest statement than "conformance adds no
 detections", and it is the sentence a process-mining reviewer needs.
-
-Skips are the one perturbation that reaches significance on a second
-system (SDAHU, k ≥ 2): its traces are 5.6 events long, so deleting two is
-a large change, and a missing activity is a model move the net cannot
-absorb. That is consistent with the earlier reading that alignment cost
-behaves as a count detector.
 
 ## X24 — the outdoor-air-fraction residual
 
@@ -92,7 +93,7 @@ the five waterside-fouling files.
 
 ## Ledger
 
-| X22 | P1 ✗ (only FCU) | P2 ✗ | P3 ✗ | P4 ✗ (no rise on PFPU) | P5 ✓ | falsifiers: none |
+| X22 (post-X25) | P1 ✗ (FCU and DDAHU, not SDAHU) | P2 ✗ | P3 ✗ (2 of 3 systems) | P4 ✗ (no rise on the FPUs) | P5 ✓ | falsifiers: none |
 |---|---|---|---|---|---|
 | X24 | P1 ✓ byte-identical | P2 ✓ silent | P3 ✓ leak 20 % | P4 ✓ 4/1/3 of 96 | P5 ✓ no loss; falsifiers: none |
 

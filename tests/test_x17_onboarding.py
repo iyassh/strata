@@ -30,4 +30,7 @@ def test_x17_pinned():
     assert s["channels"]["model"] == 0 and s["per_channel_fp"]["absence"] == 3
     u = json.loads((ROOT / "outputs" / "union_fpr_ddahu.json").read_text())
     assert u["union_minus_rate"]["holdout_fp_days"] == 3 and u["union_all8"]["holdout_fp_days"] == 8
-    assert len(u["rate_demotion"]["violations"]) == 1      # the TTD cost, recorded not hidden
+    # the check's one "violation" was its own blind spot (absence-channel day-1 alarm): now recorded as unresolved
+    assert u["rate_demotion"]["violations"] == []
+    assert len(u["rate_demotion"].get("unresolved_absence_coverage", [])) == 1
+    assert "cooling valve stuck 0%" in u["rate_demotion"]["unresolved_absence_coverage"][0]

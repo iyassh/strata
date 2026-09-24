@@ -52,6 +52,8 @@ for system in ("sdahu", "pfpu", "sfpu"):
     det = build_sojourn_detector(hstats, hold_n)
     sysout = {"healthy_file": man["healthy_file"], "n_train_days": det.n_train_days,
               "holdout_days": det.holdout_days, "holdout_fp_days": det.holdout_fp_days,
+              "holdout_days_definition": "days of the last-8-per-month holdout on which the channel has any statistic "
+                                        "(87 on SDAHU); joint_fpr below uses the 96 calendar holdout days",
               "holdout_fp_rate": round(det.holdout_fp_days / max(det.holdout_days, 1), 4),
               "monitored_statistics": len(det.bands),
               "bands": {k: [round(v[0], 1), round(v[1], 1)] for k, v in det.bands.items()},

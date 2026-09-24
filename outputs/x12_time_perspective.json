@@ -7,6 +7,7 @@
       "n_train_days": 246,
       "holdout_days": 87,
       "holdout_fp_days": 0,
+      "holdout_days_definition": "days of the last-8-per-month holdout on which the channel has any statistic (87 on SDAHU); joint_fpr below uses the 96 calendar holdout days",
       "holdout_fp_rate": 0.0,
       "monitored_statistics": 8,
       "bands": {
@@ -344,6 +345,7 @@
       "n_train_days": 269,
       "holdout_days": 96,
       "holdout_fp_days": 5,
+      "holdout_days_definition": "days of the last-8-per-month holdout on which the channel has any statistic (87 on SDAHU); joint_fpr below uses the 96 calendar holdout days",
       "holdout_fp_rate": 0.0521,
       "monitored_statistics": 37,
       "bands": {
@@ -1237,6 +1239,7 @@
       "n_train_days": 269,
       "holdout_days": 96,
       "holdout_fp_days": 5,
+      "holdout_days_definition": "days of the last-8-per-month holdout on which the channel has any statistic (87 on SDAHU); joint_fpr below uses the 96 calendar holdout days",
       "holdout_fp_rate": 0.0521,
       "monitored_statistics": 36,
       "bands": {

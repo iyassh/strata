@@ -1,33 +1,41 @@
 {
- "system": "ddahu",
- "healthy_file": "DualDuct_FaultFree",
+ "system": "fcu",
+ "healthy_file": "FCU_FaultFree",
  "holdout_days": 96,
  "total_days": 365,
  "exposure": {
-  "occupied_holdout_days": 77,
-  "residual_evaluable_holdout_days": 75,
-  "rate_windowed_holdout_days": 75
+  "occupied_holdout_days": 96,
+  "residual_evaluable_holdout_days": 72,
+  "rate_windowed_holdout_days": 65
  },
  "channels": {
   "rules": {
    "holdout_fp_days": 0,
    "holdout_days": 96,
-   "full_year_days": 1,
+   "full_year_days": 0,
    "holdout_fp_dates": [],
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "resid": {
-   "holdout_fp_days": 0,
+   "holdout_fp_days": 5,
    "holdout_days": 96,
-   "full_year_days": 0,
-   "holdout_fp_dates": [],
+   "full_year_days": 5,
+   "holdout_fp_dates": [
+    "2018-01-26",
+    "2018-08-27",
+    "2018-10-25",
+    "2018-12-24",
+    "2018-12-25"
+   ],
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "model": {
-   "holdout_fp_days": 0,
+   "holdout_fp_days": 1,
    "holdout_days": 96,
-   "full_year_days": 0,
-   "holdout_fp_dates": [],
+   "full_year_days": 3,
+   "holdout_fp_dates": [
+    "2018-01-28"
+   ],
    "threshold_provenance": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample"
   },
   "device": {
@@ -35,17 +43,13 @@
    "holdout_days": 96,
    "full_year_days": 0,
    "holdout_fp_dates": [],
-   "threshold_provenance": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample"
+   "threshold_provenance": "channel absent: this configuration declares no device stratum"
   },
   "absence": {
-   "holdout_fp_days": 3,
+   "holdout_fp_days": 0,
    "holdout_days": 96,
-   "full_year_days": 12,
-   "holdout_fp_dates": [
-    "2018-01-27",
-    "2018-11-27",
-    "2018-11-29"
-   ],
+   "full_year_days": 0,
+   "holdout_fp_dates": [],
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "freq": {
@@ -56,17 +60,27 @@
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "rate": {
-   "holdout_fp_days": 7,
+   "holdout_fp_days": 17,
    "holdout_days": 96,
-   "full_year_days": 7,
+   "full_year_days": 17,
    "holdout_fp_dates": [
-    "2018-05-31",
-    "2018-11-24",
+    "2018-08-26",
+    "2018-08-27",
+    "2018-08-28",
+    "2018-08-29",
+    "2018-08-30",
+    "2018-08-31",
+    "2018-11-23",
     "2018-11-26",
     "2018-11-27",
     "2018-11-28",
     "2018-11-29",
-    "2018-11-30"
+    "2018-11-30",
+    "2018-12-26",
+    "2018-12-27",
+    "2018-12-28",
+    "2018-12-30",
+    "2018-12-31"
    ],
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
@@ -79,47 +93,47 @@
   }
  },
  "union_all8": {
-  "holdout_fp_days": 8,
-  "rate": 0.08333333333333333
+  "holdout_fp_days": 22,
+  "rate": 0.22916666666666666
  },
  "union_minus_rate": {
-  "holdout_fp_days": 3,
-  "rate": 0.03125
+  "holdout_fp_days": 6,
+  "rate": 0.0625
  },
  "split_half_demotion_robustness": {
   "even_months": {
    "decision_half_fp": {
     "rules": 0,
-    "resid": 0,
+    "resid": 4,
     "model": 0,
     "device": 0,
     "absence": 0,
     "freq": 0,
-    "rate": 0,
+    "rate": 11,
     "osc": 0
    },
-   "worst_channel_on_decision_half": "rules",
+   "worst_channel_on_decision_half": "rate",
    "rate_is_worst_or_tied": true,
    "deployed_fpr_on_report_half": {
-    "fp_days": 3,
+    "fp_days": 2,
     "n": 48
    }
   },
   "odd_months": {
    "decision_half_fp": {
     "rules": 0,
-    "resid": 0,
-    "model": 0,
+    "resid": 1,
+    "model": 1,
     "device": 0,
-    "absence": 3,
+    "absence": 0,
     "freq": 0,
-    "rate": 7,
+    "rate": 6,
     "osc": 0
    },
    "worst_channel_on_decision_half": "rate",
    "rate_is_worst_or_tied": true,
    "deployed_fpr_on_report_half": {
-    "fp_days": 0,
+    "fp_days": 4,
     "n": 48
    }
   }
@@ -128,73 +142,14 @@
  "rate_demotion": {
   "scenarios_with_rate_significant": [
    {
-    "label": "cold-deck damper stuck 0%",
-    "channels": "rules+resid+model+absence+freq+rate+osc",
-    "ttd_days": 1,
-    "first_rate_day": "2018-03-01",
-    "rate_only_alarm_days": 6
-   },
-   {
-    "label": "cold-deck damper stuck 20%",
-    "channels": "rules+resid+model+absence+freq+rate+osc",
-    "ttd_days": 1,
-    "first_rate_day": "2018-03-01",
-    "rate_only_alarm_days": 8
-   },
-   {
-    "label": "cooling valve stuck 0%",
-    "channels": "rules+resid+absence+freq+rate+osc",
-    "ttd_days": 1,
-    "first_rate_day": "2018-04-23",
-    "rate_only_alarm_days": 32
-   },
-   {
-    "label": "cooling valve stuck 20%",
-    "channels": "rules+resid+absence+freq+rate+osc",
-    "ttd_days": 1,
-    "first_rate_day": "2018-02-03",
-    "rate_only_alarm_days": 0
-   },
-   {
-    "label": "heating valve stuck 0%",
-    "channels": "rules+resid+freq+rate+osc",
+    "label": "OA damper stuck 100%",
+    "channels": "rules+resid+model+freq+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
-    "rate_only_alarm_days": 40
-   },
-   {
-    "label": "heating valve stuck 20%",
-    "channels": "rules+resid+freq+rate+osc",
-    "ttd_days": 1,
-    "first_rate_day": "2018-01-30",
-    "rate_only_alarm_days": 0
-   },
-   {
-    "label": "heating valve stuck 50%",
-    "channels": "rules+resid+rate+osc",
-    "ttd_days": 1,
-    "first_rate_day": "2018-02-04",
-    "rate_only_alarm_days": 0
-   },
-   {
-    "label": "heating valve stuck 80%",
-    "channels": "rules+resid+rate+osc",
-    "ttd_days": 1,
-    "first_rate_day": "2018-02-04",
-    "rate_only_alarm_days": 0
-   },
-   {
-    "label": "heating valve stuck 100%",
-    "channels": "rules+resid+rate+osc",
-    "ttd_days": 1,
-    "first_rate_day": "2018-02-04",
     "rate_only_alarm_days": 0
    }
   ],
-  "violations": [],
-  "unresolved_absence_coverage": [
-   "cooling valve stuck 0%: first alarm day 2018-01-01 not in any exported non-rate day list; absence is significant and has no exported day list \u2014 verify with pipeline.score()"
-  ]
+  "violations": []
  },
  "caveats": [
   "Healthy negatives are the calibration year's shared calendar holdout; no independent healthy negative exists on any LBNL system (D2). Per-day autocorrelation makes any binomial p on these counts optimistic.",

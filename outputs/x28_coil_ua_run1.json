@@ -1,0 +1,232 @@
+{
+  "prereg": "docs/plans/2026-09-24-x28-coil-ua-prereg.md",
+  "before_commit": "295dfe3",
+  "systems": {
+    "ddahu": {
+      "detected_before": 45,
+      "detected_after": 45,
+      "scored": 55,
+      "fouling_before": 5,
+      "fouling_after": 5,
+      "fouling_scored": 12,
+      "fouling_rows": {
+        "DualDuct_Fouling_Cooling_Airside_Minor": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            6,
+            6
+          ]
+        },
+        "DualDuct_Fouling_Cooling_Airside_Moderate": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            12,
+            12
+          ]
+        },
+        "DualDuct_Fouling_Cooling_Airside_Severe": {
+          "before": "resid",
+          "after": "resid",
+          "resid_days": [
+            49,
+            49
+          ]
+        },
+        "DualDuct_Fouling_Cooling_Waterside_Minor": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            0,
+            0
+          ]
+        },
+        "DualDuct_Fouling_Cooling_Waterside_Moderate": {
+          "before": "rules",
+          "after": "rules",
+          "resid_days": [
+            0,
+            0
+          ]
+        },
+        "DualDuct_Fouling_Cooling_Waterside_Severe": {
+          "before": "rules",
+          "after": "rules",
+          "resid_days": [
+            2,
+            2
+          ]
+        },
+        "DualDuct_Fouling_Heating_Airside_Minor": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            0,
+            0
+          ]
+        },
+        "DualDuct_Fouling_Heating_Airside_Moderate": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            0,
+            0
+          ]
+        },
+        "DualDuct_Fouling_Heating_Airside_Severe": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            7,
+            7
+          ]
+        },
+        "DualDuct_Fouling_Heating_Waterside_Minor": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            0,
+            0
+          ]
+        },
+        "DualDuct_Fouling_Heating_Waterside_Moderate": {
+          "before": "rules",
+          "after": "rules",
+          "resid_days": [
+            0,
+            0
+          ]
+        },
+        "DualDuct_Fouling_Heating_Waterside_Severe": {
+          "before": "rules",
+          "after": "rules",
+          "resid_days": [
+            11,
+            11
+          ]
+        }
+      },
+      "gained": [],
+      "lost": [],
+      "deployed_fp_before": 3,
+      "deployed_fp_after": 3,
+      "residual_fp_before": 0,
+      "residual_fp_after": 0
+    },
+    "fcu": {
+      "detected_before": 40,
+      "detected_after": 40,
+      "scored": 47,
+      "fouling_before": 6,
+      "fouling_after": 6,
+      "fouling_scored": 11,
+      "fouling_rows": {
+        "FCU_Fouling_Cooling_Airside_Minor": {
+          "before": "resid",
+          "after": "resid",
+          "resid_days": [
+            268,
+            268
+          ]
+        },
+        "FCU_Fouling_Cooling_Airside_Moderate": {
+          "before": "resid",
+          "after": "resid",
+          "resid_days": [
+            268,
+            268
+          ]
+        },
+        "FCU_Fouling_Cooling_Airside_Severe": {
+          "before": "resid",
+          "after": "resid",
+          "resid_days": [
+            268,
+            268
+          ]
+        },
+        "FCU_Fouling_Cooling_Waterside_Minor": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            3,
+            5
+          ]
+        },
+        "FCU_Fouling_Cooling_Waterside_Moderate": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            3,
+            5
+          ]
+        },
+        "FCU_Fouling_Cooling_Waterside_Severe": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            3,
+            6
+          ]
+        },
+        "FCU_Fouling_Heating_Airside_Moderate": {
+          "before": "resid",
+          "after": "resid",
+          "resid_days": [
+            268,
+            268
+          ]
+        },
+        "FCU_Fouling_Heating_Airside_Severe": {
+          "before": "resid",
+          "after": "resid",
+          "resid_days": [
+            268,
+            268
+          ]
+        },
+        "FCU_Fouling_Heating_Waterside_Minor": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            3,
+            5
+          ]
+        },
+        "FCU_Fouling_Heating_Waterside_Moderate": {
+          "before": null,
+          "after": null,
+          "resid_days": [
+            9,
+            11
+          ]
+        },
+        "FCU_Fouling_Heating_Waterside_Severe": {
+          "before": "rules",
+          "after": "rules",
+          "resid_days": [
+            3,
+            5
+          ]
+        }
+      },
+      "gained": [],
+      "lost": [],
+      "deployed_fp_before": 4,
+      "deployed_fp_after": 6,
+      "residual_fp_before": 3,
+      "residual_fp_after": 5
+    }
+  },
+  "predictions": {
+    "P0_VERIFIED_BY_HAND": true,
+    "P1_budget": false,
+    "P2_ddahu_ge_3_fouling_gained": false,
+    "P3_fcu_ge_2_fouling_gained": false,
+    "P4_no_loss": true
+  },
+  "falsifiers_fired": [
+    "F-X28.b: UA from these points does not see the simulated fouling on either system"
+  ]
+}

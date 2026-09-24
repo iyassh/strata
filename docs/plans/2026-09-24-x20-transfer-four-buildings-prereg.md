@@ -84,3 +84,18 @@ is stated as such.
 `outputs/discovery_predicts_transfer_q_four.json`,
 `outputs/matched_rules_{ddahu,fcu}.json`,
 `outputs/x20_transfer_four.json`; guard `tests/test_x20_transfer_four.py`.
+
+## Corrections (2026-09-24, on hostile review; the text above stands as written)
+
+- P2 states distinct MR1 counts as the condition for rho = −1. That is a
+  non-sequitur: distinct counts permit any ordering; rho = −1 requires the
+  ordering to be exactly reversed, which was not predicted.
+- The identity argument in "Disclosure" concerns the *raw* heating-day set;
+  MR1 is that set's workday complement. `Q_support`'s sync set can differ
+  from the raw set, and on the FCU it does — all 44 divergent days are
+  workdays inside MR1's domain.
+- F-X20.b compares a variant-level quantity (no cost-zero variant aligns
+  once heating is deleted) with a day-level one (every occupied day has
+  heating); these coincide only by accident. It is scored as written.
+- The raw-count control in the write-up was not pre-registered here; it was
+  added after the result.

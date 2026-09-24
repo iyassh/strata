@@ -352,7 +352,7 @@ run.
 *Pre-registered (`docs/plans/2026-09-24-x20-transfer-four-buildings-prereg.md`,
 fd95da3) after X19 and before any quantity was computed on the two new
 buildings. Artefacts: `outputs/discovery_predicts_transfer_q_four.json`
-(the sealed Q code run unchanged on DDAHU and FCU via `--systems`),
+(the sealed Q code run on DDAHU and FCU via a `--systems` switch added for the purpose; the three-system default regenerates the committed artefact byte-identically, `outputs/x20_q_regression.json`),
 `matched_rules_{ddahu,fcu}.json`, `x20_transfer_four.json`; guard
 `tests/test_x20_transfer_four.py`. The original three-system Q artefact is
 untouched.*
@@ -373,7 +373,8 @@ count and its own complement. So the pre-registration made the identity
 withdrawn as uninformative at any n; if it failed, "the alignment carries
 information" and the four-building test (P2) was to be scored and reported
 straight. A control with no discovery in it — the raw heating-day fraction
-as predictor — was implied by the disclosure and is computed alongside.
+as predictor — is computed alongside; it was **not pre-registered** (the
+disclosure motivates it; it was added after the result).
 
 ### Result
 
@@ -385,24 +386,32 @@ as predictor — was implied by the disclosure and is computed alongside.
 | SFPU | 0.978 | 357 / 357 / 365 | 1 | 0 |
 
 - **P1 (identity)** holds exactly on DDAHU and **fails on FCU**: 44 of the
-  118 heating days get no synchronous heating move. **F-X20.a fired**, so
-  by the pre-registered rule P2 is scored. Diagnostic (after the fact): the
-  FCU's unit net, mined at noise threshold 0.2 from 196 training days,
-  carries `heating_active` but not `heating_inactive`; on 38 weekday and 6
-  weekend traces the cheapest alignment moves the heating episode on the
-  log side. What the alignment "carries" is the miner's noise filter, not a
-  reading of an invariant.
+  118 heating days get no synchronous heating move — all 44 weekdays,
+  inside MR1's workday domain. **F-X20.a fired**: by the pre-registration's
+  own wording the alignment carries information, and P2 is scored.
+  Diagnostic (after the fact, not part of the rule): the FCU's unit net,
+  mined at noise threshold 0.2 from 196 training days, carries
+  `heating_active` but not `heating_inactive`, and on those 44 traces the
+  cheapest alignment moves the heating episode on the log side. The
+  information the falsifier certifies is, on inspection, the miner's noise
+  filter. Note also that the pre-registration's identity argument concerned
+  the *raw* heating-day set — MR1 is that set's workday complement — and
+  the FCU is exactly the case where the sync set is not the raw set.
 - **P2 (four buildings)**: rho = −1.000, exact one-sided permutation
-  p = 1/24 = **0.042** < 0.05, the four MR1 counts distinct. The
-  pre-registered criterion is met.
+  p = 1/24 = **0.042** < 0.05: the ordering is exactly reversed (the
+  pre-registration wrongly stated distinct counts as the condition; a
+  correction is appended to it). The pre-registered criterion is met.
 - **Control**: the raw heating-day fraction orders the four buildings
   identically (0.32, 0.45, 0.73, 0.98) and gives rho = −1.000, p = 0.042.
-- **P3 (obligatory form)** fails on every building — **F-X20.b fired**.
-  `Q_obligatory` = 1 on SFPU and DDAHU although 8 and 77 occupied days lack
-  heating; it is 1 because no *cost-zero* variant lacks heating, and the
+- **P3 (obligatory form)** fails on SFPU and DDAHU (PFPU and FCU are
+  consistent) — **F-X20.b fired** as pre-registered, and the criterion was
+  ill-posed: it compares a variant-level quantity (no cost-zero variant
+  aligns once heating is deleted) with a day-level one (every occupied day
+  has heating), which coincide only by accident. `Q_obligatory` = 1 on SFPU
+  and DDAHU although 8 and 77 occupied days lack heating, because the
   heating-less days' traces do not fit the net for other reasons. The
   structural form is a property of which variants the noise-filtered net
-  admits, not of the year.
+  admits, not of the year (a correction is appended to the pre-registration).
 
 ### Reading
 
@@ -415,8 +424,10 @@ heating-day counts. At n = 4 nothing can separate the two predictors, and
 the one building on which they differ (FCU) differs by the miner's noise
 filter. The claim "discovery locates invariants" therefore receives no
 support beyond what the log's count provides, which is none that involves
-discovery. This is the tenth adverse result: the test that finally had
-power passed for a reason that has nothing to do with the hypothesis.
+discovery. Counting this as the tenth adverse result is a post-hoc
+reclassification and is labelled as one: the pre-registered test passed,
+the artefact records the conclusion as formally licensed, and the adverse
+reading rests entirely on a control that was not pre-registered.
 
 A test that could bear on the claim would need a predictor not computed
 from the log it predicts — fit on building A, replay building B — and it
@@ -427,7 +438,7 @@ B's log. Not run.
 
 | P1 identity | P2 four buildings | control | P3 obligatory | falsifiers |
 |---|---|---|---|---|
-| DDAHU exact; **FCU 74 ≠ 118 → F-X20.a** | rho −1, p 0.042 ✓ | rho −1, p 0.042, same order | **✗** on all four → F-X20.b | a, b fired; verdict: informative by rule, uninformative by control |
+| DDAHU exact; **FCU 74 ≠ 118 → F-X20.a** | rho −1, p 0.042 ✓ | rho −1, p 0.042, same order (not pre-registered) | **✗** SFPU, DDAHU → F-X20.b (criterion ill-posed) | a, b fired; verdict: informative by rule; the adverse reading is post hoc |
 
 
 ## X21 — can a net's reading of a *foreign* year escape being that year's count?

@@ -64,24 +64,28 @@
         "sync_days": 166,
         "raw_days_with_anchor": 166,
         "identical": true,
+        "within_one_day": true,
         "abs_diff_days": 0
       },
       "sfpu": {
         "sync_days": 357,
         "raw_days_with_anchor": 357,
         "identical": true,
+        "within_one_day": true,
         "abs_diff_days": 0
       },
       "ddahu": {
         "sync_days": 208,
         "raw_days_with_anchor": 208,
         "identical": true,
+        "within_one_day": true,
         "abs_diff_days": 0
       },
       "fcu": {
         "sync_days": 74,
         "raw_days_with_anchor": 118,
         "identical": false,
+        "within_one_day": false,
         "abs_diff_days": 44
       }
     },
@@ -99,6 +103,7 @@
   },
   "P2_control_raw_count": {
     "predictor": "raw_heating_frac (occupied days whose log contains heating_active / occupied days)",
+    "pre_registered": false,
     "rho": -0.9999999999999998,
     "exact_one_sided_p": 0.041666666666666664,
     "same_ordering_as_Q_support": true,

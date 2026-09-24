@@ -1,8 +1,8 @@
 """Guard: X20 — the transfer test with four scorable buildings. Pre-registered
 identity (Q_support = the log's own heating-day count) holds on DDAHU exactly
 and fails on FCU (74 sync days vs 118 raw), so F-X20.a fired and P2 was scored:
-rho = -1, exact one-sided p = 1/24. The pre-registered control — the raw
-heating-day fraction, no discovery in it — orders the four buildings
+rho = -1, exact one-sided p = 1/24. A discovery-free control, NOT pre-registered
+(added after the result) — the raw heating-day fraction — orders the four buildings
 identically and passes identically. F-X20.b fired: the obligatory form is
 not 'every occupied day has heating' on any building."""
 import json
@@ -28,6 +28,7 @@ def test_x20_pinned():
     p2 = a["P2_four_building_correlation"]
     assert abs(p2["rho"] + 1.0) < 1e-9 and abs(p2["exact_one_sided_p"] - 1 / 24) < 1e-9 and p2["would_pass_criterion"] and p2["mr1_counts_distinct"]
     c = a["P2_control_raw_count"]
+    assert c["pre_registered"] is False
     assert abs(c["rho"] + 1.0) < 1e-9 and abs(c["exact_one_sided_p"] - 1 / 24) < 1e-9 and c["same_ordering_as_Q_support"] is True
     assert a["P3_obligatory_is_log_property"]["pass"] is False
     assert [f.split(":")[0] for f in a["falsifiers_fired"]] == ["F-X20.a", "F-X20.b"]

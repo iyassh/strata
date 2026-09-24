@@ -1,0 +1,7 @@
+{
+  "script_commit": "62e03f0",
+  "regenerated_with": "uv run python scripts/discovery_predicts_transfer_q.py --out <scratch>/q3_regress.json (default --systems sdahu,pfpu,sfpu)",
+  "committed_md5": "e3d52823b5d9c051ea3d90be2a245dab",
+  "regenerated_md5": "e3d52823b5d9c051ea3d90be2a245dab",
+  "byte_identical": true
+}

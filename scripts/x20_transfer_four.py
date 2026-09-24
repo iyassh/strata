@@ -94,9 +94,10 @@ def main() -> int:
     # P1 identity: sync_days == raw count (and Q_support == raw frac) on the two new buildings
     p1 = {b: {"sync_days": r["sync_days"], "raw_days_with_anchor": r["raw_days_with_anchor"],
               "identical": r["sync_days"] == r["raw_days_with_anchor"],
+              "within_one_day": abs(r["sync_days"] - r["raw_days_with_anchor"]) <= 1,   # F-X20.a fires beyond one day (pre-registered)
               "abs_diff_days": abs(r["sync_days"] - r["raw_days_with_anchor"])}
           for r in rows for b in [r["building"]]}
-    p1_new = all(p1[b]["identical"] for b in ("ddahu", "fcu"))
+    p1_new = all(p1[b]["within_one_day"] for b in ("ddahu", "fcu"))
     p1_all = all(p1[b]["identical"] for b in BUILDINGS)
     # P3 obligatory form is a log property
     p3 = {r["building"]: {"Q_obligatory": r["Q_obligatory"], "every_occupied_day_has_anchor": r["every_occupied_day_has_anchor"],
@@ -115,12 +116,13 @@ def main() -> int:
     p2 = {"rho": rho, "exact_one_sided_p": p_one, "n_perm": len(perms),
           "mr1_counts_distinct": distinct, "attainable_min_rho": attainable, "attainable_floor_p": floor_p,
           "would_pass_criterion": p_one < 0.05}
-    # Control (implied by the pre-registration's disclosure): the same test with the
-    # log's own heating-day fraction as predictor — no discovery in it at all.
+    # Control — NOT pre-registered (added after the result; the pre-registration's
+    # disclosure motivates it): the same test with the log's own heating-day fraction
+    # as predictor, no discovery in it at all.
     xr = [r["raw_heating_frac"] for r in rows]
     rho_c = spearman(xr, ys)
     p_c = sum(1 for v in [spearman(xr, list(pp)) for pp in perms] if v <= rho_c + 1e-12) / len(perms)
-    control = {"predictor": "raw_heating_frac (occupied days whose log contains heating_active / occupied days)",
+    control = {"predictor": "raw_heating_frac (occupied days whose log contains heating_active / occupied days)", "pre_registered": False,
                "rho": rho_c, "exact_one_sided_p": p_c, "same_ordering_as_Q_support": _ranks(xr) == _ranks(xs),
                "reading": "if the control orders the buildings identically, the pass of P2 is carried by the count of "
                           "heating days, which MR1 is defined as the workday complement of; discovery adds nothing testable at n = 4"}

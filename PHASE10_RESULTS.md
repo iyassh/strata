@@ -1,4 +1,4 @@
-# Phase 10 Results — A fourth system: the LBNL dual-duct AHU, onboarded blind (X17)
+# Phase 10 Results — A fourth system: the LBNL dual-duct AHU, onboarded blind (X17), and the X15 gain that did not replicate (X18)
 
 *2026-09-24. Pre-registered (`docs/plans/2026-09-24-x17-ddahu-onboarding-prereg.md`,
 b8fadc8) after the documentation was read and before any data file was
@@ -82,11 +82,42 @@ union-minus-rate definition delays that scenario's time-to-detect; the
 scorecard's TTD column includes rate. Recorded in the artefact; the
 detection count is unaffected (45 with or without rate).
 
+
+## X18 — does the X15 gain replicate here? No.
+
+Pre-registered (fae33da) after the scorecard and before any enriched run:
+X15's protocol unchanged — healthy-derived band states for every actuator
+position and flow (17 signals on this system; command-only zone dampers
+excluded as non-positions), 15-minute dwell, frequency channel only, bands
+and the false-alarm rate recomputed under both holdout splits.
+
+| enriched frequency channel | last-8 | first-8 |
+|---|---|---|
+| holdout FP (of 83 event-days) | 2 | 2 |
+| significant scenarios (of 55) | 22 | 21 |
+| newly significant among the 10 misses | none | none |
+
+Inside the budget under both splits (P1), no static-bias miss gained (P3),
+and coverage on already-detected scenarios rises from the deployed
+frequency channel's 8 to 22 (P4) — but **no missed scenario becomes
+significant under either split; F-X18.b fired.** The seven fouling misses
+flag 3–11 days each against a floor of 2 or 3 in 83.
+
+**Reading.** X15's fouling detection was a one-scenario, one-system
+signature (the series unit's zone-S damper band under airside fouling); on
+a fourth system with seven fouling misses the same mechanism finds none of
+them. The enriched frequency channel remains what X15 showed it to be —
+cheap extra day-level coverage on scenarios the detector already catches,
+inside the budget — and nothing more. It is not adopted.
+
 ## Ledger
 
 | P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | falsifiers |
 |---|---|---|---|---|---|---|---|---|
 | ✓ config only | ✓ clean | ✓ 1 iteration | ✓ 3/96 | ✓ 45/55 | **✗** 5 > 4 (better) | ✓ none by conformance | ✓ 5/8 static, 2/2 unstable | none fired |
+
+| X18 | P1 ✓ budget (2/83 both splits) | P2 **✗** no fouling miss gained | P3 ✓ | P4 ✓ 22 vs 8 | **F-X18.b fired** |
+|---|---|---|---|---|---|
 
 ## Reading
 

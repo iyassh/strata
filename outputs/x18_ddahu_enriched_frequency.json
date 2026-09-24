@@ -1,0 +1,1166 @@
+{
+  "pre_registration": "docs/plans/2026-09-24-x18-ddahu-enriched-frequency-prereg.md",
+  "system": "ddahu",
+  "last8": {
+    "split": "last8",
+    "n_added_signals": 17,
+    "added": {
+      "OA_DMPR_POS": {
+        "q10": 0.28,
+        "q90": 1.0
+      },
+      "RA_DMPR_POS": {
+        "q10": 0.0,
+        "q90": 0.72
+      },
+      "EA_DMPR_POS": {
+        "q10": 0.28,
+        "q90": 1.0
+      },
+      "CHWC_VLV_POS": {
+        "q10": 0.0,
+        "q90": 0.58
+      },
+      "HWC_VLV_POS": {
+        "q10": 0.0,
+        "q90": 0.25
+      },
+      "ZONE_FLOW_C_W": {
+        "q10": 100.0,
+        "q90": 386.95
+      },
+      "ZONE_FLOW_H_W": {
+        "q10": 99.99,
+        "q90": 100.05
+      },
+      "ZONE_FLOW_T_W": {
+        "q10": 200.0,
+        "q90": 490.8
+      },
+      "ZONE_FLOW_C_SB": {
+        "q10": 100.0,
+        "q90": 357.69
+      },
+      "ZONE_FLOW_H_SB": {
+        "q10": 99.99,
+        "q90": 100.03
+      },
+      "ZONE_FLOW_T_SB": {
+        "q10": 200.0,
+        "q90": 462.282
+      },
+      "ZONE_FLOW_C_SA": {
+        "q10": 100.0,
+        "q90": 357.52
+      },
+      "ZONE_FLOW_H_SA": {
+        "q10": 99.99,
+        "q90": 100.03
+      },
+      "ZONE_FLOW_T_SA": {
+        "q10": 200.0,
+        "q90": 460.03
+      },
+      "ZONE_FLOW_C_E": {
+        "q10": 100.0,
+        "q90": 326.8
+      },
+      "ZONE_FLOW_H_E": {
+        "q10": 99.99,
+        "q90": 100.05
+      },
+      "ZONE_FLOW_T_E": {
+        "q10": 200.0,
+        "q90": 432.24
+      }
+    },
+    "holdout_days": 83,
+    "holdout_fp_days": 2,
+    "unit_fp": 0,
+    "dev_fp": 2,
+    "scenarios": [
+      {
+        "file": "DualDuct_CoolSeqUnstable",
+        "family": "unstable_control",
+        "flag_days": 207,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_HeatSeqUnstable",
+        "family": "unstable_control",
+        "flag_days": 205,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_0",
+        "family": "zone_damper_stuck",
+        "flag_days": 316,
+        "n_eval": 333,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_20",
+        "family": "zone_damper_stuck",
+        "flag_days": 316,
+        "n_eval": 333,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_50",
+        "family": "zone_damper_stuck",
+        "flag_days": 32,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_80",
+        "family": "zone_damper_stuck",
+        "flag_days": 41,
+        "n_eval": 321,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_100",
+        "family": "zone_damper_stuck",
+        "flag_days": 51,
+        "n_eval": 321,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_0",
+        "family": "zone_damper_stuck",
+        "flag_days": 290,
+        "n_eval": 322,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_20",
+        "family": "zone_damper_stuck",
+        "flag_days": 290,
+        "n_eval": 322,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_50",
+        "family": "zone_damper_stuck",
+        "flag_days": 26,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_80",
+        "family": "zone_damper_stuck",
+        "flag_days": 31,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_100",
+        "family": "zone_damper_stuck",
+        "flag_days": 30,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_0",
+        "family": "oa_damper_stuck",
+        "flag_days": 159,
+        "n_eval": 350,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_28",
+        "family": "oa_damper_stuck",
+        "flag_days": 97,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_45",
+        "family": "oa_damper_stuck",
+        "flag_days": 35,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_80",
+        "family": "oa_damper_stuck",
+        "flag_days": 34,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_100",
+        "family": "oa_damper_stuck",
+        "flag_days": 34,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Airside_Minor",
+        "family": "coil_fouling",
+        "flag_days": 5,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Airside_Moderate",
+        "family": "coil_fouling",
+        "flag_days": 4,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Airside_Severe",
+        "family": "coil_fouling",
+        "flag_days": 7,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Waterside_Minor",
+        "family": "coil_fouling",
+        "flag_days": 3,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Waterside_Moderate",
+        "family": "coil_fouling",
+        "flag_days": 7,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Waterside_Severe",
+        "family": "coil_fouling",
+        "flag_days": 7,
+        "n_eval": 322,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Airside_Minor",
+        "family": "coil_fouling",
+        "flag_days": 4,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Airside_Moderate",
+        "family": "coil_fouling",
+        "flag_days": 6,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Airside_Severe",
+        "family": "coil_fouling",
+        "flag_days": 10,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Waterside_Minor",
+        "family": "coil_fouling",
+        "flag_days": 5,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Waterside_Moderate",
+        "family": "coil_fouling",
+        "flag_days": 7,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Waterside_Severe",
+        "family": "coil_fouling",
+        "flag_days": 4,
+        "n_eval": 316,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSA_-2C",
+        "family": "sat_sensor_bias",
+        "flag_days": 5,
+        "n_eval": 316,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSA_-4C",
+        "family": "sat_sensor_bias",
+        "flag_days": 18,
+        "n_eval": 316,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSA_+2C",
+        "family": "sat_sensor_bias",
+        "flag_days": 8,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSA_+4C",
+        "family": "sat_sensor_bias",
+        "flag_days": 33,
+        "n_eval": 318,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSP_-2inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 2,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSP_-4inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 2,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSP_+2inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 7,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSP_+4inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 7,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSA_-2C",
+        "family": "sat_sensor_bias",
+        "flag_days": 5,
+        "n_eval": 315,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSA_-4C",
+        "family": "sat_sensor_bias",
+        "flag_days": 16,
+        "n_eval": 315,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSA_+2C",
+        "family": "sat_sensor_bias",
+        "flag_days": 4,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSA_+4C",
+        "family": "sat_sensor_bias",
+        "flag_days": 11,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSP_-2inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 8,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSP_-4inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 10,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSP_+2inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 7,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSP_+4inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 7,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_0",
+        "family": "valve_stuck",
+        "flag_days": 166,
+        "n_eval": 331,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_20",
+        "family": "valve_stuck",
+        "flag_days": 161,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_50",
+        "family": "valve_stuck",
+        "flag_days": 9,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_80",
+        "family": "valve_stuck",
+        "flag_days": 7,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_100",
+        "family": "valve_stuck",
+        "flag_days": 8,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_0",
+        "family": "valve_stuck",
+        "flag_days": 66,
+        "n_eval": 341,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_20",
+        "family": "valve_stuck",
+        "flag_days": 66,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_50",
+        "family": "valve_stuck",
+        "flag_days": 22,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_80",
+        "family": "valve_stuck",
+        "flag_days": 23,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_100",
+        "family": "valve_stuck",
+        "flag_days": 23,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      }
+    ]
+  },
+  "first8": {
+    "split": "first8",
+    "n_added_signals": 17,
+    "added": {
+      "OA_DMPR_POS": {
+        "q10": 0.28,
+        "q90": 0.83
+      },
+      "RA_DMPR_POS": {
+        "q10": 0.17,
+        "q90": 0.72
+      },
+      "EA_DMPR_POS": {
+        "q10": 0.28,
+        "q90": 0.83
+      },
+      "CHWC_VLV_POS": {
+        "q10": 0.0,
+        "q90": 0.62
+      },
+      "HWC_VLV_POS": {
+        "q10": 0.0,
+        "q90": 0.25
+      },
+      "ZONE_FLOW_C_W": {
+        "q10": 100.0,
+        "q90": 389.451
+      },
+      "ZONE_FLOW_H_W": {
+        "q10": 99.99,
+        "q90": 100.05
+      },
+      "ZONE_FLOW_T_W": {
+        "q10": 200.0,
+        "q90": 492.28
+      },
+      "ZONE_FLOW_C_SB": {
+        "q10": 100.0,
+        "q90": 359.52
+      },
+      "ZONE_FLOW_H_SB": {
+        "q10": 99.99,
+        "q90": 100.03
+      },
+      "ZONE_FLOW_T_SB": {
+        "q10": 200.0,
+        "q90": 461.771
+      },
+      "ZONE_FLOW_C_SA": {
+        "q10": 100.0,
+        "q90": 359.58
+      },
+      "ZONE_FLOW_H_SA": {
+        "q10": 99.99,
+        "q90": 100.03
+      },
+      "ZONE_FLOW_T_SA": {
+        "q10": 200.0,
+        "q90": 460.431
+      },
+      "ZONE_FLOW_C_E": {
+        "q10": 100.0,
+        "q90": 330.14
+      },
+      "ZONE_FLOW_H_E": {
+        "q10": 99.99,
+        "q90": 100.05
+      },
+      "ZONE_FLOW_T_E": {
+        "q10": 200.0,
+        "q90": 434.82
+      }
+    },
+    "holdout_days": 83,
+    "holdout_fp_days": 2,
+    "unit_fp": 1,
+    "dev_fp": 2,
+    "scenarios": [
+      {
+        "file": "DualDuct_CoolSeqUnstable",
+        "family": "unstable_control",
+        "flag_days": 213,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_HeatSeqUnstable",
+        "family": "unstable_control",
+        "flag_days": 204,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_0",
+        "family": "zone_damper_stuck",
+        "flag_days": 316,
+        "n_eval": 333,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_20",
+        "family": "zone_damper_stuck",
+        "flag_days": 316,
+        "n_eval": 333,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_50",
+        "family": "zone_damper_stuck",
+        "flag_days": 32,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_80",
+        "family": "zone_damper_stuck",
+        "flag_days": 42,
+        "n_eval": 321,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Cold_100",
+        "family": "zone_damper_stuck",
+        "flag_days": 53,
+        "n_eval": 321,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_0",
+        "family": "zone_damper_stuck",
+        "flag_days": 290,
+        "n_eval": 322,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_20",
+        "family": "zone_damper_stuck",
+        "flag_days": 290,
+        "n_eval": 322,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_50",
+        "family": "zone_damper_stuck",
+        "flag_days": 24,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_80",
+        "family": "zone_damper_stuck",
+        "flag_days": 31,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_Hot_100",
+        "family": "zone_damper_stuck",
+        "flag_days": 32,
+        "n_eval": 317,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_0",
+        "family": "oa_damper_stuck",
+        "flag_days": 161,
+        "n_eval": 350,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_28",
+        "family": "oa_damper_stuck",
+        "flag_days": 96,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_45",
+        "family": "oa_damper_stuck",
+        "flag_days": 35,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_80",
+        "family": "oa_damper_stuck",
+        "flag_days": 37,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_DMPRStuck_OA_100",
+        "family": "oa_damper_stuck",
+        "flag_days": 36,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Airside_Minor",
+        "family": "coil_fouling",
+        "flag_days": 6,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Airside_Moderate",
+        "family": "coil_fouling",
+        "flag_days": 4,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Airside_Severe",
+        "family": "coil_fouling",
+        "flag_days": 10,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Waterside_Minor",
+        "family": "coil_fouling",
+        "flag_days": 3,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Waterside_Moderate",
+        "family": "coil_fouling",
+        "flag_days": 9,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Cooling_Waterside_Severe",
+        "family": "coil_fouling",
+        "flag_days": 8,
+        "n_eval": 322,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Airside_Minor",
+        "family": "coil_fouling",
+        "flag_days": 4,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Airside_Moderate",
+        "family": "coil_fouling",
+        "flag_days": 7,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Airside_Severe",
+        "family": "coil_fouling",
+        "flag_days": 11,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Waterside_Minor",
+        "family": "coil_fouling",
+        "flag_days": 5,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Waterside_Moderate",
+        "family": "coil_fouling",
+        "flag_days": 6,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_Fouling_Heating_Waterside_Severe",
+        "family": "coil_fouling",
+        "flag_days": 7,
+        "n_eval": 316,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSA_-2C",
+        "family": "sat_sensor_bias",
+        "flag_days": 7,
+        "n_eval": 316,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSA_-4C",
+        "family": "sat_sensor_bias",
+        "flag_days": 19,
+        "n_eval": 316,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSA_+2C",
+        "family": "sat_sensor_bias",
+        "flag_days": 9,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSA_+4C",
+        "family": "sat_sensor_bias",
+        "flag_days": 35,
+        "n_eval": 318,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSP_-2inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 3,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSP_-4inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 3,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSP_+2inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 9,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_CSP_+4inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 10,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSA_-2C",
+        "family": "sat_sensor_bias",
+        "flag_days": 6,
+        "n_eval": 315,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSA_-4C",
+        "family": "sat_sensor_bias",
+        "flag_days": 18,
+        "n_eval": 315,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSA_+2C",
+        "family": "sat_sensor_bias",
+        "flag_days": 6,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSA_+4C",
+        "family": "sat_sensor_bias",
+        "flag_days": 14,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSP_-2inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 8,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSP_-4inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 13,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": false,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSP_+2inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 6,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_SensorBias_HSP_+4inwg",
+        "family": "static_sensor_bias",
+        "flag_days": 7,
+        "n_eval": 317,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_0",
+        "family": "valve_stuck",
+        "flag_days": 159,
+        "n_eval": 331,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_20",
+        "family": "valve_stuck",
+        "flag_days": 152,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_50",
+        "family": "valve_stuck",
+        "flag_days": 13,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_80",
+        "family": "valve_stuck",
+        "flag_days": 7,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Cooling_100",
+        "family": "valve_stuck",
+        "flag_days": 9,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_0",
+        "family": "valve_stuck",
+        "flag_days": 70,
+        "n_eval": 341,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_20",
+        "family": "valve_stuck",
+        "flag_days": 70,
+        "n_eval": 365,
+        "significant": true,
+        "deployed_detected": true,
+        "deployed_frequency_sig": true
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_50",
+        "family": "valve_stuck",
+        "flag_days": 19,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_80",
+        "family": "valve_stuck",
+        "flag_days": 20,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      },
+      {
+        "file": "DualDuct_VLVStuck_Heating_100",
+        "family": "valve_stuck",
+        "flag_days": 23,
+        "n_eval": 365,
+        "significant": false,
+        "deployed_detected": true,
+        "deployed_frequency_sig": false
+      }
+    ]
+  },
+  "predictions": {
+    "P1_budget_both_splits": true,
+    "P2_fouling_newly_both_splits": false,
+    "P3_no_static_bias_new": true,
+    "newly_significant_both_splits": [],
+    "P4_enriched_ge_deployed_on_detected": true,
+    "enriched_sig_on_detected": 22,
+    "deployed_frequency_sig_on_detected": 8
+  },
+  "falsifiers_fired": [
+    "F-X18.b: no missed fouling scenario significant under both splits \u2014 the X15 gain does not replicate"
+  ]
+}

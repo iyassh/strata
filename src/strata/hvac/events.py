@@ -33,7 +33,7 @@ _SENSOR_KEYS = {
     # These catch faults that produce NO sequence anomaly (e.g. sensor bias:
     # the controller trusts the biased reading, so every recorded value tracks
     # its setpoint and all behavioural rules stay silent).
-    "paired_residual": ["a", "b", "c", "pos"],   # c/pos only for op: oa_fraction (X24)
+    "paired_residual": ["a", "b", "c", "pos", "ewt", "lwt", "flow", "ta_in", "ta_out"],   # c/pos: op oa_fraction (X24); ewt..ta_out: op ua (X28)
     "envelope_residual": ["signal", "low_ref", "high_ref"],
 }
 
@@ -160,6 +160,25 @@ def oa_fraction_residual(w: pd.DataFrame, r: dict) -> pd.Series:
     return ((ra - ma) / span.where(ok)) - w[r["pos"]]
 
 
+def coil_ua(w: pd.DataFrame, r: dict) -> pd.Series:
+    """X28: coil heat-transfer estimate UA = Q / LMTD per sample. Q = flow * |EWT - LWT|
+    (gpm*F; the 500 factor is irrelevant to a learned band). Counterflow LMTD from the
+    four terminal temperatures; NaN (abstain) where either end difference <= 0.5 F.
+    Keys: ewt, lwt, flow, ta_in (air entering), ta_out (air leaving), coil: cooling|heating."""
+    ewt, lwt, flow = w[r["ewt"]], w[r["lwt"]], w[r["flow"]]
+    ta_in, ta_out = w[r["ta_in"]], w[r["ta_out"]]
+    q = flow * (ewt - lwt).abs()
+    if r.get("coil", "cooling") == "cooling":
+        d1, d2 = (ta_in - lwt).abs(), (ta_out - ewt).abs()
+    else:
+        d1, d2 = (ewt - ta_out).abs(), (lwt - ta_in).abs()
+    ok = (d1 > 0.5) & (d2 > 0.5)
+    ratio = d1 / d2
+    lmtd = np.where(np.isclose(d1, d2), d1, (d1 - d2) / np.log(ratio.where(ratio > 0)))
+    lmtd = pd.Series(lmtd, index=w.index).where(ok)
+    return q / lmtd.where(lmtd > 0)
+
+
 def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
     if kind == "mismatch":
         return (w[r["pos"]] - w[r["cmd"]]).abs() > r["threshold"]
@@ -182,6 +201,8 @@ def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
             resid = w[r["a"]] / (w[r["b"]] ** 2).where(w[r["b"]] > 0)
         elif r.get("op") == "oa_fraction":   # X24: (RA-MA)/(RA-OA) - damper position, |RA-OA| > min_dT
             resid = oa_fraction_residual(w, r)
+        elif r.get("op") == "ua":            # X28: coil UA = Q / LMTD
+            resid = coil_ua(w, r)
         else:
             resid = w[r["a"]] - w[r["b"]]
         cond = (resid < r["low"]) | (resid > r["high"])

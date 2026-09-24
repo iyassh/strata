@@ -32,8 +32,8 @@ def daily_residual_scores(
     r = cfg.rules["events"][rule_name]
     w = df.rename(columns={v: k for k, v in cfg.sensors.items()}).sort_values("Datetime")
     gates = residual_gates(r)
-    needed = [r["a"], r["b"], r["occ_signal"]] + [g["signal"] for g in gates]
-    needed += [r[k] for k in ("c", "pos") if k in r]
+    needed = [r[k] for k in ("a", "b") if k in r] + [r["occ_signal"]] + [g["signal"] for g in gates]
+    needed += [r[k] for k in ("c", "pos", "ewt", "lwt", "flow", "ta_in", "ta_out") if k in r]
     if any(c not in w.columns for c in needed):
         return pd.DataFrame(columns=["case_id", "score", "window_min"])
 
@@ -57,6 +57,9 @@ def daily_residual_scores(
     elif r.get("op") == "oa_fraction":
         from strata.hvac.events import oa_fraction_residual   # X24
         resid = oa_fraction_residual(w, r).where(gated)
+    elif r.get("op") == "ua":
+        from strata.hvac.events import coil_ua   # X28
+        resid = coil_ua(w, r).where(gated)
     else:
         resid = (w[r["a"]] - w[r["b"]]).where(gated)
 

@@ -1,0 +1,111 @@
+{
+  "prereg": "docs/plans/2026-09-24-x26-real-data-budget-prereg.md",
+  "run1_circuit1_only": {
+    "holdout_days": 49,
+    "deployed_fp": 3,
+    "naive_fp": 4,
+    "per_channel_fp": {
+      "rules": 0,
+      "resid": 1,
+      "model": 0,
+      "device": 0,
+      "absence": 0,
+      "freq": 2,
+      "rate": 1,
+      "osc": 1
+    },
+    "exposure": {
+      "occupied_holdout_days": 49,
+      "residual_evaluable_holdout_days": 49,
+      "rate_windowed_holdout_days": 41
+    },
+    "residual_band": [
+      -0.2486555000000017,
+      3.007659999999998
+    ],
+    "model_threshold": 0.5869090909090908,
+    "model_fp_provenance": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+    "case_undercharge": {
+      "days": 30,
+      "evaluable": 29,
+      "rules_days": 0,
+      "residual_days": 1,
+      "model_days": 1,
+      "frequency_days": 0,
+      "oscillation_days": 0,
+      "meaningful_channels": null
+    },
+    "site1_other_unit_excluded": {
+      "Site1_Staging_Fault": {
+        "days": 62,
+        "model_days": 56,
+        "residual_days": 1
+      },
+      "Site1_Unfaulted": {
+        "days": 52,
+        "model_days": 41,
+        "residual_days": 19
+      }
+    }
+  },
+  "run2_amendment1_both_circuits": {
+    "holdout_days": 49,
+    "deployed_fp": 3,
+    "naive_fp": 4,
+    "per_channel_fp": {
+      "rules": 0,
+      "resid": 1,
+      "model": 0,
+      "device": 0,
+      "absence": 0,
+      "freq": 2,
+      "rate": 1,
+      "osc": 1
+    },
+    "exposure": {
+      "occupied_holdout_days": 49,
+      "residual_evaluable_holdout_days": 49,
+      "rate_windowed_holdout_days": 41
+    },
+    "residual_band": [
+      -0.2486555000000017,
+      3.007659999999998
+    ],
+    "model_threshold": 0.5869090909090908,
+    "model_fp_provenance": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+    "case_undercharge": {
+      "days": 30,
+      "evaluable": 29,
+      "rules_days": 0,
+      "residual_days": 1,
+      "model_days": 1,
+      "frequency_days": 0,
+      "oscillation_days": 0,
+      "meaningful_channels": null
+    },
+    "site1_other_unit_excluded": {
+      "Site1_Staging_Fault": {
+        "days": 62,
+        "model_days": 56,
+        "residual_days": 61
+      },
+      "Site1_Unfaulted": {
+        "days": 52,
+        "model_days": 41,
+        "residual_days": 35
+      }
+    }
+  },
+  "predictions": {
+    "P1_healthy_silence_iterations": 2,
+    "P1_le_3": true,
+    "P2_budget_le_10pct": true,
+    "P2_deployed_fp_pct": 6.1,
+    "P3_some_residual_abstains_ge_20pct": false,
+    "P4_case_ge_50pct_days_flagged_run1": false,
+    "A1_P1_budget_holds_with_circuit2": true,
+    "A1_P2_case_ge_50pct_days_flagged_run2": false
+  },
+  "falsifiers_fired": [],
+  "claim": "A measured false-alarm budget on one real building; the undercharge scenario is a case report, not a detection rate (n = 1 fault of one kind on one unit)."
+}

@@ -1,4 +1,4 @@
-# Phase 11 Results — After the review round: the conformance positive control (X22) and the outdoor-air-fraction residual (X24)
+# Phase 11 Results — After the review round: the conformance positive control (X22), the outdoor-air-fraction residual (X24), the statistical repair (X25) and the first real building (X26)
 
 *2026-09-24. Both pre-registered (`docs/plans/2026-09-24-x22-conformance-positive-control-prereg.md` 2780137, `docs/plans/2026-09-24-x24-oa-fraction-prereg.md` 04c37ef) after the review round (`docs/plans/2026-09-24-review-verdict-and-improvement-plan.md`) and before any injected log or new residual was scored. Artefacts: `outputs/x22_positive_control.json`, `outputs/x24_oa_fraction.json`, regenerated `benchmark_v6_{fcu,sdahu,ddahu}.json` and `union_fpr_{fcu,sdahu,ddahu}.json`; guards `tests/test_x22_positive_control.py`, `tests/test_x24_oa_fraction.py`.*
 
@@ -89,3 +89,62 @@ the five waterside-fouling files.
 | X22 | P1 ✗ (only FCU) | P2 ✗ | P3 ✗ | P5 ✓ | falsifiers: none |
 |---|---|---|---|---|---|
 | X24 | P1 ✓ byte-identical | P2 ✓ silent | P3 ✓ leak 20 % | P4 ✓ 4/1/3 of 96 | P5 ✓ no loss; falsifiers: none |
+
+
+## X26 — the false-alarm budget on a real building
+
+*Pre-registered (`docs/plans/2026-09-24-x26-real-data-budget-prereg.md`,
+66de30d) after profiling the fault-free stream only; config committed
+(52b9e94) before scoring; Amendment 1 (993cdbf) after run 1 and before the
+rerun. Artefacts: `configs/lbnl_rtu_field/`, `scripts/07_convert_rtu_field.py`,
+`outputs/week0_audit_rtu_field.json`, `benchmark_v6_rtu_field.json`,
+`union_fpr_rtu_field.json` (+ `*_run1.json`), `x26_real_data_budget.json`;
+guard `tests/test_x26_real_data_budget.py`.*
+
+**The data.** LBNL's field rooftop unit, Site 2: a 10-ton RTU on a
+distribution centre in Connecticut, 25 measured points (air temperatures
+and humidities, fan and compressor power, airflow, refrigerant pressures
+and line temperatures on two circuits), one-minute, °C and bar; 182
+fault-free days across two summers and one 29-day fault case (40 %
+undercharge on circuit B). No schedule, damper, valve or command point
+exists. This is the only measured fault-free stream in the project, and
+this test asks one thing of it: does the deployed detector's false-alarm
+budget survive real data?
+
+**Onboarding.** Config only, plus one documented derived column
+(`FAN_ON` = supply-fan power > 100 W, mapped to the occupancy signal
+because the unit has no schedule). Two logged healthy-silence iterations:
+the field mixed-air probe reads below both outdoor and return air on 9 %
+of fan-on minutes (up to 2.4 °C sustained for an hour; tolerance 1.1 →
+2.5 °C), and the evaporator keeps cooling the air after the compressor
+stops (supply − mixed down to −6.9 °C; rule band −3..3 → −8..4.5). Gates:
+no duplicates, monotonic, no rotation; calendar identity is inapplicable
+(the files cover different periods); no Brick file exists for the field
+subset.
+
+**The budget (P2): 3 of 49 holdout days, 6.1 %.** Rules 0, residual 1,
+model 0 (threshold out-of-sample under X25), absence 0, frequency 2,
+oscillation 1; rate 1 (advisory); naive union 4. Every residual channel
+was evaluable on every holdout day, so P3 (some abstention) failed as a
+prediction. The budget holds on the first real building, at a rate
+between the simulated systems' 1.0 and 5.2 %.
+
+**The case (P4, then A1-P2): not seen.** Run 1's config watched circuit
+1's refrigerant sensors; the documented fault is on circuit B. Amendment 1
+added the circuit-2 residuals. With both circuits the undercharge file
+still flags 1 residual day and 1 model day of 30, and the reason is in the
+recorded points: during compressor operation, circuit-2 suction pressure
+(6.51 vs 6.57 bar), suction-line temperature (26.5 vs 26.5 °C) and
+condenser-outlet temperature (28.2 vs 27.1 °C) sit within a few per cent
+of the healthy June. Whatever a 40 % undercharge did to this unit, it did
+not reach these sensors at a size a healthy-calibrated band can see — or
+the point labelled circuit 2 is not the circuit labelled B. One fault of
+one kind on one unit is a case, and it is reported as one; nothing about
+detection is claimed from it.
+
+**What X26 changes.** The papers' "everything is simulation" limitation
+becomes a number: on one real building the deployed budget is 6.1 %.
+
+| P1 | P2 | P3 | P4 / A1-P2 | falsifiers |
+|---|---|---|---|---|
+| ✓ 2 iterations | ✓ 3/49 (6.1 %) | ✗ no abstention | ✗ case not seen (both circuits) | none |

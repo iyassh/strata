@@ -1,12 +1,12 @@
 {
   "source": "benchmark_v6_*.json (committed scorecards; no re-run)",
-  "n_detected": 61,
+  "n_detected": 57,
   "counts": {
     "correct": 36,
-    "none": 10,
+    "none": 7,
     "wrong": 0,
     "no_device_stratum": 14,
-    "indeterminate_gt": 1
+    "indeterminate_gt": 0
   },
   "note": "Zone ground truth has no variance on the FPU sets (all zone S), so 'correct' is specificity; 'wrong' and 'none' are the informative counts. SDAHU has no device stratum and names no device by construction.",
   "rows": [
@@ -178,7 +178,7 @@
       "family": "reheat_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+resid",
+      "channels": "rules",
       "attribution": "correct"
     },
     {
@@ -216,15 +216,6 @@
       "alarm_device": "TU_S",
       "channels": "rules+resid+osc",
       "attribution": "correct"
-    },
-    {
-      "system": "pfpu",
-      "scenario": "PFPU_SensorBias_RMTEMP_+4C",
-      "family": "rmtemp_bias",
-      "seeded_zone": "S",
-      "alarm_device": null,
-      "channels": "resid",
-      "attribution": "none"
     },
     {
       "system": "pfpu",
@@ -354,24 +345,6 @@
     },
     {
       "system": "sfpu",
-      "scenario": "SFPU_ReheatCoilFouling_Airside_Severe",
-      "family": "coil_fouling",
-      "seeded_zone": "S",
-      "alarm_device": null,
-      "channels": "resid",
-      "attribution": "none"
-    },
-    {
-      "system": "sfpu",
-      "scenario": "SFPU_ReheatCoilFouling_Waterside_Severe",
-      "family": "coil_fouling",
-      "seeded_zone": "INDETERMINATE",
-      "alarm_device": null,
-      "channels": "resid",
-      "attribution": "indeterminate_gt"
-    },
-    {
-      "system": "sfpu",
       "scenario": "SFPU_ReheatVLVLeak_20%MaxFlow",
       "family": "reheat_leak",
       "seeded_zone": "S",
@@ -484,7 +457,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+resid+model+rate",
+      "channels": "rules+model+rate",
       "attribution": "correct"
     },
     {
@@ -493,7 +466,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+resid+model+device+rate+osc",
+      "channels": "rules+model+device+rate+osc",
       "attribution": "correct"
     },
     {
@@ -511,7 +484,7 @@
       "family": "damper_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+resid+model+rate+osc",
+      "channels": "rules+model+rate+osc",
       "attribution": "correct"
     },
     {
@@ -529,7 +502,7 @@
       "family": "damper_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+resid+model+rate",
+      "channels": "rules+model+rate",
       "attribution": "correct"
     },
     {
@@ -548,15 +521,6 @@
       "seeded_zone": "S",
       "alarm_device": null,
       "channels": "osc",
-      "attribution": "none"
-    },
-    {
-      "system": "sfpu",
-      "scenario": "SFPU_VAVFanRestrictFlow",
-      "family": "fan_restrict",
-      "seeded_zone": "S",
-      "alarm_device": null,
-      "channels": "resid",
       "attribution": "none"
     }
   ]

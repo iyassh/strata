@@ -16,8 +16,10 @@ def _a():
 
 def test_counts_sum_to_detected_and_are_pinned():
     a = _a(); c = a["counts"]
-    assert sum(c.values()) == a["n_detected"] == 61
-    assert c == {"correct": 36, "none": 10, "wrong": 0, "no_device_stratum": 14, "indeterminate_gt": 1}
+    # X25 step 4 (2026-09-24): the per-day residual null removed four fan-powered detections
+    # (three of them attributed 'none', one with indeterminate ground truth); was 61 / 36-10-0-14-1
+    assert sum(c.values()) == a["n_detected"] == 57
+    assert c == {"correct": 36, "none": 7, "wrong": 0, "no_device_stratum": 14, "indeterminate_gt": 0}
 
 
 def test_no_wrong_attribution_and_sdahu_names_no_device():

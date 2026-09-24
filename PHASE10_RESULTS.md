@@ -219,8 +219,9 @@ inside the fault cluster on every axis. G6 also showed four fault files
 with fewer occupied days than the healthy 261 (215–250): a damper stuck
 open in winter drives mixed air below the 35 °F low-temperature limit and
 the documented protection shuts the unit down, 94 days in the stuck-80 %
-file. A physical consequence of the fault, not a defect — and the absence
-channel sees it. P2 as pre-registered ("gates clean") is therefore
+file. A physical consequence of the fault, not a defect; it changes those
+files' occupied-day universe, and no channel is credited for it (the absence
+channel flags no day on any FCU scenario). P2 as pre-registered ("gates clean") is therefore
 **false**, and it is false because the battery worked.
 
 ### Run 1: every scenario "detected", and a fired falsifier
@@ -237,10 +238,10 @@ trace. Both scoring scripts define a scheduled day as `OCCUPIED > 0` and
 flag an event-less scheduled day as a model violation — "silent while
 scheduled", written for the fan-powered units whose mode 2 is a night
 cycle that *does* generate events. On the fan coil unit mode 2 is idle
-setback, and the rule fired on 97 of 104 weekends. The six model-only
+setback, and the rule fired on 97 of 104 weekend days. The six model-only
 "detections" (OA damper leaking 20 %, five waterside-fouling files) each
 carried exactly 100 model days — the healthy year's own 100
-weekend-silence days. They were called significant because the scorecard's
+weekend model days (97 silent, three two-event traces). They were called significant because the scorecard's
 model gate compared them against a conformance-only baseline (1 of 72
 event days) while the deployed count included the silence rule (25 of
 96): two artefacts, one channel, two numbers. On the four earlier systems

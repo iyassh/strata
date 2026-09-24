@@ -262,4 +262,4 @@ file, mixed-air temperature down to 2 °F — which is the documented
 low-temperature protection (mixed air below 35 °F) responding to a damper
 held open in winter. The fault-free file has no shutdown minute. These are
 physical consequences of the seeded faults and the G6 healthy-inside-cluster
-check passes; they are noted because the absence channel sees them.
+check passes; they are noted because they change the occupied-day universe those files are scored on (no channel is credited for them: `absence_days` is 0 on every scenario).

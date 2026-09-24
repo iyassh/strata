@@ -104,3 +104,11 @@ that quotes those numbers. A1-F.b: run-2 false alarms > 10 of 96 → the
 budget does not transfer to this class; report. A1-F.c: a scenario other
 than the six changes status → the silence rule was contributing real
 detections; report which.
+
+### Correction to Amendment 1 (2026-09-24, on hostile review; the amendment's text stands as written)
+
+"97 of 104 weekends" should read 97 of 104 weekend *days*. "The healthy
+year's own 100 weekend-silence days" should read the healthy year's own
+100 weekend model days: 97 event-less weekend days flagged by the silence
+rule and three two-event weekend traces (2018-01-28, 02-04, 12-16) flagged
+by conformance, which are the three model days that survive into run 2.

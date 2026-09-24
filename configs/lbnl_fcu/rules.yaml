@@ -22,7 +22,8 @@ detection:
   residual_min_band_width: 0.5
   residual_min_exceedance: 0.5
   residual_channels: [supply_air_residual, cooling_only_residual, heating_only_residual,
-                      chwc_waterside_dT, hwc_waterside_dT, flow_per_speed]
+                      chwc_waterside_dT, hwc_waterside_dT, flow_per_speed,
+                      oa_fraction_residual]   # X24
   holdout_days_per_month: 8
 
 events:
@@ -298,3 +299,28 @@ events:
     occ_signal: OCCUPIED
     occ_above: 0.5
     sustained_min: 60
+
+  # X24 (2026-09-24, pre-registered): outdoor-air fraction implied by the mixed-air
+  # temperature, (RA-MA)/(RA-OA), minus the damper position; abstains where
+  # |RA-OA| <= 10 F (ill-conditioned). Fan on; any scheduled minute (setback
+  # nights are where a leaking damper shows). Rule band +-0.25 fraction; the
+  # residual channel learns its band on healthy with fraction-unit floors.
+  oa_fraction_residual:
+    kind: paired_residual
+    alphabet: signature
+    op: oa_fraction
+    a: RA_TEMP
+    b: MA_TEMP
+    c: OA_TEMP
+    pos: OA_DMPR_POS
+    min_dT: 10.0
+    low: -0.25
+    high: 0.25
+    gates:
+      - signal: FAN_SPEED
+        above: 1.0
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05

@@ -33,6 +33,7 @@ def daily_residual_scores(
     w = df.rename(columns={v: k for k, v in cfg.sensors.items()}).sort_values("Datetime")
     gates = residual_gates(r)
     needed = [r["a"], r["b"], r["occ_signal"]] + [g["signal"] for g in gates]
+    needed += [r[k] for k in ("c", "pos") if k in r]
     if any(c not in w.columns for c in needed):
         return pd.DataFrame(columns=["case_id", "score", "window_min"])
 
@@ -50,6 +51,9 @@ def daily_residual_scores(
     if r.get("op") == "ratio":
         # X13: a/b (e.g. coil water-side dT per gallon); b <= 0 is undefined
         resid = (w[r["a"]] / w[r["b"]].where(w[r["b"]] > 0)).where(gated)
+    elif r.get("op") == "oa_fraction":
+        from strata.hvac.events import oa_fraction_residual   # X24
+        resid = oa_fraction_residual(w, r).where(gated)
     else:
         resid = (w[r["a"]] - w[r["b"]]).where(gated)
 
@@ -94,3 +98,13 @@ def flag_days(scores: pd.DataFrame, band: tuple[float, float],
     out.loc[out["score"].isna(), "flagged"] = False
     out["evaluable"] = out["score"].notna()
     return out
+
+
+def residual_floor(cfg: Config, rule_name: str, key: str) -> float:
+    """Per-rule override of a detection-level residual floor (X24: a fraction-valued
+    residual cannot share the temperature channels' 0.5 F floors). Falls back to
+    cfg.rules["detection"][key], then 0.0."""
+    r = cfg.rules["events"].get(rule_name, {})
+    if key in r:
+        return float(r[key])
+    return float(cfg.rules["detection"].get(key, 0.0))

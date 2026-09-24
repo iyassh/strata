@@ -33,7 +33,7 @@ _SENSOR_KEYS = {
     # These catch faults that produce NO sequence anomaly (e.g. sensor bias:
     # the controller trusts the biased reading, so every recorded value tracks
     # its setpoint and all behavioural rules stay silent).
-    "paired_residual": ["a", "b"],
+    "paired_residual": ["a", "b", "c", "pos"],   # c/pos only for op: oa_fraction (X24)
     "envelope_residual": ["signal", "low_ref", "high_ref"],
 }
 
@@ -149,6 +149,17 @@ def residual_gates(r: dict) -> list[dict]:
 _residual_gates = residual_gates  # internal alias
 
 
+def oa_fraction_residual(w: pd.DataFrame, r: dict) -> pd.Series:
+    """X24 (Guideline 36 FC6 / APAR lineage): the outdoor-air fraction the mixed-air
+    temperature implies, (RA - MA) / (RA - OA), minus the damper position; NaN
+    (abstain) wherever |RA - OA| <= min_dT (default 10 F), where the fraction is
+    ill-conditioned. Keys: a = RA_TEMP, b = MA_TEMP, c = OA_TEMP, pos = OA_DMPR_POS."""
+    ra, ma, oa = w[r["a"]], w[r["b"]], w[r["c"]]
+    span = ra - oa
+    ok = span.abs() > float(r.get("min_dT", 10.0))
+    return ((ra - ma) / span.where(ok)) - w[r["pos"]]
+
+
 def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
     if kind == "mismatch":
         return (w[r["pos"]] - w[r["cmd"]]).abs() > r["threshold"]
@@ -167,6 +178,8 @@ def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
         # required to be mapped — fail closed is enforced upstream.
         if r.get("op") == "ratio":       # X13: a/b, undefined where b <= 0
             resid = w[r["a"]] / w[r["b"]].where(w[r["b"]] > 0)
+        elif r.get("op") == "oa_fraction":   # X24: (RA-MA)/(RA-OA) - damper position, |RA-OA| > min_dT
+            resid = oa_fraction_residual(w, r)
         else:
             resid = w[r["a"]] - w[r["b"]]
         cond = (resid < r["low"]) | (resid > r["high"])

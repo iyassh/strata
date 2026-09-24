@@ -43,7 +43,7 @@ from strata.core.frequency import (
     unit_day_counts,
 )
 from strata.core.oscillation import build_oscillation_detector, daily_direction_changes
-from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days
+from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days, residual_floor
 from strata.hvac.events import abstract_events, event_alphabet_map, event_device_map
 from strata.io.config import Config
 
@@ -110,12 +110,11 @@ class StrataDetector:
 
         res_flag = pd.Series(False, index=days)
         res_eval = pd.Series(False, index=days)
-        margin = cfg.rules["detection"].get("residual_min_exceedance", 0.0)
         for rname, band in self.residual_bands.items():
             rs = daily_residual_scores(df, cfg, rule_name=rname)
             if rs.empty:
                 continue
-            rf = flag_days(rs, band, min_margin=margin).set_index("case_id")
+            rf = flag_days(rs, band, min_margin=residual_floor(cfg, rname, "residual_min_exceedance")).set_index("case_id")
             res_flag = res_flag | rf["flagged"].reindex(days).fillna(False)
             res_eval = res_eval | rf["evaluable"].reindex(days).fillna(False)
 
@@ -284,16 +283,14 @@ def fit(cfg: Config, healthy_df: pd.DataFrame,
     # residual channels: train-only bands + holdout noise floor
     res_channels = cfg.rules["detection"].get("residual_channels", [residual_rule])
     bands: dict[str, tuple[float, float]] = {}
-    min_w = cfg.rules["detection"].get("residual_min_band_width", 0.0)
-    margin = cfg.rules["detection"].get("residual_min_exceedance", 0.0)
     res_fp = res_hold = 0
     for rname in res_channels:
         rh = daily_residual_scores(healthy_df, cfg, rule_name=rname)
         if rh.empty:
             continue
         hmask = holdout_mask(rh["case_id"], hold_n)
-        bands[rname] = calibrate_band(rh, ~hmask, min_width=min_w)
-        hf = flag_days(rh[hmask.values], bands[rname], min_margin=margin)
+        bands[rname] = calibrate_band(rh, ~hmask, min_width=residual_floor(cfg, rname, "residual_min_band_width"))
+        hf = flag_days(rh[hmask.values], bands[rname], min_margin=residual_floor(cfg, rname, "residual_min_exceedance"))
         res_fp += int(hf["flagged"].sum())
         res_hold += int(hf["evaluable"].sum())
 

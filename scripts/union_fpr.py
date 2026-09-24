@@ -58,7 +58,7 @@ from strata.core.frequency import (
     unit_day_counts,
 )
 from strata.core.oscillation import build_oscillation_detector, daily_direction_changes
-from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days
+from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days, residual_floor
 from strata.hvac.events import abstract_events, event_alphabet_map
 from strata.io.config import load_config
 
@@ -108,7 +108,7 @@ for rname in RES_CHANNELS:
         continue
     hmask = holdout_mask(rh["case_id"], HOLD_N)
     RES[rname] = calibrate_band(
-        rh, ~hmask, min_width=cfg.rules["detection"].get("residual_min_band_width", 0.0)
+        rh, ~hmask, min_width=residual_floor(cfg, rname, "residual_min_band_width")
     )
 osc_det = build_oscillation_detector(df, cfg)
 
@@ -129,7 +129,7 @@ for rname, band_r in RES.items():
     if rs.empty:
         continue
     rf = flag_days(
-        rs, band_r, min_margin=cfg.rules["detection"].get("residual_min_exceedance", 0.0)
+        rs, band_r, min_margin=residual_floor(cfg, rname, "residual_min_exceedance")
     ).set_index("case_id")
     res_flag = res_flag | rf["flagged"].reindex(days).fillna(False)
     res_eval = res_eval | rf["evaluable"].reindex(days).fillna(False)

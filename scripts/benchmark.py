@@ -44,7 +44,7 @@ from strata.core.frequency import _flag_matrix
 from strata.core.frequency import (build_frequency_detector, build_rate_detector_monthly,
                                         classify_frequency_days, classify_rate_days_monthly,
                                         device_day_counts, unit_day_counts)
-from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days
+from strata.core.residuals import calibrate_band, daily_residual_scores, flag_days, residual_floor
 from strata.hvac.events import abstract_events, event_alphabet_map, event_device_map
 from strata.io.config import load_config
 
@@ -116,7 +116,7 @@ def evaluate(fname: str):
         if rs.empty:
             continue
         rf = flag_days(rs, band_r,
-                       min_margin=cfg.rules["detection"].get("residual_min_exceedance", 0.0)
+                       min_margin=residual_floor(cfg, rname, "residual_min_exceedance")
                        ).set_index("case_id")
         res_flag = res_flag | rf["flagged"].reindex(days).fillna(False)
         res_eval = res_eval | rf["evaluable"].reindex(days).fillna(False)
@@ -244,9 +244,9 @@ for rname in RES_CHANNELS:
         continue
     hmask = holdout_mask(rh["case_id"], cfg.rules["detection"]["holdout_days_per_month"])
     band_r = calibrate_band(rh, ~hmask,
-                            min_width=cfg.rules["detection"].get("residual_min_band_width", 0.0))
+                            min_width=residual_floor(cfg, rname, "residual_min_band_width"))
     rhold = flag_days(rh[hmask], band_r,
-                      min_margin=cfg.rules["detection"].get("residual_min_exceedance", 0.0))
+                      min_margin=residual_floor(cfg, rname, "residual_min_exceedance"))
     RES[rname] = band_r
     hold_fp += int(rhold["flagged"].sum())
     hold_n += int(rhold["evaluable"].sum())

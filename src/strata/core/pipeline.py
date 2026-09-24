@@ -61,8 +61,13 @@ def day_universe(df: pd.DataFrame, cfg: Config) -> pd.DataFrame:
     diffs = w["Datetime"].diff().dropna().dt.total_seconds() / 60.0
     interval = float(diffs.median()) if len(diffs) else 1.0
     uni = (pd.DataFrame({"case_id": day, "occ": occ})
-           .groupby("case_id")["occ"].sum() * interval)
-    return uni.rename("occupied_min").to_frame()
+           .groupby("case_id")["occ"].sum() * interval).rename("occupied_min").to_frame()
+    # X19 Amendment 1 (2026-09-24): the silence rule needs OPERATE minutes
+    # (== 1), the occupancy event kind's own definition; setback (2) on a fan
+    # coil unit is idle by design. Mirrors scripts/benchmark.py.
+    uni["operate_min"] = (pd.DataFrame({"case_id": day, "op": w["OCCUPIED"] == 1})
+                          .groupby("case_id")["op"].sum() * interval)
+    return uni
 
 
 @dataclass
@@ -133,7 +138,7 @@ class StrataDetector:
 
             per_day = classify_days(self.unit_model, log)
             model = per_day.set_index("case_id")["flagged"].reindex(days).fillna(False)
-        model = model | (~has_events & (uni["occupied_min"] > 0))
+        model = model | (~has_events & (uni["operate_min"] > 0))
         if self.device_model is not None:
             from strata.core.devices import absence_days, classify_device_days
 

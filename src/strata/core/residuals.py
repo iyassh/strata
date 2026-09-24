@@ -51,6 +51,9 @@ def daily_residual_scores(
     if r.get("op") == "ratio":
         # X13: a/b (e.g. coil water-side dT per gallon); b <= 0 is undefined
         resid = (w[r["a"]] / w[r["b"]].where(w[r["b"]] > 0)).where(gated)
+    elif r.get("op") == "ratio_sq":
+        # X27: a/b^2 (fan law); b <= 0 is undefined
+        resid = (w[r["a"]] / (w[r["b"]] ** 2).where(w[r["b"]] > 0)).where(gated)
     elif r.get("op") == "oa_fraction":
         from strata.hvac.events import oa_fraction_residual   # X24
         resid = oa_fraction_residual(w, r).where(gated)

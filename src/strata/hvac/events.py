@@ -178,6 +178,8 @@ def _rule_condition(kind: str, r: dict, w: pd.DataFrame) -> pd.Series:
         # required to be mapped — fail closed is enforced upstream.
         if r.get("op") == "ratio":       # X13: a/b, undefined where b <= 0
             resid = w[r["a"]] / w[r["b"]].where(w[r["b"]] > 0)
+        elif r.get("op") == "ratio_sq":  # X27: a/b^2 (fan law: static ~ speed^2), undefined where b <= 0
+            resid = w[r["a"]] / (w[r["b"]] ** 2).where(w[r["b"]] > 0)
         elif r.get("op") == "oa_fraction":   # X24: (RA-MA)/(RA-OA) - damper position, |RA-OA| > min_dT
             resid = oa_fraction_residual(w, r)
         else:

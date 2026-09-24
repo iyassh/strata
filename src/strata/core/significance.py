@@ -10,9 +10,12 @@ Conventions (all from the phase audits):
 - rules: 0 observed FP on a healthy year still only bounds the rate at
   ~3/365 (rule of three) — 1-3 fire-days are NOT detection.
 - residual/model: exact binomial vs the channel's holdout rate, p < 1e-3,
-  floored at three holdout false alarms, max(fp, 3)/n (X25 step 3,
-  2026-09-24; before that max(fp, 1)/n — L36 — and, for a few hours,
-  3/365, which was looser at n = 96).
+  floored at three holdout false alarms, max(fp, 3)/n. Since X25 step 4
+  (2026-09-24) the residual channel's fp and n are PER DAY: holdout days
+  flagged by any residual channel over holdout days any channel could
+  evaluate (benchmark.py passes those; the parameter names n_windows /
+  holdout_n predate it). Before: max(fp, 1)/n on pooled channel-days (L36),
+  then briefly 3/365, then max(fp, 3) on the pooled days (steps 2-3).
 - freq/osc: exact binomial vs the holdout rate, rule-of-three floored
   where the observed floor is zero.
 - device: PER DEVICE (audit A4), Bonferroni across devices, and required

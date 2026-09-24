@@ -1,4 +1,6 @@
 """Guard: X27 — fan-law virtual static (static / speed^2) on the dual-duct unit.
+Scored under X25 step 2's floor; superseded by step 4 (DDAHU 45/55, the fouling
+gain lost, the cold +0.2 in.wg gain kept) — the ledger below is the X27 record.
 Static-bias detections 5 -> 6 of 8 (cold +0.2 in.wg gained; hot -0.2/-0.4 still
 missed) so F-X27.b fired (bar was 7); unpredicted gain: cooling-coil airside
 moderate fouling (airflow resistance shows in static per speed^2). DDAHU

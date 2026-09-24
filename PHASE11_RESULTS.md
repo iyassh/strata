@@ -181,7 +181,7 @@ detections.
 | SDAHU | 14 / 14 | 14 / 14 | — | — | 1 → 1 |
 | PFPU | 23 / 30 | **22 / 30** | room-temperature bias +4 °C | — | 5 → 7 |
 | SFPU | 24 / 29 | **21 / 29** | reheat fouling airside severe, waterside severe; fan restrict-flow | — | 4 → 6 |
-| DDAHU | 45 / 55 | 45 / 55 | hot-deck SAT bias +2 °C | cold static +0.2 in.wg (X27) | 3 → 3 |
+| DDAHU | 45 / 55 | 45 / 55 | hot-deck SAT bias +2 °C (residual-only) | cold static +0.2 in.wg (X27) | 3 → 3 |
 | FCU | 42 / 47 | **40 / 47** | OA damper leaking 20 % (the X24 gain), 50 % | — | 4 → 4 |
 
 **F-X25.c fired** on the series unit (three detections lost, more than the
@@ -191,7 +191,10 @@ alone with a flagged-day count that the pooled null had certified and the
 per-day null does not (fan-powered residual channels evaluate 41 holdout
 days, so three false alarms is 7 %; a scenario needs roughly one flagged
 day in six to clear it). No detection is conformance-only (P3 half holds);
-eight scenario statuses changed in all (P4 failed as written). The
+eight detections changed verdict and nineteen scenarios changed channel
+attribution in all (P4 failed as written). Seven residual-only detections
+were lost across the five systems, one of them offset on the dual-duct
+unit by X27's new channel. The
 budgets are unchanged by steps 3–4. The step-3 → step-4 diff is
 `outputs/x25_step4_perday.json`; the overall diff is regenerated in
 `outputs/x25_statistical_repair.json`.
@@ -205,7 +208,7 @@ calibrated on a separate slice. The papers' counts are now 13/14, 22/30,
 |---|---|---|---|---|---|---|
 | 2 (split + 3/365) | ✓ | ✓ | ✓ | ✓ | ✓ 0 flips | none |
 | 3 (max(fp,3)/pooled n) | — | ✓ | ✓ | ✓ (±1) | ✗ 2 flips | none |
-| 4 (per-day null) | — | ✓ | ✓ | **✗ SFPU −3** | ✗ 8 flips | **F-X25.c** |
+| 4 (per-day null) | — | ✓ | ✓ | **✗ DDAHU −3 vs step 3; SFPU −3 vs pre-X25** | ✗ 8 verdicts | **F-X25.c** |
 
 ## X26 — the false-alarm budget on a real building
 
@@ -285,6 +288,10 @@ before scoring. Artefacts: regenerated `benchmark_v6_ddahu.json`,
 `union_fpr_ddahu.json`; `outputs/x27_fan_law_static.json`; guard
 `tests/test_x27_fan_law_static.py`.*
 
+*Scored under X25 step 2's floor (3/365); superseded by step 4, under which
+DDAHU is 45 of 55, the airside-moderate fouling gain below is lost, and the
+cold +0.2 in.wg bias gain survives — see the X25 addendum.*
+
 A biased static-pressure sensor is unobservable from the static itself; the
 loop hides it in fan speed. The existing per-speed proxy (static ÷ speed)
 caught 5 of 8 biases; the fan law says static ∝ speed² at constant system
@@ -343,7 +350,11 @@ heating coils' are narrow (0.6–1.1, 0.2–0.5).
 
 No fouling scenario gained on either system — **F-X28.b fired** — and on
 the fan coil unit the two channels added two holdout false alarms for no
-detection, so **F-X28.a** removed them from that config (the scorecard was
+detection: the pre-registration's P1 (each channel ≤ 1 holdout false
+alarm) is violated by the only change made, and **F-X28.a** ("P1 fails on
+a system → the channels are removed there") removed them from that config
+(the ledger script had tested only P1's budget clause; it now tests the
+residual-row rise as well) (the scorecard was
 regenerated without them; the run-1 artefacts are kept). On the dual-duct
 unit they stay, inert: no gain, no false alarm. The per-scenario residual
 day counts barely moved (fan coil waterside files: 3 → 5 or 6 of 365).

@@ -37,7 +37,8 @@ pred = {"P0_VERIFIED_BY_HAND": True,   # console: x28_p0_verdict IDENTICAL (bc2d
         "P4_no_loss": all(not v["lost"] for v in S.values())}
 fired = []
 for s, v in S.items():
-    if v["deployed_fp_after"] > 10: fired.append(f"F-X28.a: budget exceeded on {s}")
+    if v["deployed_fp_after"] > 10 or v["residual_fp_after"] - v["residual_fp_before"] > 1:   # P1: budget AND per-channel clause
+        fired.append(f"F-X28.a: P1 fails on {s} (deployed {v['deployed_fp_after']}/96; residual row +{v['residual_fp_after'] - v['residual_fp_before']})")
 if not pred["P2_ddahu_ge_3_fouling_gained"] and not pred["P3_fcu_ge_2_fouling_gained"]:
     fired.append("F-X28.b: UA from these points does not see the simulated fouling on either system")
 for s, v in S.items():

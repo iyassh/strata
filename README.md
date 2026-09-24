@@ -143,7 +143,7 @@ fan coil unit):
 
 DDAHU: 79 sensor mappings, 41 rules, one healthy-silence iteration, no source
 change, gate battery clean (including a configuration-branch comparison); every family caught in full except coil fouling
-(5/12) and static-pressure sensor bias (5/8); nothing detected by the
+(5/12) and static-pressure sensor bias (6/8 after the fan-law channel of X27); nothing detected by the
 process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)).
 
 Simulated RTU (X29): the one dataset that records the refrigerant side. Every

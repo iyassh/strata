@@ -1,9 +1,9 @@
-"""Guard: X25 — statistical repair. Conformance thresholds calibrated on a slice
-before each month's holdout (out-of-sample holdout rows) and a uniform
-rule-of-three floor. Detection counts unchanged on all five systems, no
-scenario changed status, no conformance-only detection; the out-of-sample
-model rows rose on the fan-powered units (1->4, 1->5), taking their deployed
-budgets from 5 and 4 to 7 and 6 of 96. No falsifier fired."""
+"""Guard: X25 — statistical repair, final state (step 4). Conformance thresholds
+calibrated on a slice before each month's holdout (out-of-sample rows: model
+1->4, 1->5 on the fan-powered units; budgets 5->7, 4->6 of 96) and a per-day
+residual null floored at three days, which removed seven residual-only
+detections (14/22/21/45/40); F-X25.c fired on SFPU and the change is reported
+as a detector change. No conformance-only detection."""
 import json
 from pathlib import Path
 

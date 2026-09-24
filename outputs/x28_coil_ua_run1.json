@@ -227,6 +227,7 @@
     "P4_no_loss": true
   },
   "falsifiers_fired": [
+    "F-X28.a: P1 fails on fcu (deployed 6/96; residual row +2)",
     "F-X28.b: UA from these points does not see the simulated fouling on either system"
   ]
 }

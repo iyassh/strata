@@ -95,6 +95,7 @@ def run_system(system: str) -> dict:
     base_fit = base.set_index("case_id")["fitness"]
     healthy_min = float(base_fit.min())
     out = {"threshold": det.threshold, "n_holdout_days": n_days, "holdout_fp_unperturbed": fp0,
+           "unperturbed_mean_fitness": float(base_fit.mean()), "threshold_out_of_sample": bool(getattr(det, "threshold_out_of_sample", False)),
            "net_labels": labels, "start_activity": start_act,
            "mean_trace_len": sum(len(t) for t in traces.values()) / max(n_days, 1), "arms": {}}
     print(f"[{system}] threshold {det.threshold:.4f}, holdout days {n_days}, unperturbed flagged {fp0}, "

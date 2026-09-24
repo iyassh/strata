@@ -12,7 +12,8 @@ scores them with the net, threshold and significance gate deployed at the
 time (pre-X25; re-run under the X25 calibration below), and adds two
 threshold-free measures: the AUC of perturbed against unperturbed per-day
 fitness, and the hit rate a threshold set at the healthy holdout's worst day
-would give (the best any zero-false-alarm threshold can do).
+would give (the best any zero-false-alarm threshold can do; in-sample,
+since that worst day is one of the days perturbed).
 
 | system | net labels | reversal: flagged / sig | AUC | hit rate at zero FP | skips (k=4): flagged / sig | swaps (k=8): AUC |
 |---|---|---|---|---|---|---|
@@ -35,7 +36,7 @@ in swaps reaching significance on three systems. None did.
 **What the instrument is.** Three different things, by system:
 
 1. On the **fan coil unit** the channel sees order: a reversed day drops
-   fitness from 0.85 to 0.25, 55 of 72 days are flagged, and a
+   fitness from about 0.82 (the nearest recorded baseline; the re-run records the unperturbed mean) to 0.25, 55 of 72 days are flagged, and a
    zero-false-alarm threshold would still catch 75 %. On this system the
    null is instrument-validated: the channel can see order, and the
    faults (42 of 47 detected, model channel never alone) do not change it.
@@ -78,7 +79,7 @@ configs; healthy silence unchanged (P2); configs committed before scoring.
 |---|---|---|---|---|---|
 | FCU | 41 → **42** of 47 | 4 → 4 of 96 | `OADMPRLeak_20` (residual) | none | stuck-30 % gains a residual credit; OA blockage and fan-outlet blockage gain a rules credit |
 | SDAHU | 14 → 14 | 1 → 1 | — | none | none |
-| DDAHU | 45 → 45 of 55 | 3 → 3 | — | none | OA damper stuck 80 %/100 % gain residual credit (166–178 days) |
+| DDAHU | 45 → 45 of 55 | 3 → 3 | — | none | OA damper stuck 80 %/100 % gain residual credit (166–178 more days) |
 
 P3 (the 20 % leak), P4 (budget) and P5 (no loss) all held; no falsifier
 fired. On the FCU the healthy residual sits at −0.195 almost every day —
@@ -86,7 +87,7 @@ the damper at its 30 % minimum passes about 10 % outdoor air, so the
 damper–flow relation is far from linear — and the learned band absorbs
 that offset, which is why the rule was scored as a residual channel rather
 than a fixed-band rule. A blocked outdoor-air inlet shows as the mirror
-case (fraction below position, 173 residual days). The FCU's misses are now
+case (fraction below position, 173 more residual days, 226 of 365). The FCU's misses are now
 the five waterside-fouling files.
 
 ## Ledger
@@ -123,11 +124,12 @@ budget survive real data?
 **Onboarding.** Config only, plus one documented derived column
 (`FAN_ON` = supply-fan power > 100 W, mapped to the occupancy signal
 because the unit has no schedule). Two logged healthy-silence iterations:
-the field mixed-air probe reads below both outdoor and return air on 9 %
-of fan-on minutes (up to 2.4 °C sustained for an hour; tolerance 1.1 →
-2.5 °C), and the evaporator keeps cooling the air after the compressor
+the field mixed-air probe reads below both outdoor and return air on 26 %
+of fan-on minutes, by more than the 1.1 °C tolerance on 9 %, and by up to
+2.3 °C sustained for an hour (tolerance 1.1 → 2.5 °C), and the evaporator keeps cooling the air after the compressor
 stops (supply − mixed down to −6.9 °C; rule band −3..3 → −8..4.5). Gates:
-no duplicates, monotonic, no rotation; calendar identity is inapplicable
+no duplicates, monotonic; the rotation gate produced no output on this
+subset; calendar identity is inapplicable
 (the files cover different periods); no Brick file exists for the field
 subset.
 
@@ -154,7 +156,8 @@ one kind on one unit is a case, and it is reported as one; nothing about
 detection is claimed from it.
 
 **What X26 changes.** The papers' "everything is simulation" limitation
-becomes a number: on one real building the deployed budget is 6.1 %.
+is now stated with a number: on one real building the deployed budget is
+6.1 %, and nothing about detection is claimed from it.
 
 | P1 | P2 | P3 | P4 / A1-P2 | falsifiers |
 |---|---|---|---|---|

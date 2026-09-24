@@ -96,3 +96,11 @@ The undercharge file holds 30 calendar days of which 29 are evaluable; "29
 days" above counts the evaluable ones. Site 1 (52 clean days, a different
 unit) is measured data too; "the only measured fault-free stream" means the
 only one long enough to calibrate.
+
+## Amendment 2 (2026-09-24, on hostile review): a listed channel was never written
+
+The config sketch lists "compressor power per unit of (OA − zone)
+temperature difference (op: ratio)". The ratio kind divides one recorded
+column by another and (OA − zone) is not a column, so the channel was
+dropped when the config was written and the omission went unrecorded until
+review. It is recorded here; no result depends on it.

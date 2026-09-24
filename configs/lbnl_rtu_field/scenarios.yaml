@@ -1,7 +1,7 @@
-# X26: Site 2 is the scored unit (182 clean days, one 29-day fault CASE). Site 1
-# is a different unit with 51 clean days: too few to calibrate; excluded.
+# X26: Site 2 is the scored unit (182 clean days, one 30-day / 29-evaluable-day fault
+# CASE). Site 1 is a different unit with 52 clean days: too few to calibrate; excluded.
 healthy_file: Site2_Unfaulted
 scenarios:
   - {file: Site2_Undercharged40, family: refrigerant_undercharge, label: "circuit B 40% undercharged (case report, n=1)", is_fault: true}
-  - {file: Site1_Staging_Fault, family: compressor_staging, label: "Site 1 stage 2 will not engage", is_fault: true, exclude: "different unit; its 51 clean days cannot calibrate a detector"}
+  - {file: Site1_Staging_Fault, family: compressor_staging, label: "Site 1 stage 2 will not engage", is_fault: true, exclude: "different unit; its 52 clean days cannot calibrate a detector"}
   - {file: Site1_Unfaulted, family: healthy, label: "Site 1 fault-free", is_fault: false, exclude: "different unit"}

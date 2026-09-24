@@ -60,7 +60,9 @@ if ttl and ttl.exists():
     cols = set(pd.read_csv(csvs[0], nrows=1).columns) - {"Datetime"}
     txt = ttl.read_text()
     declared = set(re.findall(r"bldg:([A-Za-z0-9_%]+)", txt)) | set(re.findall(r":([A-Z][A-Za-z0-9_]+)\s+a\s+brick:", txt))
-    declared = {d for d in declared if d not in {"DDAHU", "AHU"}}
+    # X19: the FCU file names its points as FCU:<name> inside hasPoint lists
+    declared |= set(re.findall(r"\bFCU:([A-Za-z0-9_]+)", txt))
+    declared = {d for d in declared if d not in {"DDAHU", "AHU", "fcu", "fcu_zone"}}
     out["G5_ttl"] = {"columns": len(cols), "declared_points": len(declared),
                      "columns_not_declared": sorted(cols - declared)[:40], "declared_not_in_columns": sorted(declared - cols)[:40]}
     print(f"G5 ttl: {len(cols)} columns, {len(declared)} declared; not declared {len(cols - declared)}; declared-not-column {len(declared - cols)}", flush=True)
@@ -71,7 +73,7 @@ if ttl and ttl.exists():
 import yaml
 sens = yaml.safe_load(Path(f"configs/lbnl_{system}/sensors.yaml").read_text())["canonical_to_csv"]
 occ_col = sens.get("OCCUPIED"); dmpr = sens.get("OA_DMPR_POS")
-fan_cols = [v for k, v in sens.items() if "STATUS" in k or k in ("SF_CS",)]
+fan_cols = [v for k, v in sens.items() if "STATUS" in k or k in ("SF_CS", "FAN_SPEED")]   # X19: FCU exposes speed (rev/s), not status
 def branch_profile(c: Path) -> dict:
     hdr = pd.read_csv(c, nrows=1).columns
     sp_cols = [x for x in hdr if "SPT" in x.upper() or x.upper().endswith("_SP")]

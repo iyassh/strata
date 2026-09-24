@@ -1,0 +1,35 @@
+# Canonical sensor name -> LBNL FCU CSV column name (X19 onboarding, written
+# from the documentation's Table 1 only). Conventions: positions end in
+# _POS, commands in _CMD, setpoints in _SP, flows contain FLOW, statuses
+# contain STATUS.
+canonical_to_csv:
+  OCCUPIED: FCU_CTRL            # 0=shutdown, 1=operate, 2=setback
+  FAN_MODE: FAN_CTRL            # 1=auto, 2=off
+  ZONE_TEMP: RM_TEMP
+  ZONE_CLG_SP: RMCLGSPT
+  ZONE_HTG_SP: RMHTGSPT
+  MA_TEMP: FCU_MAT
+  SA_TEMP: FCU_DAT              # discharge air (the unit's supply)
+  RA_TEMP: FCU_RAT
+  OA_TEMP: FCU_OAT
+  CHWC_VLV_POS: FCU_CVLV
+  CHWC_VLV_CMD: FCU_CVLV_DM
+  CHWC_FLOW: FCU_CLG_GPM
+  CHWC_EWT: FCU_CLG_EWT
+  CHWC_LWT: FCU_CLG_RWT
+  HWC_VLV_POS: FCU_HVLV
+  HWC_VLV_CMD: FCU_HVLV_DM
+  HWC_FLOW: FCU_HTG_GPM
+  HWC_EWT: FCU_HTG_EWT
+  HWC_LWT: FCU_HTG_RWT
+  DA_FLOW: FCU_DA_CFM
+  OA_FLOW: FCU_OA_CFM
+  OA_DMPR_POS: FCU_DMPR
+  OA_DMPR_CMD: FCU_DMPR_DM
+  FAN_SPEED: FCU_SPD            # rev/s, three-speed
+  FAN_POWER: FCU_WAT
+  MA_HUMD: FCU_MA_HUMD
+  OA_HUMD: FCU_OA_HUMD
+  DA_HUMD: FCU_DA_HUMD
+  RA_HUMD: FCU_RA_HUMD
+  Datetime: Datetime

@@ -1,0 +1,300 @@
+# Event-abstraction rules for the LBNL FCU dataset (vertical four-pipe fan
+# coil unit: three-speed fan, cooling and heating coils with valves, one
+# outdoor-air damper, one zone). X19 onboarding, 2026-09-24.
+#
+# Written from the documentation (control sequence §1.2, points Table 1)
+# and the existing rule KINDS only — zero code changes. Thresholds by
+# physics/APAR convention first, validated on Fault_free ONLY through the
+# healthy-silence gate; every healthy-evidence adjustment is logged beside
+# the rule. No fault file is consulted (pre-registration X19, F-X19.e).
+
+climate:
+  ashrae_zone: 5A
+  notes: "Des Moines IA, TMY (HVACSIM+). Documentation only."
+
+detection:
+  fpr_quantile: 0.01
+  # hunting shows in the valve positions and the room temperature; the damper
+  # holds a fixed minimum so it is not an oscillation signal here
+  oscillation_signals: [CHWC_VLV_POS, HWC_VLV_POS, ZONE_TEMP]
+  oscillation_deadband: 0.02
+  oscillation_deadbands: {ZONE_TEMP: 0.5}
+  residual_min_band_width: 0.5
+  residual_min_exceedance: 0.5
+  residual_channels: [supply_air_residual, cooling_only_residual, heating_only_residual,
+                      chwc_waterside_dT, hwc_waterside_dT, flow_per_speed]
+  holdout_days_per_month: 8
+
+events:
+  # ---------------- state alphabet ----------------
+  occupancy:
+    kind: occupancy
+    alphabet: state
+    signal: OCCUPIED           # ==1: operate
+    on_event: system_started
+    off_event: system_stopped
+
+  setback:
+    kind: mode
+    alphabet: state
+    signal: OCCUPIED           # ==2: setback
+    on_above: 1.5
+    on_event: setback_started
+    off_event: setback_ended
+
+  cooling:
+    kind: mode
+    alphabet: state
+    signal: CHWC_VLV_POS
+    on_above: 0.05
+    on_event: cooling_active
+    off_event: cooling_inactive
+
+  heating:
+    kind: mode
+    alphabet: state
+    signal: HWC_VLV_POS
+    on_above: 0.05
+    on_event: heating_active
+    off_event: heating_inactive
+
+  # Fan runs whenever there is a heating or cooling call (documentation 1.2 i);
+  # rev/s threshold: any rotation.
+  fan:
+    kind: mode
+    alphabet: state
+    signal: FAN_SPEED
+    on_above: 1.0
+    on_event: fan_started
+    off_event: fan_stopped
+
+  # High-speed stage: PID output >= 80% (documentation 1.2 i). The healthy
+  # year runs the fan at exactly two non-zero speeds, 9.75 and 13.08 rev/s
+  # (iteration 2: the placeholder 20.0 could never fire; 11.0 splits them).
+  fan_high:
+    kind: mode
+    alphabet: state
+    signal: FAN_SPEED
+    on_above: 11.0
+    on_event: fan_high_entered
+    off_event: fan_high_exited
+
+  # OA damper leaves closed: the sequence holds a 30 % minimum while occupied
+  # and has no economizer (documentation 1.2), so 0.15 sits between closed
+  # and the minimum. Stuck-closed removes this event (absence channel).
+  oa_damper_open:
+    kind: mode
+    alphabet: state
+    signal: OA_DMPR_POS
+    on_above: 0.15
+    on_event: oa_damper_opened
+    off_event: oa_damper_closed
+
+  # ---------------- signature alphabet ----------------
+  oa_damper_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: OA_DMPR_POS
+    cmd: OA_DMPR_CMD
+    threshold: 0.05
+    sustained_min: 60
+  chwc_valve_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: CHWC_VLV_POS
+    cmd: CHWC_VLV_CMD
+    threshold: 0.05
+    sustained_min: 60
+  hwc_valve_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: HWC_VLV_POS
+    cmd: HWC_VLV_CMD
+    threshold: 0.05
+    sustained_min: 60
+  chwc_valve_leak:
+    kind: leak
+    alphabet: signature
+    pos: CHWC_VLV_POS
+    cmd: CHWC_VLV_CMD
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+  hwc_valve_leak:
+    kind: leak
+    alphabet: signature
+    pos: HWC_VLV_POS
+    cmd: HWC_VLV_CMD
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+
+  # Water flowing through a closed valve (valve-leak faults are imposed as a
+  # water flow rate with the valve fully closed): flow while the valve
+  # command is idle.
+  chwc_flow_when_closed:
+    kind: paired_residual
+    alphabet: signature
+    a: CHWC_FLOW
+    b: CHWC_VLV_CMD
+    low: -900.0
+    high: 0.05          # gpm through a commanded-closed valve; healthy reads 0.0
+    gates:
+      - signal: CHWC_VLV_CMD
+        below: 0.02
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 30
+  hwc_flow_when_closed:
+    kind: paired_residual
+    alphabet: signature
+    a: HWC_FLOW
+    b: HWC_VLV_CMD
+    low: -900.0
+    high: 0.05          # gpm through a commanded-closed valve; healthy reads 0.0
+    gates:
+      - signal: HWC_VLV_CMD
+        below: 0.02
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 30
+
+  # Zone temperature more than 3 F from the active setpoint for two hours
+  # while the controller demands full coil (command, not position: a stuck or
+  # starved valve leaves the position wherever it is while the demand
+  # saturates). Iteration 2: the gate was on position, which never exceeds
+  # 0.95 in the healthy year, so the rule could not have fired anywhere.
+  zone_cooling_tracking:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_TEMP
+    sp: ZONE_CLG_SP
+    threshold: 3.0
+    sustained_min: 120
+    gate_signal: CHWC_VLV_CMD
+    gate_above: 0.95
+  zone_heating_tracking:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_TEMP
+    sp: ZONE_HTG_SP
+    threshold: 3.0
+    sustained_min: 120
+    gate_signal: HWC_VLV_CMD
+    gate_above: 0.95
+
+  # Analytic redundancy: with both coils off and the fan on, discharge air
+  # equals mixed air plus fan heat.
+  supply_air_residual:
+    kind: paired_residual
+    alphabet: signature
+    a: SA_TEMP
+    b: MA_TEMP
+    low: -6.0
+    high: 6.0
+    gates:
+      - signal: CHWC_VLV_POS
+        below: 0.02
+      - signal: HWC_VLV_POS
+        below: 0.02
+      - signal: FAN_SPEED
+        above: 1.0
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+  # Heating coil off, cooling coil controlling, fan on: SA-MA is the cooling
+  # coil's air-side effect. Residual channel; band learned on healthy.
+  cooling_only_residual:
+    kind: paired_residual
+    alphabet: signature
+    a: SA_TEMP
+    b: MA_TEMP
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: HWC_VLV_POS
+        below: 0.02
+      - signal: CHWC_VLV_POS
+        above: 0.10
+      - signal: FAN_SPEED
+        above: 1.0
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+  # Cooling coil off, heating coil controlling, fan on: the mirror image.
+  heating_only_residual:
+    kind: paired_residual
+    alphabet: signature
+    a: SA_TEMP
+    b: MA_TEMP
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: CHWC_VLV_POS
+        below: 0.02
+      - signal: HWC_VLV_POS
+        above: 0.10
+      - signal: FAN_SPEED
+        above: 1.0
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+
+  mixed_air_envelope:
+    kind: envelope_residual
+    alphabet: signature
+    signal: MA_TEMP
+    low_ref: OA_TEMP
+    high_ref: RA_TEMP
+    tolerance: 2.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+
+  chwc_waterside_dT:
+    kind: paired_residual
+    alphabet: signature
+    a: CHWC_EWT
+    b: CHWC_LWT
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: CHWC_VLV_POS
+        above: 0.10
+      - signal: CHWC_FLOW
+        above: 0.05
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+  hwc_waterside_dT:
+    kind: paired_residual
+    alphabet: signature
+    a: HWC_EWT
+    b: HWC_LWT
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: HWC_VLV_POS
+        above: 0.10
+      - signal: HWC_FLOW
+        above: 0.05
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+
+  # Airflow-restriction families (filter, OA inlet, fan outlet): discharge
+  # airflow per unit fan speed while the fan runs — a restricted path moves
+  # less air at the same speed. Residual channel; band learned on healthy.
+  flow_per_speed:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: DA_FLOW
+    b: FAN_SPEED
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: FAN_SPEED
+        above: 1.0
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60

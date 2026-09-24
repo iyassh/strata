@@ -1,0 +1,55 @@
+# Evaluation manifest for the LBNL FCU dataset (documentation Table 3).
+healthy_file: FCU_FaultFree
+scenarios:
+  - {file: FCU_OADMPRLeak_20, family: oa_damper_leak, label: "OA damper leaking 20%", is_fault: true}
+  - {file: FCU_OADMPRLeak_50, family: oa_damper_leak, label: "OA damper leaking 50%", is_fault: true}
+  - {file: FCU_OADMPRLeak_80, family: oa_damper_leak, label: "OA damper leaking 80%", is_fault: true}
+  - {file: FCU_OADMPRStuck_0, family: oa_damper_stuck, label: "OA damper stuck 0%", is_fault: true}
+  - {file: FCU_OADMPRStuck_30, family: oa_damper_stuck, label: "OA damper stuck 30%", is_fault: true}
+  - {file: FCU_OADMPRStuck_50, family: oa_damper_stuck, label: "OA damper stuck 50%", is_fault: true}
+  - {file: FCU_OADMPRStuck_80, family: oa_damper_stuck, label: "OA damper stuck 80%", is_fault: true}
+  - {file: FCU_OADMPRStuck_100, family: oa_damper_stuck, label: "OA damper stuck 100%", is_fault: true}
+  - {file: FCU_VLVLeak_Heating_20, family: valve_leak, label: "heating valve leaking 20%", is_fault: true}
+  - {file: FCU_VLVLeak_Heating_50, family: valve_leak, label: "heating valve leaking 50%", is_fault: true}
+  - {file: FCU_VLVLeak_Heating_80, family: valve_leak, label: "heating valve leaking 80%", is_fault: true}
+  - {file: FCU_VLVStuck_Heating_0, family: valve_stuck, label: "heating valve stuck 0%", is_fault: true}
+  - {file: FCU_VLVStuck_Heating_20, family: valve_stuck, label: "heating valve stuck 20%", is_fault: true}
+  - {file: FCU_VLVStuck_Heating_50, family: valve_stuck, label: "heating valve stuck 50%", is_fault: true}
+  - {file: FCU_VLVStuck_Heating_80, family: valve_stuck, label: "heating valve stuck 80%", is_fault: true}
+  - {file: FCU_VLVStuck_Heating_100, family: valve_stuck, label: "heating valve stuck 100%", is_fault: true}
+  - {file: FCU_VLVLeak_Cooling_20, family: valve_leak, label: "cooling valve leaking 20%", is_fault: true}
+  - {file: FCU_VLVLeak_Cooling_50, family: valve_leak, label: "cooling valve leaking 50%", is_fault: true}
+  - {file: FCU_VLVLeak_Cooling_80, family: valve_leak, label: "cooling valve leaking 80%", is_fault: true}
+  - {file: FCU_VLVStuck_Cooling_0, family: valve_stuck, label: "cooling valve stuck 0%", is_fault: true}
+  - {file: FCU_VLVStuck_Cooling_20, family: valve_stuck, label: "cooling valve stuck 20%", is_fault: true}
+  - {file: FCU_VLVStuck_Cooling_50, family: valve_stuck, label: "cooling valve stuck 50%", is_fault: true}
+  - {file: FCU_VLVStuck_Cooling_80, family: valve_stuck, label: "cooling valve stuck 80%", is_fault: true}
+  - {file: FCU_VLVStuck_Cooling_100, family: valve_stuck, label: "cooling valve stuck 100%", is_fault: true}
+  - {file: FCU_SensorBias_RMTemp_+2C, family: sensor_bias, label: "room temp bias +2C", is_fault: true}
+  - {file: FCU_SensorBias_RMTemp_-2C, family: sensor_bias, label: "room temp bias -2C", is_fault: true}
+  - {file: FCU_SensorBias_RMTemp_+4C, family: sensor_bias, label: "room temp bias +4C", is_fault: true}
+  - {file: FCU_SensorBias_RMTemp_-4C, family: sensor_bias, label: "room temp bias -4C", is_fault: true}
+  # G1 (gates_system.py, 2026-09-24): this file and FCU_Fouling_Heating_Airside_Minor
+  # are byte-identical (one MD5). One label is wrong and the data cannot say
+  # which; the content is scored ONCE here (SDAHU precedent, ERRATA.md) and the
+  # second entry is excluded so it cannot count as independent evidence.
+  - {file: FCU_Fouling_Cooling_Airside_Minor, family: coil_fouling, label: "airside fouling minor (file labelled cooling; byte-identical to the heating file)", is_fault: true}
+  - {file: FCU_Fouling_Cooling_Airside_Moderate, family: coil_fouling, label: "cooling coil fouling airside moderate", is_fault: true}
+  - {file: FCU_Fouling_Cooling_Airside_Severe, family: coil_fouling, label: "cooling coil fouling airside severe", is_fault: true}
+  - {file: FCU_Fouling_Cooling_Waterside_Minor, family: coil_fouling, label: "cooling coil fouling waterside minor", is_fault: true}
+  - {file: FCU_Fouling_Cooling_Waterside_Moderate, family: coil_fouling, label: "cooling coil fouling waterside moderate", is_fault: true}
+  - {file: FCU_Fouling_Cooling_Waterside_Severe, family: coil_fouling, label: "cooling coil fouling waterside severe", is_fault: true}
+  - {file: FCU_Fouling_Heating_Airside_Minor, family: coil_fouling, label: "heating coil fouling airside minor", is_fault: true, exclude: "byte-identical to FCU_Fouling_Cooling_Airside_Minor (G1 duplicate group); scored once under that entry"}
+  - {file: FCU_Fouling_Heating_Airside_Moderate, family: coil_fouling, label: "heating coil fouling airside moderate", is_fault: true}
+  - {file: FCU_Fouling_Heating_Airside_Severe, family: coil_fouling, label: "heating coil fouling airside severe", is_fault: true}
+  - {file: FCU_Fouling_Heating_Waterside_Minor, family: coil_fouling, label: "heating coil fouling waterside minor", is_fault: true}
+  - {file: FCU_Fouling_Heating_Waterside_Moderate, family: coil_fouling, label: "heating coil fouling waterside moderate", is_fault: true}
+  - {file: FCU_Fouling_Heating_Waterside_Severe, family: coil_fouling, label: "heating coil fouling waterside severe", is_fault: true}
+  - {file: FCU_FilterRestriction_10%, family: airflow_restriction, label: "filter restriction 10%", is_fault: true}
+  - {file: FCU_FilterRestriction_20%, family: airflow_restriction, label: "filter restriction 20%", is_fault: true}
+  - {file: FCU_FilterRestriction_50%, family: airflow_restriction, label: "filter restriction 50%", is_fault: true}
+  - {file: FCU_OABlockage, family: airflow_restriction, label: "OA inlet blockage", is_fault: true}
+  - {file: FCU_FanOutletBlockage, family: airflow_restriction, label: "fan outlet blockage", is_fault: true}
+  - {file: FCU_Control_CoolingReverse, family: control_fault, label: "cooling control reverse acting", is_fault: true}
+  - {file: FCU_Control_HeatingReverse, family: control_fault, label: "heating control reverse acting", is_fault: true}
+  - {file: FCU_Control_Unstable, family: control_fault, label: "unstable control", is_fault: true}

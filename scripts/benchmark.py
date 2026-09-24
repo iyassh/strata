@@ -75,8 +75,13 @@ def day_universe(df: pd.DataFrame) -> pd.DataFrame:
     occ = w["OCCUPIED"] > 0  # any scheduled operation (incl. night-cycle)
     diffs = w["Datetime"].diff().dropna().dt.total_seconds() / 60.0
     interval = float(diffs.median()) if len(diffs) else 1.0
-    uni = pd.DataFrame({"case_id": day, "occ": occ}).groupby("case_id")["occ"].sum() * interval
-    return uni.rename("occupied_min").reset_index()
+    uni = (pd.DataFrame({"case_id": day, "occ": occ}).groupby("case_id")["occ"].sum() * interval
+           ).rename("occupied_min").to_frame()
+    # X19 Amendment 1: operate minutes (== 1) for the silence rule — the
+    # occupancy event kind's own definition; setback (2) on a fan coil unit is
+    # idle by design and must not count as scheduled operation.
+    uni["operate_min"] = pd.DataFrame({"case_id": day, "op": w["OCCUPIED"] == 1}).groupby("case_id")["op"].sum() * interval
+    return uni.reset_index()
 
 
 def evaluate(fname: str):
@@ -97,7 +102,7 @@ def evaluate(fname: str):
 
     per_day = classify_days(det, log)
     model = per_day.set_index("case_id")["flagged"].reindex(days).fillna(False)
-    model = model | (~has_events & (uni["occupied_min"] > 0))
+    model = model | (~has_events & (uni["operate_min"] > 0))   # silent while in operate mode (X19 A1)
     # min-robust model count: days STRICTLY worse than the worst healthy
     # holdout day (immune to the interpolated-threshold artifact, audit 1b)
     strict = float(det.holdout_per_day["fitness"].min())
@@ -254,11 +259,18 @@ if osc_det:
 h_uni = day_universe(healthy_df).set_index("case_id")
 h_sig = set(healthy_log.loc[healthy_log["activity"].isin(SIGNATURE_EVENTS), "case_id"])
 model_hold_fp = int((det.holdout_per_day["fitness"] < det.threshold).sum())
+# X19 Amendment 1: the gate's baseline must count what the deployed channel
+# counts — a holdout day silent in operate mode is a model flag too.
+_h_hold = holdout_mask(pd.Series(h_uni.index), HOLD_N)
+_h_ev = set(healthy_log["case_id"])
+model_hold_silent = int(sum(1 for d, m in zip(h_uni.index, _h_hold)
+                            if m and d not in _h_ev and h_uni.loc[d, "operate_min"] > 0))
+model_hold_fp += model_hold_silent
 
 print(f"\nresidual band (TRAIN-only): [{BAND[0]:+.2f}, {BAND[1]:+.2f}] F | "
       f"holdout: {hold_fp}/{hold_n} window-days outside")
 print(f"model threshold: {det.threshold:.4f} (min-calibration on {len(det.holdout_per_day)} holdout days; "
-      f"holdout FP {model_hold_fp})")
+      f"holdout FP {model_hold_fp}, of which silent-in-operate {model_hold_silent})")
 print(f"rules on FULL healthy year: {len(h_sig)} signature days (computed)")
 DEV_META = None
 if dev_det is not None:

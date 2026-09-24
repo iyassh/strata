@@ -87,6 +87,10 @@ interval = float(diffs.median()) if len(diffs) else 1.0
 uni = (
     pd.DataFrame({"case_id": day, "occ": occ}).groupby("case_id")["occ"].sum() * interval
 ).rename("occupied_min").to_frame()
+# X19 Amendment 1: the silence rule below needs OPERATE minutes (== 1), the
+# occupancy event kind's own definition — setback (2) on a fan coil unit is
+# idle by design and must not count as scheduled operation.
+uni["operate_min"] = pd.DataFrame({"case_id": day, "op": w["OCCUPIED"] == 1}).groupby("case_id")["op"].sum() * interval
 days = uni.index
 sched = [d for d in days if uni.loc[d, "occupied_min"] > 0]
 
@@ -116,7 +120,7 @@ rules = pd.Series([d in set(sig["case_id"]) for d in days], index=days)
 
 per_day = classify_days(det, log)
 model = per_day.set_index("case_id")["flagged"].reindex(days).fillna(False)
-model = model | (~has_events & (uni["occupied_min"] > 0))
+model = model | (~has_events & (uni["operate_min"] > 0))   # silent while in operate mode (X19 A1)
 
 res_flag = pd.Series(False, index=days)
 res_eval = pd.Series(False, index=days)

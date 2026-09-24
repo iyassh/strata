@@ -29,7 +29,8 @@ detection:
                       chwc_waterside_dT, hwc_waterside_dT,
                       cold_static_per_speed, hot_static_per_speed,
                       oa_fraction_residual,   # X24
-                      cold_static_per_speed2, hot_static_per_speed2]   # X27 fan-law form
+                      cold_static_per_speed2, hot_static_per_speed2,   # X27 fan-law form
+                      chwc_ua, hwc_ua]        # X28
   holdout_days_per_month: 8
   # X25: the 8 days before the holdout block calibrate the conformance thresholds,
   # so the holdout is out-of-sample for every channel (discovery trains on the rest)
@@ -553,5 +554,53 @@ events:
     occ_signal: OCCUPIED
     occ_above: 0.5
     sustained_min: 120
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05
+
+  # X28 (2026-09-24, pre-registered): coil heat-transfer estimate UA = Q / LMTD; floors
+  # set once on the healthy year at 5 % of the training-day median UA (5.2 -> 0.26;
+  # 1.0 -> 0.05). Cold deck: mixed air -> cold-deck SAT; hot deck: mixed air -> HSA_TEMP.
+  chwc_ua:
+    kind: paired_residual
+    alphabet: signature
+    op: ua
+    coil: cooling
+    ewt: CHWC_EWT
+    lwt: CHWC_LWT
+    flow: CHWC_FLOW
+    ta_in: MA_TEMP
+    ta_out: SA_TEMP
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: CHWC_VLV_POS
+        above: 0.10
+      - signal: CHWC_FLOW
+        above: 0.05
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.26
+    residual_min_exceedance: 0.26
+  hwc_ua:
+    kind: paired_residual
+    alphabet: signature
+    op: ua
+    coil: heating
+    ewt: HWC_EWT
+    lwt: HWC_LWT
+    flow: HWC_FLOW
+    ta_in: MA_TEMP
+    ta_out: HSA_TEMP
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: HWC_VLV_POS
+        above: 0.10
+      - signal: HWC_FLOW
+        above: 0.05
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
     residual_min_band_width: 0.05
     residual_min_exceedance: 0.05

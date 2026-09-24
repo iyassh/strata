@@ -34,9 +34,10 @@ you:
 > position 0.8 for 3.2 hours") · **a false-positive budget** ("this detector
 > is wrong on ~1% of fault-free days — measured, not hoped")
 
-Tested on three public benchmark buildings (LBNL datasets), it detects
-**13 of 14, 23 of 30, and 24 of 29** seeded fault scenarios, typically within
-**one day**, while false-alarming on only **1.0–5.2%** of fault-free days.
+Tested on four public benchmark systems (LBNL datasets), it detects
+**13 of 14, 23 of 30, 24 of 29 — and 45 of 55 on a dual-duct AHU onboarded
+blind, by configuration alone, after the protocol was fixed** — typically
+within **one day**, while false-alarming on only **1.0–5.2%** of fault-free days.
 And when this project's own audit process discovered that one of its
 "detections" was an artifact of a dataset defect, we **removed it from our own
 scorecard and published why** — that discipline is as much the contribution
@@ -119,16 +120,22 @@ the name, the explanation, the implicated device/zone, and the budget.
 
 ## Results
 
-Validated on the three [LBNL fault-detection benchmark datasets](https://data.openei.org/submissions/5763)
-(a single-duct air-handling unit and two fan-powered-unit types — the FPU
-datasets had never been benchmarked by anyone):
+Validated on four [LBNL fault-detection benchmark datasets](https://data.openei.org/submissions/5763)
+(a single-duct air-handling unit, two fan-powered-unit types — the FPU
+datasets had never been benchmarked by anyone — and, added last and onboarded
+blind by a pre-registered configuration-only protocol, a dual-duct AHU):
 
-| | SDAHU | PFPU | SFPU |
-|---|---|---|---|
-| fault scenarios detected | **13 / 14** * | **23 / 30** | **24 / 29** |
-| median time-to-detect | 1 day | 1 day | 1 day |
-| false-alarm budget (fault-free days) | 1.0% | 5.2% | 4.2% |
-| cry-wolf ratio (wrong alarms / all alarms) | 0.03% | 0.08% | 0.07% |
+| | SDAHU | PFPU | SFPU | DDAHU (X17) |
+|---|---|---|---|---|
+| fault scenarios detected | **13 / 14** * | **23 / 30** | **24 / 29** | **45 / 55** |
+| median time-to-detect | 1 day | 1 day | 1 day | 1 day |
+| false-alarm budget (fault-free days) | 1.0% | 5.2% | 4.2% | 3.1% |
+| cry-wolf ratio (wrong alarms / all alarms) | 0.03% | 0.08% | 0.07% | — |
+
+DDAHU: 88 sensor mappings, 52 rules, one healthy-silence iteration, no source
+change, gate battery clean; every family caught in full except coil fouling
+(5/12) and static-pressure sensor bias (5/8); nothing detected by the
+process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)).
 
 \* **The asterisk is the honest part.** The detector originally scored 14/14.
 Our own audit then discovered the dataset's "healthy" file was simulated

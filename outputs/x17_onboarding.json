@@ -1,0 +1,91 @@
+{
+  "pre_registration": "docs/plans/2026-09-24-x17-ddahu-onboarding-prereg.md",
+  "effort": {
+    "sensor_mappings": 80,
+    "state_rules": 15,
+    "signature_rules": 26,
+    "healthy_silence_iterations": 1,
+    "src_diff_since_prereg": "none"
+  },
+  "gates": {
+    "files": 56,
+    "duplicates": [],
+    "rotation": [],
+    "ttl_columns_not_declared": []
+  },
+  "scorecard": {
+    "detected": 45,
+    "scored": 55,
+    "by_family": {
+      "unstable_control": [
+        2,
+        2
+      ],
+      "zone_damper_stuck": [
+        10,
+        10
+      ],
+      "oa_damper_stuck": [
+        5,
+        5
+      ],
+      "coil_fouling": [
+        5,
+        12
+      ],
+      "sat_sensor_bias": [
+        8,
+        8
+      ],
+      "static_sensor_bias": [
+        5,
+        8
+      ],
+      "valve_stuck": [
+        10,
+        10
+      ]
+    },
+    "channels": {
+      "rules": 35,
+      "resid": 39,
+      "model": 0,
+      "device": 1,
+      "freq": 8,
+      "osc": 15,
+      "rate": 9
+    },
+    "holdout_fp_days_union_minus_rate": 3,
+    "holdout_days": 96,
+    "per_channel_fp": {
+      "rules": 0,
+      "resid": 0,
+      "model": 0,
+      "device": 0,
+      "absence": 3,
+      "freq": 0,
+      "rate": 7,
+      "osc": 0
+    }
+  },
+  "predictions": {
+    "P1_config_only": true,
+    "P2_gates": true,
+    "P3_healthy_silence_iterations": 1,
+    "P3_residual_healthy_signature_days": 1,
+    "P4_holdout_fp_days": 3,
+    "P4_fp_le_10_of_96": true,
+    "P5_detected": 45,
+    "P5_n_scored": 55,
+    "P5_frac": 0.818,
+    "P5_ge_60pct": true,
+    "P6_fouling_detected": 5,
+    "P6_le_4_of_12": false,
+    "P7_conformance_only_scenarios": [],
+    "P7_null_generalises": true,
+    "P8_static_bias_detected": 5,
+    "P8_unstable_detected": 2,
+    "P8_holds": true
+  },
+  "falsifiers_fired": []
+}

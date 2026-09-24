@@ -46,6 +46,8 @@ export STRATA_SDAHU_RAW=/path/to/LBNL_FDD_Data_Sets_SDAHU_all_3
 export STRATA_FPU_RAW=/path/to/LBNL_FDD_Data_Sets_FPU_all_3
 uv run python scripts/00_convert_to_parquet.py   # -> data/processed/sdahu/
 uv run python scripts/01_convert_fpu.py          # -> data/processed/{pfpu,sfpu}/
+export STRATA_DDAHU_RAW=/path/to/LBNL_FDD_Data_Sets_DDAHU_all_3   # fourth system (X17)
+uv run python scripts/05_convert_ddahu.py        # -> data/processed/ddahu/
 ```
 
 `data/` is gitignored; any location works if `data/processed/<system>/`
@@ -60,6 +62,13 @@ uv run python scripts/03_healthy_silence.py configs/lbnl_pfpu data/processed/pfp
 
 (The healthy-silence gate is per config; run it for any config you touch.)
 
+For a new system the generic gate battery replaces the audit script:
+
+```sh
+uv run python scripts/gates_system.py ddahu $STRATA_DDAHU_RAW/LBNL_FDD_Dataset_DDAHU DualDuct_FaultFree configs/lbnl_ddahu/equipment.ttl
+uv run python scripts/03_healthy_silence.py configs/lbnl_ddahu data/processed/ddahu/DualDuct_FaultFree.parquet
+```
+
 ## 5. The result pipeline (order matters only within a system)
 
 ```sh
@@ -70,6 +79,9 @@ for s in sdahu pfpu sfpu; do
   uv run python scripts/stats.py $s                          # significance battery (prints; day lists in artifacts)
   caffeinate -i uv run python scripts/union_fpr.py $s        # joint FPR + demotion checks -> outputs/union_fpr_$s.json
 done
+caffeinate -i uv run python scripts/benchmark.py ddahu       # fourth system (X17) -> outputs/benchmark_v6_ddahu.json
+caffeinate -i uv run python scripts/union_fpr.py ddahu       # exits 2: the rate-demotion TTD cost is recorded, artefact written
+uv run python scripts/x17_onboarding.py                      # -> outputs/x17_onboarding.json
 caffeinate -i uv run python scripts/grammar.py               # Phase 5 -> outputs/grammar_results.json
 uv run python scripts/sensor_coverage.py                     # -> outputs/sensor_coverage.json
 uv run python scripts/crywolf.py                             # -> outputs/crywolf.json (artifacts only)
@@ -117,4 +129,5 @@ Use `caffeinate -i` — a sleeping laptop silently stretches runs by hours.
 | X14 enriched state alphabet (healthy-derived actuator/flow bands, 15-min dwell; Amendments 1–3): one missed scenario becomes significant (SFPU_ReheatCoilFouling_Airside_Moderate, a dose-monotone zone-S damper signature — control in `x14_control.json`, `scripts/x14_control.py`), SDAHU model channel 14 of 14 significant against 0 of 14 deployed, but holdout false alarms 7/18/21 of 96 — **F-X14.a fired**; alignment channels not evaluated on the FPUs (infeasible) | `x14_enriched_alphabet.json` (`scripts/x14_enriched_alphabet.py`; `docs/plans/2026-09-23-x14-enriched-alphabet-prereg.md`) |
 | X15 enriched alphabet, frequency channel only, both holdout splits (post-hoc-motivated, stated): inside the budget under both (2/0, 4/8, 3/5), SFPU_ReheatCoilFouling_Airside_Moderate significant under both, nothing else new, 41 vs 12 significant on already-detected scenarios; no falsifier fired | `x15_enriched_frequency.json` (`scripts/x15_enriched_frequency.py`; `docs/plans/2026-09-23-x15-enriched-frequency-prereg.md`) |
 | X9/X10 robustness (pre-registered, three amendments): 1× jitter leaves detection counts unchanged (14/23/24) at 1/4/2 false-alarm days in 96; 2×/4× identical on SDAHU; first-8-days holdout 13/23/25 at 0/2/3; no falsifier fired; fan-powered arms without the conformance channels | `x9_x10_robustness.json` (`scripts/x9_x10_robustness.py`; `docs/plans/2026-09-23-x9-x10-robustness-prereg.md`) |
+| X17 fourth system, dual-duct AHU onboarded config-only (pre-registered): gates clean (56 distinct, monotonic, calendar-identical, TTL complete); 45/55 detected; deployed FP 3/96 (naive 8/96); no scenario by conformance alone; P6 (fouling ≤ 4) failed upward (5); no falsifier; rate demotion costs one scenario's TTD (recorded) | `week0_audit_ddahu.json`, `benchmark_v6_ddahu.json`, `union_fpr_ddahu.json`, `x17_onboarding.json` (`scripts/gates_system.py`, `benchmark.py ddahu`, `union_fpr.py ddahu`, `x17_onboarding.py`; `docs/plans/2026-09-24-x17-ddahu-onboarding-prereg.md`) |
 | Injected-defect sensitivity: duplicate file → G1 only; duplicate case → G4 only; rotated case → G2 only; case moved out of era → G3 only; leaked per-case outcome constant → no gate | `gates_injection.json` (`scripts/gates_injection.py` on the Sepsis log) |

@@ -1,0 +1,109 @@
+# Phase 10 Results — A fourth system: the LBNL dual-duct AHU, onboarded blind (X17)
+
+*2026-09-24. Pre-registered (`docs/plans/2026-09-24-x17-ddahu-onboarding-prereg.md`,
+b8fadc8) after the documentation was read and before any data file was
+opened; config committed (90dd88c) before any fault file was scored; one
+amendment (a script assertion turned into a recorded cost) after the
+scorecard and before the false-alarm artefact. Artefacts:
+`outputs/week0_audit_ddahu.json`, `benchmark_v6_ddahu.json`,
+`union_fpr_ddahu.json`, `x17_onboarding.json`; guard
+`tests/test_x17_onboarding.py`.*
+
+## The system
+
+LBNL FDD Data Sets: Dual Duct Air Handling Unit (2022) — hot and cold decks,
+two coils, two supply fans, three AHU dampers, four zone mixing boxes with
+command-only dampers; 114 points; 55 seeded faults in 15 families and one
+fault-free year at one-minute resolution; Des Moines TMY; 17 GB. Two fault
+families the first three systems do not have: static-pressure sensor bias
+and unstable control sequences.
+
+## Onboarding (P1): configuration only
+
+| | count |
+|---|---|
+| sensor mappings (`sensors.yaml`) | 88 |
+| state-event rules (unit + four zone boxes as device stratum) | 30 |
+| signature rules (existing kinds only) | 22 |
+| healthy-silence iterations | 1 (logged beside each rule) |
+| `src/` changes | **none** |
+
+Healthy-silence gate, iteration 1: the initial config fired 73 signature
+events on the fault-free year. Ten of them came from ten specific days on
+which the cold-deck fan saturates (speed 1.0, duct static 1.39 against a
+1.6 in.wg setpoint) and the deck cannot hold 55 °F or deliver demanded
+zone flow. Rather than loosen thresholds, those rules got a physical gate —
+"duct static at setpoint" — expressed with the existing two-gate residual
+kind; zone-damper state thresholds were set to the healthy command
+baselines (0.42 / 0.60). Result: **1 signature event on 1 day of 365**.
+
+## Gates (P2): clean
+
+56 files, 56 distinct MD5s, all monotonic, all calendar-identical to the
+fault-free file, no rotation, Brick model covers all 114 columns. Unlike
+SDAHU and SFPU, this dataset carries no defect the battery can see.
+
+## Scorecard (P5–P8)
+
+| family | detected / scored |
+|---|---|
+| unstable control sequence (cooling, heating) | **2 / 2** |
+| zone mixing-box damper stuck (cold, hot × 5 positions) | **10 / 10** |
+| OA damper stuck (5 positions) | **5 / 5** |
+| coil fouling (cooling, heating × air/water side × 3 severities) | 5 / 12 |
+| deck SAT sensor bias (±2, ±4 °C, both decks) | **8 / 8** |
+| deck static-pressure sensor bias (±0.2, ±0.4 in.wg, both decks) | 5 / 8 |
+| coil valve stuck (cooling, heating × 5 positions) | **10 / 10** |
+| **all** | **45 / 55 (82 %)** |
+
+Channel credits among the 45: residual 39, rules 35, oscillation 15,
+absence 14, rate 9, frequency 8, device 1, **model 0**. No scenario is
+detected only by the conformance channels (P7 holds: the null generalises
+to a fourth system type). The ten misses: seven coil-fouling files (all
+minor/moderate airside and waterside, plus heating airside severe) and
+three static-pressure biases (cold +0.2, hot −0.2, hot −0.4 in.wg).
+
+The one prediction that failed did so in the good direction: **P6** said at
+most 4 of the 12 fouling scenarios would be detected; 5 were (the
+waterside moderate/severe of both coils and cooling airside severe), through
+the rules channel (waterside ΔT rules) and the residual channel.
+
+## False alarms (P4)
+
+| | of 96 holdout days |
+|---|---|
+| deployed union (minus rate) | **3** (3.1 %) — all from the absence channel |
+| naive union of all eight | 8 (8.3 %) |
+| per channel | rules 0, residual 0, model 0, device 0, absence 3, frequency 0, oscillation 0, rate 7 |
+
+**Rate demotion is not free here** (Amendment 1): on `cooling valve stuck 0%`
+the first alarm day (2018-01-01) is rate-only, so the deployed
+union-minus-rate definition delays that scenario's time-to-detect; the
+scorecard's TTD column includes rate. Recorded in the artefact; the
+detection count is unaffected (45 with or without rate).
+
+## Ledger
+
+| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | falsifiers |
+|---|---|---|---|---|---|---|---|---|
+| ✓ config only | ✓ clean | ✓ 1 iteration | ✓ 3/96 | ✓ 45/55 | **✗** 5 > 4 (better) | ✓ none by conformance | ✓ 5/8 static, 2/2 unstable | none fired |
+
+## Reading
+
+The detector transfers to a different air-handler type on a different
+building with a configuration file and one healthy-silence iteration:
+82 % detection at 3 % false alarms, every family except coil fouling and
+static-pressure bias caught in full, both new fault families caught at
+least partly. The process-mining null transfers with it: the discovered
+model channel flags zero days on every scenario (threshold 0.25 at
+min-calibration on a 28-event-per-day alphabet), and nothing is detected
+by conformance alone. What did the work is what did it before — rules and
+residuals first, then oscillation and absence.
+
+Two things this changes upstream. The cross-building claim now has a
+**fourth building**, so the unit-of-replication floor the sealed transfer
+test could never clear (1/3! = 0.167) becomes 1/4! = 0.042 — a re-run of
+that test with four buildings could, for the first time, attain
+significance; it has not been run. And the benchmark-defect finding is
+bounded: the gate battery found nothing on this LBNL dataset, so the five
+defects are properties of two archives, not of the collection.

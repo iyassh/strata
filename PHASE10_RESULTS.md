@@ -1,4 +1,4 @@
-# Phase 10 Results — A fourth system: the LBNL dual-duct AHU, onboarded blind (X17), and the X15 gain that did not replicate (X18)
+# Phase 10 Results — A fourth system: the LBNL dual-duct AHU, onboarded blind (X17), the X15 gain that did not replicate (X18), and a fifth system, the fan coil unit, that broke a rule the first four never exercised (X19)
 
 *2026-09-24. Pre-registered (`docs/plans/2026-09-24-x17-ddahu-onboarding-prereg.md`,
 b8fadc8) after the documentation was read and before any data file was
@@ -160,3 +160,164 @@ the test cannot score.) And the benchmark-defect finding is bounded: the
 gate battery — G1–G5 plus a G6 configuration-branch comparison of the
 E5 class, ported for this run — found nothing on this LBNL dataset, so the
 five defects are properties of two archives, not of the collection.
+
+
+## X19 — a fifth system: the LBNL fan coil unit
+
+*Pre-registered (`docs/plans/2026-09-24-x19-fcu-onboarding-prereg.md`,
+f72d53f) after the documentation and before any data file; config committed
+(beab656) before any fault file was scored; run 1 committed (3185623) with
+two falsifiers fired; Amendment 1 committed (800f07d) before the two-script
+fix (7d52587) and the re-run. Artefacts: `outputs/week0_audit_fcu.json`,
+`benchmark_v6_fcu.json`, `union_fpr_fcu.json`, `x19_onboarding.json`, with
+run-1 copies as `*_run1.json`; guards `tests/test_x19_onboarding.py`,
+`tests/test_artefact_consistency.py`.*
+
+### The system
+
+LBNL FDD Data Sets: Fan Coil Unit (2022) — a vertical four-pipe unit with
+a three-speed fan, cooling and heating coils, one outdoor-air damper held at
+a 30 % minimum while occupied (no economizer), one zone; 29 points; 48
+seeded faults in 17 families and one fault-free year at one-minute
+resolution; Des Moines TMY; 3.8 GB. Four fault families the first four
+systems do not have: filter restriction, outdoor-air inlet blockage, fan
+outlet blockage, and reverse-acting control. Weekends are setback
+(`FCU_CTRL = 2`, 85/55 °F) and the unit is idle unless the room drifts past
+those limits — the property that matters below.
+
+### Onboarding (P1): configuration only
+
+| | count |
+|---|---|
+| sensor mappings (`sensors.yaml`, excluding `Datetime`) | 29 |
+| state-event rules | 7 |
+| signature rules (existing kinds only) | 16 |
+| healthy-silence iterations | 2 (logged beside each rule) |
+| `src/` changes | **none** |
+
+Iteration 1 was already silent — zero signature events on the fault-free
+year — but two rules could not have fired on this data at all: the
+fan-high threshold (20 rev/s) sat above both observed speeds (9.75 and
+13.08), and the zone-tracking gate was on valve *position*, which never
+exceeds 0.95 in the healthy year. Iteration 2 split the speeds at 11 rev/s
+and gated zone tracking on the valve *command*; still zero signature
+events. A rule that is silent because it is dead is not evidence of
+anything, which is why the iteration is logged.
+
+### Gates (P2): two findings
+
+49 files. **G1 found one byte-identical pair**:
+`FCU_Fouling_Cooling_Airside_Minor` and
+`FCU_Fouling_Heating_Airside_Minor` share an MD5 — one run shipped under
+two *family* labels, and the data cannot say which is right. The content
+is scored once and the second entry is excluded in the manifest
+(ERRATA E6), so the fouling family is 11 scored scenarios, 47 in all.
+**G5 is not attainable by name**: the FCU Brick file names its points by
+class (`FCU:Valve_Command`, reused under both valves), not by column;
+only the fan's two columns match. G2–G4 clean, G6 places the healthy file
+inside the fault cluster on every axis. G6 also showed four fault files
+with fewer occupied days than the healthy 261 (215–250): a damper stuck
+open in winter drives mixed air below the 35 °F low-temperature limit and
+the documented protection shuts the unit down, 94 days in the stuck-80 %
+file. A physical consequence of the fault, not a defect — and the absence
+channel sees it. P2 as pre-registered ("gates clean") is therefore
+**false**, and it is false because the battery worked.
+
+### Run 1: every scenario "detected", and a fired falsifier
+
+| | run 1 |
+|---|---|
+| scenarios detected / scored | 47 / 47 |
+| deployed false alarms (union minus rate) | **28 / 96 → F-X19.b fired** |
+| detected by the conformance channels alone | **6 → F-X19.d fired** |
+
+The model channel flagged 25 of 96 holdout days, every one a Saturday or
+Sunday: 24 were weekend days with no events, one a two-event weekend
+trace. Both scoring scripts define a scheduled day as `OCCUPIED > 0` and
+flag an event-less scheduled day as a model violation — "silent while
+scheduled", written for the fan-powered units whose mode 2 is a night
+cycle that *does* generate events. On the fan coil unit mode 2 is idle
+setback, and the rule fired on 97 of 104 weekends. The six model-only
+"detections" (OA damper leaking 20 %, five waterside-fouling files) each
+carried exactly 100 model days — the healthy year's own 100
+weekend-silence days. They were called significant because the scorecard's
+model gate compared them against a conformance-only baseline (1 of 72
+event days) while the deployed count included the silence rule (25 of
+96): two artefacts, one channel, two numbers. On the four earlier systems
+the two numbers coincide (0, 1, 1, 0), so nothing had ever exposed it.
+
+### Amendment 1 (scripts only)
+
+Pre-registered before the change: (i) the silence rule's "scheduled"
+becomes operate mode (`OCCUPIED == 1`), the definition the occupancy event
+kind already uses — the day universe, the scheduled-day list and the
+absence channel are untouched; (ii) the scorecard's model gate counts
+silent-in-operate holdout days in its baseline so it can never again gate
+against a smaller number than the deployed count. Predictions: the four
+earlier systems regenerate unchanged (A1-P1); FCU false alarms ≤ 10 of 96,
+expected 4 (A1-P2); the six model-only scenarios drop and nothing else
+changes status, 41 of 47 (A1-P3); nothing by conformance alone (A1-P4).
+
+### Run 2 (7d52587): every amendment prediction held
+
+| | run 2 |
+|---|---|
+| SDAHU, PFPU, SFPU, DDAHU artefacts after the script change | **byte-identical** (A1-P1) |
+| deployed false alarms (union minus rate) | **4 / 96** (4.2 %): residual 3, model 1 (A1-P2) |
+| naive union of all eight | 21 / 96 (rate alone 17) |
+| scenarios detected / scored | **41 / 47** (87 %): exactly the six model-only scenarios dropped, no other status changed (A1-P3) |
+| detected by conformance alone | none (A1-P4) |
+
+| family | detected / scored |
+|---|---|
+| OA damper stuck (5 positions) | **5 / 5** |
+| OA damper leaking (20/50/80 %) | 2 / 3 |
+| coil valve stuck (cooling, heating × 5 positions) | **10 / 10** |
+| coil valve leaking (cooling, heating × 3) | **6 / 6** |
+| room-temperature sensor bias (±2, ±4 °C) | **4 / 4** |
+| coil fouling (air/water side × 3 severities, one duplicate excluded) | 6 / 11 |
+| airflow restriction (filter 10/20/50 %, OA inlet, fan outlet) — new family | **5 / 5** |
+| control faults (unstable, two reverse-acting) — new family | **3 / 3** |
+
+Channel credits among the 41: residual 37, rules 25, frequency 23,
+oscillation 18, model 7 (never alone), rate 1, absence 0, device n/a.
+The six misses are OA damper leaking 20 % and five of the six
+waterside-fouling files. A diagnostic read of those files (after
+scoring; no threshold was touched) shows why: waterside fouling as
+simulated leaves the cooling coil's water-side ΔT (daily median −20.2 °F
+severe vs −20.6 healthy), its valve-open minutes (109,885 vs 109,868) and
+its flow (0.62 vs 0.60 gpm) within three per cent of the fault-free year.
+Whatever the fault does inside the model, it does not reach the recorded
+points at a size the residual channel's healthy band can see; a
+pre-registered rule for it would have to be written from the
+documentation's description of the mechanism, and it is not obvious one
+exists in these 29 points.
+
+**What X19 adds to X17.** The onboarding claim survives a second class
+with the same protocol (29 mappings, 23 rules, two silence iterations, no
+`src/` change), the false-alarm budget transfers (4.2 %), two families
+never seen before are caught in full, and the conformance null holds on a
+fifth system — the model channel is credited on seven scenarios, every
+one already caught by rules, residual, frequency or oscillation. The
+new thing is the failure: the fifth system found an assumption in the
+*scoring scripts* — "any non-zero mode is scheduled operation" — that
+four systems had never exercised, and the inconsistency it exposed
+between the scorecard's gate and the deployed count would have printed
+six detections that were the healthy year's weekends. Run 1 is kept; the
+repair was pre-registered; the four earlier scorecards did not move.
+
+### Ledger
+
+| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | falsifiers |
+|---|---|---|---|---|---|---|---|---|
+| ✓ config only | **✗** G1 duplicate pair, G5 not by name (G2–G4, G6 clean) | ✓ 2 iterations | run 1 **28/96 → F-X19.b**; run 2 ✓ 4/96 | ✓ 41/47 | ✓ 6/11 ≤ 6 | run 1 **6 → F-X19.d**; run 2 ✓ none | ✓ 5/5 airflow, 3/3 control | run 1: b, d; after Amendment 1: none |
+
+| A1-P1 | A1-P2 | A1-P3 | A1-P4 | A1 falsifiers |
+|---|---|---|---|---|
+| ✓ four systems byte-identical | ✓ 4/96 (predicted 4) | ✓ 41/47, exactly the six | ✓ none | none fired |
+
+The sealed transfer test's scorable pool is now four buildings (PFPU,
+SFPU, DDAHU, FCU — the fan coil unit has a heating coil), so the floor
+falls to 1/4! = 0.042: the first design in this project that can attain
+p < 0.05. That re-run is X20, pre-registered separately; it has not been
+run.

@@ -50,11 +50,11 @@
     ]
   },
   "scorecard": {
-    "detected": 47,
+    "detected": 41,
     "scored": 47,
     "by_family": {
       "oa_damper_leak": [
-        3,
+        2,
         3
       ],
       "oa_damper_stuck": [
@@ -74,7 +74,7 @@
         4
       ],
       "coil_fouling": [
-        11,
+        6,
         11
       ],
       "airflow_restriction": [
@@ -89,20 +89,27 @@
     "channels": {
       "rules": 25,
       "resid": 37,
-      "model": 33,
+      "model": 7,
       "device": 0,
       "absence": 0,
       "freq": 23,
       "osc": 18,
       "rate": 1
     },
-    "misses": [],
-    "holdout_fp_days_union_minus_rate": 28,
+    "misses": [
+      "FCU_OADMPRLeak_20",
+      "FCU_Fouling_Cooling_Waterside_Minor",
+      "FCU_Fouling_Cooling_Waterside_Moderate",
+      "FCU_Fouling_Cooling_Waterside_Severe",
+      "FCU_Fouling_Heating_Waterside_Minor",
+      "FCU_Fouling_Heating_Waterside_Moderate"
+    ],
+    "holdout_fp_days_union_minus_rate": 4,
     "holdout_days": 96,
     "per_channel_fp": {
       "rules": 0,
       "resid": 3,
-      "model": 25,
+      "model": 1,
       "device": 0,
       "absence": 0,
       "freq": 0,
@@ -124,32 +131,22 @@
     "P3_healthy_silence_iterations": 2,
     "P3_le_3": true,
     "P3_residual_healthy_signature_days": 0,
-    "P4_holdout_fp_days": 28,
-    "P4_fp_le_10_of_96": false,
-    "P5_detected": 47,
+    "P4_holdout_fp_days": 4,
+    "P4_fp_le_10_of_96": true,
+    "P5_detected": 41,
     "P5_n_scored": 47,
-    "P5_frac": 1.0,
+    "P5_frac": 0.872,
     "P5_ge_60pct": true,
-    "P6_fouling_detected": 11,
+    "P6_fouling_detected": 6,
     "P6_fouling_scored": 11,
-    "P6_le_6": false,
-    "P7_conformance_only_scenarios": [
-      "FCU_OADMPRLeak_20",
-      "FCU_Fouling_Cooling_Waterside_Minor",
-      "FCU_Fouling_Cooling_Waterside_Moderate",
-      "FCU_Fouling_Cooling_Waterside_Severe",
-      "FCU_Fouling_Heating_Waterside_Minor",
-      "FCU_Fouling_Heating_Waterside_Moderate"
-    ],
-    "P7_null_generalises": false,
+    "P6_le_6": true,
+    "P7_conformance_only_scenarios": [],
+    "P7_null_generalises": true,
     "P8_airflow_detected": 5,
     "P8_airflow_scored": 5,
     "P8_control_detected": 3,
     "P8_control_scored": 3,
     "P8_holds": true
   },
-  "falsifiers_fired": [
-    "F-X19.b: holdout false alarms exceed 10 of 96",
-    "F-X19.d: a scenario is detected only by the conformance channels"
-  ]
+  "falsifiers_fired": []
 }

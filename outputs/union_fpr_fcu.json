@@ -28,35 +28,11 @@
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "model": {
-   "holdout_fp_days": 25,
+   "holdout_fp_days": 1,
    "holdout_days": 96,
-   "full_year_days": 100,
+   "full_year_days": 3,
    "holdout_fp_dates": [
-    "2018-01-27",
-    "2018-01-28",
-    "2018-02-24",
-    "2018-02-25",
-    "2018-03-24",
-    "2018-03-25",
-    "2018-03-31",
-    "2018-04-28",
-    "2018-04-29",
-    "2018-05-26",
-    "2018-05-27",
-    "2018-06-23",
-    "2018-06-24",
-    "2018-06-30",
-    "2018-07-28",
-    "2018-07-29",
-    "2018-08-25",
-    "2018-09-23",
-    "2018-09-29",
-    "2018-09-30",
-    "2018-10-27",
-    "2018-10-28",
-    "2018-11-24",
-    "2018-11-25",
-    "2018-12-29"
+    "2018-01-28"
    ],
    "threshold_provenance": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"
   },
@@ -115,29 +91,29 @@
   }
  },
  "union_all8": {
-  "holdout_fp_days": 45,
-  "rate": 0.46875
+  "holdout_fp_days": 21,
+  "rate": 0.21875
  },
  "union_minus_rate": {
-  "holdout_fp_days": 28,
-  "rate": 0.2916666666666667
+  "holdout_fp_days": 4,
+  "rate": 0.041666666666666664
  },
  "split_half_demotion_robustness": {
   "even_months": {
    "decision_half_fp": {
     "rules": 0,
     "resid": 2,
-    "model": 11,
+    "model": 0,
     "device": 0,
     "absence": 0,
     "freq": 0,
     "rate": 11,
     "osc": 0
    },
-   "worst_channel_on_decision_half": "model",
+   "worst_channel_on_decision_half": "rate",
    "rate_is_worst_or_tied": true,
    "deployed_fpr_on_report_half": {
-    "fp_days": 15,
+    "fp_days": 2,
     "n": 48
    }
   },
@@ -145,17 +121,17 @@
    "decision_half_fp": {
     "rules": 0,
     "resid": 1,
-    "model": 14,
+    "model": 1,
     "device": 0,
     "absence": 0,
     "freq": 0,
     "rate": 6,
     "osc": 0
    },
-   "worst_channel_on_decision_half": "model",
-   "rate_is_worst_or_tied": false,
+   "worst_channel_on_decision_half": "rate",
+   "rate_is_worst_or_tied": true,
    "deployed_fpr_on_report_half": {
-    "fp_days": 13,
+    "fp_days": 2,
     "n": 48
    }
   }

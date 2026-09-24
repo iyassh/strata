@@ -5,7 +5,7 @@
  "total_days": 365,
  "exposure": {
   "occupied_holdout_days": 79,
-  "residual_evaluable_holdout_days": 36,
+  "residual_evaluable_holdout_days": 74,
   "rate_windowed_holdout_days": 80
  },
  "channels": {

@@ -10,17 +10,25 @@ from pathlib import Path
 
 import yaml
 
+
+def _at(path: str, commit: str) -> dict:
+    """The artefact as committed when this experiment closed. X24 (2026-09-24)
+    later changed the live scorecards; this ledger records its own experiment."""
+    import subprocess
+    return json.loads(subprocess.run(["git", "show", f"{commit}:{path}"], capture_output=True, text=True, check=True).stdout)
+
 gates = json.loads(Path("outputs/week0_audit_ddahu.json").read_text())
-card = json.loads(Path("outputs/benchmark_v6_ddahu.json").read_text())
-ufpr = json.loads(Path("outputs/union_fpr_ddahu.json").read_text())
-rules = yaml.safe_load(Path("configs/lbnl_ddahu/rules.yaml").read_text())
-sensors = yaml.safe_load(Path("configs/lbnl_ddahu/sensors.yaml").read_text())["canonical_to_csv"]
+card = _at("outputs/benchmark_v6_ddahu.json", "327ee7e")   # X17 closing scorecard
+ufpr = _at("outputs/union_fpr_ddahu.json", "4f19f49")
+CLOSE_COMMIT = "4f19f49"   # the experiment's closing commit: every diff and config count is taken there, not at HEAD
+rules = yaml.safe_load(subprocess.run(["git", "show", f"{CLOSE_COMMIT}:configs/lbnl_ddahu/rules.yaml"], capture_output=True, text=True, check=True).stdout)
+sensors = yaml.safe_load(subprocess.run(["git", "show", f"{CLOSE_COMMIT}:configs/lbnl_ddahu/sensors.yaml"], capture_output=True, text=True, check=True).stdout)["canonical_to_csv"]
 man = yaml.safe_load(Path("configs/lbnl_ddahu/scenarios.yaml").read_text())
 
 ev = rules["events"]
 n_state = sum(1 for r in ev.values() if r.get("alphabet", "state") == "state" and r["kind"] in ("occupancy", "mode", "window"))
 n_sig = len(ev) - n_state
-src_changed = subprocess.run(["git", "diff", "--stat", "b8fadc8", "HEAD", "--", "src/"], capture_output=True, text=True).stdout.strip()
+src_changed = subprocess.run(["git", "diff", "--stat", "b8fadc8", CLOSE_COMMIT, "--", "src/"], capture_output=True, text=True).stdout.strip()
 
 sc = [s for s in card["scenarios"] if s["is_fault"] and not s["excluded"]]
 det = [s for s in sc if s["meaningful_channels"]]

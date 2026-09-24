@@ -1,0 +1,102 @@
+{
+  "prereg": "docs/plans/2026-09-24-x24-oa-fraction-prereg.md",
+  "before_commit": "a4b57cb",
+  "systems": {
+    "fcu": {
+      "detected_before": 41,
+      "detected_after": 42,
+      "scored": 47,
+      "gained": [
+        "FCU_OADMPRLeak_20"
+      ],
+      "lost": [],
+      "status_changed": {
+        "FCU_OADMPRLeak_20": [
+          null,
+          "resid"
+        ],
+        "FCU_OADMPRStuck_30": [
+          "rules",
+          "rules+resid"
+        ],
+        "FCU_OABlockage": [
+          "resid",
+          "rules+resid"
+        ],
+        "FCU_FanOutletBlockage": [
+          "resid+freq",
+          "rules+resid+freq"
+        ]
+      },
+      "residual_days_delta": {
+        "FCU_OABlockage": 173,
+        "FCU_Control_Unstable": 15
+      },
+      "deployed_fp_before": 4,
+      "deployed_fp_after": 4,
+      "residual_fp_before": 3,
+      "residual_fp_after": 3,
+      "residual_band_after": [
+        -0.14499999999999602,
+        0.355000000000004
+      ]
+    },
+    "sdahu": {
+      "detected_before": 14,
+      "detected_after": 14,
+      "scored": 14,
+      "gained": [],
+      "lost": [],
+      "status_changed": {},
+      "residual_days_delta": {},
+      "deployed_fp_before": 1,
+      "deployed_fp_after": 1,
+      "residual_fp_before": 0,
+      "residual_fp_after": 0,
+      "residual_band_after": [
+        0.5263020000000012,
+        1.3720845000000033
+      ]
+    },
+    "ddahu": {
+      "detected_before": 45,
+      "detected_after": 45,
+      "scored": 55,
+      "gained": [],
+      "lost": [],
+      "status_changed": {
+        "DualDuct_DMPRStuck_OA_80": [
+          "rules",
+          "rules+resid"
+        ],
+        "DualDuct_DMPRStuck_OA_100": [
+          "rules",
+          "rules+resid"
+        ]
+      },
+      "residual_days_delta": {
+        "DualDuct_DMPRStuck_OA_0": 14,
+        "DualDuct_DMPRStuck_OA_28": 49,
+        "DualDuct_DMPRStuck_OA_45": 98,
+        "DualDuct_DMPRStuck_OA_80": 178,
+        "DualDuct_DMPRStuck_OA_100": 166
+      },
+      "deployed_fp_before": 3,
+      "deployed_fp_after": 3,
+      "residual_fp_before": 0,
+      "residual_fp_after": 0,
+      "residual_band_after": [
+        2.8599999999999994,
+        4.660000000000004
+      ]
+    }
+  },
+  "predictions": {
+    "P1_regression_sdahu_byte_identical_before_configs": true,
+    "P2_healthy_silence_unchanged": true,
+    "P3_fcu_leak20_detected": true,
+    "P4_budget_le_10": true,
+    "P5_no_loss": true
+  },
+  "falsifiers_fired": []
+}

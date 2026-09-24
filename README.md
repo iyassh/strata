@@ -38,7 +38,7 @@ you:
 > is wrong on ~1% of fault-free days — measured, not hoped")
 
 Tested on five public benchmark systems (LBNL datasets), it detects
-**13 of 14, 23 of 30, 24 of 29 — 45 of 55 on a dual-duct AHU and 41 of 47 on a fan coil unit, both onboarded
+**13 of 14, 23 of 30, 24 of 29 — 45 of 55 on a dual-duct AHU and 42 of 47 on a fan coil unit, both onboarded
 blind, by configuration alone, after the protocol was fixed** — typically
 within **one day**, while false-alarming on only **1.0–5.2%** of fault-free days.
 And when this project's own audit process discovered that one of its
@@ -131,7 +131,7 @@ fan coil unit):
 
 | | SDAHU | PFPU | SFPU | DDAHU (X17) | FCU (X19) |
 |---|---|---|---|---|---|
-| fault scenarios detected | **13 / 14** * | **23 / 30** | **24 / 29** | **45 / 55** | **41 / 47** |
+| fault scenarios detected | **13 / 14** * | **23 / 30** | **24 / 29** | **45 / 55** | **42 / 47** |
 | median time-to-detect (all significant channels, rate included) | 1 day | 1 day | 1 day | 1 day | 1 day |
 | time-to-detect tail (longest first alarm among detected scenarios) | 2 days | 21 days | 108 days | 114 days | 15 days |
 | false-alarm budget, deployed detector (fault-free holdout days) | 1.0% | 5.2% | 4.2% | 3.1% | 4.2% |
@@ -147,7 +147,8 @@ change; the hash gate found a byte-identical pair under two family labels
 (scored once, [ERRATA.md](ERRATA.md) E6); both new scorecard families — airflow
 restriction and reverse/unstable control, four at the documentation's granularity — caught in full; misses are five of
 six waterside-fouling files (the cooling coil's leave the recorded points
-within about 3% of healthy) and one 20% damper leak. Its first run fired two falsifiers (28/96 false alarms; six
+within about 3% of healthy); the 20% damper leak was caught once an
+outdoor-air-fraction residual was added (X24, [PHASE11_RESULTS.md](PHASE11_RESULTS.md)). Its first run fired two falsifiers (28/96 false alarms; six
 "detections" by the model channel alone) that traced to a scoring-script
 assumption — any non-zero mode is scheduled operation — which this unit's
 idle setback weekends broke; the repair was pre-registered, the four earlier

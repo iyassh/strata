@@ -66,6 +66,8 @@ PIPELINE = {
     "discovery_predicts_transfer_q_four.json": "uv run python scripts/discovery_predicts_transfer_q.py --systems ddahu,fcu --out outputs/discovery_predicts_transfer_q_four.json",
     "x20_transfer_four.json": "uv run python scripts/x20_transfer_four.py",
     "x21_foreign_net_support.json": "uv run python scripts/x21_foreign_net_support.py",
+    "x22_positive_control.json": "uv run python scripts/x22_positive_control.py",
+    "x24_oa_fraction.json": "uv run python scripts/x24_oa_fraction.py",
     # x9_x10_robustness.json: ~1 h in three per-system processes (see its pre-registration); not in the gate.
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",
     "discovery_predicts_transfer.json": "uv run python scripts/discovery_predicts_transfer.py --q outputs/discovery_predicts_transfer_q.json",

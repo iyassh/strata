@@ -10,23 +10,31 @@ from pathlib import Path
 
 import yaml
 
+
+def _at(path: str, commit: str) -> dict:
+    """The artefact as committed when this experiment closed. X24 (2026-09-24)
+    later changed the live scorecards; this ledger records its own experiment."""
+    import subprocess
+    return json.loads(subprocess.run(["git", "show", f"{commit}:{path}"], capture_output=True, text=True, check=True).stdout)
+
 PREREG_COMMIT = "f72d53f"
 gates = json.loads(Path("outputs/week0_audit_fcu.json").read_text())
-card = json.loads(Path("outputs/benchmark_v6_fcu.json").read_text())
-ufpr = json.loads(Path("outputs/union_fpr_fcu.json").read_text())
-rules = yaml.safe_load(Path("configs/lbnl_fcu/rules.yaml").read_text())
-sensors = yaml.safe_load(Path("configs/lbnl_fcu/sensors.yaml").read_text())["canonical_to_csv"]
+card = _at("outputs/benchmark_v6_fcu.json", "50510fc")   # X19 run-2 scorecard (X24 changed the live one)
+ufpr = _at("outputs/union_fpr_fcu.json", "50510fc")
+CLOSE_COMMIT = "50510fc"   # the experiment's closing commit: every diff and config count is taken there, not at HEAD
+rules = yaml.safe_load(subprocess.run(["git", "show", f"{CLOSE_COMMIT}:configs/lbnl_fcu/rules.yaml"], capture_output=True, text=True, check=True).stdout)
+sensors = yaml.safe_load(subprocess.run(["git", "show", f"{CLOSE_COMMIT}:configs/lbnl_fcu/sensors.yaml"], capture_output=True, text=True, check=True).stdout)["canonical_to_csv"]
 n_mappings = len([k for k in sensors if k != "Datetime"])   # the timestamp column is not a sensor mapping
 man = yaml.safe_load(Path("configs/lbnl_fcu/scenarios.yaml").read_text())
 
 ev = rules["events"]
 n_state = sum(1 for r in ev.values() if r.get("alphabet", "state") == "state" and r["kind"] in ("occupancy", "mode", "window"))
 n_sig = len(ev) - n_state
-src_changed = subprocess.run(["git", "diff", "--stat", PREREG_COMMIT, "HEAD", "--", "src/"], capture_output=True, text=True).stdout.strip()
+src_changed = subprocess.run(["git", "diff", "--stat", PREREG_COMMIT, CLOSE_COMMIT, "--", "src/"], capture_output=True, text=True).stdout.strip()
 CONFIG_COMMIT = "beab656"   # the config as committed before any fault file was scored
-config_changed_after_scoring = subprocess.run(["git", "diff", "--stat", CONFIG_COMMIT, "HEAD", "--", "configs/lbnl_fcu/"], capture_output=True, text=True).stdout.strip()
+config_changed_after_scoring = subprocess.run(["git", "diff", "--stat", CONFIG_COMMIT, CLOSE_COMMIT, "--", "configs/lbnl_fcu/"], capture_output=True, text=True).stdout.strip()
 # scripts are outside the config-only claim but are reported (hostile review, finding 11)
-scripts_changed = subprocess.run(["git", "diff", "--stat", PREREG_COMMIT, "HEAD", "--", "scripts/gates_system.py", "scripts/06_convert_fcu.py", "scripts/benchmark.py", "scripts/union_fpr.py"], capture_output=True, text=True).stdout.strip().splitlines()
+scripts_changed = subprocess.run(["git", "diff", "--stat", PREREG_COMMIT, CLOSE_COMMIT, "--", "scripts/gates_system.py", "scripts/06_convert_fcu.py", "scripts/benchmark.py", "scripts/union_fpr.py"], capture_output=True, text=True).stdout.strip().splitlines()
 
 sc = [s for s in card["scenarios"] if s["is_fault"] and not s["excluded"]]
 excluded = [s["file"] for s in card["scenarios"] if s["is_fault"] and s["excluded"]]
@@ -51,7 +59,7 @@ from strata.hvac.events import abstract_events
 _hlog = abstract_events(pd.read_parquet("data/processed/fcu/FCU_FaultFree.parquet"), load_config("configs/lbnl_fcu"))
 healthy_sig_days = int(_hlog.loc[_hlog["alphabet"] == "signature", "case_id"].nunique())
 # iterations are attested from the logged comments in rules.yaml ("iteration 2"), not computed
-_rules_txt = Path("configs/lbnl_fcu/rules.yaml").read_text()
+_rules_txt = subprocess.run(["git", "show", f"{CLOSE_COMMIT}:configs/lbnl_fcu/rules.yaml"], capture_output=True, text=True, check=True).stdout
 silence_iterations_attested = 1 + int("iteration 2" in _rules_txt.lower())
 g6 = gates.get("G6_branch", {})
 gate_axes = {

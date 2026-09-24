@@ -191,10 +191,11 @@ rule it produced — is in [RESEARCH_LOG.md](RESEARCH_LOG.md).
 
 ### Side contribution: the datasets themselves
 
-Along the way we documented **five defects in the most widely used public
+Along the way we documented **six defects in the most widely used public
 FDD benchmark datasets** — duplicate fault files shipped under different
 severity labels, a mislabeled fault run, unit-swapped columns that let any
-ML model cheat, a date-rotated file, and the configuration-branch mismatch
+ML model cheat, a date-rotated file, a fan-coil-unit run shipped under two
+family labels, and the configuration-branch mismatch
 behind our asterisk. Each ships with machine-verifiable evidence and a
 recompute command: **[ERRATA.md](ERRATA.md)**. Anyone benchmarking on these
 datasets inherits these issues silently; now there's a citable record.

@@ -1,0 +1,483 @@
+# Event-abstraction rules for the LBNL DDAHU dataset (dual-duct AHU: hot and
+# cold decks, two coils, two supply fans, three AHU dampers, four zone mixing
+# boxes W/SB/SA/E with command-only dampers). X17 onboarding, 2026-09-24.
+#
+# Written from the documentation (control sequence §1.2, points Table 2) and
+# the existing rule KINDS only — zero code changes. Thresholds follow the G1
+# discipline: physics/APAR conventions first, then validated (and if needed
+# loosened) against DualDuct_FaultFree ONLY via the healthy-silence gate.
+# Every adjustment made on healthy evidence is logged beside the rule.
+# No fault file is consulted (pre-registration X17, F-X17.e).
+
+climate:
+  ashrae_zone: 5A
+  notes: "Energy Resource Station, Des Moines IA, TMY. Documentation only."
+
+detection:
+  fpr_quantile: 0.01
+  # zone dampers are command-only (no position wire); hunting is visible in
+  # the command itself and in the coil valves. Deadband 0.02 = 2% travel.
+  oscillation_signals: [ZONE_DMPR_C_CMD_W, ZONE_DMPR_C_CMD_SB, ZONE_DMPR_C_CMD_SA, ZONE_DMPR_C_CMD_E,
+                        ZONE_DMPR_H_CMD_W, ZONE_DMPR_H_CMD_SB, ZONE_DMPR_H_CMD_SA, ZONE_DMPR_H_CMD_E,
+                        CHWC_VLV_POS, HWC_VLV_POS,
+                        ZONE_TEMP_W, ZONE_TEMP_SB, ZONE_TEMP_SA, ZONE_TEMP_E]
+  oscillation_deadband: 0.02
+  oscillation_deadbands: {ZONE_TEMP_W: 0.5, ZONE_TEMP_SB: 0.5, ZONE_TEMP_SA: 0.5, ZONE_TEMP_E: 0.5}
+  residual_min_band_width: 0.5
+  residual_min_exceedance: 0.5
+  residual_channels: [supply_air_residual, hot_deck_residual,
+                      chwc_waterside_dT, hwc_waterside_dT,
+                      cold_static_per_speed, hot_static_per_speed]
+  holdout_days_per_month: 8
+
+events:
+  # ---------------- state alphabet (feeds model discovery) ----------------
+  occupancy:
+    kind: occupancy
+    alphabet: state
+    signal: OCCUPIED           # ==1: operate
+    on_event: system_started
+    off_event: system_stopped
+
+  setback:
+    kind: mode
+    alphabet: state
+    signal: OCCUPIED           # ==2: setback; mode fires >1.5
+    on_above: 1.5
+    on_event: setback_started
+    off_event: setback_ended
+
+  cooling:
+    kind: mode
+    alphabet: state
+    signal: CHWC_VLV_POS
+    on_above: 0.05
+    on_event: cooling_active
+    off_event: cooling_inactive
+
+  heating:
+    kind: mode
+    alphabet: state
+    signal: HWC_VLV_POS
+    on_above: 0.05
+    on_event: heating_active
+    off_event: heating_inactive
+
+  cold_fan:
+    kind: mode
+    alphabet: state
+    signal: CSF_STATUS
+    on_above: 0.5
+    on_event: cold_fan_started
+    off_event: cold_fan_stopped
+
+  hot_fan:
+    kind: mode
+    alphabet: state
+    signal: HSF_STATUS
+    on_above: 0.5
+    on_event: hot_fan_started
+    off_event: hot_fan_stopped
+
+  # Economizer enabled below 60 F in winter/transition (documentation 1.2 ii/iii).
+  economizer:
+    kind: window
+    alphabet: state
+    signal: OA_TEMP
+    low: -100.0
+    high: 60.0
+    enter_event: economizer_window_entered
+    exit_event: economizer_window_exited
+
+  # Zone mixing boxes: a cooling call opens the cold-deck damper above its
+  # 10% minimum, a heating call opens the hot-deck damper above its 25%
+  # minimum (documentation 1.2 v a/b). Device stratum, one case per box.
+  zone_cooling_W:
+    kind: mode
+    alphabet: state
+    signal: ZONE_DMPR_C_CMD_W
+    on_above: 0.42   # healthy-silence iteration 1: command rests at 0.37 when idle, median 0.46+ on a call
+    on_event: zone_cooling_W_active
+    off_event: zone_cooling_W_inactive
+    stratum: device
+    device: TU_W
+  zone_cooling_SB:
+    kind: mode
+    alphabet: state
+    signal: ZONE_DMPR_C_CMD_SB
+    on_above: 0.42   # healthy-silence iteration 1: command rests at 0.37 when idle, median 0.46+ on a call
+    on_event: zone_cooling_SB_active
+    off_event: zone_cooling_SB_inactive
+    stratum: device
+    device: TU_SB
+  zone_cooling_SA:
+    kind: mode
+    alphabet: state
+    signal: ZONE_DMPR_C_CMD_SA
+    on_above: 0.42   # healthy-silence iteration 1: command rests at 0.37 when idle, median 0.46+ on a call
+    on_event: zone_cooling_SA_active
+    off_event: zone_cooling_SA_inactive
+    stratum: device
+    device: TU_SA
+  zone_cooling_E:
+    kind: mode
+    alphabet: state
+    signal: ZONE_DMPR_C_CMD_E
+    on_above: 0.42   # healthy-silence iteration 1: command rests at 0.37 when idle, median 0.46+ on a call
+    on_event: zone_cooling_E_active
+    off_event: zone_cooling_E_inactive
+    stratum: device
+    device: TU_E
+  zone_heating_W:
+    kind: mode
+    alphabet: state
+    signal: ZONE_DMPR_H_CMD_W
+    on_above: 0.60   # iteration 1: rests at 0.49 when idle; p95 0.53
+    on_event: zone_heating_W_active
+    off_event: zone_heating_W_inactive
+    stratum: device
+    device: TU_W
+  zone_heating_SB:
+    kind: mode
+    alphabet: state
+    signal: ZONE_DMPR_H_CMD_SB
+    on_above: 0.60   # iteration 1: rests at 0.49 when idle; p95 0.53
+    on_event: zone_heating_SB_active
+    off_event: zone_heating_SB_inactive
+    stratum: device
+    device: TU_SB
+  zone_heating_SA:
+    kind: mode
+    alphabet: state
+    signal: ZONE_DMPR_H_CMD_SA
+    on_above: 0.60   # iteration 1: rests at 0.49 when idle; p95 0.53
+    on_event: zone_heating_SA_active
+    off_event: zone_heating_SA_inactive
+    stratum: device
+    device: TU_SA
+  zone_heating_E:
+    kind: mode
+    alphabet: state
+    signal: ZONE_DMPR_H_CMD_E
+    on_above: 0.60   # iteration 1: rests at 0.49 when idle; p95 0.53
+    on_event: zone_heating_E_active
+    off_event: zone_heating_E_inactive
+    stratum: device
+    device: TU_E
+
+  # ---------------- signature alphabet (rules channel) ----------------
+  # Actuator command vs position mismatches: 0.05 travel, 60 consecutive min.
+  oa_damper_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: OA_DMPR_POS
+    cmd: OA_DMPR_CMD
+    threshold: 0.05
+    sustained_min: 60
+  ra_damper_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: RA_DMPR_POS
+    cmd: RA_DMPR_CMD
+    threshold: 0.05
+    sustained_min: 60
+  ea_damper_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: EA_DMPR_POS
+    cmd: EA_DMPR_CMD
+    threshold: 0.05
+    sustained_min: 60
+  chwc_valve_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: CHWC_VLV_POS
+    cmd: CHWC_VLV_CMD
+    threshold: 0.05
+    sustained_min: 60
+  hwc_valve_mismatch:
+    kind: mismatch
+    alphabet: signature
+    pos: HWC_VLV_POS
+    cmd: HWC_VLV_CMD
+    threshold: 0.05
+    sustained_min: 60
+
+  # Valve leaking: commanded (near-)closed but position open.
+  chwc_valve_leak:
+    kind: leak
+    alphabet: signature
+    pos: CHWC_VLV_POS
+    cmd: CHWC_VLV_CMD
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+  hwc_valve_leak:
+    kind: leak
+    alphabet: signature
+    pos: HWC_VLV_POS
+    cmd: HWC_VLV_CMD
+    idle_below: 0.02
+    leak_above: 0.05
+    sustained_min: 15
+
+  # Deck supply-air setpoint deviation, gated on the deck's coil controlling.
+  # Iteration 1 (healthy-silence): expressed as a two-gate residual — the
+  # cold deck cannot hold 55 F on ten healthy days when its fan saturates
+  # (speed 1.0, static 1.39 vs 1.6); gating on duct static at setpoint
+  # removes them (1 healthy day remains at 60 min sustained).
+  cold_sat_setpoint_deviation:
+    kind: paired_residual
+    alphabet: signature
+    a: SA_TEMP
+    b: SA_TEMP_SP
+    low: -2.0
+    high: 2.0
+    gates:
+      - signal: CHWC_VLV_POS
+        above: 0.05
+      - signal: CSA_STATIC
+        above: 1.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+  hot_sat_setpoint_deviation:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: HSA_TEMP
+    sp: HSA_TEMP_SP
+    threshold: 3.0   # iteration 1: 4 healthy days at 2.0 (brief transients), 0 at 3.0
+    sustained_min: 15
+    gate_signal: HWC_VLV_POS
+    gate_above: 0.05
+
+  # Deck static-pressure setpoint deviation (setpoint 1.6 in.wg), gated on the
+  # deck fan running. The controller trusts a biased sensor, so a bias will
+  # NOT show here; it is the residuals below that attempt the bias families.
+  # Iteration 1: two-gate residual so the fan-saturated regime (speed >= 0.98)
+  # is excluded; 0.5 in.wg band (healthy p99.9 outside saturation is 0.36).
+  cold_static_setpoint_deviation:
+    kind: paired_residual
+    alphabet: signature
+    a: CSA_STATIC
+    b: CSA_STATIC_SP
+    low: -0.5
+    high: 0.5
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+      - signal: CSF_SPEED
+        below: 0.98
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+  hot_static_setpoint_deviation:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: HSA_STATIC
+    sp: HSA_STATIC_SP
+    threshold: 0.5   # iteration 1: aligned with the cold deck's band
+    sustained_min: 30
+    gate_signal: HSF_STATUS
+    gate_above: 0.5
+
+  # ---- Analytic-redundancy rules ----
+  # With the deck's coil off and its fan on, deck supply air must equal mixed
+  # air plus fan heat. A bias in the deck SAT sensor appears verbatim here.
+  # Band [low, high] is the rules-channel trigger (physics ±2 F floor as on
+  # SDAHU); the residual CHANNEL learns its own band from healthy train days.
+  supply_air_residual:
+    kind: paired_residual
+    alphabet: signature
+    a: SA_TEMP
+    b: MA_TEMP
+    low: -6.0
+    high: 6.0
+    gates:
+      - signal: CHWC_VLV_POS
+        below: 0.02
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
+  hot_deck_residual:
+    kind: paired_residual
+    alphabet: signature
+    a: HSA_TEMP
+    b: MA_TEMP
+    low: -3.0    # iteration 1: healthy gated residual runs 0.1..10.2 F (p0.1..p99.9), fan heat + hot-deck carry-over
+    high: 13.0
+    gates:
+      - signal: HWC_VLV_POS
+        below: 0.02
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
+
+  # Mixed air is a blend of outdoor and return air.
+  mixed_air_envelope:
+    kind: envelope_residual
+    alphabet: signature
+    signal: MA_TEMP
+    low_ref: OA_TEMP
+    high_ref: RA_TEMP
+    tolerance: 2.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+
+  # Coil water-side temperature drop while the valve is open and water flows
+  # (residual channels; wide rules band so the learned band does the work).
+  chwc_waterside_dT:
+    kind: paired_residual
+    alphabet: signature
+    a: CHWC_EWT
+    b: CHWC_LWT
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: CHWC_VLV_POS
+        above: 0.10
+      - signal: CHWC_FLOW
+        above: 0.10
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
+  hwc_waterside_dT:
+    kind: paired_residual
+    alphabet: signature
+    a: HWC_EWT
+    b: HWC_LWT
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: HWC_VLV_POS
+        above: 0.10
+      - signal: HWC_FLOW
+        above: 0.10
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
+
+  # Static-pressure sensor bias attempt (pre-registered P8): duct static per
+  # unit of fan speed while the fan runs above a floor. The fan law makes the
+  # true ratio speed-dependent, so this is a crude proxy whose learned band
+  # will be wide; it is the only expression the existing kinds allow.
+  cold_static_per_speed:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: CSA_STATIC
+    b: CSF_SPEED
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+      - signal: CSF_SPEED
+        above: 0.30
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
+  hot_static_per_speed:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: HSA_STATIC
+    b: HSF_SPEED
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+      - signal: HSF_SPEED
+        above: 0.30
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 120
+
+  # Zone flow tracking: measured deck flow vs demanded, per box and deck
+  # (the PFPU rule; 50 CFM = 2x its measured healthy floor, to be validated
+  # on this system's healthy year).
+  zone_flow_tracking_C_W:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_FLOW_C_W
+    sp: ZONE_FLOW_C_SP_W
+    threshold: 50
+    sustained_min: 60
+    gate_signal: CSA_STATIC   # iteration 1: flow tracking is meaningful only with duct static at setpoint (fan-saturated days excluded)
+    gate_above: 1.5
+    device: TU_W
+  zone_flow_tracking_C_SB:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_FLOW_C_SB
+    sp: ZONE_FLOW_C_SP_SB
+    threshold: 50
+    sustained_min: 60
+    gate_signal: CSA_STATIC   # iteration 1: flow tracking is meaningful only with duct static at setpoint (fan-saturated days excluded)
+    gate_above: 1.5
+    device: TU_SB
+  zone_flow_tracking_C_SA:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_FLOW_C_SA
+    sp: ZONE_FLOW_C_SP_SA
+    threshold: 50
+    sustained_min: 60
+    gate_signal: CSA_STATIC   # iteration 1: flow tracking is meaningful only with duct static at setpoint (fan-saturated days excluded)
+    gate_above: 1.5
+    device: TU_SA
+  zone_flow_tracking_C_E:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_FLOW_C_E
+    sp: ZONE_FLOW_C_SP_E
+    threshold: 50
+    sustained_min: 60
+    gate_signal: CSA_STATIC   # iteration 1: flow tracking is meaningful only with duct static at setpoint (fan-saturated days excluded)
+    gate_above: 1.5
+    device: TU_E
+  zone_flow_tracking_H_W:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_FLOW_H_W
+    sp: ZONE_FLOW_H_SP_W
+    threshold: 50
+    sustained_min: 60
+    gate_signal: OCCUPIED
+    gate_above: 0.5
+    device: TU_W
+  zone_flow_tracking_H_SB:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_FLOW_H_SB
+    sp: ZONE_FLOW_H_SP_SB
+    threshold: 50
+    sustained_min: 60
+    gate_signal: OCCUPIED
+    gate_above: 0.5
+    device: TU_SB
+  zone_flow_tracking_H_SA:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_FLOW_H_SA
+    sp: ZONE_FLOW_H_SP_SA
+    threshold: 50
+    sustained_min: 60
+    gate_signal: OCCUPIED
+    gate_above: 0.5
+    device: TU_SA
+  zone_flow_tracking_H_E:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: ZONE_FLOW_H_E
+    sp: ZONE_FLOW_H_SP_E
+    threshold: 50
+    sustained_min: 60
+    gate_signal: OCCUPIED
+    gate_above: 0.5
+    device: TU_E

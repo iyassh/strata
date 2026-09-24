@@ -294,6 +294,11 @@ The change is not a no-op by construction: the silence rule's day domain shrinks
 
 Channel credits among the 41: residual 37, rules 25, frequency 23,
 oscillation 18, model 7 (never alone), rate 1, absence 0, device n/a.
+At day level the model channel is the sole flag on 15 days of the
+unstable-control scenario (`model_unique_days`), which four other channels
+catch; the scenario-level null is untouched, but this is the first system
+since the dual-duct unit's zero on which the model channel is alone on any
+day.
 The six misses are OA damper leaking 20 % and five of the six
 waterside-fouling files. A diagnostic read of those files (after
 scoring; no threshold was touched; `scripts/x19_waterside_diagnostic.py`,

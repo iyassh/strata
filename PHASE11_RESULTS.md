@@ -1,4 +1,4 @@
-# Phase 11 Results — After the review round: the conformance positive control (X22), the outdoor-air-fraction residual (X24), the statistical repair (X25), the first real building (X26) and the fan-law virtual static (X27)
+# Phase 11 Results — After the review round: the conformance positive control (X22), the outdoor-air-fraction residual (X24), the statistical repair (X25), the first real building (X26), the fan-law virtual static (X27) and the coil heat-transfer channel that saw nothing (X28)
 
 *2026-09-24. Both pre-registered (`docs/plans/2026-09-24-x22-conformance-positive-control-prereg.md` 2780137, `docs/plans/2026-09-24-x24-oa-fraction-prereg.md` 04c37ef) after the review round (`docs/plans/2026-09-24-review-verdict-and-improvement-plan.md`) and before any injected log or new residual was scored. Artefacts: `outputs/x22_positive_control.json`, `outputs/x24_oa_fraction.json`, regenerated `benchmark_v6_{fcu,sdahu,ddahu}.json` and `union_fpr_{fcu,sdahu,ddahu}.json`; guards `tests/test_x22_positive_control.py`, `tests/test_x24_oa_fraction.py`.*
 
@@ -316,3 +316,53 @@ is a fitted model, not a ratio, and is not attempted here.
 | P0 | P1 | P2 | P3 | falsifiers |
 |---|---|---|---|---|
 | ✓ (numbers identical; one caveat string refreshed) | ✓ 3/96 | **✗** 6 of 8 | ✓ none lost | F-X27.b |
+
+
+## X28 — the coil heat-transfer (UA) channel
+
+*Pre-registered (`docs/plans/2026-09-24-x28-coil-ua-prereg.md`, 8ef5661)
+before any code; step 1 (bc2dc4e) `op: ua` with no config touched — SDAHU
+byte-identical; step 2 (73a475d) `chwc_ua` and `hwc_ua` on the dual-duct
+and fan coil units with floors set once on the healthy year (5 % of the
+training-day median UA), committed before scoring on the final X25 gate.
+Artefacts: `outputs/x28_coil_ua_run1.json` (both systems with the
+channels), `benchmark_v6_fcu_x28run1.json`, `union_fpr_fcu_x28run1.json`;
+the live DDAHU scorecard keeps the channels; guard `tests/test_x28_coil_ua.py`.*
+
+UA = Q / LMTD from the water side (flow × |EWT − LWT|) and the four
+terminal temperatures, gated on the coil valve and flow, daily-median
+scored, band learned on healthy. The healthy bands were wide before any
+fault file was opened: the dual-duct cooling coil's daily-median UA runs
+2.3–14.1 (gpm·°F per °F) on training days, the fan coil's 0.7–2.1; the
+heating coils' are narrow (0.6–1.1, 0.2–0.5).
+
+| system | fouling detected before → after | detected | deployed FP | residual-channel FP |
+|---|---|---|---|---|
+| DDAHU | 5 / 12 → 5 / 12 | 45 → 45 | 3 → 3 | 0 → 0 |
+| FCU | 6 / 11 → 6 / 11 | 40 → 40 | 4 → **6** | 3 → **5** |
+
+No fouling scenario gained on either system — **F-X28.b fired** — and on
+the fan coil unit the two channels added two holdout false alarms for no
+detection, so **F-X28.a** removed them from that config (the scorecard was
+regenerated without them; the run-1 artefacts are kept). On the dual-duct
+unit they stay, inert: no gain, no false alarm. The per-scenario residual
+day counts barely moved (fan coil waterside files: 3 → 5 or 6 of 365).
+
+**Reading.** The X19 diagnostic had already shown that the fan coil's
+recorded water-side signals sit within about three per cent of healthy
+under waterside fouling; UA, being computed from those same signals, sees
+what they see. On the dual-duct unit the cooling coil's healthy UA varies
+by a factor of six across the year at partial load — the LMTD is small and
+noisy when the valve throttles — and the fouling files sit inside that
+spread. The domain review's expectation was right in the one case it
+named and wrong in the other. Fouling on these two datasets is a property
+of what was recorded, not of the detector's vocabulary: the temperature
+band (X13), the enriched alphabet (X14/X15), the water-side ΔT, and now
+the heat-transfer estimate all fail on the same files. The refrigerant-side
+observability test on the simulated rooftop unit (plan item B4) is the
+remaining way to show that fouling *can* be seen when its own physics is
+recorded.
+
+| P0 | P1 | P2 | P3 | P4 | falsifiers |
+|---|---|---|---|---|---|
+| ✓ | ✗ FCU (+2 FP) | ✗ 0 gained | ✗ 0 gained | ✓ | F-X28.a (FCU), F-X28.b |

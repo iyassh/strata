@@ -103,14 +103,21 @@ def build_device_detector(
         return None
     d = cfg.rules["detection"]
     hold = holdout_mask(dlog["case_id"], d["holdout_days_per_month"])
-    train, hold_log = dlog[~hold].reset_index(drop=True), dlog[hold].reset_index(drop=True)
+    calib_n = int(d.get("calibration_days_per_month", 0))   # X25
+    from strata.core.splits import calibration_mask
+    calib = calibration_mask(dlog["case_id"], d["holdout_days_per_month"], calib_n) if calib_n else pd.Series(False, index=dlog.index)
+    train, hold_log = dlog[~hold & ~calib].reset_index(drop=True), dlog[hold].reset_index(drop=True)
 
     from strata.core.conformance import check_conformance
     from strata.core.discovery import discover_model
 
     net, im, fm = discover_model(train[["case_id", "activity", "timestamp"]])
     conf = check_conformance(hold_log[["case_id", "activity", "timestamp"]], net, im, fm)
-    threshold = float(conf["per_day"]["fitness"].quantile(d["fpr_quantile"]))
+    if calib_n:
+        cconf = check_conformance(dlog[calib].reset_index(drop=True)[["case_id", "activity", "timestamp"]], net, im, fm)
+        threshold = float(cconf["per_day"]["fitness"].quantile(d["fpr_quantile"]))
+    else:
+        threshold = float(conf["per_day"]["fitness"].quantile(d["fpr_quantile"]))
 
     # absence baselines from TRAIN days only (audit E: calibration must not
     # see holdout); holdout silence kept separately as the validation count
@@ -133,6 +140,7 @@ def build_device_detector(
         healthy_absence=absence,
     )
     det.absence_holdout_fp = absence_holdout_fp
+    det.threshold_out_of_sample = bool(calib_n)
     return det
 
 

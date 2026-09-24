@@ -25,7 +25,7 @@ from strata.io.config import Config
 
 
 # moved to core.splits (pm4py-free path, T3 facade); re-exported here
-from strata.core.splits import holdout_mask  # noqa: F401
+from strata.core.splits import calibration_mask, holdout_mask  # noqa: F401
 
 
 @dataclass
@@ -52,15 +52,27 @@ def build_detector(cfg: Config, healthy_log: pd.DataFrame) -> Detector:
     healthy_log = state_only(healthy_log)
     d = cfg.rules["detection"]
     hold = holdout_mask(healthy_log["case_id"], d["holdout_days_per_month"])
+    calib_n = int(d.get("calibration_days_per_month", 0))   # X25: 0 keeps the legacy two-way split
+    if calib_n:
+        calib = calibration_mask(healthy_log["case_id"], d["holdout_days_per_month"], calib_n)
+    else:
+        calib = pd.Series(False, index=healthy_log.index)
 
-    train_log = healthy_log[~hold].reset_index(drop=True)
+    train_log = healthy_log[~hold & ~calib].reset_index(drop=True)
     hold_log = healthy_log[hold].reset_index(drop=True)
 
     net, im, fm = discover_model(train_log)
     hold_conf = check_conformance(hold_log, net, im, fm)
-    threshold = float(hold_conf["per_day"]["fitness"].quantile(d["fpr_quantile"]))
+    if calib_n:
+        # threshold from the calibration slice; the holdout is then out-of-sample
+        calib_conf = check_conformance(healthy_log[calib].reset_index(drop=True), net, im, fm)
+        threshold = float(calib_conf["per_day"]["fitness"].quantile(d["fpr_quantile"]))
+        calib_per_day = calib_conf["per_day"]
+    else:
+        threshold = float(hold_conf["per_day"]["fitness"].quantile(d["fpr_quantile"]))
+        calib_per_day = None
 
-    return Detector(
+    det = Detector(
         net=net,
         im=im,
         fm=fm,
@@ -68,6 +80,9 @@ def build_detector(cfg: Config, healthy_log: pd.DataFrame) -> Detector:
         n_train_days=train_log["case_id"].nunique(),
         holdout_per_day=hold_conf["per_day"],
     )
+    det.calib_per_day = calib_per_day
+    det.threshold_out_of_sample = bool(calib_n)
+    return det
 
 
 def classify_days(detector: Detector, event_log: pd.DataFrame) -> pd.DataFrame:

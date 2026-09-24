@@ -185,9 +185,12 @@ chans = {
 # construction), not out-of-sample measurements. All other channels use
 # train-only min/max thresholds and their rows are honest holdout counts.
 PROVENANCE = {
-    "model": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample",
-    "device": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample",
+    "model": ("threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample" if getattr(det, "threshold_out_of_sample", False)
+              else "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"),
+    "device": ("threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample" if getattr(dev_det, "threshold_out_of_sample", False)
+               else "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"),
 }
+CALIB_TARGET = {k for k, v in PROVENANCE.items() if "calibration target" in v}
 
 # Per-channel exposure: not every channel can alarm on all holdout days.
 exposure = {
@@ -213,7 +216,7 @@ for name, fl in chans.items():
         "holdout_fp_dates": sorted(on_hold[on_hold].index.tolist()),
         "threshold_provenance": PROVENANCE.get(name, "train-only thresholds; holdout is out-of-sample"),
     }
-    mark = " *calib-target*" if name in PROVENANCE else ""
+    mark = " *calib-target*" if name in CALIB_TARGET else ""
     print(f"  {name:8s} holdout FP {k:3d}/{len(hd)}  ({k / len(hd):.1%})   full-year {int(fl.sum())}{mark}")
     union = union | fl
     if name != "rate":

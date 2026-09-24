@@ -20,3 +20,15 @@ def holdout_mask(case_ids: pd.Series, holdout_days_per_month: int) -> pd.Series:
     """
     dates = pd.to_datetime(case_ids.str.split("__").str[0])
     return dates.dt.day > (dates.dt.days_in_month - holdout_days_per_month)
+
+
+def calibration_mask(case_ids: pd.Series, holdout_days_per_month: int,
+                     calibration_days_per_month: int) -> pd.Series:
+    """X25: True for cases whose day falls in the N days immediately BEFORE the
+    month's holdout block. Conformance thresholds are calibrated here so the
+    holdout stays out-of-sample for every channel. Calendar-based like
+    holdout_mask, so pooled device cases never straddle the split."""
+    dates = pd.to_datetime(case_ids.str.split("__").str[0])
+    dim = dates.dt.days_in_month
+    return (dates.dt.day > (dim - holdout_days_per_month - calibration_days_per_month)) & \
+           (dates.dt.day <= (dim - holdout_days_per_month))

@@ -62,3 +62,10 @@ scorecard regenerated.**
 Regenerated `benchmark_v6_*.json` and `union_fpr_*.json` for all five;
 `outputs/x25_statistical_repair.json` (before/after diff per system);
 guard `tests/test_x25_statistical_repair.py`.
+
+## Note (2026-09-24, before any run): order of the two changes
+
+P0 is evaluated on the split code alone (calibration key absent, floor
+unchanged): SDAHU must regenerate byte-identically. The floor change and the
+five config keys are then applied together, and P1–P4 are read off that
+"after" state against the committed "before" scorecards.

@@ -1,4 +1,4 @@
-# Phase 11 Results — After the review round: the conformance positive control (X22), the outdoor-air-fraction residual (X24), the statistical repair (X25), the first real building (X26), the fan-law virtual static (X27) and the coil heat-transfer channel that saw nothing (X28)
+# Phase 11 Results — After the review round: the conformance positive control (X22), the outdoor-air-fraction residual (X24), the statistical repair (X25), the first real building (X26), the fan-law virtual static (X27) the coil heat-transfer channel that saw nothing (X28), and the refrigerant-side test that saw everything (X29)
 
 *2026-09-24. Both pre-registered (`docs/plans/2026-09-24-x22-conformance-positive-control-prereg.md` 2780137, `docs/plans/2026-09-24-x24-oa-fraction-prereg.md` 04c37ef) after the review round (`docs/plans/2026-09-24-review-verdict-and-improvement-plan.md`) and before any injected log or new residual was scored. Artefacts: `outputs/x22_positive_control.json`, `outputs/x24_oa_fraction.json`, regenerated `benchmark_v6_{fcu,sdahu,ddahu}.json` and `union_fpr_{fcu,sdahu,ddahu}.json`; guards `tests/test_x22_positive_control.py`, `tests/test_x24_oa_fraction.py`.*
 
@@ -366,3 +366,66 @@ recorded.
 | P0 | P1 | P2 | P3 | P4 | falsifiers |
 |---|---|---|---|---|---|
 | ✓ | ✗ FCU (+2 FP) | ✗ 0 gained | ✗ 0 gained | ✓ | F-X28.a (FCU), F-X28.b |
+
+
+## X29 — refrigerant-side observability: fouling is seen when its physics is recorded
+
+*Pre-registered (`docs/plans/2026-09-24-x29-refrigerant-observability-prereg.md`,
+df064db) after the documentation and the baseline header only; config
+committed (379cca9) before scoring. Artefacts: `configs/lbnl_rtu_sim/`,
+`scripts/08_convert_rtu_sim.py`, `outputs/week0_audit_rtu_sim.json`,
+`benchmark_v6_rtu_sim.json`, `union_fpr_rtu_sim.json`,
+`x29_refrigerant_observability.json`; guard `tests/test_x29_refrigerant_observability.py`.*
+
+Four quantities from the air- and water-side points had failed on the same
+fouling files (X13, X14/X15, water-side ΔT, X28). The claim that fouling on
+those datasets is a property of the recorded points has one direct test: a
+dataset that records the fouled component's own physics. LBNL's simulated
+rooftop unit (NREL Modelica–EnergyPlus co-simulation of a 5-ton unit; 100
+days, one-minute, 25 points including condensing, discharge and suction
+pressures and line temperatures; one baseline and 24 fault files: condenser
+and evaporator fouling at 10/20/30/40/50 %, liquid- and suction-line
+restrictions, over- and undercharge) is that dataset. The two delivered-
+capacity outputs, which no building records, were excluded from every rule.
+
+**Onboarding.** Config only plus a derived `OPERATE` = 1 (no schedule; the
+fan runs continuously). Five compressor-on residual channels written from
+the physics — condenser approach (`REFG_COND_TEMP − OA_TEMP`), discharge
+superheat, a suction-superheat proxy, the discharge/suction pressure
+ratio, and return-minus-supply air — with fixed rule bands from the
+baseline's compressor-on p0.1/p99.9. Gates clean (25 distinct files, one
+shared calendar, Brick file covers every column); healthy silence at the
+first iteration. Under the X25 gate: 8 holdout days per month of a
+100-day record gives 29 holdout days.
+
+| family | detected / scored | channels |
+|---|---|---|
+| condenser fouling 10–50 % | **5 / 5**, monotone | residual (condenser approach, pressure ratio) |
+| evaporator fouling 10–50 % | **5 / 5**, monotone | residual; the 50 % file also rules, frequency, oscillation |
+| liquid-line restriction (0.1–1.0 bar) | **4 / 4** | residual (+ oscillation on two) |
+| suction-line restriction (0.1–0.9 bar) | **4 / 4** | residual, then rules/frequency/oscillation at higher restriction |
+| refrigerant overcharge 10/15/20 % | 1 / 3 (20 % only) | residual, frequency, oscillation |
+| refrigerant undercharge 10/15/20 % | 1 / 3 (20 % only) | residual, oscillation |
+| **all** | **20 / 24** | residual on all 20; conformance on none |
+
+Deployed false alarms: **1 of 29 holdout days (3.4 %)**; the naive union is
+the same 1 (rate flags none). Every prediction held and no falsifier
+fired; no source change.
+
+**Reading.** The detector that misses coil fouling on the air handlers and
+the fan coil unit, with the same calibration, the same gate and the same
+rule kinds, catches every fouling severity down to 10 % on a unit whose
+fouled component's pressures and temperatures are recorded — and catches
+it with a single physically named residual (condensing temperature above
+outdoor air rises with a fouled condenser; the pressure ratio rises with
+either fouled coil). The fouling misses elsewhere are therefore a property
+of what those datasets record, not of the detector's vocabulary or its
+gate. The two families it does not fully see here are the small charge
+faults (10 and 15 % over- or undercharge), whose superheat proxies sit
+inside the healthy band; the 20 % cases are caught. The limits of this
+test are the ones its data impose: one simulated unit, one summer-autumn
+period, a 29-day false-alarm denominator, and a fixed room setpoint.
+
+| P1 | P2 | P3 | P4 | P5 | P6 | falsifiers |
+|---|---|---|---|---|---|---|
+| ✓ gates, 1 iteration | ✓ 1/29 | ✓ 5/5 monotone | ✓ 5/5 monotone | ✓ 10/14 | ✓ | none |

@@ -74,6 +74,9 @@ PIPELINE = {
     "x25_statistical_repair.json": "uv run python scripts/x25_statistical_repair.py",
     "x27_fan_law_static.json": "uv run python scripts/x27_fan_law_static.py",
     "x28_coil_ua.json": "uv run python scripts/x28_coil_ua.py",
+    "benchmark_v6_rtu_sim.json": "uv run python scripts/benchmark.py rtu_sim",
+    "union_fpr_rtu_sim.json": "uv run python scripts/union_fpr.py rtu_sim",
+    "x29_refrigerant_observability.json": "uv run python scripts/x29_refrigerant_observability.py",
     # x9_x10_robustness.json: ~1 h in three per-system processes (see its pre-registration); not in the gate.
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",
     "discovery_predicts_transfer.json": "uv run python scripts/discovery_predicts_transfer.py --q outputs/discovery_predicts_transfer_q.json",

@@ -133,18 +133,24 @@ datasets had never been benchmarked by anyone — and, added last and onboarded
 blind by a pre-registered configuration-only protocol, a dual-duct AHU and a
 fan coil unit):
 
-| | SDAHU | PFPU | SFPU | DDAHU (X17) | FCU (X19) |
-|---|---|---|---|---|---|
-| fault scenarios detected | **13 / 14** * | **22 / 30** | **21 / 29** | **45 / 55** | **40 / 47** |
-| median time-to-detect (all significant channels, rate included) | 1 day | 1 day | 1 day | 1 day | 1 day |
-| time-to-detect tail (longest first alarm among detected scenarios) | 2 days | 21 days | 108 days | 114 days | 15 days |
-| false-alarm budget, deployed detector (fault-free holdout days; conformance thresholds out-of-sample, X25) | 1.0% | 7.3% | 6.2% | 3.1% | 4.2% |
-| false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 14.6% | 6.2% | 8.3% | 21.9% |
+| | SDAHU | PFPU | SFPU | DDAHU (X17) | FCU (X19) | RTU, simulated (X29) |
+|---|---|---|---|---|---|---|
+| fault scenarios detected | **13 / 14** * | **22 / 30** | **21 / 29** | **45 / 55** | **40 / 47** | **20 / 24** |
+| median time-to-detect (all significant channels, rate included) | 1 day | 1 day | 1 day | 1 day | 1 day | 1 day |
+| time-to-detect tail (longest first alarm among detected scenarios) | 2 days | 21 days | 108 days | 114 days | 15 days | — |
+| false-alarm budget, deployed detector (fault-free holdout days; conformance thresholds out-of-sample, X25) | 1.0% | 7.3% | 6.2% | 3.1% | 4.2% | 3.4% (of 29) |
+| false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 14.6% | 6.2% | 8.3% | 21.9% | 3.4% |
 
 DDAHU: 79 sensor mappings, 41 rules, one healthy-silence iteration, no source
 change, gate battery clean (including a configuration-branch comparison); every family caught in full except coil fouling
 (5/12) and static-pressure sensor bias (5/8); nothing detected by the
 process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)).
+
+Simulated RTU (X29): the one dataset that records the refrigerant side. Every
+condenser- and evaporator-fouling severity down to 10% is caught, monotone, by
+a single physically named residual, plus all eight line restrictions — the
+fouling misses on the other systems are a property of what those datasets
+record ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)).
 
 FCU: 29 sensor mappings, 23 rules, two healthy-silence iterations, no source
 change; the hash gate found a byte-identical pair under two family labels

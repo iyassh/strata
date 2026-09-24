@@ -1,0 +1,184 @@
+{
+  "prereg": "docs/plans/2026-09-24-x29-refrigerant-observability-prereg.md",
+  "scored": 24,
+  "detected": 20,
+  "by_family": {
+    "condenser_fouling": [
+      [
+        "RTU_sim_condfouling10",
+        "resid"
+      ],
+      [
+        "RTU_sim_condfouling20",
+        "resid"
+      ],
+      [
+        "RTU_sim_condfouling30",
+        "resid"
+      ],
+      [
+        "RTU_sim_condfouling40",
+        "resid"
+      ],
+      [
+        "RTU_sim_condfouling50",
+        "resid"
+      ]
+    ],
+    "evaporator_fouling": [
+      [
+        "RTU_sim_evapfouling10",
+        "resid"
+      ],
+      [
+        "RTU_sim_evapfouling20",
+        "resid"
+      ],
+      [
+        "RTU_sim_evapfouling30",
+        "resid"
+      ],
+      [
+        "RTU_sim_evapfouling40",
+        "resid"
+      ],
+      [
+        "RTU_sim_evapfouling50",
+        "rules+resid+freq+osc"
+      ]
+    ],
+    "liquid_line_restriction": [
+      [
+        "RTU_sim_liquidpipe01bar",
+        "resid"
+      ],
+      [
+        "RTU_sim_liquidpipe04bar",
+        "resid+osc"
+      ],
+      [
+        "RTU_sim_liquidpipe08bar",
+        "resid"
+      ],
+      [
+        "RTU_sim_liquidpipe10bar",
+        "resid+osc"
+      ]
+    ],
+    "refrigerant_overcharge": [
+      [
+        "RTU_sim_overcharge10",
+        null
+      ],
+      [
+        "RTU_sim_overcharge15",
+        null
+      ],
+      [
+        "RTU_sim_overcharge20",
+        "resid+freq+osc"
+      ]
+    ],
+    "suction_line_restriction": [
+      [
+        "RTU_sim_suctionpipe01bar",
+        "resid"
+      ],
+      [
+        "RTU_sim_suctionpipe03bar",
+        "resid+freq+osc"
+      ],
+      [
+        "RTU_sim_suctionpipe06bar",
+        "rules+resid+freq+rate+osc"
+      ],
+      [
+        "RTU_sim_suctionpipe09bar",
+        "rules+resid+osc"
+      ]
+    ],
+    "refrigerant_undercharge": [
+      [
+        "RTU_sim_undercharge10",
+        null
+      ],
+      [
+        "RTU_sim_undercharge15",
+        null
+      ],
+      [
+        "RTU_sim_undercharge20",
+        "resid+osc"
+      ]
+    ]
+  },
+  "family_counts": {
+    "condenser_fouling": [
+      5,
+      5
+    ],
+    "evaporator_fouling": [
+      5,
+      5
+    ],
+    "liquid_line_restriction": [
+      4,
+      4
+    ],
+    "refrigerant_overcharge": [
+      1,
+      3
+    ],
+    "suction_line_restriction": [
+      4,
+      4
+    ],
+    "refrigerant_undercharge": [
+      1,
+      3
+    ]
+  },
+  "per_channel_fp": {
+    "rules": 0,
+    "resid": 0,
+    "model": 1,
+    "device": 0,
+    "absence": 0,
+    "freq": 0,
+    "rate": 0,
+    "osc": 1
+  },
+  "deployed_fp": [
+    1,
+    29
+  ],
+  "naive_fp": 1,
+  "channel_credits": {
+    "rules": 3,
+    "resid": 20,
+    "model": 0,
+    "device": 0,
+    "absence": 0,
+    "freq": 4,
+    "osc": 8,
+    "rate": 1
+  },
+  "predictions": {
+    "P1_gates_clean": true,
+    "P1_silence_iterations": 1,
+    "P2_budget_le_10pct": true,
+    "P2_fp": [
+      1,
+      29
+    ],
+    "P3_cond_ge_3_of_5": true,
+    "P3_cond_channel_ok": true,
+    "P3_cond_monotone": true,
+    "P4_evap_ge_3_of_5": true,
+    "P4_evap_monotone": true,
+    "P5_other_ge_6_of_14": true,
+    "P6_none_conformance_only": true,
+    "config_only": true
+  },
+  "falsifiers_fired": []
+}

@@ -1,0 +1,138 @@
+{
+ "system": "rtu_sim",
+ "healthy_file": "RTU_sim_baseline",
+ "holdout_days": 29,
+ "total_days": 101,
+ "exposure": {
+  "occupied_holdout_days": 29,
+  "residual_evaluable_holdout_days": 28,
+  "rate_windowed_holdout_days": 20
+ },
+ "channels": {
+  "rules": {
+   "holdout_fp_days": 0,
+   "holdout_days": 29,
+   "full_year_days": 0,
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
+  },
+  "resid": {
+   "holdout_fp_days": 0,
+   "holdout_days": 29,
+   "full_year_days": 0,
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
+  },
+  "model": {
+   "holdout_fp_days": 1,
+   "holdout_days": 29,
+   "full_year_days": 1,
+   "holdout_fp_dates": [
+    "2018-10-28"
+   ],
+   "threshold_provenance": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample"
+  },
+  "device": {
+   "holdout_fp_days": 0,
+   "holdout_days": 29,
+   "full_year_days": 0,
+   "holdout_fp_dates": [],
+   "threshold_provenance": "channel absent: this configuration declares no device stratum"
+  },
+  "absence": {
+   "holdout_fp_days": 0,
+   "holdout_days": 29,
+   "full_year_days": 0,
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
+  },
+  "freq": {
+   "holdout_fp_days": 0,
+   "holdout_days": 29,
+   "full_year_days": 0,
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
+  },
+  "rate": {
+   "holdout_fp_days": 0,
+   "holdout_days": 29,
+   "full_year_days": 0,
+   "holdout_fp_dates": [],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
+  },
+  "osc": {
+   "holdout_fp_days": 1,
+   "holdout_days": 29,
+   "full_year_days": 1,
+   "holdout_fp_dates": [
+    "2018-10-28"
+   ],
+   "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
+  }
+ },
+ "union_all8": {
+  "holdout_fp_days": 1,
+  "rate": 0.034482758620689655
+ },
+ "union_minus_rate": {
+  "holdout_fp_days": 1,
+  "rate": 0.034482758620689655
+ },
+ "split_half_demotion_robustness": {
+  "even_months": {
+   "decision_half_fp": {
+    "rules": 0,
+    "resid": 0,
+    "model": 1,
+    "device": 0,
+    "absence": 0,
+    "freq": 0,
+    "rate": 0,
+    "osc": 1
+   },
+   "worst_channel_on_decision_half": "model",
+   "rate_is_worst_or_tied": false,
+   "deployed_fpr_on_report_half": {
+    "fp_days": 0,
+    "n": 16
+   }
+  },
+  "odd_months": {
+   "decision_half_fp": {
+    "rules": 0,
+    "resid": 0,
+    "model": 0,
+    "device": 0,
+    "absence": 0,
+    "freq": 0,
+    "rate": 0,
+    "osc": 0
+   },
+   "worst_channel_on_decision_half": "rules",
+   "rate_is_worst_or_tied": true,
+   "deployed_fpr_on_report_half": {
+    "fp_days": 1,
+    "n": 13
+   }
+  }
+ },
+ "detector_definition": "The STRATA detector = OR of the significance-gated channels {rules, residual, model, device, absence, freq, osc}; the seasonal rate channel is diagnostic-only (corroboration and explanation, never a lone alarm).",
+ "rate_demotion": {
+  "scenarios_with_rate_significant": [
+   {
+    "label": "suction line restriction 06bar",
+    "channels": "rules+resid+freq+rate+osc",
+    "ttd_days": 1,
+    "first_rate_day": "2018-08-18",
+    "rate_only_alarm_days": 0
+   }
+  ],
+  "violations": []
+ },
+ "caveats": [
+  "Healthy negatives are the calibration year's shared calendar holdout; no independent healthy negative exists on any LBNL system (D2). Per-day autocorrelation makes any binomial p on these counts optimistic.",
+  "The model- and device-conformance thresholds are quantile-calibrated on a calibration slice (the days before each month's holdout block, X25); every holdout-FP row is out-of-sample. No healthy data unseen by every calibration step exists beyond that holdout.",
+  "The rate demotion was decided after observing this holdout, so the deployed FPR is a post-selection estimate; the all-8 union is reported alongside it and the split-half probe shows the decision reproduces on both holdout halves.",
+  "Per-channel exposure differs from the day denominator: residual abstains without an adequate physics window, rate needs a full 30-day window, and unoccupied days cannot fire most channels (see 'exposure')."
+ ]
+}

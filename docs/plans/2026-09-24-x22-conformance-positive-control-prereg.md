@@ -75,3 +75,11 @@ outcome is reported.
 ## Artefacts
 
 `outputs/x22_positive_control.json`; guard `tests/test_x22_positive_control.py`.
+
+## Corrections (2026-09-24, on hostile review; text above stands)
+
+- "96 per system" should read 72–96 holdout days per system (87, 96, 96, 83, 72).
+- P4 was not scored by the first script; it is scored in the re-run.
+- The artefact scored with the pre-X25 thresholds is kept as
+  `outputs/x22_positive_control_prex25.json`; the live artefact is the re-run
+  under the X25 calibration slice, which is what "deployed" now means.

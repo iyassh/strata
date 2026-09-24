@@ -144,6 +144,12 @@ def main() -> int:
     p3_mono = {s: mono(s) for s in res}
     p3_sig8 = sum(1 for s in res if sig(s, "swap_8"))
     p3_pass = all(p3_mono.values()) and p3_sig8 >= 3
+    def skip_rise(s):
+        f = [res[s]["arms"][f"skip_{k}"]["flagged_frac"] for k in (1, 2, 4)]
+        return all(b >= a for a, b in zip(f, f[1:]))
+    p4_rise = {s: skip_rise(s) for s in res}
+    p4_absorbed = {s: not sig(s, "skip_1") for s in ("pfpu", "sfpu") if s in res}
+    p4_pass = all(p4_rise.values()) and all(p4_absorbed.values())
     p5 = {s: sig(s, "dup_block") for s in res}
     p5_pass = not any(p5.values())
     fired = []
@@ -156,6 +162,7 @@ def main() -> int:
     out = {"prereg": "docs/plans/2026-09-24-x22-conformance-positive-control-prereg.md", "seed": SEED, "systems": res,
            "predictions": {"P1_reverse": p1, "P1_pass": p1_pass, "P2_skip_start": p2, "P2_pass": p2_pass,
                            "P3_swap_monotone": p3_mono, "P3_systems_significant_at_8": p3_sig8, "P3_pass": p3_pass,
+                           "P4_skip_rise": p4_rise, "P4_single_skip_absorbed_fpu": p4_absorbed, "P4_pass": p4_pass,
                            "P5_dup_block": p5, "P5_pass": p5_pass},
            "falsifiers_fired": fired}
     (REPO / "outputs/x22_positive_control.json").write_text(json.dumps(out, indent=2) + "\n")

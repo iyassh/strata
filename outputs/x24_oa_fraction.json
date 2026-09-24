@@ -92,8 +92,8 @@
     }
   },
   "predictions": {
-    "P1_regression_sdahu_byte_identical_before_configs": true,
-    "P2_healthy_silence_unchanged": true,
+    "P1_regression_sdahu_byte_identical_before_configs_VERIFIED_BY_HAND": true,
+    "P2_healthy_silence_unchanged_VERIFIED_BY_HAND": true,
     "P3_fcu_leak20_detected": true,
     "P4_budget_le_10": true,
     "P5_no_loss": true

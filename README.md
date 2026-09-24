@@ -38,8 +38,9 @@ you:
 > is wrong on ~1% of fault-free days — measured, not hoped")
 
 Tested on five public benchmark systems (LBNL datasets), it detects
-**13 of 14, 23 of 30, 24 of 29 — 45 of 55 on a dual-duct AHU and 42 of 47 on a fan coil unit, both onboarded
-blind, by configuration alone, after the protocol was fixed** — typically
+**13 of 14, 23 of 30, 24 of 29 — 45 of 55 on a dual-duct AHU and 41 of 47 on a fan coil unit, both onboarded
+blind, by configuration alone, after the protocol was fixed (42 of 47 after a later
+pre-registered outdoor-air-fraction residual)** — typically
 within **one day**, while false-alarming on only **1.0–5.2%** of fault-free days —
 and on the first *measured* building (an LBNL field rooftop unit, 182 clean days,
 no schedule point) the same deployed detector false-alarms on **6.1%** of

@@ -89,3 +89,10 @@ the same way, to `residual_channels`; healthy silence re-checked; nothing
 else changes. **Prediction A1-P1:** the budget stays ≤ 10 % with the two
 channels added. **A1-P2 (case):** a circuit-2 residual flags ≥ 50 % of the
 29 undercharge days. Either outcome is a case report.
+
+## Correction (2026-09-24, on hostile review)
+
+The undercharge file holds 30 calendar days of which 29 are evaluable; "29
+days" above counts the evaluable ones. Site 1 (52 clean days, a different
+unit) is measured data too; "the only measured fault-free stream" means the
+only one long enough to calibrate.

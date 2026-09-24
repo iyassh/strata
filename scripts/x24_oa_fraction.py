@@ -9,18 +9,19 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 BEFORE_COMMIT = "a4b57cb"      # configs committed before scoring; artefacts at this commit are pre-X24
+AFTER_COMMIT = "944e477"       # X24 closing commit (X25 later changed the live scorecards)
 SYSTEMS = ("fcu", "sdahu", "ddahu")
 
 
-def at_commit(path: str) -> dict:
-    txt = subprocess.run(["git", "show", f"{BEFORE_COMMIT}:{path}"], cwd=REPO, capture_output=True, text=True, check=True).stdout
+def at_commit(path: str, commit: str = BEFORE_COMMIT) -> dict:
+    txt = subprocess.run(["git", "show", f"{commit}:{path}"], cwd=REPO, capture_output=True, text=True, check=True).stdout
     return json.loads(txt)
 
 
 out = {"prereg": "docs/plans/2026-09-24-x24-oa-fraction-prereg.md", "before_commit": BEFORE_COMMIT, "systems": {}}
 for s in SYSTEMS:
-    b = at_commit(f"outputs/benchmark_v6_{s}.json"); a = json.loads((REPO / f"outputs/benchmark_v6_{s}.json").read_text())
-    ub = at_commit(f"outputs/union_fpr_{s}.json"); ua = json.loads((REPO / f"outputs/union_fpr_{s}.json").read_text())
+    b = at_commit(f"outputs/benchmark_v6_{s}.json"); a = at_commit(f"outputs/benchmark_v6_{s}.json", AFTER_COMMIT)
+    ub = at_commit(f"outputs/union_fpr_{s}.json"); ua = at_commit(f"outputs/union_fpr_{s}.json", AFTER_COMMIT)
     B = {x["file"]: x for x in b["scenarios"] if x["is_fault"] and not x["excluded"]}
     A = {x["file"]: x for x in a["scenarios"] if x["is_fault"] and not x["excluded"]}
     gained = [f for f in A if A[f]["meaningful_channels"] and not B[f]["meaningful_channels"]]
@@ -35,8 +36,8 @@ for s in SYSTEMS:
         "residual_band_after": a.get("residual_band"),
     }
 fcu = out["systems"]["fcu"]
-pred = {"P1_regression_sdahu_byte_identical_before_configs": True,   # checked: x24_reg_verdict IDENTICAL (console, 2026-09-24)
-        "P2_healthy_silence_unchanged": True,                            # 03_healthy_silence: 0 / 0 / 1 (pre-existing) signature days
+pred = {"P1_regression_sdahu_byte_identical_before_configs_VERIFIED_BY_HAND": True,   # console only (x24_reg_verdict IDENTICAL, 2026-09-24); not recomputed here
+        "P2_healthy_silence_unchanged_VERIFIED_BY_HAND": True,                            # console only (03_healthy_silence 0 / 0 / 1 pre-existing)
         "P3_fcu_leak20_detected": "FCU_OADMPRLeak_20" in fcu["gained"] or bool(json.loads((REPO / "outputs/benchmark_v6_fcu.json").read_text())),
         "P4_budget_le_10": all(v["deployed_fp_after"] <= 10 for v in out["systems"].values()),
         "P5_no_loss": all(not v["lost"] for v in out["systems"].values())}

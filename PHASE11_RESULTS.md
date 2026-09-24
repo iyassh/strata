@@ -7,21 +7,25 @@
 The review's single largest objection to the process-mining null was that
 nothing showed the channel *would* fire if order really were violated. X22
 injects order violations into each system's healthy HOLDOUT traces
-(the 96 days that define the channel's false-alarm floor), scores them with
-the deployed net, threshold and significance gate, and adds two
+(the 72–96 days per system that define the channel's false-alarm floor),
+scores them with the net, threshold and significance gate deployed at the
+time (pre-X25; re-run under the X25 calibration below), and adds two
 threshold-free measures: the AUC of perturbed against unperturbed per-day
 fitness, and the hit rate a threshold set at the healthy holdout's worst day
 would give (the best any zero-false-alarm threshold can do).
 
 | system | net labels | reversal: flagged / sig | AUC | hit rate at zero FP | skips (k=4): flagged / sig | swaps (k=8): AUC |
 |---|---|---|---|---|---|---|
-| SDAHU | 10 | 0 / 87, no | 0.91 | **0.00** | 9 / 87, **yes** | 0.81 |
+| SDAHU | 6 | 0 / 87, no | 0.91 | **0.00** | 9 / 87, **yes** | 0.81 |
 | PFPU | 7 | 1 / 96, no | 0.49 | 0.00 | 2 / 96, no | 0.50 |
 | SFPU | 8 | 1 / 96, no | 0.50 | 0.00 | 2 / 96, no | 0.50 |
 | DDAHU | 14 | 0 / 83, no | 0.96 | **0.00** | 2 / 83, no | 0.88 |
 | FCU | 13 | **55 / 72, yes** | 0.99 | 0.75 | 5 / 72, no | 0.97 |
 
-Duplicated blocks fire nowhere (P5 held: loops absorb repetition). No
+Duplicated blocks fire nowhere (P5 held: loops absorb repetition). P4
+(skips rise in k; single skips absorbed on the loop-heavy nets) holds on
+the absorption half and fails on the rise: PFPU's flagged days run 3, 2, 2
+across k = 1, 2, 4. No
 falsifier fired — reversal is significant on one system, so F-X22.a
 ("blind everywhere") did not fire — but the predictions were wrong: P1
 expected SDAHU and DDAHU to fire under reversal, P2 expected skip-start to
@@ -34,15 +38,16 @@ in swaps reaching significance on three systems. None did.
    fitness from 0.85 to 0.25, 55 of 72 days are flagged, and a
    zero-false-alarm threshold would still catch 75 %. On this system the
    null is instrument-validated: the channel can see order, and the
-   faults (41 of 47 detected, model channel never alone) do not change it.
+   faults (42 of 47 detected, model channel never alone) do not change it.
 2. On the **single-duct and dual-duct units** the channel sees order on
    average (AUC 0.91 and 0.96) but not at the deployed gate, and not at any
    gate that keeps the false-alarm budget: the healthy holdout contains days
-   whose fitness (0.33 and 0.25 at the 1 % quantile; lower at the minimum)
+   whose fitness (0.33 and 0.25; the 1 % quantile and the minimum coincide)
    is below that of a fully reversed day. The channel is blind to order
    because of the *spread of healthy fitness*, not because of the net.
 3. On the **fan-powered units** fitness does not move under any
-   perturbation (AUC 0.49–0.51 on everything). Those nets accept any
+   perturbation (AUC 0.49–0.51 on everything except skip-start, where
+   deleting the start event *raises* fitness: AUC 0.40 and 0.36). Those nets accept any
    order: blind by *net structure*, the reading the earlier reversal
    probe already gave.
 
@@ -71,7 +76,7 @@ configs; healthy silence unchanged (P2); configs committed before scoring.
 
 | system | detected before → after | deployed FP | gained | lost | status changes |
 |---|---|---|---|---|---|
-| FCU | 41 → **42** of 47 | 4 → 4 of 96 | `OADMPRLeak_20` (residual) | none | stuck-30 %, OA blockage and fan-outlet blockage also gain a rules credit |
+| FCU | 41 → **42** of 47 | 4 → 4 of 96 | `OADMPRLeak_20` (residual) | none | stuck-30 % gains a residual credit; OA blockage and fan-outlet blockage gain a rules credit |
 | SDAHU | 14 → 14 | 1 → 1 | — | none | none |
 | DDAHU | 45 → 45 of 55 | 3 → 3 | — | none | OA damper stuck 80 %/100 % gain residual credit (166–178 days) |
 
@@ -86,7 +91,7 @@ the five waterside-fouling files.
 
 ## Ledger
 
-| X22 | P1 ✗ (only FCU) | P2 ✗ | P3 ✗ | P5 ✓ | falsifiers: none |
+| X22 | P1 ✗ (only FCU) | P2 ✗ | P3 ✗ | P4 ✗ (no rise on PFPU) | P5 ✓ | falsifiers: none |
 |---|---|---|---|---|---|
 | X24 | P1 ✓ byte-identical | P2 ✓ silent | P3 ✓ leak 20 % | P4 ✓ 4/1/3 of 96 | P5 ✓ no loss; falsifiers: none |
 
@@ -107,7 +112,11 @@ and humidities, fan and compressor power, airflow, refrigerant pressures
 and line temperatures on two circuits), one-minute, °C and bar; 182
 fault-free days across two summers and one 29-day fault case (40 %
 undercharge on circuit B). No schedule, damper, valve or command point
-exists. This is the only measured fault-free stream in the project, and
+exists. Site 1 (a 7.5-ton unit on a restaurant) ships 52 clean days and a
+62-day staging fault on a different machine: too few clean days to
+calibrate, so it is excluded and scored against Site 2's detector only to
+show what a foreign unit looks like (model channel 41 of its 52 clean
+days, residual 35). Site 2 is the measured stream this test uses, and
 this test asks one thing of it: does the deployed detector's false-alarm
 budget survive real data?
 
@@ -127,12 +136,14 @@ model 0 (threshold out-of-sample under X25), absence 0, frequency 2,
 oscillation 1; rate 1 (advisory); naive union 4. Every residual channel
 was evaluable on every holdout day, so P3 (some abstention) failed as a
 prediction. The budget holds on the first real building, at a rate
-between the simulated systems' 1.0 and 5.2 %.
+above every simulated system's (1.0–5.2 %).
 
 **The case (P4, then A1-P2): not seen.** Run 1's config watched circuit
 1's refrigerant sensors; the documented fault is on circuit B. Amendment 1
 added the circuit-2 residuals. With both circuits the undercharge file
-still flags 1 residual day and 1 model day of 30, and the reason is in the
+still flags 1 residual day and 1 model day of its 29 evaluable days (30
+calendar days; the pre-registration's "29" counted the evaluable ones),
+and the reason is in the
 recorded points: during compressor operation, circuit-2 suction pressure
 (6.51 vs 6.57 bar), suction-line temperature (26.5 vs 26.5 °C) and
 condenser-outlet temperature (28.2 vs 27.1 °C) sit within a few per cent

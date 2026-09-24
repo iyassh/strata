@@ -83,7 +83,7 @@ def test_facade_reproduces_union_fpr_sdahu():
     rep = det.evaluate(df)
     assert rep["detected"] is False, rep["meaningful_channels"]
     # provenance disclosure present (L24)
-    assert "calibration target" in rep["provenance"]["model"]
+    assert ("calibration target" in rep["provenance"]["model"]) or ("out-of-sample" in rep["provenance"]["model"])   # X25
 
     # fault-side regression: damper_stuck_010 is rules-carried, TTD 1 in v12
     fdf = pd.read_parquet(ROOT / "data/processed/sdahu/damper_stuck_010_annual.parquet")

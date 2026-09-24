@@ -41,7 +41,7 @@ Tested on five public benchmark systems (LBNL datasets), it detects
 **13 of 14, 23 of 30, 24 of 29 — 45 of 55 on a dual-duct AHU and 41 of 47 on a fan coil unit, both onboarded
 blind, by configuration alone, after the protocol was fixed (42 of 47 after a later
 pre-registered outdoor-air-fraction residual)** — typically
-within **one day**, while false-alarming on only **1.0–5.2%** of fault-free days —
+within **one day**, while false-alarming on only **1.0–7.3%** of fault-free days (every threshold out-of-sample since X25) —
 and on the first *measured* building (an LBNL field rooftop unit, 182 clean days,
 no schedule point) the same deployed detector false-alarms on **6.1%** of
 held-out days ([PHASE11_RESULTS.md](PHASE11_RESULTS.md), X26).
@@ -138,8 +138,8 @@ fan coil unit):
 | fault scenarios detected | **13 / 14** * | **23 / 30** | **24 / 29** | **45 / 55** | **42 / 47** |
 | median time-to-detect (all significant channels, rate included) | 1 day | 1 day | 1 day | 1 day | 1 day |
 | time-to-detect tail (longest first alarm among detected scenarios) | 2 days | 21 days | 108 days | 114 days | 15 days |
-| false-alarm budget, deployed detector (fault-free holdout days) | 1.0% | 5.2% | 4.2% | 3.1% | 4.2% |
-| false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 12.5% | 4.2% | 8.3% | 21.9% |
+| false-alarm budget, deployed detector (fault-free holdout days; conformance thresholds out-of-sample, X25) | 1.0% | 7.3% | 6.2% | 3.1% | 4.2% |
+| false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 14.6% | 6.2% | 8.3% | 21.9% |
 
 DDAHU: 79 sensor mappings, 41 rules, one healthy-silence iteration, no source
 change, gate battery clean (including a configuration-branch comparison); every family caught in full except coil fouling

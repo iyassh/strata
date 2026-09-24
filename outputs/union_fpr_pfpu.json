@@ -27,20 +27,23 @@
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "model": {
-   "holdout_fp_days": 1,
+   "holdout_fp_days": 4,
    "holdout_days": 96,
-   "full_year_days": 2,
+   "full_year_days": 7,
    "holdout_fp_dates": [
-    "2018-11-29"
+    "2018-07-24",
+    "2018-09-24",
+    "2018-11-29",
+    "2018-12-25"
    ],
-   "threshold_provenance": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"
+   "threshold_provenance": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample"
   },
   "device": {
    "holdout_fp_days": 0,
    "holdout_days": 96,
    "full_year_days": 0,
    "holdout_fp_dates": [],
-   "threshold_provenance": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"
+   "threshold_provenance": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample"
   },
   "absence": {
    "holdout_fp_days": 0,
@@ -85,19 +88,19 @@
   }
  },
  "union_all8": {
-  "holdout_fp_days": 12,
-  "rate": 0.125
+  "holdout_fp_days": 14,
+  "rate": 0.14583333333333334
  },
  "union_minus_rate": {
-  "holdout_fp_days": 5,
-  "rate": 0.052083333333333336
+  "holdout_fp_days": 7,
+  "rate": 0.07291666666666667
  },
  "split_half_demotion_robustness": {
   "even_months": {
    "decision_half_fp": {
     "rules": 0,
     "resid": 2,
-    "model": 0,
+    "model": 1,
     "device": 0,
     "absence": 0,
     "freq": 0,
@@ -107,7 +110,7 @@
    "worst_channel_on_decision_half": "rate",
    "rate_is_worst_or_tied": true,
    "deployed_fpr_on_report_half": {
-    "fp_days": 3,
+    "fp_days": 4,
     "n": 48
    }
   },
@@ -115,7 +118,7 @@
    "decision_half_fp": {
     "rules": 0,
     "resid": 0,
-    "model": 1,
+    "model": 3,
     "device": 0,
     "absence": 0,
     "freq": 1,
@@ -125,7 +128,7 @@
    "worst_channel_on_decision_half": "rate",
    "rate_is_worst_or_tied": true,
    "deployed_fpr_on_report_half": {
-    "fp_days": 2,
+    "fp_days": 3,
     "n": 48
    }
   }
@@ -145,7 +148,7 @@
  },
  "caveats": [
   "Healthy negatives are the calibration year's shared calendar holdout; no independent healthy negative exists on any LBNL system (D2). Per-day autocorrelation makes any binomial p on these counts optimistic.",
-  "The model- and device-conformance thresholds are quantile-calibrated on these same holdout days (fpr_quantile); for those two channels the holdout-FP row is the calibration target, not an out-of-sample measurement. No healthy data unseen by every calibration step exists.",
+  "The model- and device-conformance thresholds are quantile-calibrated on a calibration slice (the days before each month's holdout block, X25); every holdout-FP row is out-of-sample. No healthy data unseen by every calibration step exists beyond that holdout.",
   "The rate demotion was decided after observing this holdout, so the deployed FPR is a post-selection estimate; the all-8 union is reported alongside it and the split-half probe shows the decision reproduces on both holdout halves.",
   "Per-channel exposure differs from the day denominator: residual abstains without an adequate physics window, rate needs a full 30-day window, and unoccupied days cannot fire most channels (see 'exposure')."
  ]

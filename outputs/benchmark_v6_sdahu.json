@@ -22,9 +22,9 @@
     0,
     110
   ],
-  "model_threshold": 0.33333333333333337,
+  "model_threshold": 0.19999999999999996,
   "model_holdout_fp": 0,
-  "train_days": 248,
+  "train_days": 160,
   "healthy_sig_days": 0,
   "scenarios": [
     {
@@ -37,7 +37,7 @@
       "window_days": 265,
       "rules_days": 365,
       "residual_days": 0,
-      "model_days": 5,
+      "model_days": 0,
       "combined_days": 365,
       "model_unique_days": 0,
       "ttd_days": 1,
@@ -423,13 +423,7 @@
           "2018-12-31"
         ],
         "residual": [],
-        "model": [
-          "2018-01-16",
-          "2018-08-06",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],
@@ -1030,7 +1024,7 @@
       "window_days": 265,
       "rules_days": 365,
       "residual_days": 0,
-      "model_days": 5,
+      "model_days": 0,
       "combined_days": 365,
       "model_unique_days": 0,
       "ttd_days": 1,
@@ -1416,13 +1410,7 @@
           "2018-12-31"
         ],
         "residual": [],
-        "model": [
-          "2018-01-16",
-          "2018-08-06",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],
@@ -2023,7 +2011,7 @@
       "window_days": 266,
       "rules_days": 365,
       "residual_days": 133,
-      "model_days": 5,
+      "model_days": 0,
       "combined_days": 365,
       "model_unique_days": 0,
       "ttd_days": 1,
@@ -2543,13 +2531,7 @@
           "2018-12-29",
           "2018-12-30"
         ],
-        "model": [
-          "2018-01-16",
-          "2018-08-06",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],
@@ -3156,7 +3138,7 @@
       "window_days": 143,
       "rules_days": 214,
       "residual_days": 54,
-      "model_days": 3,
+      "model_days": 0,
       "combined_days": 214,
       "model_unique_days": 0,
       "ttd_days": 1,
@@ -3446,11 +3428,7 @@
           "2018-10-30",
           "2018-10-31"
         ],
-        "model": [
-          "2018-08-06",
-          "2018-10-15",
-          "2018-10-22"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],
@@ -3766,7 +3744,7 @@
       "window_days": 298,
       "rules_days": 365,
       "residual_days": 0,
-      "model_days": 9,
+      "model_days": 0,
       "combined_days": 365,
       "model_unique_days": 0,
       "ttd_days": 1,
@@ -4152,17 +4130,7 @@
           "2018-12-31"
         ],
         "residual": [],
-        "model": [
-          "2018-01-16",
-          "2018-07-02",
-          "2018-07-09",
-          "2018-08-06",
-          "2018-09-04",
-          "2018-09-10",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],
@@ -4858,7 +4826,7 @@
       "window_days": 259,
       "rules_days": 365,
       "residual_days": 0,
-      "model_days": 9,
+      "model_days": 0,
       "combined_days": 365,
       "model_unique_days": 0,
       "ttd_days": 1,
@@ -5244,17 +5212,7 @@
           "2018-12-31"
         ],
         "residual": [],
-        "model": [
-          "2018-01-16",
-          "2018-07-02",
-          "2018-07-09",
-          "2018-08-06",
-          "2018-09-04",
-          "2018-09-10",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],
@@ -5950,7 +5908,7 @@
       "window_days": 262,
       "rules_days": 365,
       "residual_days": 0,
-      "model_days": 9,
+      "model_days": 0,
       "combined_days": 365,
       "model_unique_days": 0,
       "ttd_days": 1,
@@ -6336,17 +6294,7 @@
           "2018-12-31"
         ],
         "residual": [],
-        "model": [
-          "2018-01-16",
-          "2018-07-02",
-          "2018-07-09",
-          "2018-08-06",
-          "2018-09-04",
-          "2018-09-10",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],
@@ -7042,7 +6990,7 @@
       "window_days": 262,
       "rules_days": 365,
       "residual_days": 0,
-      "model_days": 9,
+      "model_days": 0,
       "combined_days": 365,
       "model_unique_days": 0,
       "ttd_days": 1,
@@ -7428,17 +7376,7 @@
           "2018-12-31"
         ],
         "residual": [],
-        "model": [
-          "2018-01-16",
-          "2018-07-02",
-          "2018-07-09",
-          "2018-08-06",
-          "2018-09-04",
-          "2018-09-10",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],
@@ -8134,7 +8072,7 @@
       "window_days": 266,
       "rules_days": 365,
       "residual_days": 0,
-      "model_days": 9,
+      "model_days": 0,
       "combined_days": 365,
       "model_unique_days": 0,
       "ttd_days": 1,
@@ -8520,17 +8458,7 @@
           "2018-12-31"
         ],
         "residual": [],
-        "model": [
-          "2018-01-16",
-          "2018-07-02",
-          "2018-07-09",
-          "2018-08-06",
-          "2018-09-04",
-          "2018-09-10",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],
@@ -9226,9 +9154,9 @@
       "window_days": 251,
       "rules_days": 0,
       "residual_days": 164,
-      "model_days": 4,
-      "combined_days": 296,
-      "model_unique_days": 4,
+      "model_days": 0,
+      "combined_days": 293,
+      "model_unique_days": 0,
       "ttd_days": 2,
       "log_hash": "9adbdf1a",
       "top_device": null,
@@ -9411,12 +9339,7 @@
           "2018-12-22",
           "2018-12-26"
         ],
-        "model": [
-          "2018-01-16",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-04-16",
@@ -9961,9 +9884,9 @@
       "window_days": 262,
       "rules_days": 0,
       "residual_days": 164,
-      "model_days": 4,
-      "combined_days": 268,
-      "model_unique_days": 4,
+      "model_days": 0,
+      "combined_days": 265,
+      "model_unique_days": 0,
       "ttd_days": 2,
       "log_hash": "8296ad26",
       "top_device": null,
@@ -10146,12 +10069,7 @@
           "2018-12-22",
           "2018-12-26"
         ],
-        "model": [
-          "2018-01-16",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-07-16"
@@ -10530,9 +10448,9 @@
       "window_days": 265,
       "rules_days": 0,
       "residual_days": 139,
-      "model_days": 5,
-      "combined_days": 251,
-      "model_unique_days": 5,
+      "model_days": 0,
+      "combined_days": 248,
+      "model_unique_days": 0,
       "ttd_days": 2,
       "log_hash": "318aa581",
       "top_device": null,
@@ -10690,13 +10608,7 @@
           "2018-12-22",
           "2018-12-26"
         ],
-        "model": [
-          "2018-01-16",
-          "2018-08-06",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-01-08",
@@ -11039,9 +10951,9 @@
       "window_days": 267,
       "rules_days": 7,
       "residual_days": 137,
-      "model_days": 5,
-      "combined_days": 249,
-      "model_unique_days": 5,
+      "model_days": 0,
+      "combined_days": 246,
+      "model_unique_days": 0,
       "ttd_days": 2,
       "log_hash": "0878e25b",
       "top_device": null,
@@ -11205,13 +11117,7 @@
           "2018-12-22",
           "2018-12-26"
         ],
-        "model": [
-          "2018-01-16",
-          "2018-08-06",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-02-23",
@@ -11553,9 +11459,9 @@
       "window_days": 266,
       "rules_days": 0,
       "residual_days": 148,
-      "model_days": 5,
-      "combined_days": 231,
-      "model_unique_days": 5,
+      "model_days": 0,
+      "combined_days": 227,
+      "model_unique_days": 0,
       "ttd_days": 2,
       "log_hash": "41d0a295",
       "top_device": null,
@@ -11722,13 +11628,7 @@
           "2018-12-22",
           "2018-12-26"
         ],
-        "model": [
-          "2018-01-16",
-          "2018-08-06",
-          "2018-10-15",
-          "2018-10-22",
-          "2018-12-03"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [],

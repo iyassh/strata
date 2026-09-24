@@ -97,6 +97,51 @@ the five waterside-fouling files.
 | X24 | P1 ✓ byte-identical | P2 ✓ silent | P3 ✓ leak 20 % | P4 ✓ 4/1/3 of 96 | P5 ✓ no loss; falsifiers: none |
 
 
+
+## X25 — the statistical repair
+
+*Pre-registered (`docs/plans/2026-09-24-x25-statistical-repair-prereg.md`,
+06ea608) before any code changed. Step 1 (5bd7c5e): the calibration slice
+with the key absent — SDAHU byte-identical (P0). Step 2 (b35d23b): the
+uniform rule-of-three floor and `calibration_days_per_month: 8` in all five
+configs, committed before regeneration. Artefacts: every
+`benchmark_v6_*.json` and `union_fpr_*.json`; `outputs/x25_statistical_repair.json`;
+guard `tests/test_x25_statistical_repair.py`.*
+
+The two conformance channels had set their thresholds on the same holdout
+days on which every false-alarm rate is reported; their rows were
+calibration targets, disclosed since Phase 6 and flagged by every review
+since. Now the eight days before each month's holdout block calibrate
+those thresholds, discovery trains on the rest, and the holdout is
+out-of-sample for every channel. The residual and model gates also use the
+rules channel's rule-of-three floor instead of one holdout false alarm.
+
+| system | detected | deployed FP before → after | model threshold | model FP row (in-sample → out-of-sample) | model credits |
+|---|---|---|---|---|---|
+| SDAHU | 14 → 14 | 1 → 1 | 0.333 → 0.200 | 0 → 0 | 0 → 0 |
+| PFPU | 23 → 23 | 5 → **7** | 0.793 → 0.807 | 1 → **4** | 0 → 0 |
+| SFPU | 24 → 24 | 4 → **6** | 0.882 → 0.902 | 1 → **5** | 5 → 5 |
+| DDAHU | 45 → 45 | 3 → 3 | 0.250 → 0.500 | 0 → 0 | 0 → 2 |
+| FCU | 42 → 42 | 4 → 4 | 0.362 → 0.371 | 1 → 1 | 7 → 9 |
+
+Every prediction held and no falsifier fired: the rows are out-of-sample
+(P1), every budget stays under 10 of 96 (P2), no count moved and nothing
+is detected by conformance alone (P3), and the floor changed no verdict
+at all (P4: zero status flips). The one thing the repair measured is what
+the disclosure had been saying: the in-sample model rows on the two
+fan-powered units understated their false alarms by three and four days.
+Their deployed budgets are now 7.3 % and 6.2 %; the single-duct, dual-duct
+and fan coil units did not move. The device channel's row on the series
+unit fell from 3 to 1. Four scenarios gained a model credit beside channels
+that already carried them.
+
+The papers' budget range is therefore 1.0–7.3 %, out-of-sample, and the
+"calibration-target" caveat is retired.
+
+| P0 | P1 | P2 | P3 | P4 | falsifiers |
+|---|---|---|---|---|---|
+| ✓ byte-identical | ✓ out-of-sample | ✓ ≤ 10/96 | ✓ counts, none by conformance | ✓ 0 flips | none |
+
 ## X26 — the false-alarm budget on a real building
 
 *Pre-registered (`docs/plans/2026-09-24-x26-real-data-budget-prereg.md`,

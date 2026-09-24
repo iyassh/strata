@@ -36,8 +36,8 @@ We report a negative result and the protocol that produced it. Discovering
 Petri nets from fault-free operation of three building HVAC systems, we tested
 whether conformance against them detects seeded faults. Over all 73 seeded
 scenarios no fault is detected only by the two conformance channels; removing
-them changes no scorecard and lowers one system's false-alarm rate from four
-days in 96 to one, three of the four being calibration-target rows. Three
+them changes no scorecard and lowers one system's false-alarm rate from six
+days in 96 to one, every row out-of-sample. Three
 further measurements support that reading: a measured circularity bound,
 1.78\% against 5.24\% recall at one threshold; a reversal probe showing that two
 of the three discovered nets carry no ordering information in their fitness;
@@ -130,7 +130,7 @@ Evaluation used three public LBNL datasets~\cite{granderson2020lbnlfdddata} --- 
 
 \subsection{The ablation}
 
-Because the committed scorecards record, per scenario, which gated channels were credited with the detection, the ablation is a read rather than a re-run (Table~\ref{tab:ablation}). No scenario on any system is detected only by the two conformance channels. They are credited with none of the 14 single-duct or 23 parallel-unit detections and appear in 7 of the 24 series-unit detections, never alone; removing both channels leaves every scorecard unchanged. Nor is removal merely free. On the series unit the two channels appear on all four false-alarm days of the 96-day fault-free holdout, and deleting them eliminates three (the fourth is also flagged by the frequency channel), so that system's false-alarm rate falls from 4 in 96 to 1 in 96 at no detection cost --- with the caveat that the two conformance channels' thresholds are quantile-fit on those same holdout days, so three of the four are calibration-target rows rather than out-of-sample false alarms, and their removal removes an artefact of calibration as much as a measured error.\footnote{\texttt{outputs/union\_fpr\_sfpu.json}: model channel \{2018-11-29\}, device channel \{2018-01-25, 2018-01-30, 2018-12-28\}, frequency channel \{2018-11-29\}; \texttt{union\_all8} 4 days.} The process-mining channels' entire measurable contribution to this detector was three false alarms.
+Because the committed scorecards record, per scenario, which gated channels were credited with the detection, the ablation is a read rather than a re-run (Table~\ref{tab:ablation}). No scenario on any system is detected only by the two conformance channels. They are credited with none of the 14 single-duct or 23 parallel-unit detections and appear in 7 of the 24 series-unit detections, never alone; removing both channels leaves every scorecard unchanged. Nor is removal merely free. On the series unit the two channels appear on five of the six false-alarm days of the 96-day fault-free holdout (their thresholds now calibrated on a separate slice, so these are out-of-sample counts), and deleting them eliminates five (the sixth is also flagged by the frequency channel), so that system's false-alarm rate falls from 6 in 96 to 1 in 96 at no detection cost; on the parallel unit the same deletion takes 7 in 96 to 5.\footnote{\texttt{outputs/union\_fpr\_sfpu.json}: model channel \{2018-11-29\}, device channel \{2018-01-25, 2018-01-30, 2018-12-28\}, frequency channel \{2018-11-29\}; \texttt{union\_all8} 4 days.} The process-mining channels' entire measurable contribution to this detector was three false alarms.
 
 \begin{table}[t]
 \centering

@@ -1,0 +1,228 @@
+{
+  "prereg": "docs/plans/2026-09-24-x25-statistical-repair-prereg.md",
+  "before_commit": "5bd7c5e",
+  "systems": {
+    "sdahu": {
+      "detected_before": 14,
+      "detected_after": 14,
+      "scored": 14,
+      "gained": [],
+      "lost": [],
+      "status_changed": {},
+      "conformance_only_after": [],
+      "model_threshold_before": 0.33333333333333337,
+      "model_threshold_after": 0.19999999999999996,
+      "model_holdout_fp_before": 0,
+      "model_holdout_fp_after": 0,
+      "model_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+      "device_fp_provenance_after": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample",
+      "deployed_fp_before": 1,
+      "deployed_fp_after": 1,
+      "per_channel_fp_after": {
+        "rules": 0,
+        "resid": 0,
+        "model": 0,
+        "device": 0,
+        "absence": 0,
+        "freq": 1,
+        "rate": 14,
+        "osc": 0
+      },
+      "per_channel_fp_before": {
+        "rules": 0,
+        "resid": 0,
+        "model": 0,
+        "device": 0,
+        "absence": 0,
+        "freq": 1,
+        "rate": 14,
+        "osc": 0
+      },
+      "model_credits_before": 0,
+      "model_credits_after": 0
+    },
+    "pfpu": {
+      "detected_before": 23,
+      "detected_after": 23,
+      "scored": 30,
+      "gained": [],
+      "lost": [],
+      "status_changed": {},
+      "conformance_only_after": [],
+      "model_threshold_before": 0.7933235867446393,
+      "model_threshold_after": 0.8072517730496455,
+      "model_holdout_fp_before": 1,
+      "model_holdout_fp_after": 4,
+      "model_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+      "device_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+      "deployed_fp_before": 5,
+      "deployed_fp_after": 7,
+      "per_channel_fp_after": {
+        "rules": 0,
+        "resid": 2,
+        "model": 4,
+        "device": 0,
+        "absence": 0,
+        "freq": 1,
+        "rate": 7,
+        "osc": 2
+      },
+      "per_channel_fp_before": {
+        "rules": 0,
+        "resid": 2,
+        "model": 1,
+        "device": 0,
+        "absence": 0,
+        "freq": 1,
+        "rate": 7,
+        "osc": 2
+      },
+      "model_credits_before": 0,
+      "model_credits_after": 0
+    },
+    "sfpu": {
+      "detected_before": 24,
+      "detected_after": 24,
+      "scored": 29,
+      "gained": [],
+      "lost": [],
+      "status_changed": {},
+      "conformance_only_after": [],
+      "model_threshold_before": 0.881763925729443,
+      "model_threshold_after": 0.9015427769985974,
+      "model_holdout_fp_before": 1,
+      "model_holdout_fp_after": 5,
+      "model_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+      "device_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+      "deployed_fp_before": 4,
+      "deployed_fp_after": 6,
+      "per_channel_fp_after": {
+        "rules": 0,
+        "resid": 0,
+        "model": 5,
+        "device": 1,
+        "absence": 0,
+        "freq": 1,
+        "rate": 0,
+        "osc": 0
+      },
+      "per_channel_fp_before": {
+        "rules": 0,
+        "resid": 0,
+        "model": 1,
+        "device": 3,
+        "absence": 0,
+        "freq": 1,
+        "rate": 0,
+        "osc": 0
+      },
+      "model_credits_before": 5,
+      "model_credits_after": 5
+    },
+    "ddahu": {
+      "detected_before": 45,
+      "detected_after": 45,
+      "scored": 55,
+      "gained": [],
+      "lost": [],
+      "status_changed": {
+        "DualDuct_DMPRStuck_Cold_0": [
+          "rules+resid+absence+freq+rate+osc",
+          "rules+resid+model+absence+freq+rate+osc"
+        ],
+        "DualDuct_DMPRStuck_Cold_20": [
+          "rules+resid+absence+freq+rate+osc",
+          "rules+resid+model+absence+freq+rate+osc"
+        ]
+      },
+      "conformance_only_after": [],
+      "model_threshold_before": 0.25,
+      "model_threshold_after": 0.5,
+      "model_holdout_fp_before": 0,
+      "model_holdout_fp_after": 0,
+      "model_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+      "device_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+      "deployed_fp_before": 3,
+      "deployed_fp_after": 3,
+      "per_channel_fp_after": {
+        "rules": 0,
+        "resid": 0,
+        "model": 0,
+        "device": 0,
+        "absence": 3,
+        "freq": 0,
+        "rate": 7,
+        "osc": 0
+      },
+      "per_channel_fp_before": {
+        "rules": 0,
+        "resid": 0,
+        "model": 0,
+        "device": 0,
+        "absence": 3,
+        "freq": 0,
+        "rate": 7,
+        "osc": 0
+      },
+      "model_credits_before": 0,
+      "model_credits_after": 2
+    },
+    "fcu": {
+      "detected_before": 42,
+      "detected_after": 42,
+      "scored": 47,
+      "gained": [],
+      "lost": [],
+      "status_changed": {
+        "FCU_VLVLeak_Heating_80": [
+          "rules+resid+freq+osc",
+          "rules+resid+model+freq+osc"
+        ],
+        "FCU_VLVStuck_Heating_0": [
+          "rules+freq",
+          "rules+model+freq"
+        ]
+      },
+      "conformance_only_after": [],
+      "model_threshold_before": 0.36228571428571427,
+      "model_threshold_after": 0.3711111111111111,
+      "model_holdout_fp_before": 1,
+      "model_holdout_fp_after": 1,
+      "model_fp_provenance_after": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample",
+      "device_fp_provenance_after": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample",
+      "deployed_fp_before": 4,
+      "deployed_fp_after": 4,
+      "per_channel_fp_after": {
+        "rules": 0,
+        "resid": 3,
+        "model": 1,
+        "device": 0,
+        "absence": 0,
+        "freq": 0,
+        "rate": 17,
+        "osc": 0
+      },
+      "per_channel_fp_before": {
+        "rules": 0,
+        "resid": 3,
+        "model": 1,
+        "device": 0,
+        "absence": 0,
+        "freq": 0,
+        "rate": 17,
+        "osc": 0
+      },
+      "model_credits_before": 7,
+      "model_credits_after": 9
+    }
+  },
+  "predictions": {
+    "P1_out_of_sample": true,
+    "P2_budget_le_10": true,
+    "P3_counts_within_2": true,
+    "P3_no_conformance_only": true,
+    "P4_status_flips_total": 0,
+    "P4_le_3": true
+  },
+  "falsifiers_fired": []
+}

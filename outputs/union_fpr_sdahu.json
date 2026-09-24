@@ -26,9 +26,9 @@
   "model": {
    "holdout_fp_days": 0,
    "holdout_days": 96,
-   "full_year_days": 9,
+   "full_year_days": 0,
    "holdout_fp_dates": [],
-   "threshold_provenance": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"
+   "threshold_provenance": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample"
   },
   "device": {
    "holdout_fp_days": 0,

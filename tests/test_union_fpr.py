@@ -28,7 +28,7 @@ SYSTEMS = ("sdahu", "pfpu", "sfpu")
 
 # quoted in PHASE6_RESULTS.md — a regression above these ceilings must be
 # a deliberate, documented decision, never an accident
-DEPLOYED_FPR_CEILING = {"sdahu": 1 / 96, "pfpu": 5 / 96, "sfpu": 4 / 96}
+DEPLOYED_FPR_CEILING = {"sdahu": 1 / 96, "pfpu": 7 / 96, "sfpu": 6 / 96}   # X25 (2026-09-24): out-of-sample conformance rows; was 1/5/4
 
 
 def _load(system):
@@ -94,9 +94,12 @@ def test_calibration_target_channels_disclosed(system):
     """model/device thresholds are quantile-fit on the holdout itself; the
     artifact must carry that disclosure (hostile-audit finding #1)."""
     art = _load(system)
+    # X25 (2026-09-24): with calibration_days_per_month set, the thresholds come from a
+    # calibration slice and the holdout rows are out-of-sample; the artefact must say which.
     for ch in ("model", "device"):
-        assert "calibration target" in art["channels"][ch]["threshold_provenance"]
-    assert any("calibration target" in c for c in art["caveats"])
+        prov = art["channels"][ch]["threshold_provenance"]
+        assert ("calibration target" in prov) or ("out-of-sample" in prov)
+    assert any(("calibration target" in c) or ("calibration slice" in c) for c in art["caveats"])
 
 
 @pytest.mark.parametrize("system", SYSTEMS)

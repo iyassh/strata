@@ -34,7 +34,7 @@
    "holdout_fp_dates": [
     "2018-01-28"
    ],
-   "threshold_provenance": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"
+   "threshold_provenance": "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample"
   },
   "device": {
    "holdout_fp_days": 0,
@@ -151,7 +151,7 @@
  },
  "caveats": [
   "Healthy negatives are the calibration year's shared calendar holdout; no independent healthy negative exists on any LBNL system (D2). Per-day autocorrelation makes any binomial p on these counts optimistic.",
-  "The model- and device-conformance thresholds are quantile-calibrated on these same holdout days (fpr_quantile); for those two channels the holdout-FP row is the calibration target, not an out-of-sample measurement. No healthy data unseen by every calibration step exists.",
+  "The model- and device-conformance thresholds are quantile-calibrated on a calibration slice (the days before each month's holdout block, X25); every holdout-FP row is out-of-sample. No healthy data unseen by every calibration step exists beyond that holdout.",
   "The rate demotion was decided after observing this holdout, so the deployed FPR is a post-selection estimate; the all-8 union is reported alongside it and the split-half probe shows the decision reproduces on both holdout halves.",
   "Per-channel exposure differs from the day denominator: residual abstains without an adequate physics window, rate needs a full 30-day window, and unoccupied days cannot fire most channels (see 'exposure')."
  ]

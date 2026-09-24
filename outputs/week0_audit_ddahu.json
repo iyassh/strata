@@ -678,10 +678,8 @@
         "RMCLGSPT_E": "varies(2)",
         "RMHTGSPT_E": "varies(2)",
         "HSA_SPSPT": 1.6,
-        "HSA_SP": "varies(197)",
         "HSA_TEMPSPT": 90.0,
         "CSA_SPSPT": 1.6,
-        "CSA_SP": "varies(235)",
         "CSA_TEMPSPT": 55.0
       }
     },
@@ -690,64 +688,14 @@
       "first_occupied_minute_mode": true,
       "oa_damper_floor_fan_on": true
     },
-    "setpoint_constants_identical_to_healthy": false,
-    "files_with_different_setpoint_constants": [
-      "DualDuct_CoolSeqUnstable.csv",
-      "DualDuct_DMPRStuck_Cold_0.csv",
-      "DualDuct_DMPRStuck_Cold_100.csv",
-      "DualDuct_DMPRStuck_Cold_20.csv",
-      "DualDuct_DMPRStuck_Cold_50.csv",
-      "DualDuct_DMPRStuck_Cold_80.csv",
-      "DualDuct_DMPRStuck_Hot_0.csv",
-      "DualDuct_DMPRStuck_Hot_100.csv",
-      "DualDuct_DMPRStuck_Hot_20.csv",
-      "DualDuct_DMPRStuck_Hot_50.csv",
-      "DualDuct_DMPRStuck_Hot_80.csv",
-      "DualDuct_DMPRStuck_OA_0.csv",
-      "DualDuct_DMPRStuck_OA_100.csv",
-      "DualDuct_DMPRStuck_OA_28.csv",
-      "DualDuct_DMPRStuck_OA_45.csv",
-      "DualDuct_DMPRStuck_OA_80.csv",
-      "DualDuct_Fouling_Cooling_Airside_Minor.csv",
-      "DualDuct_Fouling_Cooling_Airside_Moderate.csv",
-      "DualDuct_Fouling_Cooling_Airside_Severe.csv",
-      "DualDuct_Fouling_Cooling_Waterside_Minor.csv",
-      "DualDuct_Fouling_Cooling_Waterside_Moderate.csv",
-      "DualDuct_Fouling_Cooling_Waterside_Severe.csv",
-      "DualDuct_Fouling_Heating_Airside_Minor.csv",
-      "DualDuct_Fouling_Heating_Airside_Moderate.csv",
-      "DualDuct_Fouling_Heating_Airside_Severe.csv",
-      "DualDuct_Fouling_Heating_Waterside_Minor.csv",
-      "DualDuct_Fouling_Heating_Waterside_Moderate.csv",
-      "DualDuct_Fouling_Heating_Waterside_Severe.csv",
-      "DualDuct_HeatSeqUnstable.csv",
-      "DualDuct_SensorBias_CSA_+2C.csv",
-      "DualDuct_SensorBias_CSA_+4C.csv",
-      "DualDuct_SensorBias_CSA_-2C.csv",
-      "DualDuct_SensorBias_CSA_-4C.csv",
-      "DualDuct_SensorBias_CSP_+2inwg.csv",
-      "DualDuct_SensorBias_CSP_+4inwg.csv",
-      "DualDuct_SensorBias_CSP_-2inwg.csv",
-      "DualDuct_SensorBias_CSP_-4inwg.csv",
-      "DualDuct_SensorBias_HSA_+2C.csv",
-      "DualDuct_SensorBias_HSA_+4C.csv",
-      "DualDuct_SensorBias_HSA_-2C.csv",
-      "DualDuct_SensorBias_HSA_-4C.csv",
-      "DualDuct_SensorBias_HSP_+2inwg.csv",
-      "DualDuct_SensorBias_HSP_+4inwg.csv",
-      "DualDuct_SensorBias_HSP_-2inwg.csv",
-      "DualDuct_SensorBias_HSP_-4inwg.csv",
-      "DualDuct_VLVStuck_Cooling_0_.csv",
-      "DualDuct_VLVStuck_Cooling_100_.csv",
-      "DualDuct_VLVStuck_Cooling_20_.csv",
-      "DualDuct_VLVStuck_Cooling_50_.csv",
-      "DualDuct_VLVStuck_Cooling_80_.csv",
-      "DualDuct_VLVStuck_Heating_0_.csv",
-      "DualDuct_VLVStuck_Heating_100_.csv",
-      "DualDuct_VLVStuck_Heating_20_.csv",
-      "DualDuct_VLVStuck_Heating_50_.csv",
-      "DualDuct_VLVStuck_Heating_80_.csv"
-    ],
+    "healthy_constant_setpoints": {
+      "HSA_SPSPT": 1.6,
+      "HSA_TEMPSPT": 90.0,
+      "CSA_SPSPT": 1.6,
+      "CSA_TEMPSPT": 55.0
+    },
+    "setpoint_constants_identical_to_healthy": true,
+    "files_with_different_setpoint_constants": [],
     "per_file": {
       "DualDuct_CoolSeqUnstable.csv": {
         "occupied_days": 261,
@@ -763,10 +711,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(202)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(204)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -784,10 +730,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(234)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(230)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -805,10 +749,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(215)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(246)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -826,10 +768,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(230)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(235)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -847,10 +787,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(193)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(185)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -868,10 +806,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(216)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(234)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -889,10 +825,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(194)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(219)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -910,10 +844,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(208)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(254)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -931,10 +863,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(193)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(217)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -952,10 +882,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(188)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(233)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -973,10 +901,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(207)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(249)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -994,10 +920,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(363)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(416)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1015,10 +939,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(172)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(177)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1036,10 +958,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(397)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(434)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1057,10 +977,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(345)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(346)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1078,10 +996,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(159)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(169)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1099,10 +1015,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(197)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(235)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1120,10 +1034,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(195)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(250)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1141,10 +1053,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(202)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(289)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1162,10 +1072,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(193)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(357)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1183,10 +1091,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(200)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(240)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1204,10 +1110,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(203)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(275)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1225,10 +1129,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(204)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(268)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1246,10 +1148,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(196)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(238)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1267,10 +1167,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(194)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(231)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1288,10 +1186,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(221)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(234)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1309,10 +1205,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(194)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(234)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1330,10 +1224,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(196)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(232)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1351,10 +1243,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(197)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(228)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1372,10 +1262,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(191)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(233)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1393,10 +1281,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(209)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(224)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1414,10 +1300,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(238)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(255)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1435,10 +1319,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(200)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(240)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1456,10 +1338,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(203)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(286)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1477,10 +1357,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(204)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(190)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1498,10 +1376,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(201)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(154)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1519,10 +1395,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(198)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(293)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1540,10 +1414,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(200)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(293)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1561,10 +1433,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(194)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(238)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1582,10 +1452,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(189)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(209)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1603,10 +1471,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(207)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(242)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1624,10 +1490,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(202)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(249)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1645,10 +1509,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(169)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(239)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1666,10 +1528,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(149)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(232)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1687,10 +1547,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(212)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(238)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1708,10 +1566,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(245)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(250)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1729,10 +1585,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(241)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(287)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1750,10 +1604,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(189)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(192)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1771,10 +1623,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(244)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(303)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1792,10 +1642,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(192)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(216)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1813,10 +1661,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(192)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(186)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1834,10 +1680,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(287)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(263)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1855,10 +1699,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(278)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(291)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1876,10 +1718,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(287)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(263)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1897,10 +1737,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(270)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(293)",
           "CSA_TEMPSPT": 55.0
         }
       },
@@ -1918,10 +1756,8 @@
           "RMCLGSPT_E": "varies(2)",
           "RMHTGSPT_E": "varies(2)",
           "HSA_SPSPT": 1.6,
-          "HSA_SP": "varies(274)",
           "HSA_TEMPSPT": 90.0,
           "CSA_SPSPT": 1.6,
-          "CSA_SP": "varies(295)",
           "CSA_TEMPSPT": 55.0
         }
       }

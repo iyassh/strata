@@ -223,9 +223,10 @@ events:
 
   # Deck supply-air setpoint deviation, gated on the deck's coil controlling.
   # Iteration 1 (healthy-silence): expressed as a two-gate residual — the
-  # cold deck cannot hold 55 F on ten healthy days when its fan saturates
-  # (speed 1.0, static 1.39 vs 1.6); gating on duct static at setpoint
-  # removes them (1 healthy day remains at 60 min sustained).
+  # cold deck cannot hold 55 F on six healthy days (sustained >= 60 min,
+  # ungated), all among the ten days on which its fan saturates (speed 1.0,
+  # static 1.39 vs 1.6); gating on duct static at setpoint removes them
+  # (1 healthy day remains at 60 min sustained).
   cold_sat_setpoint_deviation:
     kind: paired_residual
     alphabet: signature
@@ -255,7 +256,10 @@ events:
   # deck fan running. The controller trusts a biased sensor, so a bias will
   # NOT show here; it is the residuals below that attempt the bias families.
   # Iteration 1: two-gate residual so the fan-saturated regime (speed >= 0.98)
-  # is excluded; 0.5 in.wg band (healthy p99.9 outside saturation is 0.36).
+  # is excluded; 0.5 in.wg band. Under the rule's own gating the healthy
+  # deviation's p99.5 is 0.36 and its p99.9 is 1.07 (max 1.80): the band
+  # alone would not be silent; the 60-minute sustained requirement is what
+  # carries the silence (0 healthy days).
   cold_static_setpoint_deviation:
     kind: paired_residual
     alphabet: signature

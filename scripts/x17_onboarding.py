@@ -66,7 +66,7 @@ out = {"pre_registration": "docs/plans/2026-09-24-x17-ddahu-onboarding-prereg.md
                  "ttl_columns_not_declared": gates["G5_ttl"]["columns_not_declared"]},
        "scorecard": {"detected": len(det), "scored": len(sc), "by_family": by_family,
                      "channels": {ch: sum(1 for s in sc if ch in str(s["meaningful_channels"]).split("+"))
-                                  for ch in ("rules", "resid", "model", "device", "freq", "osc", "rate")},
+                                  for ch in ("rules", "resid", "model", "device", "absence", "freq", "osc", "rate")},
                      "holdout_fp_days_union_minus_rate": fp, "holdout_days": hold,
                      "per_channel_fp": {k: v["holdout_fp_days"] for k, v in ufpr["channels"].items()}},
        "predictions": pred, "falsifiers_fired": fired}

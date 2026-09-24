@@ -28,9 +28,13 @@ and unstable control sequences.
 | healthy-silence iterations | 1 (logged beside each rule) |
 | `src/` changes | **none** |
 
-Healthy-silence gate, iteration 1: the initial config fired 73 signature
-events on the fault-free year. Ten of them came from ten specific days on
-which the cold-deck fan saturates (speed 1.0, duct static 1.39 against a
+Healthy-silence gate, iteration 1: the initial config's first run printed
+73 signature events on 8 rules (cold SAT deviation 17, cold static
+deviation 11, zone flow tracking 10 on each of four boxes, hot SAT
+deviation 4, hot-deck residual 1 — a console figure; the pre-iteration
+config was not committed, and reverting the changes the comments log
+reproduces 51 events on 13 days, 47 of them on the ten days below). Nearly
+all of it came from ten specific days on which the cold-deck fan saturates (speed 1.0, duct static 1.39 against a
 1.6 in.wg setpoint) and the deck cannot hold 55 °F or deliver demanded
 zone flow. Rather than loosen thresholds, those rules got a physical gate —
 "duct static at setpoint" — expressed with the existing two-gate residual
@@ -59,14 +63,19 @@ SDAHU and SFPU, this dataset carries no defect the battery can see.
 Channel credits among the 45: residual 39, rules 35, oscillation 15,
 absence 14, rate 9, frequency 8, device 1, **model 0**. No scenario is
 detected only by the conformance channels (P7 holds: the null generalises
-to a fourth system type). The ten misses: seven coil-fouling files (all
-minor/moderate airside and waterside, plus heating airside severe) and
-three static-pressure biases (cold +0.2, hot −0.2, hot −0.4 in.wg).
+to a fourth system type). The ten misses: seven coil-fouling files (all four minor, both airside
+moderate, and heating airside severe — so at the documentation's
+15-family granularity heating airside fouling is missed entirely, 0 of 3)
+and three static-pressure biases (cold +0.2, hot −0.2, hot −0.4 in.wg).
 
-The one prediction that failed did so in the good direction: **P6** said at
-most 4 of the 12 fouling scenarios would be detected; 5 were (the
-waterside moderate/severe of both coils and cooling airside severe), through
-the rules channel (waterside ΔT rules) and the residual channel.
+**P6 was wrong.** Five of twelve fouling scenarios were detected (the
+waterside moderate/severe of both coils and cooling airside severe, through
+the waterside ΔT rules and the residual channel) against a predicted
+ceiling of four. The prediction was a limitation forecast calibrated on the
+fan-powered units (2 of 12) and it under-predicted by one scenario. No
+falsifier was attached to P6, so nothing follows for the protocol — which
+is itself worth recording: the one prediction that failed is the one that
+carried no consequence.
 
 ## False alarms (P4)
 

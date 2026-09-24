@@ -24,7 +24,8 @@ and once, below, with the deployed detector after X25's calibration slice.
 | DDAHU | 14 | 0.91 / 0.50 | **59 / 83, yes** | 0.99 | 0.71 | 0.96 / **yes** | 14 / 83, **yes** |
 | FCU | 11 | 0.89 / 0.37 | **55 / 72, yes** | 0.99 | 0.75 | 0.97 / **yes** | 6 / 72, **yes** |
 
-Duplicated blocks fire nowhere (P5 held: loops absorb repetition).
+Duplicated blocks reach significance nowhere (P5 held: loops absorb
+repetition; they add a few flagged days on the fan-powered units).
 Deleting the start event fires nowhere (P2 failed everywhere, including
 the two systems whose nets treat it as obligatory — on the fan-powered
 units it *raises* fitness, AUC 0.40 and 0.36). Swaps rise monotonically on
@@ -55,7 +56,8 @@ everywhere") did not fire — but P1's prediction (SDAHU fires) was wrong.
    X25, deletions of two or more events were significant here; with the
    new training slice they are not.)
 3. On the **fan-powered units** fitness does not move under any
-   perturbation (AUC 0.49–0.51 on everything except skip-start). Those
+   perturbation (AUC 0.49–0.51 on everything except skip-start and one
+   skip arm at 0.513). Those
    nets accept any order: blind by *net structure*, the reading the
    earlier reversal probe already gave.
 

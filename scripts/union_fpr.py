@@ -187,7 +187,8 @@ chans = {
 PROVENANCE = {
     "model": ("threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample" if getattr(det, "threshold_out_of_sample", False)
               else "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"),
-    "device": ("threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample" if getattr(dev_det, "threshold_out_of_sample", False)
+    "device": ("channel absent: this configuration declares no device stratum" if dev_det is None
+               else "threshold calibrated on the X25 calibration slice; the holdout FP row is out-of-sample" if getattr(dev_det, "threshold_out_of_sample", False)
                else "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"),
 }
 CALIB_TARGET = {k for k, v in PROVENANCE.items() if "calibration target" in v}
@@ -352,10 +353,14 @@ out = {
         "Healthy negatives are the calibration year's shared calendar holdout; "
         "no independent healthy negative exists on any LBNL system (D2). "
         "Per-day autocorrelation makes any binomial p on these counts optimistic.",
-        "The model- and device-conformance thresholds are quantile-calibrated on "
-        "these same holdout days (fpr_quantile); for those two channels the "
-        "holdout-FP row is the calibration target, not an out-of-sample "
-        "measurement. No healthy data unseen by every calibration step exists.",
+        ("The model- and device-conformance thresholds are quantile-calibrated on a "
+         "calibration slice (the days before each month's holdout block, X25); every "
+         "holdout-FP row is out-of-sample. No healthy data unseen by every calibration "
+         "step exists beyond that holdout." if getattr(det, "threshold_out_of_sample", False) else
+         "The model- and device-conformance thresholds are quantile-calibrated on "
+         "these same holdout days (fpr_quantile); for those two channels the "
+         "holdout-FP row is the calibration target, not an out-of-sample "
+         "measurement. No healthy data unseen by every calibration step exists."),
         "The rate demotion was decided after observing this holdout, so the "
         "deployed FPR is a post-selection estimate; the all-8 union is reported "
         "alongside it and the split-half probe shows the decision reproduces on "

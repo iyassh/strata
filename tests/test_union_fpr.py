@@ -24,11 +24,13 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-SYSTEMS = ("sdahu", "pfpu", "sfpu")
+SYSTEMS = ("sdahu", "pfpu", "sfpu", "ddahu", "fcu")   # extended to five (X25 review)
 
 # quoted in PHASE6_RESULTS.md — a regression above these ceilings must be
 # a deliberate, documented decision, never an accident
-DEPLOYED_FPR_CEILING = {"sdahu": 1 / 96, "pfpu": 7 / 96, "sfpu": 6 / 96}   # X25 (2026-09-24): out-of-sample conformance rows; was 1/5/4
+DEPLOYED_FPR_CEILING = {"sdahu": 1 / 96, "pfpu": 7 / 96, "sfpu": 6 / 96, "ddahu": 3 / 96, "fcu": 4 / 96}   # pinned counts after X25 (was 1/5/4 on the first three)
+PREREG_BUDGET = 10 / 96   # X25 pre-registered ceiling, asserted independently of the pins
+HAS_DEVICE_STRATUM = {"sdahu": False, "pfpu": True, "sfpu": True, "ddahu": True, "fcu": False}
 
 
 def _load(system):
@@ -68,7 +70,8 @@ def test_rate_demotion_is_free(system):
 @pytest.mark.parametrize("system", SYSTEMS)
 def test_deployed_fpr_ceiling(system):
     art = _load(system)
-    assert art["union_minus_rate"]["rate"] <= DEPLOYED_FPR_CEILING[system] + 1e-9
+    assert art["union_minus_rate"]["rate"] <= PREREG_BUDGET + 1e-9          # the pre-registered bound
+    assert art["union_minus_rate"]["rate"] <= DEPLOYED_FPR_CEILING[system] + 1e-9   # the pinned count
 
 
 @pytest.mark.parametrize("system", SYSTEMS)
@@ -96,10 +99,13 @@ def test_calibration_target_channels_disclosed(system):
     art = _load(system)
     # X25 (2026-09-24): with calibration_days_per_month set, the thresholds come from a
     # calibration slice and the holdout rows are out-of-sample; the artefact must say which.
-    for ch in ("model", "device"):
-        prov = art["channels"][ch]["threshold_provenance"]
-        assert ("calibration target" in prov) or ("out-of-sample" in prov)
-    assert any(("calibration target" in c) or ("calibration slice" in c) for c in art["caveats"])
+    assert "out-of-sample" in art["channels"]["model"]["threshold_provenance"]
+    dev = art["channels"]["device"]["threshold_provenance"]
+    if HAS_DEVICE_STRATUM[system]:
+        assert "out-of-sample" in dev
+    else:
+        assert ("channel absent" in dev) or ("calibration target" in dev)   # pre-step-3 artefacts carry the fall-through text
+    assert any("calibration slice" in c for c in art["caveats"])
 
 
 @pytest.mark.parametrize("system", SYSTEMS)

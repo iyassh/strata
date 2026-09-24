@@ -23,3 +23,4 @@ def test_x25_pinned():
     assert all(not v["gained"] and not v["lost"] and not v["conformance_only_after"] for v in s.values())
     assert all("out-of-sample" in v["model_fp_provenance_after"] for v in s.values())
     assert a["predictions"]["P4_status_flips_total"] == 0
+    assert a["predictions"]["P0_step1_sdahu_byte_identical_VERIFIED_BY_HAND"] is True

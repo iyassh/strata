@@ -238,6 +238,7 @@ if rate_det:
 RES_CHANNELS = cfg.rules["detection"].get("residual_channels", [RESIDUAL_RULE])
 RES = {}
 hold_fp, hold_n = 0, 0
+_hold_flag_days, _hold_eval_days = set(), set()   # X25 step 4: per-DAY null, OR over channels
 for rname in RES_CHANNELS:
     rh = daily_residual_scores(healthy_df, cfg, rule_name=rname)
     if rh.empty:
@@ -248,8 +249,13 @@ for rname in RES_CHANNELS:
     rhold = flag_days(rh[hmask], band_r,
                       min_margin=residual_floor(cfg, rname, "residual_min_exceedance"))
     RES[rname] = band_r
-    hold_fp += int(rhold["flagged"].sum())
-    hold_n += int(rhold["evaluable"].sum())
+    _hold_flag_days |= set(rhold.loc[rhold["flagged"], "case_id"])
+    _hold_eval_days |= set(rhold.loc[rhold["evaluable"], "case_id"])
+# X25 step 4: the residual channel's per-day flag is an OR over its channels, so its null
+# is per day: holdout days flagged by any channel over holdout days on which any channel
+# was evaluable (the quantities union_fpr reports). Before this the counts were pooled
+# channel-days, which made the floor 3/509 on one system and 3/124 on another.
+hold_fp, hold_n = len(_hold_flag_days), len(_hold_eval_days)
 BAND = RES.get(RESIDUAL_RULE, (0.0, 0.0))
 osc_det = build_oscillation_detector(healthy_df, cfg)
 if osc_det:
@@ -268,7 +274,7 @@ model_hold_silent = int(sum(1 for d, m in zip(h_uni.index, _h_hold)
 model_hold_fp += model_hold_silent
 
 print(f"\nresidual band (TRAIN-only): [{BAND[0]:+.2f}, {BAND[1]:+.2f}] F | "
-      f"holdout: {hold_fp}/{hold_n} window-days outside")
+      f"holdout: {hold_fp}/{hold_n} days flagged (per-day OR over channels, X25 step 4)")
 print(f"model threshold: {det.threshold:.4f} (min-calibration on {len(det.holdout_per_day)} holdout days; "
       f"holdout FP {model_hold_fp}, of which silent-in-operate {model_hold_silent})")
 print(f"rules on FULL healthy year: {len(h_sig)} signature days (computed)")

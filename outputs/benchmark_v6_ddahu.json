@@ -23645,14 +23645,14 @@
       "model_days": 0,
       "combined_days": 34,
       "model_unique_days": 0,
-      "ttd_days": null,
+      "ttd_days": 78,
       "log_hash": "86e78c34",
       "top_device": null,
       "ground_truth_zone": null,
       "localization": "-",
-      "meaningful_channels": null,
+      "meaningful_channels": "resid",
       "excluded": false,
-      "meaningful_channels_raw": null,
+      "meaningful_channels_raw": "resid",
       "model_days_minrobust": 0,
       "device_days": 0,
       "absence_days": 17,
@@ -23692,7 +23692,16 @@
           "2018-11-29",
           "2018-11-30"
         ],
-        "sig_union": []
+        "sig_union": [
+          "2018-03-19",
+          "2018-03-20",
+          "2018-03-23",
+          "2018-03-28",
+          "2018-05-28",
+          "2018-09-03",
+          "2018-09-06",
+          "2018-09-07"
+        ]
       },
       "frequency_violations": {
         "zone_cooling_active@TU_E": 1,

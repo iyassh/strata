@@ -1099,14 +1099,14 @@
       "model_days": 11,
       "combined_days": 63,
       "model_unique_days": 11,
-      "ttd_days": 37,
+      "ttd_days": null,
       "log_hash": "e01bd88e",
       "top_device": null,
       "ground_truth_zone": "S",
       "localization": "-",
-      "meaningful_channels": "resid",
+      "meaningful_channels": null,
       "excluded": false,
-      "meaningful_channels_raw": "resid",
+      "meaningful_channels_raw": null,
       "model_days_minrobust": 0,
       "device_days": 5,
       "absence_days": 0,
@@ -1194,15 +1194,7 @@
           "2018-09-24",
           "2018-09-25"
         ],
-        "sig_union": [
-          "2018-02-06",
-          "2018-02-07",
-          "2018-02-12",
-          "2018-03-05",
-          "2018-12-18",
-          "2018-12-19",
-          "2018-12-24"
-        ]
+        "sig_union": []
       },
       "frequency_violations": {
         "heating_active": 1,
@@ -9776,7 +9768,7 @@
       "model_days": 11,
       "combined_days": 36,
       "model_unique_days": 10,
-      "ttd_days": 10,
+      "ttd_days": null,
       "log_hash": "b3a0bc33",
       "top_device": null,
       "ground_truth_zone": "INDETERMINATE",
@@ -9853,16 +9845,7 @@
           "2018-03-01",
           "2018-03-02"
         ],
-        "sig_union": [
-          "2018-01-10",
-          "2018-01-14",
-          "2018-02-03",
-          "2018-02-04",
-          "2018-02-16",
-          "2018-03-08",
-          "2018-10-31",
-          "2018-12-27"
-        ]
+        "sig_union": []
       },
       "frequency_violations": {
         "zone_heating_active@TU_S": 11,
@@ -17286,9 +17269,9 @@
       "top_device": "TU_S",
       "ground_truth_zone": "S",
       "localization": "OK",
-      "meaningful_channels": "rules+resid+model+rate",
+      "meaningful_channels": "rules+model+rate",
       "excluded": false,
-      "meaningful_channels_raw": "rules+resid+model+rate",
+      "meaningful_channels_raw": "rules+model+rate",
       "model_days_minrobust": 23,
       "device_days": 11,
       "absence_days": 0,

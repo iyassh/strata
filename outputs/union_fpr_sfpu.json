@@ -155,7 +155,7 @@
    },
    {
     "label": "VAVDMPRStuck 50%",
-    "channels": "rules+resid+model+rate",
+    "channels": "rules+model+rate",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
     "rate_only_alarm_days": 71

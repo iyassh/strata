@@ -69,3 +69,26 @@ P0 is evaluated on the split code alone (calibration key absent, floor
 unchanged): SDAHU must regenerate byte-identically. The floor change and the
 five config keys are then applied together, and P1–P4 are read off that
 "after" state against the committed "before" scorecards.
+
+## Amendment 1 — 2026-09-24, after step 3 and before step 4
+
+**Step 2's floor was wrong** (3/365 at every n; looser than max(fp, 1)/n at
+n = 96) and **step 3's is inconsistent**: max(fp, 3)/n with the residual
+gate's n being holdout *window-days pooled over channels* (509 on DDAHU,
+124 on SFPU), so the same rule is 3/509 = 0.006 on one system and
+3/124 = 0.024 on another, and looser than step 2 wherever the pool exceeds
+365 days. That is why step 3 *gained* a DDAHU scenario (hot-deck static
+bias −0.4, 8 flagged days of 279) while *losing* an SFPU one (reheat-coil
+airside-severe fouling). The residual channel's flag is a per-day OR over
+its channels, so its null must be per day too.
+
+**Step 4 (fixed now):** the residual gate's holdout false-alarm count and
+denominator are the number of holdout *days* flagged by any residual
+channel and the number of holdout days on which any channel was
+evaluable (the same quantities the false-alarm artefact reports), with
+the floor max(fp, 3)/n on those days. Nothing else changes. All five
+systems regenerate; the step-3 → step-4 diff is recorded as
+`outputs/x25_step4_perday.json`; the ledger against the pre-X25 state is
+regenerated. Predictions P2 and P3 apply to the step-4 state; the
+step-3 SFPU loss and DDAHU gain are expected to reverse or persist and
+either is reported. No detection may become conformance-only.

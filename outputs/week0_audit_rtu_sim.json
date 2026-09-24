@@ -1,0 +1,446 @@
+{
+  "system": "rtu_sim",
+  "raw_dir": "/Users/yassh/Downloads/Ureap/LBNL_FDD_Data_Sets_RTU_all_3/Simulated RTU",
+  "n_files": 25,
+  "G1_md5": {
+    "hashes": {
+      "RTU_sim_baseline.csv": "532f614f1f6d09b88cbe5312d83cedba",
+      "RTU_sim_condfouling10.csv": "84374ed0ff26b39db0b9b44659bdd030",
+      "RTU_sim_condfouling20.csv": "16ffc27f8e9874203e78ab3b62e21143",
+      "RTU_sim_condfouling30.csv": "b6adba376823027669f2be0ba494be8d",
+      "RTU_sim_condfouling40.csv": "251a8ce4153c9ff4f43521f1a89d5f8e",
+      "RTU_sim_condfouling50.csv": "9a48354e3a19d1f1ee9cf37e298edb65",
+      "RTU_sim_evapfouling10.csv": "cf9e984c63f2daa47f0289c40846dd1a",
+      "RTU_sim_evapfouling20.csv": "5446e32403376888d495977934fe2a31",
+      "RTU_sim_evapfouling30.csv": "3bd5b6b48b90bc422ed1764f1e02516b",
+      "RTU_sim_evapfouling40.csv": "11a4462a6519e15d9df794c74e7a984e",
+      "RTU_sim_evapfouling50.csv": "2a0f67451c985beb54d965eab9ab4302",
+      "RTU_sim_liquidpipe01bar.csv": "17e0b885b16d57add7991835ede1db84",
+      "RTU_sim_liquidpipe04bar.csv": "7e2e8244906646e3a2566df58ca83173",
+      "RTU_sim_liquidpipe08bar.csv": "cb1cac471d9e3eba718418dde061e744",
+      "RTU_sim_liquidpipe10bar.csv": "9d69ab74b86a02b4cfcfccbec74e3dab",
+      "RTU_sim_overcharge10.csv": "e7193140c13cc8c17382fb14d468a405",
+      "RTU_sim_overcharge15.csv": "b5e9aecdd2f91b3a13cbd20662bdcdef",
+      "RTU_sim_overcharge20.csv": "d2adf9dda8dcd496ab1f1084db476932",
+      "RTU_sim_suctionpipe01bar.csv": "613c8a21528f00875e4db99e52087c76",
+      "RTU_sim_suctionpipe03bar.csv": "ac2974a112af3b2995747bdf05fcc553",
+      "RTU_sim_suctionpipe06bar.csv": "a026dc0493e84a66347074b3734f2284",
+      "RTU_sim_suctionpipe09bar.csv": "9295cdbd39bf76a009b7f5a5a6c715d3",
+      "RTU_sim_undercharge10.csv": "4442078b230e152cead8c943747917a8",
+      "RTU_sim_undercharge15.csv": "56b3e0a0e21748a56758c66e4c142df7",
+      "RTU_sim_undercharge20.csv": "7e3a985685697583ad7c5cc085497119"
+    },
+    "duplicate_groups": []
+  },
+  "G2_monotonic": {
+    "RTU_sim_baseline.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_condfouling10.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_condfouling20.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_condfouling30.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_condfouling40.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_condfouling50.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_evapfouling10.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_evapfouling20.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_evapfouling30.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_evapfouling40.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_evapfouling50.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_liquidpipe01bar.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_liquidpipe04bar.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_liquidpipe08bar.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_liquidpipe10bar.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_overcharge10.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_overcharge15.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_overcharge20.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_suctionpipe01bar.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_suctionpipe03bar.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_suctionpipe06bar.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_suctionpipe09bar.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_undercharge10.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_undercharge15.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    },
+    "RTU_sim_undercharge20.csv": {
+      "wrap_points": 0,
+      "first": "2018-07-20 01:00:00",
+      "last": "2018-10-28 00:00:00",
+      "rows": 143941
+    }
+  },
+  "G3_calendar": {
+    "RTU_sim_baseline.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_condfouling10.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_condfouling20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_condfouling30.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_condfouling40.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_condfouling50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_evapfouling10.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_evapfouling20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_evapfouling30.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_evapfouling40.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_evapfouling50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_liquidpipe01bar.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_liquidpipe04bar.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_liquidpipe08bar.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_liquidpipe10bar.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_overcharge10.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_overcharge15.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_overcharge20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_suctionpipe01bar.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_suctionpipe03bar.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_suctionpipe06bar.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_suctionpipe09bar.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_undercharge10.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_undercharge15.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    },
+    "RTU_sim_undercharge20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 143941
+    }
+  },
+  "G4_raw_rotation": {},
+  "G5_ttl": {
+    "columns": 24,
+    "declared_points": 29,
+    "columns_not_declared": [],
+    "declared_not_in_columns": [
+      "RTU",
+      "Zone",
+      "compressor",
+      "condenser",
+      "supply_fan"
+    ]
+  },
+  "G6_branch": {
+    "healthy": {
+      "setpoint_constants": {
+        "ZA_TEMP_SPT": 73.4
+      }
+    },
+    "healthy_inside_fault_range": {
+      "occupied_days": null,
+      "first_occupied_minute_mode": null,
+      "oa_damper_floor_fan_on": null
+    },
+    "healthy_constant_setpoints": {
+      "ZA_TEMP_SPT": 73.4
+    },
+    "setpoint_constants_identical_to_healthy": true,
+    "files_with_different_setpoint_constants": [],
+    "per_file": {
+      "RTU_sim_baseline.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_condfouling10.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_condfouling20.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_condfouling30.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_condfouling40.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_condfouling50.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_evapfouling10.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_evapfouling20.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_evapfouling30.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_evapfouling40.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_evapfouling50.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_liquidpipe01bar.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_liquidpipe04bar.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_liquidpipe08bar.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_liquidpipe10bar.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_overcharge10.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_overcharge15.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_overcharge20.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_suctionpipe01bar.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_suctionpipe03bar.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_suctionpipe06bar.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_suctionpipe09bar.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_undercharge10.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_undercharge15.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      },
+      "RTU_sim_undercharge20.csv": {
+        "setpoint_constants": {
+          "ZA_TEMP_SPT": 73.4
+        }
+      }
+    }
+  }
+}

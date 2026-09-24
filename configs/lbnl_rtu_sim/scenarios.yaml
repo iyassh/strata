@@ -1,0 +1,27 @@
+# X29: LBNL simulated RTU, 24 fault files against one baseline (all 100 days, shared calendar).
+healthy_file: RTU_sim_baseline
+scenarios:
+  - {file: RTU_sim_condfouling10, family: condenser_fouling, label: "condenser fouling 10", is_fault: true}
+  - {file: RTU_sim_condfouling20, family: condenser_fouling, label: "condenser fouling 20", is_fault: true}
+  - {file: RTU_sim_condfouling30, family: condenser_fouling, label: "condenser fouling 30", is_fault: true}
+  - {file: RTU_sim_condfouling40, family: condenser_fouling, label: "condenser fouling 40", is_fault: true}
+  - {file: RTU_sim_condfouling50, family: condenser_fouling, label: "condenser fouling 50", is_fault: true}
+  - {file: RTU_sim_evapfouling10, family: evaporator_fouling, label: "evaporator fouling 10", is_fault: true}
+  - {file: RTU_sim_evapfouling20, family: evaporator_fouling, label: "evaporator fouling 20", is_fault: true}
+  - {file: RTU_sim_evapfouling30, family: evaporator_fouling, label: "evaporator fouling 30", is_fault: true}
+  - {file: RTU_sim_evapfouling40, family: evaporator_fouling, label: "evaporator fouling 40", is_fault: true}
+  - {file: RTU_sim_evapfouling50, family: evaporator_fouling, label: "evaporator fouling 50", is_fault: true}
+  - {file: RTU_sim_liquidpipe01bar, family: liquid_line_restriction, label: "liquid line restriction 01bar", is_fault: true}
+  - {file: RTU_sim_liquidpipe04bar, family: liquid_line_restriction, label: "liquid line restriction 04bar", is_fault: true}
+  - {file: RTU_sim_liquidpipe08bar, family: liquid_line_restriction, label: "liquid line restriction 08bar", is_fault: true}
+  - {file: RTU_sim_liquidpipe10bar, family: liquid_line_restriction, label: "liquid line restriction 10bar", is_fault: true}
+  - {file: RTU_sim_overcharge10, family: refrigerant_overcharge, label: "refrigerant overcharge 10", is_fault: true}
+  - {file: RTU_sim_overcharge15, family: refrigerant_overcharge, label: "refrigerant overcharge 15", is_fault: true}
+  - {file: RTU_sim_overcharge20, family: refrigerant_overcharge, label: "refrigerant overcharge 20", is_fault: true}
+  - {file: RTU_sim_suctionpipe01bar, family: suction_line_restriction, label: "suction line restriction 01bar", is_fault: true}
+  - {file: RTU_sim_suctionpipe03bar, family: suction_line_restriction, label: "suction line restriction 03bar", is_fault: true}
+  - {file: RTU_sim_suctionpipe06bar, family: suction_line_restriction, label: "suction line restriction 06bar", is_fault: true}
+  - {file: RTU_sim_suctionpipe09bar, family: suction_line_restriction, label: "suction line restriction 09bar", is_fault: true}
+  - {file: RTU_sim_undercharge10, family: refrigerant_undercharge, label: "refrigerant undercharge 10", is_fault: true}
+  - {file: RTU_sim_undercharge15, family: refrigerant_undercharge, label: "refrigerant undercharge 15", is_fault: true}
+  - {file: RTU_sim_undercharge20, family: refrigerant_undercharge, label: "refrigerant undercharge 20", is_fault: true}

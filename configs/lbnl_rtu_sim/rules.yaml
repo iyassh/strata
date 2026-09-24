@@ -1,0 +1,108 @@
+# Event-abstraction rules for the LBNL SIMULATED rooftop unit (X29, 2026-09-24).
+# Written from documentation S1-S2 and the baseline file only. degF. Fixed rule bands
+# are the baseline compressor-on p0.1/p99.9 with a margin, logged here; residual
+# channels learn their bands on training days. Capacity outputs are never used.
+
+climate:
+  ashrae_zone: 3C
+  notes: "Small-office prototype, one zone; 100 days Jul-Oct 2018."
+
+detection:
+  fpr_quantile: 0.01
+  oscillation_signals: [ZONE_TEMP]
+  oscillation_deadband: 0.5
+  residual_min_band_width: 0.5
+  residual_min_exceedance: 0.5
+  residual_channels: [cond_approach, discharge_superheat, suction_superheat_proxy, pressure_ratio, supply_dT]
+  holdout_days_per_month: 8
+  calibration_days_per_month: 8
+
+events:
+  # ---------------- state alphabet ----------------
+  operate:
+    kind: occupancy
+    alphabet: state
+    signal: OCCUPIED
+    on_event: system_started
+    off_event: system_stopped
+  cooling:
+    kind: mode
+    alphabet: state
+    signal: COMP_STAGE        # 0.1 = off, 0.67 = stage 1, 1.0 = stage 2 (S1.2)
+    on_above: 0.5
+    on_event: cooling_active
+    off_event: cooling_inactive
+  stage2:
+    kind: mode
+    alphabet: state
+    signal: COMP_STAGE
+    on_above: 0.85
+    on_event: stage2_entered
+    off_event: stage2_exited
+
+  # ---------------- residual channels (compressor on) ----------------
+  # condenser fouling raises condensing temperature above outdoor air
+  cond_approach:
+    kind: paired_residual
+    alphabet: signature
+    a: REFG_COND_TEMP
+    b: OA_TEMP
+    low: 12.0      # baseline comp-on p0.1 13.4, p99.9 24.4
+    high: 26.0
+    gates:
+      - signal: COMP_POWER
+        above: 200.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+  discharge_superheat:
+    kind: paired_residual
+    alphabet: signature
+    a: REFG_DISC_TEMP
+    b: REFG_COND_TEMP
+    low: -1.0      # baseline p0.1 0.9, p99.9 54.5
+    high: 60.0
+    gates:
+      - signal: COMP_POWER
+        above: 200.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+  suction_superheat_proxy:
+    kind: paired_residual
+    alphabet: signature
+    a: REFG_SUCT_TEMP
+    b: SA_TEMP
+    low: -8.0      # baseline p0.1 -6.3, p99.9 11.8
+    high: 14.0
+    gates:
+      - signal: COMP_POWER
+        above: 200.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+  pressure_ratio:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: REFG_DISC_PRES
+    b: REFG_SUCT_PRES
+    low: 1.1       # baseline p0.1 1.19, p99.9 2.50
+    high: 2.7
+    gates:
+      - signal: COMP_POWER
+        above: 200.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.02
+    residual_min_exceedance: 0.02
+  # evaporator fouling lowers the coil's sensible transfer (return - supply)
+  supply_dT:
+    kind: paired_residual
+    alphabet: signature
+    a: RA_TEMP
+    b: SA_TEMP
+    low: 17.0      # baseline p0.1 19.1, p99.9 28.7
+    high: 31.0
+    gates:
+      - signal: COMP_POWER
+        above: 200.0
+    occ_signal: OCCUPIED
+    sustained_min: 60

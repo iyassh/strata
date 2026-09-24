@@ -252,6 +252,7 @@ def sdahu_evidence() -> dict:
                     "fault file floors at 0.1 (damper_stuck 025/075/100 sit at "
                     "their stuck value above it). Healthy-vs-fault comparisons "
                     "on SDAHU carry this branch offset on top of the fault.",
+            "occupied_rows_retraction": "This range was computed on SF_CS, a sensor the pipeline never reads, and conflated a 215-day file, night cycling and the branch offset; ERRATA.md E5 retracts it. The branch evidence is the damper floor (0.000 vs 0.100) and the schedule shift.",
         }
         exceptions = {k: v for k, v in fault_floors.items() if abs(v - 0.1) > 1e-6}
         print(f"  config branch: healthy floor {floors.get('AHU_annual')} vs fault "

@@ -9,8 +9,12 @@ statistics; nothing here touches data frames or pm4py.
 Conventions (all from the phase audits):
 - rules: 0 observed FP on a healthy year still only bounds the rate at
   ~3/365 (rule of three) — 1-3 fire-days are NOT detection.
-- residual/model/freq/osc: exact binomial vs the channel's holdout rate,
-  p < 1e-3, rule-of-three floored where the observed floor is zero.
+- residual/model: exact binomial vs the channel's holdout rate, p < 1e-3,
+  floored at ONE holdout false alarm (max(fp, 1)/n) — a weaker floor than
+  the rules channel's rule of three; recorded as L36 and, on the five
+  systems, no verdict changes under the stricter floor (checked 2026-09-24).
+- freq/osc: exact binomial vs the holdout rate, rule-of-three floored
+  where the observed floor is zero.
 - device: PER DEVICE (audit A4), Bonferroni across devices, and required
   to hold at 2x the estimated case rate (sensitivity margin).
 - rate: scored only on every-30th calendar day (non-overlapping windows,

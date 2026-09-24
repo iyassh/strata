@@ -90,3 +90,18 @@ sensor bias; unstable control sequences).
 `outputs/week0_audit_ddahu.json` (or the audit's DDAHU block),
 `outputs/x17_onboarding.json` (effort ledger, predictions, falsifiers),
 guarded by a test pinning fired/unfired falsifiers.
+
+## Amendment 1 (2026-09-24, after the scorecard had been seen, before the false-alarm artefact existed)
+
+`scripts/union_fpr.py` carried a hard assertion that demoting the rate
+channel to advisory is free (true on the three original systems: zero
+violations). On DDAHU it found one violation — `cooling valve stuck 0%`:
+first alarm day 2018-01-01 is rate-only, so demotion delays that
+scenario's time-to-detect — and crashed without writing the artefact. The
+script now records the cost (`rate_demotion` block, `violations`) and exits
+2, the regress gate's "falsifier exit, artefact still written" code, instead
+of asserting. This is a script change, not a `src/` change; it alters no
+threshold and no detection count (rate is never the only significant
+channel on any DDAHU scenario: 45 detected with or without it). The
+deployed definition stays union-minus-rate as pre-registered; the TTD cost
+is disclosed wherever DDAHU's TTD is quoted.

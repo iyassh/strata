@@ -1,0 +1,666 @@
+{
+  "system": "ddahu",
+  "raw_dir": "/Users/yassh/Downloads/Ureap/LBNL_FDD_Data_Sets_DDAHU_all_3/LBNL_FDD_Dataset_DDAHU",
+  "n_files": 56,
+  "G1_md5": {
+    "hashes": {
+      "DualDuct_CoolSeqUnstable.csv": "615c7a3f14d9596efba4308eaa87a67b",
+      "DualDuct_DMPRStuck_Cold_0.csv": "36875a3eda66f9b4f7ca5786b3d8297d",
+      "DualDuct_DMPRStuck_Cold_100.csv": "2519fc231dfdf9098ba9574ba033c98e",
+      "DualDuct_DMPRStuck_Cold_20.csv": "3b73e6126e2919a3f6c01973fae381b6",
+      "DualDuct_DMPRStuck_Cold_50.csv": "dbe7babf09b914742064303e96fa6745",
+      "DualDuct_DMPRStuck_Cold_80.csv": "daf0a08d2b5a48d8d0043954c790581a",
+      "DualDuct_DMPRStuck_Hot_0.csv": "1f7b8f9a3d52b1cf6af67a6f1cd02687",
+      "DualDuct_DMPRStuck_Hot_100.csv": "a57df6059c5821245c4f2193dd3012e4",
+      "DualDuct_DMPRStuck_Hot_20.csv": "8d9b6dc4b478fdf962c56e5917649323",
+      "DualDuct_DMPRStuck_Hot_50.csv": "17780b2655d35764528734d9976dbbac",
+      "DualDuct_DMPRStuck_Hot_80.csv": "6529685f36c6a0e18bc3761f4f8d32ec",
+      "DualDuct_DMPRStuck_OA_0.csv": "ca4bd591ec64327aacf4ea57bfe83e68",
+      "DualDuct_DMPRStuck_OA_100.csv": "70b86f4055df066f99df81c77f4e1e71",
+      "DualDuct_DMPRStuck_OA_28.csv": "b0756239d4842854af59f018d37c7597",
+      "DualDuct_DMPRStuck_OA_45.csv": "391078ad9e2cb76c7b53231c97dc05dc",
+      "DualDuct_DMPRStuck_OA_80.csv": "9bb58d43da991fa3d38cf5b959e87848",
+      "DualDuct_FaultFree.csv": "170a3d32565f52bb5b0d044d9bd1d65a",
+      "DualDuct_Fouling_Cooling_Airside_Minor.csv": "3c8daaea632f59296c610754d6dc1e53",
+      "DualDuct_Fouling_Cooling_Airside_Moderate.csv": "1e522149d8fb2749ee8502f176f2d6bb",
+      "DualDuct_Fouling_Cooling_Airside_Severe.csv": "e6dfc51e25ff25662a2b3e9a70e5bf18",
+      "DualDuct_Fouling_Cooling_Waterside_Minor.csv": "e39b65efc1aa2c8a8a877105302e04fa",
+      "DualDuct_Fouling_Cooling_Waterside_Moderate.csv": "61b89386c54799654e1fec478df83387",
+      "DualDuct_Fouling_Cooling_Waterside_Severe.csv": "e6e4c13223a14d813578024507dcdf66",
+      "DualDuct_Fouling_Heating_Airside_Minor.csv": "91ff3387d05e85d92504aba0a553cc85",
+      "DualDuct_Fouling_Heating_Airside_Moderate.csv": "d5ee6cefcfcc7240e8edb1c68002e78e",
+      "DualDuct_Fouling_Heating_Airside_Severe.csv": "5af737b78c825dea667783fbce69672c",
+      "DualDuct_Fouling_Heating_Waterside_Minor.csv": "478d857e326178d589729694c975aa42",
+      "DualDuct_Fouling_Heating_Waterside_Moderate.csv": "cc91900b185453a27ef1d6d30c774e24",
+      "DualDuct_Fouling_Heating_Waterside_Severe.csv": "0b85928b4f502380b89d05484bd24780",
+      "DualDuct_HeatSeqUnstable.csv": "3fc993938e7dfd69e1e807cea6c11b6b",
+      "DualDuct_SensorBias_CSA_+2C.csv": "fc72007e4cc6ce8f579503c4a820d294",
+      "DualDuct_SensorBias_CSA_+4C.csv": "8bb377e5cad441e126c64c5c105c201a",
+      "DualDuct_SensorBias_CSA_-2C.csv": "ac35bcf055c5e94de7965b65565e2f99",
+      "DualDuct_SensorBias_CSA_-4C.csv": "f985640d0290b218f12b90f9215e6a90",
+      "DualDuct_SensorBias_CSP_+2inwg.csv": "fec7000ea66003a53183d3fe89007bab",
+      "DualDuct_SensorBias_CSP_+4inwg.csv": "affcbf236ab2cced521cacdb5e242e1e",
+      "DualDuct_SensorBias_CSP_-2inwg.csv": "7c50dd3a46736255e71b8a7fddfe9a0d",
+      "DualDuct_SensorBias_CSP_-4inwg.csv": "7291db44b8088886ebc7f6005e427f9d",
+      "DualDuct_SensorBias_HSA_+2C.csv": "755e7150de588d8f749dbdceffeb1d27",
+      "DualDuct_SensorBias_HSA_+4C.csv": "47ea0246d03a8cfba262c961d58481e2",
+      "DualDuct_SensorBias_HSA_-2C.csv": "7ae6962a57d58c96dd68b138ec7442de",
+      "DualDuct_SensorBias_HSA_-4C.csv": "fb9c2863cac190bdcd97f1e30005d269",
+      "DualDuct_SensorBias_HSP_+2inwg.csv": "2f2bf45fd7fb7b029d8a50fcd2b88a40",
+      "DualDuct_SensorBias_HSP_+4inwg.csv": "afde4a03f9f73b7541fbbe9d8131c09c",
+      "DualDuct_SensorBias_HSP_-2inwg.csv": "7bb13e3c98e6d680304bdac7419ec437",
+      "DualDuct_SensorBias_HSP_-4inwg.csv": "5b776eb04e24990b8af20e1dc673c310",
+      "DualDuct_VLVStuck_Cooling_0_.csv": "ce9035a299f62f77bc47631c3102a6a1",
+      "DualDuct_VLVStuck_Cooling_100_.csv": "a2c8facb3d85d018382dbe62d1972a11",
+      "DualDuct_VLVStuck_Cooling_20_.csv": "b6ff984cc090028dd3138982d5f73d26",
+      "DualDuct_VLVStuck_Cooling_50_.csv": "df2523eff772928555f007aa9b110048",
+      "DualDuct_VLVStuck_Cooling_80_.csv": "f91e91edb6cab937047e07fef7bce770",
+      "DualDuct_VLVStuck_Heating_0_.csv": "4e3e868e904a9f73efdce9a485c3fae0",
+      "DualDuct_VLVStuck_Heating_100_.csv": "5514eb92f3cd05acaeb939fcfe704a37",
+      "DualDuct_VLVStuck_Heating_20_.csv": "36000c6760e02efddb9dfb5f88b3d037",
+      "DualDuct_VLVStuck_Heating_50_.csv": "abeef0ce37a2889b1c57b16b539b39c3",
+      "DualDuct_VLVStuck_Heating_80_.csv": "26b7cc90f34f2390285c3d497c4eea57"
+    },
+    "duplicate_groups": []
+  },
+  "G2_monotonic": {
+    "DualDuct_CoolSeqUnstable.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_0.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_100.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_20.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_50.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_80.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_0.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_100.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_20.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_50.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_80.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_OA_0.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_OA_100.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_OA_28.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_OA_45.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_DMPRStuck_OA_80.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_FaultFree.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Cooling_Airside_Minor.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Cooling_Airside_Moderate.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Cooling_Airside_Severe.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Cooling_Waterside_Minor.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Cooling_Waterside_Moderate.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Cooling_Waterside_Severe.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Heating_Airside_Minor.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Heating_Airside_Moderate.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Heating_Airside_Severe.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Heating_Waterside_Minor.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Heating_Waterside_Moderate.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_Fouling_Heating_Waterside_Severe.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_HeatSeqUnstable.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_CSA_+2C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_CSA_+4C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_CSA_-2C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_CSA_-4C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_CSP_+2inwg.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_CSP_+4inwg.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_CSP_-2inwg.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_CSP_-4inwg.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_HSA_+2C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_HSA_+4C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_HSA_-2C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_HSA_-4C.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_HSP_+2inwg.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_HSP_+4inwg.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_HSP_-2inwg.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_SensorBias_HSP_-4inwg.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_0_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_100_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_20_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_50_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_80_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Heating_0_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Heating_100_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Heating_20_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Heating_50_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    },
+    "DualDuct_VLVStuck_Heating_80_.csv": {
+      "wrap_points": 0,
+      "first": "2018-01-01 00:00:00",
+      "last": "2018-12-31 23:59:00",
+      "rows": 525600
+    }
+  },
+  "G3_calendar": {
+    "DualDuct_CoolSeqUnstable.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_0.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_100.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Cold_80.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_0.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_100.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_20.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_50.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_Hot_80.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_OA_0.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_OA_100.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_OA_28.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_OA_45.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_DMPRStuck_OA_80.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_FaultFree.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Cooling_Airside_Minor.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Cooling_Airside_Moderate.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Cooling_Airside_Severe.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Cooling_Waterside_Minor.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Cooling_Waterside_Moderate.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Cooling_Waterside_Severe.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Heating_Airside_Minor.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Heating_Airside_Moderate.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Heating_Airside_Severe.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Heating_Waterside_Minor.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Heating_Waterside_Moderate.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_Fouling_Heating_Waterside_Severe.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_HeatSeqUnstable.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_CSA_+2C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_CSA_+4C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_CSA_-2C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_CSA_-4C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_CSP_+2inwg.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_CSP_+4inwg.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_CSP_-2inwg.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_CSP_-4inwg.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_HSA_+2C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_HSA_+4C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_HSA_-2C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_HSA_-4C.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_HSP_+2inwg.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_HSP_+4inwg.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_HSP_-2inwg.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_SensorBias_HSP_-4inwg.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_0_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_100_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_20_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_50_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Cooling_80_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Heating_0_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Heating_100_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Heating_20_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Heating_50_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    },
+    "DualDuct_VLVStuck_Heating_80_.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 525600
+    }
+  },
+  "G4_raw_rotation": {},
+  "G5_ttl": {
+    "columns": 114,
+    "declared_points": 142,
+    "columns_not_declared": [],
+    "declared_not_in_columns": [
+      "Chilled_Water_Pump",
+      "Cold_Deck",
+      "Cold_Deck_Supply_Fan",
+      "Cooling_Box_E",
+      "Cooling_Box_SA",
+      "Cooling_Box_SB",
+      "Cooling_Box_W",
+      "Cooling_Coil",
+      "Exhaust_Air_Damper",
+      "Heating_Box_E",
+      "Heating_Box_SA",
+      "Heating_Box_SB",
+      "Heating_Box_W",
+      "Heating_Coil",
+      "Heating_Water_Pump",
+      "Hot_Deck",
+      "Hot_Deck_Supply_Fan",
+      "Mixing_Box_VAV_E",
+      "Mixing_Box_VAV_SA",
+      "Mixing_Box_VAV_SB",
+      "Mixing_Box_VAV_W",
+      "Outdoor_Air_Damper",
+      "Recirculated_Air_Damper",
+      "Return_Fan",
+      "Test_Room_E",
+      "Test_Room_SA",
+      "Test_Room_SB",
+      "Test_Room_W"
+    ]
+  }
+}

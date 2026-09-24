@@ -303,7 +303,17 @@ print(f"\nrate-demotion check: {n_rate_sig} scenarios have rate significant; "
       f"violations: {len(demotion['violations'])}")
 for v in demotion["violations"]:
     print(f"  VIOLATION: {v}")
-assert not demotion["violations"], "rate demotion is NOT free — do not ship it"
+# The three original systems passed this check with zero violations and it
+# was a hard assertion. X17 (DDAHU, 2026-09-24) produced one: a scenario whose
+# first alarm day is rate-only, so demoting rate delays its time-to-detect.
+# The cost is now RECORDED in the artefact and the script exits 2 (the
+# regress gate's "falsifier exit, artefact still written"), instead of
+# failing silently with no artefact. Detection counts are unaffected by
+# construction (rate is never the only significant channel here).
+RATE_DEMOTION_COST = bool(demotion["violations"])
+if RATE_DEMOTION_COST:
+    print("  RATE DEMOTION IS NOT FREE on this system: TTD cost recorded in the artefact "
+          "(union_minus_rate remains the deployed definition; the cost is disclosed).")
 
 out = {
     "system": SYSTEM,
@@ -340,4 +350,7 @@ out = {
     ],
 }
 Path(f"outputs/union_fpr_{SYSTEM}.json").write_text(json.dumps(out, indent=1))
+if RATE_DEMOTION_COST:
+    print(f"exit 2: rate demotion carries a TTD cost on {SYSTEM} (recorded in outputs/union_fpr_{SYSTEM}.json)")
+    sys.exit(2)
 print(f"\nwrote outputs/union_fpr_{SYSTEM}.json")

@@ -14,7 +14,8 @@ detection:
   oscillation_deadband: 0.3
   residual_min_band_width: 0.3      # degC (~0.5 F, the sensor-precision floor used elsewhere)
   residual_min_exceedance: 0.3
-  residual_channels: [supply_air_residual, cond_approach_residual, suction_residual, flow_per_fan_watt]
+  residual_channels: [supply_air_residual, cond_approach_residual, suction_residual, flow_per_fan_watt,
+                      cond_approach_residual_2, suction_residual_2]   # Amendment 1: circuit 2
   holdout_days_per_month: 8
   calibration_days_per_month: 8
 
@@ -101,5 +102,32 @@ events:
     gates:
       - signal: FAN_POWER
         above: 100.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+
+  # Amendment 1 (2026-09-24): the same two refrigerant residuals for circuit 2
+  # (the documented fault is on circuit B; run 1 watched circuit 1 only).
+  cond_approach_residual_2:
+    kind: paired_residual
+    alphabet: signature
+    a: REFG_COND_TEMP_2
+    b: OA_TEMP
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: COMP_POWER
+        above: 200.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+  suction_residual_2:
+    kind: paired_residual
+    alphabet: signature
+    a: REFG_SUCT_TEMP_2
+    b: SA_TEMP
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: COMP_POWER
+        above: 200.0
     occ_signal: OCCUPIED
     sustained_min: 60

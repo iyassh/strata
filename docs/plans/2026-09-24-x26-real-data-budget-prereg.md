@@ -66,3 +66,26 @@ flow per fan watt (op: ratio). Oscillation on `ZA_TEMP` and
 `configs/lbnl_rtu_field/`, `scripts/07_convert_rtu_field.py`,
 `outputs/week0_audit_rtu_field.json`, `outputs/union_fpr_rtu_field.json`,
 `outputs/x26_real_data_budget.json`; guard `tests/test_x26_real_data_budget.py`.
+
+## Amendment 1 — 2026-09-24, after run 1, before any config change
+
+**Run 1.** P1 held (two logged iterations, then silence). **P2 held: deployed
+union false alarms 3 of 49 holdout days (6.1 %)** — rules 0, residual 1,
+model 0, absence 0, frequency 2, oscillation 1 (rate 1, advisory). P3
+failed: every residual channel was evaluable on every holdout day (the
+fault-free stream has no long gaps inside its two summers). P4 failed: the
+undercharge case flagged 1 residual day and 1 model day of 29.
+
+**The coverage error.** The documentation says the fault is "Low Charge On
+Circuit B" and the point list carries two refrigerant circuits (`_1`,
+`_2`). The config written before run 1 watched circuit 1 only; nothing in
+it could see circuit B. This is a reading error of the documentation, not
+something the fault file revealed, but it was noticed after the case result
+and is therefore recorded here as an amendment rather than silently fixed.
+
+**Change.** Add the same two refrigerant residuals for circuit 2
+(`cond_approach_residual_2`, `suction_residual_2`), gated on the compressor
+the same way, to `residual_channels`; healthy silence re-checked; nothing
+else changes. **Prediction A1-P1:** the budget stays ≤ 10 % with the two
+channels added. **A1-P2 (case):** a circuit-2 residual flags ≥ 50 % of the
+29 undercharge days. Either outcome is a case report.

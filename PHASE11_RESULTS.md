@@ -1,4 +1,4 @@
-# Phase 11 Results — After the review round: the conformance positive control (X22), the outdoor-air-fraction residual (X24), the statistical repair (X25) and the first real building (X26)
+# Phase 11 Results — After the review round: the conformance positive control (X22), the outdoor-air-fraction residual (X24), the statistical repair (X25), the first real building (X26) and the fan-law virtual static (X27)
 
 *2026-09-24. Both pre-registered (`docs/plans/2026-09-24-x22-conformance-positive-control-prereg.md` 2780137, `docs/plans/2026-09-24-x24-oa-fraction-prereg.md` 04c37ef) after the review round (`docs/plans/2026-09-24-review-verdict-and-improvement-plan.md`) and before any injected log or new residual was scored. Artefacts: `outputs/x22_positive_control.json`, `outputs/x24_oa_fraction.json`, regenerated `benchmark_v6_{fcu,sdahu,ddahu}.json` and `union_fpr_{fcu,sdahu,ddahu}.json`; guards `tests/test_x22_positive_control.py`, `tests/test_x24_oa_fraction.py`.*
 
@@ -223,3 +223,47 @@ is now stated with a number: on one real building the deployed budget is
 | P1 | P2 | P3 | P4 / A1-P2 | falsifiers |
 |---|---|---|---|---|
 | ✓ 2 iterations | ✓ 3/49 (6.1 %) | ✗ no abstention | ✗ case not seen (both circuits) | none |
+
+
+## X27 — the fan-law virtual static
+
+*Pre-registered (`docs/plans/2026-09-24-x27-fan-law-static-prereg.md`,
+0477a56) before any change; step 1 (c7f35fc) `op: ratio_sq` with no config
+touched — SDAHU byte-identical (a caveat string in the false-alarm artefact
+differed, its committed copy predating the X25 wording; every number
+identical); step 2 (9e7eead) the two channels in the DDAHU config, committed
+before scoring. Artefacts: regenerated `benchmark_v6_ddahu.json`,
+`union_fpr_ddahu.json`; `outputs/x27_fan_law_static.json`; guard
+`tests/test_x27_fan_law_static.py`.*
+
+A biased static-pressure sensor is unobservable from the static itself; the
+loop hides it in fan speed. The existing per-speed proxy (static ÷ speed)
+caught 5 of 8 biases; the fan law says static ∝ speed² at constant system
+resistance, so static ÷ speed² was added for both decks, band learned on
+healthy. The healthy band of the new ratio is *wider* than the old one
+(cold deck 1.24–3.56 against 1.24–2.39 daily medians), because on a VAV
+unit the system resistance is not constant — the zone dampers move — and
+that was visible before scoring.
+
+| | before | after |
+|---|---|---|
+| static-bias scenarios detected | 5 / 8 | **6 / 8** (cold +0.2 in.wg gained; hot −0.2, −0.4 still missed) |
+| DDAHU detected | 45 / 55 | **47 / 55** |
+| deployed false alarms | 3 / 96 | 3 / 96 |
+| lost | — | none |
+
+**F-X27.b fired** (the bar was 7 of 8). The unpredicted gain is the
+cooling-coil *airside moderate* fouling: an airside-fouled coil raises the
+airflow resistance, the fan runs faster for the same static, and static ÷
+speed² falls — the fan-law channel is an airflow-resistance detector, which
+is what a virtual static is. Residual-day counts on the already-detected
+biases rose by 2–5× (cold +0.4: 34 → 172 days; hot +0.4: 74 → 260). The
+two hot-deck negative biases remain invisible: a −0.2 in.wg reading on a
+1.0 in.wg setpoint makes the loop run the fan slightly faster, and the
+ratio shift sits inside a band that the moving zone dampers already widen.
+A regression on speed *and* flow (the system curve) is the next form; it
+is a fitted model, not a ratio, and is not attempted here.
+
+| P0 | P1 | P2 | P3 | falsifiers |
+|---|---|---|---|---|
+| ✓ (numbers identical; one caveat string refreshed) | ✓ 3/96 | **✗** 6 of 8 | ✓ none lost | F-X27.b |

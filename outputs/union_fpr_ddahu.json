@@ -132,7 +132,7 @@
     "channels": "rules+resid+model+absence+freq+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-03-01",
-    "rate_only_alarm_days": 9
+    "rate_only_alarm_days": 7
    },
    {
     "label": "cold-deck damper stuck 20%",

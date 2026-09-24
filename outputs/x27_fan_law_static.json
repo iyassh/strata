@@ -1,0 +1,78 @@
+{
+  "prereg": "docs/plans/2026-09-24-x27-fan-law-static-prereg.md",
+  "before_commit": "c7f35fc",
+  "detected_before": 45,
+  "detected_after": 47,
+  "scored": 55,
+  "static_bias_before": 5,
+  "static_bias_after": 6,
+  "static_bias_rows": {
+    "DualDuct_SensorBias_CSP_-2inwg": {
+      "before": "resid",
+      "after": "resid",
+      "residual_days_before": 38,
+      "residual_days_after": 45
+    },
+    "DualDuct_SensorBias_CSP_-4inwg": {
+      "before": "resid",
+      "after": "resid",
+      "residual_days_before": 38,
+      "residual_days_after": 45
+    },
+    "DualDuct_SensorBias_CSP_+2inwg": {
+      "before": null,
+      "after": "resid",
+      "residual_days_before": 4,
+      "residual_days_after": 78
+    },
+    "DualDuct_SensorBias_CSP_+4inwg": {
+      "before": "resid",
+      "after": "resid",
+      "residual_days_before": 34,
+      "residual_days_after": 172
+    },
+    "DualDuct_SensorBias_HSP_-2inwg": {
+      "before": null,
+      "after": null,
+      "residual_days_before": 3,
+      "residual_days_after": 7
+    },
+    "DualDuct_SensorBias_HSP_-4inwg": {
+      "before": null,
+      "after": null,
+      "residual_days_before": 4,
+      "residual_days_after": 8
+    },
+    "DualDuct_SensorBias_HSP_+2inwg": {
+      "before": "rules+resid",
+      "after": "rules+resid",
+      "residual_days_before": 10,
+      "residual_days_after": 165
+    },
+    "DualDuct_SensorBias_HSP_+4inwg": {
+      "before": "rules+resid",
+      "after": "rules+resid",
+      "residual_days_before": 74,
+      "residual_days_after": 260
+    }
+  },
+  "gained": [
+    "DualDuct_Fouling_Cooling_Airside_Moderate",
+    "DualDuct_SensorBias_CSP_+2inwg"
+  ],
+  "lost": [],
+  "deployed_fp_before": 3,
+  "deployed_fp_after": 3,
+  "residual_fp_before": 0,
+  "residual_fp_after": 0,
+  "predictions": {
+    "P0_regression_sdahu_byte_identical_VERIFIED_BY_HAND": true,
+    "P1_budget_le_10": true,
+    "P1_residual_fp_le_2_more": true,
+    "P2_static_bias_ge_7_of_8": false,
+    "P3_no_loss": true
+  },
+  "falsifiers_fired": [
+    "F-X27.b: static-bias detections 6 of 8 (needed 7)"
+  ]
+}

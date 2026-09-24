@@ -72,6 +72,7 @@ PIPELINE = {
     "union_fpr_rtu_field.json": "uv run python scripts/union_fpr.py rtu_field",
     "x26_real_data_budget.json": "uv run python scripts/x26_real_data_budget.py",
     "x25_statistical_repair.json": "uv run python scripts/x25_statistical_repair.py",
+    "x27_fan_law_static.json": "uv run python scripts/x27_fan_law_static.py",
     # x9_x10_robustness.json: ~1 h in three per-system processes (see its pre-registration); not in the gate.
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",
     "discovery_predicts_transfer.json": "uv run python scripts/discovery_predicts_transfer.py --q outputs/discovery_predicts_transfer_q.json",

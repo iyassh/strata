@@ -1,0 +1,560 @@
+{
+  "system": "ddahu",
+  "healthy_fp": {
+    "mr1": 66,
+    "mr2": 0,
+    "mr3": 0
+  },
+  "scenarios": [
+    {
+      "file": "DualDuct_CoolSeqUnstable",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 204,
+      "rate": 37,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_HeatSeqUnstable",
+      "mr1": 66,
+      "mr2": 13,
+      "mr3": 0,
+      "freq": 203,
+      "rate": 29,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Cold_0",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 2,
+      "freq": 209,
+      "rate": 267,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Cold_20",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 2,
+      "freq": 204,
+      "rate": 268,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Cold_50",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 28,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Cold_80",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 42,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Cold_100",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 3,
+      "rate": 42,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Hot_0",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 12,
+      "rate": 44,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Hot_20",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 18,
+      "rate": 44,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Hot_50",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Hot_80",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 29,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_Hot_100",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 29,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_OA_0",
+      "mr1": 75,
+      "mr2": 12,
+      "mr3": 1,
+      "freq": 14,
+      "rate": 107,
+      "model": 0,
+      "device": 44
+    },
+    {
+      "file": "DualDuct_DMPRStuck_OA_28",
+      "mr1": 66,
+      "mr2": 19,
+      "mr3": 0,
+      "freq": 23,
+      "rate": 70,
+      "model": 0,
+      "device": 7
+    },
+    {
+      "file": "DualDuct_DMPRStuck_OA_45",
+      "mr1": 66,
+      "mr2": 3,
+      "mr3": 0,
+      "freq": 8,
+      "rate": 35,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_OA_80",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 3,
+      "rate": 35,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_DMPRStuck_OA_100",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 6,
+      "rate": 33,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Cooling_Airside_Minor",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Cooling_Airside_Moderate",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Cooling_Airside_Severe",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 8,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Cooling_Waterside_Minor",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Cooling_Waterside_Moderate",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Cooling_Waterside_Severe",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 85,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Heating_Airside_Minor",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Heating_Airside_Moderate",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Heating_Airside_Severe",
+      "mr1": 66,
+      "mr2": 3,
+      "mr3": 0,
+      "freq": 6,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Heating_Waterside_Minor",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Heating_Waterside_Moderate",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_Fouling_Heating_Waterside_Severe",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 27,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_CSA_-2C",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 20,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_CSA_-4C",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 4,
+      "rate": 31,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_CSA_+2C",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 3,
+      "rate": 44,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_CSA_+4C",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 62,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_CSP_-2inwg",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 9,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_CSP_-4inwg",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 9,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_CSP_+2inwg",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 5,
+      "rate": 9,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_CSP_+4inwg",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 6,
+      "rate": 30,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_HSA_-2C",
+      "mr1": 66,
+      "mr2": 2,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 27,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_HSA_-4C",
+      "mr1": 66,
+      "mr2": 2,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 27,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_HSA_+2C",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 29,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_HSA_+4C",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 6,
+      "rate": 29,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_HSP_-2inwg",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 3,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_HSP_-4inwg",
+      "mr1": 66,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_HSP_+2inwg",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_SensorBias_HSP_+4inwg",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 7,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_VLVStuck_Cooling_0",
+      "mr1": 85,
+      "mr2": 148,
+      "mr3": 0,
+      "freq": 148,
+      "rate": 211,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_VLVStuck_Cooling_20",
+      "mr1": 80,
+      "mr2": 114,
+      "mr3": 0,
+      "freq": 119,
+      "rate": 230,
+      "model": 0,
+      "device": 2
+    },
+    {
+      "file": "DualDuct_VLVStuck_Cooling_50",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 8,
+      "rate": 189,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_VLVStuck_Cooling_80",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 5,
+      "rate": 184,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_VLVStuck_Cooling_100",
+      "mr1": 66,
+      "mr2": 1,
+      "mr3": 0,
+      "freq": 5,
+      "rate": 184,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_VLVStuck_Heating_0",
+      "mr1": 261,
+      "mr2": 29,
+      "mr3": 0,
+      "freq": 54,
+      "rate": 231,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_VLVStuck_Heating_20",
+      "mr1": 261,
+      "mr2": 29,
+      "mr3": 0,
+      "freq": 54,
+      "rate": 231,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_VLVStuck_Heating_50",
+      "mr1": 261,
+      "mr2": 4,
+      "mr3": 0,
+      "freq": 18,
+      "rate": 267,
+      "model": 0,
+      "device": 0
+    },
+    {
+      "file": "DualDuct_VLVStuck_Heating_80",
+      "mr1": 261,
+      "mr2": 4,
+      "mr3": 0,
+      "freq": 20,
+      "rate": 269,
+      "model": 0,
+      "device": 1
+    },
+    {
+      "file": "DualDuct_VLVStuck_Heating_100",
+      "mr1": 261,
+      "mr2": 4,
+      "mr3": 0,
+      "freq": 19,
+      "rate": 267,
+      "model": 0,
+      "device": 1
+    }
+  ]
+}

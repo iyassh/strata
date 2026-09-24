@@ -27,7 +27,14 @@ ROOT = str(REPO) + "/"
 ANCHOR = "heating_active"
 SPEC = {"sdahu": ("configs/lbnl_sdahu", "data/processed/sdahu/AHU_annual.parquet"),
         "pfpu": ("configs/lbnl_pfpu", "data/processed/pfpu/PFPU_FaultFree.parquet"),
-        "sfpu": ("configs/lbnl_sfpu", "data/processed/sfpu/SFPU_FaultFree.parquet")}
+        "sfpu": ("configs/lbnl_sfpu", "data/processed/sfpu/SFPU_FaultFree.parquet"),
+        # X20 (2026-09-24): the two buildings onboarded after the test was sealed
+        "ddahu": ("configs/lbnl_ddahu", "data/processed/ddahu/DualDuct_FaultFree.parquet"),
+        "fcu": ("configs/lbnl_fcu", "data/processed/fcu/FCU_FaultFree.parquet")}
+# --systems a,b restricts the run (default: the three original systems, so the
+# committed artefact regenerates unchanged)
+_DEFAULT_SYSTEMS = ("sdahu", "pfpu", "sfpu")
+SYSTEMS = tuple(sys.argv[sys.argv.index("--systems") + 1].split(",")) if "--systems" in sys.argv else _DEFAULT_SYSTEMS
 
 
 def compute(SYS: str) -> dict:
@@ -280,8 +287,8 @@ def compute_device(SYS: str) -> dict:
 def main() -> int:
     out_path = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv \
         else REPO / "outputs" / "discovery_predicts_transfer_q.json"
-    result = {s: compute(s) for s in SPEC}
-    for s in SPEC:
+    result = {s: compute(s) for s in SYSTEMS}
+    for s in SYSTEMS:
         result[s]["device"] = compute_device(s)
     # Gated artifact: never write wall-clock or host-specific values into it,
     # or the L2 regression gate reports CHANGED on every run (repo audit

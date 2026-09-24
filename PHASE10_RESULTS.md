@@ -1,4 +1,4 @@
-# Phase 10 Results — A fourth system: the LBNL dual-duct AHU, onboarded blind (X17), the X15 gain that did not replicate (X18), and a fifth system, the fan coil unit, that broke a rule the first four never exercised (X19)
+# Phase 10 Results — A fourth system: the LBNL dual-duct AHU, onboarded blind (X17), the X15 gain that did not replicate (X18), a fifth system, the fan coil unit, that broke a rule the first four never exercised (X19), and the transfer test re-run with four buildings (X20)
 
 *2026-09-24. Pre-registered (`docs/plans/2026-09-24-x17-ddahu-onboarding-prereg.md`,
 b8fadc8) after the documentation was read and before any data file was
@@ -321,3 +321,86 @@ SFPU, DDAHU, FCU — the fan coil unit has a heating coil), so the floor
 falls to 1/4! = 0.042: the first design in this project that can attain
 p < 0.05. That re-run is X20, pre-registered separately; it has not been
 run.
+
+
+## X20 — the transfer test with four scorable buildings
+
+*Pre-registered (`docs/plans/2026-09-24-x20-transfer-four-buildings-prereg.md`,
+fd95da3) after X19 and before any quantity was computed on the two new
+buildings. Artefacts: `outputs/discovery_predicts_transfer_q_four.json`
+(the sealed Q code run unchanged on DDAHU and FCU via `--systems`),
+`matched_rules_{ddahu,fcu}.json`, `x20_transfer_four.json`; guard
+`tests/test_x20_transfer_four.py`. The original three-system Q artefact is
+untouched.*
+
+### Why this was pre-registered as a test of an identity, not of a correlation
+
+The original test's Amendment 3 had recorded, as an observation, that the
+model-derived predictor "equals the raw log count exactly." Checked before
+X20 on the committed artefact: on PFPU and SFPU, `Q_support` (the fraction
+of occupied days whose optimal alignment to the discovered net contains a
+synchronous heating move) is exactly the fraction of occupied days whose
+*log* contains `heating_active` — 166/365 and 357/365. And MR1, the one
+transplanted rule whose firings vary, counts occupied workdays on which
+heating never fires: the workday complement of the same day set. A
+four-building Spearman between the two would be a correlation between a
+count and its own complement. So the pre-registration made the identity
+(P1) the decision: if it held on the new buildings the test was to be
+withdrawn as uninformative at any n; if it failed, "the alignment carries
+information" and the four-building test (P2) was to be scored and reported
+straight. A control with no discovery in it — the raw heating-day fraction
+as predictor — was implied by the disclosure and is computed alongside.
+
+### Result
+
+| building | Q_support | sync days / raw heating days / occupied | Q_obligatory | MR1 healthy firings |
+|---|---|---|---|---|
+| FCU | 0.203 | 74 / **118** / 365 | 0 | 149 |
+| PFPU | 0.455 | 166 / 166 / 365 | 0 | 124 |
+| DDAHU | 0.730 | 208 / 208 / 285 | 1 | 66 |
+| SFPU | 0.978 | 357 / 357 / 365 | 1 | 0 |
+
+- **P1 (identity)** holds exactly on DDAHU and **fails on FCU**: 44 of the
+  118 heating days get no synchronous heating move. **F-X20.a fired**, so
+  by the pre-registered rule P2 is scored. Diagnostic (after the fact): the
+  FCU's unit net, mined at noise threshold 0.2 from 196 training days,
+  carries `heating_active` but not `heating_inactive`; on 38 weekday and 6
+  weekend traces the cheapest alignment moves the heating episode on the
+  log side. What the alignment "carries" is the miner's noise filter, not a
+  reading of an invariant.
+- **P2 (four buildings)**: rho = −1.000, exact one-sided permutation
+  p = 1/24 = **0.042** < 0.05, the four MR1 counts distinct. The
+  pre-registered criterion is met.
+- **Control**: the raw heating-day fraction orders the four buildings
+  identically (0.32, 0.45, 0.73, 0.98) and gives rho = −1.000, p = 0.042.
+- **P3 (obligatory form)** fails on every building — **F-X20.b fired**.
+  `Q_obligatory` = 1 on SFPU and DDAHU although 8 and 77 occupied days lack
+  heating; it is 1 because no *cost-zero* variant lacks heating, and the
+  heating-less days' traces do not fit the net for other reasons. The
+  structural form is a property of which variants the noise-filtered net
+  admits, not of the year.
+
+### Reading
+
+The four-building transfer test passes as pre-registered, and it is the
+first design in this project that could have. It is reported as a pass.
+What the pass is worth is set by the control: a predictor with no
+discovery in it — count the days with heating — passes identically,
+because MR1 is a heating-absence rule and the ordering is the ordering of
+heating-day counts. At n = 4 nothing can separate the two predictors, and
+the one building on which they differ (FCU) differs by the miner's noise
+filter. The claim "discovery locates invariants" therefore receives no
+support beyond what the log's count provides, which is none that involves
+discovery. This is the tenth adverse result: the test that finally had
+power passed for a reason that has nothing to do with the hypothesis.
+
+A test that could bear on the claim would need a predictor not computed
+from the log it predicts — fit on building A, replay building B — and it
+is an open question whether alignment support can escape being a count of
+B's log. Not run.
+
+### Ledger
+
+| P1 identity | P2 four buildings | control | P3 obligatory | falsifiers |
+|---|---|---|---|---|
+| DDAHU exact; **FCU 74 ≠ 118 → F-X20.a** | rho −1, p 0.042 ✓ | rho −1, p 0.042, same order | **✗** on all four → F-X20.b | a, b fired; verdict: informative by rule, uninformative by control |

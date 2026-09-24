@@ -1,0 +1,147 @@
+{
+  "prereg": "docs/plans/2026-09-24-x20-transfer-four-buildings-prereg.md",
+  "buildings": [
+    {
+      "building": "pfpu",
+      "Q_support": 0.4547945205479452,
+      "sync_days": 166,
+      "Q_obligatory": 0,
+      "occupied_days": 365,
+      "raw_days_with_anchor": 166,
+      "raw_heating_frac": 0.4547945205479452,
+      "every_occupied_day_has_anchor": false,
+      "occupied_days_with_trace": 365,
+      "every_traced_occupied_day_has_anchor": false,
+      "mr1_healthy_firings": 124,
+      "mr3_healthy_firings": 1
+    },
+    {
+      "building": "sfpu",
+      "Q_support": 0.9780821917808219,
+      "sync_days": 357,
+      "Q_obligatory": 1,
+      "occupied_days": 365,
+      "raw_days_with_anchor": 357,
+      "raw_heating_frac": 0.9780821917808219,
+      "every_occupied_day_has_anchor": false,
+      "occupied_days_with_trace": 365,
+      "every_traced_occupied_day_has_anchor": false,
+      "mr1_healthy_firings": 0,
+      "mr3_healthy_firings": 0
+    },
+    {
+      "building": "ddahu",
+      "Q_support": 0.7298245614035088,
+      "sync_days": 208,
+      "Q_obligatory": 1,
+      "occupied_days": 285,
+      "raw_days_with_anchor": 208,
+      "raw_heating_frac": 0.7298245614035088,
+      "every_occupied_day_has_anchor": false,
+      "occupied_days_with_trace": 285,
+      "every_traced_occupied_day_has_anchor": false,
+      "mr1_healthy_firings": 66,
+      "mr3_healthy_firings": 0
+    },
+    {
+      "building": "fcu",
+      "Q_support": 0.20273972602739726,
+      "sync_days": 74,
+      "Q_obligatory": 0,
+      "occupied_days": 365,
+      "raw_days_with_anchor": 118,
+      "raw_heating_frac": 0.3232876712328767,
+      "every_occupied_day_has_anchor": false,
+      "occupied_days_with_trace": 268,
+      "every_traced_occupied_day_has_anchor": false,
+      "mr1_healthy_firings": 149,
+      "mr3_healthy_firings": 0
+    }
+  ],
+  "P1_identity": {
+    "per_building": {
+      "pfpu": {
+        "sync_days": 166,
+        "raw_days_with_anchor": 166,
+        "identical": true,
+        "abs_diff_days": 0
+      },
+      "sfpu": {
+        "sync_days": 357,
+        "raw_days_with_anchor": 357,
+        "identical": true,
+        "abs_diff_days": 0
+      },
+      "ddahu": {
+        "sync_days": 208,
+        "raw_days_with_anchor": 208,
+        "identical": true,
+        "abs_diff_days": 0
+      },
+      "fcu": {
+        "sync_days": 74,
+        "raw_days_with_anchor": 118,
+        "identical": false,
+        "abs_diff_days": 44
+      }
+    },
+    "holds_on_new_buildings": false,
+    "holds_on_all_four": false
+  },
+  "P2_four_building_correlation": {
+    "rho": -0.9999999999999998,
+    "exact_one_sided_p": 0.041666666666666664,
+    "n_perm": 24,
+    "mr1_counts_distinct": true,
+    "attainable_min_rho": -0.9999999999999998,
+    "attainable_floor_p": 0.041666666666666664,
+    "would_pass_criterion": true
+  },
+  "P2_control_raw_count": {
+    "predictor": "raw_heating_frac (occupied days whose log contains heating_active / occupied days)",
+    "rho": -0.9999999999999998,
+    "exact_one_sided_p": 0.041666666666666664,
+    "same_ordering_as_Q_support": true,
+    "reading": "if the control orders the buildings identically, the pass of P2 is carried by the count of heating days, which MR1 is defined as the workday complement of; discovery adds nothing testable at n = 4"
+  },
+  "P3_obligatory_is_log_property": {
+    "per_building": {
+      "pfpu": {
+        "Q_obligatory": 0,
+        "every_occupied_day_has_anchor": false,
+        "consistent": true,
+        "every_traced_occupied_day_has_anchor": false,
+        "consistent_with_traced_form": true
+      },
+      "sfpu": {
+        "Q_obligatory": 1,
+        "every_occupied_day_has_anchor": false,
+        "consistent": false,
+        "every_traced_occupied_day_has_anchor": false,
+        "consistent_with_traced_form": false
+      },
+      "ddahu": {
+        "Q_obligatory": 1,
+        "every_occupied_day_has_anchor": false,
+        "consistent": false,
+        "every_traced_occupied_day_has_anchor": false,
+        "consistent_with_traced_form": false
+      },
+      "fcu": {
+        "Q_obligatory": 0,
+        "every_occupied_day_has_anchor": false,
+        "consistent": true,
+        "every_traced_occupied_day_has_anchor": false,
+        "consistent_with_traced_form": true
+      }
+    },
+    "pass": false
+  },
+  "falsifiers_fired": [
+    "F-X20.a: Q_support differs from the log's own count on a new building; the alignment carries information",
+    "F-X20.b: the obligatory form is not a log property on some building"
+  ],
+  "verdict": "INFORMATIVE: score P2 as the pre-registered four-building test",
+  "conclusion_licensed_about_discovery_predicting_transfer": true,
+  "note": "MR2 is device-stratum and was voided by the original test's Amendment 3; MR3 is reported, not scored."
+}

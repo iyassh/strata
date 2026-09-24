@@ -1,0 +1,490 @@
+{
+  "system": "fcu",
+  "healthy_fp": {
+    "mr1": 149,
+    "mr2": 0,
+    "mr3": 0
+  },
+  "scenarios": [
+    {
+      "file": "FCU_OADMPRLeak_20",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 37,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_OADMPRLeak_50",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 6,
+      "rate": 47,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_OADMPRLeak_80",
+      "mr1": 149,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 7,
+      "rate": 49,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_OADMPRStuck_0",
+      "mr1": 155,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 239,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_OADMPRStuck_30",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 239,
+      "model": 5,
+      "device": 0
+    },
+    {
+      "file": "FCU_OADMPRStuck_50",
+      "mr1": 161,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 30,
+      "rate": 243,
+      "model": 17,
+      "device": 0
+    },
+    {
+      "file": "FCU_OADMPRStuck_80",
+      "mr1": 164,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 54,
+      "rate": 257,
+      "model": 29,
+      "device": 0
+    },
+    {
+      "file": "FCU_OADMPRStuck_100",
+      "mr1": 133,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 169,
+      "rate": 274,
+      "model": 129,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVLeak_Heating_20",
+      "mr1": 212,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 98,
+      "rate": 120,
+      "model": 1,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVLeak_Heating_50",
+      "mr1": 218,
+      "mr2": 0,
+      "mr3": 2,
+      "freq": 101,
+      "rate": 189,
+      "model": 9,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVLeak_Heating_80",
+      "mr1": 220,
+      "mr2": 0,
+      "mr3": 2,
+      "freq": 63,
+      "rate": 217,
+      "model": 9,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Heating_0",
+      "mr1": 261,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 63,
+      "rate": 141,
+      "model": 12,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Heating_20",
+      "mr1": 261,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 41,
+      "rate": 149,
+      "model": 1,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Heating_50",
+      "mr1": 261,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 56,
+      "rate": 223,
+      "model": 4,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Heating_80",
+      "mr1": 261,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 102,
+      "rate": 246,
+      "model": 34,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Heating_100",
+      "mr1": 261,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 103,
+      "rate": 246,
+      "model": 34,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVLeak_Cooling_20",
+      "mr1": 135,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 105,
+      "rate": 240,
+      "model": 7,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVLeak_Cooling_50",
+      "mr1": 134,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 139,
+      "rate": 240,
+      "model": 7,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVLeak_Cooling_80",
+      "mr1": 134,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 140,
+      "rate": 240,
+      "model": 7,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Cooling_0",
+      "mr1": 159,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 114,
+      "rate": 245,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Cooling_20",
+      "mr1": 135,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 72,
+      "rate": 242,
+      "model": 7,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Cooling_50",
+      "mr1": 134,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 139,
+      "rate": 240,
+      "model": 7,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Cooling_80",
+      "mr1": 135,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 141,
+      "rate": 240,
+      "model": 7,
+      "device": 0
+    },
+    {
+      "file": "FCU_VLVStuck_Cooling_100",
+      "mr1": 135,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 142,
+      "rate": 240,
+      "model": 7,
+      "device": 0
+    },
+    {
+      "file": "FCU_SensorBias_RMTemp_+2C",
+      "mr1": 165,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 2,
+      "rate": 132,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_SensorBias_RMTemp_-2C",
+      "mr1": 131,
+      "mr2": 0,
+      "mr3": 2,
+      "freq": 1,
+      "rate": 62,
+      "model": 10,
+      "device": 0
+    },
+    {
+      "file": "FCU_SensorBias_RMTemp_+4C",
+      "mr1": 186,
+      "mr2": 0,
+      "mr3": 2,
+      "freq": 8,
+      "rate": 177,
+      "model": 6,
+      "device": 0
+    },
+    {
+      "file": "FCU_SensorBias_RMTemp_-4C",
+      "mr1": 117,
+      "mr2": 0,
+      "mr3": 2,
+      "freq": 1,
+      "rate": 80,
+      "model": 11,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Cooling_Airside_Minor",
+      "mr1": 149,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 21,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Cooling_Airside_Moderate",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 24,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Cooling_Airside_Severe",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 7,
+      "rate": 57,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Cooling_Waterside_Minor",
+      "mr1": 149,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 17,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Cooling_Waterside_Moderate",
+      "mr1": 149,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 17,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Cooling_Waterside_Severe",
+      "mr1": 149,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 17,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Heating_Airside_Minor",
+      "mr1": 149,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 21,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Heating_Airside_Moderate",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 24,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Heating_Airside_Severe",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 6,
+      "rate": 57,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Heating_Waterside_Minor",
+      "mr1": 149,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 17,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Heating_Waterside_Moderate",
+      "mr1": 149,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 17,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Fouling_Heating_Waterside_Severe",
+      "mr1": 154,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 6,
+      "rate": 61,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_FilterRestriction_10%",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 0,
+      "rate": 24,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_FilterRestriction_20%",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 1,
+      "rate": 25,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_FilterRestriction_50%",
+      "mr1": 150,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 26,
+      "rate": 57,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_OABlockage",
+      "mr1": 153,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 3,
+      "rate": 93,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_FanOutletBlockage",
+      "mr1": 152,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 126,
+      "rate": 63,
+      "model": 3,
+      "device": 0
+    },
+    {
+      "file": "FCU_Control_CoolingReverse",
+      "mr1": 135,
+      "mr2": 0,
+      "mr3": 1,
+      "freq": 142,
+      "rate": 240,
+      "model": 7,
+      "device": 0
+    },
+    {
+      "file": "FCU_Control_HeatingReverse",
+      "mr1": 261,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 103,
+      "rate": 246,
+      "model": 34,
+      "device": 0
+    },
+    {
+      "file": "FCU_Control_Unstable",
+      "mr1": 155,
+      "mr2": 0,
+      "mr3": 0,
+      "freq": 254,
+      "rate": 55,
+      "model": 202,
+      "device": 0
+    }
+  ]
+}

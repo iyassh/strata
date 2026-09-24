@@ -60,6 +60,10 @@ PIPELINE = {
     "benchmark_v6_fcu.json": "uv run python scripts/benchmark.py fcu",
     "union_fpr_fcu.json": "uv run python scripts/union_fpr.py fcu",
     "x19_onboarding.json": "uv run python scripts/x19_onboarding.py",
+    "matched_rules_ddahu.json": "uv run python scripts/matched_rules.py ddahu",
+    "matched_rules_fcu.json": "uv run python scripts/matched_rules.py fcu",
+    "discovery_predicts_transfer_q_four.json": "uv run python scripts/discovery_predicts_transfer_q.py --systems ddahu,fcu --out outputs/discovery_predicts_transfer_q_four.json",
+    "x20_transfer_four.json": "uv run python scripts/x20_transfer_four.py",
     # x9_x10_robustness.json: ~1 h in three per-system processes (see its pre-registration); not in the gate.
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",
     "discovery_predicts_transfer.json": "uv run python scripts/discovery_predicts_transfer.py --q outputs/discovery_predicts_transfer_q.json",

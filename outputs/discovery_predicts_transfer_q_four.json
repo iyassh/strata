@@ -1,0 +1,209 @@
+{
+  "ddahu": {
+    "Q_support": 0.7298245614035088,
+    "sync_days": 208,
+    "occupied_days": 285,
+    "Q_obligatory": 1,
+    "variants_tested": 79,
+    "variants_cost0_without_heating": 0,
+    "heating_in_log": true,
+    "zone_heating_activities": [],
+    "net": {
+      "places": 19,
+      "transitions": 29,
+      "silent": 15
+    },
+    "_aux": {
+      "net_labels": [
+        "cold_fan_started",
+        "cold_fan_stopped",
+        "cooling_active",
+        "cooling_inactive",
+        "economizer_window_entered",
+        "economizer_window_exited",
+        "heating_active",
+        "heating_inactive",
+        "hot_fan_started",
+        "hot_fan_stopped",
+        "setback_ended",
+        "setback_started",
+        "system_started",
+        "system_stopped"
+      ],
+      "heating_in_net": true,
+      "n_days_with_state_events": 317,
+      "occupied_days_with_no_state_events": 0,
+      "variants_with_empty_shortened_trace": 0,
+      "variants_containing_heating": 52,
+      "occupied_days_whose_log_contains_heating": 208,
+      "cost0_shortened_examples": [],
+      "n_train_days": 234
+    },
+    "device": {
+      "anchor_activity_in_device_net": "zone_heating_active",
+      "device_net_is_pooled_across_devices": true,
+      "devices": [
+        "TU_E",
+        "TU_SA",
+        "TU_SB",
+        "TU_W"
+      ],
+      "Q_support_device": 0.17982456140350878,
+      "Q_obligatory_device": 0,
+      "per_device": {
+        "TU_E": {
+          "sync_days": 39,
+          "occupied_days": 285,
+          "days_with_trace": 273,
+          "raw_log_days_with_anchor": 73,
+          "frac": 0.1368421052631579
+        },
+        "TU_SA": {
+          "sync_days": 57,
+          "occupied_days": 285,
+          "days_with_trace": 279,
+          "raw_log_days_with_anchor": 82,
+          "frac": 0.2
+        },
+        "TU_SB": {
+          "sync_days": 55,
+          "occupied_days": 285,
+          "days_with_trace": 279,
+          "raw_log_days_with_anchor": 87,
+          "frac": 0.19298245614035087
+        },
+        "TU_W": {
+          "sync_days": 54,
+          "occupied_days": 285,
+          "days_with_trace": 279,
+          "raw_log_days_with_anchor": 90,
+          "frac": 0.18947368421052632
+        }
+      },
+      "per_device_obligatory": {
+        "TU_E": {
+          "variants": 29,
+          "cost0_without_anchor": 9,
+          "baseline_cost0_unmodified": 12,
+          "Q_obligatory_device": 0
+        },
+        "TU_SA": {
+          "variants": 39,
+          "cost0_without_anchor": 9,
+          "baseline_cost0_unmodified": 13,
+          "Q_obligatory_device": 0
+        },
+        "TU_SB": {
+          "variants": 37,
+          "cost0_without_anchor": 9,
+          "baseline_cost0_unmodified": 12,
+          "Q_obligatory_device": 0
+        },
+        "TU_W": {
+          "variants": 35,
+          "cost0_without_anchor": 9,
+          "baseline_cost0_unmodified": 11,
+          "Q_obligatory_device": 0
+        }
+      },
+      "device_variants_tested": 55,
+      "device_variants_cost0_without_anchor": 9,
+      "baseline_device_variants_cost0_unmodified": 13,
+      "device_net": {
+        "places": 10,
+        "transitions": 12,
+        "silent": 8,
+        "labels": [
+          "zone_cooling_active",
+          "zone_cooling_inactive",
+          "zone_heating_active",
+          "zone_heating_inactive"
+        ]
+      },
+      "n_train_cases": 812
+    }
+  },
+  "fcu": {
+    "Q_support": 0.20273972602739726,
+    "sync_days": 74,
+    "occupied_days": 365,
+    "Q_obligatory": 0,
+    "variants_tested": 74,
+    "variants_cost0_without_heating": 5,
+    "heating_in_log": true,
+    "zone_heating_activities": [],
+    "net": {
+      "places": 17,
+      "transitions": 22,
+      "silent": 9
+    },
+    "_aux": {
+      "net_labels": [
+        "cooling_active",
+        "cooling_inactive",
+        "fan_high_entered",
+        "fan_high_exited",
+        "fan_started",
+        "fan_stopped",
+        "heating_active",
+        "oa_damper_closed",
+        "oa_damper_opened",
+        "setback_ended",
+        "setback_started",
+        "system_started",
+        "system_stopped"
+      ],
+      "heating_in_net": true,
+      "n_days_with_state_events": 268,
+      "occupied_days_with_no_state_events": 97,
+      "variants_with_empty_shortened_trace": 0,
+      "variants_containing_heating": 64,
+      "occupied_days_whose_log_contains_heating": 118,
+      "cost0_shortened_examples": [
+        [
+          "fan_started",
+          "oa_damper_opened",
+          "setback_ended",
+          "system_started",
+          "cooling_active",
+          "cooling_inactive",
+          "fan_stopped",
+          "oa_damper_closed",
+          "setback_started",
+          "system_stopped"
+        ],
+        [
+          "fan_started",
+          "oa_damper_opened",
+          "setback_ended",
+          "system_started",
+          "fan_stopped",
+          "fan_started",
+          "cooling_active",
+          "cooling_inactive",
+          "fan_stopped",
+          "oa_damper_closed",
+          "setback_started",
+          "system_stopped"
+        ],
+        [
+          "oa_damper_opened",
+          "setback_ended",
+          "system_started",
+          "fan_started",
+          "cooling_active",
+          "cooling_inactive",
+          "fan_stopped",
+          "oa_damper_closed",
+          "setback_started",
+          "system_stopped"
+        ]
+      ],
+      "n_train_days": 196
+    },
+    "device": {
+      "device_model": null
+    }
+  },
+  "_method": "Unit-stratum net from fit().unit_model (inductive miner, noise 0.2, state alphabet, train days only); pm4py alignments VERSION_STATE_EQUATION_A_STAR via the low-level API in log order, one alignment per distinct variant mapped back to days; Q_support = occupied days whose alignment has a sync move on heating_active; Q_obligatory = 1 iff no variant with heating_active deleted aligns at cost 0. Adopted from the sealed computation of 2026-09-23."
+}

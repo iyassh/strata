@@ -24,6 +24,8 @@ detection:
   # verified by full re-run, byte-identical to the committed v12 artifact.
   residual_min_band_width: 0.5
   residual_min_exceedance: 0.5
+  # X24: the default residual channel plus the outdoor-air-fraction residual
+  residual_channels: [supply_air_residual, oa_fraction_residual]
 
 events:
   occupancy:
@@ -138,3 +140,23 @@ events:
     sustained_min: 15
     gate_signal: CHWC_VLV_POS
     gate_above: 0.05
+
+  # X24 (2026-09-24, pre-registered): outdoor-air fraction implied by the mixed-air
+  # temperature, (RA-MA)/(RA-OA), minus the damper position; abstains where
+  # |RA-OA| <= 10 F. Rule band +-0.25; residual channel band learned on healthy
+  # with fraction-unit floors.
+  oa_fraction_residual:
+    kind: paired_residual
+    alphabet: signature
+    op: oa_fraction
+    a: RA_TEMP
+    b: MA_TEMP
+    c: OA_TEMP
+    pos: OA_DMPR_POS
+    min_dT: 10.0
+    low: -0.25
+    high: 0.25
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05

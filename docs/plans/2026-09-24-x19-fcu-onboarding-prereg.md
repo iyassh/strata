@@ -57,3 +57,50 @@ the sense that the documentation names them; thresholds healthy-only).
 
 `outputs/week0_audit_fcu.json`, `benchmark_v6_fcu.json`, `union_fpr_fcu.json`,
 `x19_onboarding.json`; guard `tests/test_x19_onboarding.py`.
+
+## Amendment 1 — written after run 1 (3185623), before any script change or re-run
+
+**Run 1 outcome.** Gates: G1 found one byte-identical pair (ERRATA E6;
+scored once), G5 is not attainable by name (the FCU Brick file names Brick
+classes, not columns), G2–G4 and G6 clean. Healthy silence in two logged
+iterations. Scorecard: 47 of 47 scored scenarios nominally detected;
+deployed union-minus-rate false alarms **28 of 96 → F-X19.b fired**; six
+scenarios detected by the model channel alone → **F-X19.d fired**.
+
+**Diagnosis (from the healthy year and the scripts, no fault file).** The
+model channel flags 25 holdout days, every one a Saturday or Sunday. 24 have
+no events at all: the FCU sits in setback (`FCU_CTRL = 2`) all weekend and,
+unlike the fan-powered units' night-cycle, setback on this unit is idle
+unless the room drifts past 85/55 °F. `benchmark.py` and `union_fpr.py`
+define a scheduled day as `OCCUPIED > 0` and flag an event-less scheduled
+day as a model violation ("silent while scheduled"); on this system that
+rule fires on 97 of 104 weekends. The 25th day is a conformance flag on a
+two-event weekend trace. The six model-only "detections" carry exactly 100
+model days each — the healthy year's own 100 weekend-silence days — and the
+scorecard's model gate compared them against a conformance-only baseline
+(1 of 72 event days) while the deployed count includes the silence rule
+(25 of 96): the two artefacts disagreed about the same channel. On the four
+earlier systems the two counts are equal (0, 1, 1, 0), so this
+inconsistency had no effect there.
+
+**Change (scripts only, nothing under `src/`).** (i) In both scripts the
+silence rule's "scheduled" becomes operate mode (`OCCUPIED == 1`), the
+same definition the occupancy event kind already uses; the `occupied_min`
+day universe, `sched`, and the absence channel are untouched. (ii) The
+scorecard's model gate counts silent-scheduled holdout days in its
+false-alarm numerator, so it can never again gate against a smaller
+baseline than the deployed count. No FCU threshold changes.
+
+**Predictions.** A1-P1: the committed artefacts of SDAHU, PFPU, SFPU and
+DDAHU regenerate unchanged (SDAHU byte-identical; the others
+count-identical). A1-P2: FCU run 2 deployed false alarms ≤ 10 of 96
+(expected 4: model 1, residual 3). A1-P3: the six model-only scenarios are
+no longer detected and no other scenario changes status: 41 of 47. A1-P4:
+no scenario detected by conformance alone.
+
+**Falsifiers.** A1-F.a: any earlier-system artefact changes → the change
+is a detector change, not a repair, and is reported as such in every paper
+that quotes those numbers. A1-F.b: run-2 false alarms > 10 of 96 → the
+budget does not transfer to this class; report. A1-F.c: a scenario other
+than the six changes status → the silence rule was contributing real
+detections; report which.

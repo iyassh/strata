@@ -114,11 +114,18 @@ def main() -> int:
         # sweep on artifact 2 of 12. Scratch files on disk are not a
         # dependency this gate can afford.
         committed_text = committed.read_text()
+        mtime_before = committed.stat().st_mtime_ns
         r = subprocess.run(cmd.split(), cwd=ROOT, capture_output=True, text=True)
         if r.returncode not in (0, 2):  # 2 = a script's falsifier exit, artifact still written
             print(f"{art:34s} RUN-ERROR\n{r.stderr[-500:]}", flush=True)
             failures.append(art)
             committed.write_text(committed_text)  # never leave it half-written
+            continue
+        # Write check (gap audit 2026-09-24): a script that exits cleanly without
+        # rewriting its artefact must not be reported IDENTICAL.
+        if committed.stat().st_mtime_ns == mtime_before:
+            print(f"{art:34s} NOT-REWRITTEN (exit {r.returncode}; artefact untouched)", flush=True)
+            failures.append(art)
             continue
         try:
             verdict = verdict_from_text(committed_text, committed.read_text())

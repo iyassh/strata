@@ -22,7 +22,7 @@ and once, below, with the deployed detector after X25's calibration slice.
 | PFPU | 7 | 0.90 / 0.81 | 4 / 96, no | 0.49 | 0.00 | 0.50 / no | 4 / 96, no |
 | SFPU | 8 | 0.95 / 0.90 | 5 / 96, no | 0.50 | 0.00 | 0.50 / no | 6 / 96, no |
 | DDAHU | 14 | 0.91 / 0.50 | **59 / 83, yes** | 0.99 | 0.71 | 0.96 / **yes** | 14 / 83, **yes** |
-| FCU | 13 | 0.89 / 0.37 | **55 / 72, yes** | 0.99 | 0.75 | 0.97 / **yes** | 6 / 72, **yes** |
+| FCU | 11 | 0.89 / 0.37 | **55 / 72, yes** | 0.99 | 0.75 | 0.97 / **yes** | 6 / 72, **yes** |
 
 Duplicated blocks fire nowhere (P5 held: loops absorb repetition).
 Deleting the start event fires nowhere (P2 failed everywhere, including
@@ -136,8 +136,21 @@ and fan coil units did not move. The device channel's row on the series
 unit fell from 3 to 1. Four scenarios gained a model credit beside channels
 that already carried them.
 
-The papers' budget range is therefore 1.0–7.3 %, out-of-sample, and the
-"calibration-target" caveat is retired.
+The papers' budget range is therefore 1.0–7.3 %, out-of-sample. Three
+things the review of this section added: (i) the calibration slice removes
+96 days from discovery training, so X25 changed the discovered *nets*, not
+only the thresholds (the FCU net has 11 labels after, 13 before; the
+DDAHU net's behaviour under reversal in X22 changed accordingly); (ii) the
+device-channel provenance string still read "calibration target" where
+the device channel is absent (SDAHU, FCU), a fall-through in the script,
+now "channel absent"; (iii) the floor as implemented in step 2 was
+3/365 = 0.0082, which at 96 holdout days is *looser* than the one-false-
+alarm floor it replaced (1/96 = 0.0104) and looser than the frequency and
+oscillation gates' 3/96. That is an implementation error against the
+pre-registration's intent ("the rules channel's rule of three" applied to
+the holdout sample); step 3 below corrects it to max(fp, 3)/n and is
+regenerated alone, which also separates the floor's effect from the
+split's (the P4 claim above rests on the two applied together).
 
 | P0 | P1 | P2 | P3 | P4 | falsifiers |
 |---|---|---|---|---|---|
@@ -184,7 +197,7 @@ model 0 (threshold out-of-sample under X25), absence 0, frequency 2,
 oscillation 1; rate 1 (advisory); naive union 4. Every residual channel
 was evaluable on every holdout day, so P3 (some abstention) failed as a
 prediction. The budget holds on the first real building, at a rate
-above every simulated system's (1.0–5.2 %).
+above every simulated system's (1.0–7.3 % after X25).
 
 **The case (P4, then A1-P2): not seen.** Run 1's config watched circuit
 1's refrigerant sensors; the documented fault is on circuit B. Amendment 1

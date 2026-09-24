@@ -1,0 +1,86 @@
+{
+  "system": "rtu_field",
+  "raw_dir": "/Users/yassh/Downloads/Ureap/LBNL_FDD_Data_Sets_RTU_all_3/Field RTU",
+  "n_files": 4,
+  "G1_md5": {
+    "hashes": {
+      "Site1_Staging_Fault.csv": "dc58051f1004584d1a543261cb15aa05",
+      "Site1_Unfaulted.csv": "884f098d0561fc1554efa20aba1d9fbb",
+      "Site2_Undercharged40.csv": "0c81ff475b358830a895be8122a088b7",
+      "Site2_Unfaulted.csv": "4855865bc9dcc936e777940b6516e234"
+    },
+    "duplicate_groups": []
+  },
+  "G2_monotonic": {
+    "Site1_Staging_Fault.csv": {
+      "wrap_points": 0,
+      "first": "2021-06-09 00:00:00",
+      "last": "2021-08-09 00:00:00",
+      "rows": 86354
+    },
+    "Site1_Unfaulted.csv": {
+      "wrap_points": 0,
+      "first": "2021-08-10 00:00:00",
+      "last": "2021-09-30 00:00:00",
+      "rows": 73099
+    },
+    "Site2_Undercharged40.csv": {
+      "wrap_points": 0,
+      "first": "2020-06-01 00:00:00",
+      "last": "2020-06-30 00:00:00",
+      "rows": 41522
+    },
+    "Site2_Unfaulted.csv": {
+      "wrap_points": 0,
+      "first": "2020-07-31 00:01:00",
+      "last": "2021-09-30 23:59:00",
+      "rows": 260441
+    }
+  },
+  "G3_calendar": {
+    "Site1_Staging_Fault.csv": {
+      "set_identical_to_healthy": false,
+      "n_unique": 86354
+    },
+    "Site1_Unfaulted.csv": {
+      "set_identical_to_healthy": false,
+      "n_unique": 73099
+    },
+    "Site2_Undercharged40.csv": {
+      "set_identical_to_healthy": false,
+      "n_unique": 41522
+    },
+    "Site2_Unfaulted.csv": {
+      "set_identical_to_healthy": true,
+      "n_unique": 260441
+    }
+  },
+  "G4_raw_rotation": {},
+  "G6_branch": {
+    "healthy": {
+      "setpoint_constants": {}
+    },
+    "healthy_inside_fault_range": {
+      "occupied_days": null,
+      "first_occupied_minute_mode": null,
+      "oa_damper_floor_fan_on": null
+    },
+    "healthy_constant_setpoints": {},
+    "setpoint_constants_identical_to_healthy": true,
+    "files_with_different_setpoint_constants": [],
+    "per_file": {
+      "Site1_Staging_Fault.csv": {
+        "setpoint_constants": {}
+      },
+      "Site1_Unfaulted.csv": {
+        "setpoint_constants": {}
+      },
+      "Site2_Undercharged40.csv": {
+        "setpoint_constants": {}
+      },
+      "Site2_Unfaulted.csv": {
+        "setpoint_constants": {}
+      }
+    }
+  }
+}

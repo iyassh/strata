@@ -1,0 +1,105 @@
+# Event-abstraction rules for the LBNL FIELD rooftop unit, Site 2 (X26,
+# 2026-09-24). Written from the documentation and the fault-free profile only;
+# degC units. No damper, valve or command point exists, so the mismatch and
+# leak kinds do not apply; the channels are physical residuals, the fan and
+# compressor cycle states, and oscillation.
+
+climate:
+  ashrae_zone: 5A
+  notes: "Colchester CT, distribution centre; two summers of measured data."
+
+detection:
+  fpr_quantile: 0.01
+  oscillation_signals: [ZONE_TEMP, SA_TEMP]
+  oscillation_deadband: 0.3
+  residual_min_band_width: 0.3      # degC (~0.5 F, the sensor-precision floor used elsewhere)
+  residual_min_exceedance: 0.3
+  residual_channels: [supply_air_residual, cond_approach_residual, suction_residual, flow_per_fan_watt]
+  holdout_days_per_month: 8
+  calibration_days_per_month: 8
+
+events:
+  # ---------------- state alphabet ----------------
+  fan:
+    kind: occupancy
+    alphabet: state
+    signal: OCCUPIED            # FAN_ON == 1
+    on_event: system_started
+    off_event: system_stopped
+  cooling:
+    kind: mode
+    alphabet: state
+    signal: COMP_POWER
+    on_above: 200.0
+    on_event: cooling_active
+    off_event: cooling_inactive
+
+  # ---------------- signature / residual channels ----------------
+  # fan on, compressor off: supply air = mixed air + fan heat. Iteration 2 (healthy
+  # evidence only): fan heat is 2.55 C median, p99.9 4.12; after the compressor
+  # stops the evaporator still cools the air for a while (p0.1 -6.9 C), so the
+  # fixed rule band is [-8, 4.5]; the residual channel learns its own band.
+  supply_air_residual:
+    kind: paired_residual
+    alphabet: signature
+    a: SA_TEMP
+    b: MA_TEMP
+    low: -8.0
+    high: 4.5
+    gates:
+      - signal: COMP_POWER
+        below: 200.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+  # Iteration 2 (healthy evidence only): the field mixed-air probe reads below
+  # min(OA, RA) on 9 % of fan-on minutes, up to 2.4 C sustained for an hour
+  # (placement/stratification); tolerance 2.5 C, from the 1.1 C first written.
+  mixed_air_envelope:
+    kind: envelope_residual
+    alphabet: signature
+    signal: MA_TEMP
+    low_ref: OA_TEMP
+    high_ref: RA_TEMP
+    tolerance: 2.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+  # compressor on: condenser liquid-line temperature sits a learned approach above outdoor air
+  cond_approach_residual:
+    kind: paired_residual
+    alphabet: signature
+    a: REFG_COND_TEMP_1
+    b: OA_TEMP
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: COMP_POWER
+        above: 200.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+  # compressor on: suction-line temperature relative to supply air (superheat proxy)
+  suction_residual:
+    kind: paired_residual
+    alphabet: signature
+    a: REFG_SUCT_TEMP_1
+    b: SA_TEMP
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: COMP_POWER
+        above: 200.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+  # fan on: airflow per fan watt (fan-law proxy, band learned on healthy)
+  flow_per_fan_watt:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: SA_FLOW
+    b: FAN_POWER
+    low: -900.0
+    high: 900.0
+    gates:
+      - signal: FAN_POWER
+        above: 100.0
+    occ_signal: OCCUPIED
+    sustained_min: 60

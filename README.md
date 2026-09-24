@@ -1,8 +1,11 @@
 # STRATA — fault detection for buildings that explains itself
 
-**Discovered process models locate a building's normal-behaviour invariants;
-calibrated interpretable channels detect violations of them — so every alarm
-ships with a name, an explanation, and a false-positive budget.**
+**An event log written from sensor data by configuration alone; calibrated,
+interpretable channels that detect faults on it under a stated false-alarm
+budget — so every alarm ships with a device name and a physical reason. The
+discovered process models describe healthy operation; five systems and two
+transfer tests show they neither detect nor predict, and that null is
+reported as a result.**
 
 ![tests](https://github.com/iyassh/strata/actions/workflows/tests.yml/badge.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue)
@@ -130,8 +133,9 @@ fan coil unit):
 |---|---|---|---|---|---|
 | fault scenarios detected | **13 / 14** * | **23 / 30** | **24 / 29** | **45 / 55** | **41 / 47** |
 | median time-to-detect (all significant channels, rate included) | 1 day | 1 day | 1 day | 1 day | 1 day |
-| false-alarm budget (fault-free days) | 1.0% | 5.2% | 4.2% | 3.1% | 4.2% |
-| cry-wolf ratio (wrong alarms / all alarms) | 0.03% | 0.08% | 0.07% | — | — |
+| time-to-detect tail (longest first alarm among detected scenarios) | 2 days | 21 days | 108 days | 114 days | 15 days |
+| false-alarm budget, deployed detector (fault-free holdout days) | 1.0% | 5.2% | 4.2% | 3.1% | 4.2% |
+| false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 12.5% | 4.2% | 8.3% | 21.9% |
 
 DDAHU: 79 sensor mappings, 41 rules, one healthy-silence iteration, no source
 change, gate battery clean (including a configuration-branch comparison); every family caught in full except coil fouling

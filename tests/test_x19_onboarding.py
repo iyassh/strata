@@ -25,14 +25,14 @@ def test_x19_run2_pinned():
     assert p["P1_config_only"] and p["P4_fp_le_10_of_96"] and p["P5_ge_60pct"] and p["P7_null_generalises"] and p["P8_holds"]
     assert p["P2_gates"] is False and p["P2_axes"]["G1_no_duplicates"] is False and p["P2_axes"]["G5_ttl_covers_columns_by_name"] is False
     assert all(p["P2_axes"][k] for k in ("G2_monotonic", "G3_calendar_identical", "G4_no_rotation", "G6_healthy_inside_cluster"))
-    assert p["P3_healthy_silence_iterations"] == 2
+    assert p["P3_healthy_silence_iterations_attested"] == 2 and p["P3_residual_healthy_signature_days_computed"] == 0
     assert (p["P5_detected"], p["P5_n_scored"]) == (41, 47) and p["P4_holdout_fp_days"] == 4
     assert (p["P6_fouling_detected"], p["P6_fouling_scored"]) == (6, 11) and p["P6_le_6"]
     assert (p["P8_airflow_detected"], p["P8_control_detected"]) == (5, 3)
     assert p["P7_conformance_only_scenarios"] == []
-    assert a["effort"]["src_diff_since_prereg"] == "none"
+    assert a["effort"]["src_diff_since_prereg"] == "none" and a["effort"]["config_diff_since_prescoring_commit"] == "none"
     assert any("gates_system.py" in l for l in a["effort"]["scripts_diff_since_prereg"])   # the two-line gate-script change is on record
-    assert (a["effort"]["sensor_mappings"], a["effort"]["state_rules"], a["effort"]["signature_rules"]) == (30, 7, 16)   # 30 incl. Datetime
+    assert (a["effort"]["sensor_mappings"], a["effort"]["state_rules"], a["effort"]["signature_rules"]) == (29, 7, 16)
     assert a["gates"]["duplicates"] == [["FCU_Fouling_Cooling_Airside_Minor.csv", "FCU_Fouling_Heating_Airside_Minor.csv"]]
     assert a["gates"]["excluded_scenarios"] == ["FCU_Fouling_Heating_Airside_Minor"]
     s = a["scorecard"]

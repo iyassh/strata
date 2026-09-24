@@ -1,0 +1,15 @@
+{
+  "regenerated_at_scripts_commit": "7d52587",
+  "artefacts_committed_at": "50510fc",
+  "evidence": "all eight regenerated under the amended scripts; git status reported no change (console); MD5s of the committed files recorded here",
+  "md5": {
+    "outputs/benchmark_v6_sdahu.json": "078b67465813650b09c3a9eca332183b",
+    "outputs/union_fpr_sdahu.json": "5a0a00facfc53a6be3b3dcee9903636d",
+    "outputs/benchmark_v6_pfpu.json": "784deb4327466c61a241e838e5ad3bd4",
+    "outputs/union_fpr_pfpu.json": "8e7685f041e3592fd6edfdfc26ffaece",
+    "outputs/benchmark_v6_sfpu.json": "c12d76e0632d247bc96cd694006c2cb2",
+    "outputs/union_fpr_sfpu.json": "e2566ceed01dbf4046340ce7c213988d",
+    "outputs/benchmark_v6_ddahu.json": "b5ea5f7ff1671f8f0365c64f870841b5",
+    "outputs/union_fpr_ddahu.json": "bab4d69ac54df4164e4416684772a0eb"
+  }
+}

@@ -140,8 +140,8 @@ process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)).
 
 FCU: 29 sensor mappings, 23 rules, two healthy-silence iterations, no source
 change; the hash gate found a byte-identical pair under two family labels
-(scored once, [ERRATA.md](ERRATA.md) E6); both new families — airflow
-restriction and reverse/unstable control — caught in full; misses are five of
+(scored once, [ERRATA.md](ERRATA.md) E6); both new scorecard families — airflow
+restriction and reverse/unstable control, four at the documentation's granularity — caught in full; misses are five of
 six waterside-fouling files (the cooling coil's leave the recorded points
 within about 3% of healthy) and one 20% damper leak. Its first run fired two falsifiers (28/96 false alarms; six
 "detections" by the model channel alone) that traced to a scoring-script

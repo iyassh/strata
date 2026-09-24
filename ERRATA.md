@@ -256,10 +256,11 @@ minor-airside cell is attributable to neither coil.
 
 **Related observation (not a defect):** four fault files have fewer
 occupied days than the fault-free year (261): `OADMPRStuck_80` 215,
-`OADMPRStuck_50` 242, `OADMPRStuck_100` 249, `Control_Unstable` 250. In each
-the controller enters shutdown (`FCU_CTRL = 0`) — 94 days in the stuck-80 %
-file, mixed-air temperature down to 2 °F — which is the documented
-low-temperature protection (mixed air below 35 °F) responding to a damper
-held open in winter. The fault-free file has no shutdown minute. These are
+`OADMPRStuck_50` 242, `OADMPRStuck_100` 249, `Control_Unstable` 250. In the
+three damper files the controller enters shutdown (`FCU_CTRL = 0`) — 94
+days in the stuck-80 % file, mixed-air temperature down to 2 °F — which is
+the documented low-temperature protection (mixed air below 35 °F)
+responding to a damper held open in winter; the unstable-control file
+trips for a different reason (its damper never leaves the normal 0.30). The fault-free file has no shutdown minute. These are
 physical consequences of the seeded faults and the G6 healthy-inside-cluster
 check passes; they are noted because they change the occupied-day universe those files are scored on (no channel is credited for them: `absence_days` is 0 on every scenario).

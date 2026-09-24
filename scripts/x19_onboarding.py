@@ -16,12 +16,15 @@ card = json.loads(Path("outputs/benchmark_v6_fcu.json").read_text())
 ufpr = json.loads(Path("outputs/union_fpr_fcu.json").read_text())
 rules = yaml.safe_load(Path("configs/lbnl_fcu/rules.yaml").read_text())
 sensors = yaml.safe_load(Path("configs/lbnl_fcu/sensors.yaml").read_text())["canonical_to_csv"]
+n_mappings = len([k for k in sensors if k != "Datetime"])   # the timestamp column is not a sensor mapping
 man = yaml.safe_load(Path("configs/lbnl_fcu/scenarios.yaml").read_text())
 
 ev = rules["events"]
 n_state = sum(1 for r in ev.values() if r.get("alphabet", "state") == "state" and r["kind"] in ("occupancy", "mode", "window"))
 n_sig = len(ev) - n_state
 src_changed = subprocess.run(["git", "diff", "--stat", PREREG_COMMIT, "HEAD", "--", "src/"], capture_output=True, text=True).stdout.strip()
+CONFIG_COMMIT = "beab656"   # the config as committed before any fault file was scored
+config_changed_after_scoring = subprocess.run(["git", "diff", "--stat", CONFIG_COMMIT, "HEAD", "--", "configs/lbnl_fcu/"], capture_output=True, text=True).stdout.strip()
 # scripts are outside the config-only claim but are reported (hostile review, finding 11)
 scripts_changed = subprocess.run(["git", "diff", "--stat", PREREG_COMMIT, "HEAD", "--", "scripts/gates_system.py", "scripts/06_convert_fcu.py", "scripts/benchmark.py", "scripts/union_fpr.py"], capture_output=True, text=True).stdout.strip().splitlines()
 
@@ -41,6 +44,15 @@ for s in sc:
     f = fam[s["file"]]; by_family.setdefault(f, [0, 0]); by_family[f][1] += 1; by_family[f][0] += int(bool(s["meaningful_channels"]))
 
 fp = ufpr["union_minus_rate"]["holdout_fp_days"]; hold = ufpr["holdout_days"]
+# P3 from the healthy log itself (finding 20): signature days on the fault-free year under the committed config
+import pandas as pd
+from strata.io.config import load_config
+from strata.hvac.events import abstract_events
+_hlog = abstract_events(pd.read_parquet("data/processed/fcu/FCU_FaultFree.parquet"), load_config("configs/lbnl_fcu"))
+healthy_sig_days = int(_hlog.loc[_hlog["alphabet"] == "signature", "case_id"].nunique())
+# iterations are attested from the logged comments in rules.yaml ("iteration 2"), not computed
+_rules_txt = Path("configs/lbnl_fcu/rules.yaml").read_text()
+silence_iterations_attested = 1 + int("iteration 2" in _rules_txt.lower())
 g6 = gates.get("G6_branch", {})
 gate_axes = {
     "G1_no_duplicates": gates["G1_md5"]["duplicate_groups"] == [],
@@ -54,7 +66,8 @@ gate_axes = {
 pred = {
     "P1_config_only": src_changed == "",
     "P2_gates": all(gate_axes.values()), "P2_axes": gate_axes,
-    "P3_healthy_silence_iterations": 2, "P3_le_3": True, "P3_residual_healthy_signature_days": 0,
+    "P3_healthy_silence_iterations_attested": silence_iterations_attested, "P3_le_3": silence_iterations_attested <= 3,
+    "P3_residual_healthy_signature_days_computed": healthy_sig_days,
     "P4_holdout_fp_days": fp, "P4_fp_le_10_of_96": fp <= 10,
     "P5_detected": len(det), "P5_n_scored": len(sc), "P5_frac": round(len(det) / len(sc), 3), "P5_ge_60pct": len(det) / len(sc) >= 0.6,
     "P6_fouling_detected": n_det(fouling), "P6_fouling_scored": len(fouling), "P6_le_6": n_det(fouling) <= 6,
@@ -72,9 +85,12 @@ if len(det) / len(sc) < 0.4:
     fired.append("F-X19.c: fewer than 40% of scenarios detected")
 if conf_only:
     fired.append("F-X19.d: a scenario is detected only by the conformance channels")
+if config_changed_after_scoring:
+    fired.append("F-X19.e: the config changed after the pre-scoring commit: " + config_changed_after_scoring)
 out = {"pre_registration": "docs/plans/2026-09-24-x19-fcu-onboarding-prereg.md",
-       "effort": {"sensor_mappings": len(sensors), "state_rules": n_state, "signature_rules": n_sig,
-                  "healthy_silence_iterations": 2, "src_diff_since_prereg": src_changed or "none",
+       "effort": {"sensor_mappings": n_mappings, "state_rules": n_state, "signature_rules": n_sig,
+                  "healthy_silence_iterations_attested": silence_iterations_attested, "src_diff_since_prereg": src_changed or "none",
+                  "config_diff_since_prescoring_commit": config_changed_after_scoring or "none",
                   "scripts_diff_since_prereg": [l.strip() for l in scripts_changed if "|" in l]},
        "gates": {"files": gates["n_files"], "duplicates": gates["G1_md5"]["duplicate_groups"], "rotation": list(gates["G4_raw_rotation"]),
                  "ttl_columns_not_declared": gates["G5_ttl"]["columns_not_declared"], "excluded_scenarios": excluded},

@@ -1,11 +1,12 @@
 {
   "pre_registration": "docs/plans/2026-09-24-x19-fcu-onboarding-prereg.md",
   "effort": {
-    "sensor_mappings": 30,
+    "sensor_mappings": 29,
     "state_rules": 7,
     "signature_rules": 16,
-    "healthy_silence_iterations": 2,
+    "healthy_silence_iterations_attested": 2,
     "src_diff_since_prereg": "none",
+    "config_diff_since_prescoring_commit": "none",
     "scripts_diff_since_prereg": [
       "scripts/06_convert_fcu.py | 43 +++++++++++++++++++++++++++++++++++++++++++",
       "scripts/benchmark.py      | 20 ++++++++++++++++----",
@@ -134,9 +135,9 @@
       "G5_ttl_covers_columns_by_name": false,
       "G6_healthy_inside_cluster": true
     },
-    "P3_healthy_silence_iterations": 2,
+    "P3_healthy_silence_iterations_attested": 2,
     "P3_le_3": true,
-    "P3_residual_healthy_signature_days": 0,
+    "P3_residual_healthy_signature_days_computed": 0,
     "P4_holdout_fp_days": 4,
     "P4_fp_le_10_of_96": true,
     "P5_detected": 41,

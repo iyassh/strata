@@ -22,6 +22,7 @@ def test_x17_pinned():
     assert (p["P5_detected"], p["P5_n_scored"]) == (45, 55) and p["P4_holdout_fp_days"] == 3
     assert p["P7_conformance_only_scenarios"] == []
     assert a["effort"]["src_diff_since_prereg"] == "none"
+    assert (a["effort"]["sensor_mappings"], a["effort"]["state_rules"], a["effort"]["signature_rules"]) == (80, 15, 26)   # 80 incl. Datetime
     assert a["gates"]["duplicates"] == [] and a["gates"]["rotation"] == [] and a["gates"]["ttl_columns_not_declared"] == []
     s = a["scorecard"]
     assert s["by_family"] == {"unstable_control": [2, 2], "zone_damper_stuck": [10, 10], "oa_damper_stuck": [5, 5],

@@ -22,9 +22,9 @@ and unstable control sequences.
 
 | | count |
 |---|---|
-| sensor mappings (`sensors.yaml`) | 88 |
-| state-event rules (unit + four zone boxes as device stratum) | 30 |
-| signature rules (existing kinds only) | 22 |
+| sensor mappings (`sensors.yaml`, excluding `Datetime`) | 79 |
+| state-event rules (unit + four zone boxes as device stratum) | 15 |
+| signature rules (existing kinds only) | 26 |
 | healthy-silence iterations | 1 (logged beside each rule) |
 | `src/` changes | **none** |
 
@@ -44,8 +44,12 @@ baselines (0.42 / 0.60). Result: **1 signature event on 1 day of 365**.
 ## Gates (P2): clean
 
 56 files, 56 distinct MD5s, all monotonic, all calendar-identical to the
-fault-free file, no rotation, Brick model covers all 114 columns. Unlike
-SDAHU and SFPU, this dataset carries no defect the battery can see.
+fault-free file, no rotation, Brick model covers all 114 columns. A G6
+configuration-branch comparison (occupied-day universe, first occupied
+minute, outdoor-air damper floor while the fan runs, every setpoint
+constant) places the healthy file inside the fault files' cluster on every
+axis. Unlike SDAHU and SFPU, this dataset carries no defect the battery
+can see.
 
 ## Scorecard (P5–P8)
 
@@ -85,11 +89,17 @@ carried no consequence.
 | naive union of all eight | 8 (8.3 %) |
 | per channel | rules 0, residual 0, model 0, device 0, absence 3, frequency 0, oscillation 0, rate 7 |
 
-**Rate demotion is not free here** (Amendment 1): on `cooling valve stuck 0%`
-the first alarm day (2018-01-01) is rate-only, so the deployed
-union-minus-rate definition delays that scenario's time-to-detect; the
-scorecard's TTD column includes rate. Recorded in the artefact; the
-detection count is unaffected (45 with or without rate).
+**Rate demotion is free here after all** (Amendment 1, corrected on
+review): the false-alarm script's demotion check reported that `cooling
+valve stuck 0%`'s first alarm day (2018-01-01) was covered by no non-rate
+channel. Recomputing every channel on that file with `pipeline.score()`
+shows the day-1 alarm is the **absence** channel's (135 flagged days,
+first 2018-01-01; rate's first is 2018-04-23; rules 04-03, oscillation
+02-04). The scorecards export no absence day list, so the check could not
+see it — a blind spot in the check, not a cost of demotion. The check now
+records such cases as unresolved rather than as violations. Detection
+count and every time-to-detect are unaffected by demoting rate on this
+system.
 
 
 ## X18 — does the X15 gain replicate here? No.
@@ -140,10 +150,13 @@ min-calibration on a 28-event-per-day alphabet), and nothing is detected
 by conformance alone. What did the work is what did it before — rules and
 residuals first, then oscillation and absence.
 
-Two things this changes upstream. The cross-building claim now has a
-**fourth building**, so the unit-of-replication floor the sealed transfer
-test could never clear (1/3! = 0.167) becomes 1/4! = 0.042 — a re-run of
-that test with four buildings could, for the first time, attain
-significance; it has not been run. And the benchmark-defect finding is
-bounded: the gate battery found nothing on this LBNL dataset, so the five
-defects are properties of two archives, not of the collection.
+Two things this changes upstream. The sealed transfer test's scorable
+pool grows from two buildings to three: its Amendment 1 excluded the
+single-duct system *structurally* (no heating activity in its sensor
+map), so the floor moves from 1/2! = 0.5 to 1/3! = 0.167 — still above
+0.05; the test remains unpowered and has not been re-run. (A first
+write-up said 1/4! = 0.042 with four buildings; that counted a building
+the test cannot score.) And the benchmark-defect finding is bounded: the
+gate battery — G1–G5 plus a G6 configuration-branch comparison of the
+E5 class, ported for this run — found nothing on this LBNL dataset, so the
+five defects are properties of two archives, not of the collection.

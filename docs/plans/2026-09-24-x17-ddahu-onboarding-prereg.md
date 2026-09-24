@@ -105,3 +105,12 @@ threshold and no detection count (rate is never the only significant
 channel on any DDAHU scenario: 45 detected with or without it). The
 deployed definition stays union-minus-rate as pre-registered; the TTD cost
 is disclosed wherever DDAHU's TTD is quoted.
+
+**Correction to Amendment 1 (2026-09-24, on review).** The "violation" was
+the check's blind spot, not a cost: recomputing every channel on
+`cooling valve stuck 0%` shows the 2018-01-01 alarm is the absence
+channel's (135 days, first 01-01), and the scorecards export no absence day
+list for the check to consult. Rate's own first day is 2018-04-23. Demoting
+rate delays no time-to-detect on this system. `union_fpr.py` now records
+such cases as `unresolved_absence_coverage` instead of a violation, and
+exits 0 when no true violation remains.

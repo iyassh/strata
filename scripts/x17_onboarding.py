@@ -40,7 +40,9 @@ pred = {
     "P2_gates": (not gates["G1_md5"]["duplicate_groups"] and not gates["G4_raw_rotation"]
                  and all(v["wrap_points"] == 0 for v in gates["G2_monotonic"].values())
                  and all(v["set_identical_to_healthy"] for v in gates["G3_calendar"].values())
-                 and gates["G5_ttl"]["columns_not_declared"] == []),
+                 and gates["G5_ttl"]["columns_not_declared"] == []
+                 and all(gates.get("G6_branch", {}).get("healthy_inside_fault_range", {}).values())
+                 and gates.get("G6_branch", {}).get("setpoint_constants_identical_to_healthy", False)),
     "P3_healthy_silence_iterations": 1, "P3_residual_healthy_signature_days": 1,
     "P4_holdout_fp_days": fp, "P4_fp_le_10_of_96": fp <= 10,
     "P5_detected": len(det), "P5_n_scored": len(sc), "P5_frac": round(len(det) / len(sc), 3), "P5_ge_60pct": len(det) / len(sc) >= 0.6,

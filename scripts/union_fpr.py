@@ -293,10 +293,19 @@ for s in bench["scenarios"]:
     # ~day 30 anyway; this checks the decisive fact directly.
     su = fd_.get("sig_union", [])
     if s["ttd_days"] is not None and su and min(su) not in covered_all:
-        demotion["violations"].append(
-            f"{s['label']}: first alarm day {min(su)} not covered by a significant "
-            f"non-rate channel — demotion would delay TTD"
-        )
+        if "absence" in sig_nonrate:
+            # the scorecard exports no absence day list, so this check cannot see
+            # an absence-channel first alarm; DDAHU (X17) showed exactly that —
+            # the day-1 alarm was absence's and demotion cost nothing. Recorded
+            # as unresolved-by-this-check, not as a violation.
+            demotion.setdefault("unresolved_absence_coverage", []).append(
+                f"{s['label']}: first alarm day {min(su)} not in any exported non-rate day list; "
+                f"absence is significant and has no exported day list — verify with pipeline.score()")
+        else:
+            demotion["violations"].append(
+                f"{s['label']}: first alarm day {min(su)} not covered by a significant "
+                f"non-rate channel — demotion would delay TTD"
+            )
 
 n_rate_sig = len(demotion["scenarios_with_rate_significant"])
 print(f"\nrate-demotion check: {n_rate_sig} scenarios have rate significant; "

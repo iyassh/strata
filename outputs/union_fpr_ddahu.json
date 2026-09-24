@@ -191,8 +191,9 @@
     "rate_only_alarm_days": 0
    }
   ],
-  "violations": [
-   "cooling valve stuck 0%: first alarm day 2018-01-01 not covered by a significant non-rate channel \u2014 demotion would delay TTD"
+  "violations": [],
+  "unresolved_absence_coverage": [
+   "cooling valve stuck 0%: first alarm day 2018-01-01 not in any exported non-rate day list; absence is significant and has no exported day list \u2014 verify with pipeline.score()"
   ]
  },
  "caveats": [

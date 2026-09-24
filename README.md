@@ -128,12 +128,12 @@ blind by a pre-registered configuration-only protocol, a dual-duct AHU):
 | | SDAHU | PFPU | SFPU | DDAHU (X17) |
 |---|---|---|---|---|
 | fault scenarios detected | **13 / 14** * | **23 / 30** | **24 / 29** | **45 / 55** |
-| median time-to-detect | 1 day | 1 day | 1 day | 1 day |
+| median time-to-detect (all significant channels, rate included) | 1 day | 1 day | 1 day | 1 day |
 | false-alarm budget (fault-free days) | 1.0% | 5.2% | 4.2% | 3.1% |
 | cry-wolf ratio (wrong alarms / all alarms) | 0.03% | 0.08% | 0.07% | — |
 
-DDAHU: 88 sensor mappings, 52 rules, one healthy-silence iteration, no source
-change, gate battery clean; every family caught in full except coil fouling
+DDAHU: 79 sensor mappings, 41 rules, one healthy-silence iteration, no source
+change, gate battery clean (including a configuration-branch comparison); every family caught in full except coil fouling
 (5/12) and static-pressure sensor bias (5/8); nothing detected by the
 process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)).
 

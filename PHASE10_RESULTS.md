@@ -194,14 +194,19 @@ those limits — the property that matters below.
 | signature rules (existing kinds only) | 16 |
 | healthy-silence iterations | 2 (logged beside each rule) |
 | `src/` changes | **none** |
+| `scripts/` touched | `06_convert_fcu.py` (new); two lines in `gates_system.py` so G5 reads this Brick file's `FCU:` names and G6 uses fan speed as the fan-on signal |
 
 Iteration 1 was already silent — zero signature events on the fault-free
 year — but two rules could not have fired on this data at all: the
 fan-high threshold (20 rev/s) sat above both observed speeds (9.75 and
-13.08), and the zone-tracking gate was on valve *position*, which never
-exceeds 0.95 in the healthy year. Iteration 2 split the speeds at 11 rev/s
-and gated zone tracking on the valve *command*; still zero signature
-events. A rule that is silent because it is dead is not evidence of
+13.08), and the zone-tracking gate was on valve *position*. Iteration 2 split the
+speeds at 11 rev/s and moved the zone-tracking gate to the valve *command*:
+on the healthy year neither position nor command exceeds 0.95 (commands
+reach 0.50 and 0.66), so the rule is equally silent either way there; the
+reason is physical — under a stuck or starved valve the controller's
+command saturates where the position cannot — and it comes from the
+documentation's control sequence, not from any fault file. Still zero
+signature events. A rule that is silent because it is dead is not evidence of
 anything, which is why the iteration is logged.
 
 ### Gates (P2): two findings
@@ -264,6 +269,8 @@ changes status, 41 of 47 (A1-P3); nothing by conformance alone (A1-P4).
 | | run 2 |
 |---|---|
 | SDAHU, PFPU, SFPU, DDAHU artefacts after the script change | **byte-identical** (A1-P1) |
+
+The change is not a no-op by construction: the silence rule's day domain shrinks by every day that has scheduled but no operate minutes — 104 on each fan-powered unit, 24 on the dual-duct unit, none on the single-duct — and the artefacts held only because every one of those days carries night-cycle events on those systems (0 event-less among them, checked).
 | deployed false alarms (union minus rate) | **4 / 96** (4.2 %): residual 3, model 1 (A1-P2) |
 | naive union of all eight | 21 / 96 (rate alone 17) |
 | scenarios detected / scored | **41 / 47** (87 %): exactly the six model-only scenarios dropped, no other status changed (A1-P3) |
@@ -284,15 +291,19 @@ Channel credits among the 41: residual 37, rules 25, frequency 23,
 oscillation 18, model 7 (never alone), rate 1, absence 0, device n/a.
 The six misses are OA damper leaking 20 % and five of the six
 waterside-fouling files. A diagnostic read of those files (after
-scoring; no threshold was touched) shows why: waterside fouling as
-simulated leaves the cooling coil's water-side ΔT (daily median −20.2 °F
-severe vs −20.6 healthy), its valve-open minutes (109,885 vs 109,868) and
-its flow (0.62 vs 0.60 gpm) within three per cent of the fault-free year.
-Whatever the fault does inside the model, it does not reach the recorded
-points at a size the residual channel's healthy band can see; a
-pre-registered rule for it would have to be written from the
-documentation's description of the mechanism, and it is not obvious one
-exists in these 29 points.
+scoring; no threshold was touched; `scripts/x19_waterside_diagnostic.py`,
+`outputs/x19_waterside_diagnostic.json`) shows why. On the cooling coil,
+waterside fouling as simulated leaves the water-side ΔT channel's daily
+median at -20.2 °F (severe) against -20.59 healthy, the
+valve-open minutes at 109,885 against 109,868, and the flow at
+0.622 against 0.604 gpm — about three per cent. On the heating coil the
+minor and moderate files move flow by -1 % and +5 % with the ΔT
+median within 0.5 °F of healthy; only the severe file, which cuts
+valve-open time by 16 %, is caught. Whatever the fault does inside the
+model, on the cooling coil it does not reach the recorded points at a size
+the residual channel's healthy band can see; a pre-registered rule for it
+would have to be written from the documentation's description of the
+mechanism, and it is not obvious one exists in these 29 points.
 
 **What X19 adds to X17.** The onboarding claim survives a second class
 with the same protocol (29 mappings, 23 rules, two silence iterations, no

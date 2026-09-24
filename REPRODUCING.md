@@ -89,6 +89,7 @@ uv run python scripts/x17_onboarding.py                      # -> outputs/x17_on
 caffeinate -i uv run python scripts/benchmark.py fcu         # fifth system (X19) -> outputs/benchmark_v6_fcu.json
 caffeinate -i uv run python scripts/union_fpr.py fcu
 uv run python scripts/x19_onboarding.py                      # -> outputs/x19_onboarding.json
+uv run python scripts/x19_waterside_diagnostic.py            # -> outputs/x19_waterside_diagnostic.json (why the waterside-fouling misses)
 uv run python scripts/discovery_predicts_transfer_q.py --systems ddahu,fcu --out outputs/discovery_predicts_transfer_q_four.json   # X20
 uv run python scripts/matched_rules.py ddahu; uv run python scripts/matched_rules.py fcu
 uv run python scripts/x20_transfer_four.py                   # -> outputs/x20_transfer_four.json

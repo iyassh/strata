@@ -1,0 +1,75 @@
+{
+  "FCU_FaultFree": {
+    "channel": "chwc_waterside_dT",
+    "evaluable_days": 181,
+    "dT_daily_median_F": -20.59,
+    "valve_open_min": 109868,
+    "flow_gpm_open": 0.604
+  },
+  "FCU_Fouling_Cooling_Waterside_Minor": {
+    "channel": "chwc_waterside_dT",
+    "evaluable_days": 181,
+    "dT_daily_median_F": -20.54,
+    "valve_open_min": 109881,
+    "flow_gpm_open": 0.606,
+    "flow_rel_diff_pct": 0.3,
+    "valve_open_rel_diff_pct": 0.01
+  },
+  "FCU_Fouling_Cooling_Waterside_Moderate": {
+    "channel": "chwc_waterside_dT",
+    "evaluable_days": 181,
+    "dT_daily_median_F": -20.42,
+    "valve_open_min": 109881,
+    "flow_gpm_open": 0.611,
+    "flow_rel_diff_pct": 1.2,
+    "valve_open_rel_diff_pct": 0.01
+  },
+  "FCU_Fouling_Cooling_Waterside_Severe": {
+    "channel": "chwc_waterside_dT",
+    "evaluable_days": 181,
+    "dT_daily_median_F": -20.2,
+    "valve_open_min": 109885,
+    "flow_gpm_open": 0.622,
+    "flow_rel_diff_pct": 3.0,
+    "valve_open_rel_diff_pct": 0.02
+  },
+  "FCU_Fouling_Heating_Waterside_Minor": {
+    "channel": "hwc_waterside_dT",
+    "evaluable_days": 106,
+    "dT_daily_median_F": 51.01,
+    "valve_open_min": 41151,
+    "flow_gpm_open": 0.127,
+    "flow_rel_diff_pct": -0.8,
+    "valve_open_rel_diff_pct": 0.48
+  },
+  "FCU_Fouling_Heating_Waterside_Moderate": {
+    "channel": "hwc_waterside_dT",
+    "evaluable_days": 106,
+    "dT_daily_median_F": 50.83,
+    "valve_open_min": 39575,
+    "flow_gpm_open": 0.134,
+    "flow_rel_diff_pct": 4.7,
+    "valve_open_rel_diff_pct": -3.37
+  },
+  "FCU_Fouling_Heating_Waterside_Severe": {
+    "channel": "hwc_waterside_dT",
+    "evaluable_days": 106,
+    "dT_daily_median_F": 50.56,
+    "valve_open_min": 34236,
+    "flow_gpm_open": 0.173,
+    "flow_rel_diff_pct": 35.2,
+    "valve_open_rel_diff_pct": -16.41
+  },
+  "healthy_reference_by_coil": {
+    "chwc": {
+      "dT_daily_median_F": -20.59,
+      "valve_open_min": 109868,
+      "flow_gpm_open": 0.604
+    },
+    "hwc": {
+      "dT_daily_median_F": 50.88,
+      "valve_open_min": 40956,
+      "flow_gpm_open": 0.128
+    }
+  }
+}

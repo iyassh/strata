@@ -60,6 +60,7 @@ PIPELINE = {
     "benchmark_v6_fcu.json": "uv run python scripts/benchmark.py fcu",
     "union_fpr_fcu.json": "uv run python scripts/union_fpr.py fcu",
     "x19_onboarding.json": "uv run python scripts/x19_onboarding.py",
+    "x19_waterside_diagnostic.json": "uv run python scripts/x19_waterside_diagnostic.py",
     "matched_rules_ddahu.json": "uv run python scripts/matched_rules.py ddahu",
     "matched_rules_fcu.json": "uv run python scripts/matched_rules.py fcu",
     "discovery_predicts_transfer_q_four.json": "uv run python scripts/discovery_predicts_transfer_q.py --systems ddahu,fcu --out outputs/discovery_predicts_transfer_q_four.json",

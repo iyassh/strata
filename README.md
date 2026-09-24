@@ -34,7 +34,7 @@ you:
 > position 0.8 for 3.2 hours") · **a false-positive budget** ("this detector
 > is wrong on ~1% of fault-free days — measured, not hoped")
 
-Tested on four public benchmark systems (LBNL datasets), it detects
+Tested on five public benchmark systems (LBNL datasets), it detects
 **13 of 14, 23 of 30, 24 of 29 — 45 of 55 on a dual-duct AHU and 41 of 47 on a fan coil unit, both onboarded
 blind, by configuration alone, after the protocol was fixed** — typically
 within **one day**, while false-alarming on only **1.0–5.2%** of fault-free days.
@@ -142,8 +142,8 @@ FCU: 29 sensor mappings, 23 rules, two healthy-silence iterations, no source
 change; the hash gate found a byte-identical pair under two family labels
 (scored once, [ERRATA.md](ERRATA.md) E6); both new families — airflow
 restriction and reverse/unstable control — caught in full; misses are five of
-six waterside-fouling files, which leave the recorded points within 3% of
-healthy. Its first run fired two falsifiers (28/96 false alarms; six
+six waterside-fouling files (the cooling coil's leave the recorded points
+within about 3% of healthy) and one 20% damper leak. Its first run fired two falsifiers (28/96 false alarms; six
 "detections" by the model channel alone) that traced to a scoring-script
 assumption — any non-zero mode is scheduled operation — which this unit's
 idle setback weekends broke; the repair was pre-registered, the four earlier

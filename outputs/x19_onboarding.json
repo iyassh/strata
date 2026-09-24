@@ -5,7 +5,13 @@
     "state_rules": 7,
     "signature_rules": 16,
     "healthy_silence_iterations": 2,
-    "src_diff_since_prereg": "none"
+    "src_diff_since_prereg": "none",
+    "scripts_diff_since_prereg": [
+      "scripts/06_convert_fcu.py | 43 +++++++++++++++++++++++++++++++++++++++++++",
+      "scripts/benchmark.py      | 20 ++++++++++++++++----",
+      "scripts/gates_system.py   |  6 ++++--",
+      "scripts/union_fpr.py      |  6 +++++-"
+    ]
   },
   "gates": {
     "files": 49,

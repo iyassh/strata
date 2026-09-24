@@ -22,6 +22,8 @@ ev = rules["events"]
 n_state = sum(1 for r in ev.values() if r.get("alphabet", "state") == "state" and r["kind"] in ("occupancy", "mode", "window"))
 n_sig = len(ev) - n_state
 src_changed = subprocess.run(["git", "diff", "--stat", PREREG_COMMIT, "HEAD", "--", "src/"], capture_output=True, text=True).stdout.strip()
+# scripts are outside the config-only claim but are reported (hostile review, finding 11)
+scripts_changed = subprocess.run(["git", "diff", "--stat", PREREG_COMMIT, "HEAD", "--", "scripts/gates_system.py", "scripts/06_convert_fcu.py", "scripts/benchmark.py", "scripts/union_fpr.py"], capture_output=True, text=True).stdout.strip().splitlines()
 
 sc = [s for s in card["scenarios"] if s["is_fault"] and not s["excluded"]]
 excluded = [s["file"] for s in card["scenarios"] if s["is_fault"] and s["excluded"]]
@@ -72,7 +74,8 @@ if conf_only:
     fired.append("F-X19.d: a scenario is detected only by the conformance channels")
 out = {"pre_registration": "docs/plans/2026-09-24-x19-fcu-onboarding-prereg.md",
        "effort": {"sensor_mappings": len(sensors), "state_rules": n_state, "signature_rules": n_sig,
-                  "healthy_silence_iterations": 2, "src_diff_since_prereg": src_changed or "none"},
+                  "healthy_silence_iterations": 2, "src_diff_since_prereg": src_changed or "none",
+                  "scripts_diff_since_prereg": [l.strip() for l in scripts_changed if "|" in l]},
        "gates": {"files": gates["n_files"], "duplicates": gates["G1_md5"]["duplicate_groups"], "rotation": list(gates["G4_raw_rotation"]),
                  "ttl_columns_not_declared": gates["G5_ttl"]["columns_not_declared"], "excluded_scenarios": excluded},
        "scorecard": {"detected": len(det), "scored": len(sc), "by_family": by_family,

@@ -18,8 +18,10 @@ def test_counts_sum_to_detected_and_are_pinned():
     a = _a(); c = a["counts"]
     # X25 step 4 (2026-09-24): the per-day residual null removed four fan-powered detections
     # (three of them attributed 'none', one with indeterminate ground truth); was 61 / 36-10-0-14-1
-    assert sum(c.values()) == a["n_detected"] == 57
-    assert c == {"correct": 36, "none": 7, "wrong": 0, "no_device_stratum": 14, "indeterminate_gt": 0}
+    # X33b (2026-09-25): PFPU 22 -> 26 detections; the four gains are residual-only and name no device (none 7 -> 10), one has
+    # indeterminate zone ground truth; was 57 / 36-7-0-14-0 after X25
+    assert sum(c.values()) == a["n_detected"] == 61
+    assert c == {"correct": 36, "none": 10, "wrong": 0, "no_device_stratum": 14, "indeterminate_gt": 1}
 
 
 def test_no_wrong_attribution_and_sdahu_names_no_device():

@@ -28,7 +28,7 @@ SYSTEMS = ("sdahu", "pfpu", "sfpu", "ddahu", "fcu")   # extended to five (X25 re
 
 # quoted in PHASE6_RESULTS.md — a regression above these ceilings must be
 # a deliberate, documented decision, never an accident
-DEPLOYED_FPR_CEILING = {"sdahu": 1 / 96, "pfpu": 7 / 96, "sfpu": 6 / 96, "ddahu": 3 / 96, "fcu": 4 / 96}   # pinned counts after X25 (was 1/5/4 on the first three)
+DEPLOYED_FPR_CEILING = {"sdahu": 1 / 96, "pfpu": 8 / 96, "sfpu": 6 / 96, "ddahu": 3 / 96, "fcu": 4 / 96}   # pfpu 7 -> 8 after X33b (2026-09-25)   # pinned counts after X25 (was 1/5/4 on the first three)
 PREREG_BUDGET = 10 / 96   # X25 pre-registered ceiling, asserted independently of the pins
 HAS_DEVICE_STRATUM = {"sdahu": False, "pfpu": True, "sfpu": True, "ddahu": True, "fcu": False}
 

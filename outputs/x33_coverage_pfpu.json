@@ -1,0 +1,420 @@
+{
+  "prereg": "docs/plans/2026-09-25-x33-coverage-series-prereg.md",
+  "system": "pfpu",
+  "before_commit": "6b7512a",
+  "after_commit": "working tree",
+  "columns_mapped": [
+    56,
+    109
+  ],
+  "columns_excluded": [],
+  "new_rules": [
+    "chwc_waterside_dT",
+    "da_minus_pm_E",
+    "da_minus_pm_I",
+    "da_minus_pm_S",
+    "da_minus_pm_W",
+    "dat_minus_sa_E",
+    "dat_minus_sa_I",
+    "dat_minus_sa_S",
+    "dat_minus_sa_W",
+    "hwc_waterside_dT",
+    "ra_minus_zone_E",
+    "ra_minus_zone_I",
+    "ra_minus_zone_S",
+    "ra_minus_zone_W",
+    "rf_specific_power",
+    "sf_flow_per_speed",
+    "sf_specific_power",
+    "static_per_speed2",
+    "static_setpoint_deviation"
+  ],
+  "scored": 30,
+  "detected_before": 22,
+  "detected_after": 26,
+  "gained": [
+    "PFPU_ReheatCoilFouling_Airside_Moderate",
+    "PFPU_ReheatCoilFouling_Airside_Severe",
+    "PFPU_SensorBias_RMTEMP_+2C",
+    "PFPU_SensorBias_RMTEMP_+4C"
+  ],
+  "lost": [],
+  "channel_changes": {
+    "PFPU_ReheatCoilFouling_Airside_Moderate": {
+      "before": null,
+      "after": "resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        2,
+        173
+      ]
+    },
+    "PFPU_ReheatCoilFouling_Airside_Severe": {
+      "before": null,
+      "after": "resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        9,
+        233
+      ]
+    },
+    "PFPU_ReheatVLVStuck_0%": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        12,
+        110
+      ]
+    },
+    "PFPU_SensorBias_RMTEMP_+2C": {
+      "before": null,
+      "after": "resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        7,
+        215
+      ]
+    },
+    "PFPU_SensorBias_RMTEMP_+4C": {
+      "before": null,
+      "after": "rules+resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        13,
+        261
+      ]
+    },
+    "PFPU_SensorBias_RMTEMP_-2C": {
+      "before": "osc",
+      "after": "resid+osc",
+      "ttd_before": 21,
+      "ttd_after": 1,
+      "residual_days": [
+        3,
+        218
+      ]
+    },
+    "PFPU_SensorBias_RMTEMP_-4C": {
+      "before": "freq+osc",
+      "after": "resid+freq+osc",
+      "ttd_before": 4,
+      "ttd_after": 1,
+      "residual_days": [
+        10,
+        261
+      ]
+    },
+    "PFPU_SensorBias_VAVAirflow_+200CFM": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        9,
+        197
+      ]
+    },
+    "PFPU_SensorBias_VAVAirflow_+400CFM": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        9,
+        183
+      ]
+    },
+    "PFPU_SensorBias_VAVAirflow_-200CFM": {
+      "before": "rules+osc",
+      "after": "rules+resid+osc",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        4,
+        149
+      ]
+    },
+    "PFPU_SensorBias_VAVAirflow_-400CFM": {
+      "before": "rules+freq+osc",
+      "after": "rules+resid+freq+osc",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        4,
+        261
+      ]
+    },
+    "PFPU_VAVDMPRStuck_0%": {
+      "before": "rules+freq+rate+osc",
+      "after": "rules+resid+freq+rate+osc",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        5,
+        261
+      ]
+    },
+    "PFPU_VAVDMPRStuck_20%": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        4,
+        248
+      ]
+    },
+    "PFPU_VAVDMPRStuck_50%": {
+      "before": "rules+freq+osc",
+      "after": "rules+resid+freq+osc",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        5,
+        162
+      ]
+    }
+  },
+  "ttd_later": [],
+  "deployed_fp": [
+    7,
+    8
+  ],
+  "per_channel_fp": {
+    "rules": [
+      0,
+      0
+    ],
+    "resid": [
+      2,
+      3
+    ],
+    "model": [
+      4,
+      4
+    ],
+    "device": [
+      0,
+      0
+    ],
+    "absence": [
+      0,
+      0
+    ],
+    "freq": [
+      1,
+      1
+    ],
+    "rate": [
+      7,
+      7
+    ],
+    "osc": [
+      2,
+      2
+    ]
+  },
+  "model_rows_identical": true,
+  "new_rule_holdout_fp": {
+    "chwc_waterside_dT": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 35,
+      "band": [
+        9.130000000000003,
+        16.0
+      ]
+    },
+    "da_minus_pm_E": {
+      "holdout_fp": 1,
+      "holdout_evaluable": 52,
+      "band": [
+        -41.980000000000004,
+        -23.28
+      ]
+    },
+    "da_minus_pm_I": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        -24.55000000000001,
+        -19.55000000000001
+      ]
+    },
+    "da_minus_pm_S": {
+      "holdout_fp": 1,
+      "holdout_evaluable": 63,
+      "band": [
+        -42.325,
+        -23.28
+      ]
+    },
+    "da_minus_pm_W": {
+      "holdout_fp": 1,
+      "holdout_evaluable": 60,
+      "band": [
+        -53.735000000000014,
+        -23.28
+      ]
+    },
+    "dat_minus_sa_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 52,
+      "band": [
+        0.0,
+        7.710000000000001
+      ]
+    },
+    "dat_minus_sa_I": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        -0.25,
+        0.25
+      ]
+    },
+    "dat_minus_sa_S": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 63,
+      "band": [
+        0.0,
+        7.770000000000003
+      ]
+    },
+    "dat_minus_sa_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 60,
+      "band": [
+        0.0,
+        7.635000000000002
+      ]
+    },
+    "hwc_waterside_dT": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 0,
+      "band": [
+        NaN,
+        NaN
+      ]
+    },
+    "ra_minus_zone_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        1.0900000000000034,
+        3.5149999999999935
+      ]
+    },
+    "ra_minus_zone_I": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        -1.5549999999999997,
+        1.7450000000000045
+      ]
+    },
+    "ra_minus_zone_S": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        0.8700000000000045,
+        2.5400000000000063
+      ]
+    },
+    "ra_minus_zone_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        1.0900000000000034,
+        2.690000000000012
+      ]
+    },
+    "rf_specific_power": {
+      "holdout_fp": 1,
+      "holdout_evaluable": 69,
+      "band": [
+        0.3727212424523214,
+        0.4868305239098005
+      ]
+    },
+    "sf_flow_per_speed": {
+      "holdout_fp": 1,
+      "holdout_evaluable": 69,
+      "band": [
+        1218.0151515151515,
+        1785.2045454545455
+      ]
+    },
+    "sf_specific_power": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        0.5826018533228396,
+        0.6930998853508141
+      ]
+    },
+    "static_per_speed2": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        3.4079084287200834,
+        3.621301775147929
+      ]
+    }
+  },
+  "new_rule_credited_scenarios": {},
+  "residual_days_rose_and_credited": [
+    "PFPU_ReheatCoilFouling_Airside_Moderate",
+    "PFPU_ReheatCoilFouling_Airside_Severe",
+    "PFPU_ReheatVLVStuck_0%",
+    "PFPU_ReheatVLVStuck_50%",
+    "PFPU_SensorBias_RMTEMP_+2C",
+    "PFPU_SensorBias_RMTEMP_+4C",
+    "PFPU_SensorBias_RMTEMP_-2C",
+    "PFPU_SensorBias_RMTEMP_-4C",
+    "PFPU_SensorBias_VAVAirflow_+200CFM",
+    "PFPU_SensorBias_VAVAirflow_+400CFM",
+    "PFPU_SensorBias_VAVAirflow_-200CFM",
+    "PFPU_SensorBias_VAVAirflow_-400CFM",
+    "PFPU_VAVDMPRStuck_0%",
+    "PFPU_VAVDMPRStuck_100%",
+    "PFPU_VAVDMPRStuck_20%",
+    "PFPU_VAVDMPRStuck_50%",
+    "PFPU_VAVDMPRStuck_80%",
+    "PFPU_VAVFanRestrictFlow"
+  ],
+  "adoption": {
+    "chwc_waterside_dT": "keep",
+    "da_minus_pm_E": "keep",
+    "da_minus_pm_I": "keep",
+    "da_minus_pm_S": "keep",
+    "da_minus_pm_W": "keep",
+    "dat_minus_sa_E": "keep",
+    "dat_minus_sa_I": "keep",
+    "dat_minus_sa_S": "keep",
+    "dat_minus_sa_W": "keep",
+    "hwc_waterside_dT": "keep",
+    "ra_minus_zone_E": "keep",
+    "ra_minus_zone_I": "keep",
+    "ra_minus_zone_S": "keep",
+    "ra_minus_zone_W": "keep",
+    "rf_specific_power": "keep",
+    "sf_flow_per_speed": "keep",
+    "sf_specific_power": "keep",
+    "static_per_speed2": "keep"
+  },
+  "predictions": {
+    "P1_no_loss": true,
+    "P2_budget": true,
+    "P2_new_rule_fp_le_3": true,
+    "P3_some_new_channel_credited": true,
+    "P4_ttd_not_later": true,
+    "P5_model_rows_identical": true
+  },
+  "falsifiers_fired": []
+}

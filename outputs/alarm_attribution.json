@@ -1,12 +1,12 @@
 {
   "source": "benchmark_v6_*.json (committed scorecards; no re-run)",
-  "n_detected": 57,
+  "n_detected": 61,
   "counts": {
     "correct": 36,
-    "none": 7,
+    "none": 10,
     "wrong": 0,
     "no_device_stratum": 14,
-    "indeterminate_gt": 0
+    "indeterminate_gt": 1
   },
   "note": "Zone ground truth has no variance on the FPU sets (all zone S), so 'correct' is specificity; 'wrong' and 'none' are the informative counts. SDAHU has no device stratum and names no device by construction.",
   "rows": [
@@ -147,6 +147,24 @@
     },
     {
       "system": "pfpu",
+      "scenario": "PFPU_ReheatCoilFouling_Airside_Moderate",
+      "family": "coil_fouling",
+      "seeded_zone": "INDETERMINATE",
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "indeterminate_gt"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_ReheatCoilFouling_Airside_Severe",
+      "family": "coil_fouling",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "none"
+    },
+    {
+      "system": "pfpu",
       "scenario": "PFPU_ReheatVLVLeak_20%MaxFlow",
       "family": "reheat_leak",
       "seeded_zone": "S",
@@ -178,7 +196,7 @@
       "family": "reheat_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -219,11 +237,29 @@
     },
     {
       "system": "pfpu",
+      "scenario": "PFPU_SensorBias_RMTEMP_+2C",
+      "family": "rmtemp_bias",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "none"
+    },
+    {
+      "system": "pfpu",
+      "scenario": "PFPU_SensorBias_RMTEMP_+4C",
+      "family": "rmtemp_bias",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "rules+resid",
+      "attribution": "none"
+    },
+    {
+      "system": "pfpu",
       "scenario": "PFPU_SensorBias_RMTEMP_-2C",
       "family": "rmtemp_bias",
       "seeded_zone": "S",
       "alarm_device": null,
-      "channels": "osc",
+      "channels": "resid+osc",
       "attribution": "none"
     },
     {
@@ -232,7 +268,7 @@
       "family": "rmtemp_bias",
       "seeded_zone": "S",
       "alarm_device": null,
-      "channels": "freq+osc",
+      "channels": "resid+freq+osc",
       "attribution": "none"
     },
     {
@@ -241,7 +277,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -250,7 +286,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -259,7 +295,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+osc",
+      "channels": "rules+resid+osc",
       "attribution": "correct"
     },
     {
@@ -268,7 +304,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+freq+osc",
+      "channels": "rules+resid+freq+osc",
       "attribution": "correct"
     },
     {
@@ -277,7 +313,7 @@
       "family": "damper_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+freq+rate+osc",
+      "channels": "rules+resid+freq+rate+osc",
       "attribution": "correct"
     },
     {
@@ -295,7 +331,7 @@
       "family": "damper_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -304,7 +340,7 @@
       "family": "damper_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+freq+osc",
+      "channels": "rules+resid+freq+osc",
       "attribution": "correct"
     },
     {

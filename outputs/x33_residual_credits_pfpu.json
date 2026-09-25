@@ -1,0 +1,417 @@
+{
+  "system": "pfpu",
+  "bands": {
+    "supply_air_residual": [
+      0.6000000000000014,
+      2.1700000000000017
+    ],
+    "rh_waterside_dT_I": [
+      24.825000000000003,
+      25.340000000000003
+    ],
+    "rh_waterside_dT_W": [
+      13.220000000000006,
+      31.129999999999995
+    ],
+    "rh_waterside_dT_S": [
+      3.75,
+      30.880000000000003
+    ],
+    "rh_waterside_dT_E": [
+      5.085000000000001,
+      32.75
+    ],
+    "sf_specific_power": [
+      0.5826018533228396,
+      0.6930998853508141
+    ],
+    "rf_specific_power": [
+      0.3727212424523214,
+      0.4868305239098005
+    ],
+    "sf_flow_per_speed": [
+      1218.0151515151515,
+      1785.2045454545455
+    ],
+    "static_per_speed2": [
+      3.4079084287200834,
+      3.621301775147929
+    ],
+    "chwc_waterside_dT": [
+      9.130000000000003,
+      16.0
+    ],
+    "hwc_waterside_dT": [
+      NaN,
+      NaN
+    ],
+    "ra_minus_zone_I": [
+      -1.5549999999999997,
+      1.7450000000000045
+    ],
+    "ra_minus_zone_W": [
+      1.0900000000000034,
+      2.690000000000012
+    ],
+    "ra_minus_zone_S": [
+      0.8700000000000045,
+      2.5400000000000063
+    ],
+    "ra_minus_zone_E": [
+      1.0900000000000034,
+      3.5149999999999935
+    ],
+    "dat_minus_sa_I": [
+      -0.25,
+      0.25
+    ],
+    "dat_minus_sa_W": [
+      0.0,
+      7.635000000000002
+    ],
+    "dat_minus_sa_S": [
+      0.0,
+      7.770000000000003
+    ],
+    "dat_minus_sa_E": [
+      0.0,
+      7.710000000000001
+    ],
+    "da_minus_pm_I": [
+      -24.55000000000001,
+      -19.55000000000001
+    ],
+    "da_minus_pm_W": [
+      -53.735000000000014,
+      -23.28
+    ],
+    "da_minus_pm_S": [
+      -42.325,
+      -23.28
+    ],
+    "da_minus_pm_E": [
+      -41.980000000000004,
+      -23.28
+    ]
+  },
+  "scenarios": {
+    "PFPU_ReheatCoilFouling_Airside_Minor": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "rh_waterside_dT_I": 0,
+        "rh_waterside_dT_W": 1,
+        "rh_waterside_dT_S": 0,
+        "rh_waterside_dT_E": 1,
+        "sf_specific_power": 0,
+        "rf_specific_power": 1,
+        "sf_flow_per_speed": 1,
+        "static_per_speed2": 0,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 0,
+        "ra_minus_zone_W": 0,
+        "ra_minus_zone_S": 0,
+        "ra_minus_zone_E": 0,
+        "dat_minus_sa_I": 0,
+        "dat_minus_sa_W": 0,
+        "dat_minus_sa_S": 0,
+        "dat_minus_sa_E": 0,
+        "da_minus_pm_I": 0,
+        "da_minus_pm_W": 1,
+        "da_minus_pm_S": 1,
+        "da_minus_pm_E": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 153,
+        "rh_waterside_dT_I": 4,
+        "rh_waterside_dT_W": 99,
+        "rh_waterside_dT_S": 96,
+        "rh_waterside_dT_E": 102,
+        "sf_specific_power": 261,
+        "rf_specific_power": 261,
+        "sf_flow_per_speed": 261,
+        "static_per_speed2": 261,
+        "chwc_waterside_dT": 141,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 261,
+        "ra_minus_zone_W": 261,
+        "ra_minus_zone_S": 261,
+        "ra_minus_zone_E": 261,
+        "dat_minus_sa_I": 261,
+        "dat_minus_sa_W": 228,
+        "dat_minus_sa_S": 232,
+        "dat_minus_sa_E": 203,
+        "da_minus_pm_I": 261,
+        "da_minus_pm_W": 228,
+        "da_minus_pm_S": 232,
+        "da_minus_pm_E": 203
+      }
+    },
+    "PFPU_ReheatCoilFouling_Airside_Moderate": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "rh_waterside_dT_I": 0,
+        "rh_waterside_dT_W": 1,
+        "rh_waterside_dT_S": 0,
+        "rh_waterside_dT_E": 1,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 1,
+        "static_per_speed2": 0,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 0,
+        "ra_minus_zone_W": 0,
+        "ra_minus_zone_S": 0,
+        "ra_minus_zone_E": 0,
+        "dat_minus_sa_I": 0,
+        "dat_minus_sa_W": 1,
+        "dat_minus_sa_S": 0,
+        "dat_minus_sa_E": 0,
+        "da_minus_pm_I": 0,
+        "da_minus_pm_W": 1,
+        "da_minus_pm_S": 172,
+        "da_minus_pm_E": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 153,
+        "rh_waterside_dT_I": 3,
+        "rh_waterside_dT_W": 99,
+        "rh_waterside_dT_S": 97,
+        "rh_waterside_dT_E": 102,
+        "sf_specific_power": 261,
+        "rf_specific_power": 261,
+        "sf_flow_per_speed": 261,
+        "static_per_speed2": 261,
+        "chwc_waterside_dT": 141,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 261,
+        "ra_minus_zone_W": 261,
+        "ra_minus_zone_S": 261,
+        "ra_minus_zone_E": 261,
+        "dat_minus_sa_I": 261,
+        "dat_minus_sa_W": 228,
+        "dat_minus_sa_S": 232,
+        "dat_minus_sa_E": 202,
+        "da_minus_pm_I": 261,
+        "da_minus_pm_W": 228,
+        "da_minus_pm_S": 232,
+        "da_minus_pm_E": 202
+      }
+    },
+    "PFPU_ReheatCoilFouling_Airside_Severe": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "rh_waterside_dT_I": 0,
+        "rh_waterside_dT_W": 1,
+        "rh_waterside_dT_S": 8,
+        "rh_waterside_dT_E": 1,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 1,
+        "static_per_speed2": 0,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 0,
+        "ra_minus_zone_W": 0,
+        "ra_minus_zone_S": 0,
+        "ra_minus_zone_E": 0,
+        "dat_minus_sa_I": 0,
+        "dat_minus_sa_W": 0,
+        "dat_minus_sa_S": 0,
+        "dat_minus_sa_E": 0,
+        "da_minus_pm_I": 0,
+        "da_minus_pm_W": 1,
+        "da_minus_pm_S": 227,
+        "da_minus_pm_E": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 155,
+        "rh_waterside_dT_I": 4,
+        "rh_waterside_dT_W": 99,
+        "rh_waterside_dT_S": 103,
+        "rh_waterside_dT_E": 102,
+        "sf_specific_power": 261,
+        "rf_specific_power": 261,
+        "sf_flow_per_speed": 261,
+        "static_per_speed2": 261,
+        "chwc_waterside_dT": 141,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 261,
+        "ra_minus_zone_W": 261,
+        "ra_minus_zone_S": 261,
+        "ra_minus_zone_E": 261,
+        "dat_minus_sa_I": 261,
+        "dat_minus_sa_W": 228,
+        "dat_minus_sa_S": 228,
+        "dat_minus_sa_E": 202,
+        "da_minus_pm_I": 261,
+        "da_minus_pm_W": 228,
+        "da_minus_pm_S": 228,
+        "da_minus_pm_E": 202
+      }
+    },
+    "PFPU_ReheatCoilFouling_Waterside_Severe": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "rh_waterside_dT_I": 0,
+        "rh_waterside_dT_W": 1,
+        "rh_waterside_dT_S": 0,
+        "rh_waterside_dT_E": 1,
+        "sf_specific_power": 0,
+        "rf_specific_power": 1,
+        "sf_flow_per_speed": 1,
+        "static_per_speed2": 0,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 0,
+        "ra_minus_zone_W": 0,
+        "ra_minus_zone_S": 0,
+        "ra_minus_zone_E": 0,
+        "dat_minus_sa_I": 0,
+        "dat_minus_sa_W": 0,
+        "dat_minus_sa_S": 0,
+        "dat_minus_sa_E": 0,
+        "da_minus_pm_I": 0,
+        "da_minus_pm_W": 1,
+        "da_minus_pm_S": 1,
+        "da_minus_pm_E": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 153,
+        "rh_waterside_dT_I": 4,
+        "rh_waterside_dT_W": 99,
+        "rh_waterside_dT_S": 96,
+        "rh_waterside_dT_E": 102,
+        "sf_specific_power": 261,
+        "rf_specific_power": 261,
+        "sf_flow_per_speed": 261,
+        "static_per_speed2": 261,
+        "chwc_waterside_dT": 141,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 261,
+        "ra_minus_zone_W": 261,
+        "ra_minus_zone_S": 261,
+        "ra_minus_zone_E": 261,
+        "dat_minus_sa_I": 261,
+        "dat_minus_sa_W": 228,
+        "dat_minus_sa_S": 233,
+        "dat_minus_sa_E": 201,
+        "da_minus_pm_I": 261,
+        "da_minus_pm_W": 228,
+        "da_minus_pm_S": 233,
+        "da_minus_pm_E": 201
+      }
+    },
+    "PFPU_SensorBias_RMTEMP_+2C": {
+      "family": "rmtemp_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "rh_waterside_dT_I": 0,
+        "rh_waterside_dT_W": 2,
+        "rh_waterside_dT_S": 4,
+        "rh_waterside_dT_E": 1,
+        "sf_specific_power": 19,
+        "rf_specific_power": 27,
+        "sf_flow_per_speed": 19,
+        "static_per_speed2": 16,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 24,
+        "ra_minus_zone_W": 100,
+        "ra_minus_zone_S": 187,
+        "ra_minus_zone_E": 88,
+        "dat_minus_sa_I": 0,
+        "dat_minus_sa_W": 0,
+        "dat_minus_sa_S": 0,
+        "dat_minus_sa_E": 0,
+        "da_minus_pm_I": 1,
+        "da_minus_pm_W": 1,
+        "da_minus_pm_S": 97,
+        "da_minus_pm_E": 2
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 155,
+        "rh_waterside_dT_I": 4,
+        "rh_waterside_dT_W": 99,
+        "rh_waterside_dT_S": 39,
+        "rh_waterside_dT_E": 102,
+        "sf_specific_power": 261,
+        "rf_specific_power": 261,
+        "sf_flow_per_speed": 261,
+        "static_per_speed2": 261,
+        "chwc_waterside_dT": 141,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 261,
+        "ra_minus_zone_W": 261,
+        "ra_minus_zone_S": 261,
+        "ra_minus_zone_E": 261,
+        "dat_minus_sa_I": 261,
+        "dat_minus_sa_W": 228,
+        "dat_minus_sa_S": 256,
+        "dat_minus_sa_E": 204,
+        "da_minus_pm_I": 261,
+        "da_minus_pm_W": 228,
+        "da_minus_pm_S": 256,
+        "da_minus_pm_E": 204
+      }
+    },
+    "PFPU_SensorBias_RMTEMP_+4C": {
+      "family": "rmtemp_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "rh_waterside_dT_I": 0,
+        "rh_waterside_dT_W": 2,
+        "rh_waterside_dT_S": 10,
+        "rh_waterside_dT_E": 1,
+        "sf_specific_power": 52,
+        "rf_specific_power": 92,
+        "sf_flow_per_speed": 112,
+        "static_per_speed2": 67,
+        "chwc_waterside_dT": 12,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 233,
+        "ra_minus_zone_W": 174,
+        "ra_minus_zone_S": 261,
+        "ra_minus_zone_E": 143,
+        "dat_minus_sa_I": 0,
+        "dat_minus_sa_W": 0,
+        "dat_minus_sa_S": 0,
+        "dat_minus_sa_E": 0,
+        "da_minus_pm_I": 1,
+        "da_minus_pm_W": 2,
+        "da_minus_pm_S": 172,
+        "da_minus_pm_E": 3
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 154,
+        "rh_waterside_dT_I": 6,
+        "rh_waterside_dT_W": 99,
+        "rh_waterside_dT_S": 12,
+        "rh_waterside_dT_E": 102,
+        "sf_specific_power": 261,
+        "rf_specific_power": 261,
+        "sf_flow_per_speed": 261,
+        "static_per_speed2": 261,
+        "chwc_waterside_dT": 144,
+        "hwc_waterside_dT": 0,
+        "ra_minus_zone_I": 261,
+        "ra_minus_zone_W": 261,
+        "ra_minus_zone_S": 261,
+        "ra_minus_zone_E": 261,
+        "dat_minus_sa_I": 261,
+        "dat_minus_sa_W": 228,
+        "dat_minus_sa_S": 261,
+        "dat_minus_sa_E": 201,
+        "da_minus_pm_I": 261,
+        "da_minus_pm_W": 228,
+        "da_minus_pm_S": 261,
+        "da_minus_pm_E": 201
+      }
+    }
+  }
+}

@@ -18,3 +18,20 @@ def test_x33a_sdahu():
     assert {r: v["holdout_fp"] for r, v in a["new_rule_holdout_fp"].items()} == {"rf_specific_power": 0, "sf_flow_per_speed": 0, "sf_specific_power": 0}
     assert a["residual_days_rose_and_credited"] == ["coi_stuck_010_annual", "coi_stuck_025_annual"]
     assert all(a["predictions"].values()) and a["falsifiers_fired"] == []
+
+
+def test_x33b_pfpu():
+    art = OUT / "x33_coverage_pfpu.json"
+    if not art.exists():
+        pytest.skip("artifact absent")
+    a = json.loads(art.read_text())
+    assert a["columns_mapped"] == [56, 109] and a["columns_excluded"] == []
+    assert (a["detected_before"], a["detected_after"], a["scored"]) == (22, 26, 30) and a["lost"] == []
+    assert a["gained"] == ["PFPU_ReheatCoilFouling_Airside_Moderate", "PFPU_ReheatCoilFouling_Airside_Severe", "PFPU_SensorBias_RMTEMP_+2C", "PFPU_SensorBias_RMTEMP_+4C"]
+    assert a["deployed_fp"] == [7, 8] and a["model_rows_identical"] and a["ttd_later"] == []
+    assert all(v["holdout_fp"] <= 1 for v in a["new_rule_holdout_fp"].values()) and len(a["new_rule_holdout_fp"]) == 18
+    assert a["predictions"]["P1_no_loss"] and a["predictions"]["P2_budget"] and a["falsifiers_fired"] == []
+    c = json.loads((OUT / "x33_residual_credits_pfpu.json").read_text())["scenarios"]
+    assert c["PFPU_ReheatCoilFouling_Airside_Severe"]["per_rule_flagged_days"]["da_minus_pm_S"] == 227
+    assert c["PFPU_SensorBias_RMTEMP_+4C"]["per_rule_flagged_days"]["ra_minus_zone_S"] == 261
+

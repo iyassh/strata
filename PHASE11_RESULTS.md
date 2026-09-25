@@ -201,7 +201,17 @@ budgets are unchanged by steps 3–4. The step-3 → step-4 diff is
 
 What the final gate is: every channel's null is a per-day rate on its own
 evaluable holdout days, floored at three days, with conformance thresholds
-calibrated on a separate slice. The papers' counts are now 13/14, 22/30,
+calibrated on a separate slice.
+
+The regression gate, run over every artefact after these changes, reported
+35 identical and 20 changed. Eleven of the changes are the live derived
+artefacts (matched rules, the transfer-test quantities, the field RTU),
+regenerated and re-committed; nine are closed experiments (X5, X12, X13,
+X14, X15, X18, X21, X22) whose artefacts record what the detector of their
+day found — the calibration slice changed the discovered nets and training
+days, so regenerating them now would be a different experiment. They are
+frozen at their closing commits in `scripts/regress.py` and the gate now
+checks that they have not moved. The papers' counts are now 13/14, 22/30,
 21/29, 45/55, 40/47 at 1.0–7.3 % false-alarm days, all out-of-sample.
 
 | step | P0 | P1 | P2 | P3 | P4 | falsifiers |

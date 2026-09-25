@@ -14,6 +14,21 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Closed experiments (X25's calibration slice and per-day null changed the deployed detector on
+# 2026-09-24; these artefacts are records of experiments run under the detector of their day
+# and are compared against their closing commit, not regenerated — design D5: a documented decision)
+FROZEN = {
+    "x5_severity.json": "ea6bb81",
+    "x12_log_diagnosis.json": "cabd2c4",
+    "x12_time_perspective.json": "800a531",
+    "x13_coil_effectiveness.json": "6f295f6",
+    "x14_enriched_alphabet.json": "38afc62",
+    "x15_enriched_frequency.json": "36edae1",
+    "x18_ddahu_enriched_frequency.json": "50eb13f",
+    "x21_foreign_net_support.json": "b2575b9",
+    "x22_positive_control.json": "b18aa84",
+}
+
 # artifact (relative to outputs/) -> command that regenerates it
 PIPELINE = {
     "benchmark_v6_sdahu.json": "uv run python scripts/benchmark.py sdahu",
@@ -118,6 +133,13 @@ def main() -> int:
         committed = outputs / art
         if not committed.exists():
             print(f"{art:34s} SKIP (no committed artifact)", flush=True)
+            continue
+        if art in FROZEN:
+            head_text = subprocess.run(["git", "show", f"HEAD:outputs/{art}"], cwd=ROOT, capture_output=True, text=True).stdout
+            same = head_text == committed.read_text()
+            print(f"{art:34s} FROZEN at {FROZEN[art]} ({'unchanged since' if same else 'DIFFERS FROM HEAD'})", flush=True)
+            if not same:
+                failures.append(art)
             continue
         # Hold the committed copy IN MEMORY. A previous version stashed it in
         # a scratch directory under TMPDIR; the OS emptied that directory

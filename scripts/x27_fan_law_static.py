@@ -11,12 +11,13 @@ REPO = Path(__file__).resolve().parents[1]
 BEFORE_COMMIT = "c7f35fc"
 
 
-def at_commit(path):
-    return json.loads(subprocess.run(["git", "show", f"{BEFORE_COMMIT}:{path}"], cwd=REPO, capture_output=True, text=True, check=True).stdout)
+def at_commit(path, commit=None):
+    return json.loads(subprocess.run(["git", "show", f"{commit or BEFORE_COMMIT}:{path}"], cwd=REPO, capture_output=True, text=True, check=True).stdout)
 
 
-b, a = at_commit("outputs/benchmark_v6_ddahu.json"), json.loads((REPO / "outputs/benchmark_v6_ddahu.json").read_text())
-ub, ua = at_commit("outputs/union_fpr_ddahu.json"), json.loads((REPO / "outputs/union_fpr_ddahu.json").read_text())
+AFTER_COMMIT = "4d0250a"   # X27 closing commit (step 4 later changed the live scorecard)
+b, a = at_commit("outputs/benchmark_v6_ddahu.json"), at_commit("outputs/benchmark_v6_ddahu.json", AFTER_COMMIT)
+ub, ua = at_commit("outputs/union_fpr_ddahu.json"), at_commit("outputs/union_fpr_ddahu.json", AFTER_COMMIT)
 B = {x["file"]: x for x in b["scenarios"] if x["is_fault"] and not x["excluded"]}
 A = {x["file"]: x for x in a["scenarios"] if x["is_fault"] and not x["excluded"]}
 static = [f for f in A if "SensorBias_CSP" in f or "SensorBias_HSP" in f]

@@ -28,7 +28,8 @@ cond_det = sum(1 for _, m in cond if m); evap_det = sum(1 for _, m in evap if m)
 cond_channels = {ch for _, m in cond if m for ch in str(m).split("+")}
 other = [r for f, rows in by.items() if f not in ("condenser_fouling", "evaporator_fouling") for r in rows]
 conf_only = [f for f, m in [(s["file"], s["meaningful_channels"]) for s in sc] if m and set(str(m).split("+")) <= {"model", "device"}]
-src_changed = subprocess.run(["git", "diff", "--stat", "df064db", "HEAD", "--", "src/"], capture_output=True, text=True).stdout.strip()
+CLOSE_COMMIT = "0274c72"   # X29 closing commit: the config-only check is prereg -> close, not prereg -> HEAD
+src_changed = subprocess.run(["git", "diff", "--stat", "df064db", CLOSE_COMMIT, "--", "src/"], capture_output=True, text=True).stdout.strip()
 fp, hd = u["union_minus_rate"]["holdout_fp_days"], u["holdout_days"]
 pred = {"P1_gates_clean": g["G1_md5"]["duplicate_groups"] == [] and all(v["set_identical_to_healthy"] for v in g["G3_calendar"].values()) and g["G5_ttl"]["columns_not_declared"] == [],
         "P1_silence_iterations": 1,

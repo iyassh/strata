@@ -31,6 +31,11 @@ FROZEN = {
     # X7 (15-minute downsampling, run under the configurations of 2026-09-11) regenerates differently;
     # it is a record of that experiment and is compared against its last pre-X33 commit (design D5).
     "x7_downsample.json": "8f06f19",
+    # X25 and X28 ledgers diff their closing scorecards against the LIVE scorecards; after the X33 coverage series the
+    # live scorecards moved (16 recoveries), so the "after" side of both ledgers no longer reproduces. Both experiments
+    # are closed records and are compared against their closing commits (design D5; freeze gate of 2026-09-25 08:05).
+    "x25_statistical_repair.json": "295dfe3",
+    "x28_coil_ua.json": "2cbf814",
 }
 
 # artifact (relative to outputs/) -> command that regenerates it

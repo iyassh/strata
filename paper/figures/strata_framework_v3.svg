@@ -56,7 +56,7 @@
       <text x="618" y="187" text-anchor="middle" font-size="11.5" fill="#23282E">Unit stratum — daily operating cycle</text>
       <rect x="502" y="204" width="232" height="30" rx="2" fill="#FFFFFF" stroke="#2F5D8A"/>
       <text x="618" y="223" text-anchor="middle" font-size="11.5" fill="#23282E">System stratum — cross-system grammar &#8225;</text>
-      <text x="618" y="252" text-anchor="middle" font-size="11" font-style="italic" fill="#2F5D8A">descriptive only: tested, they neither detect nor predict</text>
+      <text x="618" y="252" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2F5D8A">descriptive: they neither detect nor predict</text>
     </g>
 
     <!-- A4 calibrate -->
@@ -100,7 +100,7 @@
       <rect x="286" y="482" width="130" height="24" rx="2" fill="#FAF1E6" stroke="#B06A2A"/>
       <text x="351" y="498" text-anchor="middle" font-size="11" fill="#23282E">residual bands</text>
 
-      <text x="450" y="444" font-size="11" font-weight="700" letter-spacing="0.5" fill="#2F5D8A">CONFORMANCE (never alone)</text>
+      <text x="450" y="444" font-size="10.5" font-weight="700" letter-spacing="0.3" fill="#2F5D8A">CONFORMANCE (audited)</text>
       <rect x="444" y="452" width="130" height="24" rx="2" fill="#EAF0F7" stroke="#2F5D8A"/>
       <text x="509" y="468" text-anchor="middle" font-size="11" fill="#23282E">unit conformance</text>
       <rect x="444" y="482" width="130" height="24" rx="2" fill="#EAF0F7" stroke="#2F5D8A"/>
@@ -116,7 +116,7 @@
       <rect x="602" y="512" width="130" height="24" rx="2" fill="#F2F3F1" stroke="#40474F" stroke-dasharray="4 3"/>
       <text x="667" y="528" text-anchor="middle" font-size="11" fill="#6A7069">seasonal rate †</text>
 
-      <text x="292" y="554" font-size="10.5" font-style="italic" fill="#6A7069">† corroborates a raised alarm; never raises one alone</text>
+      <text x="292" y="554" font-size="10.5" font-style="italic" fill="#6A7069">† corroborates a raised alarm; never raises one alone · conformance channels are never credited alone</text>
     </g>
 
     <!-- B3 gate -->

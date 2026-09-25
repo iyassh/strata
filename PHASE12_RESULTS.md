@@ -378,3 +378,59 @@ thresholds*, not *a blind onboarding would have reached them*.
 - The seventeen remaining misses are coil fouling whose recorded values sit
   inside every healthy band; one of them is visible but uncertifiable from one
   healthy year.
+
+## X34 — component attribution: where in the HVAC system does the alarm point?
+
+*Pre-registered (`docs/plans/2026-09-25-x34-component-attribution-prereg.md`,
+0ea96c4) before any score was computed. Artefact
+`outputs/component_attribution.json`; guard `tests/test_component_attribution.py`.*
+
+Zone-level attribution (which terminal unit) was already measured: 37 of 50
+correct, 0 wrong. This test asks the next question: does the rule that carries
+each detection point at the *component* the fault was seeded in? For each of the
+158 detected scenarios the carrying rule (most flagged days) is mapped to a
+(subsystem, component) by a table fixed before scoring, and compared with the
+seeded component.
+
+| system | detected | exact component | same subsystem | wrong subsystem | unnamed |
+|---|---|---|---|---|---|
+| SDAHU | 14 | 13 | 0 | 1 | 0 |
+| PFPU | 26 | 15 | 6 | 0 | 5 |
+| SFPU | 25 | 14 | 9 | 0 | 2 |
+| DDAHU | 50 | 38 | 7 | 5 | 0 |
+| FCU | 43 | 29 | 0 | 14 | 0 |
+| **all** | **158** | **109 (69 %)** | **22 (14 %)** | **20 (12.7 %)** | **7 (4 %)** |
+
+| P1 exact ≥ 60 % | P2 exact or subsystem ≥ 85 % | P3 wrong ≤ 10 % | P4 bias via redundancy exact | falsifier |
+|---|---|---|---|---|
+| ✓ 69 % | ✗ 83 % | ✗ 12.7 % | ✓ (all 8) | **F-X34.a fired**: the component-level claim is withdrawn; the paper reports subsystem-level attribution with these rates |
+
+**Reading the 20 wrong cases** (the table was fixed before scoring and is not
+retuned; this is analysis, not a re-score):
+- Fourteen are on the fan coil unit, and all name the component that *responds*
+  to the fault rather than the one that caused it: the four room-temperature
+  sensor biases are carried by the cooling coil's water-side temperature drop
+  (the controller trusts the biased reading and over-cools, and the coil shows
+  it); the seven airside and waterside fouling files are carried by the fan's
+  specific power (the fan works harder against a fouled coil); the three control
+  faults are carried by the valves they mis-drive. On a single-zone unit with one
+  coil of each kind there is no second sensor to separate cause from response.
+- Five are dual-duct zone-damper faults carried by the mixing-box static of zone
+  SA. The seeded zone is not stated in the file names, and the rule points at the
+  zone's box; the table mapped the box statics to the deck sensor end of the
+  redundant pair, which is the wrong end for a damper fault. A two-ended mapping
+  would score these as exact if the seeded zone is SA — a question for the
+  dataset's authors.
+- One is the single-duct outdoor-air-bias run, which the branch adjudication
+  (E5) already reads as provenance rather than fault.
+- The seven unnamed are detections carried by the frequency or oscillation
+  channel alone (instability faults and one fan restriction): those channels
+  count events and do not name a component.
+
+**What the framework can honestly say.** It names the *zone* correctly and never
+wrongly; it names the *subsystem* (which coil, which fan, which damper section,
+which zone's box) in 83 % of detections; it names the exact component in 69 %;
+and where it is wrong, it names the component that is reacting to the fault,
+which is the first place a technician would look anyway. It does not name root
+cause, and the pre-registered bar for calling it component-level attribution
+was missed by 2.7 points.

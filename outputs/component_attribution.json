@@ -1,0 +1,3693 @@
+{
+  "prereg": "docs/plans/2026-09-25-x34-component-attribution-prereg.md",
+  "systems": {
+    "sdahu": {
+      "detected": 14,
+      "exact": 13,
+      "subsystem": 0,
+      "wrong": 1,
+      "unnamed": 0
+    },
+    "pfpu": {
+      "detected": 26,
+      "exact": 15,
+      "subsystem": 6,
+      "wrong": 0,
+      "unnamed": 5
+    },
+    "sfpu": {
+      "detected": 25,
+      "exact": 14,
+      "subsystem": 9,
+      "wrong": 0,
+      "unnamed": 2
+    },
+    "ddahu": {
+      "detected": 50,
+      "exact": 38,
+      "subsystem": 7,
+      "wrong": 5,
+      "unnamed": 0
+    },
+    "fcu": {
+      "detected": 43,
+      "exact": 29,
+      "subsystem": 0,
+      "wrong": 14,
+      "unnamed": 0
+    }
+  },
+  "rows": [
+    {
+      "system": "sdahu",
+      "file": "damper_stuck_010_annual",
+      "channels": "rules",
+      "carrying_rules": [
+        "damper_command_mismatch",
+        "ra_damper_command_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ],
+        [
+          "outdoor-air section",
+          "ra_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "damper_stuck_025_annual",
+      "channels": "rules",
+      "carrying_rules": [
+        "damper_command_mismatch",
+        "ra_damper_command_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ],
+        [
+          "outdoor-air section",
+          "ra_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "damper_stuck_075_annual",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "damper_command_mismatch",
+        "ra_damper_command_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ],
+        [
+          "outdoor-air section",
+          "ra_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "damper_stuck_100_annual_short",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "damper_command_mismatch",
+        "ra_damper_command_mismatch"
+      ],
+      "carrying_days": 214,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ],
+        [
+          "outdoor-air section",
+          "ra_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "coi_stuck_010_annual",
+      "channels": "rules+resid+rate",
+      "carrying_rules": [
+        "valve_command_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "coi_stuck_025_annual",
+      "channels": "rules+resid+rate",
+      "carrying_rules": [
+        "valve_command_mismatch",
+        "valve_leak"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "coi_stuck_050_annual",
+      "channels": "rules+rate",
+      "carrying_rules": [
+        "valve_command_mismatch",
+        "valve_leak"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "coi_stuck_075_annual",
+      "channels": "rules+rate",
+      "carrying_rules": [
+        "valve_command_mismatch",
+        "valve_leak"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "coi_leakage_010_annual",
+      "channels": "rules+rate",
+      "carrying_rules": [
+        "valve_command_mismatch",
+        "valve_leak"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "coi_bias_-4_annual",
+      "channels": "resid+rate+osc",
+      "carrying_rules": [
+        "supply_air_residual"
+      ],
+      "carrying_days": 164,
+      "rule_component": [
+        [
+          "cooling coil",
+          "coil/sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "coil/sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "coi_bias_-2_annual",
+      "channels": "resid",
+      "carrying_rules": [
+        "supply_air_residual"
+      ],
+      "carrying_days": 164,
+      "rule_component": [
+        [
+          "cooling coil",
+          "coil/sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "coil/sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "coi_bias_2_annual",
+      "channels": "resid",
+      "carrying_rules": [
+        "supply_air_residual"
+      ],
+      "carrying_days": 139,
+      "rule_component": [
+        [
+          "cooling coil",
+          "coil/sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "coil/sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "coi_bias_4_annual",
+      "channels": "resid",
+      "carrying_rules": [
+        "supply_air_residual"
+      ],
+      "carrying_days": 137,
+      "rule_component": [
+        [
+          "cooling coil",
+          "coil/sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "coil/sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sdahu",
+      "file": "oa_bias_4_annual",
+      "channels": "resid",
+      "carrying_rules": [
+        "supply_air_residual"
+      ],
+      "carrying_days": 148,
+      "rule_component": [
+        [
+          "cooling coil",
+          "coil/sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_temp_sensor"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_RMTEMPUnstable",
+      "channels": "freq+osc",
+      "carrying_rules": [],
+      "carrying_days": 0,
+      "rule_component": [],
+      "seeded_component": [
+        "zone S",
+        "control"
+      ],
+      "verdict": "unnamed"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatCoilFouling_Airside_Moderate",
+      "channels": "resid",
+      "carrying_rules": [
+        "da_minus_pm_S"
+      ],
+      "carrying_days": 172,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_airflow_path"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_coil"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatCoilFouling_Airside_Severe",
+      "channels": "resid",
+      "carrying_rules": [
+        "da_minus_pm_S"
+      ],
+      "carrying_days": 227,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_airflow_path"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_coil"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatVLVLeak_20%MaxFlow",
+      "channels": "rules+osc",
+      "carrying_rules": [
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatVLVLeak_50%MaxFlow",
+      "channels": "rules+osc",
+      "carrying_rules": [
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatVLVLeak_80%MaxFlow",
+      "channels": "rules+osc",
+      "carrying_rules": [
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatVLVStuck_0%",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "rh_valve_mismatch_S"
+      ],
+      "carrying_days": 193,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatVLVStuck_100%",
+      "channels": "rules+resid+osc",
+      "carrying_rules": [
+        "rh_valve_mismatch_S",
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ],
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatVLVStuck_20%",
+      "channels": "rules+osc",
+      "carrying_rules": [
+        "rh_valve_mismatch_S",
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ],
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatVLVStuck_50%",
+      "channels": "rules+resid+osc",
+      "carrying_rules": [
+        "rh_valve_mismatch_S",
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ],
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_ReheatVLVStuck_80%",
+      "channels": "rules+resid+osc",
+      "carrying_rules": [
+        "rh_valve_mismatch_S",
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ],
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_SensorBias_RMTEMP_+2C",
+      "channels": "resid",
+      "carrying_rules": [
+        "ra_minus_zone_S"
+      ],
+      "carrying_days": 187,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_temp_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_temp_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_SensorBias_RMTEMP_+4C",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "ra_minus_zone_S"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_temp_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_temp_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_SensorBias_RMTEMP_-2C",
+      "channels": "resid+osc",
+      "carrying_rules": [],
+      "carrying_days": 0,
+      "rule_component": [],
+      "seeded_component": [
+        "zone S",
+        "zone_temp_sensor"
+      ],
+      "verdict": "unnamed"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_SensorBias_RMTEMP_-4C",
+      "channels": "resid+freq+osc",
+      "carrying_rules": [],
+      "carrying_days": 0,
+      "rule_component": [],
+      "seeded_component": [
+        "zone S",
+        "zone_temp_sensor"
+      ],
+      "verdict": "unnamed"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_SensorBias_VAVAirflow_+200CFM",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 271,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_flow_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_SensorBias_VAVAirflow_+400CFM",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 271,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_flow_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_SensorBias_VAVAirflow_-200CFM",
+      "channels": "rules+resid+osc",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 271,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_flow_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_SensorBias_VAVAirflow_-400CFM",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 271,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_flow_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_VAVDMPRStuck_0%",
+      "channels": "rules+resid+freq+rate+osc",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 313,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_VAVDMPRStuck_100%",
+      "channels": "rules+resid+osc",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 272,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_VAVDMPRStuck_20%",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 177,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_VAVDMPRStuck_50%",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 271,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_VAVDMPRStuck_80%",
+      "channels": "rules+resid+osc",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 271,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_VAVDMPRUnstable",
+      "channels": "osc",
+      "carrying_rules": [],
+      "carrying_days": 0,
+      "rule_component": [],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "unnamed"
+    },
+    {
+      "system": "pfpu",
+      "file": "PFPU_VAVFanRestrictFlow",
+      "channels": "resid",
+      "carrying_rules": [],
+      "carrying_days": 0,
+      "rule_component": [],
+      "seeded_component": [
+        "zone S",
+        "zone_fan"
+      ],
+      "verdict": "unnamed"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_RMTEMPUnstable",
+      "channels": "freq+osc",
+      "carrying_rules": [],
+      "carrying_days": 0,
+      "rule_component": [],
+      "seeded_component": [
+        "zone S",
+        "control"
+      ],
+      "verdict": "unnamed"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "channels": "resid",
+      "carrying_rules": [
+        "zone_fan_spf_S"
+      ],
+      "carrying_days": 145,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_fan"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_coil"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatCoilFouling_Airside_Severe",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "zone_fan_spf_S"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_fan"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_coil"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "channels": "rules+resid+freq",
+      "carrying_rules": [
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "channels": "rules+resid+freq",
+      "carrying_rules": [
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatVLVStuck_0%",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "rh_valve_mismatch_S"
+      ],
+      "carrying_days": 137,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatVLVStuck_100%",
+      "channels": "rules+resid+freq",
+      "carrying_rules": [
+        "rh_valve_mismatch_S",
+        "rh_water_leak_S",
+        "rh_waterside_dT_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ],
+        [
+          "zone S",
+          "reheat_valve"
+        ],
+        [
+          "zone S",
+          "reheat_coil"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatVLVStuck_20%",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "rh_valve_mismatch_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatVLVStuck_50%",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "rh_valve_mismatch_S",
+        "rh_water_leak_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ],
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_ReheatVLVStuck_80%",
+      "channels": "rules+resid+freq",
+      "carrying_rules": [
+        "rh_valve_mismatch_S",
+        "rh_water_leak_S",
+        "rh_waterside_dT_S"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ],
+        [
+          "zone S",
+          "reheat_valve"
+        ],
+        [
+          "zone S",
+          "reheat_coil"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "reheat_valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_SensorBias_RMTEMP_+2C",
+      "channels": "resid",
+      "carrying_rules": [
+        "dat_minus_sa_S"
+      ],
+      "carrying_days": 180,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_temp_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_SensorBias_RMTEMP_+4C",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "dat_minus_sa_S"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_temp_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_SensorBias_RMTEMP_-4C",
+      "channels": "rules+resid+device+freq",
+      "carrying_rules": [
+        "dat_minus_sa_S"
+      ],
+      "carrying_days": 174,
+      "rule_component": [
+        [
+          "zone S",
+          "reheat_valve"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_temp_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 263,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_flow_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 263,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_flow_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
+      "channels": "rules+resid+model+rate",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 262,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_flow_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "channels": "rules+resid+model+device+rate+osc",
+      "carrying_rules": [
+        "zone_fan_dp_per_cfm2_S",
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_fan"
+        ],
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_flow_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_VAVDMPRStuck_0%",
+      "channels": "rules+resid+device+freq+rate+osc",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 302,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_VAVDMPRStuck_100%",
+      "channels": "rules+resid+model+rate+osc",
+      "carrying_rules": [
+        "zone_fan_dp_per_cfm2_S",
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_fan"
+        ],
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_VAVDMPRStuck_20%",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 262,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_VAVDMPRStuck_50%",
+      "channels": "rules+resid+model+rate",
+      "carrying_rules": [
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 262,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_VAVDMPRStuck_80%",
+      "channels": "rules+resid+model+rate+osc",
+      "carrying_rules": [
+        "zone_fan_dp_per_cfm2_S",
+        "zone_flow_tracking_S"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_fan"
+        ],
+        [
+          "zone S",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_VAVDMPRUnstable",
+      "channels": "osc",
+      "carrying_rules": [],
+      "carrying_days": 0,
+      "rule_component": [],
+      "seeded_component": [
+        "zone S",
+        "zone_damper"
+      ],
+      "verdict": "unnamed"
+    },
+    {
+      "system": "sfpu",
+      "file": "SFPU_VAVFanRestrictFlow",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "zone_fan_spf_S"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "zone S",
+          "zone_fan"
+        ]
+      ],
+      "seeded_component": [
+        "zone S",
+        "zone_fan"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_CoolSeqUnstable",
+      "channels": "resid+freq+osc",
+      "carrying_rules": [
+        "supply_air_residual"
+      ],
+      "carrying_days": 115,
+      "rule_component": [
+        [
+          "cold deck",
+          "sat_sensor/coil"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "control"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_HeatSeqUnstable",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "hot_deck_residual",
+        "hwc_ua"
+      ],
+      "carrying_days": 201,
+      "rule_component": [
+        [
+          "hot deck",
+          "sat_sensor/coil"
+        ],
+        [
+          "hot deck",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "control"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Cold_0",
+      "channels": "rules+resid+model+absence+freq+rate+osc",
+      "carrying_rules": [
+        "zone_flow_tracking_C_SA"
+      ],
+      "carrying_days": 306,
+      "rule_component": [
+        [
+          "zone SA",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Cold_20",
+      "channels": "rules+resid+model+absence+freq+rate+osc",
+      "carrying_rules": [
+        "zone_flow_tracking_C_SA"
+      ],
+      "carrying_days": 307,
+      "rule_component": [
+        [
+          "zone SA",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Cold_50",
+      "channels": "rules+resid+absence",
+      "carrying_rules": [
+        "zone_flow_tracking_C_SA"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "zone SA",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Cold_80",
+      "channels": "rules+resid+absence",
+      "carrying_rules": [
+        "zone_flow_tracking_C_SA"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "zone SA",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Cold_100",
+      "channels": "rules+resid+absence",
+      "carrying_rules": [
+        "box_static_C_SA"
+      ],
+      "carrying_days": 278,
+      "rule_component": [
+        [
+          "cold deck",
+          "static_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Hot_0",
+      "channels": "rules+resid+absence+osc",
+      "carrying_rules": [
+        "box_static_H_SA"
+      ],
+      "carrying_days": 288,
+      "rule_component": [
+        [
+          "hot deck",
+          "static_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Hot_20",
+      "channels": "rules+resid+absence+osc",
+      "carrying_rules": [
+        "box_static_H_SA"
+      ],
+      "carrying_days": 288,
+      "rule_component": [
+        [
+          "hot deck",
+          "static_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Hot_50",
+      "channels": "rules",
+      "carrying_rules": [
+        "zone_flow_tracking_H_SA"
+      ],
+      "carrying_days": 81,
+      "rule_component": [
+        [
+          "zone SA",
+          "zone_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Hot_80",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_static_H_SA",
+        "hsf_flow_per_speed"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "fan"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_Hot_100",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_static_H_SA",
+        "hsf_flow_per_speed"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "fan"
+        ]
+      ],
+      "seeded_component": [
+        "zone (unspecified)",
+        "zone_damper"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_OA_0",
+      "channels": "rules+resid+device+osc",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_OA_28",
+      "channels": "rules+resid+osc",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_OA_45",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_OA_80",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_DMPRStuck_OA_100",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_Fouling_Cooling_Airside_Moderate",
+      "channels": "resid",
+      "carrying_rules": [
+        "csf_specific_power"
+      ],
+      "carrying_days": 20,
+      "rule_component": [
+        [
+          "cold deck",
+          "fan"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "coil"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_Fouling_Cooling_Airside_Severe",
+      "channels": "resid",
+      "carrying_rules": [
+        "csf_specific_power"
+      ],
+      "carrying_days": 63,
+      "rule_component": [
+        [
+          "cold deck",
+          "fan"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "coil"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_Fouling_Cooling_Waterside_Moderate",
+      "channels": "rules",
+      "carrying_rules": [
+        "cold_sat_setpoint_deviation"
+      ],
+      "carrying_days": 23,
+      "rule_component": [
+        [
+          "cold deck",
+          "sat_sensor/coil"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "coil"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_Fouling_Cooling_Waterside_Severe",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "csf_flow_per_speed"
+      ],
+      "carrying_days": 36,
+      "rule_component": [
+        [
+          "cold deck",
+          "fan"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "coil"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_Fouling_Heating_Waterside_Minor",
+      "channels": "resid",
+      "carrying_rules": [
+        "hwp_bypass_flow"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "hot deck",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "coil"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_Fouling_Heating_Waterside_Moderate",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "hwp_bypass_flow"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "hot deck",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "coil"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_Fouling_Heating_Waterside_Severe",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "hwp_bypass_flow"
+      ],
+      "carrying_days": 281,
+      "rule_component": [
+        [
+          "hot deck",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "coil"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_CSA_-2C",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_eat_C_E",
+        "box_eat_C_SA",
+        "box_eat_C_SB",
+        "box_eat_C_W"
+      ],
+      "carrying_days": 281,
+      "rule_component": [
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_CSA_-4C",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_eat_C_E",
+        "box_eat_C_SA",
+        "box_eat_C_SB",
+        "box_eat_C_W"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_CSA_+2C",
+      "channels": "rules+resid+absence",
+      "carrying_rules": [
+        "box_eat_C_E",
+        "box_eat_C_SA",
+        "box_eat_C_SB",
+        "box_eat_C_W"
+      ],
+      "carrying_days": 279,
+      "rule_component": [
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_CSA_+4C",
+      "channels": "rules+resid+absence",
+      "carrying_rules": [
+        "box_eat_C_E",
+        "box_eat_C_SA",
+        "box_eat_C_SB",
+        "box_eat_C_W"
+      ],
+      "carrying_days": 244,
+      "rule_component": [
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ],
+        [
+          "cold deck",
+          "sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_CSP_-2inwg",
+      "channels": "resid",
+      "carrying_rules": [
+        "box_static_C_W"
+      ],
+      "carrying_days": 269,
+      "rule_component": [
+        [
+          "cold deck",
+          "static_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "static_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_CSP_-4inwg",
+      "channels": "resid",
+      "carrying_rules": [
+        "box_static_C_W"
+      ],
+      "carrying_days": 269,
+      "rule_component": [
+        [
+          "cold deck",
+          "static_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "static_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_CSP_+2inwg",
+      "channels": "resid",
+      "carrying_rules": [
+        "csf_specific_power"
+      ],
+      "carrying_days": 109,
+      "rule_component": [
+        [
+          "cold deck",
+          "fan"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "static_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_CSP_+4inwg",
+      "channels": "resid",
+      "carrying_rules": [
+        "csf_specific_power"
+      ],
+      "carrying_days": 183,
+      "rule_component": [
+        [
+          "cold deck",
+          "fan"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "static_sensor"
+      ],
+      "verdict": "subsystem"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_HSA_-2C",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_eat_H_E",
+        "box_eat_H_SA",
+        "box_eat_H_SB",
+        "box_eat_H_W"
+      ],
+      "carrying_days": 281,
+      "rule_component": [
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_HSA_-4C",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_eat_H_E",
+        "box_eat_H_SA",
+        "box_eat_H_SB",
+        "box_eat_H_W"
+      ],
+      "carrying_days": 280,
+      "rule_component": [
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_HSA_+2C",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_eat_H_E",
+        "box_eat_H_SA",
+        "box_eat_H_SB",
+        "box_eat_H_W"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_HSA_+4C",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_eat_H_E",
+        "box_eat_H_SA",
+        "box_eat_H_SB",
+        "box_eat_H_W"
+      ],
+      "carrying_days": 284,
+      "rule_component": [
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ],
+        [
+          "hot deck",
+          "sat_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "sat_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_HSP_-2inwg",
+      "channels": "resid",
+      "carrying_rules": [
+        "box_static_H_E",
+        "box_static_H_SA",
+        "box_static_H_SB",
+        "box_static_H_W"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "static_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_HSP_-4inwg",
+      "channels": "resid",
+      "carrying_rules": [
+        "box_static_H_E",
+        "box_static_H_SA",
+        "box_static_H_SB",
+        "box_static_H_W"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "static_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_HSP_+2inwg",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_static_H_E",
+        "box_static_H_SA",
+        "box_static_H_SB",
+        "box_static_H_W"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "static_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_SensorBias_HSP_+4inwg",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "box_static_H_E",
+        "box_static_H_SA",
+        "box_static_H_SB",
+        "box_static_H_W"
+      ],
+      "carrying_days": 282,
+      "rule_component": [
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ],
+        [
+          "hot deck",
+          "static_sensor"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "static_sensor"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Cooling_0",
+      "channels": "rules+resid+absence+freq+rate+osc",
+      "carrying_rules": [
+        "chwc_valve_mismatch"
+      ],
+      "carrying_days": 189,
+      "rule_component": [
+        [
+          "cold deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Cooling_20",
+      "channels": "rules+resid+absence+freq+rate+osc",
+      "carrying_rules": [
+        "chwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cold deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Cooling_50",
+      "channels": "rules+resid+absence",
+      "carrying_rules": [
+        "chwc_valve_leak",
+        "chwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cold deck",
+          "valve"
+        ],
+        [
+          "cold deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Cooling_80",
+      "channels": "rules+resid+absence",
+      "carrying_rules": [
+        "chwc_valve_leak",
+        "chwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cold deck",
+          "valve"
+        ],
+        [
+          "cold deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Cooling_100",
+      "channels": "rules+resid+absence",
+      "carrying_rules": [
+        "chwc_valve_leak",
+        "chwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cold deck",
+          "valve"
+        ],
+        [
+          "cold deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cold deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Heating_0",
+      "channels": "rules+resid+freq+rate+osc",
+      "carrying_rules": [
+        "hwc_valve_mismatch"
+      ],
+      "carrying_days": 207,
+      "rule_component": [
+        [
+          "hot deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Heating_20",
+      "channels": "rules+resid+freq+rate+osc",
+      "carrying_rules": [
+        "hot_sat_setpoint_deviation",
+        "hwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "hot deck",
+          "sat_sensor/coil"
+        ],
+        [
+          "hot deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Heating_50",
+      "channels": "rules+resid+rate+osc",
+      "carrying_rules": [
+        "hot_sat_setpoint_deviation",
+        "hwc_valve_leak",
+        "hwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "hot deck",
+          "sat_sensor/coil"
+        ],
+        [
+          "hot deck",
+          "valve"
+        ],
+        [
+          "hot deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Heating_80",
+      "channels": "rules+resid+rate+osc",
+      "carrying_rules": [
+        "hot_sat_setpoint_deviation",
+        "hwc_valve_leak",
+        "hwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "hot deck",
+          "sat_sensor/coil"
+        ],
+        [
+          "hot deck",
+          "valve"
+        ],
+        [
+          "hot deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "ddahu",
+      "file": "DualDuct_VLVStuck_Heating_100",
+      "channels": "rules+resid+rate+osc",
+      "carrying_rules": [
+        "hot_sat_setpoint_deviation",
+        "hwc_valve_leak",
+        "hwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "hot deck",
+          "sat_sensor/coil"
+        ],
+        [
+          "hot deck",
+          "valve"
+        ],
+        [
+          "hot deck",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "hot deck",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_OADMPRLeak_20",
+      "channels": "resid",
+      "carrying_rules": [
+        "oa_flow_ratio_min_pos"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_OADMPRLeak_50",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "oa_flow_ratio_min_pos"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_OADMPRLeak_80",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "oa_flow_ratio_min_pos"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_OADMPRStuck_0",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_OADMPRStuck_30",
+      "channels": "rules",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_OADMPRStuck_50",
+      "channels": "rules+resid+freq",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_OADMPRStuck_80",
+      "channels": "rules+resid+model+freq+osc",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_OADMPRStuck_100",
+      "channels": "rules+resid+model+freq+rate+osc",
+      "carrying_rules": [
+        "oa_damper_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVLeak_Heating_20",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "hwc_flow_when_closed"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "heating coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVLeak_Heating_50",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "hwc_flow_when_closed"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "heating coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVLeak_Heating_80",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "hwc_flow_when_closed"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "heating coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Heating_0",
+      "channels": "rules+resid+freq",
+      "carrying_rules": [
+        "hwc_valve_mismatch"
+      ],
+      "carrying_days": 147,
+      "rule_component": [
+        [
+          "heating coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Heating_20",
+      "channels": "rules+resid+freq",
+      "carrying_rules": [
+        "hwc_flow_when_closed",
+        "hwc_valve_leak",
+        "hwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Heating_50",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "hwc_flow_when_closed",
+        "hwc_valve_leak",
+        "hwc_valve_mismatch",
+        "hwc_waterside_dT"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Heating_80",
+      "channels": "rules+resid+model+freq+osc",
+      "carrying_rules": [
+        "hwc_flow_when_closed",
+        "hwc_valve_leak",
+        "hwc_valve_mismatch",
+        "hwc_waterside_dT"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Heating_100",
+      "channels": "rules+resid+model+freq+osc",
+      "carrying_rules": [
+        "hwc_flow_when_closed",
+        "hwc_valve_leak",
+        "hwc_valve_mismatch",
+        "hwc_waterside_dT"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVLeak_Cooling_20",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "chwc_flow_when_closed"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVLeak_Cooling_50",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "chwc_flow_when_closed"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVLeak_Cooling_80",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "chwc_flow_when_closed"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Cooling_0",
+      "channels": "rules+resid+freq",
+      "carrying_rules": [
+        "chwc_valve_mismatch"
+      ],
+      "carrying_days": 235,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Cooling_20",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "chwc_flow_when_closed",
+        "chwc_valve_leak",
+        "chwc_valve_mismatch"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Cooling_50",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "chwc_flow_when_closed",
+        "chwc_valve_leak",
+        "chwc_valve_mismatch",
+        "chwc_waterside_dT"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Cooling_80",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "chwc_flow_when_closed",
+        "chwc_valve_leak",
+        "chwc_valve_mismatch",
+        "chwc_waterside_dT"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_VLVStuck_Cooling_100",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "chwc_flow_when_closed",
+        "chwc_valve_leak",
+        "chwc_valve_mismatch",
+        "chwc_waterside_dT"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "valve"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_SensorBias_RMTemp_+2C",
+      "channels": "resid",
+      "carrying_rules": [
+        "chwc_waterside_dT"
+      ],
+      "carrying_days": 77,
+      "rule_component": [
+        [
+          "cooling coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "zone control",
+        "control/zone_temp_sensor"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_SensorBias_RMTemp_-2C",
+      "channels": "resid",
+      "carrying_rules": [
+        "chwc_waterside_dT"
+      ],
+      "carrying_days": 85,
+      "rule_component": [
+        [
+          "cooling coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "zone control",
+        "control/zone_temp_sensor"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_SensorBias_RMTemp_+4C",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "chwc_waterside_dT"
+      ],
+      "carrying_days": 167,
+      "rule_component": [
+        [
+          "cooling coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "zone control",
+        "control/zone_temp_sensor"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_SensorBias_RMTemp_-4C",
+      "channels": "resid",
+      "carrying_rules": [
+        "chwc_waterside_dT"
+      ],
+      "carrying_days": 149,
+      "rule_component": [
+        [
+          "cooling coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "zone control",
+        "control/zone_temp_sensor"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Fouling_Cooling_Airside_Minor",
+      "channels": "resid",
+      "carrying_rules": [
+        "flow_per_speed"
+      ],
+      "carrying_days": 268,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "coil"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Fouling_Cooling_Airside_Moderate",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "fan_specific_power",
+        "flow_per_speed"
+      ],
+      "carrying_days": 268,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ],
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "coil"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Fouling_Cooling_Airside_Severe",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "fan_specific_power",
+        "flow_per_speed"
+      ],
+      "carrying_days": 268,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ],
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "cooling coil",
+        "coil"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Fouling_Heating_Airside_Moderate",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "fan_specific_power",
+        "flow_per_speed"
+      ],
+      "carrying_days": 268,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ],
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "coil"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Fouling_Heating_Airside_Severe",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "fan_specific_power",
+        "flow_per_speed"
+      ],
+      "carrying_days": 268,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ],
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "coil"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Fouling_Heating_Waterside_Moderate",
+      "channels": "rules",
+      "carrying_rules": [
+        "fan_specific_power"
+      ],
+      "carrying_days": 11,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "coil"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Fouling_Heating_Waterside_Severe",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "fan_specific_power"
+      ],
+      "carrying_days": 33,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "heating coil",
+        "coil"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_FilterRestriction_10%",
+      "channels": "resid",
+      "carrying_rules": [
+        "flow_per_speed"
+      ],
+      "carrying_days": 268,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "airflow path",
+        "fan/filter"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_FilterRestriction_20%",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "fan_specific_power",
+        "flow_per_speed"
+      ],
+      "carrying_days": 268,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ],
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "airflow path",
+        "fan/filter"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_FilterRestriction_50%",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "fan_specific_power",
+        "flow_per_speed"
+      ],
+      "carrying_days": 268,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ],
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "airflow path",
+        "fan/filter"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_OABlockage",
+      "channels": "rules+resid",
+      "carrying_rules": [
+        "oa_flow_ratio_min_pos"
+      ],
+      "carrying_days": 261,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "outdoor-air section",
+        "oa_damper"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_FanOutletBlockage",
+      "channels": "rules+resid+freq",
+      "carrying_rules": [
+        "fan_specific_power",
+        "flow_per_speed"
+      ],
+      "carrying_days": 268,
+      "rule_component": [
+        [
+          "airflow path",
+          "fan/filter"
+        ],
+        [
+          "airflow path",
+          "fan/filter"
+        ]
+      ],
+      "seeded_component": [
+        "airflow path",
+        "fan/filter"
+      ],
+      "verdict": "exact"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Control_CoolingReverse",
+      "channels": "rules+resid+freq+osc",
+      "carrying_rules": [
+        "chwc_flow_when_closed",
+        "chwc_valve_leak",
+        "chwc_valve_mismatch",
+        "chwc_waterside_dT"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "valve"
+        ],
+        [
+          "cooling coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "zone control",
+        "control/zone_temp_sensor"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Control_HeatingReverse",
+      "channels": "rules+resid+model+freq+osc",
+      "carrying_rules": [
+        "hwc_flow_when_closed",
+        "hwc_valve_leak",
+        "hwc_valve_mismatch",
+        "hwc_waterside_dT"
+      ],
+      "carrying_days": 365,
+      "rule_component": [
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "valve"
+        ],
+        [
+          "heating coil",
+          "coil"
+        ]
+      ],
+      "seeded_component": [
+        "zone control",
+        "control/zone_temp_sensor"
+      ],
+      "verdict": "wrong"
+    },
+    {
+      "system": "fcu",
+      "file": "FCU_Control_Unstable",
+      "channels": "rules+resid+model+freq+osc",
+      "carrying_rules": [
+        "oa_flow_ratio_min_pos"
+      ],
+      "carrying_days": 247,
+      "rule_component": [
+        [
+          "outdoor-air section",
+          "oa_damper"
+        ]
+      ],
+      "seeded_component": [
+        "zone control",
+        "control/zone_temp_sensor"
+      ],
+      "verdict": "wrong"
+    }
+  ],
+  "totals": {
+    "detected": 158,
+    "exact": 109,
+    "subsystem": 22,
+    "wrong": 20,
+    "unnamed": 7,
+    "exact_rate": 0.69,
+    "exact_or_subsystem_rate": 0.829,
+    "wrong_rate": 0.127
+  },
+  "predictions": {
+    "P1_exact_ge_60pct": true,
+    "P2_exact_or_subsystem_ge_85pct": false,
+    "P3_wrong_le_10pct": false,
+    "P4_bias_via_redundancy_all_exact": true,
+    "P4_n": 16
+  },
+  "falsifiers_fired": [
+    "F-X34.a: wrong-subsystem rate above 10 %"
+  ]
+}

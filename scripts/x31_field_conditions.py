@@ -113,6 +113,8 @@ def calendar(df, seed):
 
 def perturb(df, cfg, arm, fname, cal):
     rng = np.random.default_rng(zlib.crc32(fname.encode()))
+    if arm == "clean":   # reference arm: the same facade on the unperturbed files (comparator for every condition)
+        return df
     if arm in ("field_noise", "combined"):
         df = field_noise(df, cfg, rng)
     if arm in ("cov_gaps", "combined"):
@@ -132,7 +134,7 @@ def run(system):
     hdf0 = pd.read_parquet(f"data/processed/{system}/{man['healthy_file']}.parquet")
     cal = calendar(hdf0, zlib.crc32(system.encode()))
     out_path = Path(f"outputs/x31_field_conditions_{system}.json")
-    arms = sys.argv[sys.argv.index("--arms") + 1].split(",") if "--arms" in sys.argv else ["field_noise", "cov_gaps", "schedule", "combined"]
+    arms = sys.argv[sys.argv.index("--arms") + 1].split(",") if "--arms" in sys.argv else ["clean", "field_noise", "cov_gaps", "schedule", "combined"]
     out = json.loads(out_path.read_text()) if out_path.exists() and "--arms" in sys.argv else {"clean_detected_no_alignment": clean_det, "clean_holdout_fp_no_alignment": clean_fp, "calendar": {"optimum_start_days": len(cal[0]), "holidays": [str(d) for d in sorted(cal[1])]}, "conditions": {}}
     for arm in arms:
         t0 = time.time()

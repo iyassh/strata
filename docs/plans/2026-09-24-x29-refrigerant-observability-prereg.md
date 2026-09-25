@@ -80,3 +80,37 @@ Holdout 8 days per month, calibration 8 per month (the X25 gate).
 `outputs/week0_audit_rtu_sim.json`, `benchmark_v6_rtu_sim.json`,
 `union_fpr_rtu_sim.json`, `x29_refrigerant_observability.json`; guard
 `tests/test_x29_refrigerant_observability.py`.
+
+## Amendment 1 (2026-09-24 evening, after the hostile review of the closed X29; written before regeneration)
+
+Three review findings on the closed artefacts (0274c72):
+
+1. **Boundary day.** The baseline's last calendar date, 2018-10-28, holds one
+   row (00:00). It is a holdout day, and the sole deployed false alarm (model
+   and oscillation channels) falls on it: 1/29 was one flag on a one-minute
+   "day". The residual channel already excludes it (0 of 28 evaluable).
+   Change: the converter drops any calendar date with fewer than 720 rows
+   (half a one-minute day) from every file; the only affected date is
+   2018-10-28 (the first date, 2018-07-20, has 1,380 rows and stays). The
+   week-0 gate audit reads the raw CSVs and is unchanged.
+2. **Which residual carried each detection.** The scorecard records channel
+   families only, so "a single physically named residual" was not an
+   artefact-backed statement. New artefact `outputs/x29_residual_credits.json`
+   (`scripts/x29_residual_credits.py`): per fault file, flagged days per
+   residual rule under the facade's own bands. Already computed on the closed
+   data: condenser fouling is carried by `cond_approach` (91–100 of 100 days
+   at every severity); **evaporator fouling is carried by `supply_dT`
+   (return − supply air, 100/100 at every severity), an air-side residual**,
+   while the refrigerant-side residuals reach 3/9 days at 10 %, 10/9 at 20 %
+   and 50/46 at 30 %. The documentation (S3) imposes both fouling types as fan
+   mass-flow reduction. The refrigerant-side claim is therefore restricted to
+   the condenser half and to evaporator fouling of 30 % and above; the
+   evaporator detections at 10–20 % are air-side.
+3. **Ledger.** `monotone()` returned true when nothing was detected; now
+   false. P3's channel clause is scored on the named residual
+   (`cond_approach` flagged on every condenser file), not on the family.
+
+Predictions for the regeneration: deployed false alarms **0 of 28**; detected
+20 of 24 with the same family counts; residual credits unchanged. A change
+in any detection count is reported as such. Source (`src/`) unchanged from
+this amendment's commit to the regeneration commit.

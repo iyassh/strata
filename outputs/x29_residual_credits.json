@@ -1,0 +1,290 @@
+{
+  "bands": {
+    "cond_approach": [
+      16.586886999999997,
+      22.779874000000007
+    ],
+    "discharge_superheat": [
+      28.12917999999999,
+      37.17198400000001
+    ],
+    "suction_superheat_proxy": [
+      0.437119500000005,
+      0.937119500000005
+    ],
+    "pressure_ratio": [
+      1.6237699286596092,
+      1.9439624442378698
+    ],
+    "supply_dT": [
+      21.508140000000004,
+      22.960603999999996
+    ]
+  },
+  "scenarios": {
+    "RTU_sim_condfouling10": {
+      "family": "condenser_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 91,
+        "discharge_superheat": 1,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 1,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_condfouling20": {
+      "family": "condenser_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 95,
+        "discharge_superheat": 4,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 4,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_condfouling30": {
+      "family": "condenser_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 95,
+        "discharge_superheat": 19,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 24,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_condfouling40": {
+      "family": "condenser_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 100,
+        "discharge_superheat": 81,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 86,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_condfouling50": {
+      "family": "condenser_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 100,
+        "discharge_superheat": 96,
+        "suction_superheat_proxy": 2,
+        "pressure_ratio": 99,
+        "supply_dT": 5
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_evapfouling10": {
+      "family": "evaporator_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 3,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 3,
+        "supply_dT": 100
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_evapfouling20": {
+      "family": "evaporator_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 10,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 9,
+        "supply_dT": 100
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_evapfouling30": {
+      "family": "evaporator_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 50,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 46,
+        "supply_dT": 100
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_evapfouling40": {
+      "family": "evaporator_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 93,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 93,
+        "supply_dT": 100
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_evapfouling50": {
+      "family": "evaporator_fouling",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 99,
+        "suction_superheat_proxy": 1,
+        "pressure_ratio": 99,
+        "supply_dT": 100
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_liquidpipe01bar": {
+      "family": "liquid_line_restriction",
+      "per_rule_flagged_days": {
+        "cond_approach": 97,
+        "discharge_superheat": 1,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 3,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_liquidpipe04bar": {
+      "family": "liquid_line_restriction",
+      "per_rule_flagged_days": {
+        "cond_approach": 98,
+        "discharge_superheat": 2,
+        "suction_superheat_proxy": 1,
+        "pressure_ratio": 3,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_liquidpipe08bar": {
+      "family": "liquid_line_restriction",
+      "per_rule_flagged_days": {
+        "cond_approach": 54,
+        "discharge_superheat": 62,
+        "suction_superheat_proxy": 92,
+        "pressure_ratio": 1,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_liquidpipe10bar": {
+      "family": "liquid_line_restriction",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 92,
+        "suction_superheat_proxy": 100,
+        "pressure_ratio": 85,
+        "supply_dT": 61
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_overcharge10": {
+      "family": "refrigerant_overcharge",
+      "per_rule_flagged_days": {
+        "cond_approach": 5,
+        "discharge_superheat": 1,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 5,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_overcharge15": {
+      "family": "refrigerant_overcharge",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 1,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 1,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_overcharge20": {
+      "family": "refrigerant_overcharge",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 1,
+        "suction_superheat_proxy": 10,
+        "pressure_ratio": 1,
+        "supply_dT": 100
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_suctionpipe01bar": {
+      "family": "suction_line_restriction",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 0,
+        "suction_superheat_proxy": 100,
+        "pressure_ratio": 1,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_suctionpipe03bar": {
+      "family": "suction_line_restriction",
+      "per_rule_flagged_days": {
+        "cond_approach": 100,
+        "discharge_superheat": 28,
+        "suction_superheat_proxy": 100,
+        "pressure_ratio": 34,
+        "supply_dT": 90
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_suctionpipe06bar": {
+      "family": "suction_line_restriction",
+      "per_rule_flagged_days": {
+        "cond_approach": 94,
+        "discharge_superheat": 88,
+        "suction_superheat_proxy": 100,
+        "pressure_ratio": 89,
+        "supply_dT": 100
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_suctionpipe09bar": {
+      "family": "suction_line_restriction",
+      "per_rule_flagged_days": {
+        "cond_approach": 100,
+        "discharge_superheat": 100,
+        "suction_superheat_proxy": 100,
+        "pressure_ratio": 100,
+        "supply_dT": 100
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_undercharge10": {
+      "family": "refrigerant_undercharge",
+      "per_rule_flagged_days": {
+        "cond_approach": 0,
+        "discharge_superheat": 0,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 0,
+        "supply_dT": 0
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_undercharge15": {
+      "family": "refrigerant_undercharge",
+      "per_rule_flagged_days": {
+        "cond_approach": 3,
+        "discharge_superheat": 0,
+        "suction_superheat_proxy": 0,
+        "pressure_ratio": 1,
+        "supply_dT": 3
+      },
+      "evaluable_days": 100
+    },
+    "RTU_sim_undercharge20": {
+      "family": "refrigerant_undercharge",
+      "per_rule_flagged_days": {
+        "cond_approach": 22,
+        "discharge_superheat": 1,
+        "suction_superheat_proxy": 4,
+        "pressure_ratio": 4,
+        "supply_dT": 40
+      },
+      "evaluable_days": 100
+    }
+  }
+}

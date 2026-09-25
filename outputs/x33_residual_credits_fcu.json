@@ -1,0 +1,1218 @@
+{
+  "system": "fcu",
+  "bands": {
+    "supply_air_residual": [
+      -0.14499999999999602,
+      0.355000000000004
+    ],
+    "cooling_only_residual": [
+      -15.499999999999996,
+      -0.269999999999996
+    ],
+    "heating_only_residual": [
+      0.5599999999999952,
+      10.639999999999997
+    ],
+    "chwc_waterside_dT": [
+      -25.340000000000003,
+      -15.21
+    ],
+    "hwc_waterside_dT": [
+      43.714999999999996,
+      54.25
+    ],
+    "flow_per_speed": [
+      40.66025641025641,
+      41.16025641025641
+    ],
+    "oa_fraction_residual": [
+      -0.19495365602471715,
+      0.0022276676319892596
+    ],
+    "oa_flow_ratio_min_pos": [
+      0.10043576598311219,
+      0.11043576598311218
+    ],
+    "fan_specific_power": [
+      0.006231158772151127,
+      0.006931158772151127
+    ]
+  },
+  "scenarios": {
+    "FCU_OADMPRLeak_20": {
+      "family": "oa_damper_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 4,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 9,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 85,
+        "cooling_only_residual": 182,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 177,
+        "hwc_waterside_dT": 110,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 230,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_OADMPRLeak_50": {
+      "family": "oa_damper_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 1,
+        "cooling_only_residual": 2,
+        "heating_only_residual": 4,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 18,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 88,
+        "cooling_only_residual": 176,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 170,
+        "hwc_waterside_dT": 111,
+        "flow_per_speed": 269,
+        "oa_fraction_residual": 231,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 269
+      }
+    },
+    "FCU_OADMPRLeak_80": {
+      "family": "oa_damper_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 1,
+        "cooling_only_residual": 3,
+        "heating_only_residual": 4,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 22,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 89,
+        "cooling_only_residual": 170,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 167,
+        "hwc_waterside_dT": 112,
+        "flow_per_speed": 269,
+        "oa_fraction_residual": 231,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 269
+      }
+    },
+    "FCU_OADMPRStuck_0": {
+      "family": "oa_damper_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 4,
+        "chwc_waterside_dT": 38,
+        "hwc_waterside_dT": 14,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 16,
+        "cooling_only_residual": 240,
+        "heating_only_residual": 111,
+        "chwc_waterside_dT": 229,
+        "hwc_waterside_dT": 68,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_OADMPRStuck_30": {
+      "family": "oa_damper_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 2,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 10,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 1,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 82,
+        "cooling_only_residual": 189,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 181,
+        "hwc_waterside_dT": 112,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 231,
+        "oa_flow_ratio_min_pos": 268,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_OADMPRStuck_50": {
+      "family": "oa_damper_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 3,
+        "cooling_only_residual": 18,
+        "heating_only_residual": 33,
+        "chwc_waterside_dT": 1,
+        "hwc_waterside_dT": 68,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 15
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 92,
+        "cooling_only_residual": 148,
+        "heating_only_residual": 97,
+        "chwc_waterside_dT": 146,
+        "hwc_waterside_dT": 97,
+        "flow_per_speed": 249,
+        "oa_fraction_residual": 210,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 249
+      }
+    },
+    "FCU_OADMPRStuck_80": {
+      "family": "oa_damper_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 28,
+        "cooling_only_residual": 61,
+        "heating_only_residual": 39,
+        "chwc_waterside_dT": 3,
+        "hwc_waterside_dT": 39,
+        "flow_per_speed": 204,
+        "oa_fraction_residual": 58,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 69
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 128,
+        "cooling_only_residual": 124,
+        "heating_only_residual": 49,
+        "chwc_waterside_dT": 124,
+        "hwc_waterside_dT": 49,
+        "flow_per_speed": 204,
+        "oa_fraction_residual": 150,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 204
+      }
+    },
+    "FCU_OADMPRStuck_100": {
+      "family": "oa_damper_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 32,
+        "cooling_only_residual": 63,
+        "heating_only_residual": 46,
+        "chwc_waterside_dT": 4,
+        "hwc_waterside_dT": 37,
+        "flow_per_speed": 298,
+        "oa_fraction_residual": 6,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 188
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 218,
+        "cooling_only_residual": 117,
+        "heating_only_residual": 51,
+        "chwc_waterside_dT": 117,
+        "hwc_waterside_dT": 51,
+        "flow_per_speed": 298,
+        "oa_fraction_residual": 127,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 298
+      }
+    },
+    "FCU_VLVLeak_Heating_20": {
+      "family": "valve_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 25,
+        "cooling_only_residual": 49,
+        "heating_only_residual": 39,
+        "chwc_waterside_dT": 212,
+        "hwc_waterside_dT": 20,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 3,
+        "oa_flow_ratio_min_pos": 111,
+        "fan_specific_power": 115
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 25,
+        "cooling_only_residual": 246,
+        "heating_only_residual": 39,
+        "chwc_waterside_dT": 246,
+        "hwc_waterside_dT": 39,
+        "flow_per_speed": 265,
+        "oa_fraction_residual": 229,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 265
+      }
+    },
+    "FCU_VLVLeak_Heating_50": {
+      "family": "valve_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 31,
+        "cooling_only_residual": 99,
+        "heating_only_residual": 15,
+        "chwc_waterside_dT": 261,
+        "hwc_waterside_dT": 15,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 2,
+        "oa_flow_ratio_min_pos": 236,
+        "fan_specific_power": 236
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 31,
+        "cooling_only_residual": 264,
+        "heating_only_residual": 15,
+        "chwc_waterside_dT": 264,
+        "hwc_waterside_dT": 15,
+        "flow_per_speed": 280,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 280
+      }
+    },
+    "FCU_VLVLeak_Heating_80": {
+      "family": "valve_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 33,
+        "cooling_only_residual": 119,
+        "heating_only_residual": 5,
+        "chwc_waterside_dT": 220,
+        "hwc_waterside_dT": 5,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 2,
+        "oa_flow_ratio_min_pos": 245,
+        "fan_specific_power": 223
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 33,
+        "cooling_only_residual": 273,
+        "heating_only_residual": 5,
+        "chwc_waterside_dT": 273,
+        "hwc_waterside_dT": 5,
+        "flow_per_speed": 288,
+        "oa_fraction_residual": 281,
+        "oa_flow_ratio_min_pos": 260,
+        "fan_specific_power": 288
+      }
+    },
+    "FCU_VLVStuck_Heating_0": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 3,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 4,
+        "hwc_waterside_dT": 0,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 3,
+        "oa_flow_ratio_min_pos": 87,
+        "fan_specific_power": 131
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 165,
+        "cooling_only_residual": 158,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 155,
+        "hwc_waterside_dT": 0,
+        "flow_per_speed": 291,
+        "oa_fraction_residual": 253,
+        "oa_flow_ratio_min_pos": 242,
+        "fan_specific_power": 291
+      }
+    },
+    "FCU_VLVStuck_Heating_20": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 13,
+        "chwc_waterside_dT": 76,
+        "hwc_waterside_dT": 304,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 11,
+        "oa_flow_ratio_min_pos": 97,
+        "fan_specific_power": 104
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 125,
+        "chwc_waterside_dT": 188,
+        "hwc_waterside_dT": 365,
+        "flow_per_speed": 276,
+        "oa_fraction_residual": 240,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 276
+      }
+    },
+    "FCU_VLVStuck_Heating_50": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 35,
+        "chwc_waterside_dT": 228,
+        "hwc_waterside_dT": 365,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 2,
+        "oa_flow_ratio_min_pos": 246,
+        "fan_specific_power": 233
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 35,
+        "chwc_waterside_dT": 269,
+        "hwc_waterside_dT": 365,
+        "flow_per_speed": 284,
+        "oa_fraction_residual": 265,
+        "oa_flow_ratio_min_pos": 260,
+        "fan_specific_power": 284
+      }
+    },
+    "FCU_VLVStuck_Heating_80": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 31,
+        "chwc_waterside_dT": 231,
+        "hwc_waterside_dT": 365,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 2,
+        "oa_flow_ratio_min_pos": 247,
+        "fan_specific_power": 244
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 31,
+        "chwc_waterside_dT": 278,
+        "hwc_waterside_dT": 365,
+        "flow_per_speed": 293,
+        "oa_fraction_residual": 288,
+        "oa_flow_ratio_min_pos": 260,
+        "fan_specific_power": 293
+      }
+    },
+    "FCU_VLVStuck_Heating_100": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 30,
+        "chwc_waterside_dT": 232,
+        "hwc_waterside_dT": 365,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 1,
+        "oa_flow_ratio_min_pos": 247,
+        "fan_specific_power": 243
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 30,
+        "chwc_waterside_dT": 278,
+        "hwc_waterside_dT": 365,
+        "flow_per_speed": 292,
+        "oa_fraction_residual": 287,
+        "oa_flow_ratio_min_pos": 260,
+        "fan_specific_power": 292
+      }
+    },
+    "FCU_VLVLeak_Cooling_20": {
+      "family": "valve_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 135,
+        "cooling_only_residual": 1,
+        "heating_only_residual": 69,
+        "chwc_waterside_dT": 1,
+        "hwc_waterside_dT": 116,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 1,
+        "fan_specific_power": 8
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 135,
+        "cooling_only_residual": 37,
+        "heating_only_residual": 133,
+        "chwc_waterside_dT": 37,
+        "hwc_waterside_dT": 133,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 216,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_VLVLeak_Cooling_50": {
+      "family": "valve_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 139,
+        "cooling_only_residual": 1,
+        "heating_only_residual": 71,
+        "chwc_waterside_dT": 1,
+        "hwc_waterside_dT": 107,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 6,
+        "fan_specific_power": 24
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 139,
+        "cooling_only_residual": 1,
+        "heating_only_residual": 134,
+        "chwc_waterside_dT": 1,
+        "hwc_waterside_dT": 134,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 209,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_VLVLeak_Cooling_80": {
+      "family": "valve_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 140,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 76,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 112,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 13,
+        "fan_specific_power": 38
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 140,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 134,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 134,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 209,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_VLVStuck_Cooling_0": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 2,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 2,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 166,
+        "fan_specific_power": 204
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 263,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 108,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 101,
+        "flow_per_speed": 306,
+        "oa_fraction_residual": 305,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 306
+      }
+    },
+    "FCU_VLVStuck_Cooling_20": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 324,
+        "hwc_waterside_dT": 122,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 54,
+        "fan_specific_power": 58
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 135,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 365,
+        "hwc_waterside_dT": 133,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 206,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_VLVStuck_Cooling_50": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 132,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 365,
+        "hwc_waterside_dT": 108,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 7,
+        "fan_specific_power": 27
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 139,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 365,
+        "hwc_waterside_dT": 134,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 209,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_VLVStuck_Cooling_80": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 132,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 365,
+        "hwc_waterside_dT": 114,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 16,
+        "fan_specific_power": 38
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 140,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 365,
+        "hwc_waterside_dT": 134,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 209,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_VLVStuck_Cooling_100": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 133,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 365,
+        "hwc_waterside_dT": 115,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 16,
+        "fan_specific_power": 40
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 141,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 365,
+        "hwc_waterside_dT": 134,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 209,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_SensorBias_RMTemp_+2C": {
+      "family": "sensor_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 1,
+        "chwc_waterside_dT": 77,
+        "hwc_waterside_dT": 48,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 10,
+        "fan_specific_power": 10
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 85,
+        "cooling_only_residual": 210,
+        "heating_only_residual": 102,
+        "chwc_waterside_dT": 202,
+        "hwc_waterside_dT": 89,
+        "flow_per_speed": 270,
+        "oa_fraction_residual": 242,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 270
+      }
+    },
+    "FCU_SensorBias_RMTemp_-2C": {
+      "family": "sensor_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 1,
+        "heating_only_residual": 4,
+        "chwc_waterside_dT": 85,
+        "hwc_waterside_dT": 15,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 85,
+        "cooling_only_residual": 178,
+        "heating_only_residual": 140,
+        "chwc_waterside_dT": 172,
+        "hwc_waterside_dT": 126,
+        "flow_per_speed": 271,
+        "oa_fraction_residual": 239,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 271
+      }
+    },
+    "FCU_SensorBias_RMTemp_+4C": {
+      "family": "sensor_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 1,
+        "chwc_waterside_dT": 167,
+        "hwc_waterside_dT": 55,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 51,
+        "fan_specific_power": 52
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 91,
+        "cooling_only_residual": 229,
+        "heating_only_residual": 78,
+        "chwc_waterside_dT": 223,
+        "hwc_waterside_dT": 66,
+        "flow_per_speed": 274,
+        "oa_fraction_residual": 254,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 274
+      }
+    },
+    "FCU_SensorBias_RMTemp_-4C": {
+      "family": "sensor_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 10,
+        "chwc_waterside_dT": 149,
+        "hwc_waterside_dT": 65,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 103,
+        "cooling_only_residual": 161,
+        "heating_only_residual": 159,
+        "chwc_waterside_dT": 157,
+        "hwc_waterside_dT": 143,
+        "flow_per_speed": 278,
+        "oa_fraction_residual": 248,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 278
+      }
+    },
+    "FCU_Fouling_Cooling_Airside_Minor": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 2,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 3,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 1,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 77,
+        "cooling_only_residual": 194,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 185,
+        "hwc_waterside_dT": 105,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Cooling_Airside_Moderate": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 9,
+        "heating_only_residual": 8,
+        "chwc_waterside_dT": 5,
+        "hwc_waterside_dT": 5,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 268
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 73,
+        "cooling_only_residual": 206,
+        "heating_only_residual": 117,
+        "chwc_waterside_dT": 197,
+        "hwc_waterside_dT": 103,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Cooling_Airside_Severe": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 77,
+        "heating_only_residual": 22,
+        "chwc_waterside_dT": 61,
+        "hwc_waterside_dT": 21,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 260,
+        "fan_specific_power": 268
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 61,
+        "cooling_only_residual": 221,
+        "heating_only_residual": 117,
+        "chwc_waterside_dT": 211,
+        "hwc_waterside_dT": 90,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 233,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Cooling_Waterside_Minor": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 2,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 2,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 1,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 79,
+        "cooling_only_residual": 189,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 181,
+        "hwc_waterside_dT": 106,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 231,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Cooling_Waterside_Moderate": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 2,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 2,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 1,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 79,
+        "cooling_only_residual": 189,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 181,
+        "hwc_waterside_dT": 106,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 231,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Cooling_Waterside_Severe": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 2,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 2,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 1,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 79,
+        "cooling_only_residual": 189,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 181,
+        "hwc_waterside_dT": 106,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 231,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Heating_Airside_Moderate": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 9,
+        "heating_only_residual": 8,
+        "chwc_waterside_dT": 5,
+        "hwc_waterside_dT": 5,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 268
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 73,
+        "cooling_only_residual": 206,
+        "heating_only_residual": 117,
+        "chwc_waterside_dT": 197,
+        "hwc_waterside_dT": 103,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Heating_Airside_Severe": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 77,
+        "heating_only_residual": 22,
+        "chwc_waterside_dT": 61,
+        "hwc_waterside_dT": 21,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 260,
+        "fan_specific_power": 268
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 61,
+        "cooling_only_residual": 220,
+        "heating_only_residual": 117,
+        "chwc_waterside_dT": 211,
+        "hwc_waterside_dT": 90,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 233,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Heating_Waterside_Minor": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 2,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 2,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 1,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 80,
+        "cooling_only_residual": 189,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 181,
+        "hwc_waterside_dT": 106,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 231,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Heating_Waterside_Moderate": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 7,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 6,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 2,
+        "fan_specific_power": 2
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 80,
+        "cooling_only_residual": 191,
+        "heating_only_residual": 118,
+        "chwc_waterside_dT": 181,
+        "hwc_waterside_dT": 106,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 231,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Fouling_Heating_Waterside_Severe": {
+      "family": "coil_fouling",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 1,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 2,
+        "chwc_waterside_dT": 0,
+        "hwc_waterside_dT": 0,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 29,
+        "fan_specific_power": 29
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 82,
+        "cooling_only_residual": 189,
+        "heating_only_residual": 119,
+        "chwc_waterside_dT": 181,
+        "hwc_waterside_dT": 106,
+        "flow_per_speed": 269,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 269
+      }
+    },
+    "FCU_FilterRestriction_10%": {
+      "family": "airflow_restriction",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 3,
+        "heating_only_residual": 5,
+        "chwc_waterside_dT": 2,
+        "hwc_waterside_dT": 5,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 1,
+        "fan_specific_power": 1
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 76,
+        "cooling_only_residual": 199,
+        "heating_only_residual": 117,
+        "chwc_waterside_dT": 191,
+        "hwc_waterside_dT": 105,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_FilterRestriction_20%": {
+      "family": "airflow_restriction",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 14,
+        "heating_only_residual": 11,
+        "chwc_waterside_dT": 6,
+        "hwc_waterside_dT": 5,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 0,
+        "fan_specific_power": 268
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 71,
+        "cooling_only_residual": 206,
+        "heating_only_residual": 117,
+        "chwc_waterside_dT": 197,
+        "hwc_waterside_dT": 103,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_FilterRestriction_50%": {
+      "family": "airflow_restriction",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 103,
+        "heating_only_residual": 29,
+        "chwc_waterside_dT": 81,
+        "hwc_waterside_dT": 26,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 55,
+        "cooling_only_residual": 221,
+        "heating_only_residual": 117,
+        "chwc_waterside_dT": 213,
+        "hwc_waterside_dT": 85,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_OABlockage": {
+      "family": "airflow_restriction",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 4,
+        "chwc_waterside_dT": 42,
+        "hwc_waterside_dT": 13,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 225,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 21,
+        "cooling_only_residual": 239,
+        "heating_only_residual": 112,
+        "chwc_waterside_dT": 227,
+        "hwc_waterside_dT": 70,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 232,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_FanOutletBlockage": {
+      "family": "airflow_restriction",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 1,
+        "cooling_only_residual": 201,
+        "heating_only_residual": 78,
+        "chwc_waterside_dT": 201,
+        "hwc_waterside_dT": 63,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 226,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 25,
+        "cooling_only_residual": 231,
+        "heating_only_residual": 111,
+        "chwc_waterside_dT": 228,
+        "hwc_waterside_dT": 73,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 234,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Control_CoolingReverse": {
+      "family": "control_fault",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 133,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 365,
+        "hwc_waterside_dT": 115,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 0,
+        "oa_flow_ratio_min_pos": 16,
+        "fan_specific_power": 37
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 141,
+        "heating_only_residual": 0,
+        "chwc_waterside_dT": 365,
+        "hwc_waterside_dT": 134,
+        "flow_per_speed": 268,
+        "oa_fraction_residual": 208,
+        "oa_flow_ratio_min_pos": 261,
+        "fan_specific_power": 268
+      }
+    },
+    "FCU_Control_HeatingReverse": {
+      "family": "control_fault",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 31,
+        "chwc_waterside_dT": 232,
+        "hwc_waterside_dT": 365,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 1,
+        "oa_flow_ratio_min_pos": 247,
+        "fan_specific_power": 243
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "cooling_only_residual": 0,
+        "heating_only_residual": 31,
+        "chwc_waterside_dT": 278,
+        "hwc_waterside_dT": 365,
+        "flow_per_speed": 292,
+        "oa_fraction_residual": 287,
+        "oa_flow_ratio_min_pos": 260,
+        "fan_specific_power": 292
+      }
+    },
+    "FCU_Control_Unstable": {
+      "family": "control_fault",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 177,
+        "cooling_only_residual": 17,
+        "heating_only_residual": 84,
+        "chwc_waterside_dT": 22,
+        "hwc_waterside_dT": 62,
+        "flow_per_speed": 0,
+        "oa_fraction_residual": 101,
+        "oa_flow_ratio_min_pos": 247,
+        "fan_specific_power": 90
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 239,
+        "cooling_only_residual": 135,
+        "heating_only_residual": 104,
+        "chwc_waterside_dT": 132,
+        "hwc_waterside_dT": 103,
+        "flow_per_speed": 254,
+        "oa_fraction_residual": 209,
+        "oa_flow_ratio_min_pos": 247,
+        "fan_specific_power": 254
+      }
+    }
+  }
+}

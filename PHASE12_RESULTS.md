@@ -238,3 +238,66 @@ drop could not, because it reads the fault as a flow deficit rather than a heat
 deficit. Remaining misses: the five fouling files (heating airside minor,
 moderate, severe; cooling airside minor; cooling waterside minor) sit inside
 every healthy band on every recorded column.
+
+## X33e — FCU, fan coil unit (29 columns; all 29 mapped before, 0 excluded)
+
+*Pre-configuration commit d8f5064; configuration 9bb107d (healthy silence at
+iteration 1); artefacts regenerated after. Credits diagnostic:
+`outputs/x33_residual_credits_fcu.json`.*
+
+The audit found no unmapped column, but five mapped columns with no reader:
+the outdoor-air flow, the fan power, the constant fan-mode flag and the four
+humidities. Two readers were added: the outdoor-air flow as a fraction of
+discharge flow at the damper's minimum position, and the fan's specific power.
+
+| | before | after |
+|---|---|---|
+| detected | 40 / 47 | **43 / 47** |
+| gained | — | outdoor-air damper leak **20 %** and **50 %**; heating waterside fouling **moderate** |
+| lost | — | none |
+| deployed false alarms | 4 / 96 | 5 / 96 (residual channel 3 → 4: 2018-08-27, a day both new rules flag) |
+| new residual rules' own holdout false alarms | — | 1 / 69 and 1 / 72 (the same day) |
+| model and device rows | — | byte-identical |
+| time to detection | — | not later on any scenario; the 80 % leak now on day 1 (was day 11) |
+
+**Which physics carried each gain:**
+
+| scenario | carrying rule | days | reading |
+|---|---|---|---|
+| damper leak 20 % / 50 % | `oa_flow_ratio_min_pos` | 261 / 261 of 261 | at the same minimum damper position the outdoor-air fraction of discharge flow is 0.1054 in health and 0.1275 with the 20 % leak; the leak adds air without moving the position |
+| heating waterside fouling, moderate | `fan_specific_power` **rule band** (rules channel, 11 days); severe also gains the residual credit (31 days) | 11 | **an operating-point witness, not a coil measurement**: the healthy year runs the fan at its low speed 99.1 % of the time and never at its high speed; with a fouled heating coil the controller drives the fan to the high speed (18.08) on 1 % of minutes at moderate and 8 % at severe, where the fan's specific power (0.0227 W per cfm) is outside every band the healthy year could set (0.0066 low, 0.0119 medium). The unit works harder to deliver the same heat |
+
+The four cooling waterside fouling files and the minor heating waterside file
+stay missed: the fan never leaves its healthy speeds on them, and every
+recorded value sits inside its band.
+
+| P1 no loss | P2 budget | P3 both leaks | P4 waterside stays missed | P5 model rows identical | falsifiers |
+|---|---|---|---|---|---|
+| ✓ | ✓ (5/96; both rules 1 day) | ✓ | ✗ positive surprise: heating waterside moderate, through the fan's operating point | ✓ | none |
+
+**Reading.** The fan coil unit had no coverage gap in the mapping sense, only in
+the reading sense: two mapped columns nobody read carried the damper leaks
+outright. The fouling gain is real but should be read for what it is: the coil
+is not measured, the fan's response to it is.
+
+## Series summary (X33a–e)
+
+| system | columns mapped | detected before → after | deployed false alarms | new rules kept / written | lost |
+|---|---|---|---|---|---|
+| SDAHU | 12 → 26 of 30 | 14 → 14 / 14 | 1 → 1 | 4 / 4 | 0 |
+| PFPU | 56 → 109 of 109 | 22 → 26 / 30 | 7 → 8 | 19 / 19 | 0 |
+| SFPU | 56 → 109 of 109 | 21 → 25 / 29 | 6 → 9 | 23 / 23 | 0 |
+| DDAHU | 79 → 114 of 114 | 45 → 50 / 55 | 3 → 3 | 25 / 25 | 0 |
+| FCU | 29 → 29 of 29 | 40 → 43 / 47 | 4 → 5 | 2 / 2 | 0 |
+| **all five** | **232 → 387 of 391** | **142 → 158 / 175** | **21 → 26 of 480** | | **0** |
+
+Sixteen scenarios recovered, none lost, five false-alarm days added across
+480 held-out days, the process-mining rows byte-identical on every system, and
+every band from the fault-free file. The seventeen that remain are coil
+fouling on every system (waterside on all four water-coil units; the minor
+airside files), whose recorded values sit inside every healthy band on every
+column; on the parallel unit the waterside fouling is visible only on the ten
+days a year the reheat valve saturates, which is too few to estimate a null.
+The claim the series supports is narrow and testable: on these datasets, the
+misses that remain are limits of what is recorded and how often, not of the
+detector's vocabulary or its gate.

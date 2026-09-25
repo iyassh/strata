@@ -17,11 +17,12 @@
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "resid": {
-   "holdout_fp_days": 3,
+   "holdout_fp_days": 4,
    "holdout_days": 96,
-   "full_year_days": 3,
+   "full_year_days": 4,
    "holdout_fp_dates": [
     "2018-01-26",
+    "2018-08-27",
     "2018-12-24",
     "2018-12-25"
    ],
@@ -95,14 +96,14 @@
   "rate": 0.21875
  },
  "union_minus_rate": {
-  "holdout_fp_days": 4,
-  "rate": 0.041666666666666664
+  "holdout_fp_days": 5,
+  "rate": 0.052083333333333336
  },
  "split_half_demotion_robustness": {
   "even_months": {
    "decision_half_fp": {
     "rules": 0,
-    "resid": 2,
+    "resid": 3,
     "model": 0,
     "device": 0,
     "absence": 0,
@@ -131,7 +132,7 @@
    "worst_channel_on_decision_half": "rate",
    "rate_is_worst_or_tied": true,
    "deployed_fpr_on_report_half": {
-    "fp_days": 2,
+    "fp_days": 3,
     "n": 48
    }
   }

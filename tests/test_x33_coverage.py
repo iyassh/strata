@@ -69,3 +69,30 @@ def test_x33d_ddahu():
     assert c["DualDuct_SensorBias_HSP_-4inwg"]["per_rule_flagged_days"]["box_static_H_SA"] == 282
     assert c["DualDuct_Fouling_Heating_Waterside_Minor"]["per_rule_flagged_days"]["hwp_bypass_flow"] == 282
 
+
+def test_x33e_fcu():
+    art = OUT / "x33_coverage_fcu.json"
+    if not art.exists():
+        pytest.skip("artifact absent")
+    a = json.loads(art.read_text())
+    assert a["columns_mapped"] == [29, 29] and a["columns_excluded"] == []
+    assert (a["detected_before"], a["detected_after"], a["scored"]) == (40, 43, 47) and a["lost"] == []
+    assert a["gained"] == ["FCU_Fouling_Heating_Waterside_Moderate", "FCU_OADMPRLeak_20", "FCU_OADMPRLeak_50"]
+    assert a["deployed_fp"] == [4, 5] and a["model_rows_identical"] and a["ttd_later"] == []
+    assert {r: v["holdout_fp"] for r, v in a["new_rule_holdout_fp"].items()} == {"fan_specific_power": 1, "oa_flow_ratio_min_pos": 1}
+    assert a["falsifiers_fired"] == []
+    c = json.loads((OUT / "x33_residual_credits_fcu.json").read_text())["scenarios"]
+    assert c["FCU_OADMPRLeak_20"]["per_rule_flagged_days"]["oa_flow_ratio_min_pos"] == 261
+
+
+def test_x33_series_totals():
+    tot_b = tot_a = fp_b = fp_a = 0
+    for s in ("sdahu", "pfpu", "sfpu", "ddahu", "fcu"):
+        art = OUT / f"x33_coverage_{s}.json"
+        if not art.exists():
+            pytest.skip("artifact absent")
+        a = json.loads(art.read_text())
+        tot_b += a["detected_before"]; tot_a += a["detected_after"]; fp_b += a["deployed_fp"][0]; fp_a += a["deployed_fp"][1]
+        assert a["lost"] == [] and a["model_rows_identical"]
+    assert (tot_b, tot_a) == (142, 158) and (fp_b, fp_a) == (21, 26)
+

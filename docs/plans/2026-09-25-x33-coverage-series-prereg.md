@@ -179,3 +179,14 @@ Not added: RA_FLOW / SA_FLOW (identically 1.000 in the simulation; carries nothi
 - **F-X33e.c** P5 fails → investigated before anything else.
 - A failed P3 is a wrong prediction; a failed P4 is a positive surprise, reported as such.
 
+## Post hoc disclosure (2026-09-25 08:30, after the series closed)
+
+The readers written in X33a–e were selected after a read-only scan of the fault
+files (the withdrawn X32) had identified which recorded columns separate which
+misses. No threshold saw fault data and every configuration was committed before
+scoring, but the choice of readers was fault-informed in the X13 sense. Five of
+the sixteen recoveries sit less than one band width outside the healthy
+extremes, and one (the fan coil unit's heating waterside moderate) clears only
+the rules channel's healthy-year floor. Recorded in `PHASE12_RESULTS.md`
+("Series analysis").
+

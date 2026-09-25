@@ -311,3 +311,70 @@ days a year the reheat valve saturates, which is too few to estimate a null.
 The claim the series supports is narrow and testable: on these datasets, the
 misses that remain are limits of what is recorded and how often, not of the
 detector's vocabulary or its gate.
+
+## Series analysis: does it hold up?
+
+Three checks run after the series closed, on the committed artefacts, before any
+conclusion was written (2026-09-25 08:30).
+
+**1. The gains do not depend on the noise floor that moved.** Adding residual
+rules made the residual channel evaluable on more holdout days (41 → 69 on the
+fan-powered units), which lowered its per-day floor from 7.3 % to 4.3 %. Every
+one of the fifteen residual-carried recoveries also clears the *pre-series*
+floor (3 of 41): the weakest, the dual-duct cooling airside moderate file at 32
+of 282 days, has p = 2 × 10⁻⁷ under either. The sixteenth recovery, the fan coil
+unit's heating waterside moderate, is carried by the **rules channel** (11 rule
+days of 268), whose null is the healthy year's silence over 365 days (3/365 =
+0.8 %); under the holdout-based floor the other channels use (3 of 72 = 4.2 %)
+it would not be significant. That gain is gate-dependent and is marked as such.
+
+**2. Five of the sixteen are edge detections.** Distance of the fault-day median
+from the healthy band, in band widths (a `[min, max]` band over training days):
+
+| recovery | carrying rule | band-widths outside |
+|---|---|---|
+| SFPU fan-flow restriction | zone-fan specific power | 8.0 |
+| FCU damper leak 50 % / 20 % | outdoor-air flow fraction | 4.4 / 1.7 |
+| SFPU airside fouling severe | zone-fan specific power | 3.7 |
+| DDAHU hot-deck static bias −2 in.wg | box static − deck static | 3.7 |
+| PFPU room-temperature bias +4 °C | return − zone S | 2.1 |
+| DDAHU heating waterside fouling minor | pump bypass flow | **0.8** |
+| SFPU airside fouling moderate | zone-fan specific power | **0.7** |
+| PFPU airside fouling severe | discharge − primary airflow | **0.7** |
+| PFPU room-temperature bias +2 °C | return − zone S | **0.6** |
+| PFPU airside fouling moderate | discharge − primary airflow | **0.3** |
+
+The five in bold sit less than one band width outside the healthy extremes.
+They are significant because they sit there on most days of the year, but
+X31 showed that a `[min, max]` band's edge is set by single training days; a
+different healthy year could move those edges by the margin these faults
+clear. The eleven others are robust in this sense. A quantile band, or a
+second healthy year, is the experiment that would settle it; it was not run.
+
+**3. Disclosure: the readers were chosen with the fault files in view.** The
+standing rule that no threshold sees fault data was kept: every band came from
+the fault-free file, and the configurations were committed before any scorecard
+was regenerated. But *which* columns to read, and which residuals to write, was
+decided after a read-only scan of the fault files (the withdrawn X32) had shown
+which recorded columns separate which misses. Each reader is a standard physical
+relation an HVAC engineer would write from the point list (fan laws, specific
+power, redundant sensor pairs, flow fractions), and the same readers were then
+applied to every scenario, healthy holdout and system; but the selection was
+fault-informed in the sense the X13 design disclosure uses, and the series'
+gains should be read with that in mind. The claim the series licenses is
+therefore: *these misses were reachable from the recorded columns with blind
+thresholds*, not *a blind onboarding would have reached them*.
+
+**What the series does and does not conclude.**
+- It does show that on these datasets the detector's ceiling was set more by
+  which columns it read than by its method: sixteen of thirty-three misses were
+  coverage, none of the sixteen came through the process-mining channels, and
+  the process-mining null stands unchanged.
+- It does show the budget survives full coverage: five false-alarm days added
+  over 480 held-out days, none above 10 in 96.
+- It does not show that the framework generalises to a new building without
+  fault files to scan; that is exactly the blind-onboarding test X17 and X19
+  were, and their counts (45 of 55, 40 of 47) are the honest prior for it.
+- The seventeen remaining misses are coil fouling whose recorded values sit
+  inside every healthy band; one of them is visible but uncertifiable from one
+  healthy year.

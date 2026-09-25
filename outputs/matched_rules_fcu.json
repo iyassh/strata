@@ -73,7 +73,7 @@
       "mr3": 0,
       "freq": 54,
       "rate": 257,
-      "model": 29,
+      "model": 54,
       "device": 0
     },
     {
@@ -83,7 +83,7 @@
       "mr3": 1,
       "freq": 169,
       "rate": 274,
-      "model": 129,
+      "model": 138,
       "device": 0
     },
     {
@@ -113,7 +113,7 @@
       "mr3": 2,
       "freq": 63,
       "rate": 217,
-      "model": 9,
+      "model": 16,
       "device": 0
     },
     {
@@ -123,7 +123,7 @@
       "mr3": 0,
       "freq": 63,
       "rate": 141,
-      "model": 12,
+      "model": 16,
       "device": 0
     },
     {
@@ -143,7 +143,7 @@
       "mr3": 0,
       "freq": 56,
       "rate": 223,
-      "model": 4,
+      "model": 6,
       "device": 0
     },
     {
@@ -153,7 +153,7 @@
       "mr3": 0,
       "freq": 102,
       "rate": 246,
-      "model": 34,
+      "model": 41,
       "device": 0
     },
     {
@@ -163,7 +163,7 @@
       "mr3": 0,
       "freq": 103,
       "rate": 246,
-      "model": 34,
+      "model": 41,
       "device": 0
     },
     {
@@ -203,7 +203,7 @@
       "mr3": 0,
       "freq": 114,
       "rate": 245,
-      "model": 3,
+      "model": 9,
       "device": 0
     },
     {
@@ -473,7 +473,7 @@
       "mr3": 0,
       "freq": 103,
       "rate": 246,
-      "model": 34,
+      "model": 41,
       "device": 0
     },
     {
@@ -483,7 +483,7 @@
       "mr3": 0,
       "freq": 254,
       "rate": 55,
-      "model": 202,
+      "model": 212,
       "device": 0
     }
   ]

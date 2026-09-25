@@ -23,7 +23,7 @@
       "mr3": 0,
       "freq": 203,
       "rate": 29,
-      "model": 0,
+      "model": 1,
       "device": 0
     },
     {
@@ -33,7 +33,7 @@
       "mr3": 2,
       "freq": 209,
       "rate": 267,
-      "model": 0,
+      "model": 140,
       "device": 0
     },
     {
@@ -43,7 +43,7 @@
       "mr3": 2,
       "freq": 204,
       "rate": 268,
-      "model": 0,
+      "model": 127,
       "device": 0
     },
     {

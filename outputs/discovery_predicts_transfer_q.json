@@ -63,7 +63,7 @@
           "cooling_inactive"
         ]
       ],
-      "n_train_days": 248
+      "n_train_days": 160
     },
     "device": {
       "device_model": null
@@ -167,7 +167,7 @@
           "night_cycle_ended"
         ]
       ],
-      "n_train_days": 269
+      "n_train_days": 173
     },
     "device": {
       "anchor_activity_in_device_net": "zone_heating_active",
@@ -250,7 +250,7 @@
           "zone_heating_inactive"
         ]
       },
-      "n_train_cases": 681
+      "n_train_cases": 436
     }
   },
   "sfpu": {
@@ -285,7 +285,7 @@
       "variants_containing_heating": 356,
       "occupied_days_whose_log_contains_heating": 357,
       "cost0_shortened_examples": [],
-      "n_train_days": 269
+      "n_train_days": 173
     },
     "device": {
       "anchor_activity_in_device_net": "zone_heating_active",
@@ -368,7 +368,7 @@
           "zone_heating_inactive"
         ]
       },
-      "n_train_cases": 1076
+      "n_train_cases": 692
     }
   },
   "_method": "Unit-stratum net from fit().unit_model (inductive miner, noise 0.2, state alphabet, train days only); pm4py alignments VERSION_STATE_EQUATION_A_STAR via the low-level API in log order, one alignment per distinct variant mapped back to days; Q_support = occupied days whose alignment has a sync move on heating_active; Q_obligatory = 1 iff no variant with heating_active deleted aligns at cost 0. Adopted from the sealed computation of 2026-09-23."

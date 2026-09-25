@@ -9,9 +9,9 @@
     "heating_in_log": true,
     "zone_heating_activities": [],
     "net": {
-      "places": 19,
-      "transitions": 29,
-      "silent": 15
+      "places": 24,
+      "transitions": 34,
+      "silent": 20
     },
     "_aux": {
       "net_labels": [
@@ -37,7 +37,7 @@
       "variants_containing_heating": 52,
       "occupied_days_whose_log_contains_heating": 208,
       "cost0_shortened_examples": [],
-      "n_train_days": 234
+      "n_train_days": 150
     },
     "device": {
       "anchor_activity_in_device_net": "zone_heating_active",
@@ -120,7 +120,7 @@
           "zone_heating_inactive"
         ]
       },
-      "n_train_cases": 812
+      "n_train_cases": 512
     }
   },
   "fcu": {
@@ -129,20 +129,18 @@
     "occupied_days": 365,
     "Q_obligatory": 0,
     "variants_tested": 74,
-    "variants_cost0_without_heating": 5,
+    "variants_cost0_without_heating": 2,
     "heating_in_log": true,
     "zone_heating_activities": [],
     "net": {
-      "places": 17,
-      "transitions": 22,
-      "silent": 9
+      "places": 13,
+      "transitions": 18,
+      "silent": 7
     },
     "_aux": {
       "net_labels": [
         "cooling_active",
         "cooling_inactive",
-        "fan_high_entered",
-        "fan_high_exited",
         "fan_started",
         "fan_stopped",
         "heating_active",
@@ -185,21 +183,9 @@
           "oa_damper_closed",
           "setback_started",
           "system_stopped"
-        ],
-        [
-          "oa_damper_opened",
-          "setback_ended",
-          "system_started",
-          "fan_started",
-          "cooling_active",
-          "cooling_inactive",
-          "fan_stopped",
-          "oa_damper_closed",
-          "setback_started",
-          "system_stopped"
         ]
       ],
-      "n_train_days": 196
+      "n_train_days": 125
     },
     "device": {
       "device_model": null

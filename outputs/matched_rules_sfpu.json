@@ -13,8 +13,8 @@
       "mr3": 1,
       "freq": 141,
       "rate": 11,
-      "model": 2,
-      "device": 15
+      "model": 12,
+      "device": 6
     },
     {
       "file": "SFPU_ReheatCoilFouling_Airside_Minor",
@@ -23,8 +23,8 @@
       "mr3": 0,
       "freq": 1,
       "rate": 0,
-      "model": 2,
-      "device": 12
+      "model": 11,
+      "device": 4
     },
     {
       "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
@@ -33,8 +33,8 @@
       "mr3": 1,
       "freq": 1,
       "rate": 39,
-      "model": 2,
-      "device": 12
+      "model": 11,
+      "device": 4
     },
     {
       "file": "SFPU_ReheatCoilFouling_Airside_Severe",
@@ -43,8 +43,8 @@
       "mr3": 1,
       "freq": 3,
       "rate": 40,
-      "model": 3,
-      "device": 13
+      "model": 11,
+      "device": 5
     },
     {
       "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
@@ -53,8 +53,8 @@
       "mr3": 0,
       "freq": 2,
       "rate": 0,
-      "model": 2,
-      "device": 12
+      "model": 11,
+      "device": 4
     },
     {
       "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
@@ -63,8 +63,8 @@
       "mr3": 0,
       "freq": 1,
       "rate": 15,
-      "model": 2,
-      "device": 12
+      "model": 11,
+      "device": 4
     },
     {
       "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
@@ -73,8 +73,8 @@
       "mr3": 0,
       "freq": 3,
       "rate": 18,
-      "model": 2,
-      "device": 12
+      "model": 11,
+      "device": 4
     },
     {
       "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
@@ -83,8 +83,8 @@
       "mr3": 1,
       "freq": 17,
       "rate": 36,
-      "model": 2,
-      "device": 11
+      "model": 13,
+      "device": 3
     },
     {
       "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
@@ -93,8 +93,8 @@
       "mr3": 2,
       "freq": 30,
       "rate": 35,
-      "model": 2,
-      "device": 12
+      "model": 12,
+      "device": 3
     },
     {
       "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
@@ -103,8 +103,8 @@
       "mr3": 1,
       "freq": 33,
       "rate": 41,
-      "model": 1,
-      "device": 11
+      "model": 14,
+      "device": 3
     },
     {
       "file": "SFPU_ReheatVLVStuck_0%",
@@ -113,8 +113,8 @@
       "mr3": 0,
       "freq": 5,
       "rate": 24,
-      "model": 2,
-      "device": 6
+      "model": 11,
+      "device": 3
     },
     {
       "file": "SFPU_ReheatVLVStuck_100%",
@@ -123,8 +123,8 @@
       "mr3": 2,
       "freq": 35,
       "rate": 54,
-      "model": 1,
-      "device": 13
+      "model": 16,
+      "device": 3
     },
     {
       "file": "SFPU_ReheatVLVStuck_20%",
@@ -133,8 +133,8 @@
       "mr3": 1,
       "freq": 2,
       "rate": 34,
-      "model": 2,
-      "device": 11
+      "model": 11,
+      "device": 3
     },
     {
       "file": "SFPU_ReheatVLVStuck_50%",
@@ -143,8 +143,8 @@
       "mr3": 1,
       "freq": 16,
       "rate": 36,
-      "model": 2,
-      "device": 11
+      "model": 12,
+      "device": 3
     },
     {
       "file": "SFPU_ReheatVLVStuck_80%",
@@ -153,8 +153,8 @@
       "mr3": 0,
       "freq": 32,
       "rate": 15,
-      "model": 2,
-      "device": 12
+      "model": 12,
+      "device": 3
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_+2C",
@@ -163,8 +163,8 @@
       "mr3": 0,
       "freq": 1,
       "rate": 27,
-      "model": 2,
-      "device": 13
+      "model": 11,
+      "device": 3
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_+4C",
@@ -173,8 +173,8 @@
       "mr3": 0,
       "freq": 3,
       "rate": 25,
-      "model": 3,
-      "device": 11
+      "model": 11,
+      "device": 3
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_-2C",
@@ -183,8 +183,8 @@
       "mr3": 0,
       "freq": 14,
       "rate": 2,
-      "model": 2,
-      "device": 15
+      "model": 11,
+      "device": 8
     },
     {
       "file": "SFPU_SensorBias_RMTEMP_-4C",
@@ -193,8 +193,8 @@
       "mr3": 0,
       "freq": 37,
       "rate": 24,
-      "model": 4,
-      "device": 36
+      "model": 10,
+      "device": 30
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
@@ -203,8 +203,8 @@
       "mr3": 1,
       "freq": 19,
       "rate": 30,
-      "model": 2,
-      "device": 12
+      "model": 10,
+      "device": 3
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
@@ -213,8 +213,8 @@
       "mr3": 0,
       "freq": 19,
       "rate": 0,
-      "model": 2,
-      "device": 12
+      "model": 10,
+      "device": 3
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
@@ -223,8 +223,8 @@
       "mr3": 11,
       "freq": 3,
       "rate": 336,
-      "model": 140,
-      "device": 17
+      "model": 189,
+      "device": 9
     },
     {
       "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
@@ -233,8 +233,8 @@
       "mr3": 11,
       "freq": 4,
       "rate": 336,
-      "model": 139,
-      "device": 49
+      "model": 187,
+      "device": 21
     },
     {
       "file": "SFPU_VAVDMPRStuck_0%",
@@ -243,8 +243,8 @@
       "mr3": 5,
       "freq": 139,
       "rate": 146,
-      "model": 3,
-      "device": 93
+      "model": 13,
+      "device": 82
     },
     {
       "file": "SFPU_VAVDMPRStuck_100%",
@@ -253,8 +253,8 @@
       "mr3": 11,
       "freq": 4,
       "rate": 336,
-      "model": 136,
-      "device": 10
+      "model": 180,
+      "device": 3
     },
     {
       "file": "SFPU_VAVDMPRStuck_20%",
@@ -263,8 +263,8 @@
       "mr3": 0,
       "freq": 21,
       "rate": 25,
-      "model": 3,
-      "device": 13
+      "model": 13,
+      "device": 3
     },
     {
       "file": "SFPU_VAVDMPRStuck_50%",
@@ -273,8 +273,8 @@
       "mr3": 11,
       "freq": 3,
       "rate": 336,
-      "model": 137,
-      "device": 19
+      "model": 185,
+      "device": 11
     },
     {
       "file": "SFPU_VAVDMPRStuck_80%",
@@ -283,8 +283,8 @@
       "mr3": 11,
       "freq": 4,
       "rate": 336,
-      "model": 135,
-      "device": 10
+      "model": 178,
+      "device": 3
     },
     {
       "file": "SFPU_VAVDMPRUnstable",
@@ -293,8 +293,8 @@
       "mr3": 0,
       "freq": 16,
       "rate": 0,
-      "model": 1,
-      "device": 11
+      "model": 10,
+      "device": 3
     },
     {
       "file": "SFPU_VAVFanRestrictFlow",
@@ -303,8 +303,8 @@
       "mr3": 2,
       "freq": 5,
       "rate": 45,
-      "model": 4,
-      "device": 12
+      "model": 13,
+      "device": 4
     }
   ]
 }

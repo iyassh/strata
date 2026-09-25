@@ -37,7 +37,7 @@
    "holdout_days": 49,
    "full_year_days": 0,
    "holdout_fp_dates": [],
-   "threshold_provenance": "holdout-quantile threshold: FP row is the calibration target, not out-of-sample"
+   "threshold_provenance": "channel absent: this configuration declares no device stratum"
   },
   "absence": {
    "holdout_fp_days": 0,

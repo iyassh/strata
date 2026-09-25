@@ -26,7 +26,13 @@ detection:
   residual_min_band_width: 0.5
   residual_min_exceedance: 0.5   # margin floor (audit C1)
   residual_channels: [supply_air_residual, rh_waterside_dT_I, rh_waterside_dT_W,
-                      rh_waterside_dT_S, rh_waterside_dT_E]
+                      rh_waterside_dT_S, rh_waterside_dT_E,
+                      # X33b coverage audit (2026-09-25)
+                      sf_specific_power, rf_specific_power, sf_flow_per_speed, static_per_speed2,
+                      chwc_waterside_dT, hwc_waterside_dT,
+                      ra_minus_zone_I, ra_minus_zone_W, ra_minus_zone_S, ra_minus_zone_E,
+                      dat_minus_sa_I, dat_minus_sa_W, dat_minus_sa_S, dat_minus_sa_E,
+                      da_minus_pm_I, da_minus_pm_W, da_minus_pm_S, da_minus_pm_E]
   holdout_days_per_month: 8
   # X25: the 8 days before the holdout block calibrate the conformance thresholds,
   # so the holdout is out-of-sample for every channel (discovery trains on the rest)
@@ -425,3 +431,322 @@ events:
     sustained_min: 30
     gate_signal: CHWC_VLV_POS
     gate_above: 0.05
+
+  # ---------------- X33b coverage audit (2026-09-25) ----------------
+  # Bands from the fault-free file, occupied and supply fan on; quantiles (p0.1 / median / p99.9) logged per rule.
+  # Supply fan specific power W/cfm: 0.548 / 0.679 / 0.706
+  sf_specific_power:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: SF_POWER
+    b: SA_FLOW
+    low: 0.45
+    high: 0.8
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: SA_FLOW
+        above: 50.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.01
+    residual_min_exceedance: 0.01
+  # Return fan specific power W/cfm: 0.314 / 0.483 / 0.783
+  rf_specific_power:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: RF_POWER
+    b: RA_FLOW
+    low: 0.25
+    high: 0.9
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: RA_FLOW
+        above: 50.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.01
+    residual_min_exceedance: 0.01
+  # Fan law, flow per unit speed: 1216 / 1246 / 2113
+  sf_flow_per_speed:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: SA_FLOW
+    b: SF_SPEED
+    low: 1000.0
+    high: 2400.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: SF_SPEED
+        above: 0.05
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 25.0
+    residual_min_exceedance: 25.0
+  # Fan law, static per speed^2 (X27 kind): 3.35 / 3.55 / 3.62
+  static_per_speed2:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio_sq
+    a: SA_STATIC
+    b: SF_SPEED
+    low: 3.0
+    high: 4.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: SF_SPEED
+        above: 0.3
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.02
+    residual_min_exceedance: 0.02
+  # Cooling coil water-side rise, valve open: 8.1 / 10.0 / 30.0 F
+  chwc_waterside_dT:
+    kind: paired_residual
+    alphabet: signature
+    a: CHWC_LWT
+    b: CHWC_EWT
+    low: 5.0
+    high: 32.0
+    gates:
+      - signal: CHWC_VLV_POS
+        above: 0.05
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Heating coil water-side drop, valve open (128 healthy minutes only): -74 / -56 / -48 F
+  hwc_waterside_dT:
+    kind: paired_residual
+    alphabet: signature
+    a: HWC_LWT
+    b: HWC_EWT
+    low: -80.0
+    high: -40.0
+    gates:
+      - signal: HWC_VLV_POS
+        above: 0.02
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Return air minus zone I (return is the mix of the true zone temperatures): mean over zones 0.47 / 1.53 / 2.32 F
+  ra_minus_zone_I:
+    kind: paired_residual
+    alphabet: signature
+    a: RA_TEMP
+    b: ZONE_TEMP_I
+    low: -6.0
+    high: 9.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Return air minus zone W (return is the mix of the true zone temperatures): mean over zones 0.47 / 1.53 / 2.32 F
+  ra_minus_zone_W:
+    kind: paired_residual
+    alphabet: signature
+    a: RA_TEMP
+    b: ZONE_TEMP_W
+    low: -6.0
+    high: 9.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Return air minus zone S (return is the mix of the true zone temperatures): mean over zones 0.47 / 1.53 / 2.32 F
+  ra_minus_zone_S:
+    kind: paired_residual
+    alphabet: signature
+    a: RA_TEMP
+    b: ZONE_TEMP_S
+    low: -6.0
+    high: 9.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Return air minus zone E (return is the mix of the true zone temperatures): mean over zones 0.47 / 1.53 / 2.32 F
+  ra_minus_zone_E:
+    kind: paired_residual
+    alphabet: signature
+    a: RA_TEMP
+    b: ZONE_TEMP_E
+    low: -6.0
+    high: 9.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone I discharge minus supply air, reheat valve closed and zone fan off: 0 / 0 / 9.7 F
+  dat_minus_sa_I:
+    kind: paired_residual
+    alphabet: signature
+    a: ZONE_DAT_I
+    b: SA_TEMP
+    low: -2.0
+    high: 12.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: RH_VLV_POS_I
+        below: 0.02
+      - signal: ZONE_FAN_STATUS_I
+        below: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone W discharge minus supply air, reheat valve closed and zone fan off: 0 / 0 / 9.7 F
+  dat_minus_sa_W:
+    kind: paired_residual
+    alphabet: signature
+    a: ZONE_DAT_W
+    b: SA_TEMP
+    low: -2.0
+    high: 12.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: RH_VLV_POS_W
+        below: 0.02
+      - signal: ZONE_FAN_STATUS_W
+        below: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone S discharge minus supply air, reheat valve closed and zone fan off: 0 / 0 / 9.7 F
+  dat_minus_sa_S:
+    kind: paired_residual
+    alphabet: signature
+    a: ZONE_DAT_S
+    b: SA_TEMP
+    low: -2.0
+    high: 12.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: RH_VLV_POS_S
+        below: 0.02
+      - signal: ZONE_FAN_STATUS_S
+        below: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone E discharge minus supply air, reheat valve closed and zone fan off: 0 / 0 / 9.7 F
+  dat_minus_sa_E:
+    kind: paired_residual
+    alphabet: signature
+    a: ZONE_DAT_E
+    b: SA_TEMP
+    low: -2.0
+    high: 12.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: RH_VLV_POS_E
+        below: 0.02
+      - signal: ZONE_FAN_STATUS_E
+        below: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone I discharge minus primary airflow, zone fan off: -108 / -22 / -20 cfm
+  da_minus_pm_I:
+    kind: paired_residual
+    alphabet: signature
+    a: ZONE_DA_FLOW_I
+    b: ZONE_FLOW_I
+    low: -130.0
+    high: 5.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: ZONE_FAN_STATUS_I
+        below: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 5.0
+    residual_min_exceedance: 5.0
+  # Zone W discharge minus primary airflow, zone fan off: -108 / -22 / -20 cfm
+  da_minus_pm_W:
+    kind: paired_residual
+    alphabet: signature
+    a: ZONE_DA_FLOW_W
+    b: ZONE_FLOW_W
+    low: -130.0
+    high: 5.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: ZONE_FAN_STATUS_W
+        below: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 5.0
+    residual_min_exceedance: 5.0
+  # Zone S discharge minus primary airflow, zone fan off: -108 / -22 / -20 cfm
+  da_minus_pm_S:
+    kind: paired_residual
+    alphabet: signature
+    a: ZONE_DA_FLOW_S
+    b: ZONE_FLOW_S
+    low: -130.0
+    high: 5.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: ZONE_FAN_STATUS_S
+        below: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 5.0
+    residual_min_exceedance: 5.0
+  # Zone E discharge minus primary airflow, zone fan off: -108 / -22 / -20 cfm
+  da_minus_pm_E:
+    kind: paired_residual
+    alphabet: signature
+    a: ZONE_DA_FLOW_E
+    b: ZONE_FLOW_E
+    low: -130.0
+    high: 5.0
+    gates:
+      - signal: SF_STATUS
+        above: 0.5
+      - signal: ZONE_FAN_STATUS_E
+        below: 0.5
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 5.0
+    residual_min_exceedance: 5.0
+  # Duct static must track its setpoint while the supply fan runs (healthy |deviation| p99.9 0.17 in.wg)
+  static_setpoint_deviation:
+    kind: setpoint_deviation
+    alphabet: signature
+    meas: SA_STATIC
+    sp: SA_STATIC_SP
+    threshold: 0.3
+    sustained_min: 30
+    gate_signal: SF_STATUS
+    gate_above: 0.5

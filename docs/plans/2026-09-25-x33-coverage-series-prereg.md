@@ -72,3 +72,33 @@ Not added: RA_FLOW / SA_FLOW (identically 1.000 in the simulation; carries nothi
 - **F-X33a.b** P2 fails → the channel responsible is removed under the adoption rule; reported.
 - **F-X33a.c** P5 fails → a coverage change reached the process-mining channels; investigated before anything else.
 - A failed P3 or P4 is reported as a wrong prediction.
+
+## X33b — PFPU, parallel fan-powered unit (109 columns, 56 mapped before)
+
+**Written 2026-09-25 03:30 after X33a closed, before the PFPU configuration is changed. Pre-configuration commit: `6b7512a`.** Bands below come from the fault-free file's occupied, supply-fan-on minutes (quantiles logged in the configuration); no fault file opened.
+
+| columns | decision / reader |
+|---|---|
+| RMCLGSPT_i, RMHTGSPT_i (zone cooling/heating setpoints, two values each) | map (ZONE_CLG_SP_i, ZONE_HTG_SP_i); context for the zone-temperature rules; no new reader (the recorded zone temperature is the controller's own reading, which tracks its setpoint even when biased) |
+| VAV_DAT_i (zone discharge air temperature) | map; residual `dat_minus_sa_i` = ZONE_DAT_i − SA_TEMP gated reheat valve closed (< 0.02) and zone fan off |
+| VAV_DA_CFM_i (zone discharge airflow) | map; residual `da_minus_pm_i` = ZONE_DA_FLOW_i − ZONE_FLOW_i gated zone fan off (discharge equals primary when the parallel fan is off) |
+| VAV_FAN_DP_i, VAV_FAN_WAT_i (zone fan pressure, power) | map as context; no reader (the parallel fan runs intermittently at a near-constant 18.9 W; no seeded fault touches it on this unit) |
+| SF_WAT, RF_WAT, SA_CFM, RA_CFM, SF_SPD, RF_SPD, SF_CS, SF_DP, RF_DP, RF%SFSPD | map; readers `sf_specific_power`, `rf_specific_power`, `sf_flow_per_speed`, `static_per_speed2` (SA_SP / SF_SPD², X27 kind) |
+| SA_SP, SA_SPSPT (duct static and setpoint; not E3 — that erratum is SDAHU-only, and here SA_SP varies) | map; rule `static_setpoint_deviation` (|SA_SP − SA_SPSPT| > 0.3 in.wg sustained 30 min, fan on; healthy p99.9 0.17) |
+| OA_CFM, OA_HUMD, RA_HUMD, SA_HUMD, CHWC_EAH | map as context (no humidity or outdoor-flow rule in the sequence; recorded for the operator) |
+| HWC_DAT, HWC_EWT, HWC_LWT, HWC_MWT, HWP_GPMC, HWP_GPMT, CHWC_DAT, CHWC_EWT, CHWC_LWT, CHWC_MWT, CHWP_GPMC, CHWP_GPMT | map; readers `chwc_waterside_dT` (CHWC_LWT − CHWC_EWT, valve open), `hwc_waterside_dT` (valve open; the AHU heating valve opens on 128 healthy minutes, so this channel will mostly abstain) |
+| RA_TEMP vs zones | residuals `ra_minus_zone_i` = RA_TEMP − ZONE_TEMP_i (occupied, fan on): the return air is the mix of the true zone temperatures, so a biased zone sensor shifts this residual by the bias |
+| excluded | none: every column is either mapped with a reader or mapped as context |
+
+### Predictions
+- **P1.** No scenario lost (22 of 30 before).
+- **P2.** Deployed false alarms ≤ 10 of 96 and ≤ 7 + 3 (7 before); no new residual rule > 3 holdout days on its own; channels failing this are removed under the adoption rule.
+- **P3.** At least one of the two room-temperature-bias misses (+2 °C, +4 °C) is detected, through `ra_minus_zone_i`.
+- **P4.** All six reheat-coil fouling misses stay missed (their recorded signals sit within a few per cent of healthy on every column; the X32 scan found no unmapped column that separates them).
+- **P5.** Model and device rows byte-identical.
+
+### Falsifiers
+- **F-X33b.a** P1 fails → channel named and removed; loss reported.
+- **F-X33b.b** P2 fails → channel removed under the adoption rule; reported.
+- **F-X33b.c** P5 fails → investigated before anything else.
+- A failed P3 is a wrong prediction; a failed P4 is a positive surprise, reported as such.

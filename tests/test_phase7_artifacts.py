@@ -54,7 +54,7 @@ def test_sensor_coverage_consistent():
     import yaml
 
     cov = _load("sensor_coverage.json")
-    assert set(cov) == {"sdahu", "pfpu", "sfpu"}
+    assert set(cov) >= {"sdahu", "pfpu", "sfpu"}   # seven systems since X33
     for system, c in cov.items():
         assert c["mapped"] + len(c["unmapped"]) == c["data_columns"], system
         assert c["mapped_but_absent_in_data"] == [], f"{system}: ghost mappings"

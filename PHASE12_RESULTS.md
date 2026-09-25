@@ -301,7 +301,8 @@ is not measured, the fan's response to it is.
 | **all five** | **232 → 387 of 391** | **142 → 158 / 175** | **21 → 26 of 480** | | **0** |
 
 Sixteen scenarios recovered, none lost, five false-alarm days added across
-480 held-out days, the process-mining rows byte-identical on every system, and
+480 held-out days, the model and device rows identical on every system (the
+log hashes change, because the new readers emit signature events), and
 every band from the fault-free file. The seventeen that remain are coil
 fouling on every system (waterside on all four water-coil units; the minor
 airside files), whose recorded values sit inside every healthy band on every

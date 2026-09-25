@@ -21,5 +21,32 @@
   "mapped": 109,
   "unmapped": [],
   "mapped_but_absent_in_data": []
+ },
+ "ddahu": {
+  "data_columns": 114,
+  "mapped": 114,
+  "unmapped": [],
+  "mapped_but_absent_in_data": []
+ },
+ "fcu": {
+  "data_columns": 29,
+  "mapped": 29,
+  "unmapped": [],
+  "mapped_but_absent_in_data": []
+ },
+ "rtu_sim": {
+  "data_columns": 25,
+  "mapped": 23,
+  "unmapped": [
+   "RTU_SEN_CAPA",
+   "RTU_TOT_CAPA"
+  ],
+  "mapped_but_absent_in_data": []
+ },
+ "rtu_field": {
+  "data_columns": 26,
+  "mapped": 26,
+  "unmapped": [],
+  "mapped_but_absent_in_data": []
  }
 }

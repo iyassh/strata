@@ -19,7 +19,8 @@ import pandas as pd
 sys.path.insert(0, "src")
 from strata.io.config import load_config  # noqa: E402
 
-HEALTHY = {"sdahu": "AHU_annual", "pfpu": "PFPU_FaultFree", "sfpu": "SFPU_FaultFree"}
+HEALTHY = {"sdahu": "AHU_annual", "pfpu": "PFPU_FaultFree", "sfpu": "SFPU_FaultFree", "ddahu": "DualDuct_FaultFree", "fcu": "FCU_FaultFree",
+           "rtu_sim": "RTU_sim_baseline", "rtu_field": "Site2_Unfaulted"}   # X33 (2026-09-25): all seven systems
 
 out = {}
 for system, healthy in HEALTHY.items():

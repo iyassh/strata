@@ -55,7 +55,7 @@ as the numbers.
 ## The framework in one figure
 
 <p align="center">
-  <img src="paper/figures/strata_framework_v2.svg" alt="STRATA framework: training phase (discover models, calibrate channels) over deployment phase (evaluate channels, noise gate, explained alarm)" width="100%">
+  <img src="paper/figures/strata_framework_v3.svg" alt="STRATA framework: training phase (discover models, calibrate channels) over deployment phase (evaluate channels, noise gate, explained alarm)" width="100%">
 </p>
 
 **How to read it:** blue is what the system *discovers* (models of normal
@@ -145,7 +145,7 @@ fan coil unit):
 
 ![Per-channel false alarms on the held-out fault-free days](paper/figures/fig_false_alarms.png)
 
-DDAHU: 79 sensor mappings, 41 rules, one healthy-silence iteration, no source
+DDAHU: 79 sensor mappings and 41 rules at onboarding (114 and 71 after X33d), one healthy-silence iteration, no source
 change, gate battery clean (including a configuration-branch comparison); every family caught in full except coil fouling
 (5/12) and static-pressure sensor bias (6/8 after the fan-law channel of X27); nothing detected by the
 process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)). After the coverage audit (X33d) the
@@ -172,13 +172,13 @@ measure ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)).
 Coverage series (X33, 2026-09-25): every recorded column of every system audited and mapped or excluded
 with a written reason (a guard now enforces it), each new column given a physically named reader, every band
 from the fault-free file. 142 → **158 of 175** scenarios across the five simulated systems, nothing lost, 21 → 26
-false-alarm days of 480, the process-mining rows byte-identical on every system. The gains are the misses that
+false-alarm days of 480, the model and device rows identical on every system. The gains are the misses that
 were never a detector limit: airside coil fouling through zone-fan power per cfm and discharge-minus-primary
 airflow, sensor biases through redundant mixing-box sensors and return-minus-zone residuals, damper leaks through
 the outdoor-air flow fraction. What remains missed is coil fouling whose recorded values sit inside every healthy
 band on every column ([PHASE12_RESULTS.md](PHASE12_RESULTS.md)).
 
-Field conditions (X31): sensor error on temperatures, flows and positions with 5% feedback quantisation,
+Field conditions (X31, run before the coverage series and not repeated after it): sensor error on temperatures, flows and positions with 5% feedback quantisation,
 change-of-value logging with gaps, and schedule shifts with holidays, injected
 into the fault-free year and every fault file of SDAHU, DDAHU and FCU and
 re-fitted: the budget holds in every cell (worst 3/96), the costliest condition
@@ -188,11 +188,11 @@ this experiment exposed a drift between the library and the benchmark scripts
 (a pooled residual noise floor), repaired and guarded before the re-run
 ([PHASE11_RESULTS.md](PHASE11_RESULTS.md), X31 and Amendment 1).
 
-FCU: 29 sensor mappings, 23 rules, two healthy-silence iterations, no source
+FCU: 29 sensor mappings and 23 rules at onboarding (26 rules after X33e), two healthy-silence iterations, no source
 change; the hash gate found a byte-identical pair under two family labels
 (scored once, [ERRATA.md](ERRATA.md) E6); both new scorecard families — airflow
 restriction and reverse/unstable control, four at the documentation's granularity — caught in full; misses under the final gate are
-five of six waterside-fouling files (the cooling coil's leave the recorded points
+at onboarding five of six waterside-fouling files (four after X33e; the cooling coil's leave the recorded points
 within about 3% of healthy) and, until the coverage audit read the outdoor-air flow (X33e), the two smaller damper leaks; an
 outdoor-air-fraction residual (X24) caught the 20% leak under the earlier gate
 and the per-day residual null of X25 took it back ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)). Its first run fired two falsifiers (28/96 false alarms; six

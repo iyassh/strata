@@ -232,7 +232,7 @@ An audit of sixty-five primary machine-learning HVAC fault-detection studies fou
 
 \subsection{Pre-registration and honoured falsifiers}
 
-Every experiment is pre-registered: the hypothesis, and the specific observation that would refute it, are committed to version control before the experiment runs, in the spirit of the hypothesis-testing discipline recently urged for process-mining research \cite{pitsch2025hypothesistesting}. A falsifier that fires is treated as a finding and published, not as a setback to be absorbed by rewriting the hypothesis. Ten results went against the project --- four refuted hypotheses, one fault-informed rule whose falsifier fired, three withdrawn claims, one pre-registered test that never had attainable power, and one four-building transfer test whose pass a discovery-free control reproduced --- several of them results the project would have preferred to keep. Section~\ref{sec:falsified} reports each with the claim it killed and what survived.
+Every experiment is pre-registered: the hypothesis, and the specific observation that would refute it, are committed to version control before the experiment runs, in the spirit of the hypothesis-testing discipline recently urged for process-mining research \cite{pitsch2025hypothesistesting}. A falsifier that fires is treated as a finding and published, not as a setback to be absorbed by rewriting the hypothesis. Ten results went against the project --- four refuted hypotheses, one fault-informed rule whose falsifier fired, three withdrawn claims, one pre-registered test that never had attainable power, and one four-building transfer test whose pass a discovery-free control reproduced --- several of them results the project would have preferred to keep. Section~\ref{sec:falsified} reports each with the claim it killed and what survived. Appendix~\ref{app:ledger} lists every pre-registered experiment with its prediction and outcome.
 
 The discipline also catches drift between the scripts that produce the published artefacts and the importable library: a pre-registered robustness experiment scored through the library detected five dual-duct scenarios the scorecard does not, under every condition including one that touches only the occupancy signal; the library's residual noise floor had not received the per-day repair of Section~\ref{sec:protocol}, a defect the regression gate could not see because it regenerates through the scripts, and the one facade test of the time checked a single system's per-channel flag counts, not the null pair. The library was repaired, a guard now pins its residual null to the scorecard's, and the experiment was re-run against a clean arm through the same code path.\footnote{X31 Amendment 1, \texttt{docs/plans/2026-09-24-x31-field-conditions-prereg.md}; \texttt{tests/test\_facade\_residual\_null.py}.}
 
@@ -570,6 +570,71 @@ The evaluation protocol is offered as a contribution in its own right. Four pre-
 \section*{Acknowledgements}
 
 The author thanks Dr.\ Anthony Aighobahi and Dr.\ Mridula Sharma for supervision throughout this project. AI coding assistants were used for implementation, analysis scripting, and adversarial auditing of results; all experimental designs, pre-registrations, and claims were reviewed and approved by the author.
+
+\appendix
+\section{Every pre-registered experiment}
+\label{app:ledger}
+
+Tables~\ref{tab:ledger} and \ref{tab:ledger-b} list every pre-registered experiment in the order it was run, with its pre-registered prediction, its outcome and what fired. Each row resolves to a ledger under \texttt{outputs/} or, where noted in the repository's research log, to the phase report; amendments are folded into the row they amend.
+
+\begin{table}[p]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
+\hline
+ID & Question & Pre-registered prediction & Outcome & Fired / failed \\
+\hline
+--- & Do discovered unit models out-detect a hand-written rule? & The model channel covers more fault days than any matched rule & A one-line matched rule covered 192 days against the model channel's 135, at 0 of 365 healthy false alarms & Falsifier fired (matched-rule ablation) \\
+--- & Does behavioural structure transfer zero-shot to a new building? & Source-fitted bands detect faults on the target system & 0 of 14 single-duct scenarios detected under the confidence-bound gate & Falsifier fired (cold-start detection) \\
+--- & Does model support predict where a transplanted rule holds? Three amendments. & Spearman $\rho < 0$ with permutation $p < 0.05$ over nine cells & $\rho = -0.69$, $p = 0.200$; the valid null over three buildings has minimum $p = 0.167$ & F1 and F2 fired, then both voided; never had power \\
+X5 & Are severity ladders monotone in dose? & No ladder is significantly anti-monotone & Series-unit fouling $\rho = +0.87$; no anti-monotone ladder; F-X5.a nearly unfireable at $n = 5$ & None \\
+X7 & Does healthy silence survive 15-minute resampling? & Healthy signature days and residual coverage are preserved & Healthy years gain 28, 64 and 64 signature days; one residual's coverage falls 31 to 1 & F-X7.a (three systems) and F-X7.b \\
+X8 & Does training contamination break extreme-value calibration? & Breakdown at small contamination; mild sources stay visible to rules & One score-carrying contaminated day collapses both negative coil-bias rungs, 164 of 164 to 0 & None \\
+X9/ X10 & Is the deployed detector robust to sensor jitter and to the holdout split? & Detections change by at most 3; false alarms under 10\,\% & Counts unchanged at $1\times$ jitter, within one on the mirrored split; 0 to 4 false alarms of 96 & None \\
+X11 & Is the single-duct OA-bias detection the fault or the configuration branch? & Five baseline estimators agree; the branch offset explains the flags & Offset $+1.06\,^\circ$F; OA-bias drops to 0 flags on 148 window days; 14/14 becomes 13/14 & F-X11.d fired on run 1; leg re-specified \\
+X12 & Does the model's time perspective recover missed scenarios? & The duration channel newly detects missed scenarios & 11 scenarios significant but 0 newly detected; unique against frequency on 11 & None; P3 failed without one \\
+X13 & Does a water-side coil-effectiveness residual separate reheat fouling? & At least 6 of the 9 fouling scenarios it counted significant & 1 of the 12 fouling files scored significant, already detected elsewhere; nothing newly detected & F-X13.b \\
+X14 & Was the discovered model starved of vocabulary? & At least one newly detected scenario inside the false-alarm budget & One newly detected; model channel fires on 14 scenarios against 5; 7, 18 and 21 false alarms of 96 & F-X14.a (budget) \\
+X15 & Does the enriched gain survive frequency-only scoring under two splits? & The gain is significant under both splits and inside budget & The same one scenario is significant under both splits; 41 significant against 12 deployed & None \\
+X17 & Can a dual-duct air handler be onboarded by configuration alone? & Config-only, gates clean, at least 60\,\% of scenarios detected & 45 of 55 detected (81.8\,\%) at 3 false alarms of 96; one silence iteration & None; P6 failed (5 fouling, not $\le 4$) \\
+X18 & Does the enriched-frequency gain replicate on the dual-duct unit? & A missed fouling scenario becomes significant under both splits & 0 newly significant; enriched 22 against deployed 8 on already-detected scenarios & F-X18.b \\
+X19 run 1 & Can a fan coil unit be onboarded by configuration alone? & Gates clean, at most 10 false alarms of 96, no conformance-only scenario & All 47 scenarios ``detected'' at 28 false alarms of 96; 6 conformance-only & F-X19.b and F-X19.d \\
+\hline
+\end{tabular}
+\caption{Every pre-registered experiment, its prediction, its outcome and what fired (part 1 of 2).}
+\label{tab:ledger}
+\end{table}
+
+\begin{table}[p]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
+\hline
+ID & Question & Pre-registered prediction & Outcome & Fired / failed \\
+\hline
+X19 A1 & Does the amended fan coil onboarding hold? & Budget restored and no conformance-only detection & 41 of 47 detected at 4 false alarms of 96; 0 conformance-only & None \\
+X20 & Is model support the log's own heating-day count across four buildings? & The identity holds on every building; $\rho < 0$ at $p < 0.05$ & $\rho = -1$, exact one-sided $p = 1/24 = 0.042$; the identity misses by 44 days on the fan coil unit & F-X20.a and F-X20.b \\
+X21 & Can a net's reading of a foreign year escape being that log's count? & The bound holds, the tautology persists, the ordering matches the count & The tautology fails on 6 of 12 pairs; the foreign predictor gives $\rho = -0.6$ against the count's $-1$ & F-X21.a; P3 failed without one \\
+X22 & Does the conformance channel fire on injected order violations? & Reversal is significant on the single-duct unit & Significant on 2 of 5 systems; the single-duct hit rate is 0 at zero false alarms & None; P1--P4 failed \\
+X24 & Does an outdoor-air-fraction residual add detections? & The 20\,\% damper leak is detected, budget held, nothing lost & Fan coil 41 to 42 of 47 at 4 false alarms of 96; no system loses a detection & None \\
+X25 steps 1--2 & Are the conformance thresholds calibrated out of sample? & Rows out of sample, budget $\le 10$ of 96, at most 3 verdict flips & All held at 0 verdict flips; the in-sample rows had understated false alarms by 3 and 4 days & None \\
+X25 step 3 & Does a max(fp,3)/n floor on the pooled denominator keep verdicts? & Counts within 2 and at most 3 verdict flips & Held at 2 verdict flips; one dual-duct scenario gained, one series-unit scenario lost & None \\
+X25 step 4 & Does a per-day residual null keep the detections? & Each system's count stays within 2 & The series unit loses 3 detections and 8 verdicts flip; budgets unchanged & F-X25.c \\
+X26 (+A1) & Does the false-alarm budget hold on a real building? & At most 3 silence iterations, false alarms under 10\,\%, the fault case flagged & 6.1\,\% false-alarm days with every channel in budget; the 40\,\% undercharge case is not flagged & None; both case predictions failed \\
+X27 & Does a fan-law virtual static recover static-pressure biases? & At least 7 of 8 static-bias scenarios detected & 6 of 8 detected; budget held and nothing lost & F-X27.b \\
+X28 & Does a water-side coil UA channel see the simulated fouling? & At least 3 dual-duct and 2 fan coil fouling scenarios gained & 0 gained on either system; run 1 also broke the fan coil budget & F-X28.b; run 1 also F-X28.a \\
+X29 & Is fouling visible when the refrigerant side is recorded? & At least 3 of 5 condenser and 3 of 5 evaporator severities detected, monotone & All 10 fouling severities detected and monotone at 0 false alarms of 28 & None \\
+X30 & Does any other process-mining instrument see the deployed misses? & No cell detects a miss within 3 false alarms & 33 cells against 33 missed scenarios, 0 detections; worst cell 7 of 72 (9.7\,\%) & F-X30.b (two cells not evaluated) \\
+X31 (+A1) & Does the detector survive field noise, change-of-value logging and schedule shifts? & Budget held everywhere; the schedule arm within $\pm 1$ detection & Budgets held; the dual-duct schedule arm reaches 48 against the clean arm's 45 & None; P3 and the A1 prediction failed \\
+\hline
+\end{tabular}
+\caption{Every pre-registered experiment, its prediction, its outcome and what fired (part 2 of 2).}
+\label{tab:ledger-b}
+\end{table}
 
 \bibliographystyle{plain}
 \bibliography{references}

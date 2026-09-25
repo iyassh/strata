@@ -27,4 +27,11 @@ def test_facade_residual_null_matches_scorecard(system, healthy):
         raise ImportError("alignment strata off for this guard")
     detmod.build_detector = _off
     det = fit(load_config(str(REPO / f"configs/lbnl_{system}")), pd.read_parquet(data))
-    assert list(det.residual_holdout) == json.loads(card.read_text())["residual_holdout_fp"]
+    b = json.loads(card.read_text())
+    assert list(det.residual_holdout) == b["residual_holdout_fp"]
+    assert [det.freq_unit.holdout_fp_days, det.freq_unit.holdout_days] == b["frequency"]["unit_holdout_fp"]
+    if b["frequency"]["device_holdout_fp"] is not None:
+        assert [det.freq_dev.holdout_fp_days, det.freq_dev.holdout_days] == b["frequency"]["device_holdout_fp"]
+    u = json.loads((REPO / f"outputs/union_fpr_{system}.json").read_text())["channels"]
+    if det.osc_det is not None and "osc" in u:
+        assert det.osc_det.holdout_fp_days == u["osc"]["holdout_fp_days"]

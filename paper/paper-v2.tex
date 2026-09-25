@@ -579,9 +579,9 @@ Tables~\ref{tab:ledger} and \ref{tab:ledger-b} list every pre-registered experim
 
 \begin{table}[p]
 \centering
-\small
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.15}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.05}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
 \hline
 ID & Question & Pre-registered prediction & Outcome & Fired / failed \\
@@ -599,8 +599,6 @@ X13 & Does a water-side coil-effectiveness residual separate reheat fouling? & A
 X14 & Was the discovered model starved of vocabulary? & At least one newly detected scenario inside the false-alarm budget & One newly detected; model channel fires on 14 scenarios against 5; 7, 18 and 21 false alarms of 96 & F-X14.a (budget) \\
 X15 & Does the enriched gain survive frequency-only scoring under two splits? & The gain is significant under both splits and inside budget & The same one scenario is significant under both splits; 41 significant against 12 deployed & None \\
 X17 & Can a dual-duct air handler be onboarded by configuration alone? & Config-only, gates clean, at least 60\,\% of scenarios detected & 45 of 55 detected (81.8\,\%) at 3 false alarms of 96; one silence iteration & None; P6 failed (5 fouling, not $\le 4$) \\
-X18 & Does the enriched-frequency gain replicate on the dual-duct unit? & A missed fouling scenario becomes significant under both splits & 0 newly significant; enriched 22 against deployed 8 on already-detected scenarios & F-X18.b \\
-X19 run 1 & Can a fan coil unit be onboarded by configuration alone? & Gates clean, at most 10 false alarms of 96, no conformance-only scenario & All 47 scenarios ``detected'' at 28 false alarms of 96; 6 conformance-only & F-X19.b and F-X19.d \\
 \hline
 \end{tabular}
 \caption{Every pre-registered experiment, its prediction, its outcome and what fired (part 1 of 2).}
@@ -609,13 +607,15 @@ X19 run 1 & Can a fan coil unit be onboarded by configuration alone? & Gates cle
 
 \begin{table}[p]
 \centering
-\small
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.15}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.05}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
 \hline
 ID & Question & Pre-registered prediction & Outcome & Fired / failed \\
 \hline
+X18 & Does the enriched-frequency gain replicate on the dual-duct unit? & A missed fouling scenario becomes significant under both splits & 0 newly significant; enriched 22 against deployed 8 on already-detected scenarios & F-X18.b \\
+X19 run 1 & Can a fan coil unit be onboarded by configuration alone? & Gates clean, at most 10 false alarms of 96, no conformance-only scenario & All 47 scenarios ``detected'' at 28 false alarms of 96; 6 conformance-only & F-X19.b and F-X19.d \\
 X19 A1 & Does the amended fan coil onboarding hold? & Budget restored and no conformance-only detection & 41 of 47 detected at 4 false alarms of 96; 0 conformance-only & None \\
 X20 & Is model support the log's own heating-day count across four buildings? & The identity holds on every building; $\rho < 0$ at $p < 0.05$ & $\rho = -1$, exact one-sided $p = 1/24 = 0.042$; the identity misses by 44 days on the fan coil unit & F-X20.a and F-X20.b \\
 X21 & Can a net's reading of a foreign year escape being that log's count? & The bound holds, the tautology persists, the ordering matches the count & The tautology fails on 6 of 12 pairs; the foreign predictor gives $\rho = -0.6$ against the count's $-1$ & F-X21.a; P3 failed without one \\

@@ -186,14 +186,14 @@
    {
     "file": "coi_stuck_010_annual",
     "label": "valve stuck 10%",
-    "naive_channels": "rules+rate",
+    "naive_channels": "rules+resid+rate",
     "adjudicated_deployed_channels": "rules",
     "detected": true
    },
    {
     "file": "coi_stuck_025_annual",
     "label": "valve stuck 25%",
-    "naive_channels": "rules+rate",
+    "naive_channels": "rules+resid+rate",
     "adjudicated_deployed_channels": "rules",
     "detected": true
    },
@@ -221,8 +221,8 @@
    {
     "file": "coi_bias_-4_annual",
     "label": "SA sensor bias -4C",
-    "naive_channels": "resid+rate",
-    "adjudicated_deployed_channels": "resid",
+    "naive_channels": "resid+rate+osc",
+    "adjudicated_deployed_channels": "osc+resid",
     "detected": true
    },
    {

@@ -27,6 +27,10 @@ FROZEN = {
     "x18_ddahu_enriched_frequency.json": "50eb13f",
     "x21_foreign_net_support.json": "b2575b9",
     "x22_positive_control.json": "b18aa84",
+    # X33 coverage series (2026-09-25): the reference configurations now map every recorded column, so
+    # X7 (15-minute downsampling, run under the configurations of 2026-09-11) regenerates differently;
+    # it is a record of that experiment and is compared against its last pre-X33 commit (design D5).
+    "x7_downsample.json": "8f06f19",
 }
 
 # artifact (relative to outputs/) -> command that regenerates it

@@ -52,7 +52,7 @@
       "family": "valve_stuck",
       "seeded_zone": null,
       "alarm_device": null,
-      "channels": "rules+rate",
+      "channels": "rules+resid+rate",
       "attribution": "no_device_stratum"
     },
     {
@@ -61,7 +61,7 @@
       "family": "valve_stuck",
       "seeded_zone": null,
       "alarm_device": null,
-      "channels": "rules+rate",
+      "channels": "rules+resid+rate",
       "attribution": "no_device_stratum"
     },
     {
@@ -97,7 +97,7 @@
       "family": "sensor_bias",
       "seeded_zone": null,
       "alarm_device": null,
-      "channels": "resid+rate",
+      "channels": "resid+rate+osc",
       "attribution": "no_device_stratum"
     },
     {

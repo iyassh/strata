@@ -5,7 +5,7 @@
  "total_days": 365,
  "exposure": {
   "occupied_holdout_days": 79,
-  "residual_evaluable_holdout_days": 74,
+  "residual_evaluable_holdout_days": 79,
   "rate_windowed_holdout_days": 80
  },
  "channels": {
@@ -134,14 +134,14 @@
   "scenarios_with_rate_significant": [
    {
     "label": "valve stuck 10%",
-    "channels": "rules+rate",
+    "channels": "rules+resid+rate",
     "ttd_days": 1,
     "first_rate_day": "2018-02-02",
     "rate_only_alarm_days": 0
    },
    {
     "label": "valve stuck 25%",
-    "channels": "rules+rate",
+    "channels": "rules+resid+rate",
     "ttd_days": 1,
     "first_rate_day": "2018-02-02",
     "rate_only_alarm_days": 0
@@ -169,10 +169,10 @@
    },
    {
     "label": "SA sensor bias -4C",
-    "channels": "resid+rate",
+    "channels": "resid+rate+osc",
     "ttd_days": 2,
     "first_rate_day": "2018-02-05",
-    "rate_only_alarm_days": 127
+    "rate_only_alarm_days": 111
    }
   ],
   "violations": []

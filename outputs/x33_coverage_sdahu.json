@@ -1,0 +1,144 @@
+{
+  "prereg": "docs/plans/2026-09-25-x33-coverage-series-prereg.md",
+  "system": "sdahu",
+  "before_commit": "8f06f19",
+  "after_commit": "working tree",
+  "columns_mapped": [
+    12,
+    26
+  ],
+  "columns_excluded": [
+    "OA_CFM",
+    "SA_SP",
+    "SA_SPSPT",
+    "SF_SPD"
+  ],
+  "new_rules": [
+    "rf_specific_power",
+    "rf_speed_mismatch",
+    "sf_flow_per_speed",
+    "sf_specific_power"
+  ],
+  "scored": 14,
+  "detected_before": 14,
+  "detected_after": 14,
+  "gained": [],
+  "lost": [],
+  "channel_changes": {
+    "coi_stuck_010_annual": {
+      "before": "rules+rate",
+      "after": "rules+resid+rate",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        0,
+        118
+      ]
+    },
+    "coi_stuck_025_annual": {
+      "before": "rules+rate",
+      "after": "rules+resid+rate",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        0,
+        87
+      ]
+    },
+    "coi_bias_-4_annual": {
+      "before": "resid+rate",
+      "after": "resid+rate+osc",
+      "ttd_before": 2,
+      "ttd_after": 2,
+      "residual_days": [
+        164,
+        164
+      ]
+    }
+  },
+  "ttd_later": [],
+  "deployed_fp": [
+    1,
+    1
+  ],
+  "per_channel_fp": {
+    "rules": [
+      0,
+      0
+    ],
+    "resid": [
+      0,
+      0
+    ],
+    "model": [
+      0,
+      0
+    ],
+    "device": [
+      0,
+      0
+    ],
+    "absence": [
+      0,
+      0
+    ],
+    "freq": [
+      1,
+      1
+    ],
+    "rate": [
+      14,
+      14
+    ],
+    "osc": [
+      0,
+      0
+    ]
+  },
+  "model_rows_identical": true,
+  "new_rule_holdout_fp": {
+    "rf_specific_power": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 79,
+      "band": [
+        0.00021495945282946303,
+        0.00041222170881325657
+      ]
+    },
+    "sf_flow_per_speed": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 79,
+      "band": [
+        597476.6759791657,
+        807934.8754699405
+      ]
+    },
+    "sf_specific_power": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 79,
+      "band": [
+        0.0009018443205651361,
+        0.001500701260813641
+      ]
+    }
+  },
+  "new_rule_credited_scenarios": {},
+  "residual_days_rose_and_credited": [
+    "coi_stuck_010_annual",
+    "coi_stuck_025_annual"
+  ],
+  "adoption": {
+    "rf_specific_power": "keep",
+    "sf_flow_per_speed": "keep",
+    "sf_specific_power": "keep"
+  },
+  "predictions": {
+    "P1_no_loss": true,
+    "P2_budget": true,
+    "P2_new_rule_fp_le_3": true,
+    "P3_some_new_channel_credited": true,
+    "P4_ttd_not_later": true,
+    "P5_model_rows_identical": true
+  },
+  "falsifiers_fired": []
+}

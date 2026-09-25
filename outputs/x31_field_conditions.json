@@ -1,0 +1,335 @@
+{
+  "prereg": "docs/plans/2026-09-24-x31-field-conditions-prereg.md",
+  "systems": {
+    "sdahu": {
+      "clean_detected": 14,
+      "clean_holdout_fp": 1,
+      "scorecard_detected": 14,
+      "scorecard_holdout_fp": 1,
+      "scorecard_holdout_fp_without_absence": 1,
+      "absence_channel_evaluated": false,
+      "facade_matches_scorecard_detections": true,
+      "facade_matches_scorecard_fp_without_absence": true,
+      "calendar": {
+        "optimum_start_days": 52,
+        "holidays": [
+          "2018-02-23",
+          "2018-04-04",
+          "2018-07-26",
+          "2018-08-16",
+          "2018-09-07",
+          "2018-10-01"
+        ]
+      },
+      "conditions": {
+        "field_noise": {
+          "detected": 14,
+          "n_scored": 14,
+          "holdout_fp_days": 1,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 0,
+            "absence": 0,
+            "frequency": 1,
+            "oscillation": 0
+          },
+          "gained": [],
+          "lost": [],
+          "seconds": 42,
+          "P1_budget": true,
+          "P2_within_minus_3": true
+        },
+        "cov_gaps": {
+          "detected": 13,
+          "n_scored": 14,
+          "holdout_fp_days": 0,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 0,
+            "absence": 0,
+            "frequency": 0,
+            "oscillation": 0
+          },
+          "gained": [],
+          "lost": [
+            "oa_bias_4_annual"
+          ],
+          "seconds": 43,
+          "P1_budget": true,
+          "P2_within_minus_3": true
+        },
+        "schedule": {
+          "detected": 14,
+          "n_scored": 14,
+          "holdout_fp_days": 1,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 0,
+            "absence": 0,
+            "frequency": 1,
+            "oscillation": 0
+          },
+          "gained": [],
+          "lost": [],
+          "seconds": 47,
+          "P1_budget": true,
+          "P3_within_pm_1_and_fp_le_clean_plus_2": true
+        },
+        "combined": {
+          "detected": 14,
+          "n_scored": 14,
+          "holdout_fp_days": 1,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 0,
+            "absence": 0,
+            "frequency": 1,
+            "oscillation": 0
+          },
+          "gained": [],
+          "lost": [],
+          "seconds": 68,
+          "P1_budget": true,
+          "P4_within_minus_4": true
+        }
+      }
+    },
+    "ddahu": {
+      "clean_detected": 45,
+      "clean_holdout_fp": 0,
+      "scorecard_detected": 45,
+      "scorecard_holdout_fp": 3,
+      "scorecard_holdout_fp_without_absence": 0,
+      "absence_channel_evaluated": false,
+      "facade_matches_scorecard_detections": true,
+      "facade_matches_scorecard_fp_without_absence": true,
+      "calendar": {
+        "optimum_start_days": 52,
+        "holidays": [
+          "2018-03-07",
+          "2018-03-19",
+          "2018-06-12",
+          "2018-10-03",
+          "2018-10-05",
+          "2018-11-06"
+        ]
+      },
+      "conditions": {
+        "field_noise": {
+          "detected": 44,
+          "n_scored": 55,
+          "holdout_fp_days": 1,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 1,
+            "absence": 0,
+            "frequency": 0,
+            "oscillation": 0
+          },
+          "gained": [],
+          "lost": [
+            "DualDuct_SensorBias_CSP_-4inwg"
+          ],
+          "seconds": 574,
+          "P1_budget": true,
+          "P2_within_minus_3": true
+        },
+        "cov_gaps": {
+          "detected": 42,
+          "n_scored": 55,
+          "holdout_fp_days": 2,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 0,
+            "absence": 0,
+            "frequency": 0,
+            "oscillation": 2
+          },
+          "gained": [],
+          "lost": [
+            "DualDuct_Fouling_Cooling_Airside_Severe",
+            "DualDuct_SensorBias_CSP_-2inwg",
+            "DualDuct_SensorBias_CSP_-4inwg"
+          ],
+          "seconds": 727,
+          "P1_budget": true,
+          "P2_within_minus_3": true
+        },
+        "schedule": {
+          "detected": 48,
+          "n_scored": 55,
+          "holdout_fp_days": 0,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 0,
+            "absence": 0,
+            "frequency": 0,
+            "oscillation": 0
+          },
+          "gained": [
+            "DualDuct_SensorBias_HSA_+2C",
+            "DualDuct_SensorBias_HSP_-2inwg",
+            "DualDuct_SensorBias_HSP_-4inwg"
+          ],
+          "lost": [],
+          "seconds": 546,
+          "P1_budget": true,
+          "P3_within_pm_1_and_fp_le_clean_plus_2": false
+        },
+        "combined": {
+          "detected": 45,
+          "n_scored": 55,
+          "holdout_fp_days": 1,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 1,
+            "absence": 0,
+            "frequency": 0,
+            "oscillation": 0
+          },
+          "gained": [
+            "DualDuct_SensorBias_HSA_+2C",
+            "DualDuct_SensorBias_HSP_-4inwg"
+          ],
+          "lost": [
+            "DualDuct_SensorBias_CSP_-2inwg",
+            "DualDuct_SensorBias_CSP_-4inwg"
+          ],
+          "seconds": 860,
+          "P1_budget": true,
+          "P4_within_minus_4": true
+        }
+      }
+    },
+    "fcu": {
+      "clean_detected": 40,
+      "clean_holdout_fp": 3,
+      "scorecard_detected": 40,
+      "scorecard_holdout_fp": 3,
+      "scorecard_holdout_fp_without_absence": 3,
+      "absence_channel_evaluated": false,
+      "facade_matches_scorecard_detections": true,
+      "facade_matches_scorecard_fp_without_absence": true,
+      "calendar": {
+        "optimum_start_days": 52,
+        "holidays": [
+          "2018-01-10",
+          "2018-03-01",
+          "2018-03-14",
+          "2018-04-23",
+          "2018-07-31",
+          "2018-09-13"
+        ]
+      },
+      "conditions": {
+        "field_noise": {
+          "detected": 39,
+          "n_scored": 47,
+          "holdout_fp_days": 3,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 1,
+            "absence": 0,
+            "frequency": 0,
+            "oscillation": 2
+          },
+          "gained": [],
+          "lost": [
+            "FCU_OADMPRLeak_80"
+          ],
+          "seconds": 233,
+          "P1_budget": true,
+          "P2_within_minus_3": true
+        },
+        "cov_gaps": {
+          "detected": 40,
+          "n_scored": 47,
+          "holdout_fp_days": 3,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 3,
+            "absence": 0,
+            "frequency": 0,
+            "oscillation": 0
+          },
+          "gained": [],
+          "lost": [],
+          "seconds": 300,
+          "P1_budget": true,
+          "P2_within_minus_3": true
+        },
+        "schedule": {
+          "detected": 40,
+          "n_scored": 47,
+          "holdout_fp_days": 3,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 3,
+            "absence": 0,
+            "frequency": 0,
+            "oscillation": 0
+          },
+          "gained": [],
+          "lost": [],
+          "seconds": 258,
+          "P1_budget": true,
+          "P3_within_pm_1_and_fp_le_clean_plus_2": true
+        },
+        "combined": {
+          "detected": 39,
+          "n_scored": 47,
+          "holdout_fp_days": 1,
+          "holdout_days": 96,
+          "per_channel_fp": {
+            "rules": 0,
+            "residual": 1,
+            "absence": 0,
+            "frequency": 0,
+            "oscillation": 0
+          },
+          "gained": [],
+          "lost": [
+            "FCU_OADMPRLeak_80"
+          ],
+          "seconds": 371,
+          "P1_budget": true,
+          "P4_within_minus_4": true
+        }
+      }
+    }
+  },
+  "predictions": {
+    "P1_budget_all": true,
+    "P1_failures": [],
+    "P2_noise_cov_within_minus_3": true,
+    "P2_failures": [],
+    "P3_schedule_within_pm_1": false,
+    "P3_failures": [
+      [
+        "ddahu",
+        "schedule",
+        48,
+        45,
+        0,
+        0
+      ]
+    ],
+    "P4_combined_within_minus_4": true,
+    "P4_failures": [],
+    "not_evaluated": [],
+    "clean_arm_matches_scorecard": true,
+    "absence_channel_evaluated": false
+  },
+  "falsifiers_fired": []
+}

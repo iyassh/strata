@@ -168,6 +168,16 @@ the training days and thresholded on the calibration slice, detect none of the
 conformance null is a property of the state-event log, not of the miner or the
 measure ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)).
 
+Field conditions (X31): sensor error with 5% feedback quantisation,
+change-of-value logging with gaps, and schedule shifts with holidays, injected
+into the fault-free year and every fault file of SDAHU, DDAHU and FCU and
+re-fitted: the budget holds in every cell (worst 3/96), the costliest condition
+(change-of-value logging) loses at most three detections, and the schedule shift
+gains three (reported as a wrong prediction, not a result). The first pass of
+this experiment exposed a drift between the library and the benchmark scripts
+(a pooled residual noise floor), repaired and guarded before the re-run
+([PHASE11_RESULTS.md](PHASE11_RESULTS.md), X31 and Amendment 1).
+
 FCU: 29 sensor mappings, 23 rules, two healthy-silence iterations, no source
 change; the hash gate found a byte-identical pair under two family labels
 (scored once, [ERRATA.md](ERRATA.md) E6); both new scorecard families — airflow

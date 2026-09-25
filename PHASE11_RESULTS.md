@@ -525,3 +525,98 @@ instruments are not merely noisy, they are silent. The two heuristics-
 miner timeouts (series fan-powered and dual-duct units) are the
 alignment cost of heuristics nets with many silent transitions on
 365-day scenario logs; they are reported, not counted.
+
+## X31 — field conditions: sensor error, change-of-value logging, schedule shifts
+
+*Pre-registered (`docs/plans/2026-09-24-x31-field-conditions-prereg.md`) before
+any perturbed file was scored; Amendment 1 (facade repair, clean comparator
+arm, full re-run) written before the re-run. Artefacts:
+`outputs/x31_field_conditions.json` (ledger) and
+`x31_field_conditions_{sdahu,ddahu,fcu}.json`; guards
+`tests/test_x31_field_conditions.py`, `tests/test_facade_residual_null.py`.
+Runtime ≈ 1 h in three processes; not in the regression gate.*
+
+X9/X10 injected i.i.d. jitter at sensor precision. Real buildings differ from
+simulation in ways that jitter does not cover: duct sensors err by about
+±0.9 °F, damper feedback is quantised to 5 % steps, building automation
+systems log by change-of-value with stale repeats and gaps, and schedules
+move. X31 injects each (and all three) into the simulated fault-free year
+*and* every fault file with common random numbers, re-fits the deployed
+detector on the perturbed year and scores every scenario, on three
+equipment classes:
+
+- **field_noise**: temperatures + N(0, 0.9 °F); flows × (1 + N(0, 0.02));
+  positions quantised to 0.05 then + N(0, 0.01), clipped to [0, 1].
+- **cov_gaps**: per-column change-of-value logging (deadbands 0.5 °F, 0.02
+  position, 2 % flow; last value carried forward) plus 2 % of minutes removed
+  in 30-minute blocks.
+- **schedule**: on a seeded 20 % of weekdays occupancy starts 30 minutes
+  earlier; six seeded weekdays are holidays (occupancy 0). One calendar per
+  system, applied to every file.
+- **combined**: all three.
+
+**First pass and Amendment 1.** The first pass compared each condition against
+the published scorecard and found every DDAHU condition — including the
+schedule shift, which touches only the occupancy signal — at 50 of 55
+against the scorecard's 45, with the same four scenarios gained each time.
+The cause was in the library facade, not the perturbation: `pipeline.fit`
+still pooled the residual noise floor over channel-days (X25 step 3, 3/509
+on DDAHU) where `scripts/benchmark.py` had moved to the per-day null of
+step 4 (3/124). The regression gate regenerates artefacts through the
+scripts and could not see the drift. The facade was repaired, a guard now
+pins its residual, frequency and oscillation nulls to the scorecards', a
+**clean arm** (the same facade on the unperturbed files) became the
+comparator, and every arm was re-run (L55). The clean arm reproduces the
+scorecard's deployed-channel detections exactly on all three systems
+(14, 45, 40).
+
+| system | clean | field_noise | cov_gaps | schedule | combined |
+|---|---|---|---|---|---|
+| SDAHU detected / 14 | 14 | 14 | 13 (−1: OA-temp bias +4 °F) | 14 | 14 |
+| SDAHU false alarms / 96 | 1 | 1 | 0 | 1 | 1 |
+| DDAHU detected / 55 | 45 | 44 (−1: CSP bias −4 in.wg) | 42 (−3: cooling airside fouling severe, CSP bias −2/−4) | **48 (+3: HSA bias +2 °C, HSP bias −2/−4 in.wg)** | 45 (+2 HSA/HSP, −2 CSP) |
+| DDAHU false alarms / 96 | 0 | 1 | 2 | 0 | 1 |
+| FCU detected / 47 | 40 | 39 (−1: OA damper leak 80 %) | 40 | 40 | 39 (−1: leak 80 %) |
+| FCU false alarms / 96 | 3 | 3 | 3 | 3 | 1 |
+
+False alarms are the deployed union without the alignment channels; the
+scorecard's DDAHU count of 3 is three absence-channel days, and the absence
+channel is not exercised here (below), so the clean arm's 0 is the matching
+comparator (the ledger records both).
+
+| P1 budget (≤ 10/96 and ≤ 2·clean + 2, every cell) | P2 noise / COV within −3 | P3 schedule within ±1, FP ≤ clean + 2 | P4 combined within −4 | falsifiers |
+|---|---|---|---|---|
+| ✓ (worst 3/96) | ✓ (worst −3, DDAHU cov_gaps, at the bar) | ✗ **failed upward**: DDAHU +3 at 0 false alarms | ✓ (worst −1) | none named (F-X31.b covers P2/P4 only); P3 reported as a wrong prediction |
+
+**Reading.** The budget survives every condition on every system, and the
+noise-floor gate does what it is for: the re-fitted bands absorb the
+sensor error and the stale logging, and the false-alarm count never exceeds
+the clean count by more than two days. The detection cost is small and
+named: change-of-value logging is the harshest condition (it loses the
+SDAHU outdoor-air-temperature bias, whose residual sits just outside the
+band and is now held stale, and three DDAHU scenarios at the smaller bias
+magnitudes); field noise costs one detection on DDAHU and one on FCU; the
+combined condition costs at most one, because the noise breaks the
+stale-value plateaus that the deadband alone produces (SDAHU recovers the
+bias it lost under COV alone). The schedule shift gains three DDAHU
+sensor-bias detections at zero false alarms — the one prediction that was
+wrong, and wrong upward. The diagnostic (same facade, clean vs schedule
+fit, the four scenarios re-evaluated) shows the residual noise floor
+unchanged (0 of 75) and every band unchanged but one: the hot-deck residual
+band's top falls from 9.28 to 4.87 °F, because the single training day that
+set it became one of the six seeded holidays and dropped out of calibration.
+With the narrower band the biased hot-deck files flag 87, 26 and 79 residual
+days instead of 16, 7 and 8, and clear the gate. The detections are real
+under that calibration and the false alarms stay at zero, but they hinge on
+a band whose edge one day sets — the discrete-ladder fragility of extreme
+`[min, max]` calibration that the residual method's docstring already
+records. They are reported as a wrong prediction, not credited to the
+detector, and the fragility is logged as a gap for a quantile-band
+experiment (not run tonight).
+
+**Not evaluated.** The absence channel rides on the device stratum, which
+the alignment-off setting removes (X9/X10 Amendment 3, for cost on
+inflated logs); X31 therefore exercises rules, residual, frequency and
+oscillation. The holiday risk the pre-registration named for the absence
+channel is untested here and is recorded as such. The fan-powered units were
+not run (compute), so the robustness claim covers the three classes above.

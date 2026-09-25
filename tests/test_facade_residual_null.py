@@ -14,7 +14,7 @@ sys.path.insert(0, str(REPO / "src"))
 
 
 @pytest.mark.parametrize("system,healthy", [("sdahu", "AHU_annual"), ("ddahu", "DualDuct_FaultFree")])
-def test_facade_residual_null_matches_scorecard(system, healthy):
+def test_facade_residual_null_matches_scorecard(system, healthy, monkeypatch):
     card = REPO / f"outputs/benchmark_v6_{system}.json"
     data = REPO / f"data/processed/{system}/{healthy}.parquet"
     if not card.exists() or not data.exists():
@@ -25,7 +25,7 @@ def test_facade_residual_null_matches_scorecard(system, healthy):
 
     def _off(*_a, **_k):
         raise ImportError("alignment strata off for this guard")
-    detmod.build_detector = _off
+    monkeypatch.setattr(detmod, "build_detector", _off)   # undone after the test: other tests need the real one
     det = fit(load_config(str(REPO / f"configs/lbnl_{system}")), pd.read_parquet(data))
     b = json.loads(card.read_text())
     assert list(det.residual_holdout) == b["residual_holdout_fp"]

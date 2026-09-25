@@ -93,6 +93,7 @@ PIPELINE = {
     "union_fpr_rtu_sim.json": "uv run python scripts/union_fpr.py rtu_sim",
     "x29_residual_credits.json": "uv run python scripts/x29_residual_credits.py",
     "x29_refrigerant_observability.json": "uv run python scripts/x29_refrigerant_observability.py",
+    # x31_field_conditions*.json: ~1 h in three per-system processes; not in the gate — guard tests/test_x31_field_conditions.py pins it.
     # x30_method_grid.json: ~2 h (alignments on 365-day logs; per-cell 15-min budget); not in the gate — guard tests/test_x30_method_grid.py pins it.
     # x9_x10_robustness.json: ~1 h in three per-system processes (see its pre-registration); not in the gate.
     "discovery_predicts_transfer_q.json": "uv run python scripts/discovery_predicts_transfer_q.py",

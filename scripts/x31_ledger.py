@@ -23,6 +23,12 @@ def clean_detected(system: str) -> set[str]:
     return {c["file"] for c in card if c["is_fault"] and not c["excluded"] and set(str(c["meaningful_channels"]).split("+")) & DEPLOYED}
 
 
+def absence_fp_dates(system: str) -> list[str]:
+    u = json.loads((REPO / f"outputs/union_fpr_{system}.json").read_text())["channels"]
+    others = set().union(*[set(v["holdout_fp_dates"]) for k, v in u.items() if k in ("rules", "resid", "freq", "osc")])
+    return [d for d in u.get("absence", {}).get("holdout_fp_dates", []) if d not in others]
+
+
 def main() -> int:
     out = {"prereg": "docs/plans/2026-09-24-x31-field-conditions-prereg.md", "systems": {}, "predictions": {}, "falsifiers_fired": []}
     p1_fail, p2_fail, p3_fail, p4_fail, not_eval = [], [], [], [], []
@@ -41,9 +47,16 @@ def main() -> int:
         else:
             clean_set = {k for k, v in ca["per_scenario"].items() if v}
             clean_det, clean_fp = ca["detected"], ca["holdout_fp_days"]
-            facade_ok = (clean_det == card_det and clean_fp == card_fp)
+            facade_ok = (clean_det == card_det)
+        # The absence channel rides on the device stratum, which the alignment-off setting removes
+        # (X9/X10 Amendment 3), so X31 exercises rules, residual, frequency and oscillation only;
+        # the scorecard's false alarms are compared without absence days.
+        card_fp_no_absence = card_fp - len(set(uabs)) if (uabs := absence_fp_dates(s)) else card_fp
         sysrow = {"clean_detected": clean_det, "clean_holdout_fp": clean_fp, "scorecard_detected": card_det, "scorecard_holdout_fp": card_fp,
-                  "facade_matches_scorecard": facade_ok, "calendar": a["calendar"], "conditions": {}}
+                  "scorecard_holdout_fp_without_absence": card_fp_no_absence, "absence_channel_evaluated": False,
+                  "facade_matches_scorecard_detections": facade_ok,
+                  "facade_matches_scorecard_fp_without_absence": (clean_fp == card_fp_no_absence) if ca and "error" not in ca else None,
+                  "calendar": a["calendar"], "conditions": {}}
         for arm in ARMS:
             r = a["conditions"].get(arm)
             if r is None or "error" in r:
@@ -78,8 +91,9 @@ def main() -> int:
         out["falsifiers_fired"].append(f"F-X31.b: detections lost beyond the bar on {p2_fail + p4_fail}")
     if not_eval:
         out["falsifiers_fired"].append(f"F-X31.c: not evaluated {not_eval}")
-    mism = [s for s, v in out["systems"].items() if v.get("facade_matches_scorecard") is False]
+    mism = [s for s, v in out["systems"].items() if v.get("facade_matches_scorecard_detections") is False or v.get("facade_matches_scorecard_fp_without_absence") is False]
     out["predictions"]["clean_arm_matches_scorecard"] = not mism
+    out["predictions"]["absence_channel_evaluated"] = False
     if mism:
         out["falsifiers_fired"].append(f"Amendment 1: facade differs from the scorecard on {mism}")
     (REPO / "outputs/x31_field_conditions.json").write_text(json.dumps(out, indent=2) + "\n")

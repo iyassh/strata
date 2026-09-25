@@ -128,3 +128,31 @@ Not added: RA_FLOW / SA_FLOW (identically 1.000 in the simulation; carries nothi
 - **F-X33c.c** P6 fails → investigated before anything else.
 - A failed P3 or P4 is a wrong prediction; a failed P5 is a positive surprise, reported as such.
 
+## X33d — DDAHU, dual-duct air handler (114 columns, 79 mapped before)
+
+**Written 2026-09-25 05:20, configuration drafted against the fault-free file only (healthy silence: the new rules emit nothing; the one pre-existing healthy firing of `cold_sat_setpoint_deviation` is unchanged); to be committed and scored after X33c closes.**
+
+| columns | reader |
+|---|---|
+| VAV_SP_C_z, VAV_SP_H_z (mixing-box inlet statics, four zones × two decks) | `box_static_{C,H}_z` = box static − deck static (a constant duct loss in health; the hot-deck pairs are identical to two decimals) |
+| VAV_EAT_C_z, VAV_EAT_H_z (mixing-box entering air temperatures) | `box_eat_{C,H}_z` = box entering temperature − deck temperature (identical in health: a redundant sensor pair) |
+| CSF_WAT, HSF_WAT, RF_WAT, CSA_CFM, HSA_CFM, RA_CFM, CSF_DP, HSF_DP, RF_DP | `csf/hsf/rf_specific_power`, `csf/hsf_flow_per_speed`, `csf/hsf_dp_per_speed2` |
+| CHWP_GPMT, HWP_GPMT | `chwp_bypass_flow` = pump total − coil flow; `hwp_bypass_flow` |
+| OA_CFM, humidities, HWC_MWT, CHWC_MWT, CHWC_EAH | mapped as context; no reader |
+| excluded | none |
+
+### Predictions
+- **P1.** No scenario lost (45 of 55 before).
+- **P2.** Deployed false alarms ≤ 10 of 96 and ≤ 3 + 3; no new residual rule > 3 holdout days on its own.
+- **P3.** The hot-deck static-pressure biases `HSP_−2inwg` and `HSP_−4inwg` are detected through `box_static_H_z` (a biased deck sensor against four unbiased box sensors shifts the residual by the bias; healthy width 0.00).
+- **P4.** The hot-deck supply-air temperature bias `HSA_+2C` is detected through `box_eat_H_z` (same logic; healthy width 0.00 °F, floor 0.5 °F, bias 3.6 °F).
+- **P5.** The two minor waterside-fouling misses (heating, cooling) are detected through the pump bypass residuals (the X32 scan: total pump flow separates both at 0–1 holdout exceedances).
+- **P6.** The five airside-fouling misses stay missed.
+- **P7.** Model and device rows byte-identical.
+
+### Falsifiers
+- **F-X33d.a** P1 fails → channel named and removed; loss reported.
+- **F-X33d.b** P2 fails → channel removed under the adoption rule; reported.
+- **F-X33d.c** P7 fails → investigated before anything else.
+- A failed P3, P4 or P5 is a wrong prediction (and, for P3/P4, would mean the seeded bias is written into the box sensors too, which the section will then say); a failed P6 is a positive surprise, reported as such.
+

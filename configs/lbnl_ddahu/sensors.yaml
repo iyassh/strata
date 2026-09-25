@@ -87,3 +87,43 @@ canonical_to_csv:
   ZONE_FLOW_H_E: VAVCFM_H_E
   ZONE_FLOW_H_SP_E: VAVCFM_H_DM_E
   ZONE_FLOW_T_E: VAVCFM_T_E
+  # X33d (2026-09-25): coverage audit — every recorded column mapped (readers in rules.yaml or context)
+  BOX_STATIC_C_W: VAV_SP_C_W
+  BOX_STATIC_H_W: VAV_SP_H_W
+  BOX_EAT_C_W: VAV_EAT_C_W
+  BOX_EAT_H_W: VAV_EAT_H_W
+  BOX_STATIC_C_SB: VAV_SP_C_SB
+  BOX_STATIC_H_SB: VAV_SP_H_SB
+  BOX_EAT_C_SB: VAV_EAT_C_SB
+  BOX_EAT_H_SB: VAV_EAT_H_SB
+  BOX_STATIC_C_SA: VAV_SP_C_SA
+  BOX_STATIC_H_SA: VAV_SP_H_SA
+  BOX_EAT_C_SA: VAV_EAT_C_SA
+  BOX_EAT_H_SA: VAV_EAT_H_SA
+  BOX_STATIC_C_E: VAV_SP_C_E
+  BOX_STATIC_H_E: VAV_SP_H_E
+  BOX_EAT_C_E: VAV_EAT_C_E
+  BOX_EAT_H_E: VAV_EAT_H_E
+  OA_FLOW: OA_CFM
+  OA_HUMD: OA_HUMD
+  RA_FLOW: RA_CFM
+  RA_HUMD: RA_HUMD
+  RF_DP: RF_DP
+  RF_POWER: RF_WAT
+  HSA_HUMD: HSA_HUMD
+  HSA_FLOW: HSA_CFM
+  HSF_DP: HSF_DP
+  HSF_POWER: HSF_WAT
+  CSA_HUMD: CSA_HUMD
+  CSA_FLOW: CSA_CFM
+  CSF_DP: CSF_DP
+  CSF_POWER: CSF_WAT
+  HWC_MWT: HWC_MWT
+  HWP_FLOW_TOTAL: HWP_GPMT
+  CHWC_ENT_HUMD: CHWC_EAH
+  CHWC_MWT: CHWC_MWT
+  CHWP_FLOW_TOTAL: CHWP_GPMT
+
+# X33d: no column excluded — every recorded column is mapped (guarded by tests/test_sensor_coverage.py)
+coverage_audited: true
+unmapped: {}

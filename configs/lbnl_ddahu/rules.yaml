@@ -30,7 +30,15 @@ detection:
                       cold_static_per_speed, hot_static_per_speed,
                       oa_fraction_residual,   # X24
                       cold_static_per_speed2, hot_static_per_speed2,   # X27 fan-law form
-                      chwc_ua, hwc_ua]        # X28
+                      chwc_ua, hwc_ua,
+                      # X33d coverage audit (2026-09-25)
+                      csf_specific_power, hsf_specific_power, rf_specific_power,
+                      csf_flow_per_speed, hsf_flow_per_speed, csf_dp_per_speed2, hsf_dp_per_speed2,
+                      chwp_bypass_flow, hwp_bypass_flow,
+                      box_static_C_W, box_static_C_SB, box_static_C_SA, box_static_C_E,
+                      box_static_H_W, box_static_H_SB, box_static_H_SA, box_static_H_E,
+                      box_eat_C_W, box_eat_C_SB, box_eat_C_SA, box_eat_C_E,
+                      box_eat_H_W, box_eat_H_SB, box_eat_H_SA, box_eat_H_E]        # X28
   holdout_days_per_month: 8
   # X25: the 8 days before the holdout block calibrate the conformance thresholds,
   # so the holdout is out-of-sample for every channel (discovery trains on the rest)
@@ -604,3 +612,424 @@ events:
     sustained_min: 60
     residual_min_band_width: 0.05
     residual_min_exceedance: 0.05
+
+  # ---------------- X33d coverage audit (2026-09-25) ----------------
+  # Bands from the fault-free file, occupied and the deck fan running; quantiles (p0.1 / median / p99.9) logged per rule.
+  # Cold-deck fan specific power W/cfm: 0.73 / 1.00 / 2.11
+  csf_specific_power:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: CSF_POWER
+    b: CSA_FLOW
+    low: 0.5
+    high: 2.6
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+      - signal: CSA_FLOW
+        above: 50.0
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.02
+    residual_min_exceedance: 0.02
+  # Hot-deck fan specific power W/cfm: 0.75 / 1.37 / 3.35
+  hsf_specific_power:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: HSF_POWER
+    b: HSA_FLOW
+    low: 0.5
+    high: 4.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+      - signal: HSA_FLOW
+        above: 50.0
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.03
+    residual_min_exceedance: 0.03
+  # Return fan specific power W/cfm: 0 / 0.013 / 0.286 (the return fan idles most of the year)
+  rf_specific_power:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: RF_POWER
+    b: RA_FLOW
+    low: 0.0
+    high: 0.4
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+      - signal: RA_FLOW
+        above: 50.0
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.01
+    residual_min_exceedance: 0.01
+  # Fan law, flow per unit speed: cold 485 / 1175 / 3008; hot 404 / 556 / 1930
+  csf_flow_per_speed:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: CSA_FLOW
+    b: CSF_SPEED
+    low: 350.0
+    high: 3400.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+      - signal: CSF_SPEED
+        above: 0.05
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 25.0
+    residual_min_exceedance: 25.0
+  hsf_flow_per_speed:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: HSA_FLOW
+    b: HSF_SPEED
+    low: 300.0
+    high: 2200.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+      - signal: HSF_SPEED
+        above: 0.05
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 15.0
+    residual_min_exceedance: 15.0
+  # Fan law, fan differential pressure per speed^2: cold 3.93 / 4.11 / 4.78; hot 3.57 / 3.65 / 4.17
+  csf_dp_per_speed2:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio_sq
+    a: CSF_DP
+    b: CSF_SPEED
+    low: 3.5
+    high: 5.2
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+      - signal: CSF_SPEED
+        above: 0.3
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.03
+    residual_min_exceedance: 0.03
+  hsf_dp_per_speed2:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio_sq
+    a: HSF_DP
+    b: HSF_SPEED
+    low: 3.2
+    high: 4.6
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+      - signal: HSF_SPEED
+        above: 0.3
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.03
+    residual_min_exceedance: 0.03
+  # Pump total minus coil flow (bypass / other consumers): chilled 0 / 26.4 / 27.6 gpm; hot 2.6 / 7.5 / 7.8 gpm
+  chwp_bypass_flow:
+    kind: paired_residual
+    alphabet: signature
+    a: CHWP_FLOW_TOTAL
+    b: CHWC_FLOW
+    low: -1.0
+    high: 30.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.3
+    residual_min_exceedance: 0.3
+  hwp_bypass_flow:
+    kind: paired_residual
+    alphabet: signature
+    a: HWP_FLOW_TOTAL
+    b: HWC_FLOW
+    low: 1.0
+    high: 9.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.1
+    residual_min_exceedance: 0.1
+  # Zone W mixing-box inlet static minus cold deck static (a constant duct loss in health: -0.01 to -0.9 cold, -0.04 to -0.12 hot)
+  box_static_C_W:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_STATIC_C_W
+    b: CSA_STATIC
+    low: -2.0
+    high: 1.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05
+  # Zone SB mixing-box inlet static minus cold deck static (a constant duct loss in health: -0.01 to -0.9 cold, -0.04 to -0.12 hot)
+  box_static_C_SB:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_STATIC_C_SB
+    b: CSA_STATIC
+    low: -2.0
+    high: 1.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05
+  # Zone SA mixing-box inlet static minus cold deck static (a constant duct loss in health: -0.01 to -0.9 cold, -0.04 to -0.12 hot)
+  box_static_C_SA:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_STATIC_C_SA
+    b: CSA_STATIC
+    low: -2.0
+    high: 1.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05
+  # Zone E mixing-box inlet static minus cold deck static (a constant duct loss in health: -0.01 to -0.9 cold, -0.04 to -0.12 hot)
+  box_static_C_E:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_STATIC_C_E
+    b: CSA_STATIC
+    low: -2.0
+    high: 1.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05
+  # Zone W mixing-box entering air minus cold deck temperature (identical in health: a redundant sensor pair)
+  box_eat_C_W:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_EAT_C_W
+    b: SA_TEMP
+    low: -3.0
+    high: 3.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone SB mixing-box entering air minus cold deck temperature (identical in health: a redundant sensor pair)
+  box_eat_C_SB:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_EAT_C_SB
+    b: SA_TEMP
+    low: -3.0
+    high: 3.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone SA mixing-box entering air minus cold deck temperature (identical in health: a redundant sensor pair)
+  box_eat_C_SA:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_EAT_C_SA
+    b: SA_TEMP
+    low: -3.0
+    high: 3.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone E mixing-box entering air minus cold deck temperature (identical in health: a redundant sensor pair)
+  box_eat_C_E:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_EAT_C_E
+    b: SA_TEMP
+    low: -3.0
+    high: 3.0
+    gates:
+      - signal: CSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone W mixing-box inlet static minus hot deck static (a constant duct loss in health: -0.01 to -0.9 cold, -0.04 to -0.12 hot)
+  box_static_H_W:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_STATIC_H_W
+    b: HSA_STATIC
+    low: -2.0
+    high: 1.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05
+  # Zone SB mixing-box inlet static minus hot deck static (a constant duct loss in health: -0.01 to -0.9 cold, -0.04 to -0.12 hot)
+  box_static_H_SB:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_STATIC_H_SB
+    b: HSA_STATIC
+    low: -2.0
+    high: 1.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05
+  # Zone SA mixing-box inlet static minus hot deck static (a constant duct loss in health: -0.01 to -0.9 cold, -0.04 to -0.12 hot)
+  box_static_H_SA:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_STATIC_H_SA
+    b: HSA_STATIC
+    low: -2.0
+    high: 1.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05
+  # Zone E mixing-box inlet static minus hot deck static (a constant duct loss in health: -0.01 to -0.9 cold, -0.04 to -0.12 hot)
+  box_static_H_E:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_STATIC_H_E
+    b: HSA_STATIC
+    low: -2.0
+    high: 1.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.05
+    residual_min_exceedance: 0.05
+  # Zone W mixing-box entering air minus hot deck temperature (identical in health: a redundant sensor pair)
+  box_eat_H_W:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_EAT_H_W
+    b: HSA_TEMP
+    low: -3.0
+    high: 3.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone SB mixing-box entering air minus hot deck temperature (identical in health: a redundant sensor pair)
+  box_eat_H_SB:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_EAT_H_SB
+    b: HSA_TEMP
+    low: -3.0
+    high: 3.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone SA mixing-box entering air minus hot deck temperature (identical in health: a redundant sensor pair)
+  box_eat_H_SA:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_EAT_H_SA
+    b: HSA_TEMP
+    low: -3.0
+    high: 3.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5
+  # Zone E mixing-box entering air minus hot deck temperature (identical in health: a redundant sensor pair)
+  box_eat_H_E:
+    kind: paired_residual
+    alphabet: signature
+    a: BOX_EAT_H_E
+    b: HSA_TEMP
+    low: -3.0
+    high: 3.0
+    gates:
+      - signal: HSF_STATUS
+        above: 0.5
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.5
+    residual_min_exceedance: 0.5

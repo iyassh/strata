@@ -283,7 +283,12 @@ def fit(cfg: Config, healthy_df: pd.DataFrame,
     # residual channels: train-only bands + holdout noise floor
     res_channels = cfg.rules["detection"].get("residual_channels", [residual_rule])
     bands: dict[str, tuple[float, float]] = {}
-    res_fp = res_hold = 0
+    # X25 step 4 (X31 Amendment 1 brought the facade in line with scripts/benchmark.py):
+    # the residual channel's per-day flag is an OR over its channels, so its null is per
+    # DAY — holdout days flagged by any channel over holdout days any channel could
+    # evaluate — not pooled channel-days (which loosened the floor to 3/509 on DDAHU).
+    hold_flag_days: set = set()
+    hold_eval_days: set = set()
     for rname in res_channels:
         rh = daily_residual_scores(healthy_df, cfg, rule_name=rname)
         if rh.empty:
@@ -291,8 +296,9 @@ def fit(cfg: Config, healthy_df: pd.DataFrame,
         hmask = holdout_mask(rh["case_id"], hold_n)
         bands[rname] = calibrate_band(rh, ~hmask, min_width=residual_floor(cfg, rname, "residual_min_band_width"))
         hf = flag_days(rh[hmask.values], bands[rname], min_margin=residual_floor(cfg, rname, "residual_min_exceedance"))
-        res_fp += int(hf["flagged"].sum())
-        res_hold += int(hf["evaluable"].sum())
+        hold_flag_days |= set(hf.loc[hf["flagged"], "case_id"])
+        hold_eval_days |= set(hf.loc[hf["evaluable"], "case_id"])
+    res_fp, res_hold = len(hold_flag_days), len(hold_eval_days)
 
     freq_unit = build_frequency_detector(unit_day_counts(log), hold_n)
     freq_dev = build_frequency_detector(device_day_counts(log, cfg), hold_n)

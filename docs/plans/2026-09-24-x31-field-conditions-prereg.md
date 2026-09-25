@@ -61,3 +61,29 @@ inflated logs); false alarms on the last-8 holdout.
 ## Artefacts
 
 `outputs/x31_field_conditions.json`; guard `tests/test_x31_field_conditions.py`.
+
+## Amendment 1 (2026-09-24 evening, after the first pass; written before the re-run)
+
+The first pass (all four conditions on the three systems, plus the clean
+scorecard as comparator) showed every DDAHU condition detecting 50 of 55
+against the scorecard's 45, with the same four scenarios gained under every
+condition including the schedule shift, which touches only the occupancy
+signal. That is not a perturbation effect. Cause, found in the library
+facade (`src/strata/core/pipeline.py`, `fit`): its residual noise floor was
+still the pooled channel-day count of X25 step 3 (3/509 on DDAHU), while
+`scripts/benchmark.py` had been moved to the per-day null of step 4 (3/124).
+The facade therefore ran a looser gate than the published scorecards — a
+gap between the library and the scripts that the regression gate does not
+see, because the gate regenerates artefacts through the scripts.
+
+Changes: (1) the facade's residual null is now the per-day OR over channels,
+identical to the benchmark's; guard `tests/test_facade_residual_null.py`
+asserts the facade's `residual_holdout` equals the scorecard's
+`residual_holdout_fp` on SDAHU and DDAHU. (2) A `clean` arm — the same
+facade on the unperturbed files — is the comparator for every condition,
+instead of the scorecard count; both are reported. (3) All arms are re-run
+on all three systems. Predictions P1–P4 are unchanged and are now tested
+against the clean arm's count. Prediction for the clean arm: detections
+equal the scorecard's deployed-channel count (14, 45, 40) and false alarms
+equal its deployed-union count without the alignment channels (1, 3, 3);
+any difference is reported as a facade defect, not as a condition effect.

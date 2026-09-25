@@ -14,7 +14,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 SYSTEMS = ["sdahu", "ddahu", "fcu"]
-ARMS = ["field_noise", "cov_gaps", "schedule", "combined"]
+ARMS = ["field_noise", "cov_gaps", "schedule", "combined"]   # "clean" is the comparator, reported per system
 DEPLOYED = {"rules", "resid", "freq", "osc", "absence"}
 
 
@@ -31,10 +31,19 @@ def main() -> int:
         if not path.exists():
             not_eval += [(s, a) for a in ARMS]; out["systems"][s] = {"error": "artefact absent"}; continue
         a = json.loads(path.read_text())
-        clean_det, clean_fp = a["clean_detected_no_alignment"], a["clean_holdout_fp_no_alignment"]
+        card_det, card_fp = a["clean_detected_no_alignment"], a["clean_holdout_fp_no_alignment"]
         clean_set = clean_detected(s)
-        assert len(clean_set) == clean_det, (s, len(clean_set), clean_det)
-        sysrow = {"clean_detected": clean_det, "clean_holdout_fp": clean_fp, "calendar": a["calendar"], "conditions": {}}
+        assert len(clean_set) == card_det, (s, len(clean_set), card_det)
+        # Amendment 1: the comparator is the facade's own clean arm; the scorecard count is reported beside it
+        ca = a["conditions"].get("clean")
+        if ca is None or "error" in ca:
+            not_eval.append((s, "clean")); clean_det, clean_fp = card_det, card_fp; facade_ok = None
+        else:
+            clean_set = {k for k, v in ca["per_scenario"].items() if v}
+            clean_det, clean_fp = ca["detected"], ca["holdout_fp_days"]
+            facade_ok = (clean_det == card_det and clean_fp == card_fp)
+        sysrow = {"clean_detected": clean_det, "clean_holdout_fp": clean_fp, "scorecard_detected": card_det, "scorecard_holdout_fp": card_fp,
+                  "facade_matches_scorecard": facade_ok, "calendar": a["calendar"], "conditions": {}}
         for arm in ARMS:
             r = a["conditions"].get(arm)
             if r is None or "error" in r:
@@ -69,6 +78,10 @@ def main() -> int:
         out["falsifiers_fired"].append(f"F-X31.b: detections lost beyond the bar on {p2_fail + p4_fail}")
     if not_eval:
         out["falsifiers_fired"].append(f"F-X31.c: not evaluated {not_eval}")
+    mism = [s for s, v in out["systems"].items() if v.get("facade_matches_scorecard") is False]
+    out["predictions"]["clean_arm_matches_scorecard"] = not mism
+    if mism:
+        out["falsifiers_fired"].append(f"Amendment 1: facade differs from the scorecard on {mism}")
     (REPO / "outputs/x31_field_conditions.json").write_text(json.dumps(out, indent=2) + "\n")
     for s, v in out["systems"].items():
         if "error" in v:

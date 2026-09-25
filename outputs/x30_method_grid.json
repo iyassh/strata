@@ -1,0 +1,1474 @@
+{
+  "prereg": "docs/plans/2026-09-24-x30-method-grid-prereg.md",
+  "cells": [
+    "IM00-align",
+    "IM05-align",
+    "IM02-token",
+    "HM-align",
+    "SKEL",
+    "DECLARE",
+    "TEMPORAL"
+  ],
+  "systems": {
+    "pfpu": {
+      "n_train_days": 173,
+      "n_calib_days": 96,
+      "n_holdout_days": 96,
+      "missed_scenarios": [
+        "PFPU_ReheatCoilFouling_Airside_Minor",
+        "PFPU_ReheatCoilFouling_Airside_Moderate",
+        "PFPU_ReheatCoilFouling_Airside_Severe",
+        "PFPU_ReheatCoilFouling_Waterside_Minor",
+        "PFPU_ReheatCoilFouling_Waterside_Moderate",
+        "PFPU_ReheatCoilFouling_Waterside_Severe",
+        "PFPU_SensorBias_RMTEMP_+2C",
+        "PFPU_SensorBias_RMTEMP_+4C"
+      ],
+      "cells": {
+        "IM00-align": {
+          "threshold": 1.0,
+          "holdout_fp": 0,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "PFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+4C": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "IM05-align": {
+          "threshold": 0.7136320754716982,
+          "holdout_fp": 2,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.020833333333333332,
+          "scenarios": {
+            "PFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 18,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 18,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 18,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 13,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 13,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 13,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 15,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+4C": {
+              "flagged": 9,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "IM02-token": {
+          "threshold": 0.8323997847726662,
+          "holdout_fp": 5,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.052083333333333336,
+          "scenarios": {
+            "PFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 12,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 12,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 12,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 12,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 12,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 12,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 12,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+4C": {
+              "flagged": 14,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "HM-align": {
+          "threshold": 0.051973684210526366,
+          "holdout_fp": 0,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "PFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 3,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 2,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 3,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 3,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 2,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+4C": {
+              "flagged": 3,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "SKEL": {
+          "threshold": 0.8885620915032679,
+          "holdout_fp": 0,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "PFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 1,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 1,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 1,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 1,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 2,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 1,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 1,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+4C": {
+              "flagged": 1,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "DECLARE": {
+          "threshold": 0.8470588235294118,
+          "holdout_fp": 0,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "PFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+4C": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "TEMPORAL": {
+          "threshold": 0.9226524390243903,
+          "holdout_fp": 0,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "PFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 3,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 2,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 2,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 2,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 2,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 2,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 3,
+              "n": 365,
+              "significant": false
+            },
+            "PFPU_SensorBias_RMTEMP_+4C": {
+              "flagged": 2,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        }
+      }
+    },
+    "sfpu": {
+      "n_train_days": 173,
+      "n_calib_days": 96,
+      "n_holdout_days": 96,
+      "missed_scenarios": [
+        "SFPU_ReheatCoilFouling_Airside_Minor",
+        "SFPU_ReheatCoilFouling_Airside_Moderate",
+        "SFPU_ReheatCoilFouling_Airside_Severe",
+        "SFPU_ReheatCoilFouling_Waterside_Minor",
+        "SFPU_ReheatCoilFouling_Waterside_Moderate",
+        "SFPU_ReheatCoilFouling_Waterside_Severe",
+        "SFPU_SensorBias_RMTEMP_+2C",
+        "SFPU_VAVFanRestrictFlow"
+      ],
+      "cells": {
+        "IM00-align": {
+          "threshold": 1.0,
+          "holdout_fp": 0,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "SFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_VAVFanRestrictFlow": {
+              "flagged": 0,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "IM05-align": {
+          "threshold": 0.9015427769985974,
+          "holdout_fp": 5,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.052083333333333336,
+          "scenarios": {
+            "SFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 11,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 11,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 11,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 11,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 11,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 11,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 11,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_VAVFanRestrictFlow": {
+              "flagged": 13,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "IM02-token": {
+          "threshold": 0.8416916416916417,
+          "holdout_fp": 1,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.010416666666666666,
+          "scenarios": {
+            "SFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 5,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 5,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 5,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_VAVFanRestrictFlow": {
+              "flagged": 7,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "HM-align": {
+          "error": "CellTimeout: cell exceeded 900 s",
+          "trace": "4py/util/lp/variants/cvxopt_solver_custom_align.py\", line 78, in apply\n    sol = custom_solve_lp(c, Aub, bub, Aeq, beq)\n  File \"/Users/yassh/Downloads/Ureap/strata/.venv/lib/python3.14/site-packages/pm4py/util/lp/variants/cvxopt_solver_custom_align.py\", line 44, in custom_solve_lp\n    status, x, z, y = glpk.lp(c, G, h, A, b, options=this_options)\n                      ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yassh/Downloads/Ureap/strata/scripts/x30_method_grid.py\", line 46, in _alarm\n    raise CellTimeout(f\"cell exceeded {CELL_TIMEOUT_S} s\")\nCellTimeout: cell exceeded 900 s\n"
+        },
+        "SKEL": {
+          "threshold": 0.9781892133352142,
+          "holdout_fp": 5,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.052083333333333336,
+          "scenarios": {
+            "SFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 7,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 7,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 7,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_VAVFanRestrictFlow": {
+              "flagged": 9,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "DECLARE": {
+          "threshold": 0.8667338709677419,
+          "holdout_fp": 2,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.020833333333333332,
+          "scenarios": {
+            "SFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 5,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 7,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 7,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_VAVFanRestrictFlow": {
+              "flagged": 6,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "TEMPORAL": {
+          "threshold": 0.9735683987274655,
+          "holdout_fp": 2,
+          "holdout_n": 96,
+          "holdout_fp_rate": 0.020833333333333332,
+          "scenarios": {
+            "SFPU_ReheatCoilFouling_Airside_Minor": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Moderate": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Airside_Severe": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Minor": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Moderate": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_ReheatCoilFouling_Waterside_Severe": {
+              "flagged": 4,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_SensorBias_RMTEMP_+2C": {
+              "flagged": 3,
+              "n": 365,
+              "significant": false
+            },
+            "SFPU_VAVFanRestrictFlow": {
+              "flagged": 5,
+              "n": 365,
+              "significant": false
+            }
+          },
+          "detected": []
+        }
+      }
+    },
+    "ddahu": {
+      "n_train_days": 150,
+      "n_calib_days": 84,
+      "n_holdout_days": 83,
+      "missed_scenarios": [
+        "DualDuct_Fouling_Cooling_Airside_Minor",
+        "DualDuct_Fouling_Cooling_Airside_Moderate",
+        "DualDuct_Fouling_Cooling_Waterside_Minor",
+        "DualDuct_Fouling_Heating_Airside_Minor",
+        "DualDuct_Fouling_Heating_Airside_Moderate",
+        "DualDuct_Fouling_Heating_Airside_Severe",
+        "DualDuct_Fouling_Heating_Waterside_Minor",
+        "DualDuct_SensorBias_HSA_+2C",
+        "DualDuct_SensorBias_HSP_-2inwg",
+        "DualDuct_SensorBias_HSP_-4inwg"
+      ],
+      "cells": {
+        "IM00-align": {
+          "threshold": 0.9886666666666667,
+          "holdout_fp": 0,
+          "holdout_n": 83,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "DualDuct_Fouling_Cooling_Airside_Minor": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Airside_Moderate": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Minor": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Moderate": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Severe": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Waterside_Minor": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSA_+2C": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-2inwg": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-4inwg": {
+              "flagged": 1,
+              "n": 317,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "IM05-align": {
+          "threshold": 0.1943333333333333,
+          "holdout_fp": 0,
+          "holdout_n": 83,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "DualDuct_Fouling_Cooling_Airside_Minor": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Airside_Moderate": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Minor": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Moderate": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Severe": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Waterside_Minor": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSA_+2C": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-2inwg": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-4inwg": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "IM02-token": {
+          "threshold": 0.6666666666666667,
+          "holdout_fp": 0,
+          "holdout_n": 83,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "DualDuct_Fouling_Cooling_Airside_Minor": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Airside_Moderate": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Minor": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Moderate": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Severe": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Waterside_Minor": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSA_+2C": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-2inwg": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-4inwg": {
+              "flagged": 0,
+              "n": 317,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "HM-align": {
+          "error": "CellTimeout: cell exceeded 900 s",
+          "trace": "4py/util/lp/variants/cvxopt_solver_custom_align.py\", line 78, in apply\n    sol = custom_solve_lp(c, Aub, bub, Aeq, beq)\n  File \"/Users/yassh/Downloads/Ureap/strata/.venv/lib/python3.14/site-packages/pm4py/util/lp/variants/cvxopt_solver_custom_align.py\", line 44, in custom_solve_lp\n    status, x, z, y = glpk.lp(c, G, h, A, b, options=this_options)\n                      ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yassh/Downloads/Ureap/strata/scripts/x30_method_grid.py\", line 46, in _alarm\n    raise CellTimeout(f\"cell exceeded {CELL_TIMEOUT_S} s\")\nCellTimeout: cell exceeded 900 s\n"
+        },
+        "SKEL": {
+          "threshold": 0.9052976190476191,
+          "holdout_fp": 1,
+          "holdout_n": 83,
+          "holdout_fp_rate": 0.012048192771084338,
+          "scenarios": {
+            "DualDuct_Fouling_Cooling_Airside_Minor": {
+              "flagged": 3,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Airside_Moderate": {
+              "flagged": 3,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 3,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Minor": {
+              "flagged": 3,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Moderate": {
+              "flagged": 3,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Severe": {
+              "flagged": 3,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Waterside_Minor": {
+              "flagged": 3,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSA_+2C": {
+              "flagged": 4,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-2inwg": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-4inwg": {
+              "flagged": 2,
+              "n": 317,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "DECLARE": {
+          "threshold": 0.7684964200477327,
+          "holdout_fp": 2,
+          "holdout_n": 83,
+          "holdout_fp_rate": 0.024096385542168676,
+          "scenarios": {
+            "DualDuct_Fouling_Cooling_Airside_Minor": {
+              "flagged": 6,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Airside_Moderate": {
+              "flagged": 9,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 6,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Minor": {
+              "flagged": 7,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Moderate": {
+              "flagged": 8,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Severe": {
+              "flagged": 7,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Waterside_Minor": {
+              "flagged": 6,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSA_+2C": {
+              "flagged": 6,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-2inwg": {
+              "flagged": 6,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-4inwg": {
+              "flagged": 6,
+              "n": 317,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "TEMPORAL": {
+          "threshold": 0.682969696969697,
+          "holdout_fp": 3,
+          "holdout_n": 83,
+          "holdout_fp_rate": 0.03614457831325301,
+          "scenarios": {
+            "DualDuct_Fouling_Cooling_Airside_Minor": {
+              "flagged": 7,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Airside_Moderate": {
+              "flagged": 8,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 9,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Minor": {
+              "flagged": 7,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Moderate": {
+              "flagged": 7,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Airside_Severe": {
+              "flagged": 8,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_Fouling_Heating_Waterside_Minor": {
+              "flagged": 7,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSA_+2C": {
+              "flagged": 11,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-2inwg": {
+              "flagged": 8,
+              "n": 317,
+              "significant": false
+            },
+            "DualDuct_SensorBias_HSP_-4inwg": {
+              "flagged": 8,
+              "n": 317,
+              "significant": false
+            }
+          },
+          "detected": []
+        }
+      }
+    },
+    "fcu": {
+      "n_train_days": 125,
+      "n_calib_days": 71,
+      "n_holdout_days": 72,
+      "missed_scenarios": [
+        "FCU_OADMPRLeak_20",
+        "FCU_OADMPRLeak_50",
+        "FCU_Fouling_Cooling_Waterside_Minor",
+        "FCU_Fouling_Cooling_Waterside_Moderate",
+        "FCU_Fouling_Cooling_Waterside_Severe",
+        "FCU_Fouling_Heating_Waterside_Minor",
+        "FCU_Fouling_Heating_Waterside_Moderate"
+      ],
+      "cells": {
+        "IM00-align": {
+          "threshold": 1.0,
+          "holdout_fp": 0,
+          "holdout_n": 72,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "FCU_OADMPRLeak_20": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_OADMPRLeak_50": {
+              "flagged": 0,
+              "n": 269,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Moderate": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Severe": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Minor": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Moderate": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "IM05-align": {
+          "threshold": 0.21393939393939398,
+          "holdout_fp": 1,
+          "holdout_n": 72,
+          "holdout_fp_rate": 0.013888888888888888,
+          "scenarios": {
+            "FCU_OADMPRLeak_20": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_OADMPRLeak_50": {
+              "flagged": 3,
+              "n": 269,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Moderate": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Severe": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Minor": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Moderate": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "IM02-token": {
+          "threshold": 0.87,
+          "holdout_fp": 2,
+          "holdout_n": 72,
+          "holdout_fp_rate": 0.027777777777777776,
+          "scenarios": {
+            "FCU_OADMPRLeak_20": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_OADMPRLeak_50": {
+              "flagged": 4,
+              "n": 269,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 4,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Moderate": {
+              "flagged": 4,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Severe": {
+              "flagged": 4,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Minor": {
+              "flagged": 4,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Moderate": {
+              "flagged": 4,
+              "n": 268,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "HM-align": {
+          "threshold": 0.6666666666666667,
+          "holdout_fp": 0,
+          "holdout_n": 72,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {
+            "FCU_OADMPRLeak_20": {
+              "flagged": 4,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_OADMPRLeak_50": {
+              "flagged": 2,
+              "n": 269,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Moderate": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Severe": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Minor": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Moderate": {
+              "flagged": 0,
+              "n": 268,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "SKEL": {
+          "threshold": 0.9608771929824562,
+          "holdout_fp": 7,
+          "holdout_n": 72,
+          "holdout_fp_rate": 0.09722222222222222,
+          "scenarios": {
+            "FCU_OADMPRLeak_20": {
+              "flagged": 14,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_OADMPRLeak_50": {
+              "flagged": 11,
+              "n": 269,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 8,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Moderate": {
+              "flagged": 10,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Severe": {
+              "flagged": 15,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Minor": {
+              "flagged": 5,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Moderate": {
+              "flagged": 8,
+              "n": 268,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "DECLARE": {
+          "threshold": 0.8807106598984772,
+          "holdout_fp": 1,
+          "holdout_n": 72,
+          "holdout_fp_rate": 0.013888888888888888,
+          "scenarios": {
+            "FCU_OADMPRLeak_20": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_OADMPRLeak_50": {
+              "flagged": 4,
+              "n": 269,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Moderate": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Severe": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Minor": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Moderate": {
+              "flagged": 3,
+              "n": 268,
+              "significant": false
+            }
+          },
+          "detected": []
+        },
+        "TEMPORAL": {
+          "threshold": 0.3357142857142857,
+          "holdout_fp": 1,
+          "holdout_n": 72,
+          "holdout_fp_rate": 0.013888888888888888,
+          "scenarios": {
+            "FCU_OADMPRLeak_20": {
+              "flagged": 8,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_OADMPRLeak_50": {
+              "flagged": 11,
+              "n": 269,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Minor": {
+              "flagged": 7,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Moderate": {
+              "flagged": 5,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Cooling_Waterside_Severe": {
+              "flagged": 12,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Minor": {
+              "flagged": 6,
+              "n": 268,
+              "significant": false
+            },
+            "FCU_Fouling_Heating_Waterside_Moderate": {
+              "flagged": 7,
+              "n": 268,
+              "significant": false
+            }
+          },
+          "detected": []
+        }
+      }
+    },
+    "sdahu": {
+      "n_train_days": 160,
+      "n_calib_days": 88,
+      "n_holdout_days": 87,
+      "missed_scenarios": [],
+      "cells": {
+        "IM00-align": {
+          "threshold": 1.0,
+          "holdout_fp": 0,
+          "holdout_n": 87,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {},
+          "detected": []
+        },
+        "IM05-align": {
+          "threshold": 0.2857142857142857,
+          "holdout_fp": 0,
+          "holdout_n": 87,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {},
+          "detected": []
+        },
+        "IM02-token": {
+          "threshold": 0.6944444444444444,
+          "holdout_fp": 0,
+          "holdout_n": 87,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {},
+          "detected": []
+        },
+        "HM-align": {
+          "threshold": 0.33333333333333337,
+          "holdout_fp": 0,
+          "holdout_n": 87,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {},
+          "detected": []
+        },
+        "SKEL": {
+          "threshold": 0.8726785714285714,
+          "holdout_fp": 0,
+          "holdout_n": 87,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {},
+          "detected": []
+        },
+        "DECLARE": {
+          "threshold": 0.7341052631578948,
+          "holdout_fp": 1,
+          "holdout_n": 87,
+          "holdout_fp_rate": 0.011494252873563218,
+          "scenarios": {},
+          "detected": []
+        },
+        "TEMPORAL": {
+          "threshold": 1.0,
+          "holdout_fp": 0,
+          "holdout_n": 87,
+          "holdout_fp_rate": 0.0,
+          "scenarios": {},
+          "detected": []
+        }
+      }
+    }
+  },
+  "predictions": {
+    "P1_no_cell_detects_a_miss_within_3_fp": true,
+    "P1_violations": [],
+    "P2_some_cell_over_10pct_fp": false,
+    "P2_cells": [],
+    "P3_all_cells_ran": false,
+    "P3_errors": [
+      [
+        "sfpu",
+        "HM-align"
+      ],
+      [
+        "ddahu",
+        "HM-align"
+      ]
+    ]
+  },
+  "falsifiers_fired": [
+    "F-X30.b: cells not evaluated: [('sfpu', 'HM-align'), ('ddahu', 'HM-align')]"
+  ]
+}

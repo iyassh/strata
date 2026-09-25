@@ -451,3 +451,55 @@ period, a 29-day false-alarm denominator, and a fixed room setpoint.
 | P1 | P2 | P3 | P4 | P5 | P6 | falsifiers |
 |---|---|---|---|---|---|---|
 | ✓ gates, 1 iteration | ✓ 1/29 | ✓ 5/5 monotone | ✓ 5/5 monotone | ✓ 10/14 | ✓ | none |
+
+## X30 — the method-coverage grid: no other process-mining instrument sees what the deployed one misses
+
+*Pre-registered (`docs/plans/2026-09-24-x30-method-grid-prereg.md`) before
+any cell was computed. Artefact: `outputs/x30_method_grid.json`; guard
+`tests/test_x30_method_grid.py`. Runtime ≈ 2 h (alignments on 365-day
+scenario logs); not in the regression gate.*
+
+The null (conformance adds no detection) had been tested with one miner,
+one conformance measure and one case notion. X30 runs seven instruments
+pm4py offers — inductive miner at noise 0.0 and 0.5 with alignment fitness,
+the deployed net (noise 0.2) with token-replay fitness, heuristics miner with
+alignments, log skeleton, Declare, temporal profile — on the state-event log
+at the calendar-day case notion, each discovered on the training days of the
+X25 split, thresholded at the 1 % quantile of the per-day score on the
+calibration slice, and scored on the fault-free holdout and on the scenarios
+the deployed detector misses under the final gate (8 PFPU, 8 SFPU, 10
+DDAHU, 7 FCU; SDAHU misses none, so its cells report false alarms only).
+A cell detects a scenario if its flagged days clear `model_significant`
+against the cell's own holdout false alarms — the deployed rule.
+
+| system | misses | cells run | holdout false alarms (of days with a state trace) | best cell: flagged days on its best miss | detects |
+|---|---|---|---|---|---|
+| PFPU | 8 | 7 / 7 | 0, 2, 5, 0, 0, 0, 0 of 96 | IM05-align 18 / 365 (reheat airside minor) at 2 / 96 | **0** |
+| SFPU | 8 | 6 / 7 (HM-align timed out) | 0, 5, 1, –, 5, 2, 2 of 96 | IM05-align 13 / 365 (VAV fan restrict) at 5 / 96 | **0** |
+| DDAHU | 10 | 6 / 7 (HM-align timed out) | 0, 0, 0, –, 1, 2, 3 of 83 | TEMPORAL 11 / 317 (HSA +2 °C bias) at 3 / 83 | **0** |
+| FCU | 7 | 7 / 7 | 0, 1, 2, 0, 7, 1, 1 of 72 | SKEL 15 / 268 (cooling waterside severe) at 7 / 72 | **0** |
+| SDAHU | 0 | 7 / 7 | 0, 0, 0, 0, 0, 1, 0 of 87 | — | — |
+
+Cell order in the false-alarm column: IM00-align, IM05-align, IM02-token,
+HM-align, SKEL, DECLARE, TEMPORAL. Thirty-three cells evaluated, 33
+missed scenarios, zero detections at any false-alarm level. The highest
+flagged share any cell reaches on any miss is 5.6 % of scenario days
+(FCU skeleton, at 9.7 % holdout false alarms).
+
+| P1 no cell detects a miss within 3 false alarms | P2 some cell above 10 % false alarms | P3 every cell runs | falsifiers |
+|---|---|---|---|
+| ✓ (no cell detects a miss at *any* false-alarm level) | ✗ predicted, not observed: the worst cell is 7 / 72 = 9.7 % | ✗ two heuristics-miner cells exceeded the 15-minute cell budget | F-X30.b (two cells "not evaluated", never a null) |
+
+**Reading.** The null is not an artefact of the instrument. Order-based,
+declarative and timing-based conformance discovered on the same log all
+fail to separate the missed scenarios from healthy days, at thresholds
+that keep false alarms in budget and at thresholds that do not. This is
+the model-side complement of X12's log-side finding (the missed reheat
+fouling files are indistinguishable from healthy in every daily activity
+count and duration at the deployed alphabet): what the state-event log
+does not carry, no conformance measure over it recovers. P2 was wrong in
+the direction that strengthens the conclusion — the alternative
+instruments are not merely noisy, they are silent. The two heuristics-
+miner timeouts (series fan-powered and dual-duct units) are the
+alignment cost of heuristics nets with many silent transitions on
+365-day scenario logs; they are reported, not counted.

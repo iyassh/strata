@@ -156,6 +156,14 @@ a single physically named residual, plus all eight line restrictions — the
 fouling misses on the other systems are a property of what those datasets
 record ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)).
 
+Method grid (X30): seven other process-mining instruments (inductive miner at
+noise 0.0 and 0.5 with alignments, the deployed net with token replay,
+heuristics miner, log skeleton, Declare, temporal profile), each discovered on
+the training days and thresholded on the calibration slice, detect none of the
+33 scenarios the deployed detector misses, at any false-alarm level; the
+conformance null is a property of the state-event log, not of the miner or the
+measure ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)).
+
 FCU: 29 sensor mappings, 23 rules, two healthy-silence iterations, no source
 change; the hash gate found a byte-identical pair under two family labels
 (scored once, [ERRATA.md](ERRATA.md) E6); both new scorecard families — airflow

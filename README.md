@@ -38,10 +38,10 @@ you:
 > is wrong on ~1% of fault-free days — measured, not hoped")
 
 Tested on five public benchmark systems (LBNL datasets), it detects
-**13 of 14, 22 of 30, 21 of 29 — 45 of 55 on a dual-duct AHU and 40 of 47 on a fan coil unit, both onboarded
+**13 of 14, 26 of 30, 25 of 29 — 50 of 55 on a dual-duct AHU and 43 of 47 on a fan coil unit, both onboarded
 blind, by configuration alone, after the protocol was fixed** (counts under the final,
 fully out-of-sample gate of X25; the blind-onboarding runs scored 45 and 41 under the earlier gate) — typically
-within **one day**, while false-alarming on only **1.0–7.3%** of fault-free days (every threshold out-of-sample since X25) —
+within **one day**, while false-alarming on only **1.0–9.4%** of fault-free days (every threshold out-of-sample since X25) —
 and on the first *measured* building (an LBNL field rooftop unit, 182 clean days,
 no schedule point) the same deployed detector false-alarms on **6.1%** of
 held-out days ([PHASE11_RESULTS.md](PHASE11_RESULTS.md), X26).
@@ -135,11 +135,11 @@ fan coil unit):
 
 | | SDAHU | PFPU | SFPU | DDAHU (X17) | FCU (X19) | RTU, simulated (X29) |
 |---|---|---|---|---|---|---|
-| fault scenarios detected | **13 / 14** * | **22 / 30** | **21 / 29** | **45 / 55** | **40 / 47** | **20 / 24** |
+| fault scenarios detected | **13 / 14** * | **26 / 30** | **25 / 29** | **50 / 55** | **43 / 47** | **20 / 24** |
 | median time-to-detect (all significant channels, rate included) | 1 day | 1 day | 1 day | 1 day | 1 day | 1 day |
-| time-to-detect tail (longest first alarm among detected scenarios) | 2 days | 21 days | 108 days | 114 days | 15 days | — |
-| false-alarm budget, deployed detector (fault-free holdout days; conformance thresholds out-of-sample, X25) | 1.0% | 7.3% | 6.2% | 3.1% | 4.2% | 0.0% (of 28) |
-| false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 14.6% | 6.2% | 8.3% | 21.9% | 0.0% |
+| time-to-detect tail (longest first alarm among detected scenarios) | 2 days | 1 day | 1 day | 114 days | 15 days | 14 days |
+| false-alarm budget, deployed detector (fault-free holdout days; conformance thresholds out-of-sample, X25; every recorded column read, X33) | 1.0% | 8.3% | 9.4% | 3.1% | 5.2% | 0.0% (of 28) |
+| false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 15.6% | 9.4% | 8.3% | 21.9% | 0.0% |
 
 ![Detected scenarios by fault family on six systems](paper/figures/fig_detection_by_family.png)
 
@@ -148,7 +148,8 @@ fan coil unit):
 DDAHU: 79 sensor mappings, 41 rules, one healthy-silence iteration, no source
 change, gate battery clean (including a configuration-branch comparison); every family caught in full except coil fouling
 (5/12) and static-pressure sensor bias (6/8 after the fan-law channel of X27); nothing detected by the
-process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)).
+process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)). After the coverage audit (X33d) the
+remaining sensor biases are caught through the mixing boxes' redundant sensors and the count is 50/55 at 3/96.
 
 Simulated RTU (X29): the one dataset that records the refrigerant side. Every
 condenser- and evaporator-fouling severity down to 10% is caught, monotone,
@@ -168,6 +169,15 @@ the training days and thresholded on the calibration slice, detect none of the
 conformance null is a property of the state-event log, not of the miner or the
 measure ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)).
 
+Coverage series (X33, 2026-09-25): every recorded column of every system audited and mapped or excluded
+with a written reason (a guard now enforces it), each new column given a physically named reader, every band
+from the fault-free file. 142 → **158 of 175** scenarios across the five simulated systems, nothing lost, 21 → 26
+false-alarm days of 480, the process-mining rows byte-identical on every system. The gains are the misses that
+were never a detector limit: airside coil fouling through zone-fan power per cfm and discharge-minus-primary
+airflow, sensor biases through redundant mixing-box sensors and return-minus-zone residuals, damper leaks through
+the outdoor-air flow fraction. What remains missed is coil fouling whose recorded values sit inside every healthy
+band on every column ([PHASE12_RESULTS.md](PHASE12_RESULTS.md)).
+
 Field conditions (X31): sensor error on temperatures, flows and positions with 5% feedback quantisation,
 change-of-value logging with gaps, and schedule shifts with holidays, injected
 into the fault-free year and every fault file of SDAHU, DDAHU and FCU and
@@ -183,7 +193,7 @@ change; the hash gate found a byte-identical pair under two family labels
 (scored once, [ERRATA.md](ERRATA.md) E6); both new scorecard families — airflow
 restriction and reverse/unstable control, four at the documentation's granularity — caught in full; misses under the final gate are
 five of six waterside-fouling files (the cooling coil's leave the recorded points
-within about 3% of healthy) and the two smaller damper leaks; an
+within about 3% of healthy) and, until the coverage audit read the outdoor-air flow (X33e), the two smaller damper leaks; an
 outdoor-air-fraction residual (X24) caught the 20% leak under the earlier gate
 and the per-day residual null of X25 took it back ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)). Its first run fired two falsifiers (28/96 false alarms; six
 "detections" by the model channel alone) that traced to a scoring-script

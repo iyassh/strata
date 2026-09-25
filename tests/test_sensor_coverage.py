@@ -9,7 +9,8 @@ import pytest
 import yaml
 
 REPO = Path(__file__).resolve().parents[1]
-SYSTEMS = {"sdahu": "AHU_annual", "pfpu": "PFPU_FaultFree", "sfpu": "SFPU_FaultFree", "ddahu": "DualDuct_FaultFree", "fcu": "FCU_FaultFree"}
+SYSTEMS = {"sdahu": "AHU_annual", "pfpu": "PFPU_FaultFree", "sfpu": "SFPU_FaultFree", "ddahu": "DualDuct_FaultFree", "fcu": "FCU_FaultFree",
+           "rtu_sim": "RTU_sim_baseline", "rtu_field": "Site2_Unfaulted"}
 
 
 @pytest.mark.parametrize("system,healthy", list(SYSTEMS.items()))

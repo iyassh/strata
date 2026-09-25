@@ -26,3 +26,11 @@ canonical_to_csv:
   REFG_DISC_PRES: RTU_REFG_DISC_PRES
   REFG_SUCT_PRES: RTU_REFG_SUCT_PRES
   Datetime: Datetime
+
+# X33 coverage audit (2026-09-25): the two delivered-capacity outputs are simulation outputs no building records
+# (X29 pre-registration excluded them from every rule); everything else is mapped. OPERATE is the converter's derived column.
+coverage_audited: true
+unmapped:
+  RTU_SEN_CAPA: sensible capacity delivered — a simulation output no building records (X29 exclusion)
+  RTU_TOT_CAPA: total capacity delivered — a simulation output no building records (X29 exclusion)
+

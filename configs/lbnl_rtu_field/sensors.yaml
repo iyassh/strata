@@ -29,3 +29,8 @@ canonical_to_csv:
   REFG_DISC_PRES_1: RTU_REFG_DISC_PRES_1
   REFG_DISC_PRES_2: RTU_REFG_DISC_PRES_2
   Datetime: Datetime
+
+# X33 coverage audit (2026-09-25): every recorded column is mapped (OCCUPIED is derived from FAN_ON, X26)
+coverage_audited: true
+unmapped: {}
+

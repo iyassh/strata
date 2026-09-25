@@ -195,7 +195,28 @@ Whether a discovered net encodes temporal order at all --- rather than merely a 
 
 \subsection{Calibrated channels and the noise gate}
 
-Eight channels evaluate each day independently: (1) \emph{rules}, physics rules descended from the NIST APAR lineage that name direct contradictions between measurements; (2) \emph{residual}, temperature-residual bands encoding relationships that must hold under known operating modes --- with the cooling coil inactive, supply-air minus mixed-air temperature should equal the supply-fan heat rise, so a biased sensor appears as a persistent offset; (3) \emph{model conformance} and (4) \emph{device conformance}, alignment cost \cite{vanderaalst2012replaying,carmona2018conformancechecking} against the discovered unit and device models respectively --- these two are the process-mining channels; (5) \emph{absence}, a scheduled activity that did not occur; (6) \emph{frequency} and (7) \emph{oscillation}, statistical bands on activity counts and reversals; and (8) a seasonal \emph{rate} channel that corroborates but may not raise an alarm alone, for reasons disclosed in Section~\ref{sec:limitations}.
+Eight channels (Table~\ref{tab:channels}) evaluate each day independently: (1) \emph{rules}, physics rules descended from the NIST APAR lineage that name direct contradictions between measurements; (2) \emph{residual}, temperature-residual bands encoding relationships that must hold under known operating modes --- with the cooling coil inactive, supply-air minus mixed-air temperature should equal the supply-fan heat rise, so a biased sensor appears as a persistent offset; (3) \emph{model conformance} and (4) \emph{device conformance}, alignment cost \cite{vanderaalst2012replaying,carmona2018conformancechecking} against the discovered unit and device models respectively --- these two are the process-mining channels; (5) \emph{absence}, a scheduled activity that did not occur; (6) \emph{frequency} and (7) \emph{oscillation}, statistical bands on activity counts and reversals; and (8) a seasonal \emph{rate} channel that corroborates but may not raise an alarm alone, for reasons disclosed in Section~\ref{sec:limitations}.
+
+\begin{table}[t]
+\centering
+\caption{The eight channels as deployed. Every threshold is set from the fault-free year alone: bands from its training days, conformance thresholds from its calibration slice, and the noise floor from its held-out days. ``Alphabet'' names which side of the wall the channel reads. The rate channel is advisory: reported, never counted in the deployed union.}
+\label{tab:channels}
+\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{1.45cm}>{\raggedright\arraybackslash}p{4.35cm}>{\raggedright\arraybackslash}p{4.35cm}>{\raggedright\arraybackslash}p{1.25cm}@{}}
+\hline
+Channel & Alphabet & A day is flagged when & Threshold source & In union \\
+\hline
+Rules & signature & a control-sequence rule (Guideline~36 / APAR lineage) fires during operation & fixed bands from the sequence documentation; no fitted parameter & yes \\
+Residual & raw signals & a per-mode physical residual (coil-off supply--mixed rise, outdoor-air fraction, static $\div$ speed$^2$, refrigerant approach) leaves its healthy band & $[\min,\max]$ of training-day scores, widened to at least the $0.5\,^\circ$F sensor floor; exceedance must also clear that floor & yes \\
+Model conformance & state & the day's trace aligns to the unit net with fitness below threshold & 1\,\% quantile of per-day fitness on the calibration slice & yes \\
+Device conformance & state & an actuator's daily lifecycle trace aligns to its device net below threshold & as above, per device net & yes \\
+Absence & state & a device that is active on scheduled training days produces no lifecycle event on a scheduled day & each device's healthy silence rate on training days & yes \\
+Frequency & state & a daily activity count (unit or device) leaves its healthy range & $[\min,\max]$ over training days, for activities seen on $\geq 5\,\%$ of them & yes \\
+Oscillation & raw signals & an actuator's daily count of direction reversals leaves its healthy range & $[\min,\max]$ over training days & yes \\
+Rate & state & a 30-day active-day rate leaves the range of healthy windows ending in the same calendar month & training-year windows, month-matched & advisory \\
+\hline
+\end{tabular}
+\end{table}
 
 Calibration uses the fault-free year only, at a false-positive quantile of 0.01 against a calendar-stratified holdout of the last eight days of each month. No threshold may see fault data. Every rule additionally requires a positive control, because silence is not competence: a position-based leak rule proved structurally deaf on the fan-powered units, where the seeded leak passes water through a valve whose position reads closed honestly, and was replaced by a waterside flow rule.
 
@@ -281,11 +302,11 @@ Wrong alarms / all alarms & \multicolumn{3}{c}{$<0.1\%$ (96 fault-free vs 4{,}54
 
 \begin{table}[t]
 \centering
-\small
-\setlength{\tabcolsep}{4pt}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}lrrrrrr@{}}
 \hline
-System (LBNL) & points mapped & rules (state / signature) & scored & detected & deployed false alarms & fault-free days \\
+System (LBNL) & points & rules (state\,/\,sig.) & scored & detected & false alarms & healthy days \\
 \hline
 SDAHU, single-duct AHU & 12 & 3 / 8 & 14 & 14 (13 adj.) & 1 / 96 & 365 \\
 PFPU, parallel fan-powered box & 56 & 13 / 26 & 30 & 22 & 7 / 96 & 365 \\

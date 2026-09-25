@@ -1,0 +1,210 @@
+{
+  "method": "Wilson score interval, 95 %, z = 1.959964; McNemar exact two-sided binomial on discordant pairs",
+  "false_alarm_rates": {
+    "sdahu": {
+      "deployed": [
+        1,
+        96,
+        [
+          0.2,
+          5.7
+        ]
+      ],
+      "naive": [
+        15,
+        96,
+        [
+          9.7,
+          24.2
+        ]
+      ],
+      "pca_strict": [
+        1,
+        79,
+        [
+          0.2,
+          6.8
+        ]
+      ]
+    },
+    "pfpu": {
+      "deployed": [
+        7,
+        96,
+        [
+          3.6,
+          14.3
+        ]
+      ],
+      "naive": [
+        14,
+        96,
+        [
+          8.9,
+          23.0
+        ]
+      ],
+      "pca_strict": [
+        1,
+        96,
+        [
+          0.2,
+          5.7
+        ]
+      ]
+    },
+    "sfpu": {
+      "deployed": [
+        6,
+        96,
+        [
+          2.9,
+          13.0
+        ]
+      ],
+      "naive": [
+        6,
+        96,
+        [
+          2.9,
+          13.0
+        ]
+      ],
+      "pca_strict": [
+        1,
+        96,
+        [
+          0.2,
+          5.7
+        ]
+      ]
+    },
+    "ddahu": {
+      "deployed": [
+        3,
+        96,
+        [
+          1.1,
+          8.8
+        ]
+      ],
+      "naive": [
+        8,
+        96,
+        [
+          4.3,
+          15.6
+        ]
+      ]
+    },
+    "fcu": {
+      "deployed": [
+        4,
+        96,
+        [
+          1.6,
+          10.2
+        ]
+      ],
+      "naive": [
+        21,
+        96,
+        [
+          14.8,
+          31.1
+        ]
+      ]
+    },
+    "rtu_sim": {
+      "deployed": [
+        0,
+        28,
+        [
+          0.0,
+          12.1
+        ]
+      ],
+      "naive": [
+        0,
+        28,
+        [
+          0.0,
+          12.1
+        ]
+      ]
+    },
+    "rtu_field": {
+      "deployed": [
+        3,
+        49,
+        [
+          2.1,
+          16.5
+        ]
+      ],
+      "naive": [
+        4,
+        49,
+        [
+          3.2,
+          19.2
+        ]
+      ]
+    }
+  },
+  "detection": {
+    "n_scenarios": 73,
+    "strata_adjudicated": [
+      56,
+      73,
+      [
+        65.8,
+        84.9
+      ]
+    ],
+    "strata_naive": [
+      57,
+      73,
+      [
+        67.3,
+        86.0
+      ]
+    ],
+    "pca_strict": [
+      61,
+      73,
+      [
+        73.4,
+        90.3
+      ]
+    ]
+  },
+  "mcnemar": {
+    "strata_only": [
+      "PFPU_VAVDMPRUnstable"
+    ],
+    "baseline_only": [
+      "PFPU_SensorBias_RMTEMP_+2C",
+      "PFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "SFPU_ReheatCoilFouling_Airside_Severe",
+      "SFPU_SensorBias_RMTEMP_+2C",
+      "SFPU_VAVFanRestrictFlow"
+    ],
+    "discordant": 7,
+    "exact_p_two_sided": 0.125,
+    "both_miss": [
+      "PFPU_ReheatCoilFouling_Airside_Minor",
+      "PFPU_ReheatCoilFouling_Airside_Moderate",
+      "PFPU_ReheatCoilFouling_Airside_Severe",
+      "PFPU_ReheatCoilFouling_Waterside_Minor",
+      "PFPU_ReheatCoilFouling_Waterside_Moderate",
+      "PFPU_ReheatCoilFouling_Waterside_Severe",
+      "SFPU_ReheatCoilFouling_Airside_Minor",
+      "SFPU_ReheatCoilFouling_Waterside_Minor",
+      "SFPU_ReheatCoilFouling_Waterside_Moderate",
+      "SFPU_ReheatCoilFouling_Waterside_Severe",
+      "oa_bias_4_annual"
+    ]
+  }
+}

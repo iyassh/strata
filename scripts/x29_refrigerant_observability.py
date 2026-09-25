@@ -30,7 +30,7 @@ other = [r for f, rows in by.items() if f not in ("condenser_fouling", "evaporat
 conf_only = [f for f, m in [(s["file"], s["meaningful_channels"]) for s in sc] if m and set(str(m).split("+")) <= {"model", "device"}]
 CLOSE_COMMIT = "0274c72"   # X29 closing commit: the config-only check is prereg -> close, not prereg -> HEAD
 src_changed = subprocess.run(["git", "diff", "--stat", "df064db", CLOSE_COMMIT, "--", "src/"], capture_output=True, text=True).stdout.strip()
-AMEND1_COMMIT = "AMEND1"    # replaced by the Amendment 1 commit hash once committed; src/ must be unchanged from it to HEAD
+AMEND1_COMMIT = "48dfbe0"    # replaced by the Amendment 1 commit hash once committed; src/ must be unchanged from it to HEAD
 src_changed_a1 = subprocess.run(["git", "diff", "--stat", AMEND1_COMMIT, "HEAD", "--", "src/"], capture_output=True, text=True).stdout.strip() if AMEND1_COMMIT != "AMEND1" else ""
 credits = json.loads((REPO / "outputs/x29_residual_credits.json").read_text())["scenarios"] if (REPO / "outputs/x29_residual_credits.json").exists() else {}
 cond_named = all(credits[n]["per_rule_flagged_days"].get("cond_approach", 0) > 0 for n, _ in cond) if credits else None

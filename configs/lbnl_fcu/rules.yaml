@@ -23,7 +23,9 @@ detection:
   residual_min_exceedance: 0.5
   residual_channels: [supply_air_residual, cooling_only_residual, heating_only_residual,
                       chwc_waterside_dT, hwc_waterside_dT, flow_per_speed,
-                      oa_fraction_residual]   # X24 (X28's chwc_ua/hwc_ua removed: F-X28.a, two false-alarm days for no detection)
+                      oa_fraction_residual,
+                      # X33e coverage audit (2026-09-25)
+                      oa_flow_ratio_min_pos, fan_specific_power]   # flow_per_speed already exists above   # X24 (X28's chwc_ua/hwc_ua removed: F-X28.a, two false-alarm days for no detection)
   holdout_days_per_month: 8
   # X25: the 8 days before the holdout block calibrate the conformance thresholds,
   # so the holdout is out-of-sample for every channel (discovery trains on the rest)
@@ -332,3 +334,49 @@ events:
   # were scored here once — no fouling scenario gained, two holdout false alarms added —
   # and removed under F-X28.a. Their definition is in configs/lbnl_ddahu/rules.yaml, where
   # they stay as inert channels (no gain, no false alarm), and in the pre-registration.
+
+  # ---------------- X33e coverage audit (2026-09-25) ----------------
+  # Bands from the fault-free file, occupied and fan on; quantiles (p0.1 / median / p99.9) logged per rule.
+  # Outdoor-air flow as a fraction of discharge flow at the damper's minimum position (0.30, 174,453 healthy minutes):
+  # 0.1052 / 0.1054 / 0.1330 — a damper leak adds outdoor air without moving the position.
+  oa_flow_ratio_min_pos:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: OA_FLOW
+    b: DA_FLOW
+    low: 0.05
+    high: 0.16
+    gates:
+      - signal: FAN_SPEED
+        above: 0.05
+      - signal: DA_FLOW
+        above: 20.0
+      - signal: OA_DMPR_POS
+        above: 0.25
+      - signal: OA_DMPR_POS
+        below: 0.35
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.01
+    residual_min_exceedance: 0.01
+  # Fan specific power W/cfm: 0.0026 / 0.0066 / 0.0119
+  fan_specific_power:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: FAN_POWER
+    b: DA_FLOW
+    low: 0.001
+    high: 0.015
+    gates:
+      - signal: FAN_SPEED
+        above: 0.05
+      - signal: DA_FLOW
+        above: 20.0
+    occ_signal: OCCUPIED
+    occ_above: 0.5
+    sustained_min: 60
+    residual_min_band_width: 0.0007
+    residual_min_exceedance: 0.0007

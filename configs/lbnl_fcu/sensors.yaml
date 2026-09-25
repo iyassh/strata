@@ -33,3 +33,10 @@ canonical_to_csv:
   DA_HUMD: FCU_DA_HUMD
   RA_HUMD: FCU_RA_HUMD
   Datetime: Datetime
+
+# X33e (2026-09-25): coverage audit — all 29 recorded columns were already mapped; readers added in rules.yaml
+# for OA_FLOW, FAN_POWER and FAN_SPEED; FAN_MODE is constant (1) for the whole fault-free year and the four
+# humidities are mapped as context (no humidity rule in the sequence)
+coverage_audited: true
+unmapped: {}
+

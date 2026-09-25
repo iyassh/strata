@@ -168,7 +168,7 @@ the training days and thresholded on the calibration slice, detect none of the
 conformance null is a property of the state-event log, not of the miner or the
 measure ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)).
 
-Field conditions (X31): sensor error with 5% feedback quantisation,
+Field conditions (X31): sensor error on temperatures, flows and positions with 5% feedback quantisation,
 change-of-value logging with gaps, and schedule shifts with holidays, injected
 into the fault-free year and every fault file of SDAHU, DDAHU and FCU and
 re-fitted: the budget holds in every cell (worst 3/96), the costliest condition

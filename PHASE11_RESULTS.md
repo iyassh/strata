@@ -496,14 +496,19 @@ against the cell's own holdout false alarms — the deployed rule.
 
 | system | misses | cells run | holdout false alarms (of days with a state trace) | best cell: flagged days on its best miss | detects |
 |---|---|---|---|---|---|
-| PFPU | 8 | 7 / 7 | 0, 2, 5, 0, 0, 0, 0 of 96 | IM05-align 18 / 365 (reheat airside minor) at 2 / 96 | **0** |
+| PFPU | 8 | 7 / 7 | 0, 2, 5, 0, 0, 0, 0 of 96 | IM05-align 18 / 365 (all three reheat airside severities) at 2 / 96 | **0** |
 | SFPU | 8 | 6 / 7 (HM-align timed out) | 0, 5, 1, –, 5, 2, 2 of 96 | IM05-align 13 / 365 (VAV fan restrict) at 5 / 96 | **0** |
 | DDAHU | 10 | 6 / 7 (HM-align timed out) | 0, 0, 0, –, 1, 2, 3 of 83 | TEMPORAL 11 / 317 (HSA +2 °C bias) at 3 / 83 | **0** |
 | FCU | 7 | 7 / 7 | 0, 1, 2, 0, 7, 1, 1 of 72 | SKEL 15 / 268 (cooling waterside severe) at 7 / 72 | **0** |
 | SDAHU | 0 | 7 / 7 | 0, 0, 0, 0, 0, 1, 0 of 87 | — | — |
 
 Cell order in the false-alarm column: IM00-align, IM05-align, IM02-token,
-HM-align, SKEL, DECLARE, TEMPORAL. Thirty-three cells evaluated, 33
+HM-align, SKEL, DECLARE, TEMPORAL. Every denominator — holdout and scenario
+(365, 317, 268) — is the number of days with a state trace, not the deployed
+evaluable-day count, and the cells omit the silent-in-operate holdout flags
+the deployed model channel adds; recomputing the closest cell at n = 365
+against a 96-day holdout leaves its p at 0.040, so the gate difference is
+immaterial to the result. Thirty-three cells evaluated, 33
 missed scenarios, zero detections at each cell's pre-registered threshold (the 1 % calibration quantile; realised holdout false-alarm rates 0 to 9.7 %). No threshold sweep was run; the closest cell to the gate is p = 0.040 against 10⁻³. The highest
 flagged share any cell reaches on any miss is 5.6 % of scenario days
 (FCU skeleton, at 9.7 % holdout false alarms).
@@ -547,10 +552,14 @@ detector on the perturbed year and scores every scenario, on three
 equipment classes:
 
 - **field_noise**: temperatures + N(0, 0.9 °F); flows × (1 + N(0, 0.02));
-  positions quantised to 0.05 then + N(0, 0.01), clipped to [0, 1].
+  positions quantised to 0.05 then + N(0, 0.01), clipped to [0, 1]. Static
+  pressures, humidities, speeds and powers are not perturbed — so the DDAHU
+  static-pressure biases that move under this arm move through the
+  re-fitted bands and the perturbed temperatures, not through their own signal.
 - **cov_gaps**: per-column change-of-value logging (deadbands 0.5 °F, 0.02
-  position, 2 % flow; last value carried forward) plus 2 % of minutes removed
-  in 30-minute blocks.
+  position, 2 % flow; last value carried forward) plus about 2 % of minutes
+  removed in 30-minute blocks (block starts drawn with replacement; 1.98 %
+  on SDAHU).
 - **schedule**: on a seeded 20 % of weekdays occupancy starts 30 minutes
   earlier; six seeded weekdays are holidays (occupancy 0). One calendar per
   system, applied to every file.
@@ -564,7 +573,8 @@ The cause was in the library facade, not the perturbation: `pipeline.fit`
 still pooled the residual noise floor over channel-days (X25 step 3, 3/509
 on DDAHU) where `scripts/benchmark.py` had moved to the per-day null of
 step 4 (3/124). The regression gate regenerates artefacts through the
-scripts and could not see the drift. The facade was repaired, a guard now
+scripts and could not see the drift, and the facade test of the time checked
+one system's per-channel flag counts, never the null pair. The facade was repaired, a guard now
 pins its residual, frequency and oscillation nulls to the scorecards', a
 **clean arm** (the same facade on the unperturbed files) became the
 comparator, and every arm was re-run (L55). The clean arm reproduces the

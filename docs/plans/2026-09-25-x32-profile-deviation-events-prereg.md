@@ -69,3 +69,16 @@ stretch, with its direction. Three things are then measured.
 
 `outputs/x32_profile_deviation_events.json`; guard
 `tests/test_x32_profile_deviation_events.py`.
+
+## Withdrawn before any computation (2026-09-25 02:20)
+
+A read-only scan of the design against the data (scratch report
+`x32_signal_scan.md`, not an artefact) showed that the envelope as specified
+cannot pass its own false-alarm side: on healthy holdout days a third to a
+half of all signals leave a (month, weekday-type, hour) envelope for 30
+sustained minutes, because each bin holds about ten training days of
+autocorrelated minutes, and a count of such events fires on 9–19 % of
+healthy days and on fewer fault days than that. The same scan found that for
+six of the fourteen reachable misses the decisive signal is a recorded column
+that no configuration maps. X32 is withdrawn unrun; the coverage audit and
+remap series X33 replaces it. No artefact was produced.

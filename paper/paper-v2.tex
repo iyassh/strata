@@ -176,8 +176,8 @@ STRATA (Figure~\ref{fig:framework}; code and artefacts at \url{https://github.co
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/strata_framework_v2.pdf}
-\caption{The framework. Training (top): one fault-free year and one configuration file; events are split into state and fault-signature alphabets, models are discovered from state events only, and every channel is calibrated to its own noise floor. Deployment (bottom): each day is scored by every channel, only what clears a channel's floor may report, and what survives reaches the operator with a name, the evidence, and that channel's stated false-alarm budget.}
+\includegraphics[width=\textwidth]{figures/strata_framework_v3.pdf}
+\caption{The framework as finally evaluated. Training (top): one fault-free year and one configuration file; events are split into state and fault-signature alphabets; process models are discovered from state events only and, on the evidence of Sections~\ref{sec:results} and \ref{sec:positivecontrol}, describe normal operation without detecting or predicting anything; every channel's threshold comes from a three-way calendar split (discover, calibrate, hold out), so every reported false-alarm rate is out-of-sample. Deployment (bottom): each day is scored by physics, statistical and conformance channels; a channel reports only what exceeds its own per-day false-alarm rate on the held-out days it could evaluate, floored at three days; what survives reaches the operator with a name, a physical explanation, the device, and the stated budget.}
 \label{fig:framework}
 \end{figure}
 

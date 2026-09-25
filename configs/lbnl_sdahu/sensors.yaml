@@ -14,4 +14,27 @@ canonical_to_csv:
   RA_DMPR_POS: RA_DMPR
   RA_DMPR_CMD: RA_DMPR_DM
   OCCUPIED: SYS_CTL
+  # X33a (2026-09-25): coverage audit — every recorded column mapped or excluded below
+  SF_POWER: SF_WAT
+  RF_POWER: RF_WAT
+  SA_FLOW: SA_CFM
+  RA_FLOW: RA_CFM
+  SF_SPEED_CMD: SF_CS
+  RF_SPEED_CMD: RF_CS
+  RF_SPEED_POS: RF_SPD
+  SF_CMD: SF_SPD_DM
+  RF_CMD: RF_SPD_DM
+  ZONE_TEMP_1: ZONE_TEMP_1
+  ZONE_TEMP_2: ZONE_TEMP_2
+  ZONE_TEMP_3: ZONE_TEMP_3
+  ZONE_TEMP_4: ZONE_TEMP_4
+  ZONE_TEMP_5: ZONE_TEMP_5
   Datetime: Datetime
+
+# X33a: columns deliberately not mapped, with the reason (guarded by tests/test_sensor_coverage.py)
+coverage_audited: true
+unmapped:
+  OA_CFM: constant for the whole fault-free year (one value); carries nothing
+  SF_SPD: constant 0.9 for the whole fault-free year while SF_CS varies; a position-vs-command rule would fire permanently
+  SA_SP: ERRATA E3 — per-branch constant offset that separates the fault-free file from every fault file (provenance leak)
+  SA_SPSPT: ERRATA E3 — constant, per-branch (provenance leak)

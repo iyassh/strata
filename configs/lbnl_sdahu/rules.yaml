@@ -28,7 +28,10 @@ detection:
   residual_min_band_width: 0.5
   residual_min_exceedance: 0.5
   # X24: the default residual channel plus the outdoor-air-fraction residual
-  residual_channels: [supply_air_residual, oa_fraction_residual]
+  residual_channels: [supply_air_residual, oa_fraction_residual, sf_specific_power, rf_specific_power, sf_flow_per_speed]
+  # X33a: zone air temperatures read by the oscillation channel (healthy holdout exceedance 0/96 per zone)
+  oscillation_signals: [ZONE_TEMP_1, ZONE_TEMP_2, ZONE_TEMP_3, ZONE_TEMP_4, ZONE_TEMP_5]
+  oscillation_deadband: 0.5
 
 events:
   occupancy:
@@ -163,3 +166,68 @@ events:
     sustained_min: 60
     residual_min_band_width: 0.05
     residual_min_exceedance: 0.05
+
+  # ---------------- X33a coverage audit (2026-09-25): fan side ----------------
+  # Bands from the fault-free year only (occupied, fan commanded): quantiles logged here.
+  # Supply fan specific power, W per cfm: healthy p0.1 7e-6, median 9.6e-4, p99.9 1.65e-3.
+  sf_specific_power:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: SF_POWER
+    b: SA_FLOW
+    low: 0.0
+    high: 0.0020
+    gates:
+      - signal: SF_CMD
+        above: 0.5
+      - signal: SA_FLOW
+        above: 1000.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.0001
+    residual_min_exceedance: 0.0001
+  # Return fan specific power: healthy p0.1 1e-6, median 2.2e-4, p99.9 4.3e-4.
+  rf_specific_power:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: RF_POWER
+    b: RA_FLOW
+    low: 0.0
+    high: 0.0006
+    gates:
+      - signal: RF_CMD
+        above: 0.5
+      - signal: RA_FLOW
+        above: 1000.0
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 0.00003
+    residual_min_exceedance: 0.00003
+  # Fan law, flow proportional to speed: SA_FLOW / SF_SPEED_CMD, healthy p0.1 5.72e5, median 7.88e5, p99.9 1.27e6
+  # (the file's flow unit is ~1000x cfm). Silence iteration 1: bands were logged /1000 by mistake and fired daily; corrected.
+  sf_flow_per_speed:
+    kind: paired_residual
+    alphabet: signature
+    op: ratio
+    a: SA_FLOW
+    b: SF_SPEED_CMD
+    low: 450000.0
+    high: 1400000.0
+    gates:
+      - signal: SF_CMD
+        above: 0.5
+      - signal: SF_SPEED_CMD
+        above: 0.05
+    occ_signal: OCCUPIED
+    sustained_min: 60
+    residual_min_band_width: 20000.0
+    residual_min_exceedance: 20000.0
+  # Return fan speed position must track its command (identical columns in the fault-free year).
+  rf_speed_mismatch:
+    kind: mismatch
+    pos: RF_SPEED_POS
+    cmd: RF_SPEED_CMD
+    threshold: 0.05
+    sustained_min: 60

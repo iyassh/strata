@@ -152,3 +152,38 @@ up as "same power, less air". Every prediction held. The cost is three residual
 false-alarm days, all on different rules, which puts the deployed union at 9
 of 96 — inside the budget but with one day of headroom, the least of the six
 systems.
+
+### Gap analysis after X33a–c: what the remaining fan-powered misses look like
+
+Eight scenarios remain missed on the two fan-powered units, all reheat-coil
+fouling: airside minor on both units, and waterside minor, moderate and severe
+on both. Their residual channels flag 3–18 of 365 days; the strongest witness is
+the water-side temperature drop on the series unit's severe file (15 days), below
+the per-day floor of 3 in 69 (4.3 %).
+
+**The waterside fouling is visible, but not certifiable, on the parallel unit.**
+The fault is implemented as a reduced maximum water flow: with the reheat valve
+more than 90 % open, the healthy coil passes 6.03 gpm and the fouled coil 5.42,
+4.22 and 3.01 gpm at minor, moderate and severe (day medians; every such day is
+outside the healthy band of [6.015, 6.030]). Below 80 % open the flow tracks
+the valve position identically in health and fault, so a flow-per-position
+residual over the whole range does not move (median 2.143 against 2.136). The
+witness therefore exists only on days when the valve saturates: 10 days in the
+healthy year (5 training days, 1 holdout day) and 10–15 days in each fault file.
+Two consequences, both of the framework's own discipline: the rule's healthy
+band rests on five days and its false-alarm rate on one, so no null can be
+estimated for it; and under the per-day gate, 15 flagged days of 365 (4.1 %)
+sit below the residual channel's floor. A one-year healthy record does not
+contain enough saturated-valve days to certify a witness that only appears when
+the valve saturates. On the series unit the reheat valve exceeds 80 % on two
+healthy days, so the witness is not even measurable there.
+
+This is recorded as a limit, not tuned around: lowering the gate for a rule
+that is evaluable on ten days would be exactly the kind of decision the
+pre-registration forbids. What would change it is data, not method: a second
+healthy year, or a healthy period with more saturated-valve operation.
+
+**Airside minor fouling** moves the parallel unit's discharge-minus-primary
+airflow on 1 day and the series unit's fan power per cfm on 0 days; the
+moderate files move them on 172 and 145. The minor level sits inside the
+healthy band on every column the units record.

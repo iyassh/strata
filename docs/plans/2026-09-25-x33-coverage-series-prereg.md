@@ -156,3 +156,26 @@ Not added: RA_FLOW / SA_FLOW (identically 1.000 in the simulation; carries nothi
 - **F-X33d.c** P7 fails → investigated before anything else.
 - A failed P3, P4 or P5 is a wrong prediction (and, for P3/P4, would mean the seeded bias is written into the box sensors too, which the section will then say); a failed P6 is a positive surprise, reported as such.
 
+## X33e — FCU, fan coil unit (29 columns, all 29 mapped before)
+
+**Written 2026-09-25 after X33d closed; configuration drafted against the fault-free file only (healthy silence at iteration 1) and held in the stash until this section is committed with it.** Every column was already mapped; the audit found five with no reader: OA_FLOW, FAN_POWER, FAN_MODE (constant 1 for the whole year) and the four humidities (context; no humidity rule in the sequence). Readers added:
+
+| column | reader |
+|---|---|
+| OA_FLOW | `oa_flow_ratio_min_pos` = OA_FLOW / DA_FLOW gated on the damper at its minimum position (0.25–0.35; the damper sits at 0.30 for 174,453 healthy occupied minutes): healthy p0.1 / median / p99.9 = 0.1052 / 0.1054 / 0.1330; a damper leak adds outdoor air without moving the position |
+| FAN_POWER | `fan_specific_power` = FAN_POWER / DA_FLOW (0.0026 / 0.0066 / 0.0119 W per cfm) |
+| DA_FLOW / FAN_SPEED | already read by the existing `flow_per_speed`; a duplicate reader was drafted and removed before commit |
+
+### Predictions
+- **P1.** No scenario lost (40 of 47 before).
+- **P2.** Deployed false alarms ≤ 10 of 96 and ≤ 4 + 3; no new rule > 3 holdout days on its own.
+- **P3.** The 50 % outdoor-air damper leak is detected through `oa_flow_ratio_min_pos` (the X32 scan: outdoor-air flow separates it at zero holdout exceedances); the 20 % leak is uncertain and predicted detected.
+- **P4.** The five waterside fouling misses stay missed.
+- **P5.** Model and device rows byte-identical.
+
+### Falsifiers
+- **F-X33e.a** P1 fails → channel named and removed; loss reported.
+- **F-X33e.b** P2 fails → channel removed under the adoption rule; reported.
+- **F-X33e.c** P5 fails → investigated before anything else.
+- A failed P3 is a wrong prediction; a failed P4 is a positive surprise, reported as such.
+

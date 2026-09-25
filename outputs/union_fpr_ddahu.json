@@ -132,14 +132,14 @@
     "channels": "rules+resid+model+absence+freq+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-03-01",
-    "rate_only_alarm_days": 6
+    "rate_only_alarm_days": 4
    },
    {
     "label": "cold-deck damper stuck 20%",
     "channels": "rules+resid+model+absence+freq+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-03-01",
-    "rate_only_alarm_days": 8
+    "rate_only_alarm_days": 5
    },
    {
     "label": "cooling valve stuck 0%",

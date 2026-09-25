@@ -1,0 +1,670 @@
+{
+  "prereg": "docs/plans/2026-09-25-x33-coverage-series-prereg.md",
+  "system": "ddahu",
+  "before_commit": "c40144d",
+  "after_commit": "working tree",
+  "columns_mapped": [
+    79,
+    114
+  ],
+  "columns_excluded": [],
+  "new_rules": [
+    "box_eat_C_E",
+    "box_eat_C_SA",
+    "box_eat_C_SB",
+    "box_eat_C_W",
+    "box_eat_H_E",
+    "box_eat_H_SA",
+    "box_eat_H_SB",
+    "box_eat_H_W",
+    "box_static_C_E",
+    "box_static_C_SA",
+    "box_static_C_SB",
+    "box_static_C_W",
+    "box_static_H_E",
+    "box_static_H_SA",
+    "box_static_H_SB",
+    "box_static_H_W",
+    "chwp_bypass_flow",
+    "csf_dp_per_speed2",
+    "csf_flow_per_speed",
+    "csf_specific_power",
+    "hsf_dp_per_speed2",
+    "hsf_flow_per_speed",
+    "hsf_specific_power",
+    "hwp_bypass_flow",
+    "rf_specific_power"
+  ],
+  "scored": 55,
+  "detected_before": 45,
+  "detected_after": 50,
+  "gained": [
+    "DualDuct_Fouling_Cooling_Airside_Moderate",
+    "DualDuct_Fouling_Heating_Waterside_Minor",
+    "DualDuct_SensorBias_HSA_+2C",
+    "DualDuct_SensorBias_HSP_-2inwg",
+    "DualDuct_SensorBias_HSP_-4inwg"
+  ],
+  "lost": [],
+  "channel_changes": {
+    "DualDuct_DMPRStuck_Cold_50": {
+      "before": "rules+absence",
+      "after": "rules+resid+absence",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        19,
+        35
+      ]
+    },
+    "DualDuct_Fouling_Cooling_Airside_Moderate": {
+      "before": null,
+      "after": "resid",
+      "ttd_before": null,
+      "ttd_after": 14,
+      "residual_days": [
+        12,
+        32
+      ]
+    },
+    "DualDuct_Fouling_Cooling_Waterside_Severe": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 114,
+      "ttd_after": 114,
+      "residual_days": [
+        2,
+        38
+      ]
+    },
+    "DualDuct_Fouling_Heating_Waterside_Minor": {
+      "before": null,
+      "after": "resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        0,
+        282
+      ]
+    },
+    "DualDuct_Fouling_Heating_Waterside_Moderate": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 8,
+      "ttd_after": 1,
+      "residual_days": [
+        0,
+        282
+      ]
+    },
+    "DualDuct_Fouling_Heating_Waterside_Severe": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 3,
+      "ttd_after": 1,
+      "residual_days": [
+        11,
+        281
+      ]
+    },
+    "DualDuct_SensorBias_CSA_-2C": {
+      "before": "resid",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        177,
+        281
+      ]
+    },
+    "DualDuct_SensorBias_CSA_-4C": {
+      "before": "resid",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        200,
+        282
+      ]
+    },
+    "DualDuct_SensorBias_HSA_-2C": {
+      "before": "resid",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        209,
+        281
+      ]
+    },
+    "DualDuct_SensorBias_HSA_+2C": {
+      "before": null,
+      "after": "rules+resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        16,
+        282
+      ]
+    },
+    "DualDuct_SensorBias_HSA_+4C": {
+      "before": "resid",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        270,
+        284
+      ]
+    },
+    "DualDuct_SensorBias_HSP_-2inwg": {
+      "before": null,
+      "after": "resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        7,
+        282
+      ]
+    },
+    "DualDuct_SensorBias_HSP_-4inwg": {
+      "before": null,
+      "after": "resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        8,
+        282
+      ]
+    }
+  },
+  "ttd_later": [],
+  "deployed_fp": [
+    3,
+    3
+  ],
+  "per_channel_fp": {
+    "rules": [
+      0,
+      0
+    ],
+    "resid": [
+      0,
+      0
+    ],
+    "model": [
+      0,
+      0
+    ],
+    "device": [
+      0,
+      0
+    ],
+    "absence": [
+      3,
+      3
+    ],
+    "freq": [
+      0,
+      0
+    ],
+    "rate": [
+      7,
+      7
+    ],
+    "osc": [
+      0,
+      0
+    ]
+  },
+  "model_rows_identical": true,
+  "new_rule_holdout_fp": {
+    "box_eat_C_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.25,
+        0.25
+      ]
+    },
+    "box_eat_C_SA": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.25,
+        0.25
+      ]
+    },
+    "box_eat_C_SB": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.25,
+        0.25
+      ]
+    },
+    "box_eat_C_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.25,
+        0.25
+      ]
+    },
+    "box_eat_H_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.25,
+        0.25
+      ]
+    },
+    "box_eat_H_SA": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.25,
+        0.25
+      ]
+    },
+    "box_eat_H_SB": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.25,
+        0.25
+      ]
+    },
+    "box_eat_H_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.25,
+        0.25
+      ]
+    },
+    "box_static_C_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.9099999999999999,
+        -0.010000000000000009
+      ]
+    },
+    "box_static_C_SA": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.79,
+        -0.010000000000000009
+      ]
+    },
+    "box_static_C_SB": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.66,
+        -0.010000000000000009
+      ]
+    },
+    "box_static_C_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.6,
+        -0.010000000000000009
+      ]
+    },
+    "box_static_H_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.07000000000000003,
+        -0.02000000000000004
+      ]
+    },
+    "box_static_H_SA": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.1450000000000001,
+        -0.09500000000000011
+      ]
+    },
+    "box_static_H_SB": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.12500000000000008,
+        -0.0750000000000001
+      ]
+    },
+    "box_static_H_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        -0.12500000000000008,
+        -0.0750000000000001
+      ]
+    },
+    "chwp_bypass_flow": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        0.0,
+        27.57
+      ]
+    },
+    "csf_dp_per_speed2": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        3.965248384940966,
+        4.72
+      ]
+    },
+    "csf_flow_per_speed": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        597.0,
+        3007.87
+      ]
+    },
+    "csf_specific_power": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        0.814416264253425,
+        1.5019934864438418
+      ]
+    },
+    "hsf_dp_per_speed2": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        3.6122448979591844,
+        3.711411723898716
+      ]
+    },
+    "hsf_flow_per_speed": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        430.1182795698924,
+        609.0214285714287
+      ]
+    },
+    "hsf_specific_power": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        1.187415087246962,
+        2.914227144321392
+      ]
+    },
+    "hwp_bypass_flow": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        7.26,
+        7.84
+      ]
+    },
+    "rf_specific_power": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 75,
+      "band": [
+        0.0,
+        0.2724072842965003
+      ]
+    }
+  },
+  "new_rule_credited_scenarios": {
+    "box_eat_C_E": [
+      "DualDuct_SensorBias_CSA_+2C",
+      "DualDuct_SensorBias_CSA_+4C",
+      "DualDuct_SensorBias_CSA_-2C",
+      "DualDuct_SensorBias_CSA_-4C"
+    ],
+    "box_eat_C_SA": [
+      "DualDuct_SensorBias_CSA_+2C",
+      "DualDuct_SensorBias_CSA_+4C",
+      "DualDuct_SensorBias_CSA_-2C",
+      "DualDuct_SensorBias_CSA_-4C"
+    ],
+    "box_eat_C_SB": [
+      "DualDuct_SensorBias_CSA_+2C",
+      "DualDuct_SensorBias_CSA_+4C",
+      "DualDuct_SensorBias_CSA_-2C",
+      "DualDuct_SensorBias_CSA_-4C"
+    ],
+    "box_eat_C_W": [
+      "DualDuct_SensorBias_CSA_+2C",
+      "DualDuct_SensorBias_CSA_+4C",
+      "DualDuct_SensorBias_CSA_-2C",
+      "DualDuct_SensorBias_CSA_-4C"
+    ],
+    "box_eat_H_E": [
+      "DualDuct_SensorBias_HSA_+2C",
+      "DualDuct_SensorBias_HSA_+4C",
+      "DualDuct_SensorBias_HSA_-2C",
+      "DualDuct_SensorBias_HSA_-4C"
+    ],
+    "box_eat_H_SA": [
+      "DualDuct_SensorBias_HSA_+2C",
+      "DualDuct_SensorBias_HSA_+4C",
+      "DualDuct_SensorBias_HSA_-2C",
+      "DualDuct_SensorBias_HSA_-4C"
+    ],
+    "box_eat_H_SB": [
+      "DualDuct_SensorBias_HSA_+2C",
+      "DualDuct_SensorBias_HSA_+4C",
+      "DualDuct_SensorBias_HSA_-2C",
+      "DualDuct_SensorBias_HSA_-4C"
+    ],
+    "box_eat_H_W": [
+      "DualDuct_SensorBias_HSA_+2C",
+      "DualDuct_SensorBias_HSA_+4C",
+      "DualDuct_SensorBias_HSA_-2C",
+      "DualDuct_SensorBias_HSA_-4C"
+    ],
+    "box_static_C_E": [
+      "DualDuct_SensorBias_CSP_-2inwg",
+      "DualDuct_SensorBias_CSP_-4inwg"
+    ],
+    "box_static_C_SA": [
+      "DualDuct_DMPRStuck_Cold_100",
+      "DualDuct_SensorBias_CSP_-2inwg",
+      "DualDuct_SensorBias_CSP_-4inwg"
+    ],
+    "box_static_C_SB": [
+      "DualDuct_SensorBias_CSP_-2inwg",
+      "DualDuct_SensorBias_CSP_-4inwg"
+    ],
+    "box_static_C_W": [
+      "DualDuct_SensorBias_CSP_-2inwg",
+      "DualDuct_SensorBias_CSP_-4inwg"
+    ],
+    "box_static_H_E": [
+      "DualDuct_SensorBias_HSP_+2inwg",
+      "DualDuct_SensorBias_HSP_+4inwg",
+      "DualDuct_SensorBias_HSP_-2inwg",
+      "DualDuct_SensorBias_HSP_-4inwg",
+      "DualDuct_VLVStuck_Heating_0",
+      "DualDuct_VLVStuck_Heating_20"
+    ],
+    "box_static_H_SA": [
+      "DualDuct_DMPRStuck_Cold_100",
+      "DualDuct_DMPRStuck_Cold_80",
+      "DualDuct_DMPRStuck_Hot_0",
+      "DualDuct_DMPRStuck_Hot_100",
+      "DualDuct_DMPRStuck_Hot_20",
+      "DualDuct_DMPRStuck_Hot_80",
+      "DualDuct_DMPRStuck_OA_0",
+      "DualDuct_SensorBias_HSP_+2inwg",
+      "DualDuct_SensorBias_HSP_+4inwg",
+      "DualDuct_SensorBias_HSP_-2inwg",
+      "DualDuct_SensorBias_HSP_-4inwg",
+      "DualDuct_VLVStuck_Heating_0",
+      "DualDuct_VLVStuck_Heating_20"
+    ],
+    "box_static_H_SB": [
+      "DualDuct_DMPRStuck_OA_0",
+      "DualDuct_SensorBias_HSP_+2inwg",
+      "DualDuct_SensorBias_HSP_+4inwg",
+      "DualDuct_SensorBias_HSP_-2inwg",
+      "DualDuct_SensorBias_HSP_-4inwg",
+      "DualDuct_VLVStuck_Heating_0",
+      "DualDuct_VLVStuck_Heating_20"
+    ],
+    "box_static_H_W": [
+      "DualDuct_DMPRStuck_OA_0",
+      "DualDuct_SensorBias_HSP_+2inwg",
+      "DualDuct_SensorBias_HSP_+4inwg",
+      "DualDuct_SensorBias_HSP_-2inwg",
+      "DualDuct_SensorBias_HSP_-4inwg",
+      "DualDuct_VLVStuck_Heating_0",
+      "DualDuct_VLVStuck_Heating_20"
+    ],
+    "chwp_bypass_flow": [],
+    "csf_dp_per_speed2": [],
+    "csf_flow_per_speed": [
+      "DualDuct_DMPRStuck_Cold_0",
+      "DualDuct_DMPRStuck_Cold_20",
+      "DualDuct_DMPRStuck_OA_0",
+      "DualDuct_VLVStuck_Heating_0",
+      "DualDuct_VLVStuck_Heating_20"
+    ],
+    "csf_specific_power": [
+      "DualDuct_DMPRStuck_OA_0",
+      "DualDuct_DMPRStuck_OA_100",
+      "DualDuct_DMPRStuck_OA_28",
+      "DualDuct_DMPRStuck_OA_45",
+      "DualDuct_DMPRStuck_OA_80",
+      "DualDuct_SensorBias_CSP_+2inwg",
+      "DualDuct_SensorBias_CSP_+4inwg",
+      "DualDuct_VLVStuck_Heating_0",
+      "DualDuct_VLVStuck_Heating_20"
+    ],
+    "hsf_dp_per_speed2": [
+      "DualDuct_DMPRStuck_OA_0",
+      "DualDuct_VLVStuck_Heating_0",
+      "DualDuct_VLVStuck_Heating_20"
+    ],
+    "hsf_flow_per_speed": [
+      "DualDuct_DMPRStuck_Cold_100",
+      "DualDuct_DMPRStuck_Cold_80",
+      "DualDuct_DMPRStuck_Hot_100",
+      "DualDuct_DMPRStuck_Hot_80",
+      "DualDuct_DMPRStuck_OA_0",
+      "DualDuct_DMPRStuck_OA_28",
+      "DualDuct_SensorBias_HSP_+4inwg",
+      "DualDuct_VLVStuck_Heating_0",
+      "DualDuct_VLVStuck_Heating_20"
+    ],
+    "hsf_specific_power": [
+      "DualDuct_DMPRStuck_Hot_100",
+      "DualDuct_DMPRStuck_Hot_80",
+      "DualDuct_DMPRStuck_OA_28",
+      "DualDuct_SensorBias_HSP_+2inwg",
+      "DualDuct_SensorBias_HSP_+4inwg",
+      "DualDuct_VLVStuck_Heating_0",
+      "DualDuct_VLVStuck_Heating_20"
+    ],
+    "hwp_bypass_flow": [
+      "DualDuct_DMPRStuck_Cold_100",
+      "DualDuct_DMPRStuck_Cold_80",
+      "DualDuct_DMPRStuck_Hot_100",
+      "DualDuct_DMPRStuck_Hot_80",
+      "DualDuct_Fouling_Heating_Waterside_Minor",
+      "DualDuct_Fouling_Heating_Waterside_Moderate",
+      "DualDuct_Fouling_Heating_Waterside_Severe",
+      "DualDuct_SensorBias_HSA_-4C",
+      "DualDuct_VLVStuck_Heating_100",
+      "DualDuct_VLVStuck_Heating_50",
+      "DualDuct_VLVStuck_Heating_80"
+    ],
+    "rf_specific_power": []
+  },
+  "residual_days_rose_and_credited": [
+    "DualDuct_DMPRStuck_Cold_0",
+    "DualDuct_DMPRStuck_Cold_100",
+    "DualDuct_DMPRStuck_Cold_20",
+    "DualDuct_DMPRStuck_Cold_50",
+    "DualDuct_DMPRStuck_Cold_80",
+    "DualDuct_DMPRStuck_Hot_0",
+    "DualDuct_DMPRStuck_Hot_100",
+    "DualDuct_DMPRStuck_Hot_20",
+    "DualDuct_DMPRStuck_Hot_80",
+    "DualDuct_DMPRStuck_OA_100",
+    "DualDuct_DMPRStuck_OA_28",
+    "DualDuct_DMPRStuck_OA_45",
+    "DualDuct_DMPRStuck_OA_80",
+    "DualDuct_Fouling_Cooling_Airside_Moderate",
+    "DualDuct_Fouling_Cooling_Airside_Severe",
+    "DualDuct_Fouling_Cooling_Waterside_Severe",
+    "DualDuct_Fouling_Heating_Waterside_Minor",
+    "DualDuct_Fouling_Heating_Waterside_Moderate",
+    "DualDuct_Fouling_Heating_Waterside_Severe",
+    "DualDuct_SensorBias_CSA_+2C",
+    "DualDuct_SensorBias_CSA_+4C",
+    "DualDuct_SensorBias_CSA_-2C",
+    "DualDuct_SensorBias_CSA_-4C",
+    "DualDuct_SensorBias_CSP_+2inwg",
+    "DualDuct_SensorBias_CSP_+4inwg",
+    "DualDuct_SensorBias_CSP_-2inwg",
+    "DualDuct_SensorBias_CSP_-4inwg",
+    "DualDuct_SensorBias_HSA_+2C",
+    "DualDuct_SensorBias_HSA_+4C",
+    "DualDuct_SensorBias_HSA_-2C",
+    "DualDuct_SensorBias_HSA_-4C",
+    "DualDuct_SensorBias_HSP_+2inwg",
+    "DualDuct_SensorBias_HSP_+4inwg",
+    "DualDuct_SensorBias_HSP_-2inwg",
+    "DualDuct_SensorBias_HSP_-4inwg",
+    "DualDuct_VLVStuck_Cooling_0",
+    "DualDuct_VLVStuck_Cooling_50",
+    "DualDuct_VLVStuck_Heating_0",
+    "DualDuct_VLVStuck_Heating_20",
+    "DualDuct_VLVStuck_Heating_50",
+    "DualDuct_VLVStuck_Heating_80"
+  ],
+  "adoption": {
+    "box_eat_C_E": "keep",
+    "box_eat_C_SA": "keep",
+    "box_eat_C_SB": "keep",
+    "box_eat_C_W": "keep",
+    "box_eat_H_E": "keep",
+    "box_eat_H_SA": "keep",
+    "box_eat_H_SB": "keep",
+    "box_eat_H_W": "keep",
+    "box_static_C_E": "keep",
+    "box_static_C_SA": "keep",
+    "box_static_C_SB": "keep",
+    "box_static_C_W": "keep",
+    "box_static_H_E": "keep",
+    "box_static_H_SA": "keep",
+    "box_static_H_SB": "keep",
+    "box_static_H_W": "keep",
+    "chwp_bypass_flow": "keep",
+    "csf_dp_per_speed2": "keep",
+    "csf_flow_per_speed": "keep",
+    "csf_specific_power": "keep",
+    "hsf_dp_per_speed2": "keep",
+    "hsf_flow_per_speed": "keep",
+    "hsf_specific_power": "keep",
+    "hwp_bypass_flow": "keep",
+    "rf_specific_power": "keep"
+  },
+  "new_signature_rule_holdout_days": {},
+  "predictions": {
+    "P1_no_loss": true,
+    "P2_budget": true,
+    "P2_new_rule_fp_le_3": true,
+    "P3_some_new_channel_credited": true,
+    "P4_ttd_not_later": true,
+    "P5_model_rows_identical": true
+  },
+  "falsifiers_fired": []
+}

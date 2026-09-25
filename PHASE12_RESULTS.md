@@ -187,3 +187,54 @@ healthy year, or a healthy period with more saturated-valve operation.
 airflow on 1 day and the series unit's fan power per cfm on 0 days; the
 moderate files move them on 172 and 145. The minor level sits inside the
 healthy band on every column the units record.
+
+## X33d — DDAHU, dual-duct air handler (114 columns; 79 → 114 mapped, 0 excluded)
+
+*Pre-configuration commit c40144d; configuration 08bf7ec (healthy silence
+unchanged); artefacts regenerated after. Credits diagnostic:
+`outputs/x33_residual_credits_ddahu.json`.*
+
+Thirty-five columns added: the mixing-box inlet statics and entering-air
+temperatures for both decks in all four zones, both deck fans' and the return
+fan's power, airflow and pressure, the pump totals, humidities and the coils'
+mixed-water temperatures. Twenty-five residual rules were written from the
+healthy year; the mixing-box pairs are redundant sensors of the deck statics and
+deck temperatures (identical to two decimals in health).
+
+| | before | after |
+|---|---|---|
+| detected | 45 / 55 | **50 / 55** |
+| gained | — | hot-deck static bias **−2 and −4 in.wg**; hot-deck supply-air temperature bias **+2 °C**; heating waterside fouling **minor**; cooling airside fouling **moderate** |
+| lost | — | none |
+| deployed false alarms | 3 / 96 | 3 / 96 (all three absence-channel days, unchanged) |
+| new residual rules' own holdout false alarms (of 75 evaluable holdout days each) | — | 0 / 75 for all 25 |
+| model and device rows | — | byte-identical |
+| time to detection | — | not later on any scenario; three scenarios earlier (heating waterside moderate 8 → 1, severe 3 → 1 days) |
+
+**Which physics carried each gain** (flagged days of 282 evaluable, facade bands):
+
+| scenario | carrying rule | days | reading |
+|---|---|---|---|
+| hot-deck static bias −2 / −4 in.wg | `box_static_H_{W,SB,SA,E}` | 282 each | four unbiased mixing-box statics against one biased deck sensor: the residual shifts by exactly the bias on every day |
+| hot-deck temperature bias +2 °C | `box_eat_H_{W,SB,SA,E}` | 282 each | same, with the entering-air temperatures; the fixed rule band (±3 °F) also fires, so the rules channel joins the credit (as it now does on the four cold- and hot-deck biases already detected) |
+| heating waterside fouling, minor | `hwp_bypass_flow` (hot-water pump total − coil flow) | 282 | the fault reduces the coil's water flow at the same valve command; the pump total is unchanged, so the bypass grows |
+| cooling airside fouling, moderate | `csf_specific_power` (cold-deck fan power per cfm) | 20 | same power, less air through a fouled coil face, but only on 20 days: the weakest gain, first alarm on day 14 |
+
+The cooling waterside minor miss stays missed: the chilled-water bypass residual moves it on 0 days
+(its healthy band spans 0–27.6 gpm because the chilled-water pump total swings with load, unlike the
+hot-water pump's). The three heating airside fouling files move the hot-deck fan's specific power on
+at most 6 days.
+
+| P1 no loss | P2 budget | P3 HSP biases | P4 HSA +2 °C | P5 both minor waterside | P6 airside stays missed | P7 model rows identical | falsifiers |
+|---|---|---|---|---|---|---|---|
+| ✓ | ✓ (3/96, every rule 0/75) | ✓ | ✓ | half: heating ✓, cooling ✗ | ✗ positive surprise: cooling airside moderate detected | ✓ | none |
+
+**Reading.** The three sensor-bias misses were never a detector limit: the
+dataset records a second, unbiased copy of each biased quantity at every mixing
+box, and the configuration had not mapped it. The bias detections are exact
+(282 of 282 days, every zone) at zero false alarms. The pump-bypass residual
+catches the minor heating waterside fouling that the coil's own temperature
+drop could not, because it reads the fault as a flow deficit rather than a heat
+deficit. Remaining misses: the five fouling files (heating airside minor,
+moderate, severe; cooling airside minor; cooling waterside minor) sit inside
+every healthy band on every recorded column.

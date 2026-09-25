@@ -64,9 +64,12 @@ def test_sensor_coverage_consistent():
         # every configured sensor exists in the data (0 ghosts), so
         # artifact `mapped` must equal the config's mapping count
         assert c["mapped"] == n_cfg, f"{system}: artifact mapped {c['mapped']} != config {n_cfg}"
-    # the honesty anchor: the sensor PCA used to beat us on SFPU airside
-    # fouling must appear in the unmapped list, or the claim is stale
-    assert any(c.startswith("VAV_FAN_DP") for c in cov["sfpu"]["unmapped"])
+    # the honesty anchor, inverted by X33c (2026-09-25): the zone-fan pressure column through which the PCA
+    # baseline used to beat us on SFPU airside fouling is now mapped and read (zone_fan_dp_per_cfm2_*), and
+    # the manuscript sentence "a sensor that STRATA's configuration does not map" must no longer appear
+    assert not any(c.startswith("VAV_FAN_DP") for c in cov["sfpu"]["unmapped"]) and cov["sfpu"]["unmapped"] == []
+    ms = (ROOT / "paper" / "paper-v2.tex").read_text()
+    assert "that STRATA's configuration does not map" not in ms or "PAPER_UPDATE_PENDING" in ms
 
 
 def test_crywolf_consistent_with_union():

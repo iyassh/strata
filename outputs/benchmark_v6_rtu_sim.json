@@ -23,7 +23,7 @@
     28
   ],
   "model_threshold": 1.0,
-  "model_holdout_fp": 1,
+  "model_holdout_fp": 0,
   "train_days": 44,
   "healthy_sig_days": 0,
   "scenarios": [
@@ -32,14 +32,14 @@
       "family": "condenser_fouling",
       "label": "condenser fouling 10",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 92,
-      "model_days": 1,
-      "combined_days": 93,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 92,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "a2443e3e",
       "top_device": null,
@@ -53,7 +53,7 @@
       "absence_days": 0,
       "frequency_days": 0,
       "rate_days": 0,
-      "oscillation_days": 1,
+      "oscillation_days": 0,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -150,14 +150,10 @@
           "2018-10-25",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
-        "osc": [
-          "2018-10-28"
-        ],
+        "osc": [],
         "rate": [],
         "sig_union": [
           "2018-07-20",
@@ -265,16 +261,16 @@
       "family": "condenser_fouling",
       "label": "condenser fouling 20",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 98,
       "model_days": 0,
-      "combined_days": 100,
+      "combined_days": 99,
       "model_unique_days": 0,
       "ttd_days": 1,
-      "log_hash": "70a5a885",
+      "log_hash": "00bc0833",
       "top_device": null,
       "ground_truth_zone": null,
       "localization": "-",
@@ -284,9 +280,9 @@
       "model_days_minrobust": 0,
       "device_days": 0,
       "absence_days": 0,
-      "frequency_days": 2,
-      "rate_days": 1,
-      "oscillation_days": 2,
+      "frequency_days": 1,
+      "rate_days": 0,
+      "oscillation_days": 1,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -392,16 +388,12 @@
         "model": [],
         "device": [],
         "freq": [
-          "2018-10-20",
-          "2018-10-28"
+          "2018-10-20"
         ],
         "osc": [
-          "2018-10-20",
-          "2018-10-28"
+          "2018-10-20"
         ],
-        "rate": [
-          "2018-10-28"
-        ],
+        "rate": [],
         "sig_union": [
           "2018-07-20",
           "2018-07-21",
@@ -504,10 +496,8 @@
         ]
       },
       "frequency_violations": {
-        "cooling_active": 2,
-        "cooling_inactive": 2,
-        "stage2_entered": 1,
-        "stage2_exited": 1
+        "cooling_active": 1,
+        "cooling_inactive": 1
       },
       "top_device_channel": null,
       "device_case_days": 0,
@@ -519,14 +509,14 @@
       "family": "condenser_fouling",
       "label": "condenser fouling 30",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "a83e5cc8",
       "top_device": null,
@@ -540,7 +530,7 @@
       "absence_days": 0,
       "frequency_days": 1,
       "rate_days": 0,
-      "oscillation_days": 3,
+      "oscillation_days": 2,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -645,17 +635,14 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-09-15"
         ],
         "osc": [
           "2018-07-21",
-          "2018-09-15",
-          "2018-10-28"
+          "2018-09-15"
         ],
         "rate": [],
         "sig_union": [
@@ -775,14 +762,14 @@
       "family": "condenser_fouling",
       "label": "condenser fouling 40",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "84f38cfb",
       "top_device": null,
@@ -796,7 +783,7 @@
       "absence_days": 0,
       "frequency_days": 0,
       "rate_days": 0,
-      "oscillation_days": 1,
+      "oscillation_days": 0,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -901,14 +888,10 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
-        "osc": [
-          "2018-10-28"
-        ],
+        "osc": [],
         "rate": [],
         "sig_union": [
           "2018-07-20",
@@ -1024,14 +1007,14 @@
       "family": "condenser_fouling",
       "label": "condenser fouling 50",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "cba976c0",
       "top_device": null,
@@ -1045,7 +1028,7 @@
       "absence_days": 0,
       "frequency_days": 1,
       "rate_days": 0,
-      "oscillation_days": 2,
+      "oscillation_days": 1,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -1150,16 +1133,13 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-09-15"
         ],
         "osc": [
-          "2018-09-15",
-          "2018-10-28"
+          "2018-09-15"
         ],
         "rate": [],
         "sig_union": [
@@ -1279,14 +1259,14 @@
       "family": "evaporator_fouling",
       "label": "evaporator fouling 10",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "a244d5a7",
       "top_device": null,
@@ -1300,7 +1280,7 @@
       "absence_days": 0,
       "frequency_days": 0,
       "rate_days": 0,
-      "oscillation_days": 1,
+      "oscillation_days": 0,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -1405,14 +1385,10 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
-        "osc": [
-          "2018-10-28"
-        ],
+        "osc": [],
         "rate": [],
         "sig_union": [
           "2018-07-20",
@@ -1528,14 +1504,14 @@
       "family": "evaporator_fouling",
       "label": "evaporator fouling 20",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "ca00b59a",
       "top_device": null,
@@ -1549,7 +1525,7 @@
       "absence_days": 0,
       "frequency_days": 0,
       "rate_days": 0,
-      "oscillation_days": 1,
+      "oscillation_days": 0,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -1654,14 +1630,10 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
-        "osc": [
-          "2018-10-28"
-        ],
+        "osc": [],
         "rate": [],
         "sig_union": [
           "2018-07-20",
@@ -1777,14 +1749,14 @@
       "family": "evaporator_fouling",
       "label": "evaporator fouling 30",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "1071683b",
       "top_device": null,
@@ -1798,7 +1770,7 @@
       "absence_days": 0,
       "frequency_days": 0,
       "rate_days": 0,
-      "oscillation_days": 1,
+      "oscillation_days": 0,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -1903,14 +1875,10 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
-        "osc": [
-          "2018-10-28"
-        ],
+        "osc": [],
         "rate": [],
         "sig_union": [
           "2018-07-20",
@@ -2026,14 +1994,14 @@
       "family": "evaporator_fouling",
       "label": "evaporator fouling 40",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "e2154de3",
       "top_device": null,
@@ -2047,7 +2015,7 @@
       "absence_days": 0,
       "frequency_days": 1,
       "rate_days": 0,
-      "oscillation_days": 16,
+      "oscillation_days": 15,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -2152,9 +2120,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-07-20"
@@ -2174,8 +2140,7 @@
           "2018-09-24",
           "2018-10-05",
           "2018-10-19",
-          "2018-10-20",
-          "2018-10-28"
+          "2018-10-20"
         ],
         "rate": [],
         "sig_union": [
@@ -2294,14 +2259,14 @@
       "family": "evaporator_fouling",
       "label": "evaporator fouling 50",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 16,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "9aa0b2a5",
       "top_device": null,
@@ -2315,7 +2280,7 @@
       "absence_days": 0,
       "frequency_days": 53,
       "rate_days": 0,
-      "oscillation_days": 101,
+      "oscillation_days": 100,
       "flag_days": {
         "rules": [
           "2018-08-02",
@@ -2437,9 +2402,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-07-20",
@@ -2596,8 +2559,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ],
         "rate": [],
         "sig_union": [
@@ -2700,8 +2662,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ]
       },
       "frequency_violations": {
@@ -2718,14 +2679,14 @@
       "family": "liquid_line_restriction",
       "label": "liquid line restriction 01bar",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 98,
-      "model_days": 1,
-      "combined_days": 99,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 98,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "13133fb3",
       "top_device": null,
@@ -2739,7 +2700,7 @@
       "absence_days": 0,
       "frequency_days": 0,
       "rate_days": 0,
-      "oscillation_days": 9,
+      "oscillation_days": 8,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -2842,9 +2803,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [
@@ -2855,8 +2814,7 @@
           "2018-09-19",
           "2018-10-03",
           "2018-10-10",
-          "2018-10-23",
-          "2018-10-28"
+          "2018-10-23"
         ],
         "rate": [],
         "sig_union": [
@@ -2971,14 +2929,14 @@
       "family": "liquid_line_restriction",
       "label": "liquid line restriction 04bar",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 99,
-      "model_days": 1,
-      "combined_days": 100,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 99,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "f4c0ce78",
       "top_device": null,
@@ -2992,7 +2950,7 @@
       "absence_days": 0,
       "frequency_days": 1,
       "rate_days": 0,
-      "oscillation_days": 30,
+      "oscillation_days": 29,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -3096,9 +3054,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-10-22"
@@ -3132,8 +3088,7 @@
           "2018-10-23",
           "2018-10-24",
           "2018-10-25",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ],
         "rate": [],
         "sig_union": [
@@ -3235,8 +3190,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ]
       },
       "frequency_violations": {
@@ -3252,14 +3206,14 @@
       "family": "liquid_line_restriction",
       "label": "liquid line restriction 08bar",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "62fce68e",
       "top_device": null,
@@ -3273,7 +3227,7 @@
       "absence_days": 0,
       "frequency_days": 2,
       "rate_days": 0,
-      "oscillation_days": 21,
+      "oscillation_days": 20,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -3378,9 +3332,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-07-31",
@@ -3406,8 +3358,7 @@
           "2018-08-30",
           "2018-09-03",
           "2018-09-10",
-          "2018-09-23",
-          "2018-10-28"
+          "2018-09-23"
         ],
         "rate": [],
         "sig_union": [
@@ -3527,14 +3478,14 @@
       "family": "liquid_line_restriction",
       "label": "liquid line restriction 10bar",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 3,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "48bc13dd",
       "top_device": null,
@@ -3548,7 +3499,7 @@
       "absence_days": 0,
       "frequency_days": 21,
       "rate_days": 15,
-      "oscillation_days": 54,
+      "oscillation_days": 53,
       "flag_days": {
         "rules": [
           "2018-10-11",
@@ -3657,9 +3608,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-07-20",
@@ -3737,8 +3686,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ],
         "rate": [
           "2018-08-18",
@@ -3857,8 +3805,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ]
       },
       "frequency_violations": {
@@ -3877,14 +3824,14 @@
       "family": "refrigerant_overcharge",
       "label": "refrigerant overcharge 10",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 10,
-      "model_days": 1,
-      "combined_days": 13,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 12,
+      "model_unique_days": 0,
       "ttd_days": null,
       "log_hash": "7fd5a9ed",
       "top_device": null,
@@ -3898,7 +3845,7 @@
       "absence_days": 0,
       "frequency_days": 1,
       "rate_days": 0,
-      "oscillation_days": 4,
+      "oscillation_days": 3,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -3913,9 +3860,7 @@
           "2018-10-22",
           "2018-10-23"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-09-15"
@@ -3923,8 +3868,7 @@
         "osc": [
           "2018-07-21",
           "2018-09-15",
-          "2018-10-20",
-          "2018-10-28"
+          "2018-10-20"
         ],
         "rate": [],
         "sig_union": []
@@ -3943,14 +3887,14 @@
       "family": "refrigerant_overcharge",
       "label": "refrigerant overcharge 15",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 1,
-      "model_days": 1,
-      "combined_days": 18,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 17,
+      "model_unique_days": 0,
       "ttd_days": null,
       "log_hash": "0a527542",
       "top_device": null,
@@ -3964,15 +3908,13 @@
       "absence_days": 0,
       "frequency_days": 0,
       "rate_days": 0,
-      "oscillation_days": 17,
+      "oscillation_days": 16,
       "flag_days": {
         "rules": [],
         "residual": [
           "2018-09-15"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [],
         "osc": [
@@ -3991,8 +3933,7 @@
           "2018-10-14",
           "2018-10-16",
           "2018-10-25",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ],
         "rate": [],
         "sig_union": []
@@ -4008,14 +3949,14 @@
       "family": "refrigerant_overcharge",
       "label": "refrigerant overcharge 20",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "c3f57e5d",
       "top_device": null,
@@ -4029,7 +3970,7 @@
       "absence_days": 0,
       "frequency_days": 100,
       "rate_days": 5,
-      "oscillation_days": 95,
+      "oscillation_days": 94,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -4134,9 +4075,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-07-20",
@@ -4334,8 +4273,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ],
         "rate": [
           "2018-08-18",
@@ -4444,8 +4382,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ]
       },
       "frequency_violations": {
@@ -4464,14 +4401,14 @@
       "family": "suction_line_restriction",
       "label": "suction line restriction 01bar",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "f01fc02a",
       "top_device": null,
@@ -4485,7 +4422,7 @@
       "absence_days": 0,
       "frequency_days": 2,
       "rate_days": 0,
-      "oscillation_days": 3,
+      "oscillation_days": 2,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -4590,9 +4527,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-09-15",
@@ -4600,8 +4535,7 @@
         ],
         "osc": [
           "2018-09-15",
-          "2018-10-20",
-          "2018-10-28"
+          "2018-10-20"
         ],
         "rate": [],
         "sig_union": [
@@ -4721,14 +4655,14 @@
       "family": "suction_line_restriction",
       "label": "suction line restriction 03bar",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "58b25861",
       "top_device": null,
@@ -4742,7 +4676,7 @@
       "absence_days": 0,
       "frequency_days": 100,
       "rate_days": 0,
-      "oscillation_days": 101,
+      "oscillation_days": 100,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -4847,9 +4781,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-07-20",
@@ -5053,8 +4985,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ],
         "rate": [],
         "sig_union": [
@@ -5157,8 +5088,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ]
       },
       "frequency_violations": {
@@ -5177,14 +5107,14 @@
       "family": "suction_line_restriction",
       "label": "suction line restriction 06bar",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 100,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "150b22b2",
       "top_device": null,
@@ -5198,7 +5128,7 @@
       "absence_days": 0,
       "frequency_days": 100,
       "rate_days": 71,
-      "oscillation_days": 101,
+      "oscillation_days": 100,
       "flag_days": {
         "rules": [
           "2018-07-20",
@@ -5404,9 +5334,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-07-20",
@@ -5610,8 +5538,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ],
         "rate": [
           "2018-08-18",
@@ -5786,8 +5713,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ]
       },
       "frequency_violations": {
@@ -5806,14 +5732,14 @@
       "family": "suction_line_restriction",
       "label": "suction line restriction 09bar",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 100,
       "residual_days": 100,
-      "model_days": 1,
-      "combined_days": 101,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 100,
+      "model_unique_days": 0,
       "ttd_days": 1,
       "log_hash": "72d9dddb",
       "top_device": null,
@@ -5827,7 +5753,7 @@
       "absence_days": 0,
       "frequency_days": 8,
       "rate_days": 0,
-      "oscillation_days": 101,
+      "oscillation_days": 100,
       "flag_days": {
         "rules": [
           "2018-07-20",
@@ -6033,9 +5959,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-07-20",
@@ -6147,8 +6071,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ],
         "rate": [],
         "sig_union": [
@@ -6251,8 +6174,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ]
       },
       "frequency_violations": {
@@ -6271,14 +6193,14 @@
       "family": "refrigerant_undercharge",
       "label": "refrigerant undercharge 10",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 0,
-      "model_days": 1,
-      "combined_days": 4,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 3,
+      "model_unique_days": 0,
       "ttd_days": null,
       "log_hash": "18bc2e3b",
       "top_device": null,
@@ -6292,13 +6214,11 @@
       "absence_days": 0,
       "frequency_days": 3,
       "rate_days": 0,
-      "oscillation_days": 4,
+      "oscillation_days": 3,
       "flag_days": {
         "rules": [],
         "residual": [],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-09-15",
@@ -6308,8 +6228,7 @@
         "osc": [
           "2018-09-15",
           "2018-09-16",
-          "2018-10-20",
-          "2018-10-28"
+          "2018-10-20"
         ],
         "rate": [],
         "sig_union": []
@@ -6328,14 +6247,14 @@
       "family": "refrigerant_undercharge",
       "label": "refrigerant undercharge 15",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 6,
-      "model_days": 1,
-      "combined_days": 7,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 6,
+      "model_unique_days": 0,
       "ttd_days": null,
       "log_hash": "1dd3d086",
       "top_device": null,
@@ -6349,7 +6268,7 @@
       "absence_days": 0,
       "frequency_days": 3,
       "rate_days": 0,
-      "oscillation_days": 4,
+      "oscillation_days": 3,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -6360,9 +6279,7 @@
           "2018-10-20",
           "2018-10-22"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-09-15",
@@ -6372,8 +6289,7 @@
         "osc": [
           "2018-09-15",
           "2018-10-05",
-          "2018-10-20",
-          "2018-10-28"
+          "2018-10-20"
         ],
         "rate": [],
         "sig_union": []
@@ -6392,14 +6308,14 @@
       "family": "refrigerant_undercharge",
       "label": "refrigerant undercharge 20",
       "is_fault": true,
-      "days": 101,
-      "evaluable_days": 101,
+      "days": 100,
+      "evaluable_days": 100,
       "window_days": 100,
       "rules_days": 0,
       "residual_days": 44,
-      "model_days": 1,
-      "combined_days": 45,
-      "model_unique_days": 1,
+      "model_days": 0,
+      "combined_days": 44,
+      "model_unique_days": 0,
       "ttd_days": 14,
       "log_hash": "4d38ec27",
       "top_device": null,
@@ -6413,7 +6329,7 @@
       "absence_days": 0,
       "frequency_days": 17,
       "rate_days": 0,
-      "oscillation_days": 23,
+      "oscillation_days": 22,
       "flag_days": {
         "rules": [],
         "residual": [
@@ -6462,9 +6378,7 @@
           "2018-10-26",
           "2018-10-27"
         ],
-        "model": [
-          "2018-10-28"
-        ],
+        "model": [],
         "device": [],
         "freq": [
           "2018-08-09",
@@ -6507,8 +6421,7 @@
           "2018-10-19",
           "2018-10-20",
           "2018-10-21",
-          "2018-10-26",
-          "2018-10-28"
+          "2018-10-26"
         ],
         "rate": [],
         "sig_union": [
@@ -6555,8 +6468,7 @@
           "2018-10-24",
           "2018-10-25",
           "2018-10-26",
-          "2018-10-27",
-          "2018-10-28"
+          "2018-10-27"
         ]
       },
       "frequency_violations": {

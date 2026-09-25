@@ -404,7 +404,7 @@ fouling files (X13, X14/X15, water-side ΔT, X28). The claim that fouling on
 those datasets is a property of the recorded points has one direct test: a
 dataset that records the fouled component's own physics. LBNL's simulated
 rooftop unit (NREL Modelica–EnergyPlus co-simulation of a 5-ton unit; 100
-days, one-minute, 25 points including condensing, discharge and suction
+days, one-minute, 24 recorded points including condensing, discharge and suction
 pressures and line temperatures; one baseline and 24 fault files: condenser
 and evaporator fouling at 10/20/30/40/50 %, liquid- and suction-line
 restrictions, over- and undercharge) is that dataset. The two delivered-
@@ -418,39 +418,61 @@ ratio, and return-minus-supply air — with fixed rule bands from the
 baseline's compressor-on p0.1/p99.9. Gates clean (25 distinct files, one
 shared calendar, Brick file covers every column); healthy silence at the
 first iteration. Under the X25 gate: 8 holdout days per month of a
-100-day record gives 29 holdout days.
+100-day record gives 28 holdout days (29 before Amendment 1 dropped the
+record's one-row boundary date, 2018-10-28). Deviation from the pre-registration: stage 2 is
+declared at `COMP_STAGE > 0.85` (the signal's maximum is 1.0), not the
+"above 1.5" the pre-registration wrote; the 1.5 could never have fired.
 
 | family | detected / scored | channels |
 |---|---|---|
-| condenser fouling 10–50 % | **5 / 5**, monotone | residual (condenser approach, pressure ratio) |
-| evaporator fouling 10–50 % | **5 / 5**, monotone | residual; the 50 % file also rules, frequency, oscillation |
+| condenser fouling 10–50 % | **5 / 5**, monotone | residual: condenser approach on 91–100 of 100 days at every severity (refrigerant side); pressure ratio and discharge superheat from 30 % |
+| evaporator fouling 10–50 % | **5 / 5**, monotone | residual: return − supply air on 100 of 100 days at every severity (**air side**); pressure ratio / discharge superheat 3–10 days at 10–20 %, 46–50 at 30 %, ≥ 93 from 40 %; the 50 % file also rules, frequency, oscillation |
 | liquid-line restriction (0.1–1.0 bar) | **4 / 4** | residual (+ oscillation on two) |
 | suction-line restriction (0.1–0.9 bar) | **4 / 4** | residual, then rules/frequency/oscillation at higher restriction |
 | refrigerant overcharge 10/15/20 % | 1 / 3 (20 % only) | residual, frequency, oscillation |
 | refrigerant undercharge 10/15/20 % | 1 / 3 (20 % only) | residual, oscillation |
-| **all** | **20 / 24** | residual on all 20; conformance on none |
+| **all** | **20 / 24** | residual on all 20; conformance on none (per-residual credits: `outputs/x29_residual_credits.json`, Amendment 1) |
 
-Deployed false alarms: **1 of 29 holdout days (3.4 %)**; the naive union is
-the same 1 (rate flags none). Every prediction held and no falsifier
-fired; no source change.
+Deployed false alarms: **0 of 28 holdout days**; the naive union is also 0.
+(At close, 0274c72: 1 of 29 — one model/oscillation flag on 2018-10-28, a
+"day" holding a single 00:00 row; Amendment 1 drops such dates at
+conversion and the regeneration, 20/24 with identical family counts and
+identical residual credits, matched its prediction.) Every prediction held
+and no falsifier fired; no source change from the pre-registration to the
+close or from the amendment to the regeneration.
 
 **Reading.** The detector that misses coil fouling on the air handlers and
 the fan coil unit, with the same calibration, the same gate and the same
-rule kinds, catches every fouling severity down to 10 % on a unit whose
-fouled component's pressures and temperatures are recorded — and catches
-it with a single physically named residual (condensing temperature above
-outdoor air rises with a fouled condenser; the pressure ratio rises with
-either fouled coil). The fouling misses elsewhere are therefore a property
-of what those datasets record, not of the detector's vocabulary or its
-gate. The two families it does not fully see here are the small charge
+rule kinds, catches every fouling severity down to 10 % on this unit. The
+per-residual credits (Amendment 1) say which physics carried it, and the
+answer splits by coil. **Condenser fouling** is carried by the condensing
+temperature's approach to outdoor air — a refrigerant-side point no air
+handler records — on 91–100 of 100 days at every severity, the pressure
+ratio and discharge superheat joining from 30 %. **Evaporator fouling** is
+carried at every severity by return-minus-supply air, an *air-side*
+residual; the refrigerant-side residuals see it only from 30 %. The
+documentation (S3) imposes both fouling types as fan mass-flow reduction,
+and on this unit an evaporator airflow cut raises the air-side temperature
+drop directly, which is not how the air handlers' coil fouling is
+simulated (a coil-conductance change under supply-temperature control,
+X13/X28). The claim this test supports is therefore narrower than the
+pre-registration's wording: fouling of the coil whose refrigerant-side
+state is recorded (the condenser) is seen through that state and could
+not be seen without it; evaporator fouling on this unit is seen through
+the air side because its seeded form moves the air side. The fouling
+misses elsewhere remain a property of what those datasets record and how
+their fouling is imposed, not of the detector's vocabulary or its gate —
+but the evidence for "refrigerant points would fix them" is the condenser
+half only. The two families it does not fully see here are the small charge
 faults (10 and 15 % over- or undercharge), whose superheat proxies sit
 inside the healthy band; the 20 % cases are caught. The limits of this
 test are the ones its data impose: one simulated unit, one summer-autumn
-period, a 29-day false-alarm denominator, and a fixed room setpoint.
+period, a 28-day false-alarm denominator, a fouling mechanism (airflow
+reduction) that differs from the air-side datasets', and a fixed room setpoint.
 
 | P1 | P2 | P3 | P4 | P5 | P6 | falsifiers |
 |---|---|---|---|---|---|---|
-| ✓ gates, 1 iteration | ✓ 1/29 | ✓ 5/5 monotone | ✓ 5/5 monotone | ✓ 10/14 | ✓ | none |
+| ✓ gates, 1 iteration | ✓ 0/28 (1/29 at close) | ✓ 5/5 monotone, `cond_approach` on every file | ✓ 5/5 monotone (air-side residual) | ✓ 10/14 | ✓ | none |
 
 ## X30 — the method-coverage grid: no other process-mining instrument sees what the deployed one misses
 

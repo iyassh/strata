@@ -174,7 +174,7 @@
 
     <!-- ═══════════════ FOOT ═══════════════ -->
     <line x1="24" y1="622" x2="1076" y2="622" stroke="#D8D6CC"/>
-    <text x="550" y="646" text-anchor="middle" font-size="12" fill="#6A7069">Validated on six LBNL systems — 13/14 · 22/30 · 21/29 · 45/55 · 40/47 · 20/24 scenarios at 1.0–7.3 % false-alarm days — and one measured rooftop unit (6.1 %)</text>
+    <text x="550" y="646" text-anchor="middle" font-size="12" fill="#6A7069">Validated on six LBNL systems — 13/14 · 22/30 · 21/29 · 45/55 · 40/47 · 20/24 scenarios at 0–7.3 % false-alarm days — and one measured rooftop unit (6.1 %)</text>
     <g font-size="11" fill="#6A7069">
       <rect x="330" y="662" width="14" height="14" rx="2" fill="#EAF0F7" stroke="#2F5D8A"/>
       <text x="352" y="673.5">discovered process models</text>
@@ -182,6 +182,6 @@
       <text x="552" y="673.5">physics / fault-signature path</text>
       <line x1="726" y1="669" x2="756" y2="669" stroke="#B06A2A" stroke-width="1.5" stroke-dasharray="6 4"/>
       <text x="764" y="673.5">excluded from discovery</text>
-      <text x="330" y="692">&#8225; supports the portability analysis; the deployed channels come from the device and unit strata</text>
+      <text x="330" y="692">&#8225; used in the portability analysis, which found no transfer (X20/X21); the deployed channels come from the device and unit strata</text>
     </g>
   </svg>

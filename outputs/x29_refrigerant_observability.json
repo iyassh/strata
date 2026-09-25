@@ -141,18 +141,18 @@
   "per_channel_fp": {
     "rules": 0,
     "resid": 0,
-    "model": 1,
+    "model": 0,
     "device": 0,
     "absence": 0,
     "freq": 0,
     "rate": 0,
-    "osc": 1
+    "osc": 0
   },
   "deployed_fp": [
-    1,
-    29
+    0,
+    28
   ],
-  "naive_fp": 1,
+  "naive_fp": 0,
   "channel_credits": {
     "rules": 3,
     "resid": 20,
@@ -163,22 +163,25 @@
     "osc": 8,
     "rate": 1
   },
+  "evaporator_credit_note": "Amendment 1: evaporator fouling is carried by supply_dT (air-side) at every severity; refrigerant-side residuals see it from 30 % (outputs/x29_residual_credits.json)",
   "predictions": {
     "P1_gates_clean": true,
     "P1_silence_iterations": 1,
     "P2_budget_le_10pct": true,
     "P2_fp": [
-      1,
-      29
+      0,
+      28
     ],
     "P3_cond_ge_3_of_5": true,
     "P3_cond_channel_ok": true,
+    "P3_cond_approach_flagged_on_every_condenser_file": true,
     "P3_cond_monotone": true,
     "P4_evap_ge_3_of_5": true,
     "P4_evap_monotone": true,
     "P5_other_ge_6_of_14": true,
     "P6_none_conformance_only": true,
-    "config_only": true
+    "config_only": true,
+    "amendment1_src_unchanged": true
   },
   "falsifiers_fired": []
 }

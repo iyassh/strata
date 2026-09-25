@@ -138,8 +138,8 @@ fan coil unit):
 | fault scenarios detected | **13 / 14** * | **22 / 30** | **21 / 29** | **45 / 55** | **40 / 47** | **20 / 24** |
 | median time-to-detect (all significant channels, rate included) | 1 day | 1 day | 1 day | 1 day | 1 day | 1 day |
 | time-to-detect tail (longest first alarm among detected scenarios) | 2 days | 21 days | 108 days | 114 days | 15 days | — |
-| false-alarm budget, deployed detector (fault-free holdout days; conformance thresholds out-of-sample, X25) | 1.0% | 7.3% | 6.2% | 3.1% | 4.2% | 3.4% (of 29) |
-| false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 14.6% | 6.2% | 8.3% | 21.9% | 3.4% |
+| false-alarm budget, deployed detector (fault-free holdout days; conformance thresholds out-of-sample, X25) | 1.0% | 7.3% | 6.2% | 3.1% | 4.2% | 0.0% (of 28) |
+| false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 14.6% | 6.2% | 8.3% | 21.9% | 0.0% |
 
 ![Detected scenarios by fault family on six systems](paper/figures/fig_detection_by_family.png)
 
@@ -151,10 +151,14 @@ change, gate battery clean (including a configuration-branch comparison); every 
 process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)).
 
 Simulated RTU (X29): the one dataset that records the refrigerant side. Every
-condenser- and evaporator-fouling severity down to 10% is caught, monotone, by
-a single physically named residual, plus all eight line restrictions — the
-fouling misses on the other systems are a property of what those datasets
-record ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)).
+condenser- and evaporator-fouling severity down to 10% is caught, monotone,
+plus all eight line restrictions, at 0 false-alarm days in 28. The per-residual
+credits say which physics carried it: condenser fouling by the condensing
+temperature's approach to outdoor air (a refrigerant-side point no air handler
+records); evaporator fouling by return-minus-supply air, an air-side residual,
+because this dataset seeds fouling as an airflow reduction. The refrigerant-side
+argument for the fouling misses elsewhere rests on the condenser half
+([PHASE11_RESULTS.md](PHASE11_RESULTS.md), X29 Amendment 1).
 
 Method grid (X30): seven other process-mining instruments (inductive miner at
 noise 0.0 and 0.5 with alignments, the deployed net with token replay,

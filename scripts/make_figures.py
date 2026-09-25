@@ -78,7 +78,7 @@ def fig_false_alarms():
         ax.bar(x + (i - 3.5) * width, vals, width, label=lab, color=None if ch != "rate" else "#bbbbbb", hatch="//" if ch == "rate" else None)
     dep = [100 * load(f"union_fpr_{s}.json")["union_minus_rate"]["holdout_fp_days"] / load(f"union_fpr_{s}.json")["holdout_days"] for s, _ in SYSTEMS]
     ax.plot(x, dep, "k_", markersize=18, markeredgewidth=2, label="deployed union")
-    ax.axhline(10.4, color="#c0392b", lw=0.8, ls="--"); ax.text(len(SYSTEMS) - 0.5, 10.6, "pre-registered budget (10 of 96)", color="#c0392b", fontsize=6.5, ha="right")
+    ax.plot([-0.5, 4.5], [100 * 10 / 96] * 2, color="#c0392b", lw=0.8, ls="--"); ax.text(4.45, 10.7, "pre-registered budget, 10 of 96 (annual systems)", color="#c0392b", fontsize=6.5, ha="right")
     ax.set_xticks(x); ax.set_xticklabels([l for _, l in SYSTEMS]); ax.set_ylabel("% of held-out fault-free days"); ax.set_ylim(0, 20)
     ax.legend(ncol=5, fontsize=6, frameon=False, loc="upper left")
     ax.set_title("Per-channel and deployed-union false alarms on the fault-free holdout (every threshold out-of-sample)", fontsize=8.5)
@@ -104,23 +104,24 @@ def fig_x22():
     save(fig, "fig_x22_positive_control")
 
 
-# ---------------------------------------------------------------- 4. X29: fouling by severity when refrigerant points exist
+# ---------------------------------------------------------------- 4. X29: which residual carries fouling, by severity
 def fig_x29():
-    card = load("benchmark_v6_rtu_sim.json")
-    rows = {x["file"]: x for x in card["scenarios"] if x["is_fault"]}
-    fig, ax = plt.subplots(figsize=(4.6, 2.6))
-    for fam, color, lab in (("condfouling", "#2b6cb0", "condenser fouling"), ("evapfouling", "#c0392b", "evaporator fouling")):
-        sev = [10, 20, 30, 40, 50]
-        days = [rows[f"RTU_sim_{fam}{k}"]["residual_days"] for k in sev]
-        det = [bool(rows[f"RTU_sim_{fam}{k}"]["meaningful_channels"]) for k in sev]
-        ax.plot(sev, days, "-o", color=color, label=lab, markerfacecolor=[color if d else "white" for d in det][0])
-        for k, d, dd in zip(sev, days, det):
-            ax.plot(k, d, "o", color=color, markerfacecolor=color if dd else "white")
-    u = load("union_fpr_rtu_sim.json")
-    ax.axhline(u["channels"]["resid"]["holdout_fp_days"] / u["holdout_days"] * 100, color="grey", lw=0.6, ls="--")
-    ax.set_xlabel("seeded fouling severity (%)"); ax.set_ylabel("residual-channel days flagged (of 100)")
-    ax.set_title("X29: fouling on the unit that records the refrigerant side", fontsize=8.5)
-    ax.legend(fontsize=7, frameon=False)
+    cr = load("x29_residual_credits.json")["scenarios"]
+    sev = [10, 20, 30, 40, 50]
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(7.2, 2.6), sharey=True)
+    series = {ax1: [("condfouling", "cond_approach", "#2b6cb0", "-o", "condensing $-$ outdoor temp. (refrigerant side)"),
+                    ("condfouling", "pressure_ratio", "#2b6cb0", "--s", "discharge / suction pressure (refrigerant side)"),
+                    ("condfouling", "supply_dT", "#c0392b", ":^", "return $-$ supply air (air side)")],
+              ax2: [("evapfouling", "supply_dT", "#c0392b", ":^", "return $-$ supply air (air side)"),
+                    ("evapfouling", "pressure_ratio", "#2b6cb0", "--s", "discharge / suction pressure (refrigerant side)"),
+                    ("evapfouling", "discharge_superheat", "#2b6cb0", "-.d", "discharge superheat (refrigerant side)")]}
+    for ax, rows in series.items():
+        for fam, rule, color, style, lab in rows:
+            ax.plot(sev, [cr[f"RTU_sim_{fam}{k}"]["per_rule_flagged_days"][rule] for k in sev], style, color=color, label=lab, markersize=4)
+        ax.set_xlabel("seeded airflow reduction (%)"); ax.set_xticks(sev); ax.set_ylim(-3, 105)
+        ax.legend(fontsize=6, frameon=False, loc="center right")
+    ax1.set_ylabel("days flagged (of 100)"); ax1.set_title("Condenser fouling", fontsize=8.5); ax2.set_title("Evaporator fouling", fontsize=8.5)
+    fig.suptitle("X29: which residual carries each fouling detection on the simulated rooftop unit", fontsize=9, y=1.03)
     save(fig, "fig_x29_fouling_severity")
 
 

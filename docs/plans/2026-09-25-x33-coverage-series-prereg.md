@@ -102,3 +102,29 @@ Not added: RA_FLOW / SA_FLOW (identically 1.000 in the simulation; carries nothi
 - **F-X33b.b** P2 fails → channel removed under the adoption rule; reported.
 - **F-X33b.c** P5 fails → investigated before anything else.
 - A failed P3 is a wrong prediction; a failed P4 is a positive surprise, reported as such.
+
+## X33c — SFPU, series fan-powered unit (109 columns, 56 mapped before)
+
+**Written 2026-09-25 04:10, configuration drafted against the fault-free file only (silence at iteration 2: a YAML literal format error, no band change); to be committed and scored after X33b closes.** Same column map as X33b (the two units share the column list) with the series-fan readers the X32 scan pointed at:
+
+| columns | reader |
+|---|---|
+| VAV_FAN_WAT_i, VAV_DA_CFM_i, VAV_FAN_DP_i | `zone_fan_spf_i` = fan power / discharge airflow (W per cfm; healthy width 0.02–0.03 W/cfm) and `zone_fan_dp_per_cfm2_i` = fan pressure / airflow² (fan law), both gated on the zone fan running and airflow > 50 cfm |
+| AHU fan and coil side | as X33b: `sf_specific_power`, `rf_specific_power`, `sf_flow_per_speed`, `static_per_speed2`, `chwc_waterside_dT`, `hwc_waterside_dT`, `static_setpoint_deviation` |
+| RA_TEMP vs zones, VAV_DAT_i | `ra_minus_zone_i`; `dat_minus_sa_i` gated reheat valve closed (the series fan's heat makes this 11–16 °F in health) |
+| excluded | none |
+
+### Predictions
+- **P1.** No scenario lost (21 of 29 before).
+- **P2.** Deployed false alarms ≤ 10 of 96 and ≤ 6 + 3; no new residual rule > 3 holdout days on its own (the interior-zone `ra_minus_zone_I` pre-check showed 4 raw exceedances in 69 holdout days and is the likeliest removal).
+- **P3.** `SFPU_VAVFanRestrictFlow` and `SFPU_ReheatCoilFouling_Airside_Severe` are detected through the zone-fan readers (the pre-check band on fan power per cfm put every scenario day outside the healthy band at 0–1 holdout exceedance).
+- **P4.** `SFPU_ReheatCoilFouling_Airside_Moderate` is detected (167 of 261 pre-check days outside); `_Minor` (101 of 261) is uncertain and predicted missed.
+- **P5.** The three waterside reheat-fouling misses stay missed.
+- **P6.** Model and device rows byte-identical.
+
+### Falsifiers
+- **F-X33c.a** P1 fails → channel named and removed; loss reported.
+- **F-X33c.b** P2 fails → channel removed under the adoption rule; reported.
+- **F-X33c.c** P6 fails → investigated before anything else.
+- A failed P3 or P4 is a wrong prediction; a failed P5 is a positive surprise, reported as such.
+

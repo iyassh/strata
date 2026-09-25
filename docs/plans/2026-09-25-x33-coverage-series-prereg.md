@@ -105,7 +105,7 @@ Not added: RA_FLOW / SA_FLOW (identically 1.000 in the simulation; carries nothi
 
 ## X33c — SFPU, series fan-powered unit (109 columns, 56 mapped before)
 
-**Written 2026-09-25 04:10, configuration drafted against the fault-free file only (silence at iteration 2: a YAML literal format error, no band change); to be committed and scored after X33b closes.** Same column map as X33b (the two units share the column list) with the series-fan readers the X32 scan pointed at:
+**Drafted while X33b was scoring, against the fault-free file only (silence at iteration 2: a YAML literal format error, no band change), held in a stash, and committed with its configuration (ce3a9f4) after the X33b close (028a941).** Same column map as X33b (the two units share the column list) with the series-fan readers the X32 scan pointed at:
 
 | columns | reader |
 |---|---|
@@ -130,7 +130,7 @@ Not added: RA_FLOW / SA_FLOW (identically 1.000 in the simulation; carries nothi
 
 ## X33d — DDAHU, dual-duct air handler (114 columns, 79 mapped before)
 
-**Written 2026-09-25 05:20, configuration drafted against the fault-free file only (healthy silence: the new rules emit nothing; the one pre-existing healthy firing of `cold_sat_setpoint_deviation` is unchanged); to be committed and scored after X33c closes.**
+**Drafted while X33c was scoring, against the fault-free file only (healthy silence: the new rules emit nothing; the one pre-existing healthy firing of `cold_sat_setpoint_deviation` is unchanged), held in a stash, and committed with its configuration (08bf7ec) four seconds after the X33c close (c40144d). The series' ordering rule says a system is closed before the next is opened; drafting the next configuration during the previous system's scoring, as here and for X33c, is a deviation from it, recorded in review. No fault file of any system was opened before its configuration was committed.**
 
 | columns | reader |
 |---|---|
@@ -144,7 +144,7 @@ Not added: RA_FLOW / SA_FLOW (identically 1.000 in the simulation; carries nothi
 ### Predictions
 - **P1.** No scenario lost (45 of 55 before).
 - **P2.** Deployed false alarms ≤ 10 of 96 and ≤ 3 + 3; no new residual rule > 3 holdout days on its own.
-- **P3.** The hot-deck static-pressure biases `HSP_−2inwg` and `HSP_−4inwg` are detected through `box_static_H_z` (a biased deck sensor against four unbiased box sensors shifts the residual by the bias; healthy width 0.00).
+- **P3.** The hot-deck static-pressure biases `HSP_−2inwg` and `HSP_−4inwg` are detected through `box_static_H_z` (a biased deck sensor against four unbiased box sensors shifts the residual by the bias; healthy width 0.00). *Post hoc note: the prediction's mechanism was stated backwards — the deck column stays at setpoint and the box columns move — and the shift is 0.2 and 0.4 in.wg, one tenth of the label (ERRATA E8); the detection prediction itself held.*
 - **P4.** The hot-deck supply-air temperature bias `HSA_+2C` is detected through `box_eat_H_z` (same logic; healthy width 0.00 °F, floor 0.5 °F, bias 3.6 °F).
 - **P5.** The two minor waterside-fouling misses (heating, cooling) are detected through the pump bypass residuals (the X32 scan: total pump flow separates both at 0–1 holdout exceedances).
 - **P6.** The five airside-fouling misses stay missed.

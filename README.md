@@ -243,7 +243,7 @@ rule it produced — is in [RESEARCH_LOG.md](RESEARCH_LOG.md).
 
 ### Side contribution: the datasets themselves
 
-Along the way we documented **six defects in the most widely used public
+Along the way we documented **eight defects in the most widely used public
 FDD benchmark datasets** — duplicate fault files shipped under different
 severity labels, a mislabeled fault run, unit-swapped columns that let any
 ML model cheat, a date-rotated file, a fan-coil-unit run shipped under two

@@ -1,0 +1,46 @@
+{
+  "DualDuct_SensorBias_HSP_-2inwg": {
+    "label": "-2 in.wg",
+    "deck_column_median_shift": 0.0,
+    "box_columns_median_shift": {
+      "VAV_SP_H_W": 0.2,
+      "VAV_SP_H_SB": 0.2,
+      "VAV_SP_H_SA": 0.2,
+      "VAV_SP_H_E": 0.2
+    },
+    "minutes": 193600
+  },
+  "DualDuct_SensorBias_HSP_-4inwg": {
+    "label": "-4 in.wg",
+    "deck_column_median_shift": 0.0,
+    "box_columns_median_shift": {
+      "VAV_SP_H_W": 0.4,
+      "VAV_SP_H_SB": 0.4,
+      "VAV_SP_H_SA": 0.4,
+      "VAV_SP_H_E": 0.4
+    },
+    "minutes": 193600
+  },
+  "DualDuct_SensorBias_HSA_+2C": {
+    "label": "+2 C (3.6 F)",
+    "deck_column_median_shift": 0.0,
+    "box_columns_median_shift": {
+      "VAV_EAT_H_W": -3.6,
+      "VAV_EAT_H_SB": -3.6,
+      "VAV_EAT_H_SA": -3.6,
+      "VAV_EAT_H_E": -3.6
+    },
+    "minutes": 193600
+  },
+  "DualDuct_SensorBias_CSP_-2inwg": {
+    "label": "-2 in.wg",
+    "deck_column_median_shift": 0.0,
+    "box_columns_median_shift": {
+      "VAV_SP_C_W": 0.2,
+      "VAV_SP_C_SB": 0.2,
+      "VAV_SP_C_SA": 0.2,
+      "VAV_SP_C_E": 0.2
+    },
+    "minutes": 193600
+  }
+}

@@ -120,7 +120,7 @@ pressure per airflow² for each of the four zones.
 | gained | — | **VAV fan flow restriction**; airside reheat fouling **moderate** and **severe**; room-temperature bias **+2 °C** |
 | lost | — | none |
 | deployed false alarms | 6 / 96 | 9 / 96 (residual channel 0 → 3: 27 April, 25 June, 27 August) |
-| new residual rules' own holdout false alarms | — | 22 rules: 0 (17), 1 (4), 2 (`static_per_speed2`) |
+| new residual rules' own holdout false alarms (of each rule's evaluable holdout days) | — | 22 rules: 0 on 17 (one of them, `hwc_waterside_dT`, has no evaluable holdout day and an undefined band, so it can never flag), 1 on 3, 2 on `static_per_speed2` |
 | model and device rows | — | byte-identical |
 | time to detection | — | not later on any scenario; all four gains on day 1 |
 
@@ -151,29 +151,35 @@ resistance downstream of it: a restricted fan and a fouled coil face both show
 up as "same power, less air". Every prediction held. The cost is three residual
 false-alarm days, all on different rules, which puts the deployed union at 9
 of 96 — inside the budget but with one day of headroom, the least of the six
-systems.
+systems. As on the parallel unit, the new rules evaluate on more holdout days,
+so the residual channel's per-day null denominator grows from 41 to 69 and its
+floor falls from 7.3 % to 4.3 % for the pre-existing rules as well; no verdict
+flipped.
 
 ### Gap analysis after X33a–c: what the remaining fan-powered misses look like
 
 Eight scenarios remain missed on the two fan-powered units, all reheat-coil
 fouling: airside minor on both units, and waterside minor, moderate and severe
-on both. Their residual channels flag 3–18 of 365 days; the strongest witness is
-the water-side temperature drop on the series unit's severe file (15 days), below
-the per-day floor of 3 in 69 (4.3 %).
+on both. Their residual channels flag 3–18 of the 261 days on which the channel
+evaluates; the strongest is the series unit's severe waterside file, whose union
+of 18 days (6.9 %, mostly the water-side temperature drop) sits above the per-day
+floor of 3 in 69 (4.3 %) but not significantly so (p = 0.04 against 10⁻³).
 
 **The waterside fouling is visible, but not certifiable, on the parallel unit.**
 The fault is implemented as a reduced maximum water flow: with the reheat valve
 more than 90 % open, the healthy coil passes 6.03 gpm and the fouled coil 5.42,
 4.22 and 3.01 gpm at minor, moderate and severe (day medians; every such day is
-outside the healthy band of [6.015, 6.030]). Below 80 % open the flow tracks
+outside the healthy band of [5.910, 6.030]). Below 80 % open the flow tracks
 the valve position identically in health and fault, so a flow-per-position
-residual over the whole range does not move (median 2.143 against 2.136). The
+residual over the whole range does not move (occupied minutes at positions
+0.02–0.8: healthy median 2.500, severe 2.455). The
 witness therefore exists only on days when the valve saturates: 10 days in the
 healthy year (5 training days, 1 holdout day) and 10–15 days in each fault file.
 Two consequences, both of the framework's own discipline: the rule's healthy
-band rests on five days and its false-alarm rate on one, so no null can be
-estimated for it; and under the per-day gate, 15 flagged days of 365 (4.1 %)
-sit below the residual channel's floor. A one-year healthy record does not
+band rests on five training days (four more fall in the calibration slice) and
+its false-alarm rate on one holdout day, so no null can be estimated for it; and
+under the per-day gate, 15 flagged days of 261 (5.7 %) sit above the residual
+channel's 4.3 % floor but far from significance (p = 0.17). A one-year healthy record does not
 contain enough saturated-valve days to certify a witness that only appears when
 the valve saturates. On the series unit the reheat valve exceeds 80 % on two
 healthy days, so the witness is not even measurable there.
@@ -209,16 +215,16 @@ deck temperatures (identical to two decimals in health).
 | deployed false alarms | 3 / 96 | 3 / 96 (all three absence-channel days, unchanged) |
 | new residual rules' own holdout false alarms (of 75 evaluable holdout days each) | — | 0 / 75 for all 25 |
 | model and device rows | — | byte-identical |
-| time to detection | — | not later on any scenario; three scenarios earlier (heating waterside moderate 8 → 1, severe 3 → 1 days) |
+| time to detection | — | not later on any scenario; five scenarios earlier (cooling airside fouling severe 15 → 5, cold-deck static bias −2 and −4 in.wg 15 → 1 each, heating waterside fouling moderate 8 → 1 and severe 3 → 1 days) |
 
 **Which physics carried each gain** (flagged days of 282 evaluable, facade bands):
 
 | scenario | carrying rule | days | reading |
 |---|---|---|---|
-| hot-deck static bias −2 / −4 in.wg | `box_static_H_{W,SB,SA,E}` | 282 each | four unbiased mixing-box statics against one biased deck sensor: the residual shifts by exactly the bias on every day |
-| hot-deck temperature bias +2 °C | `box_eat_H_{W,SB,SA,E}` | 282 each | same, with the entering-air temperatures; the fixed rule band (±3 °F) also fires, so the rules channel joins the credit (as it now does on the four cold- and hot-deck biases already detected) |
+| hot-deck static bias −2 / −4 in.wg | `box_static_H_{W,SB,SA,E}` | 282 each | the deck column does not move (the controller holds its own, biased, reading at setpoint) while all four mixing-box statics rise by +0.20 and +0.40 in.wg: the true duct static has moved and the boxes record it. The recorded shift is one tenth of the labelled bias (ERRATA E8) |
+| hot-deck temperature bias +2 °C | `box_eat_H_{W,SB,SA,E}` | 282 each | same mechanism: the deck column stays at setpoint, the four box entering-air temperatures fall by 3.6 °F (the labelled 2 °C, exactly); the fixed rule band (±3 °F) also fires, so the rules channel joins the credit (as it now does on the four cold- and hot-deck biases already detected) |
 | heating waterside fouling, minor | `hwp_bypass_flow` (hot-water pump total − coil flow) | 282 | the fault reduces the coil's water flow at the same valve command; the pump total is unchanged, so the bypass grows |
-| cooling airside fouling, moderate | `csf_specific_power` (cold-deck fan power per cfm) | 20 | same power, less air through a fouled coil face, but only on 20 days: the weakest gain, first alarm on day 14 |
+| cooling airside fouling, moderate | the residual channel's union of six fan-side rules (cold-deck fan specific power 20 days, fan-law static 10, return-fan power 9, fan pressure 9, two others 1 each) | 32 of 282 (p = 1.5 × 10⁻⁷ against 3 of 75) | no single rule is significant alone (the strongest, 20 days, gives p = 0.01); the gate clears on the pooled per-day union, and the ledger's per-rule credit rule credits none of them on this file. The weakest gain, first alarm on day 14 |
 
 The cooling waterside minor miss stays missed: the chilled-water bypass residual moves it on 0 days
 (its healthy band spans 0–27.6 gpm because the chilled-water pump total swings with load, unlike the
@@ -230,9 +236,12 @@ at most 6 days.
 | ✓ | ✓ (3/96, every rule 0/75) | ✓ | ✓ | half: heating ✓, cooling ✗ | ✗ positive surprise: cooling airside moderate detected | ✓ | none |
 
 **Reading.** The three sensor-bias misses were never a detector limit: the
-dataset records a second, unbiased copy of each biased quantity at every mixing
-box, and the configuration had not mapped it. The bias detections are exact
-(282 of 282 days, every zone) at zero false alarms. The pump-bypass residual
+dataset records the true duct static and true deck temperature at every mixing
+box, while the deck columns carry the controller's own held readings; the
+configuration had not mapped the boxes. The bias detections are exact (282 of
+282 days, every zone) at zero false alarms, and their magnitudes expose a
+labelling defect: the static-bias files shift the true static by one tenth of
+the labelled bias (ERRATA E8), the temperature-bias file by exactly the label. The pump-bypass residual
 catches the minor heating waterside fouling that the coil's own temperature
 drop could not, because it reads the fault as a flow deficit rather than a heat
 deficit. Remaining misses: the five fouling files (heating airside minor,

@@ -279,11 +279,28 @@ identifier _W)". In every PFPU and SFPU fault file the columns that move are the
 | PFPU_VAVDMPRStuck_0% | 0.19 / 0.44 / **13.8** / 0.57 | 1.32 / 1.06 / **0.18** / 1.05 | 0.01 / 0.01 / **0.25** / 0.01 |
 | PFPU_ReheatCoilFouling_Waterside_Severe | 0.00 / 0.00 / 0.01 / 0.00 | 1.00 / 1.00 / **0.84** / 1.00 | 0 / 0 / 0 / 0 |
 
-The project's zone ground truth (week-0 audit: 50 scenarios S, 10 indeterminate)
-was established from the data and already places every fault in zone S; the
+The project's zone ground truth (week-0 audit: 50 scenarios S, 10 indeterminate — a
+different instrument from the movement score above, which gives 57 S and 3
+indeterminate over the 60 files) was established from the data and already places
+every fault in zone S; the
 alarm-attribution specificity counts rest on that, not on the documentation.
 Consequence for others: a reader who takes the documentation at its word and
 scores localisation against zone W will score every correct zone-S alarm as
 wrong. Reproduce: `uv run python scripts/e7_zone_label.py` (writes
 `outputs/e7_zone_label.json`).
+
+## Erratum E8 — DDAHU static-pressure bias labels: the recorded shift is one tenth of the label
+
+**Found 2026-09-25 (hostile review of X33d).** In the four dual-duct static-pressure
+bias files (`SensorBias_CSP_-2inwg`, `_CSP_-4inwg`, `_HSP_-2inwg`, `_HSP_-4inwg`) the deck
+static column (`CSA_SP` / `HSA_SP`, the controller's own reading) is unchanged from the
+fault-free file on occupied fan-on minutes, while all four mixing-box statics on that deck
+shift by +0.20 in.wg for the −2 in.wg label and +0.40 for the −4 label — one tenth of the
+labelled magnitude. The temperature-bias file `SensorBias_HSA_+2C` behaves as labelled: the
+box entering-air temperatures shift by −3.6 °F (2 °C) while the deck column is unchanged.
+Either the label's unit or the seeded magnitude differs from the documentation for the
+static-pressure family. Consequence: a severity ladder or a per-in.wg sensitivity claim
+built from these labels is off by a factor of ten. The detections are unaffected.
+Reproduce: `uv run python scripts/e8_bias_magnitude.py` (writes
+`outputs/e8_bias_magnitude.json`).
 

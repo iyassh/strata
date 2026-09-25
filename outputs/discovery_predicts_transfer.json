@@ -65,7 +65,7 @@
             "cooling_inactive"
           ]
         ],
-        "n_train_days": 248
+        "n_train_days": 160
       },
       "device": {
         "device_model": null
@@ -169,7 +169,7 @@
             "night_cycle_ended"
           ]
         ],
-        "n_train_days": 269
+        "n_train_days": 173
       },
       "device": {
         "anchor_activity_in_device_net": "zone_heating_active",
@@ -252,7 +252,7 @@
             "zone_heating_inactive"
           ]
         },
-        "n_train_cases": 681
+        "n_train_cases": 436
       }
     },
     "sfpu": {
@@ -287,7 +287,7 @@
         "variants_containing_heating": 356,
         "occupied_days_whose_log_contains_heating": 357,
         "cost0_shortened_examples": [],
-        "n_train_days": 269
+        "n_train_days": 173
       },
       "device": {
         "anchor_activity_in_device_net": "zone_heating_active",
@@ -370,7 +370,7 @@
             "zone_heating_inactive"
           ]
         },
-        "n_train_cases": 1076
+        "n_train_cases": 692
       }
     }
   },

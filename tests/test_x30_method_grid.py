@@ -21,8 +21,10 @@ def test_x30_pinned():
     assert {s: len(v["missed_scenarios"]) for s, v in a["systems"].items()} == {"pfpu": 8, "sfpu": 8, "ddahu": 10, "fcu": 7, "sdahu": 0}
     evaluated = [(s, c, r) for s, v in a["systems"].items() for c, r in v["cells"].items() if "error" not in r]
     assert len(evaluated) == 33
-    assert all(r["detected"] == [] for _, _, r in evaluated)            # P1, at any false-alarm level
+    assert all(r["detected"] == [] for _, _, r in evaluated)            # P1, at each cell's pre-registered threshold
     assert all(r["holdout_fp_rate"] <= 0.10 for _, _, r in evaluated)  # P2 did not occur
     assert max(r["holdout_fp"] for _, _, r in evaluated) == 7
     assert a["predictions"]["P3_errors"] == [["sfpu", "HM-align"], ["ddahu", "HM-align"]]
     assert len(a["falsifiers_fired"]) == 1 and a["falsifiers_fired"][0].startswith("F-X30.b")
+    assert a["predictions"]["predictions_failed_without_falsifier"] == ["P2: no cell exceeded 10 % holdout false alarms (worst 7/72 = 9.7 %)"]
+    assert "no threshold sweep" in a["predictions"]["threshold_policy"]

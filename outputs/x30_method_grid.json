@@ -1466,7 +1466,12 @@
         "ddahu",
         "HM-align"
       ]
-    ]
+    ],
+    "predictions_failed_without_falsifier": [
+      "P2: no cell exceeded 10 % holdout false alarms (worst 7/72 = 9.7 %)"
+    ],
+    "threshold_policy": "one threshold per cell: the 1 % quantile of the per-day score on the calibration slice; no threshold sweep",
+    "cell_budget_note": "900 s per cell covering discovery plus every scenario log; set in this script, not in the pre-registration"
   },
   "falsifiers_fired": [
     "F-X30.b: cells not evaluated: [('sfpu', 'HM-align'), ('ddahu', 'HM-align')]"

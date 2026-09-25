@@ -57,3 +57,17 @@ holdout false alarms) — the same rule as the deployed channel.
 ## Artefacts
 
 `outputs/x30_method_grid.json`; guard `tests/test_x30_method_grid.py`.
+
+## Post hoc notes (2026-09-24 evening, from the hostile review of the closed X30)
+
+- The 15-minute per-cell budget that decides P3 was set in the script
+  (`CELL_TIMEOUT_S`), not here; it covers discovery plus every scenario log
+  of the system, so it is harsher where a system has more misses (DDAHU 10,
+  FCU 7). Recorded as a deviation.
+- Each cell is scored at one threshold (the 1 % quantile of its per-day score
+  on the calibration slice). No threshold sweep was run, so the result is
+  "no cell detects a miss at its pre-registered threshold", not "at any
+  false-alarm level"; the realised false-alarm rates span 0 to 9.7 %.
+- P2 failed (no cell exceeded 10 %) and has no falsifier attached; the ledger
+  now carries a `predictions_failed_without_falsifier` field
+  (`--summarise` recomputes the predictions block from the saved cells).

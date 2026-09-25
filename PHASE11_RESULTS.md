@@ -504,18 +504,19 @@ against the cell's own holdout false alarms — the deployed rule.
 
 Cell order in the false-alarm column: IM00-align, IM05-align, IM02-token,
 HM-align, SKEL, DECLARE, TEMPORAL. Thirty-three cells evaluated, 33
-missed scenarios, zero detections at any false-alarm level. The highest
+missed scenarios, zero detections at each cell's pre-registered threshold (the 1 % calibration quantile; realised holdout false-alarm rates 0 to 9.7 %). No threshold sweep was run; the closest cell to the gate is p = 0.040 against 10⁻³. The highest
 flagged share any cell reaches on any miss is 5.6 % of scenario days
 (FCU skeleton, at 9.7 % holdout false alarms).
 
 | P1 no cell detects a miss within 3 false alarms | P2 some cell above 10 % false alarms | P3 every cell runs | falsifiers |
 |---|---|---|---|
-| ✓ (no cell detects a miss at *any* false-alarm level) | ✗ predicted, not observed: the worst cell is 7 / 72 = 9.7 % | ✗ two heuristics-miner cells exceeded the 15-minute cell budget | F-X30.b (two cells "not evaluated", never a null) |
+| ✓ (no cell detects a miss at its threshold; no cell sweeps thresholds) | ✗ predicted, not observed: the worst cell is 7 / 72 = 9.7 % (no falsifier attached; recorded in the ledger's `predictions_failed_without_falsifier`) | ✗ two heuristics-miner cells exceeded the 15-minute cell budget — a budget set in the script, not the pre-registration, spanning discovery plus every scenario log (post hoc note in the pre-registration) | F-X30.b (two cells "not evaluated", never a null) |
 
 **Reading.** The null is not an artefact of the instrument. Order-based,
 declarative and timing-based conformance discovered on the same log all
-fail to separate the missed scenarios from healthy days, at thresholds
-that keep false alarms in budget and at thresholds that do not. This is
+fail to separate the missed scenarios from healthy days at their
+pre-registered thresholds, whose realised false-alarm rates run from 0 to
+9.7 % — inside and outside the budget. This is
 the model-side complement of X12's log-side finding (the missed reheat
 fouling files are indistinguishable from healthy in every daily activity
 count and duration at the deployed alphabet): what the state-event log
@@ -579,14 +580,22 @@ scorecard's deployed-channel detections exactly on all three systems
 | FCU detected / 47 | 40 | 39 (−1: OA damper leak 80 %) | 40 | 40 | 39 (−1: leak 80 %) |
 | FCU false alarms / 96 | 3 | 3 | 3 | 3 | 1 |
 
-False alarms are the deployed union without the alignment channels; the
+False alarms are the deployed union without the alignment channels. The
 scorecard's DDAHU count of 3 is three absence-channel days, and the absence
 channel is not exercised here (below), so the clean arm's 0 is the matching
-comparator (the ledger records both).
+comparator — but Amendment 1 predicted (1, 3, 3) and observed (1, 0, 3): that
+prediction **failed as written**, the absence-free comparator was chosen
+after the number was seen, and the ledger records it under
+`predictions_failed_without_falsifier` beside P3. Two further deviations
+from the pre-registration, found in review: common random numbers hold for
+the noise and quantisation draws but not for gap placement (one generator
+per file; the combined arm's gap blocks differ from the cov_gaps arm's), and
+the schedule arm *shifts* the occupied block 30 minutes earlier at both
+ends rather than extending it (a whole-day shift, not an optimum start).
 
 | P1 budget (≤ 10/96 and ≤ 2·clean + 2, every cell) | P2 noise / COV within −3 | P3 schedule within ±1, FP ≤ clean + 2 | P4 combined within −4 | falsifiers |
 |---|---|---|---|---|
-| ✓ (worst 3/96) | ✓ (worst −3, DDAHU cov_gaps, at the bar) | ✗ **failed upward**: DDAHU +3 at 0 false alarms | ✓ (worst −1) | none named (F-X31.b covers P2/P4 only); P3 reported as a wrong prediction |
+| ✓ (worst 3/96) | ✓ (worst −3, DDAHU cov_gaps, at the bar) | ✗ **failed upward**: DDAHU +3 at 0 false alarms | ✓ (worst −1) | none named (F-X31.b covers P2/P4 only); P3 and the Amendment 1 clean-FP prediction recorded as failed predictions without a falsifier |
 
 **Reading.** The budget survives every condition on every system, and the
 noise-floor gate does what it is for: the re-fitted bands absorb the

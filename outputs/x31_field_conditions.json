@@ -329,7 +329,29 @@
     "P4_failures": [],
     "not_evaluated": [],
     "clean_arm_matches_scorecard": true,
-    "absence_channel_evaluated": false
+    "absence_channel_evaluated": false,
+    "amendment1_clean_fp_prediction": {
+      "predicted": {
+        "sdahu": 1,
+        "ddahu": 3,
+        "fcu": 3
+      },
+      "observed": {
+        "sdahu": 1,
+        "ddahu": 0,
+        "fcu": 3
+      },
+      "held": false,
+      "post_hoc_comparator": "scorecard false alarms without absence days"
+    },
+    "predictions_failed_without_falsifier": [
+      "P3 (schedule within \u00b11): [('ddahu', 'schedule', 48, 45, 0, 0)]",
+      "Amendment 1 clean-arm false alarms: predicted {'sdahu': 1, 'ddahu': 3, 'fcu': 3}, observed {'sdahu': 1, 'ddahu': 0, 'fcu': 3}"
+    ]
   },
-  "falsifiers_fired": []
+  "falsifiers_fired": [],
+  "deviations": [
+    "common random numbers hold for the noise and quantisation draws but not for gap placement: one generator per file, so the combined arm's gap blocks differ from the cov_gaps arm's",
+    "the schedule arm shifts the occupied block 30 minutes earlier (start and end), leaving its length unchanged: a whole-day shift, not the extension the pre-registration's 'optimum start' implies"
+  ]
 }

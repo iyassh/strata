@@ -137,7 +137,10 @@ def run_system(system: str) -> dict:
 
 def main() -> int:
     systems = sys.argv[sys.argv.index("--systems") + 1].split(",") if "--systems" in sys.argv else ["pfpu", "sfpu", "ddahu", "fcu", "sdahu"]
-    res = {s: run_system(s) for s in systems}
+    if "--summarise" in sys.argv:   # recompute the predictions block from the saved per-cell results (no cell re-run)
+        res = json.loads((REPO / "outputs/x30_method_grid.json").read_text())["systems"]
+    else:
+        res = {s: run_system(s) for s in systems}
     within = [(s, c, v["detected"]) for s in res for c, v in res[s]["cells"].items() if "detected" in v and v["detected"] and v["holdout_fp"] <= 3]
     over10 = [(s, c, v["holdout_fp_rate"]) for s in res for c, v in res[s]["cells"].items() if "holdout_fp_rate" in v and v["holdout_fp_rate"] > 0.10]
     errors = [(s, c) for s in res for c, v in res[s]["cells"].items() if "error" in v]
@@ -147,6 +150,9 @@ def main() -> int:
     fired = []
     if within: fired.append(f"F-X30.a: {within}")
     if errors: fired.append(f"F-X30.b: cells not evaluated: {errors}")
+    pred["predictions_failed_without_falsifier"] = ([] if over10 else ["P2: no cell exceeded 10 % holdout false alarms (worst 7/72 = 9.7 %)"])
+    pred["threshold_policy"] = "one threshold per cell: the 1 % quantile of the per-day score on the calibration slice; no threshold sweep"
+    pred["cell_budget_note"] = f"{CELL_TIMEOUT_S} s per cell covering discovery plus every scenario log; set in this script, not in the pre-registration"
     out = {"prereg": "docs/plans/2026-09-24-x30-method-grid-prereg.md", "cells": CELLS, "systems": res, "predictions": pred, "falsifiers_fired": fired}
     (REPO / "outputs/x30_method_grid.json").write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps(pred, indent=1)); print("falsifiers fired:", fired or "none")

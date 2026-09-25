@@ -87,3 +87,23 @@ against the clean arm's count. Prediction for the clean arm: detections
 equal the scorecard's deployed-channel count (14, 45, 40) and false alarms
 equal its deployed-union count without the alignment channels (1, 3, 3);
 any difference is reported as a facade defect, not as a condition effect.
+
+## Post hoc notes (2026-09-24 evening, from the hostile review of the re-run)
+
+- **Amendment 1's clean-arm false-alarm prediction failed as written** (1, 3,
+  3 predicted; 1, 0, 3 observed): the absence channel, three of the DDAHU
+  scorecard's days, rides on the device stratum this experiment never
+  builds. The absence-free comparator the ledger uses was chosen after the
+  number was seen; the ledger records the failed prediction under
+  `predictions_failed_without_falsifier` beside P3.
+- **Common random numbers** hold for the noise and quantisation draws but not
+  for gap placement: one generator serves each file, so in the combined arm
+  the noise draws precede the gap draws and the gap blocks differ from the
+  cov_gaps arm's (SDAHU: 515,130 vs 515,144 minutes kept). Not re-run;
+  recorded as a deviation.
+- **The schedule arm is a shift, not an extension:** the occupied block moves
+  30 minutes earlier at both ends, so its length is unchanged; "optimum
+  start" in the conditions text implies an earlier start with the same end.
+  Recorded as a deviation; the holiday half of the arm is as written.
+- P3 failed upward and has no falsifier attached (the falsifier list names
+  P1, P2, P4); recorded in the ledger's `predictions_failed_without_falsifier`.

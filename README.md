@@ -164,7 +164,7 @@ Method grid (X30): seven other process-mining instruments (inductive miner at
 noise 0.0 and 0.5 with alignments, the deployed net with token replay,
 heuristics miner, log skeleton, Declare, temporal profile), each discovered on
 the training days and thresholded on the calibration slice, detect none of the
-33 scenarios the deployed detector misses, at any false-alarm level; the
+33 scenarios the deployed detector misses at their pre-registered thresholds (realised false-alarm rates 0 to 9.7%); the
 conformance null is a property of the state-event log, not of the miner or the
 measure ([PHASE11_RESULTS.md](PHASE11_RESULTS.md)).
 

@@ -31,3 +31,6 @@ def test_x31_pinned():
     assert S["sdahu"]["conditions"]["cov_gaps"]["lost"] == ["oa_bias_4_annual"]
     assert S["fcu"]["conditions"]["field_noise"]["lost"] == ["FCU_OADMPRLeak_80"]
     assert a["falsifiers_fired"] == []
+    failed = p["predictions_failed_without_falsifier"]
+    assert len(failed) == 2 and failed[0].startswith("P3") and failed[1].startswith("Amendment 1 clean-arm false alarms")
+    assert p["amendment1_clean_fp_prediction"]["held"] is False and len(a["deviations"]) == 2

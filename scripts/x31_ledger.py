@@ -94,6 +94,22 @@ def main() -> int:
     mism = [s for s, v in out["systems"].items() if v.get("facade_matches_scorecard_detections") is False or v.get("facade_matches_scorecard_fp_without_absence") is False]
     out["predictions"]["clean_arm_matches_scorecard"] = not mism
     out["predictions"]["absence_channel_evaluated"] = False
+    # Amendment 1 predicted the clean arm's false alarms at the scorecard's deployed-union-without-alignment count
+    # (1, 3, 3); DDAHU came in at 0 because the absence channel (three scorecard days) rides on the device stratum
+    # that this experiment never builds. The prediction FAILED as written; the absence-free comparator was chosen
+    # after seeing the number and is recorded here as such.
+    clean_fp_obs = {s: v.get("clean_holdout_fp") for s, v in out["systems"].items() if "error" not in v}
+    clean_fp_pred = {s: v.get("scorecard_holdout_fp") for s, v in out["systems"].items() if "error" not in v}
+    out["predictions"]["amendment1_clean_fp_prediction"] = {"predicted": clean_fp_pred, "observed": clean_fp_obs, "held": clean_fp_pred == clean_fp_obs,
+                                                             "post_hoc_comparator": "scorecard false alarms without absence days"}
+    failed = []
+    if p3_fail:
+        failed.append(f"P3 (schedule within ±1): {p3_fail}")
+    if clean_fp_pred != clean_fp_obs:
+        failed.append(f"Amendment 1 clean-arm false alarms: predicted {clean_fp_pred}, observed {clean_fp_obs}")
+    out["predictions"]["predictions_failed_without_falsifier"] = failed
+    out["deviations"] = ["common random numbers hold for the noise and quantisation draws but not for gap placement: one generator per file, so the combined arm's gap blocks differ from the cov_gaps arm's",
+                         "the schedule arm shifts the occupied block 30 minutes earlier (start and end), leaving its length unchanged: a whole-day shift, not the extension the pre-registration's 'optimum start' implies"]
     if mism:
         out["falsifiers_fired"].append(f"Amendment 1: facade differs from the scorecard on {mism}")
     (REPO / "outputs/x31_field_conditions.json").write_text(json.dumps(out, indent=2) + "\n")

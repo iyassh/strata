@@ -1,4 +1,4 @@
-# STRATA — fault detection for buildings that explains itself
+# STRATA: A Stratified Process-Mining Framework for HVAC Fault Detection and Diagnosis
 
 **An event log written from sensor data by configuration alone; calibrated,
 interpretable channels that detect faults on it under a stated false-alarm

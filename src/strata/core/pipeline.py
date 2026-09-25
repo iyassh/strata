@@ -320,9 +320,14 @@ def fit(cfg: Config, healthy_df: pd.DataFrame,
                      < device_model.threshold).sum()),
                 len(device_model.holdout_per_case),
                 max(len(device_model.healthy_absence), 1))
-        provenance["model"] = provenance["device"] = (
-            "holdout-quantile threshold: healthy-holdout FP is the calibration "
-            "target, not out-of-sample (L24; three-way split pending)")
+        if getattr(unit_model, "threshold_out_of_sample", False):
+            provenance["model"] = provenance["device"] = (
+                "threshold calibrated on the X25 calibration slice; the healthy-holdout "
+                "FP is out-of-sample")
+        else:
+            provenance["model"] = provenance["device"] = (
+                "holdout-quantile threshold: healthy-holdout FP is the calibration "
+                "target, not out-of-sample (L24; three-way split pending)")
     except ImportError:
         warnings.warn(
             "pm4py not installed: model and device conformance strata are "

@@ -25,7 +25,8 @@ def test_detector_calibrates_out_of_sample_with_low_fpr():
     det = build_detector(CFG, healthy_log)
     # every event-bearing day lands in exactly one side of the split
     # (days with zero events — e.g. Sundays with the system off — have no trace)
-    assert det.n_train_days + len(det.holdout_per_day) == healthy_log["case_id"].nunique()
+    n_calib = len(det.calib_per_day) if getattr(det, "calib_per_day", None) is not None else 0   # X25 three-way split
+    assert det.n_train_days + n_calib + len(det.holdout_per_day) == healthy_log["case_id"].nunique()
     assert det.holdout_fpr <= 0.05
 
 

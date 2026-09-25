@@ -1322,6 +1322,7 @@ dependencies = [
     { name = "pyyaml" },
     { name = "rdflib" },
     { name = "scikit-learn" },
+    { name = "scipy" },
     { name = "typer" },
     { name = "uvicorn" },
 ]
@@ -1346,6 +1347,7 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "rdflib", specifier = ">=7.6.0" },
     { name = "scikit-learn", specifier = ">=1.9.0" },
+    { name = "scipy", specifier = ">=1.14" },
     { name = "typer", specifier = ">=0.26.7" },
     { name = "uvicorn", specifier = ">=0.49.0" },
 ]

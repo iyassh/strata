@@ -279,6 +279,42 @@ Wrong alarms / all alarms & \multicolumn{3}{c}{$<0.1\%$ (96 fault-free vs 4{,}54
 \label{tab:results}
 \end{table}
 
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\hline
+System (LBNL) & points mapped & rules (state / signature) & scored & detected & deployed false alarms & fault-free days \\
+\hline
+SDAHU, single-duct AHU & 12 & 3 / 8 & 14 & 14 (13 adj.) & 1 / 96 & 365 \\
+PFPU, parallel fan-powered box & 56 & 13 / 26 & 30 & 22 & 7 / 96 & 365 \\
+SFPU, series fan-powered box & 56 & 13 / 26 & 29 & 21 & 6 / 96 & 365 \\
+DDAHU, dual-duct AHU & 79 & 15 / 31 & 55 & 45 & 3 / 96 & 365 \\
+FCU, fan coil unit & 29 & 7 / 17 & 47 & 40 & 4 / 96 & 365 \\
+RTU, simulated rooftop unit & 23 & 3 / 5 & 24 & 20 & 1 / 29 & 100 \\
+RTU, measured rooftop unit (Site 2) & 26 & 2 / 7 & 1 case & --- & 3 / 49 & 182 \\
+\hline
+\end{tabular}
+\caption{The seven LBNL datasets under the final gate: what each configuration maps and declares, what was scored, and the out-of-sample false-alarm count on the held-out fault-free days (the last eight of each month). The measured unit carries one fault case and is used for its false-alarm rate only.}
+\label{tab:systems}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_detection_by_family.pdf}
+\caption{Detected scenarios (blue) of scored scenarios (grey) by fault family on the six scored systems, under the final gate. Coil fouling is the dominant miss on the four air-side datasets and is caught in full on the unit that records the refrigerant side (Section~\ref{sec:ddahu}).}
+\label{fig:families}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_false_alarms.pdf}
+\caption{Per-channel and deployed-union false alarms on the held-out fault-free days, every threshold out-of-sample. The seasonal rate channel (hatched) is advisory and outside the deployed union; the dashed line is the pre-registered budget.}
+\label{fig:falsealarms}
+\end{figure}
+
+
 The median time to detection is one day on all three systems, but the median alone misrepresents the distribution and should not be quoted without its tail (Table~\ref{tab:ttd}).
 
 \begin{table}[h]
@@ -369,6 +405,13 @@ A post-hoc read of the same artefact, not a pre-registered result, locates the c
 
 The null above can be read two ways: the faults do not change event order, or the channel cannot see order. A pre-registered positive control injected order violations --- whole-day reversal, adjacent swaps, deletions, a deleted start event, a duplicated block --- into each system's fault-free holdout traces and scored them with the deployed net, threshold and significance gate, adding two threshold-free measures: the AUC of perturbed against unperturbed per-day fitness, and the hit rate of a threshold set at the fault-free holdout's worst day. The channel turned out to be three instruments. On the fan coil and dual-duct units a reversed day is flagged on 55 of 72 and 59 of 83 holdout days (AUC 0.99; 75 and 71\,\% hit rate at zero false alarms): the channel sees order, and those units' faults do not change it (the dual-duct unit joined this group only once its threshold was calibrated out-of-sample, Section~\ref{sec:protocol}). On the single-duct unit a reversed day is separable on average (AUC 0.91) but the hit rate at zero false alarms is exactly zero: the fault-free holdout contains days that fit worse than a reversed day, so no threshold inside the budget can see order --- blind by the spread of healthy fitness, not by the net. On the two fan-powered units fitness does not move under any perturbation (AUC 0.40--0.51; deleting the start event raises it): blind by net structure. Eight adjacent swaps and four deletions are also significant on the two order-seeing units, consistent with alignment cost behaving as a graded detector there. No falsifier fired, and four of the five predictions were wrong.\footnote{\texttt{outputs/x22\_positive\_control.json}; \texttt{docs/plans/2026-09-24-x22-conformance-positive-control-prereg.md}.}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_x22_positive_control.pdf}
+\caption{The positive control. Left: threshold-free separability (AUC) of perturbed against unperturbed fault-free holdout days for each injected order violation. Right: the share of those days the deployed gate flags. The fan coil and dual-duct units see order; the single-duct unit separates it on average but not at any in-budget threshold; the fan-powered units' nets accept any order.}
+\label{fig:x22}
+\end{figure}
+
 \subsection{A fourth and a fifth system, onboarded blind}
 \label{sec:ddahu}
 
@@ -377,6 +420,20 @@ The onboarding claim --- that a building is a configuration directory, not code 
 The detector caught 45 of 55 scenarios at 3 false-alarm days in 96 (8 with the advisory rate channel counted): every zone-damper, outdoor-air-damper, coil-valve, deck-temperature-bias and unstable-control scenario, five of twelve coil-fouling scenarios (the pre-registration predicted at most four) and five of eight static-pressure biases. The discovered model channel is credited on two cold-deck damper scenarios that four other channels already carry (none before the three-way split); nothing was detected by the conformance channels alone. The enriched-alphabet frequency channel of X15, re-run here under its own protocol, stays inside the budget and triples its coverage of already-detected scenarios but catches none of the ten misses: the one fouling gain of X15 was a one-system signature and does not replicate. One check misfired usefully: the false-alarm script reported that demoting the rate channel would delay one scenario's first alarm, and recomputation showed the day-one alarm belonged to the absence channel, whose day list the scorecards do not export --- a blind spot in the check, now recorded as such, and no cost of demotion. Two things follow upstream: the transfer test's scorable pool grows from two buildings to three (its amendment excluded the single-duct system structurally, for want of a heating activity), so the building-level floor moves from $1/2! = 0.5$ to $1/3! = 0.167$ with the dual-duct unit and to $1/4! = 0.042$ with the fan coil unit below --- the first design that can attain $p<0.05$; that re-run is row 10 of Table~\ref{tab:refuted}; and the dataset defects are properties of three of five archives, not of the collection.\footnote{\texttt{outputs/x17\_onboarding.json}, \texttt{benchmark\_v6\_ddahu.json}, \texttt{union\_fpr\_ddahu.json}, \texttt{week0\_audit\_ddahu.json}; pre-registration and one amendment in \texttt{docs/plans/2026-09-24-x17-ddahu-onboarding-prereg.md}.}
 
 The fifth system, the LBNL fan coil unit (a four-pipe single-zone unit with a three-speed fan, both coils and one outdoor-air damper; 29 points; 48 seeded faults in 17 families, four of them --- filter restriction, outdoor-air inlet blockage, fan outlet blockage and reverse-acting control, scored as two --- absent from the first four), was onboarded under the same pre-registration form: 29 mappings, 7 state and 16 signature rules, two logged healthy-silence iterations, no change under \texttt{src/} (the gate script needed two lines to read this system's Brick file). The hash gate found a byte-identical pair under two \emph{family} labels (cooling and heating airside fouling, minor); the content is scored once and the fouling family is 11, the scored total 47. The first run detected 47 of 47 at 28 false-alarm days in 96 and fired two falsifiers. Twenty-five of the 28 were the model channel's, every one a Saturday or Sunday (the other three were residual days, and they survive into run 2): the two scoring scripts flag an event-less \emph{scheduled} day as a model violation and define scheduled as any non-zero mode --- a rule written for the fan-powered units, whose mode 2 is a night cycle that generates events --- and on this unit mode 2 is idle setback, so 97 of 104 weekend days were ``silent while scheduled.'' The scorecard's model gate then judged six scenarios significant against a conformance-only baseline (1 of 72 event days) that the deployed count (25 of 96) did not use; their 100 model days each were the healthy year's own 100 weekend model days: 97 silent and three two-event traces. A two-script repair --- scheduled means operate mode, the definition the occupancy event kind already used, and the gate's baseline counts what the deployed channel counts --- was pre-registered with four predictions and three falsifiers before it was made. All four held: the four earlier scorecards regenerated byte-identically, the fan coil unit scores 41 of 47 at 4 false-alarm days in 96 (residual 3, model 1), exactly the six model-only scenarios dropped and nothing else changed status, and nothing is detected by conformance alone (a pre-registered outdoor-air-fraction residual, Guideline 36 FC6 lineage, later caught the 20\,\% damper leak at unchanged false alarms, and the per-day residual null of the statistical repair, Section~\ref{sec:protocol}, took it back again: 40 of 47 under the final gate); the model channel is credited on nine scenarios, each also caught by rules, residual, frequency or oscillation. Both new families are caught in full (airflow restriction 5 of 5, control 3 of 3); the misses are five of six waterside-fouling files --- on the cooling coil the recorded water-side temperature difference, valve-open time and flow stay within about three per cent of the fault-free year (the 20\,\% damper leak was the sixth miss until the outdoor-air-fraction residual).\footnote{\texttt{outputs/x19\_onboarding\_run1.json}, \texttt{x19\_onboarding.json}, \texttt{benchmark\_v6\_fcu.json}, \texttt{union\_fpr\_fcu.json}; \texttt{docs/plans/2026-09-24-x19-fcu-onboarding-prereg.md} with Amendment 1; \texttt{tests/test\_artefact\_consistency.py}.} What the fifth system adds is not the row but the failure: a semantic constant in a scoring script is a hypothesis about the equipment class, and two artefacts that compute one quantity two ways will agree until the first class on which they do not.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/fig_x25_repair.pdf}
+\caption{The statistical repair. Left: the conformance channel's false-alarm days as a calibration target (grey) and out-of-sample after the three-way split (blue). Right: detections before and under the final gate; the per-day residual null removed seven residual-only detections, one offset by a new channel.}
+\label{fig:x25}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/fig_x29_fouling_severity.pdf}
+\caption{Fouling on the one dataset that records the refrigerant side: residual-channel days flagged by seeded severity on the simulated rooftop unit; every severity is detected (filled markers). The same detector misses most fouling on the air-side datasets.}
+\label{fig:x29}
+\end{figure}
 
 \section{What the Protocol Refuted or Withdrew}
 \label{sec:falsified}

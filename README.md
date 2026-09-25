@@ -141,6 +141,10 @@ fan coil unit):
 | false-alarm budget, deployed detector (fault-free holdout days; conformance thresholds out-of-sample, X25) | 1.0% | 7.3% | 6.2% | 3.1% | 4.2% | 3.4% (of 29) |
 | false-alarm rate, naive union of all eight channels (compare against this if your method has no budget) | 15.6% | 14.6% | 6.2% | 8.3% | 21.9% | 3.4% |
 
+![Detected scenarios by fault family on six systems](paper/figures/fig_detection_by_family.png)
+
+![Per-channel false alarms on the held-out fault-free days](paper/figures/fig_false_alarms.png)
+
 DDAHU: 79 sensor mappings, 41 rules, one healthy-silence iteration, no source
 change, gate battery clean (including a configuration-branch comparison); every family caught in full except coil fouling
 (5/12) and static-pressure sensor bias (6/8 after the fan-law channel of X27); nothing detected by the

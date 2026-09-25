@@ -20,8 +20,9 @@ def test_counts_sum_to_detected_and_are_pinned():
     # (three of them attributed 'none', one with indeterminate ground truth); was 61 / 36-10-0-14-1
     # X33b (2026-09-25): PFPU 22 -> 26 detections; the four gains are residual-only and name no device (none 7 -> 10), one has
     # indeterminate zone ground truth; was 57 / 36-7-0-14-0 after X25
-    assert sum(c.values()) == a["n_detected"] == 61
-    assert c == {"correct": 36, "none": 10, "wrong": 0, "no_device_stratum": 14, "indeterminate_gt": 1}
+    # X33c: SFPU 21 -> 25 (57 -> 65 over the three systems); one gain names its zone, three are residual-only
+    assert sum(c.values()) == a["n_detected"] == 65
+    assert c == {"correct": 37, "none": 13, "wrong": 0, "no_device_stratum": 14, "indeterminate_gt": 1}
 
 
 def test_no_wrong_attribution_and_sdahu_names_no_device():

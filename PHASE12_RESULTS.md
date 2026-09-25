@@ -34,7 +34,7 @@ against the fault-free file and recorded); artefacts regenerated after.*
 |---|---|---|
 | detected (naive / adjudicated) | 14 / 14 (13) | 14 / 14 (13) |
 | deployed false alarms | 1 / 96 | 1 / 96 |
-| new residual rules' own holdout false alarms | — | 0 / 79, 0 / 79, 0 / 79 |
+| new residual rules' own holdout false alarms (of each rule's evaluable holdout days) | — | 0 / 79, 0 / 79, 0 / 79 |
 | model and device rows | — | byte-identical |
 | time to detection | — | unchanged on every scenario |
 
@@ -69,7 +69,7 @@ written from the healthy year (bands logged in the configuration).
 | gained | — | airside reheat fouling **moderate** and **severe**; room-temperature bias **+2 °C** and **+4 °C** |
 | lost | — | none |
 | deployed false alarms | 7 / 96 | 8 / 96 (residual channel 2 → 3) |
-| new residual rules' own holdout false alarms | — | 0 or 1 day each (18 rules; the heating-coil rule never evaluates) |
+| new residual rules' own holdout false alarms (of each rule's evaluable holdout days) | — | 0 or 1 day each: 0/35, 1/52, 0/69, 1/63, 1/60, 0/52, 0/69, 0/63, 0/60, 0/69 ×4, 1/69, 1/69, 0/69, 0/69; `hwc_waterside_dT` never evaluates (0/0) |
 | model and device rows | — | byte-identical |
 | time to detection | — | not later on any scenario; all four gains on day 1 |
 
@@ -77,8 +77,8 @@ written from the healthy year (bands logged in the configuration).
 
 | scenario | carrying rule | days | reading |
 |---|---|---|---|
-| airside reheat fouling, moderate | `da_minus_pm_S` (zone S discharge airflow − primary airflow, zone fan off) | 172 | with the zone fan off the discharge-minus-primary airflow sits at −27 cfm in health (5th–95th percentile −45 to −23); at severe fouling it sits at −10 (−15 to −9) and at minor fouling it does not move (−25); the coil's airside resistance is in the primary air's path, and the flow relationship moves while every temperature the controller holds stays inside its band |
-| airside reheat fouling, severe | `da_minus_pm_S` | 227 | same; the minor file moves it on 0 days and stays missed |
+| airside reheat fouling, moderate | `da_minus_pm_S` (zone S discharge airflow − primary airflow, zone fan off) | 172 | with the zone fan off, the primary airflow median is 201 cfm in the healthy, minor, moderate and severe files alike, while the measured discharge airflow rises 178 → 180 → 185 → 192 cfm; the relationship between the two flow sensors moves with fouling severity while every temperature the controller holds stays inside its band. The mechanism inside the simulation is not documented; the relation is reported as a witness, not an explanation |
+| airside reheat fouling, severe | `da_minus_pm_S` | 227 | same; the minor file moves it on 1 day and stays missed |
 | room-temperature bias +2 °C | `ra_minus_zone_S` (return air − zone S reading) | 187 | the controller over-cools the zone whose sensor reads high; the return air, which mixes the true zone temperatures, falls away from that zone's reading by the bias |
 | room-temperature bias +4 °C | `ra_minus_zone_S`, `_I`, `_W` | 261, 233, 174 | as above, larger, and visible against every zone because the return air itself is cooler |
 
@@ -93,5 +93,62 @@ the physics is the right one: airside fouling is a flow-resistance fault, and
 the recorded temperatures never move because the controller holds them. The
 four remaining fouling misses (airside minor, waterside minor/moderate/severe)
 still sit inside every healthy band on every column. The one added false-alarm
-day is a residual day on 2018-12-24, inside budget and inside the adoption
-rule. Every new rule is kept.
+day is a residual day on 2018-08-27 (the residual channel's 2018-10-29 and
+2018-12-24 were already there), inside budget and inside the adoption rule.
+Every new rule is kept. Two costs the ledger does not show: the four gains are
+residual-only and name no device, so the attribution count moves from 36 named
+of 43 to 36 of 46 (three more 'none'); and because the new rules evaluate on
+more holdout days, the residual channel's per-day null denominator grows from
+41 to 69 days, which lowers its floor from 7.3 % to 4.3 % for the pre-existing
+rules as well — no verdict flipped (every credited scenario has ≥ 110 residual
+days, every miss ≤ 6), but the null is looser than before and the manuscript's
+'41 such days' sentence must change.
+
+## X33c — SFPU, series fan-powered unit (109 columns; 56 → 109 mapped, 0 excluded)
+
+*Pre-configuration commit 028a941; configuration ce3a9f4 (healthy silence at
+iteration 2: a YAML literal format error, no band change); artefacts
+regenerated after. Credits diagnostic: `outputs/x33_residual_credits_sfpu.json`.*
+
+Same column map as the parallel unit, plus the series-fan readers the X32 scan
+pointed at: zone-fan specific power (fan power / discharge airflow) and fan
+pressure per airflow² for each of the four zones.
+
+| | before | after |
+|---|---|---|
+| detected | 21 / 29 | **25 / 29** |
+| gained | — | **VAV fan flow restriction**; airside reheat fouling **moderate** and **severe**; room-temperature bias **+2 °C** |
+| lost | — | none |
+| deployed false alarms | 6 / 96 | 9 / 96 (residual channel 0 → 3: 27 April, 25 June, 27 August) |
+| new residual rules' own holdout false alarms | — | 22 rules: 0 (17), 1 (4), 2 (`static_per_speed2`) |
+| model and device rows | — | byte-identical |
+| time to detection | — | not later on any scenario; all four gains on day 1 |
+
+**Which physics carried each gain** (flagged days of 261, facade bands):
+
+| scenario | carrying rule | days | reading |
+|---|---|---|---|
+| VAV fan flow restriction | `zone_fan_spf_S` (zone S fan power per cfm delivered) | 261 | a restricted fan delivers less air for the same power; the healthy band is 0.02 W/cfm wide and the fault leaves it every day |
+| airside reheat fouling, severe | `zone_fan_spf_S` | 261 | the fouled coil sits in the series fan's path: the same power moves less air |
+| airside reheat fouling, moderate | `zone_fan_spf_S` | 145 | same, at half the days; the minor file moves it on 0 days and stays missed |
+| room-temperature bias +2 °C | `dat_minus_sa_S`, `ra_minus_zone_W/E` | 180, 173, 152 | over-cooled zone: discharge air runs colder against supply, and the return air falls away from the other zones' readings |
+
+**Adoption rule, per rule.** Four new rules carry a holdout day: `rf_specific_power`
+(1), `sf_flow_per_speed` (1), `zone_fan_dp_per_cfm2_S` (1) and `static_per_speed2`
+(2, on 25 June and 27 August). All four also flag scenario days (the static rule on
+97 days of two valve scenarios, the pressure rule on 261 days of nine scenarios),
+so all are kept under the rule as pre-registered. Removing `static_per_speed2`
+alone would give 8 of 96 at no detection cost; it is kept because the rule says
+so, and the option is recorded here rather than taken after the fact.
+
+| P1 no loss | P2 budget | P3 fan restriction + severe fouling | P4 moderate fouling | P5 waterside fouling stays missed | P6 model rows identical | falsifiers |
+|---|---|---|---|---|---|---|
+| ✓ | ✓ (9/96 ≤ 6 + 3, at the bound) | ✓ | ✓ | ✓ | ✓ | none |
+
+**Reading.** The series unit's zone fan runs continuously, so its power per
+cfm is a permanent, tight witness of everything that changes the airflow
+resistance downstream of it: a restricted fan and a fouled coil face both show
+up as "same power, less air". Every prediction held. The cost is three residual
+false-alarm days, all on different rules, which puts the deployed union at 9
+of 96 — inside the budget but with one day of headroom, the least of the six
+systems.

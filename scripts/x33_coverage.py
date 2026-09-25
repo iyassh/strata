@@ -85,13 +85,30 @@ def main() -> int:
     for r in new_rules:
         if r in prf:
             out["new_rule_holdout_fp"][r] = prf[r]
-    # credits: a new residual rule is 'credited' if the residual channel is credited on a scenario whose residual days rose vs before
+    # credits: a new residual rule is credited on a scenario if it flags >= 30 % of that scenario's evaluable days
+    # (per-rule, from the credits artefact of scripts/x33_residual_credits.py); the system-wide list is reported beside it
     resid_credit = sorted(f for f in A if "resid" in chan(A[f]) and (A[f].get("residual_days") or 0) > (B[f].get("residual_days") or 0))
     out["residual_days_rose_and_credited"] = resid_credit
-    out["adoption"] = {r: ("keep" if (v["holdout_fp"] <= 1 or resid_credit) else "remove (credited nowhere, >1 holdout day)") for r, v in out["new_rule_holdout_fp"].items()}
+    cred_path = REPO / f"outputs/x33_residual_credits_{system}.json"
+    per_rule_credit = {}
+    if cred_path.exists():
+        cr = json.loads(cred_path.read_text())["scenarios"]
+        for r in new_rules:
+            per_rule_credit[r] = sorted(f for f, row in cr.items() if f in A and row["per_rule_evaluable_days"].get(r, 0) > 0
+                                        and row["per_rule_flagged_days"].get(r, 0) >= 0.3 * row["per_rule_evaluable_days"][r])
+    out["new_rule_credited_scenarios"] = per_rule_credit
+    out["adoption"] = {r: ("keep" if (v["holdout_fp"] <= 1 or per_rule_credit.get(r)) else "remove (credited nowhere, >1 holdout day)") for r, v in out["new_rule_holdout_fp"].items()}
+    # non-residual new rules (mismatch / setpoint_deviation): holdout days on which the rule emitted a signature event
+    from strata.core.splits import holdout_mask as _hm
+    from strata.hvac.events import abstract_events as _ae
+    from strata.io.config import load_config as _lc
+    _cfg = _lc(str(REPO / f"configs/lbnl_{system}")); _log = _ae(pd.read_parquet(REPO / f"data/processed/{system}/{HEALTHY[system]}.parquet"), _cfg)
+    _hold = set(_log.loc[_hm(_log["case_id"], _cfg.rules["detection"]["holdout_days_per_month"]).values, "case_id"]) if len(_log) else set()
+    out["new_signature_rule_holdout_days"] = {r: sorted(set(_log.loc[(_log["activity"] == r) & _log["case_id"].isin(_hold), "case_id"])) for r in new_rules if r not in out["new_rule_holdout_fp"]}
     dep_b, dep_a = out["deployed_fp"]
-    pred = {"P1_no_loss": not out["lost"], "P2_budget": dep_a <= 10 and dep_a <= dep_b + 3, "P2_new_rule_fp_le_3": all(v["holdout_fp"] <= 3 for v in out["new_rule_holdout_fp"].values()),
-            "P3_some_new_channel_credited": bool(resid_credit) or any("osc" in chan(A[f]) and "osc" not in chan(B[f]) for f in A) or any(r in str(A[f]["meaningful_channels"]) for f in A for r in new_rules),
+    pred = {"P1_no_loss": not out["lost"], "P2_budget": dep_a <= 10 and dep_a <= dep_b + 3,
+            "P2_new_rule_fp_le_3": all(v["holdout_fp"] <= 3 for v in out["new_rule_holdout_fp"].values()) and all(len(d) <= 3 for d in out["new_signature_rule_holdout_days"].values()),
+            "P3_some_new_channel_credited": any(per_rule_credit.values()) or bool(resid_credit) or any("osc" in chan(A[f]) and "osc" not in chan(B[f]) for f in A),
             "P4_ttd_not_later": not out["ttd_later"], "P5_model_rows_identical": out["model_rows_identical"]}
     fired = []
     if out["lost"]: fired.append(f"F-{system}.a: detection lost {out['lost']}")
@@ -100,7 +117,8 @@ def main() -> int:
     out["predictions"] = pred; out["falsifiers_fired"] = fired
     (REPO / f"outputs/x33_coverage_{system}.json").write_text(json.dumps(out, indent=2) + "\n")
     print(f"[{system}] columns {out['columns_mapped'][0]}->{out['columns_mapped'][1]} mapped, excluded {out['columns_excluded']} | detected {out['detected_before']}->{out['detected_after']}/{out['scored']} gained {out['gained']} lost {out['lost']} | deployed FP {dep_b}->{dep_a} | per-channel {out['per_channel_fp']}")
-    for r, v in out["new_rule_holdout_fp"].items(): print(f"   new rule {r:22s} holdout FP {v['holdout_fp']}/{v['holdout_evaluable']} band {v['band']} -> {out['adoption'][r]}")
+    for r, v in out["new_rule_holdout_fp"].items(): print(f"   new rule {r:22s} holdout FP {v['holdout_fp']}/{v['holdout_evaluable']} credited on {len(per_rule_credit.get(r, []))} scenarios -> {out['adoption'][r]}")
+    for r, d in out["new_signature_rule_holdout_days"].items(): print(f"   new signature rule {r:22s} holdout firing days {d}")
     print("   channel changes:", out["channel_changes"] or "none"); print("  ", pred); print("   falsifiers:", fired or "none")
     return 0
 

@@ -35,3 +35,21 @@ def test_x33b_pfpu():
     assert c["PFPU_ReheatCoilFouling_Airside_Severe"]["per_rule_flagged_days"]["da_minus_pm_S"] == 227
     assert c["PFPU_SensorBias_RMTEMP_+4C"]["per_rule_flagged_days"]["ra_minus_zone_S"] == 261
 
+
+def test_x33c_sfpu():
+    art = OUT / "x33_coverage_sfpu.json"
+    if not art.exists():
+        pytest.skip("artifact absent")
+    a = json.loads(art.read_text())
+    assert a["columns_mapped"] == [56, 109] and a["columns_excluded"] == []
+    assert (a["detected_before"], a["detected_after"], a["scored"]) == (21, 25, 29) and a["lost"] == []
+    assert a["gained"] == ["SFPU_ReheatCoilFouling_Airside_Moderate", "SFPU_ReheatCoilFouling_Airside_Severe", "SFPU_SensorBias_RMTEMP_+2C", "SFPU_VAVFanRestrictFlow"]
+    assert a["deployed_fp"] == [6, 9] and a["model_rows_identical"] and a["ttd_later"] == []
+    fp = {r: v["holdout_fp"] for r, v in a["new_rule_holdout_fp"].items()}
+    assert len(fp) == 22 and max(fp.values()) == 2 and fp["static_per_speed2"] == 2
+    assert a["predictions"]["P1_no_loss"] and a["predictions"]["P2_budget"] and a["falsifiers_fired"] == []
+    c = json.loads((OUT / "x33_residual_credits_sfpu.json").read_text())["scenarios"]
+    assert c["SFPU_VAVFanRestrictFlow"]["per_rule_flagged_days"]["zone_fan_spf_S"] == 261
+    assert c["SFPU_ReheatCoilFouling_Airside_Severe"]["per_rule_flagged_days"]["zone_fan_spf_S"] == 261
+    assert c["SFPU_ReheatCoilFouling_Airside_Moderate"]["per_rule_flagged_days"]["zone_fan_spf_S"] == 145
+

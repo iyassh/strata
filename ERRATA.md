@@ -264,3 +264,26 @@ responding to a damper held open in winter; the unstable-control file
 trips for a different reason (its damper never leaves the normal 0.30). The fault-free file has no shutdown minute. These are
 physical consequences of the seeded faults and the G6 healthy-inside-cluster
 check passes; they are noted because they change the occupied-day universe those files are scored on (no channel is credited for them: `absence_days` is 0 on every scenario).
+
+## Erratum E7 — FPU documentation names the west zone; the faults are in the south zone
+
+**Found 2026-09-25 (hostile review of X33b).** `LBNL_FDD_Data_Sets_FPU.pdf` p. 12
+states: "the fault was performed in the PFPU and SFPU in the west zone (i.e., one
+FPU out of four FPUs was imposed faults and its variables are followed by zone
+identifier _W)". In every PFPU and SFPU fault file the columns that move are the
+`_S` ones. Evidence (occupied minutes, fault file against the fault-free file):
+
+| file | mean \|ΔRM_TEMP\| I / W / S / E | RH_GPM ratio I / W / S / E | mean \|ΔVAV_DMPR\| I / W / S / E |
+|---|---|---|---|
+| PFPU_SensorBias_RMTEMP_+4C | 0.05 / 0.02 / **1.77** / 0.02 °F | 1.01 / 1.01 / **0.10** / 1.01 | 0.01 / 0.01 / **0.17** / 0.01 |
+| PFPU_VAVDMPRStuck_0% | 0.19 / 0.44 / **13.8** / 0.57 | 1.32 / 1.06 / **0.18** / 1.05 | 0.01 / 0.01 / **0.25** / 0.01 |
+| PFPU_ReheatCoilFouling_Waterside_Severe | 0.00 / 0.00 / 0.01 / 0.00 | 1.00 / 1.00 / **0.84** / 1.00 | 0 / 0 / 0 / 0 |
+
+The project's zone ground truth (week-0 audit: 50 scenarios S, 10 indeterminate)
+was established from the data and already places every fault in zone S; the
+alarm-attribution specificity counts rest on that, not on the documentation.
+Consequence for others: a reader who takes the documentation at its word and
+scores localisation against zone W will score every correct zone-S alarm as
+wrong. Reproduce: `uv run python scripts/e7_zone_label.py` (writes
+`outputs/e7_zone_label.json`).
+

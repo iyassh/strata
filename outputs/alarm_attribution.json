@@ -1,9 +1,9 @@
 {
   "source": "benchmark_v6_*.json (committed scorecards; no re-run)",
-  "n_detected": 61,
+  "n_detected": 65,
   "counts": {
-    "correct": 36,
-    "none": 10,
+    "correct": 37,
+    "none": 13,
     "wrong": 0,
     "no_device_stratum": 14,
     "indeterminate_gt": 1
@@ -381,11 +381,29 @@
     },
     {
       "system": "sfpu",
+      "scenario": "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "family": "coil_fouling",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "resid",
+      "attribution": "none"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_ReheatCoilFouling_Airside_Severe",
+      "family": "coil_fouling",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "rules+resid",
+      "attribution": "none"
+    },
+    {
+      "system": "sfpu",
       "scenario": "SFPU_ReheatVLVLeak_20%MaxFlow",
       "family": "reheat_leak",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -394,7 +412,7 @@
       "family": "reheat_leak",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+freq",
+      "channels": "rules+resid+freq",
       "attribution": "correct"
     },
     {
@@ -403,7 +421,7 @@
       "family": "reheat_leak",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+freq",
+      "channels": "rules+resid+freq",
       "attribution": "correct"
     },
     {
@@ -412,7 +430,7 @@
       "family": "reheat_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -453,11 +471,20 @@
     },
     {
       "system": "sfpu",
+      "scenario": "SFPU_SensorBias_RMTEMP_+2C",
+      "family": "rmtemp_bias",
+      "seeded_zone": "S",
+      "alarm_device": "TU_S",
+      "channels": "resid",
+      "attribution": "correct"
+    },
+    {
+      "system": "sfpu",
       "scenario": "SFPU_SensorBias_RMTEMP_+4C",
       "family": "rmtemp_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -466,7 +493,7 @@
       "family": "rmtemp_bias",
       "seeded_zone": "S",
       "alarm_device": null,
-      "channels": "resid+device+freq",
+      "channels": "rules+resid+device+freq",
       "attribution": "none"
     },
     {
@@ -475,7 +502,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -484,7 +511,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -493,7 +520,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+model+rate",
+      "channels": "rules+resid+model+rate",
       "attribution": "correct"
     },
     {
@@ -502,7 +529,7 @@
       "family": "airflow_bias",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+model+device+rate+osc",
+      "channels": "rules+resid+model+device+rate+osc",
       "attribution": "correct"
     },
     {
@@ -511,7 +538,7 @@
       "family": "damper_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+device+freq+rate+osc",
+      "channels": "rules+resid+device+freq+rate+osc",
       "attribution": "correct"
     },
     {
@@ -520,7 +547,7 @@
       "family": "damper_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+model+rate+osc",
+      "channels": "rules+resid+model+rate+osc",
       "attribution": "correct"
     },
     {
@@ -529,7 +556,7 @@
       "family": "damper_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules",
+      "channels": "rules+resid",
       "attribution": "correct"
     },
     {
@@ -538,7 +565,7 @@
       "family": "damper_stuck",
       "seeded_zone": "S",
       "alarm_device": "TU_S",
-      "channels": "rules+model+rate",
+      "channels": "rules+resid+model+rate",
       "attribution": "correct"
     },
     {
@@ -557,6 +584,15 @@
       "seeded_zone": "S",
       "alarm_device": null,
       "channels": "osc",
+      "attribution": "none"
+    },
+    {
+      "system": "sfpu",
+      "scenario": "SFPU_VAVFanRestrictFlow",
+      "family": "fan_restrict",
+      "seeded_zone": "S",
+      "alarm_device": null,
+      "channels": "rules+resid",
       "attribution": "none"
     }
   ]

@@ -29,19 +29,19 @@
     },
     "pfpu": {
       "deployed": [
-        7,
+        8,
         96,
         [
-          3.6,
-          14.3
+          4.3,
+          15.6
         ]
       ],
       "naive": [
-        14,
+        15,
         96,
         [
-          8.9,
-          23.0
+          9.7,
+          24.2
         ]
       ],
       "pca_strict": [
@@ -55,19 +55,19 @@
     },
     "sfpu": {
       "deployed": [
-        6,
+        9,
         96,
         [
-          2.9,
-          13.0
+          5.0,
+          16.9
         ]
       ],
       "naive": [
-        6,
+        9,
         96,
         [
-          2.9,
-          13.0
+          5.0,
+          16.9
         ]
       ],
       "pca_strict": [
@@ -155,19 +155,19 @@
   "detection": {
     "n_scenarios": 73,
     "strata_adjudicated": [
-      56,
+      64,
       73,
       [
-        65.8,
-        84.9
+        78.2,
+        93.4
       ]
     ],
     "strata_naive": [
-      57,
+      65,
       73,
       [
-        67.3,
-        86.0
+        79.8,
+        94.3
       ]
     ],
     "pca_strict": [
@@ -181,22 +181,15 @@
   },
   "mcnemar": {
     "strata_only": [
-      "PFPU_VAVDMPRUnstable"
-    ],
-    "baseline_only": [
-      "PFPU_SensorBias_RMTEMP_+2C",
-      "PFPU_SensorBias_RMTEMP_+4C",
-      "SFPU_ReheatCoilFouling_Airside_Moderate",
-      "SFPU_ReheatCoilFouling_Airside_Severe",
-      "SFPU_SensorBias_RMTEMP_+2C",
-      "SFPU_VAVFanRestrictFlow"
-    ],
-    "discordant": 7,
-    "exact_p_two_sided": 0.125,
-    "both_miss": [
-      "PFPU_ReheatCoilFouling_Airside_Minor",
       "PFPU_ReheatCoilFouling_Airside_Moderate",
       "PFPU_ReheatCoilFouling_Airside_Severe",
+      "PFPU_VAVDMPRUnstable"
+    ],
+    "baseline_only": [],
+    "discordant": 3,
+    "exact_p_two_sided": 0.25,
+    "both_miss": [
+      "PFPU_ReheatCoilFouling_Airside_Minor",
       "PFPU_ReheatCoilFouling_Waterside_Minor",
       "PFPU_ReheatCoilFouling_Waterside_Moderate",
       "PFPU_ReheatCoilFouling_Waterside_Severe",

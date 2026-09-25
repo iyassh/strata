@@ -5,7 +5,7 @@
  "total_days": 365,
  "exposure": {
   "occupied_holdout_days": 96,
-  "residual_evaluable_holdout_days": 41,
+  "residual_evaluable_holdout_days": 69,
   "rate_windowed_holdout_days": 90
  },
  "channels": {
@@ -17,10 +17,14 @@
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "resid": {
-   "holdout_fp_days": 0,
+   "holdout_fp_days": 3,
    "holdout_days": 96,
-   "full_year_days": 0,
-   "holdout_fp_dates": [],
+   "full_year_days": 3,
+   "holdout_fp_dates": [
+    "2018-04-27",
+    "2018-06-25",
+    "2018-08-27"
+   ],
    "threshold_provenance": "train-only thresholds; holdout is out-of-sample"
   },
   "model": {
@@ -77,18 +81,18 @@
   }
  },
  "union_all8": {
-  "holdout_fp_days": 6,
-  "rate": 0.0625
+  "holdout_fp_days": 9,
+  "rate": 0.09375
  },
  "union_minus_rate": {
-  "holdout_fp_days": 6,
-  "rate": 0.0625
+  "holdout_fp_days": 9,
+  "rate": 0.09375
  },
  "split_half_demotion_robustness": {
   "even_months": {
    "decision_half_fp": {
     "rules": 0,
-    "resid": 0,
+    "resid": 3,
     "model": 2,
     "device": 1,
     "absence": 0,
@@ -96,7 +100,7 @@
     "rate": 0,
     "osc": 0
    },
-   "worst_channel_on_decision_half": "model",
+   "worst_channel_on_decision_half": "resid",
    "rate_is_worst_or_tied": false,
    "deployed_fpr_on_report_half": {
     "fp_days": 3,
@@ -117,7 +121,7 @@
    "worst_channel_on_decision_half": "model",
    "rate_is_worst_or_tied": false,
    "deployed_fpr_on_report_half": {
-    "fp_days": 3,
+    "fp_days": 6,
     "n": 48
    }
   }
@@ -127,35 +131,35 @@
   "scenarios_with_rate_significant": [
    {
     "label": "SensorBias VAVAirflow -200CFM",
-    "channels": "rules+model+rate",
+    "channels": "rules+resid+model+rate",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
     "rate_only_alarm_days": 70
    },
    {
     "label": "SensorBias VAVAirflow -400CFM",
-    "channels": "rules+model+device+rate+osc",
+    "channels": "rules+resid+model+device+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
     "rate_only_alarm_days": 64
    },
    {
     "label": "VAVDMPRStuck 0%",
-    "channels": "rules+device+freq+rate+osc",
+    "channels": "rules+resid+device+freq+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-05-29",
     "rate_only_alarm_days": 3
    },
    {
     "label": "VAVDMPRStuck 100%",
-    "channels": "rules+model+rate+osc",
+    "channels": "rules+resid+model+rate+osc",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
     "rate_only_alarm_days": 54
    },
    {
     "label": "VAVDMPRStuck 50%",
-    "channels": "rules+model+rate",
+    "channels": "rules+resid+model+rate",
     "ttd_days": 1,
     "first_rate_day": "2018-01-30",
     "rate_only_alarm_days": 71

@@ -1,0 +1,636 @@
+{
+  "prereg": "docs/plans/2026-09-25-x33-coverage-series-prereg.md",
+  "system": "sfpu",
+  "before_commit": "028a941",
+  "after_commit": "working tree",
+  "columns_mapped": [
+    56,
+    109
+  ],
+  "columns_excluded": [],
+  "new_rules": [
+    "chwc_waterside_dT",
+    "dat_minus_sa_E",
+    "dat_minus_sa_I",
+    "dat_minus_sa_S",
+    "dat_minus_sa_W",
+    "hwc_waterside_dT",
+    "ra_minus_zone_E",
+    "ra_minus_zone_I",
+    "ra_minus_zone_S",
+    "ra_minus_zone_W",
+    "rf_specific_power",
+    "sf_flow_per_speed",
+    "sf_specific_power",
+    "static_per_speed2",
+    "static_setpoint_deviation",
+    "zone_fan_dp_per_cfm2_E",
+    "zone_fan_dp_per_cfm2_I",
+    "zone_fan_dp_per_cfm2_S",
+    "zone_fan_dp_per_cfm2_W",
+    "zone_fan_spf_E",
+    "zone_fan_spf_I",
+    "zone_fan_spf_S",
+    "zone_fan_spf_W"
+  ],
+  "scored": 29,
+  "detected_before": 21,
+  "detected_after": 25,
+  "gained": [
+    "SFPU_ReheatCoilFouling_Airside_Moderate",
+    "SFPU_ReheatCoilFouling_Airside_Severe",
+    "SFPU_SensorBias_RMTEMP_+2C",
+    "SFPU_VAVFanRestrictFlow"
+  ],
+  "lost": [],
+  "channel_changes": {
+    "SFPU_ReheatCoilFouling_Airside_Moderate": {
+      "before": null,
+      "after": "resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        5,
+        147
+      ]
+    },
+    "SFPU_ReheatCoilFouling_Airside_Severe": {
+      "before": null,
+      "after": "rules+resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        7,
+        261
+      ]
+    },
+    "SFPU_ReheatVLVLeak_20%MaxFlow": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        0,
+        261
+      ]
+    },
+    "SFPU_ReheatVLVLeak_50%MaxFlow": {
+      "before": "rules+freq",
+      "after": "rules+resid+freq",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        1,
+        261
+      ]
+    },
+    "SFPU_ReheatVLVLeak_80%MaxFlow": {
+      "before": "rules+freq",
+      "after": "rules+resid+freq",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        1,
+        261
+      ]
+    },
+    "SFPU_ReheatVLVStuck_0%": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        1,
+        51
+      ]
+    },
+    "SFPU_SensorBias_RMTEMP_+2C": {
+      "before": null,
+      "after": "resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        3,
+        258
+      ]
+    },
+    "SFPU_SensorBias_RMTEMP_+4C": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 108,
+      "ttd_after": 1,
+      "residual_days": [
+        5,
+        261
+      ]
+    },
+    "SFPU_SensorBias_RMTEMP_-4C": {
+      "before": "resid+device+freq",
+      "after": "rules+resid+device+freq",
+      "ttd_before": 3,
+      "ttd_after": 1,
+      "residual_days": [
+        38,
+        266
+      ]
+    },
+    "SFPU_SensorBias_VAVAirflow_+200CFM": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        0,
+        84
+      ]
+    },
+    "SFPU_SensorBias_VAVAirflow_+400CFM": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        0,
+        82
+      ]
+    },
+    "SFPU_SensorBias_VAVAirflow_-200CFM": {
+      "before": "rules+model+rate",
+      "after": "rules+resid+model+rate",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        12,
+        111
+      ]
+    },
+    "SFPU_SensorBias_VAVAirflow_-400CFM": {
+      "before": "rules+model+device+rate+osc",
+      "after": "rules+resid+model+device+rate+osc",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        21,
+        261
+      ]
+    },
+    "SFPU_VAVDMPRStuck_0%": {
+      "before": "rules+device+freq+rate+osc",
+      "after": "rules+resid+device+freq+rate+osc",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        0,
+        261
+      ]
+    },
+    "SFPU_VAVDMPRStuck_100%": {
+      "before": "rules+model+rate+osc",
+      "after": "rules+resid+model+rate+osc",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        30,
+        261
+      ]
+    },
+    "SFPU_VAVDMPRStuck_20%": {
+      "before": "rules",
+      "after": "rules+resid",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        2,
+        261
+      ]
+    },
+    "SFPU_VAVDMPRStuck_50%": {
+      "before": "rules+model+rate",
+      "after": "rules+resid+model+rate",
+      "ttd_before": 1,
+      "ttd_after": 1,
+      "residual_days": [
+        11,
+        95
+      ]
+    },
+    "SFPU_VAVFanRestrictFlow": {
+      "before": null,
+      "after": "rules+resid",
+      "ttd_before": null,
+      "ttd_after": 1,
+      "residual_days": [
+        16,
+        261
+      ]
+    }
+  },
+  "ttd_later": [],
+  "deployed_fp": [
+    6,
+    9
+  ],
+  "per_channel_fp": {
+    "rules": [
+      0,
+      0
+    ],
+    "resid": [
+      0,
+      3
+    ],
+    "model": [
+      5,
+      5
+    ],
+    "device": [
+      1,
+      1
+    ],
+    "absence": [
+      0,
+      0
+    ],
+    "freq": [
+      1,
+      1
+    ],
+    "rate": [
+      0,
+      0
+    ],
+    "osc": [
+      0,
+      0
+    ]
+  },
+  "model_rows_identical": true,
+  "new_rule_holdout_fp": {
+    "chwc_waterside_dT": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 37,
+      "band": [
+        9.740000000000002,
+        18.43
+      ]
+    },
+    "dat_minus_sa_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 61,
+      "band": [
+        12.064999999999998,
+        15.839999999999996
+      ]
+    },
+    "dat_minus_sa_I": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        10.570000000000007,
+        11.490000000000002
+      ]
+    },
+    "dat_minus_sa_S": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 65,
+      "band": [
+        11.249999999999993,
+        15.809999999999995
+      ]
+    },
+    "dat_minus_sa_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 65,
+      "band": [
+        10.990000000000002,
+        15.799999999999997
+      ]
+    },
+    "hwc_waterside_dT": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 0,
+      "band": [
+        NaN,
+        NaN
+      ]
+    },
+    "ra_minus_zone_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        0.18999999999999773,
+        2.1499999999999915
+      ]
+    },
+    "ra_minus_zone_I": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        -2.509999999999991,
+        0.4099999999999966
+      ]
+    },
+    "ra_minus_zone_S": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        -0.4350000000000023,
+        1.460000000000008
+      ]
+    },
+    "ra_minus_zone_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        0.18999999999999773,
+        1.4699999999999989
+      ]
+    },
+    "rf_specific_power": {
+      "holdout_fp": 1,
+      "holdout_evaluable": 69,
+      "band": [
+        0.06578429943742137,
+        0.12708154368696237
+      ]
+    },
+    "sf_flow_per_speed": {
+      "holdout_fp": 1,
+      "holdout_evaluable": 69,
+      "band": [
+        1820.223404255319,
+        2982.313559322034
+      ]
+    },
+    "sf_specific_power": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        0.404174273119843,
+        0.5412450259700821
+      ]
+    },
+    "static_per_speed2": {
+      "holdout_fp": 2,
+      "holdout_evaluable": 69,
+      "band": [
+        1.8274657350174686,
+        2.995867768595041
+      ]
+    },
+    "zone_fan_dp_per_cfm2_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        4.113830206598217e-07,
+        5.808221041983736e-07
+      ]
+    },
+    "zone_fan_dp_per_cfm2_I": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        3.8118064063269213e-07,
+        4.313636012867169e-07
+      ]
+    },
+    "zone_fan_dp_per_cfm2_S": {
+      "holdout_fp": 1,
+      "holdout_evaluable": 69,
+      "band": [
+        4.091976003255396e-07,
+        5.808338305752403e-07
+      ]
+    },
+    "zone_fan_dp_per_cfm2_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        3.957872879184999e-07,
+        5.808221041983736e-07
+      ]
+    },
+    "zone_fan_spf_E": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        0.3496274020588057,
+        0.3680449002664944
+      ]
+    },
+    "zone_fan_spf_I": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        0.18978823238871395,
+        0.22201798658275695
+      ]
+    },
+    "zone_fan_spf_S": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        0.3485560148415211,
+        0.36804861552749263
+      ]
+    },
+    "zone_fan_spf_W": {
+      "holdout_fp": 0,
+      "holdout_evaluable": 69,
+      "band": [
+        0.3466225003952178,
+        0.3680449002664944
+      ]
+    }
+  },
+  "new_rule_credited_scenarios": {
+    "chwc_waterside_dT": [],
+    "dat_minus_sa_E": [],
+    "dat_minus_sa_I": [],
+    "dat_minus_sa_S": [
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_SensorBias_RMTEMP_+2C",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_SensorBias_RMTEMP_-4C",
+      "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_20%",
+      "SFPU_VAVDMPRStuck_80%",
+      "SFPU_VAVFanRestrictFlow"
+    ],
+    "dat_minus_sa_W": [],
+    "hwc_waterside_dT": [],
+    "ra_minus_zone_E": [
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_+2C",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_80%"
+    ],
+    "ra_minus_zone_I": [
+      "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_-4C",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_20%"
+    ],
+    "ra_minus_zone_S": [
+      "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_50%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_SensorBias_RMTEMP_-4C",
+      "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_20%",
+      "SFPU_VAVDMPRStuck_80%"
+    ],
+    "ra_minus_zone_W": [
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_+2C",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_SensorBias_RMTEMP_-4C",
+      "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_20%",
+      "SFPU_VAVDMPRStuck_80%"
+    ],
+    "rf_specific_power": [],
+    "sf_flow_per_speed": [
+      "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_50%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_20%",
+      "SFPU_VAVDMPRStuck_80%"
+    ],
+    "sf_specific_power": [],
+    "static_per_speed2": [
+      "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_50%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_80%"
+    ],
+    "static_setpoint_deviation": [],
+    "zone_fan_dp_per_cfm2_E": [],
+    "zone_fan_dp_per_cfm2_I": [],
+    "zone_fan_dp_per_cfm2_S": [
+      "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_20%",
+      "SFPU_ReheatVLVStuck_50%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_+2C",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_SensorBias_VAVAirflow_+200CFM",
+      "SFPU_SensorBias_VAVAirflow_+400CFM",
+      "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_20%",
+      "SFPU_VAVDMPRStuck_80%",
+      "SFPU_VAVFanRestrictFlow"
+    ],
+    "zone_fan_dp_per_cfm2_W": [],
+    "zone_fan_spf_E": [],
+    "zone_fan_spf_I": [],
+    "zone_fan_spf_S": [
+      "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "SFPU_ReheatCoilFouling_Airside_Severe",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_20%",
+      "SFPU_VAVFanRestrictFlow"
+    ],
+    "zone_fan_spf_W": []
+  },
+  "residual_days_rose_and_credited": [
+    "SFPU_ReheatCoilFouling_Airside_Moderate",
+    "SFPU_ReheatCoilFouling_Airside_Severe",
+    "SFPU_ReheatVLVLeak_20%MaxFlow",
+    "SFPU_ReheatVLVLeak_50%MaxFlow",
+    "SFPU_ReheatVLVLeak_80%MaxFlow",
+    "SFPU_ReheatVLVStuck_0%",
+    "SFPU_ReheatVLVStuck_20%",
+    "SFPU_ReheatVLVStuck_50%",
+    "SFPU_SensorBias_RMTEMP_+2C",
+    "SFPU_SensorBias_RMTEMP_+4C",
+    "SFPU_SensorBias_RMTEMP_-4C",
+    "SFPU_SensorBias_VAVAirflow_+200CFM",
+    "SFPU_SensorBias_VAVAirflow_+400CFM",
+    "SFPU_SensorBias_VAVAirflow_-200CFM",
+    "SFPU_SensorBias_VAVAirflow_-400CFM",
+    "SFPU_VAVDMPRStuck_0%",
+    "SFPU_VAVDMPRStuck_100%",
+    "SFPU_VAVDMPRStuck_20%",
+    "SFPU_VAVDMPRStuck_50%",
+    "SFPU_VAVDMPRStuck_80%",
+    "SFPU_VAVFanRestrictFlow"
+  ],
+  "adoption": {
+    "chwc_waterside_dT": "keep",
+    "dat_minus_sa_E": "keep",
+    "dat_minus_sa_I": "keep",
+    "dat_minus_sa_S": "keep",
+    "dat_minus_sa_W": "keep",
+    "hwc_waterside_dT": "keep",
+    "ra_minus_zone_E": "keep",
+    "ra_minus_zone_I": "keep",
+    "ra_minus_zone_S": "keep",
+    "ra_minus_zone_W": "keep",
+    "rf_specific_power": "keep",
+    "sf_flow_per_speed": "keep",
+    "sf_specific_power": "keep",
+    "static_per_speed2": "keep",
+    "zone_fan_dp_per_cfm2_E": "keep",
+    "zone_fan_dp_per_cfm2_I": "keep",
+    "zone_fan_dp_per_cfm2_S": "keep",
+    "zone_fan_dp_per_cfm2_W": "keep",
+    "zone_fan_spf_E": "keep",
+    "zone_fan_spf_I": "keep",
+    "zone_fan_spf_S": "keep",
+    "zone_fan_spf_W": "keep"
+  },
+  "new_signature_rule_holdout_days": {
+    "static_setpoint_deviation": []
+  },
+  "predictions": {
+    "P1_no_loss": true,
+    "P2_budget": true,
+    "P2_new_rule_fp_le_3": true,
+    "P3_some_new_channel_credited": true,
+    "P4_ttd_not_later": true,
+    "P5_model_rows_identical": true
+  },
+  "falsifiers_fired": []
+}

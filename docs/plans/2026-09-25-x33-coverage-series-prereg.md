@@ -75,7 +75,7 @@ Not added: RA_FLOW / SA_FLOW (identically 1.000 in the simulation; carries nothi
 
 ## X33b — PFPU, parallel fan-powered unit (109 columns, 56 mapped before)
 
-**Written 2026-09-25 03:30 after X33a closed, before the PFPU configuration is changed. Pre-configuration commit: `6b7512a`.** Bands below come from the fault-free file's occupied, supply-fan-on minutes (quantiles logged in the configuration); no fault file opened.
+**Written after the SDAHU scorecard and ledger had been run and analysed, but committed (bbe6cd3) before the X33a close commit (80caa06) — a deviation from this file's own ordering rule ("closed before the next is opened"), found in review and recorded here; no fault file was opened before the PFPU configuration was committed. Pre-configuration commit: `6b7512a`.** Bands below come from the fault-free file's occupied, supply-fan-on minutes (quantiles logged in the configuration); no fault file opened.
 
 | columns | decision / reader |
 |---|---|

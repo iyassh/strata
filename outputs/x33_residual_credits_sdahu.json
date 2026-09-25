@@ -1,0 +1,265 @@
+{
+  "system": "sdahu",
+  "bands": {
+    "supply_air_residual": [
+      0.5263020000000012,
+      1.3720845000000033
+    ],
+    "oa_fraction_residual": [
+      -0.18413238810188085,
+      2.499754716245306e-05
+    ],
+    "sf_specific_power": [
+      0.0009018443205651361,
+      0.001500701260813641
+    ],
+    "rf_specific_power": [
+      0.00021495945282946303,
+      0.00041222170881325657
+    ],
+    "sf_flow_per_speed": [
+      597476.6759791657,
+      807934.8754699405
+    ]
+  },
+  "scenarios": {
+    "damper_stuck_010_annual": {
+      "family": "damper_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 265,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "damper_stuck_025_annual": {
+      "family": "damper_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 265,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "damper_stuck_075_annual": {
+      "family": "damper_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 133,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 156,
+        "oa_fraction_residual": 266,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "damper_stuck_100_annual_short": {
+      "family": "damper_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 54,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 70,
+        "oa_fraction_residual": 143,
+        "sf_specific_power": 179,
+        "rf_specific_power": 179,
+        "sf_flow_per_speed": 179
+      }
+    },
+    "coi_stuck_010_annual": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 109,
+        "rf_specific_power": 114,
+        "sf_flow_per_speed": 118
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 298,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "coi_stuck_025_annual": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 70,
+        "rf_specific_power": 83,
+        "sf_flow_per_speed": 87
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 259,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "coi_stuck_050_annual": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 262,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "coi_stuck_075_annual": {
+      "family": "valve_stuck",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 262,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "coi_leakage_010_annual": {
+      "family": "valve_leak",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 0,
+        "oa_fraction_residual": 266,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "coi_bias_-4_annual": {
+      "family": "sensor_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 164,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 164,
+        "oa_fraction_residual": 251,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "coi_bias_-2_annual": {
+      "family": "sensor_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 164,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 164,
+        "oa_fraction_residual": 262,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "coi_bias_2_annual": {
+      "family": "sensor_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 139,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 139,
+        "oa_fraction_residual": 265,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "coi_bias_4_annual": {
+      "family": "sensor_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 137,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 137,
+        "oa_fraction_residual": 267,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    },
+    "oa_bias_4_annual": {
+      "family": "oa_bias",
+      "per_rule_flagged_days": {
+        "supply_air_residual": 148,
+        "oa_fraction_residual": 0,
+        "sf_specific_power": 0,
+        "rf_specific_power": 0,
+        "sf_flow_per_speed": 0
+      },
+      "per_rule_evaluable_days": {
+        "supply_air_residual": 148,
+        "oa_fraction_residual": 266,
+        "sf_specific_power": 303,
+        "rf_specific_power": 303,
+        "sf_flow_per_speed": 303
+      }
+    }
+  }
+}

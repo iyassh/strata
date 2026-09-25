@@ -827,7 +827,8 @@ events:
     sustained_min: 60
     residual_min_band_width: 0.5
     residual_min_exceedance: 0.5
-  # Duct static must track its setpoint while the supply fan runs (healthy |deviation| p99.9 0.19 in.wg)
+  # Duct static must track its setpoint while the supply fan runs. Occupied healthy |deviation| p99.9 is 0.19 in.wg; over all
+  # fan-on minutes (the rule's gate) short excursions above 0.3 occur, so healthy silence rests on sustained_min: 30 (review of X33b)
   static_setpoint_deviation:
     kind: setpoint_deviation
     alphabet: signature

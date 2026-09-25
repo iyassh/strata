@@ -1,0 +1,561 @@
+{
+  "documentation": "LBNL_FDD_Data_Sets_FPU.pdf p.12: fault imposed in the west zone, identifier _W",
+  "systems": {
+    "pfpu": {
+      "files": {
+        "PFPU_RMTEMPUnstable": {
+          "zone_movement_score": {
+            "I": 0.015,
+            "W": 0.019,
+            "S": 0.338,
+            "E": 0.018
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatCoilFouling_Airside_Minor": {
+          "zone_movement_score": {
+            "I": 0.004,
+            "W": 0.007,
+            "S": 0.044,
+            "E": 0.006
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatCoilFouling_Airside_Moderate": {
+          "zone_movement_score": {
+            "I": 0.009,
+            "W": 0.012,
+            "S": 0.148,
+            "E": 0.011
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatCoilFouling_Airside_Severe": {
+          "zone_movement_score": {
+            "I": 0.013,
+            "W": 0.015,
+            "S": 0.316,
+            "E": 0.012
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatCoilFouling_Waterside_Minor": {
+          "zone_movement_score": {
+            "I": 0.003,
+            "W": 0.006,
+            "S": 0.01,
+            "E": 0.005
+          },
+          "moving_zone": "indeterminate"
+        },
+        "PFPU_ReheatCoilFouling_Waterside_Moderate": {
+          "zone_movement_score": {
+            "I": 0.002,
+            "W": 0.006,
+            "S": 0.02,
+            "E": 0.005
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatCoilFouling_Waterside_Severe": {
+          "zone_movement_score": {
+            "I": 0.002,
+            "W": 0.005,
+            "S": 0.034,
+            "E": 0.004
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatVLVLeak_20%MaxFlow": {
+          "zone_movement_score": {
+            "I": 0.004,
+            "W": 0.009,
+            "S": 1.187,
+            "E": 0.007
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatVLVLeak_50%MaxFlow": {
+          "zone_movement_score": {
+            "I": 0.006,
+            "W": 0.01,
+            "S": 2.985,
+            "E": 0.007
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatVLVLeak_80%MaxFlow": {
+          "zone_movement_score": {
+            "I": 0.006,
+            "W": 0.01,
+            "S": 4.787,
+            "E": 0.008
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatVLVStuck_0%": {
+          "zone_movement_score": {
+            "I": 0.077,
+            "W": 0.03,
+            "S": 2.823,
+            "E": 0.031
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatVLVStuck_100%": {
+          "zone_movement_score": {
+            "I": 0.006,
+            "W": 0.01,
+            "S": 5.993,
+            "E": 0.008
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatVLVStuck_20%": {
+          "zone_movement_score": {
+            "I": 0.009,
+            "W": 0.011,
+            "S": 0.525,
+            "E": 0.009
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatVLVStuck_50%": {
+          "zone_movement_score": {
+            "I": 0.006,
+            "W": 0.01,
+            "S": 1.196,
+            "E": 0.008
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_ReheatVLVStuck_80%": {
+          "zone_movement_score": {
+            "I": 0.005,
+            "W": 0.009,
+            "S": 3.261,
+            "E": 0.007
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_SensorBias_RMTEMP_+2C": {
+          "zone_movement_score": {
+            "I": 0.046,
+            "W": 0.046,
+            "S": 1.509,
+            "E": 0.041
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_SensorBias_RMTEMP_+4C": {
+          "zone_movement_score": {
+            "I": 0.102,
+            "W": 0.106,
+            "S": 3.55,
+            "E": 0.106
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_SensorBias_RMTEMP_-2C": {
+          "zone_movement_score": {
+            "I": 0.048,
+            "W": 0.028,
+            "S": 1.377,
+            "E": 0.03
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_SensorBias_RMTEMP_-4C": {
+          "zone_movement_score": {
+            "I": 0.098,
+            "W": 0.037,
+            "S": 2.515,
+            "E": 0.043
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_SensorBias_VAVAirflow_+200CFM": {
+          "zone_movement_score": {
+            "I": 0.092,
+            "W": 0.084,
+            "S": 3.066,
+            "E": 0.077
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_SensorBias_VAVAirflow_+400CFM": {
+          "zone_movement_score": {
+            "I": 0.092,
+            "W": 0.083,
+            "S": 3.218,
+            "E": 0.077
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_SensorBias_VAVAirflow_-200CFM": {
+          "zone_movement_score": {
+            "I": 0.087,
+            "W": 0.087,
+            "S": 3.493,
+            "E": 0.109
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_SensorBias_VAVAirflow_-400CFM": {
+          "zone_movement_score": {
+            "I": 0.13,
+            "W": 0.111,
+            "S": 6.061,
+            "E": 0.134
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_VAVDMPRStuck_0%": {
+          "zone_movement_score": {
+            "I": 0.261,
+            "W": 0.586,
+            "S": 16.37,
+            "E": 0.67
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_VAVDMPRStuck_100%": {
+          "zone_movement_score": {
+            "I": 0.209,
+            "W": 0.192,
+            "S": 12.411,
+            "E": 0.222
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_VAVDMPRStuck_20%": {
+          "zone_movement_score": {
+            "I": 0.04,
+            "W": 0.052,
+            "S": 2.215,
+            "E": 0.072
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_VAVDMPRStuck_50%": {
+          "zone_movement_score": {
+            "I": 0.127,
+            "W": 0.11,
+            "S": 5.094,
+            "E": 0.131
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_VAVDMPRStuck_80%": {
+          "zone_movement_score": {
+            "I": 0.202,
+            "W": 0.188,
+            "S": 10.17,
+            "E": 0.22
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_VAVDMPRUnstable": {
+          "zone_movement_score": {
+            "I": 0.046,
+            "W": 0.061,
+            "S": 0.263,
+            "E": 0.075
+          },
+          "moving_zone": "S"
+        },
+        "PFPU_VAVFanRestrictFlow": {
+          "zone_movement_score": {
+            "I": 0.019,
+            "W": 0.018,
+            "S": 0.586,
+            "E": 0.016
+          },
+          "moving_zone": "S"
+        }
+      },
+      "count": {
+        "indeterminate": 1,
+        "S": 29
+      }
+    },
+    "sfpu": {
+      "files": {
+        "SFPU_RMTEMPUnstable": {
+          "zone_movement_score": {
+            "I": 0.107,
+            "W": 0.106,
+            "S": 1.085,
+            "E": 0.102
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatCoilFouling_Airside_Minor": {
+          "zone_movement_score": {
+            "I": 0.003,
+            "W": 0.002,
+            "S": 0.014,
+            "E": 0.002
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatCoilFouling_Airside_Moderate": {
+          "zone_movement_score": {
+            "I": 0.006,
+            "W": 0.004,
+            "S": 0.093,
+            "E": 0.003
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatCoilFouling_Airside_Severe": {
+          "zone_movement_score": {
+            "I": 0.017,
+            "W": 0.012,
+            "S": 0.32,
+            "E": 0.011
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatCoilFouling_Waterside_Minor": {
+          "zone_movement_score": {
+            "I": 0.002,
+            "W": 0.001,
+            "S": 0.003,
+            "E": 0.001
+          },
+          "moving_zone": "indeterminate"
+        },
+        "SFPU_ReheatCoilFouling_Waterside_Moderate": {
+          "zone_movement_score": {
+            "I": 0.002,
+            "W": 0.001,
+            "S": 0.009,
+            "E": 0.001
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatCoilFouling_Waterside_Severe": {
+          "zone_movement_score": {
+            "I": 0.003,
+            "W": 0.001,
+            "S": 0.021,
+            "E": 0.001
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatVLVLeak_20%MaxFlow": {
+          "zone_movement_score": {
+            "I": 0.122,
+            "W": 0.077,
+            "S": 8.297,
+            "E": 0.08
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatVLVLeak_50%MaxFlow": {
+          "zone_movement_score": {
+            "I": 0.173,
+            "W": 0.146,
+            "S": 13.599,
+            "E": 0.119
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatVLVLeak_80%MaxFlow": {
+          "zone_movement_score": {
+            "I": 0.191,
+            "W": 0.174,
+            "S": 16.133,
+            "E": 0.136
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatVLVStuck_0%": {
+          "zone_movement_score": {
+            "I": 0.023,
+            "W": 0.006,
+            "S": 1.35,
+            "E": 0.006
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatVLVStuck_100%": {
+          "zone_movement_score": {
+            "I": 0.202,
+            "W": 0.184,
+            "S": 17.451,
+            "E": 0.145
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatVLVStuck_20%": {
+          "zone_movement_score": {
+            "I": 0.057,
+            "W": 0.037,
+            "S": 2.034,
+            "E": 0.034
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatVLVStuck_50%": {
+          "zone_movement_score": {
+            "I": 0.118,
+            "W": 0.075,
+            "S": 7.237,
+            "E": 0.079
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_ReheatVLVStuck_80%": {
+          "zone_movement_score": {
+            "I": 0.173,
+            "W": 0.144,
+            "S": 13.509,
+            "E": 0.118
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_SensorBias_RMTEMP_+2C": {
+          "zone_movement_score": {
+            "I": 0.05,
+            "W": 0.034,
+            "S": 1.356,
+            "E": 0.031
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_SensorBias_RMTEMP_+4C": {
+          "zone_movement_score": {
+            "I": 0.09,
+            "W": 0.061,
+            "S": 3.643,
+            "E": 0.061
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_SensorBias_RMTEMP_-2C": {
+          "zone_movement_score": {
+            "I": 3.683,
+            "W": 3.146,
+            "S": 3.595,
+            "E": 2.951
+          },
+          "moving_zone": "indeterminate"
+        },
+        "SFPU_SensorBias_RMTEMP_-4C": {
+          "zone_movement_score": {
+            "I": 0.098,
+            "W": 0.055,
+            "S": 2.27,
+            "E": 0.05
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_SensorBias_VAVAirflow_+200CFM": {
+          "zone_movement_score": {
+            "I": 0.095,
+            "W": 0.041,
+            "S": 2.007,
+            "E": 0.046
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_SensorBias_VAVAirflow_+400CFM": {
+          "zone_movement_score": {
+            "I": 0.098,
+            "W": 0.041,
+            "S": 2.084,
+            "E": 0.047
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_SensorBias_VAVAirflow_-200CFM": {
+          "zone_movement_score": {
+            "I": 0.175,
+            "W": 0.086,
+            "S": 2.699,
+            "E": 0.085
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_SensorBias_VAVAirflow_-400CFM": {
+          "zone_movement_score": {
+            "I": 0.205,
+            "W": 0.096,
+            "S": 5.442,
+            "E": 0.092
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_VAVDMPRStuck_0%": {
+          "zone_movement_score": {
+            "I": 0.224,
+            "W": 0.286,
+            "S": 15.82,
+            "E": 0.257
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_VAVDMPRStuck_100%": {
+          "zone_movement_score": {
+            "I": 0.218,
+            "W": 0.096,
+            "S": 9.376,
+            "E": 0.102
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_VAVDMPRStuck_20%": {
+          "zone_movement_score": {
+            "I": 0.139,
+            "W": 0.071,
+            "S": 8.499,
+            "E": 0.067
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_VAVDMPRStuck_50%": {
+          "zone_movement_score": {
+            "I": 0.141,
+            "W": 0.065,
+            "S": 2.929,
+            "E": 0.065
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_VAVDMPRStuck_80%": {
+          "zone_movement_score": {
+            "I": 0.204,
+            "W": 0.09,
+            "S": 7.305,
+            "E": 0.095
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_VAVDMPRUnstable": {
+          "zone_movement_score": {
+            "I": 0.023,
+            "W": 0.013,
+            "S": 0.188,
+            "E": 0.016
+          },
+          "moving_zone": "S"
+        },
+        "SFPU_VAVFanRestrictFlow": {
+          "zone_movement_score": {
+            "I": 0.04,
+            "W": 0.029,
+            "S": 0.983,
+            "E": 0.027
+          },
+          "moving_zone": "S"
+        }
+      },
+      "count": {
+        "indeterminate": 2,
+        "S": 28
+      }
+    }
+  }
+}

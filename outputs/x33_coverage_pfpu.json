@@ -367,7 +367,47 @@
       ]
     }
   },
-  "new_rule_credited_scenarios": {},
+  "new_rule_credited_scenarios": {
+    "chwc_waterside_dT": [],
+    "da_minus_pm_E": [],
+    "da_minus_pm_I": [],
+    "da_minus_pm_S": [
+      "PFPU_ReheatCoilFouling_Airside_Moderate",
+      "PFPU_ReheatCoilFouling_Airside_Severe",
+      "PFPU_SensorBias_RMTEMP_+2C",
+      "PFPU_SensorBias_RMTEMP_+4C"
+    ],
+    "da_minus_pm_W": [],
+    "dat_minus_sa_E": [],
+    "dat_minus_sa_I": [],
+    "dat_minus_sa_S": [],
+    "dat_minus_sa_W": [],
+    "hwc_waterside_dT": [],
+    "ra_minus_zone_E": [
+      "PFPU_SensorBias_RMTEMP_+2C",
+      "PFPU_SensorBias_RMTEMP_+4C"
+    ],
+    "ra_minus_zone_I": [
+      "PFPU_SensorBias_RMTEMP_+4C"
+    ],
+    "ra_minus_zone_S": [
+      "PFPU_SensorBias_RMTEMP_+2C",
+      "PFPU_SensorBias_RMTEMP_+4C"
+    ],
+    "ra_minus_zone_W": [
+      "PFPU_SensorBias_RMTEMP_+2C",
+      "PFPU_SensorBias_RMTEMP_+4C"
+    ],
+    "rf_specific_power": [
+      "PFPU_SensorBias_RMTEMP_+4C"
+    ],
+    "sf_flow_per_speed": [
+      "PFPU_SensorBias_RMTEMP_+4C"
+    ],
+    "sf_specific_power": [],
+    "static_per_speed2": [],
+    "static_setpoint_deviation": []
+  },
   "residual_days_rose_and_credited": [
     "PFPU_ReheatCoilFouling_Airside_Moderate",
     "PFPU_ReheatCoilFouling_Airside_Severe",
@@ -407,6 +447,9 @@
     "sf_flow_per_speed": "keep",
     "sf_specific_power": "keep",
     "static_per_speed2": "keep"
+  },
+  "new_signature_rule_holdout_days": {
+    "static_setpoint_deviation": []
   },
   "predictions": {
     "P1_no_loss": true,

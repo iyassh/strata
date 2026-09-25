@@ -122,7 +122,18 @@
       ]
     }
   },
-  "new_rule_credited_scenarios": {},
+  "new_rule_credited_scenarios": {
+    "rf_specific_power": [
+      "coi_stuck_010_annual"
+    ],
+    "rf_speed_mismatch": [],
+    "sf_flow_per_speed": [
+      "coi_stuck_010_annual"
+    ],
+    "sf_specific_power": [
+      "coi_stuck_010_annual"
+    ]
+  },
   "residual_days_rose_and_credited": [
     "coi_stuck_010_annual",
     "coi_stuck_025_annual"
@@ -131,6 +142,9 @@
     "rf_specific_power": "keep",
     "sf_flow_per_speed": "keep",
     "sf_specific_power": "keep"
+  },
+  "new_signature_rule_holdout_days": {
+    "rf_speed_mismatch": []
   },
   "predictions": {
     "P1_no_loss": true,

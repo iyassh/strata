@@ -276,3 +276,21 @@ verdict of round 4 did not hold for those items.
 
 Overall ≈ 7.9 on entry by this reading (the 8.1 of round 4 did not survive the
 cross-check), ≈ 8.1 after the fixes.
+
+## Round 6 — second editor, round 2 (compiled: 19 pp; body ends at the foot of p. 12; Acknowledgements and References p. 13; ledger pp. 18–19)
+
+Every passage edited in the previous round re-read in the rendered text
+(`pdftotext`): all 25 edited sentences present and grammatical, both ledger
+halves intact ("part 1 of 2", "part 2 of 2"), no undefined reference, the
+only overfull boxes the two pre-existing sub-3 pt ones in the channels table
+and the ledger. Numbers re-checked in the rendered text: 157 adjudicated,
+37 of 50, 83 % / 69 % (carrying rule) beside 85 % / 71 % (X37, stated as not
+adopted), 5/96 → 4/96 on the fan coil unit, dual-duct 48 → 45 in the X25
+step-4 row. Nothing further found; loop closed on the second editor's side.
+Ratings unchanged from the previous block (overall ≈ 8.1).
+
+Open items handed to the manuscript loop rather than fixed here, because they
+are in `paper-v2.tex` too: the X25 step-4 ledger row ("series unit loses 3";
+artefact says dual-duct 3, series 2), the "frequency- or oscillation-only"
+parenthetical on the seven unnamed-component detections (three carry residual
+credits), and X17's 79 mappings against the artefact's 80.

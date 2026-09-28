@@ -143,3 +143,49 @@ Compiled: 12 pages, no undefined references.
    "eight" — shared references.bib, R2PM agent's.
 
 Compiled: 12 pages (page 12 has 44 lines), no undefined references.
+
+## Round 3 — 2026-09-28 05:22 PDT
+
+### Numbers spot-checked this round
+
+| claim | artefact | result |
+|---|---|---|
+| matched frequency rule 141 vs 141 (SFPU), 206 vs 206 (PFPU) on RMTEMPUnstable | matched_rules_sfpu/pfpu.json `mr2` = `freq` | ✓ |
+| transplanted heating rule fires 231 / 124 / 0 fault-free days | matched_rules_{sdahu,pfpu,sfpu}.json `healthy_fp.mr1` | ✓ |
+| jitter arms: detection drop 0, FA ≤ 4/96 | x9_x10_robustness.json `predictions` (det_drop_1x 0 on all three) | ✓ |
+| 22–26 min-robust days behind the 135 | PHASE3B_RESULTS.md, RESEARCH_LOG.md L-row | ✓ |
+| X38 SDAHU 13 of 14 is the E5-adjudicated count | x38_guideline36.json `strata_detected` 13 | ✓ (now stated beside Table 2's naive 14) |
+
+### Ratings (1–10)
+
+| section | round 2 | round 3 |
+|---|---|---|
+| Title + abstract | 8 | 8 |
+| 1 Introduction | 8 | 8 |
+| 2 Related work | 7 | 7 |
+| 3 Abstraction / wall / bound | 8 | 8 |
+| 4 Discovery / reversal / counting | 8 | 8 |
+| 5 Scorecard / ablation / matched rule / reading | 9 | 9 |
+| 6 Transfer test | 7 | 7 |
+| 7 Tests that pin | 7 | 7 |
+| 8 Limitations | 8 | 8 |
+| 9 Conclusion | 8 | 8 |
+| **overall** | **8** | **8** |
+
+### Gaps found and fixes (all minor)
+
+1. Section 5.1 quoted STRATA's air-handler count as 13 of 14 beside a Table 2
+   row of 14; the sentence now says "after the adjudication noted in Table 2".
+2. The compacted activity-pair list said "each started and ended", which is
+   not the heating/cooling pair's wording; now "each with an entry and an
+   exit event".
+3. Framing: "entire measurable contribution ... was five false alarms"
+   reworded to "their only measurable effect on this detector's output,
+   then, is those five false alarms" — same fact, stated as what was
+   measured rather than as a verdict.
+4. Full read of Sections 1–5 in the compiled PDF: no broken sentence, no
+   dangling reference; Sections 6–9 unchanged since the round-1 read apart
+   from the compressions, re-read at compile.
+
+Compiled: 12 pages, no undefined references, two overfull boxes under 2 pt.
+Nothing substantive left to fix; one more round to confirm.

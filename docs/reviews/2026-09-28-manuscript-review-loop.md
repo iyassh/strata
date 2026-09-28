@@ -173,3 +173,51 @@ None. Two consecutive rounds (5 and 6) found no gap worth fixing; the loop stops
 - E7's "57 of 60 files; three indeterminate" split was not recomputed (the artefact records the documentation claim and the two systems; the per-file split lives in ERRATA.md).
 - The onboarding wall-clock figure (about 1.5 hours, reconstructed from commit timestamps) and the 45-mapping / 35-rule onboarding counts were not re-derived from git history.
 - Figures were not regenerated; captions were read against the artefacts, not against the PDFs of the figures.
+
+## Round 1 (second editor) — 2026-09-28, hostile referee pass
+
+Reviewer: second, independent editor (Energy-and-Buildings sceptic and process-mining referee stance). Whole manuscript read; 20 numbers spot-checked against committed artefacts and configs (below). Framing rule respected: no number changed, no fired falsifier softened, errata and audit trail intact; the author's sentence stands verbatim in the abstract, introduction and conclusion.
+
+### Ratings before this round's fixes (1–10)
+
+| Section | Score | Hostile-referee notes |
+|---|---|---|
+| Abstract | 7 | Headline "158 of 175 (13 of 14, 26 of 30, 25 of 29, 50 of 55, 43 of 47)" sums to 157: the total uses the naive single-duct count (component_attribution.json: sdahu detected 14) while the parenthetical uses the adjudicated one. "every threshold out-of-sample" contradicts Limitations ("every threshold still comes from the same fault-free year"; it is the rates that are out of sample). "the invariants that discovery surfaced carry … the rules that detect" outruns the evidence (Related work says "several of the rules"; one documented case, the heating-absence rule) |
+| Introduction | 7.5 | Same overclaim ("the invariants … are the rules that detect"); two consecutive sentences both point to Section falsified |
+| Aims and objectives | 8 | Objective 4 carries the same 157/158 mismatch; Objective 2 "became the rules that detect" |
+| Related work | 7 | "the deployment building of the present study" — there is no deployment in this paper; "conformance traces … could serve as input to the LBNL correction algorithms" credits conformance after the paper has shown it detects nothing; "addressing the behaviour-based and sequence-level faults" is untested here (no benchmark seeds one) |
+| Method | 8.5 | Sound; figure caption consistent with the results |
+| Verification | 8.5 | Consistent with the baseline section (two voided executions, counts match) |
+| Results | 7.5 | "three further systems were onboarded afterwards" but Table 3 lists four further datasets; DDAHU "31 [signature rules] in the committed configuration" is stale (configs/lbnl_ddahu/rules.yaml: 71 events = 15 state + 56 signature, as Table 3 already says); fan coil "misses at onboarding … the 20 % and 50 % leaks" — x19_onboarding.json lists six misses at onboarding: five waterside-fouling files and the 20 % leak only; x25_step4_perday.json shows both leaks lost at the per-day null (42 → 40); "six of the fourteen reachable misses" undefined against the sixteen recovered; X12 "5.2 % to 10.4 %" is the then-deployed rate |
+| Refuted or withdrawn | 8 | Caption "the rest in the text that follows" is false for rows 8–10, which are narrated in Sections timeperspective/ddahu or only in the table |
+| Errata | 8.5 | E7 "57 of 60; three indeterminate" is the movement-score instrument; ERRATA.md also records the earlier zone audit at 50/10 and the attribution's "one indeterminate" rests on that; worth stating |
+| Limitations | 7.5 | Missing the limitation a sceptical reader raises first: the introduction motivates with schedule/override/setpoint-reset faults and no dataset seeds one (families from benchmark_v6_*.json: dampers, valves, sensor bias, fouling, airflow restriction, unstable loops, reversed controller) |
+| Comparison against commercial practice | 7.5 | "STRATA's [false-alarm day] is out of sample" versus the battery's "post-selection" is over-favourable: scripts/03_healthy_silence.py judges STRATA's rule silence on the whole FaultFree file (365 days including the holdout), so the rules-channel zero is post-selection on both sides; what is out of sample on STRATA's side is the one frequency-channel day (union_fpr_sdahu.json: freq 1, rules 0, train-only bands). "silences every rule on the whole training year" vs "whole fault-free year" two sentences apart |
+| Conclusion | 8 | Same 158 and "the rules that detect" wording |
+| Appendix ledger | 9 | Consistent with the section text |
+| **Overall** | **7.5** | Strong evidence base, but the arithmetic slip in the headline and the four over-positive phrasings are what a referee would lead with |
+
+### Numbers spot-checked (all agree unless stated)
+component_attribution.json totals 158/109/22/20/7 and sdahu detected 14 (naive universe, one wrong on the single-duct unit); benchmark_v6_* under the final gate: scored 14/30/29/55/47/24, detected 14/26/25/50/43/20, TTD median 1 on all six, no scenario on any of the six systems (199) with meaningful channels ⊆ {model, device}; ttd max 114 (DDAHU), 15 (FCU), 14 (RTU-sim); union_fpr_sdahu all-8 15/96, minus-rate 1/96 (freq), rate 14; x38 systems: G3 12/8/9, STRATA 13/26/25 at 1/8/9, all-8 15/15/9, F-X38.a under G2 (pfpu, sfpu), G3 (all three), S (pfpu, sfpu); configs rules.yaml events 15/58/62/71/26 = Table 3's state+signature; x19_onboarding detected 41, misses six as above; x25_step4 fcu 42 → 40 losing OADMPRLeak_20 and _50; ONBOARDING_LOG 45 mappings, 35 rules (14+21), ~1.5 h; x33 prereg "six of the fourteen reachable misses"; x35 prereg "73 residual rules"; ERRATA E7 57/3 (movement) and 50/10 (zone audit); coverage table row and column sums (232 → 387 of 391; 142 → 158; 21 → 26).
+
+### Fixes made (paper/paper-v2.tex)
+1. Abstract, Objective 4, Results lead and Conclusion: the 158 headline now states that totals use the naive single-duct count and gives 157 under the adjudication; the parenthetical reads "14 of 14 with 13 adjudicated".
+2. Abstract: "every threshold out-of-sample" → "every rate out-of-sample".
+3. Abstract, Introduction, Objective 2, Conclusion: "the invariants … are/became the rules that detect" → "several of the rules that detect were written from invariants discovery surfaced" (matches Related work and the one documented case). The author's sentence is untouched.
+4. Introduction: the refutation cross-reference moved to the sentence that states the refutation; the duplicate closing reference removed.
+5. Related work: "deployment building of the present study" → the building intended for the deployment phase; "conformance traces" → "located, evidenced alarms"; "behaviour-based and sequence-level faults" → faults outside the library or below its thresholds, with the benchmark scope stated and a cross-reference to the new limitation.
+6. Results: "three further systems" → "four further datasets" (named); DDAHU committed signature-rule count 31 → 56; fan coil onboarding misses corrected to the ledger (five fouling files and the 20 % leak; both leaks lost at the per-day null, both recovered by the coverage audit); "fourteen reachable misses" defined against the sixteen recovered; X12's 5.2 % marked as the then-deployed rate.
+7. Refuted table caption: rows 8–10 pointed to where they are narrated.
+8. Errata E7: both instruments stated (57/3 movement score; 50/10 zone audit).
+9. Limitations: new paragraph stating that no dataset seeds a schedule, override or setpoint-reset fault, so the introduction's sequence-aware argument is motivated, not tested, on these benchmarks, and that Section baseline measures how many of the seeded faults a rule library enumerates.
+10. Baseline subsection: "whole training year" → "whole fault-free year"; the post-selection sentence now says the rules-channel zero is post-selection on both sides and that STRATA's one day is a training-band frequency day.
+
+Compile: tectonic in scratchpad ms-loop-2, exit 0; no undefined references or citations (four "undefined" log hits are TU font-shape warnings); worst overfull box 9.3 pt; three pre-existing "float too large" warnings on the [h]/[p] tables. PDF copied to paper/paper-v2.pdf and ~/Downloads/Ureap/docs/writing/paper-v2.pdf.
+
+### Disagreements with the first editor
+- None of their changes is wrong on the artefacts. Two of their Round 1 rewrites (abstract and conclusion) introduced the "invariants … carry the rules that detect" wording that this round tempers; their reordering was correct, the strength of the clause was not.
+- Their Round 3 check "every cross-reference target says what the referring sentence claims" missed the refuted-table caption and the "three further systems" count.
+
+### Left for Round 2
+- Re-read the rendered text of every edited passage; check the new Limitations paragraph does not duplicate the time-perspective subsection's "faults do not change event order" reading.
+- Objective 1's "applied unchanged to seven LBNL datasets" against the fan coil gate-script change (two lines outside src/).

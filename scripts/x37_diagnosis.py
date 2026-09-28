@@ -59,8 +59,18 @@ def signed_pattern(system, cfg, det, x, cred, log_days):
                 pat.add((ZONE_RE.sub("", r), sign))
     if "rules" in chans:
         for r, d in log_days.items():
-            if d >= 5:
-                per_rule[r] = {"days": d, "sign": "fires"}; pat.add((ZONE_RE.sub("", r), "fires"))
+            if d >= 5 and r not in per_rule:
+                # run 2 (after the run-1 defect): a residual-kind rule that fires its fixed band is a moving copy too;
+                # its direction is computed the same way as for the residual channel
+                if r in det.residual_bands:
+                    if df is None:
+                        df = pd.read_parquet(REPO / f"data/processed/{system}/{x['file']}.parquet")
+                    rs = daily_residual_scores(df, cfg, rule_name=r)["score"].dropna()
+                    lo, hi = det.residual_bands[r]; med = float(rs.median()) if len(rs) else float("nan")
+                    sign = "above" if med > hi else "below" if med < lo else "fires"
+                    per_rule[r] = {"days": d, "median": med, "band": [lo, hi], "sign": sign}; pat.add((ZONE_RE.sub("", r), sign))
+                else:
+                    per_rule[r] = {"days": d, "sign": "fires"}; pat.add((ZONE_RE.sub("", r), "fires"))
     return frozenset(pat), per_rule
 
 
@@ -152,6 +162,7 @@ def main() -> int:
     if not out["predictions"]["P1_family_ge_80pct"]: fired.append("F-X37.a: family accuracy below 80 % or unresolved above 15 %")
     if out["component"]["wrong_rate"] >= 0.10: fired.append("F-X37.b: wrong-subsystem rate not below 10 %")
     out["falsifiers_fired"] = fired
+    out["run"] = 2; out["run1_defect"] = "consensus ignored copies that moved through the rules channel (signature firings); run-1 artefact kept as outputs/x37_diagnosis_run1.json"
     (REPO / "outputs/x37_diagnosis.json").write_text(json.dumps(out, indent=2, default=str) + "\n")
     print(json.dumps({k: out[k] for k in ("family", "component", "predictions", "falsifiers_fired")}, indent=1, default=str))
     return 0

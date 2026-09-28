@@ -373,3 +373,34 @@ Compiled: 12 pages (page 12 has 51 lines; no slack), no undefined references.
 | 8 Limitations | 8 | 8 |
 | 9 Conclusion | 8 | 8 |
 | **overall** | **8** | **8** |
+
+## Round 3 (second editor) — 2026-09-28
+
+Undefined-term pass for a process-mining reader, after the two content rounds.
+
+### Gaps found and fixes
+
+1. **"Budget" never defined.** "in-budget", "over budget", "keeps the budget",
+   "the budget held" appear five times with no definition. Section 5 now
+   states it once beside the noise floor: a system's false-alarm budget is
+   10 % of its fault-free holdout days (x17 P4, x26 P2, x30 P2 all test
+   ≤ 10 %).
+2. **"The sampling-rate experiment" (Section 7) never introduced.** It is
+   paper-v2's one-minute to fifteen-minute re-sampling test (four
+   falsifiers fired). Now glossed in place; no number added.
+
+Space recovered (no number or falsifier touched): "We are not aware of a
+prior quantification on a sensor-derived log" (an unevidenced novelty
+assertion a hostile reviewer would also strike), the grammar's replay
+purpose clause in Section 4, "The domain is the setting" in the intro.
+
+Compiled: 12 pages (page 12 has 51 lines, no slack), no undefined references.
+
+### Ratings (1–10): unchanged from round 2 (overall 8). Nothing else found;
+second-editor loop closed after three rounds.
+
+### Left for others (unchanged from the first editor)
+
+- references.bib `singh2027erratacompanion` now reads "Eight defects" in the
+  compiled bibliography (fixed upstream in ccbddb2).
+- Author-block TODOs (co-author order, contact e-mail) remain as comments.

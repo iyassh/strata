@@ -74,3 +74,85 @@ false alarms. The repaired adapter (`scripts/openfdd_baseline.py`, this commit):
 `outputs/openfdd_baseline_{sdahu,pfpu,sfpu}.json` (regenerated; the void ones are
 moved to `outputs/void/`), `outputs/x38_guideline36.json` (ledger); guard
 `tests/test_x38_guideline36.py`; two independent audits before any number is quoted.
+
+## Amendment 1 (2026-09-28 03:40, written after the first run and its two audits, before the re-run)
+
+The first run of the repaired adapter (artefacts of 2026-09-28 02:30–03:17, kept as
+`outputs/openfdd_baseline_<system>_run1.json` and `outputs/x38_guideline36_run1.json`)
+gave battery healthy-holdout false alarms of 77, 96 and 96 of 96 and gated
+detections of 0 on every system; every prediction held. Two independent audits
+found adapter defects that make those numbers artefacts of the adapter, and one
+defect of the pre-registered design. Nothing from run 1 is quoted. The audits'
+findings and the repairs, all applied before the re-run:
+
+**Adapter repairs (audit A items 1–5, 7, 14, 22).**
+- A1. SDAHU `fan-cmd` was `SF_SPD`, a constant 0.9 on every row (the project's own
+  sensor map records it as dead); FC1's full-speed condition was therefore always
+  true. Repaired to `SF_CS`, the speed command. Audit A's recomputation: FC1
+  holdout days 77 → 26.
+- A2. The terminal-unit rules were fan-gated on the box fan status. On a parallel
+  box the plenum fan runs only while heating (30.8 % of occupied minutes), so the
+  rules saw only those minutes; on a series box the fan tracks occupancy. Fan
+  roles are no longer supplied to the terminal battery on either unit; the
+  library's airflow proxy (primary airflow) gates the rules, uniformly.
+- A3. PID-HUNT-1 sweeps every mapped control output and read the binary fan
+  status as a hunting loop. It now runs on a frame holding the reheat valve only,
+  as the pre-registration says.
+- A4. `occupied` was `SYS_CTL > 0`, which graded night-cycle (value 2) as occupied
+  and applied the 70–75 °F band to setback periods. Now `SYS_CTL == 1`.
+- A5. VAV-AHU-LEAVE (box discharge within 8 °F of the AHU supply) is a single-duct
+  rule; a fan-powered box mixes plenum air by design and the difference exceeds
+  8 °F on about 90 % of healthy running minutes. Recorded not applicable on both
+  fan-powered units (F-X38.b class).
+- A6. FC6 on SDAHU: `SA_CFM` there is not in cfm (median 4.96 × 10⁵, no documented
+  unit); recorded not applicable rather than "not fired".
+- A7. STRATA's SDAHU count is quoted as 13 of 14: the outdoor-air-bias detection is
+  adjudicated as branch provenance (ERRATA E5, `outputs/x11_branch.json`), as the
+  pre-registration's own P1 already assumed.
+- A8. The named guard `tests/test_x38_guideline36.py` did not exist; it is written
+  with the re-run.
+
+**Design defect (audit A items 10–11): the pooled gate is a tautology.** The
+pre-registration gated the battery once, on the union of its rules, against the
+union's holdout false alarms. STRATA gates each channel separately and ORs the
+verdicts, and when a union flags every healthy holdout day its floor is 1.0 and
+nothing can pass. Three framings are therefore reported, and the falsifier
+F-X38.a is applied to every one of them:
+- G1, as pre-registered: pooled union against the union's holdout false alarms,
+  with the symmetric demotion.
+- G2, STRATA's per-channel structure: each rule against its own holdout false
+  alarms with the same floor max(fp, 3)/96, OR across rules.
+- G3, STRATA's rules-channel treatment: a rule that is silent on the healthy year
+  (≤ 3 flagged days of 365, the bar STRATA's onboarding applies to its own
+  signature rules) is held to the rules channel's 3/365 null; a rule that is not
+  silent is excluded, as onboarding would remove it.
+
+**Site-datum arm (audit A item 8).** FC6 compares the temperature-estimated
+outdoor-air fraction with `min_cfm_design / total airflow`; the installed default
+of 5,000 cfm is about six times the fan-powered air handler's total airflow, so
+the rule fires on every running minute. That number is the unit's design minimum
+outdoor-air flow, a site datum every deployment supplies, not a tuning threshold.
+Arm S runs FC6 with `min_cfm_design` set from the fault-free year (median OA_CFM
+over occupied minutes) and every other parameter at its installed default; the
+three framings are reported for this arm too. No other parameter is altered in
+any arm.
+
+**Predictions for the re-run** (P1–P4 stand as written and are evaluated under
+G1; the following are added):
+- **P5.** Under G2 the battery detects at least one scenario on SDAHU and STRATA
+  still detects at least as many on every system.
+- **P6.** Under G3 at most three battery rules per system are silent on the
+  healthy year, and the battery's G3 detections are a subset of STRATA's.
+- **P7.** Arm S brings FC6's healthy holdout days below 10 of 96 on both
+  fan-powered units, and the union's false-alarm rate stays above 30 % because
+  VAV-1 and VAV-2 saturate alone.
+- Failed P5–P7 are wrong predictions; F-X38.a applies to G1, G2, G3 and arm S.
+
+**Caveats to carry into print regardless of outcome** (audit A items 17–20):
+open-fdd 4.4.1's installed defaults are tighter than the Guideline 36 values its
+parameter labels cite (the write-up lists them), so the battery is "open-fdd
+4.4.1 defaults", not "Guideline 36"; the terminal rules carry fixed comfort bands
+(70–75 °F) and flow thresholds that do not read the building's own setpoint
+columns; FC4 on SDAHU counts damper crossings because the cooling valve never
+reads exactly zero; a battery that flags every healthy day flags every fault day
+too, so the raw detection counts of P2 are vacuous.

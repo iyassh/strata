@@ -1,0 +1,325 @@
+{
+  "system": "sdahu",
+  "openfdd_version": "4.4.1",
+  "prereg": "docs/plans/2026-09-27-x38-guideline36-repaired-prereg.md",
+  "ahu_rules": [
+    "FC1",
+    "FC2",
+    "FC3",
+    "FC4",
+    "FC5",
+    "FC6",
+    "FC7",
+    "FC8",
+    "FC9",
+    "FC10",
+    "FC11",
+    "FC12",
+    "FC13",
+    "FC14",
+    "FC15"
+  ],
+  "tu_rules": [],
+  "ahu_role_map": {
+    "outside-air-temp": "OA_TEMP",
+    "discharge-air-temp": "SA_TEMP",
+    "discharge-air-temp-sp": "SA_TEMPSPT",
+    "mixed-air-temp": "MA_TEMP",
+    "return-air-temp": "RA_TEMP",
+    "cooling-valve": "CHWC_VLV",
+    "outside-air-damper": "OA_DMPR",
+    "duct-static-pressure": "SA_SP",
+    "duct-static-pressure-sp": "SA_SPSPT",
+    "vav-total-airflow": "SA_CFM",
+    "fan-cmd": "SF_SPD",
+    "fan-status": "SF_SPD_DM"
+  },
+  "tu_role_map_zone_S": {},
+  "params_overridden": {},
+  "e3_static_repair": true,
+  "clean_year": {
+    "healthy_file": "AHU_annual",
+    "holdout_days": 96,
+    "holdout_fp_days_all_rules": 77,
+    "holdout_fp_days_minus_noisiest": 43,
+    "noisiest_rule": "FC1",
+    "per_rule_holdout_fp_days": {
+      "FC1": 77,
+      "FC2": 0,
+      "FC3": 0,
+      "FC4": 38,
+      "FC5": 0,
+      "FC6": 0,
+      "FC7": 0,
+      "FC8": 0,
+      "FC9": 10,
+      "FC10": 0,
+      "FC11": 0,
+      "FC12": 0,
+      "FC13": 1,
+      "FC14": 0,
+      "FC15": 0
+    },
+    "full_year_fp_days_all_rules": 299,
+    "full_year_days": 365,
+    "rule_status": {
+      "FC1": "fired",
+      "FC2": "not_fired",
+      "FC3": "not_fired",
+      "FC4": "fired",
+      "FC5": "not_applicable (heating-valve)",
+      "FC6": "not_fired",
+      "FC7": "not_applicable (heating-valve)",
+      "FC8": "not_fired",
+      "FC9": "fired",
+      "FC10": "not_fired",
+      "FC11": "not_fired",
+      "FC12": "not_fired",
+      "FC13": "fired",
+      "FC14": "not_applicable (cooling-coil-entering-temp, cooling-coil-leaving-temp)",
+      "FC15": "not_applicable (heating-coil-entering-temp, heating-coil-leaving-temp)"
+    }
+  },
+  "scenarios": [
+    {
+      "file": "damper_stuck_010_annual",
+      "family": "damper_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 302,
+      "flag_days_minus_noisiest": 52,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 301,
+        "FC9": 52,
+        "FC2": 0
+      }
+    },
+    {
+      "file": "damper_stuck_025_annual",
+      "family": "damper_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 302,
+      "flag_days_minus_noisiest": 52,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 301,
+        "FC9": 52,
+        "FC2": 0
+      }
+    },
+    {
+      "file": "damper_stuck_075_annual",
+      "family": "damper_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 303,
+      "flag_days_minus_noisiest": 191,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 303,
+        "FC4": 158,
+        "FC8": 146
+      }
+    },
+    {
+      "file": "damper_stuck_100_annual_short",
+      "family": "damper_stuck",
+      "total_days": 215,
+      "flag_days_all_rules": 179,
+      "flag_days_minus_noisiest": 89,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 179,
+        "FC4": 85,
+        "FC8": 74
+      }
+    },
+    {
+      "file": "coi_stuck_010_annual",
+      "family": "valve_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 302,
+      "flag_days_minus_noisiest": 106,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 302,
+        "FC13": 90,
+        "FC10": 65
+      }
+    },
+    {
+      "file": "coi_stuck_025_annual",
+      "family": "valve_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 303,
+      "flag_days_minus_noisiest": 103,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 303,
+        "FC13": 84,
+        "FC10": 62
+      }
+    },
+    {
+      "file": "coi_stuck_050_annual",
+      "family": "valve_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 303,
+      "flag_days_minus_noisiest": 57,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 303,
+        "FC10": 57,
+        "FC11": 1
+      }
+    },
+    {
+      "file": "coi_stuck_075_annual",
+      "family": "valve_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 300,
+      "flag_days_minus_noisiest": 55,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 300,
+        "FC10": 55,
+        "FC11": 1
+      }
+    },
+    {
+      "file": "coi_leakage_010_annual",
+      "family": "valve_leak",
+      "total_days": 365,
+      "flag_days_all_rules": 300,
+      "flag_days_minus_noisiest": 69,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 300,
+        "FC10": 60,
+        "FC13": 24
+      }
+    },
+    {
+      "file": "coi_bias_-4_annual",
+      "family": "sensor_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 298,
+      "flag_days_minus_noisiest": 200,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": true,
+      "top_rules": {
+        "FC1": 297,
+        "FC8": 200,
+        "FC4": 171
+      }
+    },
+    {
+      "file": "coi_bias_-2_annual",
+      "family": "sensor_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 302,
+      "flag_days_minus_noisiest": 188,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 302,
+        "FC8": 188,
+        "FC4": 169
+      }
+    },
+    {
+      "file": "coi_bias_2_annual",
+      "family": "sensor_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 302,
+      "flag_days_minus_noisiest": 169,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 301,
+        "FC8": 169,
+        "FC4": 146
+      }
+    },
+    {
+      "file": "coi_bias_4_annual",
+      "family": "sensor_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 300,
+      "flag_days_minus_noisiest": 169,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 299,
+        "FC8": 169,
+        "FC4": 145
+      }
+    },
+    {
+      "file": "oa_bias_4_annual",
+      "family": "oa_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 303,
+      "flag_days_minus_noisiest": 172,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "top_rules": {
+        "FC1": 302,
+        "FC4": 146,
+        "FC8": 65
+      }
+    }
+  ],
+  "battery": {
+    "detected_raw": 14,
+    "detected_gated_all_rules": 0,
+    "detected_gated_minus_noisiest": 1,
+    "scored": 14
+  },
+  "strata": {
+    "detected": 14,
+    "scored": 14,
+    "holdout_fp_all8": 15,
+    "holdout_fp_minus_rate": 1,
+    "holdout_days": 96,
+    "detected_files": [
+      "coi_bias_-2_annual",
+      "coi_bias_-4_annual",
+      "coi_bias_2_annual",
+      "coi_bias_4_annual",
+      "coi_leakage_010_annual",
+      "coi_stuck_010_annual",
+      "coi_stuck_025_annual",
+      "coi_stuck_050_annual",
+      "coi_stuck_075_annual",
+      "damper_stuck_010_annual",
+      "damper_stuck_025_annual",
+      "damper_stuck_075_annual",
+      "damper_stuck_100_annual_short",
+      "oa_bias_4_annual"
+    ]
+  },
+  "battery_gated_detected_files": []
+}

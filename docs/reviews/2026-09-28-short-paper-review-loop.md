@@ -294,3 +294,16 @@ are in `paper-v2.tex` too: the X25 step-4 ledger row ("series unit loses 3";
 artefact says dual-duct 3, series 2), the "frequency- or oscillation-only"
 parenthetical on the seven unnamed-component detections (three carry residual
 credits), and X17's 79 mappings against the artefact's 80.
+
+## Round 7 — second editor, follow-up from the manuscript loop (compiled: 19 pp; body ends at the foot of p. 12)
+
+Two of the three cross-checks handed to the manuscript loop came back with a
+refinement that applies here. (1) X25 step 4 has two committed artefacts:
+`x25_step4_perday.json` (step level, before the fan-law channel: dual-duct
+loses 3, series 2, eight flips) and `x25_statistical_repair.json` (final
+regeneration: seven lost, one regained on the dual-duct unit, the count the
+Limitations quote). The short ledger row now names both, as the long paper's
+does. (2) The dual-duct onboarding count is 80 canonical mappings (79 recorded
+columns, as the coverage table counts them, plus the timestamp); the lead had
+set the text to 80 (db6c9e6) and the parenthetical now reconciles it with the
+table's 79. Neither change moved the body off page 12.

@@ -204,3 +204,53 @@ Result: 8 pages, no undefined references; committed PDF = `docs/writing/r2pm.pdf
 
 **Ratings after fixes:** Abstract 8 · Intro 8 · Gates 8 · Protocol 8 · Defects 8 · Leak 8 ·
 Taxonomy 8 · Recommendations 7 · Disclosure 6 (author TODO) · Conclusion 7 · Overall 8.
+
+## Round 2 (second editor) — 2026-09-28 (after commit 73d178f)
+
+**Spot-checked (all match):** E4 `sfpu_rotation_evidence` (set identical, 1 wrap point, first row
+01/03 vs 01/01); E5 damper floors (healthy 0.0; sixteen fault files 0.1; `damper_stuck_010` 0.1 =
+the floor; 025/075/100 at 0.25/0.75/1.0); E5 first-occupied-minute 05:01 79 + 05:02 121 = 200,
+06:01 33, 06:02 70, 303 occupied days on every full-year file; X11 healthy median 1.0706 (→ 1.071),
+fault-branch baseline 0.008 from five estimators with spread 0.001, delta 1.0625 (→ 1.06), oa_bias
+0.0072; E7 `moving_zone` counts S 57 / indeterminate 3 of 60; E8 deck shift 0.0 and box shifts
++0.2 / +0.4 / −3.6; Sepsis 1050 cases, 15214 events, 10 midnight stamps; E6 MD5 `a0b885fe` in
+`week0_audit_fcu.json`; E3 thresholds and healthy range [401.85086, 403.478475].
+
+**Ratings before fixes:** unchanged from Round 1 close (Overall 8).
+
+**Gaps found and fixed:**
+1. §4.4 "the three stuck-damper files" — there are four; `damper_stuck_010`'s stuck value equals
+   the 0.1 floor → "three of the four stuck-damper files at their stuck value above it".
+2. §4.1 "The mislabel was overturned twice" — the label never changed; our reading did → "Our
+   reading of the files was overturned twice".
+3. §7 "count scenarios as distinct runs" read backwards → "count distinct runs, not labels, as
+   scenarios".
+
+**Not fixable here, flagged for the author:** the claim that Deng and colleagues trained an
+outdoor-air-bias class on the `oa_bias` files rests on the project's own reading
+(`RESEARCH_LOG.md` l.52, `GAP_ANALYSIS_AUG2026.md` l.172, "citable, carefully"); the publisher
+page could not be fetched from this session, so the claim was not verified against the paper's
+dataset section. The hedge "we assert only that the bias it names is not in the data" stays.
+
+**Page budget:** the three fixes tipped the PDF to 9 pages. Page 3 ends with a third of the page
+blank; diagnosed this round as *not* float-, footnote- or penalty-induced (the same 41-line page 3
+appears with the table removed, with the new footnote removed, with the E1 paragraph split and
+with club/widow penalties at 150), so it was left alone. Recovered the page by cutting on pages
+4–8 only: E4's "cannot recur" clause, "and we measured how free", the leak section's "property of
+the data, not of any published result" lead-in (the remedy sentence stays), the Disclosure
+sentence's opener, and E3's "with every file's range". No number changed; no erratum or fired
+falsifier removed or softened. Result: 8 pages, no undefined references; committed PDF =
+`docs/writing/r2pm.pdf` (one MD5).
+
+**Ratings after fixes:** Abstract 8 · Intro 8 · Gates 8 · Protocol 8 · Defects 8 · Leak 8 ·
+Taxonomy 8 · Recommendations 7 · Disclosure 6 (author TODO) · Conclusion 7 · Overall 8.
+
+**Disagreements with the first editor's changes:** (a) Round 1's "154 guard tests" counted the
+whole suite, including 66 unit tests of code that pin no published number (fixed in second-editor
+Round 1); (b) Round 2 softened "in under a second" in §2 but left "the gates cost a second" in the
+conclusion (fixed); (c) Rounds 2–6 flagged the three ERRATA-only numbers in the log but left §3
+asserting "every quoted number regenerates" — a reproducibility reviewer would test that sentence
+against the paper first (fixed, and the three are now footnoted for the reader); (d) §3 named the
+X38 battery "Guideline 36" although the X38 write-up's own print caveat forbids it (fixed).
+The title question ("…the Protocol That Found Them") is left with the author; under the current
+§1 wording the protocol includes the gates and the audits, so the title is defensible.

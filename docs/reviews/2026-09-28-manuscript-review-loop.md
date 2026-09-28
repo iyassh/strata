@@ -157,3 +157,19 @@ Circularity bound (benchmark_v2_processheal_v1 vs benchmark_v3): rules tp 3,134 
 
 ### Gaps found → fixes made
 None in the manuscript. In this review file the Round 1–4 time ranges were estimates and did not match the commit clock; corrected to the commit times above.
+
+## Round 6 — 2026-09-28 05:08–05:12 PDT
+
+### Ratings
+Unchanged; **overall 8.8**. Trajectory across the loop: 7 → 8.3 → 8.7 → 8.8 → 8.8 → 8.8.
+
+### Numbers spot-checked this round (all agree)
+Table 3 rooftop rows: benchmark_v6_rtu_sim 20 of 24 scored, union_fpr_rtu_sim 0 of 28 held-out days over 100; rtu_field one case, 3 of 49 over 182. Table 3 rule columns against configs/*/rules.yaml: SDAHU 3 state / 12 signature-side, PFPU 13 / 45, SFPU 13 / 49, DDAHU 15 / 56, FCU 7 / 19, RTU-sim 3 / 5, RTU-field 2 / 7; PFPU and SFPU sensors.yaml carry 109 recorded columns mapped with coverage_audited true and unmapped 0.
+
+### Gaps found
+None. Two consecutive rounds (5 and 6) found no gap worth fixing; the loop stops here.
+
+### Not verified in this loop
+- E7's "57 of 60 files; three indeterminate" split was not recomputed (the artefact records the documentation claim and the two systems; the per-file split lives in ERRATA.md).
+- The onboarding wall-clock figure (about 1.5 hours, reconstructed from commit timestamps) and the 45-mapping / 35-rule onboarding counts were not re-derived from git history.
+- Figures were not regenerated; captions were read against the artefacts, not against the PDFs of the figures.

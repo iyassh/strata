@@ -129,3 +129,19 @@ E1 OA_TEMP |diff| mean 0.0214 / max 0.3331; injection row `dup_case` fires G4 al
 MD5; the four loop commits touch only the three permitted paths and carry no attribution lines.
 
 **Ratings:** unchanged from Round 4 (Overall 8). **Gaps:** none worth fixing. No edit this round.
+
+## Round 6 — 2026-09-28 (after commit 0f1d7cf)
+
+**Checked:** pages 1, 3 and 4 rendered and inspected (title wraps to three lines cleanly, footnotes
+in place, table legible). The whitespace at the foot of page 3 is not float-induced: `[!tb]`,
+`[tbp]`, `[!t]` give identical pagination and `[H]` goes to 9 pages. Source re-read in full; every
+number in the paper traces to `ERRATA.md` or an `outputs/*.json` artefact (three ERRATA-only numbers
+noted in Round 2). **Gaps:** none. No edit this round. Two consecutive rounds without a fix → loop
+closed.
+
+**Open for the author (not changed by this loop):** the title now reads "…and the Protocol That
+Found Them" (was "…the Gate Battery That Found Them", contradicted by §1's "three by gates");
+the Disclosure Status section's TODO; the supervisor co-authorship TODO at the file head; and the
+three ERRATA-only numbers (38 % exact zeros, 48.8 %, 0.05–0.14 °F) which have no JSON artefact.
+
+**Trajectory:** overall 7 → 8 → 8 → 8 → 8 → 8; Conclusion 5 → 7; Gates 7 → 8; Protocol (new) 8.

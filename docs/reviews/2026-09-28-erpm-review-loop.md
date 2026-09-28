@@ -85,3 +85,61 @@ Reframing added about 1.5 pages; recovered by prose compression across all
 sections and by dropping five citations that carried no claim (Popper
 convention, Muñoz-Gama precision, anti-alignments, pm4py, Yuill protocol).
 Compiled: 12 pages, no undefined references.
+
+## Round 2 — 2026-09-28 05:16 PDT
+
+### Numbers spot-checked this round
+
+| claim | artefact | result |
+|---|---|---|
+| Table 1 nets 16/17/11, 15/18/11, 15/17/9; variants 102/343/364; labels in net 6/7/8 | discovery_predicts_transfer.json `Q.*.net`, `variants_tested`, `_aux.net_labels` | ✓ |
+| Q supports 0.000 / 0.455 / 0.978 | discovery_predicts_transfer.json `Q_support` | ✓ |
+| one series-unit file excluded (73 of 74 scored) | benchmark_v6_sfpu.json `excluded` (SFPU_SensorBias_RMTEMP_-2C) | ✓ |
+| eight of twelve then-missed scenarios have an indistinguishable state log | x12_log_diagnosis.json `summary` | ✓ |
+| time-infused model: five extra FA days per fan-powered unit | x12_time_perspective.json `holdout_fp_days` 5 / 5 | ✓ |
+| X22 DDAHU 59 of 83 | x22_positive_control.json `n_holdout_days` 83 | ✓ |
+| X38 G3: 12/14 @ 1, 8/30 @ 0, 9/29 @ 0 vs STRATA 13 @ 1, 26 @ 8, 25 @ 9; F-X38.a fired under G2/G3/S | x38_guideline36.json `systems.*`, `falsifiers_fired` | ✓ |
+| "roughly 750 binomial tests" | not in paper-v2.tex at c489460 nor HEAD, nor any PHASE file or the research log | ✗ unverifiable — replaced (see gaps) |
+| p_min = 0.05 for two groups of three; 1/3! = 0.167; 1/2! = 0.5; 1/4! = 0.042 | arithmetic | ✓ |
+
+### Ratings (1–10)
+
+| section | round 1 | round 2 | note |
+|---|---|---|---|
+| Title + abstract | 8 | 8 | absence-channel clause dropped from the abstract for space; the fact stays in 5.1 |
+| 1 Introduction | 8 | 8 | |
+| 2 Related work | 7 | 7 | protocol paragraph trimmed to the Pitsch sentence |
+| 3 Abstraction / wall / bound | 8 | 8 | activity list compacted |
+| 4 Discovery / reversal / counting | 8 | 8 | |
+| 5 Scorecard / ablation / matched rule / reading | 8 | 9 | X38 comparison with current practice added as one sentence with its fired falsifier |
+| 6 Transfer test | 7 | 7 | |
+| 7 Tests that pin | 7 | 7 | |
+| 8 Limitations | 8 | 8 | unverifiable "750" replaced by what the gate does |
+| 9 Conclusion | 8 | 8 | |
+| **overall** | **8** | **8** | |
+
+### Gaps found and fixes
+
+1. "The noise-floor gate applies no correction across roughly 750 binomial
+   tests" — the 750 has no source in any committed document or the
+   manuscript's history. Replaced by "one binomial test per scenario and
+   channel, several hundred at α = 10⁻³, with no multiplicity correction",
+   which is what the gate does (73 × 7 gated channels = 511 on the three
+   systems; 175 × 7 = 1,225 on five).
+2. X38 now included (Section 5.1, one sentence, footnote to
+   outputs/x38_guideline36.json): within one detection and one false-alarm
+   day on the air handler, three times the terminal-unit detections at 8 and
+   9 false alarms against 0, the falsifier reported as fired and the
+   difference named as coverage. Fits the ERPM argument as "what the
+   framework achieves against current practice", not as a process-mining
+   claim.
+3. Acknowledgement overfull box (12 pt) removed by using a run-in paragraph
+   heading; remaining overfull boxes are 0.6 pt and 1.9 pt.
+4. Five citations that carried no claim were dropped in round 1 for space
+   (Popper, Muñoz-Gama, anti-alignments, pm4py, Yuill); the LBNL 2020 and
+   2023 dataset papers, the Bi review and every conformance/abstraction/
+   leakage/protocol citation remain.
+5. Left as is: the companion-paper bib title ("Five defects") vs the text's
+   "eight" — shared references.bib, R2PM agent's.
+
+Compiled: 12 pages (page 12 has 44 lines), no undefined references.

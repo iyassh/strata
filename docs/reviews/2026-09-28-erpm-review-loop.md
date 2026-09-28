@@ -318,3 +318,58 @@ slack left), no undefined references, overfull boxes 0.6 pt and 1.9 pt.
 None on substance. The reframing is within the author's rule and the
 conformance null is intact. Two of their additions needed qualification
 (the absence channel in the intro; the X37 sentence), fixed above.
+
+## Round 2 (second editor) — 2026-09-28
+
+Full read of the compiled PDF, front to back.
+
+### Numbers spot-checked this round
+
+| claim | artefact | result |
+|---|---|---|
+| Table 1 nets 16/17/11, 15/18/11, 15/17/9; variants 102/343/364; Q supports 0.000/0.455/0.978; sync_days 0/166/357 | discovery_predicts_transfer.json `Q` | ✓ |
+| reversal 0.8861/0.5526, 0.9021/0.9026, 0.9533/0.9533; cooling-active band 4–44 on the series unit | grammar_results.json `reversal_probe`, `bands.sfpu` | ✓ |
+| X12 time-infused model significant on 11 of 73, none newly detected | x12_time_perspective.json `P1_count`, `P3_newly_detected` | ✓ |
+| coverage audit 142 → 158 (14+22+21+45+40 → 14+26+25+50+43), model rows identical on all five | x33_coverage_*.json | ✓ |
+| 22–26 min-robust days behind the 135 | PHASE3B_RESULTS.md | ✓ |
+| "discovery located an invariant" (abstract, 5.3, conclusion) | matched_rules_*.json (MR2 = per-zone heating-episode bands, train-only), PHASE4 "the strata located the invariant; the calibrated channel generalizes it" | ✗ mechanism is the frequency channel's band on the stratified log, not net discovery — gap 1 |
+
+### Gaps found and fixes
+
+1. **Discovery credited with the frequency channel's work.** The wording
+   "discovery located an invariant" entered in the first editor's round 1
+   (cc8ea37); paper-v2 §matched-rule says "the models automate the
+   discovery of rules", PHASE4 says the strata located it. No discovered
+   net is involved in the 141 = 141 / 206 = 206 match: MR2 is a hand-written
+   per-zone heating-episode band and the channel it matches is the count
+   band on the log. Abstract, 5.3 and conclusion now credit "a count band
+   on the stratified log" / "the stratified log"; 5.3's opener now
+   separates what "the process-mining side" contributes at design time.
+   Same fact, credited where the artefact credits it.
+2. **Raw-signal band listed under "the log's own channels".** The
+   unstable-damper scenario is carried by the direction-change band alone,
+   which reads the raw frame, not the log. Now stated parenthetically as a
+   raw-signal band.
+
+Conformance null re-checked after both rounds: "No scenario on any system is
+detected only by the two conformance channels" (5.2), the X22 positive control
+and the X30 grid are all still stated as the measured limit; the author's
+closing sentence is unchanged in abstract, introduction and conclusion.
+
+Compiled: 12 pages (page 12 has 51 lines; no slack), no undefined references.
+
+### Ratings (1–10)
+
+| section | r1 | r2 |
+|---|---|---|
+| Title + abstract | 8 | 8 |
+| 1 Introduction | 8 | 8 |
+| 2 Related work | 7 | 7 |
+| 3 Abstraction / wall / bound | 8 | 8 |
+| 4 Discovery / reversal / counting | 8 | 8 |
+| 5 Scorecard / ablation / matched rule / reading | 8 | 8 |
+| 6 Transfer test | 7 | 7 |
+| 7 Tests that pin | 7 | 7 |
+| 8 Limitations | 8 | 8 |
+| 9 Conclusion | 8 | 8 |
+| **overall** | **8** | **8** |

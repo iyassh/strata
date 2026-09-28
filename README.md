@@ -222,7 +222,7 @@ detection count (60 vs 61 across all systems, with complementary misses) —
 but the baseline cannot name a valve, explain a flag, or state its alarm
 budget. Equal counting power; only one side is accountable.
 
-**Not a result:** `outputs/openfdd_baseline_*.json` are marked `"verdict": "VOID"` in-file — a first attempt at the Guideline 36 comparison that failed its own audit; see the repair plan they point to. Quote nothing from them.
+**Current practice on the same exam (X38, pre-registered + Amendment 1 after two audits voided the first repaired run; the 2026-09-11 artefacts are in `outputs/void/`):** the open-fdd 4.4.1 Guideline 36 battery, wired to the right columns and treated as STRATA treats its own signature rules (rules silent on the fault-free year, 3/365 null), detects 12/14 on the single-duct AHU at 1 false-alarm day against STRATA's 13/14 at 1, and 8/30 and 9/29 on the fan-powered terminal units at 0 false-alarm days against STRATA's 26/30 and 25/29 at 8 and 9. The pre-registered falsifier fired on every system; the honest sentence is 'within one detection and one false-alarm day on the air handler; three times the terminal-unit detections, bought with eight or nine false-alarm days, through per-zone coverage'. Quantile bands (X36) gain nothing and add 13 false-alarm days; not adopted.
 
 Every number above regenerates from this repository —
 see [REPRODUCING.md](REPRODUCING.md) for the clone-to-artifacts runbook.

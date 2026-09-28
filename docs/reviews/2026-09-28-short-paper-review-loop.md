@@ -77,3 +77,33 @@ statement moved into the text); the appendix ledger, which overflowed a single
 
 Defect: body still 1.1 pp over. Plan for round 3: abstract to ~290 words, refuted
 section and limitations trimmed, compact section spacing, lessons sentence cut.
+
+## Round 3 — fits (compiled: 19 pp total; body ends at the foot of p. 12; Acknowledgements and References begin p. 13; appendix pp. 17–19)
+
+Changes: abstract to ~300 words; compact section spacing (`titlesec`); the
+refuted list, limitations and conclusion trimmed; framework figure at 0.92
+width and the alarm listing at `\footnotesize`; errata table at `\scriptsize`;
+ledger split moved to X24 so both halves fit with their captions (verified in
+the text layer: "part 1 of 2", "part 2 of 2"). Every cut was prose; no number,
+no fired falsifier and no caveat was removed. The families figure stays out;
+the false-alarm, X22, X25 and X29 figures were never included.
+
+| Section | Rating | Remaining gaps |
+|---|---|---|
+| Abstract | 8 | — |
+| Introduction | 8 | — |
+| Aim and objectives | 8 | — |
+| Related work | 7 | One paragraph; dense but complete. |
+| Method | 8 | — |
+| Verification | 8 | — |
+| Results (all paragraphs) | 8 | Full read-through still due (round 4). |
+| What process mining carries | 8 | — |
+| Against current practice | 8 | — |
+| Refuted or withdrawn | 7 | One paragraph of ten numbered items; readable, dense. |
+| Errata | 8 | Table at `\scriptsize`; legible in the PDF. |
+| Limitations | 8 | — |
+| Conclusion | 8 | Carries the settled sentence. |
+| Appendix ledger | 8 | Both halves complete. |
+
+Plan for round 4: read the compiled text end to end for wording, framing and
+numbers; re-check every number against the artefacts by script; fix; recompile.

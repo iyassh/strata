@@ -117,3 +117,15 @@ Recommendations 7 · Disclosure 6 (author TODO) · Conclusion 7 · Overall 8.
 
 **Fixes:** the E5 damper-floor parenthetical above; a double-semicolon sentence in §3 split in two.
 8 pages, no undefined references.
+
+## Round 5 — 2026-09-28 (after commit a49b42f)
+
+**Spot-checked:** x11 adjudicated scorecard 13/14 with rules carrying 7 scenarios alone and 2 with
+the residual channel (the "nine rules-carried scenarios"); DDAHU week-0 gates: 56 distinct hashes,
+no duplicate group, no raw rotation, calendar and monotonicity clean on all 56, every column
+declared in the TTL — "passed every gate" holds; E3 healthy SA_SP mean 402.788 ("near 402");
+E1 OA_TEMP |diff| mean 0.0214 / max 0.3331; injection row `dup_case` fires G4 alone; the committed
+`paper/r2pm/r2pm.pdf`, the scratch build and `~/Downloads/Ureap/docs/writing/r2pm.pdf` share one
+MD5; the four loop commits touch only the three permitted paths and carry no attribution lines.
+
+**Ratings:** unchanged from Round 4 (Overall 8). **Gaps:** none worth fixing. No edit this round.

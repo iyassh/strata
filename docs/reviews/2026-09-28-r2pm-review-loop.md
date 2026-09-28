@@ -145,3 +145,62 @@ the Disclosure Status section's TODO; the supervisor co-authorship TODO at the f
 three ERRATA-only numbers (38 % exact zeros, 48.8 %, 0.05–0.14 °F) which have no JSON artefact.
 
 **Trajectory:** overall 7 → 8 → 8 → 8 → 8 → 8; Conclusion 5 → 7; Gates 7 → 8; Protocol (new) 8.
+
+## Round 1 (second editor) — 2026-09-28 (after commit 8a14ef5)
+
+Independent hostile pass by a second editor; every paragraph re-read against `ERRATA.md`,
+`PHASE12_RESULTS.md` §X37/§X38, the X38 pre-registration and Amendment 1, `scripts/regress.py`,
+`src/strata/log_gates.py`, `docs/plans/`, `tests/` and the JSON artefacts.
+
+**Spot-checked (all match):** X38 executed three times (2026-09-11 void → `outputs/void/`; run 1 of
+the repaired adapter kept as `*_run1.json`; run 2 quoted), F-X38.a fired on every system, the
+2026-09-11 void's two defects and run 1's three named defects all in the pre-registration and
+Amendment 1; X37 three runs, two script defects fixed to the pre-registered wording; 28 files named
+`*-prereg.md` in `docs/plans/`; injection rows fire G1/G4/G2/G3 alone and `leak` fires none;
+`strata gates LOG.xes` exists (`src/strata/cli.py`); 20 × 365 − 150 = 7,150 fault-file days (the
+215-day `damper_stuck_100` file); E5 first-occupied-minute counts 200 + 33 + 70 = 303; E3 midpoint
+thresholds; DDAHU/PFPU/SFPU/FCU/SDAHU file counts; `OA_TEMP` mean 0.0214 / max 0.3331; E8 +0.20 /
++0.40 in.wg and −3.6 °F; 14 bib keys resolve.
+
+**Ratings before fixes:** Abstract 8 · Intro 8 · Gates 7 · Protocol 6 · Defects 8 · Leak 8 ·
+Taxonomy 8 · Recommendations 6 · Disclosure 6 (author TODO) · Conclusion 6 · Overall 7.
+
+**Gaps found (claims outrunning the artefacts, or contradictions):**
+1. §3 called X38 "a Guideline 36 rule battery"; the X38 write-up's own print caveat (i) says the
+   battery is open-fdd 4.4.1's installed defaults, tighter than the GL36 values its labels cite,
+   and must not be called Guideline 36 → "the open-fdd rule battery (X38; Guideline 36-derived
+   rules at the library's installed defaults)".
+2. §3 "154 guard tests pin the published numbers": 154 is the whole suite (84 top-level + 66
+   `tests/unit` code tests + 4 integration); the unit tests pin no published number → "the test
+   suite (154 tests) pins …". (Disagreement with Round 1's "154 guard tests".)
+3. §3 "artefacts are kept under a run-number suffix": the 2026-09-11 void lives in
+   `outputs/void/`, only run 1 under `_run1` → "in a void directory or under a run-number suffix".
+4. §3 "every quoted number regenerates" was contradicted by this paper's own three ERRATA-only
+   numbers (38 %, 48.8 %, 0.05–0.14 °F, flagged in Round 2 but never surfaced to the reader) →
+   "every benchmark number regenerates from the current code", plus a footnote at the 38 % naming
+   the three numbers that have no JSON artefact. A reproducibility reviewer would test that
+   sentence against the paper first.
+5. §2 "Six checks run against the raw files": log hashing runs on the derived event logs → "Six
+   checks run before any science". "We ran them unchanged over two public logs": the public-log
+   run is a separate XES packaging (`strata.log_gates`, pm4py), not the week-0 script → "packaged
+   the four for XES logs and ran them". "Trace-hash gate" in the injection paragraph vs "log
+   hashing" in the gate list → one name.
+6. Conclusion "found not by insight but by … audits" contradicts §4's hostile audits (E5 needed
+   the damper-floor reading); "Each would have inflated a published result" is false for E4
+   (misaligns) and E7 (a reader scoring against the documented zone marks correct alarms wrong,
+   which deflates) → "silently altered"; "the gates cost a second" vs §2's "in seconds" (Round 2
+   softened one and not the other) → "seconds".
+7. §5 "E1, E2, E4 and E6 corrupt an accounting" left E7 and E8 unplaced → "… E7 and E8 corrupt an
+   accounting or a label".
+8. §7 reviewers' sentence did not parse ("which columns … would have caught E3") → rewritten as
+   the two questions a reviewer should ask.
+9. Stale traceability comment at the file head (listed four artefacts of nine).
+
+**Page budget:** the footnote and the X38 rename pushed the PDF to 9 pages; recovered by tightening
+five sentences that carried no number (intro leak sentence, gate-rule sentence, E4 sort sentence,
+the new footnote and reviewers' sentence). No number changed; no erratum or fired falsifier removed
+or softened; no conformance-detection claim added; the author's settled sentence kept.
+Result: 8 pages, no undefined references; committed PDF = `docs/writing/r2pm.pdf` (one MD5).
+
+**Ratings after fixes:** Abstract 8 · Intro 8 · Gates 8 · Protocol 8 · Defects 8 · Leak 8 ·
+Taxonomy 8 · Recommendations 7 · Disclosure 6 (author TODO) · Conclusion 7 · Overall 8.

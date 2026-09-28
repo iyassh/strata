@@ -221,3 +221,39 @@ Compile: tectonic in scratchpad ms-loop-2, exit 0; no undefined references or ci
 ### Left for Round 2
 - Re-read the rendered text of every edited passage; check the new Limitations paragraph does not duplicate the time-perspective subsection's "faults do not change event order" reading.
 - Objective 1's "applied unchanged to seven LBNL datasets" against the fan coil gate-script change (two lines outside src/).
+
+## Round 2 (second editor) — 2026-09-28
+
+### Ratings after Round 1 (second editor) fixes, rendered text re-read
+
+| Section | Round 1 → Round 2 | Notes |
+|---|---|---|
+| Abstract | 7 → 8.5 | 158/157 reconciled; rendered sentence reads cleanly |
+| Introduction | 7.5 → 8.5 | |
+| Aims and objectives | 8 → 8.5 | Objective 1's "applied unchanged" refers to the event-abstraction layer, which is accurate (the two-line change was in the gate script, outside src/) |
+| Related work | 7 → 8.5 | |
+| Method | 8.5 → 8.5 | |
+| Verification | 8.5 → 8.5 | |
+| Results | 7.5 → 8.5 | |
+| Refuted or withdrawn | 8 → 8.5 | |
+| Errata | 8.5 → 8.5 | |
+| Limitations | 7.5 → 8.5 | New paragraph listed the seeded families without the rooftop units' refrigerant faults (line and charge); fixed. It does not duplicate the time-perspective subsection: that subsection says the seeded faults leave event order unchanged, this paragraph says the behaviour-based class was never seeded |
+| Comparison against commercial practice | 7.5 → 8.5 | One residual "training year" (the lesson sentence) made "fault-free year" to match the corrected sentence two lines above |
+| Conclusion | 8 → 8.5 | |
+| Appendix ledger | 9 → 9 | |
+| **Overall** | **7.5 → 8.5** | |
+
+### Checks this round
+- Every sentence mentioning invariants now carries the same strength (several rules written from surfaced invariants; no detection by conformance); the author's sentence is verbatim in all three places.
+- Rendered abstract, new Limitations paragraph, baseline post-selection sentence and fan coil onboarding sentence read in the PDF text.
+- Fault families in the new paragraph checked against benchmark_v6_*.json (sdahu: damper_stuck, valve_stuck, valve_leak, sensor_bias, oa_bias; pfpu/sfpu: instability, coil_fouling, reheat_leak/stuck, rmtemp_bias, airflow_bias, damper_stuck, fan_restrict; ddahu: unstable_control, zone/oa_damper_stuck, coil_fouling, sat/static_sensor_bias, valve_stuck; fcu: oa_damper_leak/stuck, valve_leak/stuck, sensor_bias, coil_fouling, airflow_restriction, control_fault; rtu_sim: condenser/evaporator_fouling, liquid/suction_line_restriction, refrigerant_over/undercharge). No schedule, override or setpoint-reset family on any system.
+
+### Fixes made
+1. Limitations: refrigerant-line restriction and refrigerant charge added to the seeded-family list.
+2. Baseline subsection: "silence on the training year buys" → "fault-free year".
+
+Compile: exit 0, 43 pages, no undefined references, worst overfull box 9.3 pt. PDF copied to both destinations. Two small residues from my own Round 1 edits and nothing new found in the rest of the manuscript; the loop stops here.
+
+### Not verified in this pass
+- The X22, X30, X35 and X36 figures were not re-derived (first editor's spot-checks accepted).
+- The per-file E7 split and the onboarding wall-clock figure remain as the first editor left them (ONBOARDING_LOG.md agrees on 45 mappings, 35 rules and ~1.5 h; the commit timestamps were not re-derived).

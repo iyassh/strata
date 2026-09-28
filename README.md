@@ -145,7 +145,7 @@ fan coil unit):
 
 ![Per-channel false alarms on the held-out fault-free days](paper/figures/fig_false_alarms.png)
 
-DDAHU: 79 sensor mappings and 41 rules at onboarding (114 and 71 after X33d), one healthy-silence iteration, no source
+DDAHU: 80 sensor mappings and 41 rules at onboarding (114 and 71 after X33d), one healthy-silence iteration, no source
 change, gate battery clean (including a configuration-branch comparison); every family caught in full except coil fouling
 (5/12) and static-pressure sensor bias (6/8 after the fan-law channel of X27); nothing detected by the
 process-mining channels alone ([PHASE10_RESULTS.md](PHASE10_RESULTS.md)). After the coverage audit (X33d) the

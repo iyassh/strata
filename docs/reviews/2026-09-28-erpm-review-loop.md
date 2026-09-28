@@ -189,3 +189,40 @@ Compiled: 12 pages (page 12 has 44 lines), no undefined references.
 
 Compiled: 12 pages, no undefined references, two overfull boxes under 2 pt.
 Nothing substantive left to fix; one more round to confirm.
+
+## Round 4 — 2026-09-28 05:26 PDT (confirmation round)
+
+### Numbers spot-checked this round
+
+| claim | artefact | result |
+|---|---|---|
+| eight machine-verified benchmark defects | ERRATA.md E1–E8 | ✓ |
+| 3.5-point bound = 5.24 − 1.78 | arithmetic (3.46) | ✓ |
+| seventeen misses = 175 − 158; sixteen recoveries = 158 − 142 | x33_coverage_*.json | ✓ |
+| X31 detection change −1 / −3 / 0, FA worst 3/96 ("within three", "≤ 4") | RESEARCH_LOG.md L56, x31_field_conditions.json | ✓ |
+
+### Ratings (1–10): unchanged from round 3 (overall 8).
+
+### Gaps found
+
+1. Conclusion said the frequency channel "carries detections nothing else
+   carries"; the unstable-room-temperature detections are shared with the
+   direction-change band. Now "no rule or residual carries", matching the
+   abstract and introduction. Wording only.
+
+Nothing else found. Rounds 3 and 4 found nothing substantive; loop closed.
+
+### Title proposal (for the author)
+
+Adopted: "STRATA: What Process Mining Contributes to HVAC Fault Detection",
+subtitle "Event abstraction, stratified discovery and count channels on five
+public benchmarks, and the measured limit of conformance checking on its
+own". Alternative if a shorter subtitle is wanted: "Measured contributions,
+and the limit of conformance checking alone".
+
+### Left for others
+
+- references.bib entry `singh2027erratacompanion` is titled "Five defects";
+  the text (and ERRATA.md) say eight. Shared file; R2PM agent.
+- Author-block TODOs (co-author order, contact e-mail) remain as comments
+  in the source.

@@ -75,18 +75,23 @@ def signed_pattern(system, cfg, det, x, cred, log_days):
 
 
 def consensus_component(system, per_rule):
-    """redundant groups: all copies moving -> shared end; one copy -> that zone."""
+    """redundant groups, as pre-registered: every copy moving in the SAME direction -> shared end;
+    exactly one copy moving -> that zone; anything else (copies moving in opposite directions, two or
+    three copies) -> no consensus. Run 2 counted three or more copies moving in any direction as
+    consensus, which blamed the shared return-air sensor when one zone's copy moved the opposite way
+    to the other three (kept as outputs/x37_diagnosis_run2.json)."""
+    n_copies = 4
     for stem, shared in GROUPS.get(system, {}).items():
-        moving = [r for r, v in per_rule.items() if r.startswith(stem + "_") and v.get("sign") in ("above", "below")]
+        moving = {r: v["sign"] for r, v in per_rule.items() if r.startswith(stem + "_") and v.get("sign") in ("above", "below")}
         if not moving:
             continue
         zones = {ZONE_RE.search(r).group(1) for r in moving if ZONE_RE.search(r)}
-        n_copies = 4
-        if len(zones) >= n_copies - 1:
-            return shared, "consensus: all copies move"
+        if len(zones) == n_copies and len(set(moving.values())) == 1:
+            return shared, f"consensus: all {n_copies} copies move {next(iter(moving.values()))}"
         if len(zones) == 1:
             z = next(iter(zones)); comp = "zone_damper" if stem.startswith("box_static") else "zone_temp_sensor"
             return (f"zone {z}", comp), "single copy moves"
+        return None, f"no consensus: {len(zones)} copies move, directions {sorted(set(moving.values()))}"
     return None, None
 
 
@@ -162,7 +167,8 @@ def main() -> int:
     if not out["predictions"]["P1_family_ge_80pct"]: fired.append("F-X37.a: family accuracy below 80 % or unresolved above 15 %")
     if out["component"]["wrong_rate"] >= 0.10: fired.append("F-X37.b: wrong-subsystem rate not below 10 %")
     out["falsifiers_fired"] = fired
-    out["run"] = 2; out["run1_defect"] = "consensus ignored copies that moved through the rules channel (signature firings); run-1 artefact kept as outputs/x37_diagnosis_run1.json"
+    out["run"] = 3; out["run1_defect"] = "consensus ignored copies that moved through the rules channel (signature firings); run-1 artefact kept as outputs/x37_diagnosis_run1.json"
+    out["run2_defect"] = "consensus counted three or more copies moving in any direction as 'all copies move' where the pre-registration says every copy in the same direction; run-2 artefact kept as outputs/x37_diagnosis_run2.json"
     (REPO / "outputs/x37_diagnosis.json").write_text(json.dumps(out, indent=2, default=str) + "\n")
     print(json.dumps({k: out[k] for k in ("family", "component", "predictions", "falsifiers_fired")}, indent=1, default=str))
     return 0

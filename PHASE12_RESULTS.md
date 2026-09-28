@@ -434,3 +434,72 @@ and where it is wrong, it names the component that is reacting to the fault,
 which is the first place a technician would look anyway. It does not name root
 cause, and the pre-registered bar for calling it component-level attribution
 was missed by 2.7 points.
+
+## X37 — a diagnosis layer: signed rule patterns and redundant-pair consensus
+
+*Pre-registered (`docs/plans/2026-09-27-x37-diagnosis-layer-prereg.md`) before
+any score was computed. Three runs: run 1 (kept as `outputs/x37_diagnosis_run1.json`)
+ignored copies that moved through the rules channel; run 2 (kept as
+`outputs/x37_diagnosis_run2.json`) counted three or more copies moving in any
+direction as consensus where the pre-registration says every copy in the same
+direction; run 3 (`outputs/x37_diagnosis.json`) implements the design as written.
+Both script defects were found by reading the rows, and both fixes are the
+pre-registered wording, not a re-tune. Guard `tests/test_x37_diagnosis.py`.*
+
+X34 measured where the carrying rule points. X37 asked whether three
+fault-agnostic ingredients — the *sign* of every significant residual against
+its healthy band, a *consensus* rule over redundant copies of one quantity, and a
+leave-one-out nearest-pattern *family* vote — turn that into a diagnosis.
+
+| | resolved | unresolved | correct | accuracy (resolved) | unresolved rate |
+|---|---|---|---|---|---|
+| family, leave-one-out over 158 detections | 114 | 44 | 85 | **74.6 %** | **27.8 %** |
+
+| component | exact | same subsystem | wrong subsystem | unnamed |
+|---|---|---|---|---|
+| X34 (carrying rule) | 109 (69 %) | 22 | 20 (12.7 %) | 7 |
+| X37 run 3 (with consensus) | 112 (70.9 %) | 23 | **16 (10.1 %)** | 7 |
+
+| P1 family ≥ 80 %, unresolved ≤ 15 % | P2 exact ≥ 78 %, wrong < 10 % | P3 dual-duct dampers → one zone; deck biases → deck | P4 FCU cause/response unresolved | falsifiers |
+|---|---|---|---|---|
+| ✗ 74.6 %, 27.8 % | ✗ 70.9 %, 10.1 % | ✓ dampers 6/6 single copy; biases 14/16 consensus | ✓ 14 wrong, unchanged | **F-X37.a and F-X37.b fired** |
+
+**Verdict.** The diagnosis layer is not adoptable as designed. The paper's
+future-work sentence stands, and the component-level claim stays withdrawn
+(the wrong-subsystem rate missed the bar by one case of 158).
+
+**What the consensus rule did, per system.**
+- DDAHU: the five zone-damper faults X34 scored wrong now score exact (one
+  mixing-box copy moves alone, so the diagnosis names that zone's box), and
+  fourteen of the sixteen deck sensor biases are called at the deck because all
+  four copies move the same way. This is the mechanism the pre-registration
+  described, and it worked where the redundancy is real.
+- SFPU and PFPU: the return-minus-zone group is *not* a redundant pair in the
+  sense required. A fault in one zone moves that zone's copy one way and, because
+  the return air is the mix of all zones, the other three copies the opposite
+  way (SFPU damper stuck 0 %: zone S −10.6 °F, zones I/W/E +2.3 to +2.6 °F).
+  Under the pre-registered rule this is "no consensus" (fourteen SFPU rows) and
+  the verdict falls back to the carrying rule; run 2, which ignored direction,
+  blamed the shared return-air sensor in eleven of them. One PFPU room-sensor
+  bias (+4 °C) does move all four copies the same way and is now called at the
+  return-air sensor: wrong.
+- FCU and SDAHU: no redundant copy exists; verdicts identical to X34.
+
+**Why the family vote misses.** The 29 wrong family calls are almost all pairs the
+recorded signals cannot separate with signs alone: a stuck zone damper and a
+biased zone airflow sensor (9 cases; the zone flow-tracking rule is a mismatch
+kind and carries no sign); a restricted filter and a fouled cooling coil on the
+fan coil unit (4; both are "same speed, less air"); cooling-side and heating-side
+airside fouling on the fan coil unit (4; the fan-side witnesses are identical);
+a leaking and a stuck valve (5). The 44 unresolved are scenarios whose signed
+pattern has no neighbour above Jaccard 0.5 — sixteen on DDAHU, where most
+families have one or two members, and the instability faults everywhere, which
+only the frequency and oscillation channels see.
+
+**What can honestly be said.** Signs and consensus fix the one class of error
+X34 could name (the dual-duct damper cases) and otherwise leave the picture
+where X34 left it: zone right, subsystem right in 85 %, exact component in 71 %,
+family from pattern alone in three of four resolved cases. Separating cause from
+response, or a stuck actuator from a biased sensor on the same loop, needs a
+witness these datasets do not record or a test the detector cannot run
+passively.

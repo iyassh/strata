@@ -161,7 +161,7 @@ def main() -> int:
     out["predictions"] = {"P1_family_ge_80pct": out["family"]["accuracy_resolved"] >= 0.80 and out["family"]["unresolved_rate"] <= 0.15,
                           "P2_component_exact_ge_78pct_and_wrong_lt_10pct": out["component"]["exact_rate"] >= 0.78 and out["component"]["wrong_rate"] < 0.10,
                           "P3_ddahu_damper_single_copy": all(r["consensus_reason"] == "single copy moves" for r in dd) and bool(dd),
-                          "P3_ddahu_bias_consensus": sum(1 for r in biases if r["consensus_reason"] == "consensus: all copies move"), "P3_ddahu_bias_n": len(biases),
+                          "P3_ddahu_bias_consensus": sum(1 for r in biases if str(r["consensus_reason"]).startswith("consensus: all")), "P3_ddahu_bias_n": len(biases),
                           "P4_fcu_unresolved_component": Counter(r["component_verdict_x37"] for r in rows if r["system"] == "fcu")}
     fired = []
     if not out["predictions"]["P1_family_ge_80pct"]: fired.append("F-X37.a: family accuracy below 80 % or unresolved above 15 %")

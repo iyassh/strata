@@ -257,3 +257,13 @@ Compile: exit 0, 43 pages, no undefined references, worst overfull box 9.3 pt. P
 ### Not verified in this pass
 - The X22, X30, X35 and X36 figures were not re-derived (first editor's spot-checks accepted).
 - The per-file E7 split and the onboarding wall-clock figure remain as the first editor left them (ONBOARDING_LOG.md agrees on 45 mappings, 35 rules and ~1.5 h; the commit timestamps were not re-derived).
+
+## Round 3 (second editor) — 2026-09-28, three cross-checks from the short-paper editor
+
+The short-paper editor reported three artefact mismatches in paper-v2.tex. Each was re-verified here before any change.
+
+1. Ledger row "X25 step 4" ("series unit loses 3 detections and 8 verdicts flip"). Two committed artefacts describe the step: outputs/x25_step4_perday.json (2026-09-24, before_commit fbc95bb: ddahu 48 → 45, sfpu 23 → 21, pfpu 23 → 22, fcu 42 → 40; F-X25.c on ddahu) and outputs/x25_statistical_repair.json (2026-09-25, before_commit 5bd7c5e, after the fan-law channel: sfpu 24 → 21, ddahu 45 → 45 with one lost and one gained, pfpu 23 → 22, fcu 42 → 40; F-X25.c on sfpu; 8 flips in both). The manuscript's row and the Limitations sentence ("removed seven residual-only detections, one of them offset on the dual-duct unit by a new fan-law channel": 1 + 3 + 1 + 2 = 7 lost, 1 gained) both follow the later artefact, so the row was not wrong; it now names both artefacts and the step-level losses, and the fired column says on which system the falsifier fired in each. Disagreement with the short-paper editor's reading recorded: the step-level file is not the one the paper's counts come from.
+2. "no component in 7 (frequency- or oscillation-only detections)": component_attribution.json rows with verdict unnamed are five PFPU and two SFPU scenarios carried by freq+osc, resid+osc, resid+freq+osc, osc, resid, freq+osc and osc. Three carry residual credit. Sentence corrected to the channels and scenarios the artefact shows. Confirmed.
+3. "79 sensor mappings" for the dual-duct unit versus x17_onboarding.json effort.sensor_mappings = 80. configs/lbnl_ddahu/sensors.yaml at c40144d has 80 canonical entries, one of which maps the Datetime column; the current file has 115 entries and sensor_coverage.json counts 114 data columns mapped of 114. The 79 is therefore recorded columns (the instrument Table 3 and the coverage table use) and 80 is canonical entries. Sentence now gives both.
+
+Ratings unchanged from Round 2 (overall 8.5). Compile: exit 0, 43 pages, no undefined references, worst overfull box 9.3 pt. PDF copied to both destinations.

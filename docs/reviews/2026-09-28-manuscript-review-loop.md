@@ -125,3 +125,19 @@ Compile: exit 0, 43 pages, no undefined references or citations, no overfull box
 5. Baseline subsection: duplicate statement of the refutation condition removed.
 
 Compile: exit 0, 43 pages, no undefined references, no overfull box above 10 pt. PDF copied to both destinations.
+
+## Round 4 — 2026-09-28 06:00–06:20 PDT
+
+### Ratings after Round 3 fixes
+
+| Section | Round 3 → Round 4 |
+|---|---|
+| Abstract 9 → 9 · Introduction 8.5 → 8.5 · Aims 8.5 → 8.5 · Related work 8.5 → 8.5 · Method 8.5 → 8.5 · Verification 8.5 → 8.5 · Results 9 → 9 · Refuted 8.5 → 8.5 · Errata 8.5 → 8.5 · Limitations 8.5 → 8.5 · Baseline 9 → 9 · Conclusion 9 → 9 · Ledger 9 → 9 | **Overall 8.7 → 8.8** |
+
+### Numbers spot-checked this round (all agree)
+matched_rules_*: SFPU mr2 141 = frequency 141; PFPU mr2 206 = frequency 206; MR1 healthy firings 231 / 124 / 0; SFPU oscillation-only instability scenario. x11_branch F-X11.d disclosure present. x12 worst holdout rate 0.0521 (five of 96). x27 static biases 6 of 8, deployed FP 3 → 3, F-X27.b. x28 F-X28.b. x30 F-X30.b with the two HM-align cells named. x24 and x22 no falsifier. Union artefacts' per-channel day lists: deployed false-alarm days without the two conformance channels are SFPU 9 → 4, PFPU 8 → 6, FCU 5 → 4 (one model-only day on the fan coil unit).
+
+### Gaps found → fixes made
+1. The abstract says removing the conformance channels lowers three systems' false-alarm rates; the results ablation paragraph named only two. The fan coil unit (5/96 → 4/96) added, with the recomputation stated.
+
+Nothing else found on the rendered Results opening, Limitations opening and attribution paragraph. Compile: exit 0, 43 pages, clean log. PDF copied to both destinations.

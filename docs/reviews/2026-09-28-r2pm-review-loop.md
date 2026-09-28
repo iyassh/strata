@@ -55,3 +55,32 @@ E5-footnote aside, and the conclusion's restatement of E3. Also fixed on the rea
 "four systems" while E8 and the conclusion cover the dual-duct AHU — now five (DDAHU, 56 files,
 `week0_audit_ddahu.json`). No number changed; no erratum or fired falsifier removed. Result: 8 pages,
 no undefined references, 14/14 citations resolve.
+
+## Round 2 — 2026-09-28 (after commit 9805a72)
+
+**Spot-checked numbers (all match):** PFPU/SFPU 31 + 31 = 62 hashes (`week0_audit.json`); E3
+thresholds 200.92543 = 401.85086/2 and 0.80373 = 1.60746/2 (midpoint rule as stated,
+`e3_leakage.json`); SA_SP per-file mean of day-medians 1.103–1.145 ("between 1.10 and 1.15");
+E5 five concordant estimators (four coi_bias + oa_bias_4), spread 0.001 (`x11_branch.json`);
+"forty years" = `DateOffset(years=40)` in `scripts/gates_injection.py`; FCU 49 files, one
+duplicate group; DDAHU 56 files (`week0_audit_ddahu.json`); 28 pre-registration plans in
+`docs/plans/`; 154 `def test` functions under `tests/`; FROZEN dict holds 12 closed artefacts at
+their closing commits; the 2026-09-11 open-fdd void was declared by two auditors
+(`docs/plans/NEXT-openfdd-baseline-repair.md`), Amendment 1 by two more.
+**ERRATA-only numbers (no JSON carries them):** "38 % exact zeros" (E1), "48.8 %" false-alarm rate
+(E1 relabel history), "0.05–0.14 °F" fault-vs-fault divergence (E5). Left as ERRATA.md is canonical;
+flagged here. "In under a second each" (public-log gates) is a runtime the script prints and does not
+commit — softened to "in seconds".
+
+**Ratings:** Abstract 8 · Intro 8 · Gates 8 · Protocol 8 · Defects 8 · Leak 8 · Taxonomy 8 ·
+Recommendations 7 · Disclosure 6 (author TODO) · Conclusion 7 · Overall 8.
+
+**Gaps found and fixed:**
+1. §3 said the regression gate "fails on any byte that differs"; `verdict_from_text` compares
+   flattened JSON values, not bytes → "any value".
+2. §3 said "an audit voided the first run" of X38; the 2026-09-11 void was two auditors
+   independently → "two hostile audits … two more voided the second".
+3. §2 credited the hash gate with E1 and E2 only; it also produced E6 (FCU) → "E1, E2 and E6".
+4. Comma splice in the voided-run sentence.
+5. "in under a second each" → "in seconds" (see above).
+Result: 8 pages, no undefined references.

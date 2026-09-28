@@ -90,3 +90,38 @@ Compile: exit 0, 43 pages, no undefined references or citations, no overfull box
 ### Left for Round 3
 - Full re-read for flow with fresh eyes; check every cross-reference target still says what the referring sentence claims.
 - Confirm the ledger appendix rows X34–X38 against the section text (bars and outcomes).
+
+## Round 3 — 2026-09-28 05:35–06:00 PDT
+
+### Ratings after Round 2 fixes
+
+| Section | Round 2 → Round 3 | Notes |
+|---|---|---|
+| Abstract | 8.5 → 9 | Rendered text read; nothing to change |
+| Introduction | 8 → 8.5 | |
+| Aims and objectives | 8.5 → 8.5 | Objective 3's "statistical repair, Section protocol" pointed at a section that does not describe the repair; redirected to the Limitations disclosure where it is described |
+| Related work | 8.5 → 8.5 | |
+| Method | 8.5 → 8.5 | Same misdirected reference in the noise-gate paragraph; fixed |
+| Verification | 8.5 → 8.5 | A self-reference ("the per-day repair of Section protocol" inside that section) redirected |
+| Results | 8.5 → 9 | Two misdirected references to the split/repair fixed; the opening sentence now says where the two rooftop units are reported |
+| Refuted or withdrawn | 8 → 8.5 | Ledger rows X34–X38 checked against the section text: consistent |
+| Errata | 8.5 → 8.5 | |
+| Limitations | 8 → 8.5 | "as the paragraph below records" → paragraphs; jitter cross-reference pointed to the wrong section, now "described below" |
+| Comparison against commercial practice | 8.5 → 9 | Refutation condition was stated twice after the Round 1 reorder; second statement removed |
+| Conclusion | 8.5 → 9 | "the division of labour the title names" → "the introduction states" (the title names the framework, not the division) |
+| Appendix ledger | 8.5 → 9 | |
+| **Overall** | **8.3 → 8.7** | |
+
+### Checks this round
+- Every \ref has a \label and every \cite a bibliography entry (scripted check; none missing).
+- Paragraph-opening scan for negative-leading sentences: the remaining ones open descriptive paragraphs (related work, protocol mechanics, the refuted-test narrative) and are not results framing.
+- Rendered abstract, baseline subsection and conclusion read in the PDF text for flow.
+
+### Gaps found → fixes made
+1. Five cross-references to "the statistical repair / three-way split of Section protocol" now point to the Limitations disclosure paragraph (and Figure 5) where the repair is described; one pointed from inside the protocol section to itself.
+2. Limitations: "as the paragraph below records" → "paragraphs"; jitter reference reworded.
+3. Results opening: rooftop units' sections named.
+4. Conclusion: "the title names" → "the introduction states".
+5. Baseline subsection: duplicate statement of the refutation condition removed.
+
+Compile: exit 0, 43 pages, no undefined references, no overfull box above 10 pt. PDF copied to both destinations.

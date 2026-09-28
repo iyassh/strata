@@ -705,12 +705,15 @@ travel with the numbers:
   self-detecting rules (post hoc, `G2_prime_post_hoc` in the ledger) gives 12 of
   14, 15 of 30 and 17 of 29 against STRATA's 13, 26 and 25, at a union
   false-alarm rate still 96 of 96 on the fan-powered units.
-- *G3's rule selection is in-sample.* Silence is judged on the whole fault-free
-  year including the 96 holdout days, then those rules' holdout days are
-  reported; STRATA's channels are selected on training days only. No numeric
-  effect here (FC13 has two training-day flags and stays silent), but the
-  SDAHU tie of 1 against 1 pairs a post-selection count with an out-of-sample
-  one.
+- *G3's rule selection is in-sample, and so is STRATA's.* Silence is judged on
+  the whole fault-free year including the 96 holdout days, then those rules'
+  holdout days are reported. Audit A read STRATA's selection as train-only;
+  the second manuscript editor checked `scripts/03_healthy_silence.py`, which
+  runs on the whole fault-free file, so the rules-channel zero is
+  post-selection on both sides (STRATA's one SDAHU holdout day is a
+  frequency-channel day on a training-fitted band). No numeric effect (FC13
+  has two training-day flags and stays silent); the SDAHU tie of 1 against 1
+  is a like-for-like tie.
 - *The outdoor-air-bias file is adjudicated on one side only.* STRATA's
   detection of it was removed by the branch adjudication (E5); the battery's
   (FC8, 65 days) is counted and is the sole battery-only file. FC8 passes the

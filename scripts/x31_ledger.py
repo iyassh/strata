@@ -29,6 +29,52 @@ def absence_fp_dates(system: str) -> list[str]:
     return [d for d in u.get("absence", {}).get("holdout_fp_dates", []) if d not in others]
 
 
+X35_EDGE = ["PFPU_ReheatCoilFouling_Airside_Moderate", "PFPU_ReheatCoilFouling_Airside_Severe", "PFPU_SensorBias_RMTEMP_+2C",
+            "SFPU_ReheatCoilFouling_Airside_Moderate", "DualDuct_Fouling_Heating_Waterside_Minor"]
+X35_SCORECARD = {"sdahu": 14, "pfpu": 26, "sfpu": 25, "ddahu": 50, "fcu": 43}
+
+
+def x35_predictions(out: dict) -> dict:
+    """X35 (docs/plans/2026-09-27-x35-field-conditions-post-coverage-prereg.md): the six bars as pre-registered,
+    evaluated on the same per-arm rows. The rows above keep X31's bars for the record; X35's are these."""
+    S = out["systems"]
+    p1, p2, p4, p5, edge_lost, p6 = [], [], [], [], [], []
+    for s, v in S.items():
+        if "error" in v:
+            continue
+        cd, cf = v["clean_detected"], v["clean_holdout_fp"]
+        if cd != X35_SCORECARD[s] or v.get("facade_matches_scorecard_fp_without_absence") is False:
+            p6.append((s, cd, X35_SCORECARD[s], cf, v.get("scorecard_holdout_fp_without_absence")))
+        for arm, r in v["conditions"].items():
+            if "error" in r:
+                continue
+            if not (r["holdout_fp_days"] <= 10 and r["holdout_fp_days"] <= cf + 3):
+                p1.append((s, arm, r["holdout_fp_days"], cf))
+            if arm in ("field_noise", "cov_gaps") and r["detected"] < cd - 4:
+                p2.append((s, arm, r["detected"], cd))
+            if arm == "schedule" and abs(r["detected"] - cd) > 3:
+                p4.append((s, arm, r["detected"], cd))
+            if arm == "combined" and r["detected"] < cd - 6:
+                p5.append((s, arm, r["detected"], cd))
+            if arm == "field_noise":
+                edge_lost += [f for f in r["lost"] if f in X35_EDGE]
+    pred = {"P1_budget_le_10_and_le_clean_plus_3": not p1, "P1_failures": p1,
+            "P2_noise_cov_within_minus_4": not p2, "P2_failures": p2,
+            "P3_ge_2_edge_recoveries_lost_under_noise": len(edge_lost) >= 2, "P3_edge_lost_under_noise": edge_lost,
+            "P4_schedule_within_pm_3": not p4, "P4_failures": p4,
+            "P5_combined_within_minus_6": not p5, "P5_failures": p5,
+            "P6_clean_arm_matches_scorecard": not p6, "P6_failures": p6}
+    fired = []
+    if p1: fired.append(f"F-X35.a: budget failed on {p1}")
+    if p2 or p5: fired.append(f"F-X35.b: detections lost beyond the bar on {p2 + p5}")
+    if p6: fired.append(f"F-X35.c: clean arm differs from the scorecard on {p6}")
+    if out["predictions"].get("not_evaluated"): fired.append(f"not evaluated: {out['predictions']['not_evaluated']}")
+    wrong = [k for k in ("P3_ge_2_edge_recoveries_lost_under_noise", "P4_schedule_within_pm_3") if not pred[k]]
+    return {"prereg": "docs/plans/2026-09-27-x35-field-conditions-post-coverage-prereg.md", "predictions": pred, "falsifiers_fired": fired,
+            "predictions_failed_without_falsifier": wrong,
+            "note": "X35's bars were added to this ledger after the arms had run (the ledger of 2026-09-27 evaluated X31's bars); the bars are copied from the pre-registration unchanged"}
+
+
 def main() -> int:
     out = {"prereg": "docs/plans/2026-09-24-x31-field-conditions-prereg.md", "systems": {}, "predictions": {}, "falsifiers_fired": []}
     p1_fail, p2_fail, p3_fail, p4_fail, not_eval = [], [], [], [], []
@@ -113,6 +159,8 @@ def main() -> int:
     if mism:
         out["falsifiers_fired"].append(f"Amendment 1: facade differs from the scorecard on {mism}")
     import sys as _s
+    if "--x35" in _s.argv:
+        out["x35"] = x35_predictions(out)
     _out = "outputs/x35_field_conditions.json" if "--x35" in _s.argv else "outputs/x31_field_conditions.json"
     (REPO / _out).write_text(json.dumps(out, indent=2) + "\n")
     for s, v in out["systems"].items():
@@ -123,6 +171,8 @@ def main() -> int:
                 print(f"[{s}] {arm:12s} NOT EVALUATED {r['error']}"); continue
             print(f"[{s}] {arm:12s} {r['detected']}/{r['n_scored']} (clean {v['clean_detected']}) fp {r['holdout_fp_days']}/{r['holdout_days']} (clean {v['clean_holdout_fp']}) gained {r['gained']} lost {r['lost']}")
     print(json.dumps(out["predictions"], indent=1)); print("falsifiers fired:", out["falsifiers_fired"] or "none")
+    if "x35" in out:
+        print("X35:", json.dumps(out["x35"]["predictions"], indent=1)); print("X35 falsifiers fired:", out["x35"]["falsifiers_fired"] or "none")
     return 0
 
 

@@ -503,3 +503,63 @@ family from pattern alone in three of four resolved cases. Separating cause from
 response, or a stuck actuator from a biased sensor on the same loop, needs a
 witness these datasets do not record or a test the detector cannot run
 passively.
+
+## X35 — field conditions on the post-coverage configurations, all five systems
+
+*Pre-registered (`docs/plans/2026-09-27-x35-field-conditions-post-coverage-prereg.md`)
+before any perturbed file was scored; configurations as of 36b9e6e. Same facade
+and arms as X31 (`scripts/x31_field_conditions.py`, unchanged); ledger
+`scripts/x31_ledger.py --x35` → `outputs/x35_field_conditions.json`; per-system
+artefacts `outputs/x31_field_conditions_<system>.json` regenerated (the X31
+artefacts of 2026-09-24 are under `outputs/x31_archive/`). Guard
+`tests/test_x35_field_conditions.py`. Deviation: the ledger of 2026-09-27
+evaluated X31's bars; X35's six bars were added to it after the arms had run,
+copied from the pre-registration unchanged, and both sets are in the artefact.
+The DDAHU `combined` arm was interrupted by a machine restart and re-run alone
+(`--arms combined`), resuming the artefact; the other four arms are the original
+run.*
+
+The coverage series added 73 residual rules, some with healthy bands 0.01–0.02
+units wide, and five of its sixteen recoveries sit less than one band width
+outside the healthy extremes. X31's robustness claim was dated to before the
+series. X35 asks whether the shipped configurations survive the same four
+conditions.
+
+| system | clean | field noise | COV + gaps | schedule | combined |
+|---|---|---|---|---|---|
+| SDAHU | 14/14 @ 1 | 14 @ 2 | 13 @ 0 | 14 @ 1 | 14 @ 2 |
+| PFPU | 26/30 @ 6 | 25 @ 6 | 25 @ 6 | 26 @ 7 | 25 @ 5 |
+| SFPU | 25/29 @ 4 | 25 @ 4 | 25 @ 6 | 25 @ 3 | 25 @ 3 |
+| DDAHU | 50/55 @ 0 | 50 @ 1 | 50 @ 2 | 50 @ 0 | 49 @ 2 |
+| FCU | 43/47 @ 4 | 43 @ 4 | 43 @ 4 | 43 @ 4 | 43 @ 2 |
+
+(detected @ holdout false-alarm days of 96; alignment channels off, so the
+absence channel is not exercised and DDAHU's clean arm shows 0 where the
+scorecard's 3 are absence days.)
+
+| P1 budget ≤ 10 and ≤ clean + 3 | P2 noise/COV within −4 | P3 ≥ 2 edge recoveries lost under noise | P4 schedule within ±3 | P5 combined within −6 | P6 clean arm = scorecard | falsifiers |
+|---|---|---|---|---|---|---|
+| ✓ worst 7/96 | ✓ worst −1 | ✗ one lost | ✓ worst 0 | ✓ worst −1 | ✓ all five | **none** |
+
+**Detections lost, all named.**
+- SDAHU outdoor-air bias 4 °C under COV + gaps (the same loss as X31; the
+  branch adjudication E5 already reads this file as provenance rather than fault).
+- PFPU reheat-coil airside fouling *moderate* under field noise, COV + gaps and
+  combined: the one edge recovery that noise removes. Its margin was the
+  smallest of the five (X33 series analysis), and it is the only one of the
+  five that moved. The other four edge recoveries (PFPU airside severe, PFPU
+  +2 °C bias, SFPU airside moderate, DDAHU heating waterside minor) held under
+  every condition.
+- DDAHU cooling-coil waterside fouling *moderate* under combined only.
+
+**False alarms.** The worst condition on any system is PFPU under the schedule
+shift at 7 of 96 (clean 6); no system exceeds clean + 2. The new narrow bands
+did not turn field noise into false alarms: the residual channel's holdout
+days under noise are 0, 3, 3, 1, 2 against clean 0, 3, 3, 0, 4.
+
+**Reading.** P3 predicted that the coverage series had bought fragile
+detections; one of five was fragile, four were not. The claim the papers can
+carry is the one X31 carried, now on the shipped configurations of all five
+systems: sensor error, change-of-value logging with gaps and schedule shifts
+cost at most one detection per system per condition and never break the
+budget.

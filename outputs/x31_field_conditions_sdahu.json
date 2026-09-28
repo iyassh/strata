@@ -41,19 +41,19 @@
         "coi_bias_4_annual": true,
         "oa_bias_4_annual": true
       },
-      "seconds": 32
+      "seconds": 196
     },
     "field_noise": {
       "detected": 14,
       "n_scored": 14,
-      "holdout_fp_days": 1,
+      "holdout_fp_days": 2,
       "holdout_days": 96,
       "per_channel_fp": {
         "rules": 0,
         "residual": 0,
         "absence": 0,
         "frequency": 1,
-        "oscillation": 0
+        "oscillation": 1
       },
       "per_scenario": {
         "damper_stuck_010_annual": true,
@@ -71,7 +71,7 @@
         "coi_bias_4_annual": true,
         "oa_bias_4_annual": true
       },
-      "seconds": 42
+      "seconds": 357
     },
     "cov_gaps": {
       "detected": 13,
@@ -101,7 +101,7 @@
         "coi_bias_4_annual": true,
         "oa_bias_4_annual": false
       },
-      "seconds": 43
+      "seconds": 374
     },
     "schedule": {
       "detected": 14,
@@ -131,19 +131,19 @@
         "coi_bias_4_annual": true,
         "oa_bias_4_annual": true
       },
-      "seconds": 47
+      "seconds": 283
     },
     "combined": {
       "detected": 14,
       "n_scored": 14,
-      "holdout_fp_days": 1,
+      "holdout_fp_days": 2,
       "holdout_days": 96,
       "per_channel_fp": {
         "rules": 0,
         "residual": 0,
         "absence": 0,
         "frequency": 1,
-        "oscillation": 0
+        "oscillation": 1
       },
       "per_scenario": {
         "damper_stuck_010_annual": true,
@@ -161,7 +161,7 @@
         "coi_bias_4_annual": true,
         "oa_bias_4_annual": true
       },
-      "seconds": 68
+      "seconds": 551
     }
   }
 }

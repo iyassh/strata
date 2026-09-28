@@ -1,6 +1,6 @@
 {
-  "clean_detected_no_alignment": 40,
-  "clean_holdout_fp_no_alignment": 3,
+  "clean_detected_no_alignment": 43,
+  "clean_holdout_fp_no_alignment": 4,
   "calendar": {
     "optimum_start_days": 52,
     "holidays": [
@@ -14,20 +14,20 @@
   },
   "conditions": {
     "clean": {
-      "detected": 40,
+      "detected": 43,
       "n_scored": 47,
-      "holdout_fp_days": 3,
+      "holdout_fp_days": 4,
       "holdout_days": 96,
       "per_channel_fp": {
         "rules": 0,
-        "residual": 3,
+        "residual": 4,
         "absence": 0,
         "frequency": 0,
         "oscillation": 0
       },
       "per_scenario": {
-        "FCU_OADMPRLeak_20": false,
-        "FCU_OADMPRLeak_50": false,
+        "FCU_OADMPRLeak_20": true,
+        "FCU_OADMPRLeak_50": true,
         "FCU_OADMPRLeak_80": true,
         "FCU_OADMPRStuck_0": true,
         "FCU_OADMPRStuck_30": true,
@@ -63,7 +63,7 @@
         "FCU_Fouling_Heating_Airside_Moderate": true,
         "FCU_Fouling_Heating_Airside_Severe": true,
         "FCU_Fouling_Heating_Waterside_Minor": false,
-        "FCU_Fouling_Heating_Waterside_Moderate": false,
+        "FCU_Fouling_Heating_Waterside_Moderate": true,
         "FCU_Fouling_Heating_Waterside_Severe": true,
         "FCU_FilterRestriction_10%": true,
         "FCU_FilterRestriction_20%": true,
@@ -74,24 +74,24 @@
         "FCU_Control_HeatingReverse": true,
         "FCU_Control_Unstable": true
       },
-      "seconds": 219
+      "seconds": 866
     },
     "field_noise": {
-      "detected": 39,
+      "detected": 43,
       "n_scored": 47,
-      "holdout_fp_days": 3,
+      "holdout_fp_days": 4,
       "holdout_days": 96,
       "per_channel_fp": {
         "rules": 0,
-        "residual": 1,
+        "residual": 2,
         "absence": 0,
         "frequency": 0,
         "oscillation": 2
       },
       "per_scenario": {
-        "FCU_OADMPRLeak_20": false,
-        "FCU_OADMPRLeak_50": false,
-        "FCU_OADMPRLeak_80": false,
+        "FCU_OADMPRLeak_20": true,
+        "FCU_OADMPRLeak_50": true,
+        "FCU_OADMPRLeak_80": true,
         "FCU_OADMPRStuck_0": true,
         "FCU_OADMPRStuck_30": true,
         "FCU_OADMPRStuck_50": true,
@@ -126,7 +126,7 @@
         "FCU_Fouling_Heating_Airside_Moderate": true,
         "FCU_Fouling_Heating_Airside_Severe": true,
         "FCU_Fouling_Heating_Waterside_Minor": false,
-        "FCU_Fouling_Heating_Waterside_Moderate": false,
+        "FCU_Fouling_Heating_Waterside_Moderate": true,
         "FCU_Fouling_Heating_Waterside_Severe": true,
         "FCU_FilterRestriction_10%": true,
         "FCU_FilterRestriction_20%": true,
@@ -137,23 +137,23 @@
         "FCU_Control_HeatingReverse": true,
         "FCU_Control_Unstable": true
       },
-      "seconds": 233
+      "seconds": 1336
     },
     "cov_gaps": {
-      "detected": 40,
+      "detected": 43,
       "n_scored": 47,
-      "holdout_fp_days": 3,
+      "holdout_fp_days": 4,
       "holdout_days": 96,
       "per_channel_fp": {
         "rules": 0,
-        "residual": 3,
+        "residual": 4,
         "absence": 0,
         "frequency": 0,
         "oscillation": 0
       },
       "per_scenario": {
-        "FCU_OADMPRLeak_20": false,
-        "FCU_OADMPRLeak_50": false,
+        "FCU_OADMPRLeak_20": true,
+        "FCU_OADMPRLeak_50": true,
         "FCU_OADMPRLeak_80": true,
         "FCU_OADMPRStuck_0": true,
         "FCU_OADMPRStuck_30": true,
@@ -189,7 +189,7 @@
         "FCU_Fouling_Heating_Airside_Moderate": true,
         "FCU_Fouling_Heating_Airside_Severe": true,
         "FCU_Fouling_Heating_Waterside_Minor": false,
-        "FCU_Fouling_Heating_Waterside_Moderate": false,
+        "FCU_Fouling_Heating_Waterside_Moderate": true,
         "FCU_Fouling_Heating_Waterside_Severe": true,
         "FCU_FilterRestriction_10%": true,
         "FCU_FilterRestriction_20%": true,
@@ -200,23 +200,23 @@
         "FCU_Control_HeatingReverse": true,
         "FCU_Control_Unstable": true
       },
-      "seconds": 300
+      "seconds": 1477
     },
     "schedule": {
-      "detected": 40,
+      "detected": 43,
       "n_scored": 47,
-      "holdout_fp_days": 3,
+      "holdout_fp_days": 4,
       "holdout_days": 96,
       "per_channel_fp": {
         "rules": 0,
-        "residual": 3,
+        "residual": 4,
         "absence": 0,
         "frequency": 0,
         "oscillation": 0
       },
       "per_scenario": {
-        "FCU_OADMPRLeak_20": false,
-        "FCU_OADMPRLeak_50": false,
+        "FCU_OADMPRLeak_20": true,
+        "FCU_OADMPRLeak_50": true,
         "FCU_OADMPRLeak_80": true,
         "FCU_OADMPRStuck_0": true,
         "FCU_OADMPRStuck_30": true,
@@ -252,7 +252,7 @@
         "FCU_Fouling_Heating_Airside_Moderate": true,
         "FCU_Fouling_Heating_Airside_Severe": true,
         "FCU_Fouling_Heating_Waterside_Minor": false,
-        "FCU_Fouling_Heating_Waterside_Moderate": false,
+        "FCU_Fouling_Heating_Waterside_Moderate": true,
         "FCU_Fouling_Heating_Waterside_Severe": true,
         "FCU_FilterRestriction_10%": true,
         "FCU_FilterRestriction_20%": true,
@@ -263,24 +263,24 @@
         "FCU_Control_HeatingReverse": true,
         "FCU_Control_Unstable": true
       },
-      "seconds": 258
+      "seconds": 901
     },
     "combined": {
-      "detected": 39,
+      "detected": 43,
       "n_scored": 47,
-      "holdout_fp_days": 1,
+      "holdout_fp_days": 2,
       "holdout_days": 96,
       "per_channel_fp": {
         "rules": 0,
-        "residual": 1,
+        "residual": 2,
         "absence": 0,
         "frequency": 0,
         "oscillation": 0
       },
       "per_scenario": {
-        "FCU_OADMPRLeak_20": false,
-        "FCU_OADMPRLeak_50": false,
-        "FCU_OADMPRLeak_80": false,
+        "FCU_OADMPRLeak_20": true,
+        "FCU_OADMPRLeak_50": true,
+        "FCU_OADMPRLeak_80": true,
         "FCU_OADMPRStuck_0": true,
         "FCU_OADMPRStuck_30": true,
         "FCU_OADMPRStuck_50": true,
@@ -315,7 +315,7 @@
         "FCU_Fouling_Heating_Airside_Moderate": true,
         "FCU_Fouling_Heating_Airside_Severe": true,
         "FCU_Fouling_Heating_Waterside_Minor": false,
-        "FCU_Fouling_Heating_Waterside_Moderate": false,
+        "FCU_Fouling_Heating_Waterside_Moderate": true,
         "FCU_Fouling_Heating_Waterside_Severe": true,
         "FCU_FilterRestriction_10%": true,
         "FCU_FilterRestriction_20%": true,
@@ -326,7 +326,7 @@
         "FCU_Control_HeatingReverse": true,
         "FCU_Control_Unstable": true
       },
-      "seconds": 371
+      "seconds": 1300
     }
   }
 }

@@ -1,0 +1,1419 @@
+{
+  "system": "sfpu",
+  "openfdd_version": "4.4.1",
+  "prereg": "docs/plans/2026-09-27-x38-guideline36-repaired-prereg.md",
+  "ahu_rules": [
+    "FC1",
+    "FC2",
+    "FC3",
+    "FC4",
+    "FC5",
+    "FC6",
+    "FC7",
+    "FC8",
+    "FC9",
+    "FC10",
+    "FC11",
+    "FC12",
+    "FC13",
+    "FC14",
+    "FC15"
+  ],
+  "tu_rules": [
+    "VAV-1",
+    "VAV-2",
+    "VAV-3",
+    "VAV-4",
+    "VAV-5",
+    "VAV-6",
+    "VAV-7",
+    "VAV-REHEAT",
+    "VAV-AHU-LEAVE",
+    "SCHED-247",
+    "PID-HUNT-1"
+  ],
+  "ahu_role_map": {
+    "outside-air-temp": "OA_TEMP",
+    "discharge-air-temp": "SA_TEMP",
+    "discharge-air-temp-sp": "SA_TEMPSPT",
+    "mixed-air-temp": "MA_TEMP",
+    "return-air-temp": "RA_TEMP",
+    "cooling-valve": "CHWC_VLV",
+    "outside-air-damper": "OA_DMPR",
+    "duct-static-pressure": "SA_SP",
+    "duct-static-pressure-sp": "SA_SPSPT",
+    "vav-total-airflow": "SA_CFM",
+    "fan-cmd": "SF_SPD",
+    "fan-status": "SF_CS",
+    "heating-valve": "HWC_VLV",
+    "cooling-coil-entering-temp": "HWC_DAT",
+    "cooling-coil-leaving-temp": "CHWC_DAT",
+    "heating-coil-entering-temp": "MA_TEMP",
+    "heating-coil-leaving-temp": "HWC_DAT"
+  },
+  "tu_role_map_zone_S": {
+    "zone-air-temp": "RM_TEMP_S",
+    "reheat-valve": "RH_VLV_S",
+    "damper": "VAV_DMPR_S",
+    "zone-airflow": "VAV_PM_CFM_S",
+    "vav-discharge-air-temp": "VAV_DAT_S",
+    "vav-inlet-air-temp": "SA_TEMP",
+    "ahu-discharge-air-temp": "SA_TEMP",
+    "outside-air-temp": "OA_TEMP",
+    "occupied": "SYS_CTL"
+  },
+  "params_overridden": {},
+  "site_arm_params": {
+    "FC6": {
+      "min_cfm_design": 396.89
+    }
+  },
+  "e3_static_repair": false,
+  "amendment": 1,
+  "not_applicable": {
+    "VAV-AHU-LEAVE": "single-duct rule: a fan-powered box mixes plenum air by design (A5)",
+    "FC6@sdahu": "SA_CFM is not in cfm on SDAHU (median 4.96e5, no documented unit) (A6)"
+  },
+  "strata_sdahu_e5_adjudicated": false,
+  "clean_year": {
+    "healthy_file": "SFPU_FaultFree",
+    "holdout_days": 96,
+    "holdout_fp_days_all_rules": 96,
+    "holdout_fp_days_minus_noisiest": 95,
+    "noisiest_rule": "FC6",
+    "per_rule_holdout_fp_days": {
+      "FC1": 0,
+      "FC2": 0,
+      "FC3": 0,
+      "FC4": 0,
+      "FC5": 0,
+      "FC6": 96,
+      "FC7": 0,
+      "FC8": 1,
+      "FC9": 4,
+      "FC10": 0,
+      "FC11": 0,
+      "FC12": 0,
+      "FC13": 9,
+      "FC14": 0,
+      "FC15": 0,
+      "VAV-1": 69,
+      "VAV-2": 95,
+      "VAV-3": 0,
+      "VAV-4": 0,
+      "VAV-5": 0,
+      "VAV-6": 28,
+      "VAV-7": 69,
+      "VAV-REHEAT": 0,
+      "SCHED-247": 0,
+      "PID-HUNT-1": 0,
+      "VAV-AHU-LEAVE": 0
+    },
+    "per_rule_full_year_flag_days": {
+      "FC1": 0,
+      "FC2": 0,
+      "FC3": 0,
+      "FC4": 0,
+      "FC5": 0,
+      "FC6": 365,
+      "FC7": 0,
+      "FC8": 10,
+      "FC9": 10,
+      "FC10": 0,
+      "FC11": 3,
+      "FC12": 0,
+      "FC13": 58,
+      "FC14": 0,
+      "FC15": 0,
+      "VAV-1": 261,
+      "VAV-2": 363,
+      "VAV-3": 0,
+      "VAV-4": 0,
+      "VAV-5": 0,
+      "VAV-6": 99,
+      "VAV-7": 262,
+      "VAV-REHEAT": 0,
+      "SCHED-247": 0,
+      "PID-HUNT-1": 0,
+      "VAV-AHU-LEAVE": 0
+    },
+    "healthy_year_silent_rules": [
+      "FC1",
+      "FC10",
+      "FC11",
+      "FC12",
+      "FC14",
+      "FC15",
+      "FC2",
+      "FC3",
+      "FC4",
+      "FC5",
+      "FC7",
+      "PID-HUNT-1",
+      "SCHED-247",
+      "VAV-3",
+      "VAV-4",
+      "VAV-5",
+      "VAV-AHU-LEAVE",
+      "VAV-REHEAT"
+    ],
+    "site_arm": {
+      "params": {
+        "FC6": {
+          "min_cfm_design": 396.89
+        }
+      },
+      "holdout_fp_days_all_rules": 96,
+      "holdout_fp_days_minus_noisiest": 95,
+      "noisiest_rule": "FC6",
+      "per_rule_holdout_fp_days": {
+        "FC1": 0,
+        "FC2": 0,
+        "FC3": 0,
+        "FC4": 0,
+        "FC5": 0,
+        "FC6": 95,
+        "FC7": 0,
+        "FC8": 1,
+        "FC9": 4,
+        "FC10": 0,
+        "FC11": 0,
+        "FC12": 0,
+        "FC13": 9,
+        "FC14": 0,
+        "FC15": 0,
+        "VAV-1": 69,
+        "VAV-2": 95,
+        "VAV-3": 0,
+        "VAV-4": 0,
+        "VAV-5": 0,
+        "VAV-6": 28,
+        "VAV-7": 69,
+        "VAV-REHEAT": 0,
+        "SCHED-247": 0,
+        "PID-HUNT-1": 0,
+        "VAV-AHU-LEAVE": 0
+      }
+    },
+    "full_year_fp_days_all_rules": 365,
+    "full_year_days": 365,
+    "rule_status": {
+      "FC1": "not_fired",
+      "FC2": "not_fired",
+      "FC3": "not_fired",
+      "FC4": "not_fired",
+      "FC5": "not_fired",
+      "FC6": "fired",
+      "FC7": "not_fired",
+      "FC8": "fired",
+      "FC9": "fired",
+      "FC10": "not_fired",
+      "FC11": "fired",
+      "FC12": "not_fired",
+      "FC13": "fired",
+      "FC14": "not_fired",
+      "FC15": "not_fired"
+    },
+    "tu_rule_status_zone_S": {
+      "VAV-1": "fired",
+      "VAV-2": "fired",
+      "VAV-3": "not_fired",
+      "VAV-4": "not_fired",
+      "VAV-5": "not_fired",
+      "VAV-6": "fired",
+      "VAV-7": "fired",
+      "VAV-REHEAT": "not_fired",
+      "SCHED-247": "not_fired",
+      "PID-HUNT-1": "not_fired",
+      "VAV-AHU-LEAVE": "not_applicable (single-duct rule: a fan-powered box mixes plenum air by desi)"
+    }
+  },
+  "scenarios": [
+    {
+      "file": "SFPU_RMTEMPUnstable",
+      "family": "instability",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "PID-HUNT-1"
+      ],
+      "G3_rules_channel": true,
+      "G3_rules": [
+        "PID-HUNT-1"
+      ],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "PID-HUNT-1"
+        ],
+        "G3_rules_channel": true,
+        "G3_rules": [
+          "PID-HUNT-1"
+        ]
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Minor",
+      "family": "coil_fouling",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "family": "coil_fouling",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Airside_Severe",
+      "family": "coil_fouling",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Minor",
+      "family": "coil_fouling",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Moderate",
+      "family": "coil_fouling",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_ReheatCoilFouling_Waterside_Severe",
+      "family": "coil_fouling",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "family": "reheat_leak",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 365,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-4"
+      ],
+      "G3_rules_channel": true,
+      "G3_rules": [
+        "VAV-4"
+      ],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 365,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-4"
+        ],
+        "G3_rules_channel": true,
+        "G3_rules": [
+          "VAV-4"
+        ]
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 365,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "family": "reheat_leak",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 365,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-4"
+      ],
+      "G3_rules_channel": true,
+      "G3_rules": [
+        "VAV-4"
+      ],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 365,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-4"
+        ],
+        "G3_rules_channel": true,
+        "G3_rules": [
+          "VAV-4"
+        ]
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 365,
+        "VAV-7": 266
+      }
+    },
+    {
+      "file": "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "family": "reheat_leak",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 365,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-4"
+      ],
+      "G3_rules_channel": true,
+      "G3_rules": [
+        "VAV-4"
+      ],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 365,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-4"
+        ],
+        "G3_rules_channel": true,
+        "G3_rules": [
+          "VAV-4"
+        ]
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 365,
+        "VAV-7": 268
+      }
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_0%",
+      "family": "reheat_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 365,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 365,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 266
+      }
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_100%",
+      "family": "reheat_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 365,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-3",
+        "VAV-4",
+        "VAV-6"
+      ],
+      "G3_rules_channel": true,
+      "G3_rules": [
+        "VAV-3",
+        "VAV-4"
+      ],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 365,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-3",
+          "VAV-4",
+          "VAV-6"
+        ],
+        "G3_rules_channel": true,
+        "G3_rules": [
+          "VAV-3",
+          "VAV-4"
+        ]
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 365,
+        "VAV-6": 302
+      }
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_20%",
+      "family": "reheat_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_50%",
+      "family": "reheat_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 365,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-4",
+        "VAV-6"
+      ],
+      "G3_rules_channel": true,
+      "G3_rules": [
+        "VAV-4"
+      ],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 365,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-4",
+          "VAV-6"
+        ],
+        "G3_rules_channel": true,
+        "G3_rules": [
+          "VAV-4"
+        ]
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 365,
+        "VAV-6": 303
+      }
+    },
+    {
+      "file": "SFPU_ReheatVLVStuck_80%",
+      "family": "reheat_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 365,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-3",
+        "VAV-4",
+        "VAV-6"
+      ],
+      "G3_rules_channel": true,
+      "G3_rules": [
+        "VAV-3",
+        "VAV-4"
+      ],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 365,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-3",
+          "VAV-4",
+          "VAV-6"
+        ],
+        "G3_rules_channel": true,
+        "G3_rules": [
+          "VAV-3",
+          "VAV-4"
+        ]
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 365,
+        "VAV-6": 303
+      }
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_+2C",
+      "family": "rmtemp_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_+4C",
+      "family": "rmtemp_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-4"
+      ],
+      "G3_rules_channel": true,
+      "G3_rules": [
+        "VAV-4"
+      ],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-4"
+        ],
+        "G3_rules_channel": true,
+        "G3_rules": [
+          "VAV-4"
+        ]
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_SensorBias_RMTEMP_-4C",
+      "family": "rmtemp_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 365,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-6"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 365,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-6"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 364,
+        "VAV-2": 360,
+        "VAV-7": 279
+      }
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_+200CFM",
+      "family": "airflow_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "FC8"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "FC8"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 263
+      }
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_+400CFM",
+      "family": "airflow_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "FC8"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "FC8"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_-200CFM",
+      "family": "airflow_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-6"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-6"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 362,
+        "VAV-1": 261
+      }
+    },
+    {
+      "file": "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "family": "airflow_bias",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 363,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "FC9",
+        "VAV-6"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 363,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "FC9",
+          "VAV-6"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 363,
+        "VAV-2": 362,
+        "VAV-1": 261
+      }
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_0%",
+      "family": "damper_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "FC8",
+        "FC9",
+        "VAV-7"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "FC8",
+          "FC9",
+          "VAV-7"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 364,
+        "VAV-2": 363,
+        "VAV-7": 299
+      }
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_100%",
+      "family": "damper_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 365,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "FC9",
+        "VAV-4",
+        "VAV-6"
+      ],
+      "G3_rules_channel": true,
+      "G3_rules": [
+        "VAV-4"
+      ],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 365,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "FC9",
+          "VAV-4",
+          "VAV-6"
+        ],
+        "G3_rules_channel": true,
+        "G3_rules": [
+          "VAV-4"
+        ]
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-4": 365,
+        "VAV-2": 362
+      }
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_20%",
+      "family": "damper_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 364,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_50%",
+      "family": "damper_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "VAV-6"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "VAV-6"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 364,
+        "VAV-2": 362,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_VAVDMPRStuck_80%",
+      "family": "damper_stuck",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 362,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13",
+        "FC9",
+        "VAV-6"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 362,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13",
+          "FC9",
+          "VAV-6"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 362,
+        "VAV-1": 261
+      }
+    },
+    {
+      "file": "SFPU_VAVDMPRUnstable",
+      "family": "instability",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 262
+      }
+    },
+    {
+      "file": "SFPU_VAVFanRestrictFlow",
+      "family": "fan_restrict",
+      "total_days": 365,
+      "flag_days_all_rules": 365,
+      "flag_days_minus_noisiest": 364,
+      "detected_raw": true,
+      "detected_gated_all_rules": false,
+      "detected_gated_minus_noisiest": false,
+      "G2_per_rule": true,
+      "G2_rules": [
+        "FC13"
+      ],
+      "G3_rules_channel": false,
+      "G3_rules": [],
+      "site_arm": {
+        "flag_days_all_rules": 365,
+        "flag_days_minus_noisiest": 364,
+        "G1_pooled_all_rules": false,
+        "G1_pooled_minus_noisiest": false,
+        "G2_per_rule": true,
+        "G2_rules": [
+          "FC13"
+        ],
+        "G3_rules_channel": false,
+        "G3_rules": []
+      },
+      "top_rules": {
+        "FC6": 365,
+        "VAV-2": 363,
+        "VAV-7": 263
+      }
+    }
+  ],
+  "battery": {
+    "detected_raw": 29,
+    "detected_gated_all_rules": 0,
+    "detected_gated_minus_noisiest": 0,
+    "scored": 29,
+    "G2_per_rule": 29,
+    "G3_rules_channel": 9,
+    "G2_files": [
+      "SFPU_RMTEMPUnstable",
+      "SFPU_ReheatCoilFouling_Airside_Minor",
+      "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "SFPU_ReheatCoilFouling_Airside_Severe",
+      "SFPU_ReheatCoilFouling_Waterside_Minor",
+      "SFPU_ReheatCoilFouling_Waterside_Moderate",
+      "SFPU_ReheatCoilFouling_Waterside_Severe",
+      "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_0%",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_20%",
+      "SFPU_ReheatVLVStuck_50%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_+2C",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_SensorBias_RMTEMP_-4C",
+      "SFPU_SensorBias_VAVAirflow_+200CFM",
+      "SFPU_SensorBias_VAVAirflow_+400CFM",
+      "SFPU_SensorBias_VAVAirflow_-200CFM",
+      "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_20%",
+      "SFPU_VAVDMPRStuck_50%",
+      "SFPU_VAVDMPRStuck_80%",
+      "SFPU_VAVDMPRUnstable",
+      "SFPU_VAVFanRestrictFlow"
+    ],
+    "G3_files": [
+      "SFPU_RMTEMPUnstable",
+      "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_50%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_VAVDMPRStuck_100%"
+    ],
+    "site_arm": {
+      "G1_all": 0,
+      "G1_demoted": 0,
+      "G2": 29,
+      "G3": 9,
+      "G2_files": [
+        "SFPU_RMTEMPUnstable",
+        "SFPU_ReheatCoilFouling_Airside_Minor",
+        "SFPU_ReheatCoilFouling_Airside_Moderate",
+        "SFPU_ReheatCoilFouling_Airside_Severe",
+        "SFPU_ReheatCoilFouling_Waterside_Minor",
+        "SFPU_ReheatCoilFouling_Waterside_Moderate",
+        "SFPU_ReheatCoilFouling_Waterside_Severe",
+        "SFPU_ReheatVLVLeak_20%MaxFlow",
+        "SFPU_ReheatVLVLeak_50%MaxFlow",
+        "SFPU_ReheatVLVLeak_80%MaxFlow",
+        "SFPU_ReheatVLVStuck_0%",
+        "SFPU_ReheatVLVStuck_100%",
+        "SFPU_ReheatVLVStuck_20%",
+        "SFPU_ReheatVLVStuck_50%",
+        "SFPU_ReheatVLVStuck_80%",
+        "SFPU_SensorBias_RMTEMP_+2C",
+        "SFPU_SensorBias_RMTEMP_+4C",
+        "SFPU_SensorBias_RMTEMP_-4C",
+        "SFPU_SensorBias_VAVAirflow_+200CFM",
+        "SFPU_SensorBias_VAVAirflow_+400CFM",
+        "SFPU_SensorBias_VAVAirflow_-200CFM",
+        "SFPU_SensorBias_VAVAirflow_-400CFM",
+        "SFPU_VAVDMPRStuck_0%",
+        "SFPU_VAVDMPRStuck_100%",
+        "SFPU_VAVDMPRStuck_20%",
+        "SFPU_VAVDMPRStuck_50%",
+        "SFPU_VAVDMPRStuck_80%",
+        "SFPU_VAVDMPRUnstable",
+        "SFPU_VAVFanRestrictFlow"
+      ],
+      "G3_files": [
+        "SFPU_RMTEMPUnstable",
+        "SFPU_ReheatVLVLeak_20%MaxFlow",
+        "SFPU_ReheatVLVLeak_50%MaxFlow",
+        "SFPU_ReheatVLVLeak_80%MaxFlow",
+        "SFPU_ReheatVLVStuck_100%",
+        "SFPU_ReheatVLVStuck_50%",
+        "SFPU_ReheatVLVStuck_80%",
+        "SFPU_SensorBias_RMTEMP_+4C",
+        "SFPU_VAVDMPRStuck_100%"
+      ]
+    }
+  },
+  "strata": {
+    "detected": 25,
+    "scored": 29,
+    "holdout_fp_all8": 9,
+    "holdout_fp_minus_rate": 9,
+    "holdout_days": 96,
+    "detected_files": [
+      "SFPU_RMTEMPUnstable",
+      "SFPU_ReheatCoilFouling_Airside_Moderate",
+      "SFPU_ReheatCoilFouling_Airside_Severe",
+      "SFPU_ReheatVLVLeak_20%MaxFlow",
+      "SFPU_ReheatVLVLeak_50%MaxFlow",
+      "SFPU_ReheatVLVLeak_80%MaxFlow",
+      "SFPU_ReheatVLVStuck_0%",
+      "SFPU_ReheatVLVStuck_100%",
+      "SFPU_ReheatVLVStuck_20%",
+      "SFPU_ReheatVLVStuck_50%",
+      "SFPU_ReheatVLVStuck_80%",
+      "SFPU_SensorBias_RMTEMP_+2C",
+      "SFPU_SensorBias_RMTEMP_+4C",
+      "SFPU_SensorBias_RMTEMP_-4C",
+      "SFPU_SensorBias_VAVAirflow_+200CFM",
+      "SFPU_SensorBias_VAVAirflow_+400CFM",
+      "SFPU_SensorBias_VAVAirflow_-200CFM",
+      "SFPU_SensorBias_VAVAirflow_-400CFM",
+      "SFPU_VAVDMPRStuck_0%",
+      "SFPU_VAVDMPRStuck_100%",
+      "SFPU_VAVDMPRStuck_20%",
+      "SFPU_VAVDMPRStuck_50%",
+      "SFPU_VAVDMPRStuck_80%",
+      "SFPU_VAVDMPRUnstable",
+      "SFPU_VAVFanRestrictFlow"
+    ]
+  },
+  "battery_gated_detected_files": []
+}

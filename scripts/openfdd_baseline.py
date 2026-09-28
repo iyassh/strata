@@ -246,6 +246,27 @@ def run_system(system: str) -> dict:
             "battery_gated_detected_files": sorted(r["file"] for r in rows if r["detected_gated_all_rules"])}
 
 
+def silent_union_fp(system: str, silent: list[str]) -> dict:
+    """G3's false-alarm side: the union of the healthy-year-silent rules' holdout days (the rules G3 keeps),
+    recomputed from the healthy file because the artefact stores per-rule counts, not dates."""
+    from strata.core.splits import holdout_mask
+    cfg = yaml.safe_load((ROOT / "configs" / CONFIG_DIR[system] / "scenarios.yaml").read_text())
+    healthy = pd.read_parquet(ROOT / "data" / "processed" / system / f"{cfg['healthy_file']}.parquet")
+    all_days = sorted(set(day_key(time_index(healthy)))); s = pd.Series(all_days); hold = set(s[holdout_mask(s, 8).to_numpy()])
+    poll = poll_seconds_of(healthy); dates: dict[str, set] = {}
+    ahu = [r for r in silent if r in AHU_RULES]
+    if ahu:
+        for rid, v in run_battery(to_frame(healthy, AHU_ROLE_MAP[system], system, True), poll, ahu).items(): dates.setdefault(rid, set()).update(v["flag_dates"])
+    tu = [r for r in silent if r in TU_BATTERY or r == "PID-HUNT-1" or r == "SCHED-247"]
+    if tu and system in ("pfpu", "sfpu"):
+        res = score_file(healthy, system, True)
+        for z, rr in res["tu"].items():
+            for rid, v in rr.items():
+                if rid in tu: dates.setdefault(rid, set()).update(v["flag_dates"])
+    union = set().union(*dates.values()) if dates else set()
+    return {"rules": silent, "holdout_fp_days": len(union & hold), "per_rule": {r: len(d & hold) for r, d in dates.items()}}
+
+
 def ledger() -> dict:
     out = {"prereg": "docs/plans/2026-09-27-x38-guideline36-repaired-prereg.md", "amendment": 1, "run": 2,
            "run1": "outputs/openfdd_baseline_<system>_run1.json, outputs/x38_guideline36_run1.json (adapter defects; not quoted)", "systems": {}}
@@ -263,12 +284,16 @@ def ledger() -> dict:
                              "battery_only_gated": sorted(set(a["battery_gated_detected_files"]) - set(st["detected_files"])),
                              "battery_only_G2": sorted(set(b["G2_files"]) - set(st["detected_files"])), "battery_only_G3": sorted(set(b["G3_files"]) - set(st["detected_files"])),
                              "strata_only_gated": sorted(set(st["detected_files"]) - set(a["battery_gated_detected_files"]))}
+        out["systems"][s]["G3_false_alarms"] = silent_union_fp(s, c.get("healthy_year_silent_rules", []))
+        print(f"[{s}] G3 false alarms (silent rules' holdout days): {out['systems'][s]['G3_false_alarms']}", flush=True)
     S = out["systems"]; h = S["sdahu"]
     p1 = h["battery_fp_all"] / h["holdout_days"] > 0.30 and h["battery_gated"] < 13
     p2 = all(S[s]["battery_raw"] >= S[s]["scored"] / 2 and S[s]["battery_fp_all"] / S[s]["holdout_days"] > 0.10 for s in ("pfpu", "sfpu"))
     def p3_ok(s, det_key, fp_all_key="battery_fp_all", fp_dem_key="battery_fp_demoted"):
         return S[s]["strata_detected"] >= S[s][det_key] and S[s]["strata_fp_all8"] < S[s][fp_all_key] and S[s]["strata_fp_minus_rate"] < S[s][fp_dem_key]
-    p3 = {"G1": all(p3_ok(s, "battery_gated") for s in S), "G2": all(S[s]["strata_detected"] >= S[s]["battery_G2"] for s in S), "G3": all(S[s]["strata_detected"] >= S[s]["battery_G3"] for s in S),
+    p3 = {"G1": all(p3_ok(s, "battery_gated") for s in S), "G2": all(S[s]["strata_detected"] >= S[s]["battery_G2"] for s in S),
+          # P3 as worded: at least as many detections AND a lower false-alarm rate; equal false alarms = "matches" = F-X38.a
+          "G3": all(S[s]["strata_detected"] >= S[s]["battery_G3"] and S[s]["strata_fp_minus_rate"] < S[s]["G3_false_alarms"]["holdout_fp_days"] for s in S),
           "S": all(S[s]["site_arm"] is None or (S[s]["strata_detected"] >= max(S[s]["site_arm"]["G1_all"], S[s]["site_arm"]["G2"], S[s]["site_arm"]["G3"]) and S[s]["strata_fp_all8"] < S[s]["site_arm"]["fp_all"]) for s in S)}
     p4 = all(len(S[s]["battery_only_gated"]) <= 2 for s in ("pfpu", "sfpu"))
     p5 = h["battery_G2"] >= 1 and p3["G2"]
@@ -277,7 +302,12 @@ def ledger() -> dict:
     out["predictions"] = {"P1_sdahu_battery_fp_gt_30pct_and_gated_lt_13": p1, "P2_tu_battery_raw_ge_half_at_fp_gt_10pct": p2,
                           "P3_strata_ge_battery_and_lower_fp": p3, "P4_battery_only_le_2": p4,
                           "P5_G2_sdahu_ge_1_and_strata_ge": p5, "P6_G3_le_3_silent_rules_and_subset": p6, "P7_site_arm_FC6_lt_10_union_gt_30pct": p7}
-    fired = [f"F-X38.a ({k}): current practice matches or beats STRATA under framing {k} on {[s for s in S if not (p3_ok(s, 'battery_gated') if k == 'G1' else True)]}" for k, v in p3.items() if not v]
+    def p3_sys(k):
+        if k == "G1": return [s for s in S if not p3_ok(s, "battery_gated")]
+        if k == "G2": return [s for s in S if not S[s]["strata_detected"] >= S[s]["battery_G2"]]
+        if k == "G3": return [s for s in S if not (S[s]["strata_detected"] >= S[s]["battery_G3"] and S[s]["strata_fp_minus_rate"] < S[s]["G3_false_alarms"]["holdout_fp_days"])]
+        return [s for s in S if S[s]["site_arm"] and not (S[s]["strata_detected"] >= max(S[s]["site_arm"]["G1_all"], S[s]["site_arm"]["G2"], S[s]["site_arm"]["G3"]) and S[s]["strata_fp_all8"] < S[s]["site_arm"]["fp_all"])]
+    fired = [f"F-X38.a ({k}): current practice matches or beats STRATA under framing {k} on {p3_sys(k)}" for k, v in p3.items() if not v]
     out["falsifiers_fired"] = fired
     out["predictions_failed_without_falsifier"] = [k for k, v in {"P1": p1, "P2": p2, "P4": p4, "P5": p5, "P6": p6, "P7": p7}.items() if not v]
     (ROOT / "outputs" / "x38_guideline36.json").write_text(json.dumps(out, indent=2) + "\n")

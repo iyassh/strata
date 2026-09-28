@@ -600,3 +600,96 @@ currently missed scenario comes within reach, so the misses are not a
 calibration margin away. The deployed calibration stays [min, max] with floors;
 X31's single-day fragility is a property of the band edge, not a reason to move
 it inward.
+
+## X38 — the open-fdd Guideline 36 battery, repaired: current practice on the same exam
+
+*Pre-registered (`docs/plans/2026-09-27-x38-guideline36-repaired-prereg.md`,
+12dfa92) before the repaired adapter ran; the 2026-09-11 artefacts are void and
+live in `outputs/void/`. Run 1 (2026-09-28 02:30–03:17) held every prediction
+with the battery flagging 77, 96 and 96 of 96 healthy holdout days; two
+independent audits then found six adapter defects and one defect of the
+pre-registered design, all recorded in Amendment 1 (aa40f2a, written before the
+re-run; run-1 artefacts kept as `*_run1.json`, not quoted). Run 2 is reported
+here. Artefacts `outputs/openfdd_baseline_{sdahu,pfpu,sfpu}.json`,
+`outputs/x38_guideline36.json`; guard `tests/test_x38_guideline36.py`.*
+
+**What was repaired between the runs.** SDAHU's fan command was a dead constant
+(SF_SPD = 0.9 on every row, which the project's own sensor map records), so FC1's
+full-speed condition was always true; the terminal-unit rules were gated on the
+box fan, which on a parallel unit runs only while heating; the hunting rule read
+a binary fan status as a hunting loop; night-cycle was graded as occupied; a
+single-duct leaving-air rule was applied to boxes that mix plenum air by design;
+FC6 on SDAHU read a column that is not in cfm. The design defect: gating the
+battery once, on the pooled union of its rules, is a tautology when the union
+flags every healthy day (floor 1.0). Amendment 1 therefore reports three
+framings and applies the falsifier to each: G1 pooled (as pre-registered), G2
+per rule against its own holdout false alarms (STRATA's per-channel structure),
+G3 the rules-channel treatment (only rules silent on the healthy year, ≤ 3 days
+of 365, held to the 3/365 null), plus a site-datum arm S for FC6.
+
+| system | scored | battery raw | G1 pooled (all / demoted) | G2 per rule | G3 silent rules @ FP | STRATA @ FP (minus-rate / all eight) |
+|---|---|---|---|---|---|---|
+| SDAHU | 14 | 14 | 1 / 7 @ 49 / 33 | 12 | **12 @ 1** | **13 @ 1** / 15 |
+| PFPU | 30 | 30 | 0 / 0 @ 96 / 96 | 30† | **8 @ 0** | **26 @ 8** / 15 |
+| SFPU | 29 | 29 | 0 / 0 @ 96 / 95 | 29† | **9 @ 0** | **25 @ 9** / 9 |
+
+(FP = healthy holdout false-alarm days of 96. STRATA's SDAHU count is 13 because
+the outdoor-air-bias detection is adjudicated as branch provenance, ERRATA E5.
+† not detection: see below.)
+
+| P1 | P2 | P3 (G1 / G2 / G3 / S) | P4 | P5 | P6 | P7 | falsifiers |
+|---|---|---|---|---|---|---|---|
+| ✓ | ✓ (vacuous) | ✓ / ✗ / ✗ / ✗ | ✓ | ✗ | ✗ | ✗ | **F-X38.a fired under G2 (PFPU, SFPU), G3 (all three) and S (PFPU, SFPU)** |
+
+**G2 on the fan-powered units is not detection.** FC9, FC13 and FC14 flag the
+*identical* day sets on the healthy file and on every fault file (88, 130 and 72
+days of 365): the fault files' air-handler columns are the healthy file's. They
+pass the per-rule gate because each rule's holdout rate (FC9 14 of 96, 14.6 %)
+sits below its full-year rate (24 %), and 88 of 365 against a 14.6 % null is
+significant at p < 10⁻³. That is the gate STRATA's channels are held to, and
+STRATA does not suffer it because its onboarding silences every rule on the
+whole training year before the holdout floor is measured. The lesson is a
+property of the floor, recorded as such: a holdout-sample null is only valid for
+a channel that is stationary across the year, and silence on the training year
+is what makes STRATA's channels so.
+
+**G3 is the framing that compares like with like.** With the battery treated
+exactly as STRATA treats its own signature rules — keep what is silent on the
+healthy year, hold it to 3/365 — the repaired open-fdd battery detects 12 of 14
+on the single-duct air handler at 1 false-alarm day (FC8, FC10, FC13 carry the
+coil faults; FC9 alone sees the 10 % and 25 % stuck dampers and is not silent),
+against STRATA's 13 at 1. On the terminal units it detects 8 of 30 and 9 of 29
+at 0 false-alarm days (PID-HUNT-1 on the unstable room loop; VAV-3/4/5 and
+VAV-REHEAT on the larger stuck and leaking reheat valves and dampers), against
+STRATA's 26 and 25 at 8 and 9. F-X38.a fired as worded on every system: on
+SDAHU because equal false alarms is "matches", on the terminal units because
+zero false alarms is fewer. The pre-registered claim ("STRATA detects at least
+as many at a lower false-alarm rate") cannot be made. What can: on the air
+handler the two are within one detection and one false-alarm day of each
+other; on the terminal units STRATA detects three times as many faults and
+pays eight or nine false-alarm days for them, and the difference is
+*coverage* — STRATA's residual readers on the per-zone columns (X33b, X33c) —
+not the gate.
+
+**Arm S and P7.** Supplying FC6's design minimum outdoor-air flow from the
+fault-free year (250 and 397 cfm) leaves it at 94 and 95 of 96: as implemented
+the rule has no operating-state gate, so every economizing minute exceeds the
+band. P7 was wrong. P5 (G2 SDAHU ≥ 1 and STRATA ≥ battery everywhere) and P6
+(≤ 3 silent rules per system) were wrong on the fan-powered units (17–18 silent
+rules there, because most AHU rules never fire on a unit whose air handler
+holds 55 °F all year).
+
+**Caveats for print.** (i) These are open-fdd 4.4.1's *installed defaults*, not
+Guideline 36's: the library's own parameter labels cite GL36 values that are
+looser on every rule that fired (sensor errors 1.15 °F vs 2–5 °F, fan heat rise
+0.55 vs 2 °F, mode delay 0 vs 30 min, FC6 band 15 % vs 30 % and 5 vs 10 °F,
+FC13 full-cooling 1 % vs 99 %); with GL36's values FC8 (fan heat rise 2.15 °F
+on the fan-powered air handler) would largely not fire. (ii) The terminal rules
+carry fixed comfort bands (VAV-1 70–75 °F against occupied setpoints 68/72;
+VAV-2 68 °F against a 55 °F setback) and flow thresholds equal to the boxes'
+minimum flow; none reads the building's setpoint columns. (iii) FC4 on SDAHU
+counts damper crossings because the cooling valve never reads exactly zero.
+(iv) A battery that flags every healthy day flags every fault day, so the raw
+counts of P2 say nothing. (v) STRATA's rules channel is held to 3/365 while the
+battery's per-rule floor under G2 is max(fp, 3)/96, looser for the battery;
+G3 removes that asymmetry by construction.

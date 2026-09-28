@@ -178,7 +178,7 @@ airflow, sensor biases through redundant mixing-box sensors and return-minus-zon
 the outdoor-air flow fraction. What remains missed is coil fouling whose recorded values sit inside every healthy
 band on every column ([PHASE12_RESULTS.md](PHASE12_RESULTS.md)).
 
-Field conditions (X31, run before the coverage series and not repeated after it): sensor error on temperatures, flows and positions with 5% feedback quantisation,
+Field conditions (X31; repeated after the coverage series as X35 on all five systems): sensor error on temperatures, flows and positions with 5% feedback quantisation,
 change-of-value logging with gaps, and schedule shifts with holidays, injected
 into the fault-free year and every fault file of SDAHU, DDAHU and FCU and
 re-fitted: the budget holds in every cell (worst 3/96), the costliest condition
@@ -186,7 +186,15 @@ re-fitted: the budget holds in every cell (worst 3/96), the costliest condition
 gains three (reported as a wrong prediction, not a result). The first pass of
 this experiment exposed a drift between the library and the benchmark scripts
 (a pooled residual noise floor), repaired and guarded before the re-run
-([PHASE11_RESULTS.md](PHASE11_RESULTS.md), X31 and Amendment 1).
+([PHASE11_RESULTS.md](PHASE11_RESULTS.md), X31 and Amendment 1). Repeated on the
+shipped configurations of all five systems after the coverage series (X35), the same
+conditions cost at most one detection per system and condition (three named) at
+worst 7/96, and the clean arm reproduces the scorecard everywhere
+([PHASE12_RESULTS.md](PHASE12_RESULTS.md), X35). A pre-registered diagnosis layer
+(signed residual patterns, redundant-pair consensus, nearest-pattern family vote; X37)
+missed its bars — family 74.6% of resolved detections with 27.8% unresolved, wrong
+subsystem 10.1% — and is reported as not adoptable; it did resolve the five dual-duct
+damper cases the carrying rule had placed at the wrong end of the redundant pair.
 
 FCU: 29 sensor mappings and 23 rules at onboarding (26 rules after X33e), two healthy-silence iterations, no source
 change; the hash gate found a byte-identical pair under two family labels

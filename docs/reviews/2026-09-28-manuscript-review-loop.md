@@ -3,7 +3,7 @@
 Reviewer: manuscript-loop agent. Facts as of 2026-09-28 (X33–X38 closed; X38 Amendment 1 re-audit applied at b69d870).
 Framing rule applied throughout: every section leads with what the framework achieves, limitations follow in their own sentences; no number changed, no fired falsifier softened, errata and audit trail intact. Author's settled sentence: "process mining helps to get detection but it is not detecting on its own."
 
-## Round 1 — 2026-09-28 04:15–05:00 PDT
+## Round 1 — 2026-09-28 04:13–04:58 PDT (commit 3a19b6b)
 
 ### Ratings (clarity / correctness / achievement-first → section score, 1–10)
 
@@ -48,7 +48,7 @@ union_fpr_* deployed 1/8/9/3/5 of 96 and naive 15/15/9/8/21; component_attributi
 
 Compile: tectonic in scratchpad ms-loop, exit 0, 43 pages, no undefined references or citations (four "undefined" log hits are TU/ptm font-shape warnings from the times package). PDF copied to paper/paper-v2.pdf and ~/Downloads/Ureap/docs/writing/paper-v2.pdf.
 
-## Round 2 — 2026-09-28 05:00–05:35 PDT
+## Round 2 — 2026-09-28 04:58–05:01 PDT (commit 05f403d)
 
 ### Ratings after Round 1 fixes (re-read of the whole manuscript)
 
@@ -91,7 +91,7 @@ Compile: exit 0, 43 pages, no undefined references or citations, no overfull box
 - Full re-read for flow with fresh eyes; check every cross-reference target still says what the referring sentence claims.
 - Confirm the ledger appendix rows X34–X38 against the section text (bars and outcomes).
 
-## Round 3 — 2026-09-28 05:35–06:00 PDT
+## Round 3 — 2026-09-28 05:01–05:03 PDT (commit 032938b)
 
 ### Ratings after Round 2 fixes
 
@@ -126,7 +126,7 @@ Compile: exit 0, 43 pages, no undefined references or citations, no overfull box
 
 Compile: exit 0, 43 pages, no undefined references, no overfull box above 10 pt. PDF copied to both destinations.
 
-## Round 4 — 2026-09-28 06:00–06:20 PDT
+## Round 4 — 2026-09-28 05:03–05:04 PDT (commit c92e8c6)
 
 ### Ratings after Round 3 fixes
 
@@ -141,3 +141,19 @@ matched_rules_*: SFPU mr2 141 = frequency 141; PFPU mr2 206 = frequency 206; MR1
 1. The abstract says removing the conformance channels lowers three systems' false-alarm rates; the results ablation paragraph named only two. The fan coil unit (5/96 → 4/96) added, with the recomputation stated.
 
 Nothing else found on the rendered Results opening, Limitations opening and attribution paragraph. Compile: exit 0, 43 pages, clean log. PDF copied to both destinations.
+
+## Round 5 — 2026-09-28 05:04–05:08 PDT
+
+### Ratings after Round 4 fixes
+Unchanged from Round 4 on every section; **overall 8.8**.
+
+### Numbers spot-checked this round (all agree)
+Circularity bound (benchmark_v2_processheal_v1 vs benchmark_v3): rules tp 3,134 on 4,540 fault days in both; structure tp 238 (5.24 %) vs 81 (1.78 %); 5 false positives in both; combined recall 0.6943 = 3,152 tp. x7_downsample: F-X7.a on three systems (28, 64, 64 signature days) and F-X7.b on the PFPU fan-restriction residual. x8_contamination: no falsifier. e8_bias_magnitude: box statics shift +0.20 and +0.40 in.wg against 0.0 on the deck column; the +2 °C file shifts 3.6 °F, exactly its label. e7_zone_label: documentation names _W, artefact covers PFPU and SFPU.
+
+### Checks
+- British spelling scan over the prose: no American forms introduced ("claim-to-artifact table" is the repository's own name and predates the loop).
+- No stray double spaces or broken dashes outside the verbatim alarm listing.
+- Rendered Verification lead paragraph reads correctly with the four later falsifiers sentence.
+
+### Gaps found → fixes made
+None in the manuscript. In this review file the Round 1–4 time ranges were estimates and did not match the commit clock; corrected to the commit times above.

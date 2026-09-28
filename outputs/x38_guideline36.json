@@ -212,7 +212,6 @@
         "VAV-3",
         "VAV-4",
         "VAV-5",
-        "VAV-AHU-LEAVE",
         "VAV-REHEAT"
       ],
       "site_arm": {
@@ -329,7 +328,6 @@
           "VAV-3",
           "VAV-4",
           "VAV-5",
-          "VAV-AHU-LEAVE",
           "VAV-REHEAT"
         ],
         "holdout_fp_days": 0,
@@ -450,7 +448,6 @@
         "VAV-3",
         "VAV-4",
         "VAV-5",
-        "VAV-AHU-LEAVE",
         "VAV-REHEAT"
       ],
       "site_arm": {
@@ -567,7 +564,6 @@
           "VAV-3",
           "VAV-4",
           "VAV-5",
-          "VAV-AHU-LEAVE",
           "VAV-REHEAT"
         ],
         "holdout_fp_days": 0,
@@ -613,8 +609,35 @@
     "F-X38.a (S): current practice matches or beats STRATA under framing S on ['pfpu', 'sfpu']"
   ],
   "predictions_failed_without_falsifier": [
-    "P5",
     "P6",
-    "P7"
-  ]
+    "P7",
+    "P5 (its failure is the G2 falsifier)"
+  ],
+  "G2_prime_post_hoc": {
+    "note": "G2 excluding self-detecting rules (audit A re-audit item 11); computed from the artefacts' G2_rules",
+    "self_detecting": {
+      "sdahu": [],
+      "pfpu": [
+        "FC9",
+        "FC14"
+      ],
+      "sfpu": [
+        "FC13"
+      ]
+    },
+    "sdahu": {
+      "detected": 12,
+      "battery_only": [
+        "oa_bias_4_annual"
+      ]
+    },
+    "pfpu": {
+      "detected": 15,
+      "battery_only": []
+    },
+    "sfpu": {
+      "detected": 17,
+      "battery_only": []
+    }
+  }
 }

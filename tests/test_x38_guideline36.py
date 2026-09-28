@@ -31,7 +31,11 @@ def test_x38_pinned():
     assert p["P1_sdahu_battery_fp_gt_30pct_and_gated_lt_13"] and p["P4_battery_only_le_2"]
     assert not p["P5_G2_sdahu_ge_1_and_strata_ge"] and not p["P6_G3_le_3_silent_rules_and_subset"] and not p["P7_site_arm_FC6_lt_10_union_gt_30pct"]
     assert [f.split(":")[0] for f in a["falsifiers_fired"]] == ["F-X38.a (G2)", "F-X38.a (G3)", "F-X38.a (S)"]
-    assert a["predictions_failed_without_falsifier"] == ["P5", "P6", "P7"]
+    assert a["predictions_failed_without_falsifier"] == ["P6", "P7", "P5 (its failure is the G2 falsifier)"]
+    g2p = a["G2_prime_post_hoc"]
+    assert {s: g2p[s]["detected"] for s in ("sdahu", "pfpu", "sfpu")} == {"sdahu": 12, "pfpu": 15, "sfpu": 17}
+    assert g2p["sdahu"]["battery_only"] == ["oa_bias_4_annual"] and g2p["pfpu"]["battery_only"] == [] and g2p["sfpu"]["battery_only"] == []
+    assert "VAV-AHU-LEAVE" not in S["pfpu"]["healthy_year_silent_rules"]
 
 
 @pytest.mark.parametrize("system", ("sdahu", "pfpu", "sfpu"))

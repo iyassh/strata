@@ -693,3 +693,41 @@ counts damper crossings because the cooling valve never reads exactly zero.
 counts of P2 say nothing. (v) STRATA's rules channel is held to 3/365 while the
 battery's per-rule floor under G2 is max(fp, 3)/96, looser for the battery;
 G3 removes that asymmetry by construction.
+
+**Re-audit of run 2 (audit A, after Amendment 1; audit B independently
+reproduced every run-1 number and the SDAHU repair).** No adapter defect
+remains; the six repairs are verified in the code and by independent
+recomputation. Four caveats change what the framings may be said to show, and
+travel with the numbers:
+- *G2 admits rules that detect the healthy file itself.* Applied to the
+  fault-free year's own training days, the per-rule gate "detects" the healthy
+  file through FC9 and FC14 on PFPU and FC13 on SFPU. Excluding those
+  self-detecting rules (post hoc, `G2_prime_post_hoc` in the ledger) gives 12 of
+  14, 15 of 30 and 17 of 29 against STRATA's 13, 26 and 25, at a union
+  false-alarm rate still 96 of 96 on the fan-powered units.
+- *G3's rule selection is in-sample.* Silence is judged on the whole fault-free
+  year including the 96 holdout days, then those rules' holdout days are
+  reported; STRATA's channels are selected on training days only. No numeric
+  effect here (FC13 has two training-day flags and stays silent), but the
+  SDAHU tie of 1 against 1 pairs a post-selection count with an out-of-sample
+  one.
+- *The outdoor-air-bias file is adjudicated on one side only.* STRATA's
+  detection of it was removed by the branch adjudication (E5); the battery's
+  (FC8, 65 days) is counted and is the sole battery-only file. FC8 passes the
+  same branch-immunity control (it fires on no fault-branch file whose fault
+  cannot touch it), so the count is legitimate, but removing the file from both
+  sides gives 11 of 13 against 13 of 13 and keeping it un-adjudicated on both
+  gives 12 of 14 against 14 of 14: under every reading STRATA detects more on
+  SDAHU, and "matches" rests on the false-alarm tie alone.
+- *Scope.* STRATA's two SDAHU-only files (stuck damper 10 % and 25 %) are caught
+  by position-against-command signature rules; open-fdd ships rules of that
+  kind (DMP-1, VLV-1, CMD-1) which the pre-registered FC1–FC15 battery
+  excludes. Arm S's design datum is the occupied-median outdoor-air flow, not
+  the minimum-outdoor-air mode's; 63 % of FC6's remaining flags are economizing
+  minutes and the rest minimum-position minutes at low total airflow.
+- *Stated, not defects:* on SDAHU the fan status equals the occupancy bit, so
+  every battery rule is scored in occupied mode only, as STRATA's universe is;
+  the binomial gate treats days as independent on both sides; VAV-2's 68 °F
+  setback threshold against a simulated 55 °F setback is a site constant, not a
+  tolerance, and demotion removes only FC6, leaving VAV-2 at 94 of 96.
+

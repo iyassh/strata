@@ -284,7 +284,12 @@ def ledger() -> dict:
                              "battery_only_gated": sorted(set(a["battery_gated_detected_files"]) - set(st["detected_files"])),
                              "battery_only_G2": sorted(set(b["G2_files"]) - set(st["detected_files"])), "battery_only_G3": sorted(set(b["G3_files"]) - set(st["detected_files"])),
                              "strata_only_gated": sorted(set(st["detected_files"]) - set(a["battery_gated_detected_files"]))}
-        out["systems"][s]["G3_false_alarms"] = silent_union_fp(s, c.get("healthy_year_silent_rules", []))
+        # re-audit item 6: the artefact's silent list filtered not-applicable status for AHU rules only; drop the
+        # terminal rules recorded not applicable (VAV-AHU-LEAVE) before they are called "silent"
+        na_tu = {r for r, v in (c.get("tu_rule_status_zone_S") or {}).items() if str(v).startswith("not_applicable")}
+        silent = [r for r in c.get("healthy_year_silent_rules", []) if r not in na_tu]
+        out["systems"][s]["healthy_year_silent_rules"] = silent
+        out["systems"][s]["G3_false_alarms"] = silent_union_fp(s, silent)
         print(f"[{s}] G3 false alarms (silent rules' holdout days): {out['systems'][s]['G3_false_alarms']}", flush=True)
     S = out["systems"]; h = S["sdahu"]
     p1 = h["battery_fp_all"] / h["holdout_days"] > 0.30 and h["battery_gated"] < 13
@@ -309,7 +314,15 @@ def ledger() -> dict:
         return [s for s in S if S[s]["site_arm"] and not (S[s]["strata_detected"] >= max(S[s]["site_arm"]["G1_all"], S[s]["site_arm"]["G2"], S[s]["site_arm"]["G3"]) and S[s]["strata_fp_all8"] < S[s]["site_arm"]["fp_all"])]
     fired = [f"F-X38.a ({k}): current practice matches or beats STRATA under framing {k} on {p3_sys(k)}" for k, v in p3.items() if not v]
     out["falsifiers_fired"] = fired
-    out["predictions_failed_without_falsifier"] = [k for k, v in {"P1": p1, "P2": p2, "P4": p4, "P5": p5, "P6": p6, "P7": p7}.items() if not v]
+    out["predictions_failed_without_falsifier"] = [k for k, v in {"P1": p1, "P2": p2, "P4": p4, "P6": p6, "P7": p7}.items() if not v] + (["P5 (its failure is the G2 falsifier)"] if not p5 else [])
+    # re-audit item 11 (post hoc, not pre-registered): G2 with the rules that pass the gate on the healthy file's own
+    # training days excluded — those rules flag the identical day sets on healthy and fault files (FC9/FC14 on PFPU, FC13 on SFPU)
+    out["G2_prime_post_hoc"] = {"note": "G2 excluding self-detecting rules (audit A re-audit item 11); computed from the artefacts' G2_rules",
+                                "self_detecting": {"sdahu": [], "pfpu": ["FC9", "FC14"], "sfpu": ["FC13"]}}
+    for s in S:
+        a = json.loads((ROOT / "outputs" / f"openfdd_baseline_{s}.json").read_text()); sd = set(out["G2_prime_post_hoc"]["self_detecting"][s])
+        files = sorted(r["file"] for r in a["scenarios"] if set(r["G2_rules"]) - sd)
+        out["G2_prime_post_hoc"][s] = {"detected": len(files), "battery_only": sorted(set(files) - set(a["strata"]["detected_files"]))}
     (ROOT / "outputs" / "x38_guideline36.json").write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps({k: v for k, v in out.items() if k != "systems"}, indent=1))
     for s, v in S.items():

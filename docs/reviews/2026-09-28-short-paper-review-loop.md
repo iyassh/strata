@@ -107,3 +107,50 @@ the false-alarm, X22, X25 and X29 figures were never included.
 
 Plan for round 4: read the compiled text end to end for wording, framing and
 numbers; re-check every number against the artefacts by script; fix; recompile.
+
+## Round 4 — full read-through of the compiled text (19 pp total; body ends at the foot of p. 12; Acknowledgements and References p. 13–17; ledger pp. 18–19)
+
+Read end to end from `pdftotext`. Fixed: the introduction's dangling
+"buildings that run..." clause; the related-work sentence that cited two
+individual studies as surveys; "attributable" in the abstract (one of the 51 is
+indeterminate, so "in the attribution universe"); a handful of word-level trims
+to keep the conclusion on p. 12 after those fixes. Secondary numbers re-checked
+against artefacts: X15 deployed frequency significant on 12 (matches
+`x15_enriched_frequency.json`), X22 single-duct reversal AUC 0.908 → 0.91 and
+fan-powered AUCs 0.40–0.51 (`x22_positive_control.json`), X14 six added events
+on the single-duct unit and 7 state-channel held-out days
+(`x14_enriched_alphabet.json`), X30 seven cells (`x30_method_grid.json`).
+
+Framing check: every section leads with what the framework achieves; the
+conformance result is stated as a measured finding ("process mining helps to
+get detection; it is not detecting on its own") in the introduction, the
+process-mining subsection and the conclusion; conformance is nowhere credited
+with a detection; all ten adverse results, every fired falsifier (F-X7, F-X11.d,
+F-X13.b, F-X14.a, F-X18.b, F-X19.b/d, F-X20, F-X21.a, F-X25.c, F-X27.b, F-X28,
+F-X30.b, F-X34.a, F-X36.a, F-X37.a/b, F-X38.a) and both disclosure caveats
+(rate-channel demotion, 15.6 %; three-way-split debt) are present.
+
+| Section | Rating |
+|---|---|
+| Abstract | 9 |
+| Introduction | 8 |
+| Aim and objectives | 8 |
+| Related work | 7 |
+| Method | 8 |
+| Verification | 8 |
+| Results (detection, coverage, baseline, alarm, localisation, onboarding, field) | 8 |
+| What process mining carries | 9 |
+| Against current practice | 8 |
+| Refuted or withdrawn | 7 |
+| Errata | 8 |
+| Limitations | 8 |
+| Conclusion | 8 |
+| Appendix ledger | 8 |
+
+Trajectory (mean over sections): round 1 ≈ 7.1 → round 2 ≈ 7.7 → round 3 ≈ 7.9 →
+round 4 ≈ 8.1. What remains below 9 is density, not error: related work and the
+refuted list are each a single dense paragraph by necessity of the page limit.
+
+Not verified: the ~1.5 h onboarding time (reconstructed from commit timestamps
+in the long paper; not re-derived here), and the cry-wolf "47–99 to 1" ratio and
+the 0.36 lower AUC bound, both quoted from the long manuscript.

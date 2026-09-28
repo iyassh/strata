@@ -154,3 +154,125 @@ refuted list are each a single dense paragraph by necessity of the page limit.
 Not verified: the ~1.5 h onboarding time (reconstructed from commit timestamps
 in the long paper; not re-derived here), and the cry-wolf "47–99 to 1" ratio and
 the 0.36 lower AUC bound, both quoted from the long manuscript.
+
+## Round 5 — second editor, round 1 (hostile-referee read against `paper-v2.tex` and the artefacts; compiled: 19 pp; body ends at the foot of p. 12; Acknowledgements and References p. 13; ledger pp. 18–19)
+
+Method: every paragraph read; the short paper diffed claim by claim against
+the long manuscript; 32 further numbers checked against `outputs/*.json` and
+`ERRATA.md` (reversal probe, circularity, union rates, time to detection,
+cry-wolf, coil-bias windows, PCA baseline, X7, X8, X12–X15, X17–X22, X24–X31,
+X33–X36, E3, E7, matched rules, attribution universe). All confirmed except
+the items fixed below.
+
+Substantive fixes (all in `paper/short/strata-short.tex`):
+
+1. **Headline attribution figures were the unadopted layer's.** The abstract,
+   the end of the localisation paragraph and the conclusion quoted "subsystem
+   85 %, exact component 71 %", which are the X37 diagnosis layer's lifted
+   numbers, while the same paragraph says that layer "is not adopted". The long
+   manuscript headlines the carrying rule's 83 % at subsystem level (X34,
+   `component_attribution.json`: 109 + 22 of 158). Abstract and conclusion now
+   say 83 %; the paragraph closes on 37 of 50, 83 %, 69 %; X37's 85 % / 71 %
+   remain in the body as the non-adopted result. Added the long paper's caveat
+   that X37 does nothing on the fan-powered units.
+2. **Attribution denominator.** Abstract said "37 of the 51 detections in the
+   attribution universe"; the long paper and `alarm_attribution.json` give
+   37 of the 50 with determinable ground truth (51 less one indeterminate).
+   Conclusion's "never wrongly" replaced by "37 of 50 checkable detections and
+   a wrong one in none".
+3. **Adjudicated total.** Abstract now states 157 after the E5 adjudication,
+   as the long paper does in every headline.
+4. **Oscillation is not a log channel.** Abstract, introduction and conclusion
+   said "the absence, frequency and oscillation channels over the log"; the
+   channels table and the long paper have oscillation reading raw signals.
+   Now "the absence and frequency channels over the log".
+5. **Seven no-rule detections mis-described.** "seven detections … carried by
+   the frequency or oscillation channel alone, instability faults and one fan
+   restriction" — `component_attribution.json` shows only four of the seven
+   (the instability faults) are frequency/oscillation-only; three carry
+   residual credits. Rewritten to match the artefact. (The long paper's
+   parenthetical "frequency- or oscillation-only" at its X34 sentence has the
+   same imprecision — flagged to the manuscript loop.)
+6. **Conformance removal lowers three systems, not two.** Added the fan coil
+   unit's 5/96 → 4/96 (long paper §results; `union_fpr_fcu.json`).
+7. **X25 step-4 ledger row.** Both papers' ledgers say "series unit loses 3";
+   `x25_step4_perday.json` records the dual-duct unit losing 3 (48 → 45, the
+   fired F-X25.c names ddahu) and the series unit 2. Short ledger corrected;
+   flagged to the manuscript loop.
+8. **X38 caveats.** The first caveat said STRATA's false-alarm day "is out of
+   sample" where the long manuscript (second-editor round 1) made it
+   symmetric: STRATA's signature rules are silenced on the same whole year, so
+   the rules-channel zero is post-selection on both sides. Restored. Removed
+   the unsupported parenthetical "(removing it from both gives 11 of 13
+   against 13 of 13)", which appears in no artefact and not in the long paper;
+   added the long paper's "under every reading STRATA detects more on that
+   unit, the match resting on the false-alarm tie alone".
+9. **Rule-count contradictions.** Onboarding text (26 and 16 signature rules;
+   45 mappings / 35 rules) contradicted the systems table (56, 19; 109 / 58).
+   Added the long paper's reconciliations (counts at onboarding vs the
+   committed configuration) and the fan coil's 41 → 42 → 40 → 43 chain, which
+   the table's "40 → 43" needed.
+10. **Abstract omissions relative to the long abstract.** Added: the
+    improvement claim over current practice is withdrawn on the air handler;
+    the PCA baseline has fewer false alarms on the terminal units; the sealed
+    transfer test never had attainable power and is a protocol failure.
+    "Thirty" → "more than thirty" (the ledger has 35 rows) throughout; the four
+    later fired falsifiers (X34, X36–X38) are now named beside the ten adverse
+    results.
+11. **Dropped caveats restored.** Benchmark scope (no dataset seeds a schedule,
+    override or setpoint-reset fault, so the introduction's behavioural-fault
+    case is motivated, not tested; the practice comparison covers three
+    systems and one library); "no code change" qualified by the fan coil gate
+    script's two lines; 1.5 h onboarding "by commit timestamps"; the X15 gain
+    is a scenario the PCA baseline also detects; X30's two not-evaluated cells;
+    the rate-channel demotion is post hoc and its split-half probe fails on the
+    series unit; "the channel turned out to be three instruments"; the transfer
+    quantity is constant "across rules within a building".
+12. **Claims softened to the long paper's.** "Absent from every review whose
+    scope could have caught it" → one review whose scope would have, three
+    whose scope or period would not necessarily; "guarding that a caveat
+    survives is, to our knowledge, new" → "we have not found it reported".
+    Research question restored to "and what survives when they cannot";
+    objective 2 "in the form its falsification required … and the founding
+    hypothesis is refuted". Conclusion now carries the long conclusion's
+    Guideline 36 sentence.
+13. **Results intro** no longer says every false-alarm count is on 96 held-out
+    days (the rooftop rows are 28 and 49): now "on the five simulated systems".
+
+Space (all prose, no number, falsifier or caveat removed): the phase-report
+overclaim anecdote, the "none would have been caught by a test suite" and
+"exactly as a lost feature would" sentences, the pre-ledger jitter sentence
+compressed to a clause with its X9/X10 pointer, the hybrid-deferral sentence in
+Limitations (stated in the objectives), the "first place a technician would
+look" tail, and framework figure at 0.66 width, alarm listing at `\scriptsize`,
+coverage and Guideline 36 tables at `\footnotesize`, tighter heading and float
+spacing.
+
+Not changed, disagreements and notes for the author: (a) the naive all-channel
+union is 15.6 % on the parallel unit too and 21.9 % on the fan coil unit
+(`union_fpr_*.json` `union_all8`); both papers quote only the single-duct 15.6 %
+— consistent between them, left as is, but a referee may ask. (b) X17 mappings:
+`x17_onboarding.json` records 80, both papers say 79; left consistent with the
+long paper. (c) First pass rated the abstract 9 while it carried the unadopted
+85 % / 71 % and the wrong attribution denominator; the density-not-error
+verdict of round 4 did not hold for those items.
+
+| Section | Rating |
+|---|---|
+| Abstract | 8 (was carrying unadopted figures; now aligned with the long abstract) |
+| Introduction | 8 |
+| Aim and objectives | 8 |
+| Related work | 7 |
+| Method | 8 |
+| Verification | 8 |
+| Results (detection, coverage, baseline, alarm, localisation, onboarding, field) | 8 |
+| What process mining carries | 8 |
+| Against current practice | 8 |
+| Refuted or withdrawn | 7 |
+| Errata | 8 |
+| Limitations | 8 |
+| Conclusion | 8 |
+| Appendix ledger | 8 |
+
+Overall ≈ 7.9 on entry by this reading (the 8.1 of round 4 did not survive the
+cross-check), ≈ 8.1 after the fixes.

@@ -103,3 +103,17 @@ Recommendations 7 · Disclosure 6 (author TODO) · Conclusion 7 · Overall 8.
 only E4's misalignment is (the injection test confirms), while the E7/E8 mislabels came from
 audits → "the first class, and the misalignment in the fourth, are caught by log-generic gates; the
 mislabels and the second and third classes cannot be". Nothing else worth fixing. 8 pages.
+
+## Round 4 — 2026-09-28 (after commit 63ab07e)
+
+**Spot-checked:** damper floors per file in `week0_audit.json` `config_branch.occupied_oa_dmpr_min`:
+healthy 0.0; sixteen fault files 0.1; damper_stuck 025/075/100 at 0.25/0.75/1.0; damper_stuck_010 at
+0.1 (its stuck value equals the floor). "Every fault file floors at exactly 0.100" in §4.4 was
+therefore overstated for three files → parenthetical added, matching ERRATA E5's wording.
+Twenty-eight plan files, 154 tests and 12 FROZEN entries re-confirmed unchanged.
+
+**Ratings:** Abstract 8 · Intro 8 · Gates 8 · Protocol 8 · Defects 8 · Leak 8 · Taxonomy 8 ·
+Recommendations 7 · Disclosure 6 (author TODO) · Conclusion 7 · Overall 8.
+
+**Fixes:** the E5 damper-floor parenthetical above; a double-semicolon sentence in §3 split in two.
+8 pages, no undefined references.

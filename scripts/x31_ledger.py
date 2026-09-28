@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-SYSTEMS = ["sdahu", "ddahu", "fcu"]
+SYSTEMS = ["sdahu", "pfpu", "sfpu", "ddahu", "fcu"]   # X35 (2026-09-27): all five; X31 ran sdahu/ddahu/fcu
 ARMS = ["field_noise", "cov_gaps", "schedule", "combined"]   # "clean" is the comparator, reported per system
 DEPLOYED = {"rules", "resid", "freq", "osc", "absence"}
 
@@ -112,7 +112,9 @@ def main() -> int:
                          "the schedule arm shifts the occupied block 30 minutes earlier (start and end), leaving its length unchanged: a whole-day shift, not the extension the pre-registration's 'optimum start' implies"]
     if mism:
         out["falsifiers_fired"].append(f"Amendment 1: facade differs from the scorecard on {mism}")
-    (REPO / "outputs/x31_field_conditions.json").write_text(json.dumps(out, indent=2) + "\n")
+    import sys as _s
+    _out = "outputs/x35_field_conditions.json" if "--x35" in _s.argv else "outputs/x31_field_conditions.json"
+    (REPO / _out).write_text(json.dumps(out, indent=2) + "\n")
     for s, v in out["systems"].items():
         if "error" in v:
             print(f"[{s}] {v['error']}"); continue

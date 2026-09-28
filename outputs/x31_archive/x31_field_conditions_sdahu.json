@@ -1,0 +1,167 @@
+{
+  "clean_detected_no_alignment": 14,
+  "clean_holdout_fp_no_alignment": 1,
+  "calendar": {
+    "optimum_start_days": 52,
+    "holidays": [
+      "2018-02-23",
+      "2018-04-04",
+      "2018-07-26",
+      "2018-08-16",
+      "2018-09-07",
+      "2018-10-01"
+    ]
+  },
+  "conditions": {
+    "clean": {
+      "detected": 14,
+      "n_scored": 14,
+      "holdout_fp_days": 1,
+      "holdout_days": 96,
+      "per_channel_fp": {
+        "rules": 0,
+        "residual": 0,
+        "absence": 0,
+        "frequency": 1,
+        "oscillation": 0
+      },
+      "per_scenario": {
+        "damper_stuck_010_annual": true,
+        "damper_stuck_025_annual": true,
+        "damper_stuck_075_annual": true,
+        "damper_stuck_100_annual_short": true,
+        "coi_stuck_010_annual": true,
+        "coi_stuck_025_annual": true,
+        "coi_stuck_050_annual": true,
+        "coi_stuck_075_annual": true,
+        "coi_leakage_010_annual": true,
+        "coi_bias_-4_annual": true,
+        "coi_bias_-2_annual": true,
+        "coi_bias_2_annual": true,
+        "coi_bias_4_annual": true,
+        "oa_bias_4_annual": true
+      },
+      "seconds": 32
+    },
+    "field_noise": {
+      "detected": 14,
+      "n_scored": 14,
+      "holdout_fp_days": 1,
+      "holdout_days": 96,
+      "per_channel_fp": {
+        "rules": 0,
+        "residual": 0,
+        "absence": 0,
+        "frequency": 1,
+        "oscillation": 0
+      },
+      "per_scenario": {
+        "damper_stuck_010_annual": true,
+        "damper_stuck_025_annual": true,
+        "damper_stuck_075_annual": true,
+        "damper_stuck_100_annual_short": true,
+        "coi_stuck_010_annual": true,
+        "coi_stuck_025_annual": true,
+        "coi_stuck_050_annual": true,
+        "coi_stuck_075_annual": true,
+        "coi_leakage_010_annual": true,
+        "coi_bias_-4_annual": true,
+        "coi_bias_-2_annual": true,
+        "coi_bias_2_annual": true,
+        "coi_bias_4_annual": true,
+        "oa_bias_4_annual": true
+      },
+      "seconds": 42
+    },
+    "cov_gaps": {
+      "detected": 13,
+      "n_scored": 14,
+      "holdout_fp_days": 0,
+      "holdout_days": 96,
+      "per_channel_fp": {
+        "rules": 0,
+        "residual": 0,
+        "absence": 0,
+        "frequency": 0,
+        "oscillation": 0
+      },
+      "per_scenario": {
+        "damper_stuck_010_annual": true,
+        "damper_stuck_025_annual": true,
+        "damper_stuck_075_annual": true,
+        "damper_stuck_100_annual_short": true,
+        "coi_stuck_010_annual": true,
+        "coi_stuck_025_annual": true,
+        "coi_stuck_050_annual": true,
+        "coi_stuck_075_annual": true,
+        "coi_leakage_010_annual": true,
+        "coi_bias_-4_annual": true,
+        "coi_bias_-2_annual": true,
+        "coi_bias_2_annual": true,
+        "coi_bias_4_annual": true,
+        "oa_bias_4_annual": false
+      },
+      "seconds": 43
+    },
+    "schedule": {
+      "detected": 14,
+      "n_scored": 14,
+      "holdout_fp_days": 1,
+      "holdout_days": 96,
+      "per_channel_fp": {
+        "rules": 0,
+        "residual": 0,
+        "absence": 0,
+        "frequency": 1,
+        "oscillation": 0
+      },
+      "per_scenario": {
+        "damper_stuck_010_annual": true,
+        "damper_stuck_025_annual": true,
+        "damper_stuck_075_annual": true,
+        "damper_stuck_100_annual_short": true,
+        "coi_stuck_010_annual": true,
+        "coi_stuck_025_annual": true,
+        "coi_stuck_050_annual": true,
+        "coi_stuck_075_annual": true,
+        "coi_leakage_010_annual": true,
+        "coi_bias_-4_annual": true,
+        "coi_bias_-2_annual": true,
+        "coi_bias_2_annual": true,
+        "coi_bias_4_annual": true,
+        "oa_bias_4_annual": true
+      },
+      "seconds": 47
+    },
+    "combined": {
+      "detected": 14,
+      "n_scored": 14,
+      "holdout_fp_days": 1,
+      "holdout_days": 96,
+      "per_channel_fp": {
+        "rules": 0,
+        "residual": 0,
+        "absence": 0,
+        "frequency": 1,
+        "oscillation": 0
+      },
+      "per_scenario": {
+        "damper_stuck_010_annual": true,
+        "damper_stuck_025_annual": true,
+        "damper_stuck_075_annual": true,
+        "damper_stuck_100_annual_short": true,
+        "coi_stuck_010_annual": true,
+        "coi_stuck_025_annual": true,
+        "coi_stuck_050_annual": true,
+        "coi_stuck_075_annual": true,
+        "coi_leakage_010_annual": true,
+        "coi_bias_-4_annual": true,
+        "coi_bias_-2_annual": true,
+        "coi_bias_2_annual": true,
+        "coi_bias_4_annual": true,
+        "oa_bias_4_annual": true
+      },
+      "seconds": 68
+    }
+  }
+}

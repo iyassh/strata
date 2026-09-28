@@ -1,0 +1,189 @@
+{
+  "prereg": "docs/plans/2026-09-27-x36-quantile-band-prereg.md",
+  "quantile": 0.02,
+  "systems": {
+    "sdahu": {
+      "extreme": {
+        "detected": 14,
+        "n_scored": 14,
+        "holdout_fp_days": 1,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 0,
+          "absence": 0,
+          "frequency": 1,
+          "oscillation": 0
+        }
+      },
+      "quantile": {
+        "detected": 14,
+        "n_scored": 14,
+        "holdout_fp_days": 1,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 0,
+          "absence": 0,
+          "frequency": 1,
+          "oscillation": 0
+        }
+      },
+      "gained": [],
+      "lost": [],
+      "edge_recoveries_kept": [],
+      "edge_recoveries_lost": [],
+      "band_width_ratio_median": 0.9529199298735783
+    },
+    "pfpu": {
+      "extreme": {
+        "detected": 26,
+        "n_scored": 30,
+        "holdout_fp_days": 6,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 3,
+          "absence": 0,
+          "frequency": 1,
+          "oscillation": 2
+        }
+      },
+      "quantile": {
+        "detected": 26,
+        "n_scored": 30,
+        "holdout_fp_days": 10,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 8,
+          "absence": 0,
+          "frequency": 1,
+          "oscillation": 2
+        }
+      },
+      "gained": [],
+      "lost": [],
+      "edge_recoveries_kept": [
+        "PFPU_ReheatCoilFouling_Airside_Moderate",
+        "PFPU_ReheatCoilFouling_Airside_Severe",
+        "PFPU_SensorBias_RMTEMP_+2C"
+      ],
+      "edge_recoveries_lost": [],
+      "band_width_ratio_median": 0.8810387467583909
+    },
+    "sfpu": {
+      "extreme": {
+        "detected": 25,
+        "n_scored": 29,
+        "holdout_fp_days": 4,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 3,
+          "absence": 0,
+          "frequency": 1,
+          "oscillation": 0
+        }
+      },
+      "quantile": {
+        "detected": 25,
+        "n_scored": 29,
+        "holdout_fp_days": 8,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 7,
+          "absence": 0,
+          "frequency": 1,
+          "oscillation": 0
+        }
+      },
+      "gained": [],
+      "lost": [],
+      "edge_recoveries_kept": [
+        "SFPU_ReheatCoilFouling_Airside_Moderate"
+      ],
+      "edge_recoveries_lost": [],
+      "band_width_ratio_median": 0.9226623500002158
+    },
+    "ddahu": {
+      "extreme": {
+        "detected": 50,
+        "n_scored": 55,
+        "holdout_fp_days": 0,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 0,
+          "absence": 0,
+          "frequency": 0,
+          "oscillation": 0
+        }
+      },
+      "quantile": {
+        "detected": 50,
+        "n_scored": 55,
+        "holdout_fp_days": 3,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 3,
+          "absence": 0,
+          "frequency": 0,
+          "oscillation": 0
+        }
+      },
+      "gained": [],
+      "lost": [],
+      "edge_recoveries_kept": [
+        "DualDuct_Fouling_Heating_Waterside_Minor"
+      ],
+      "edge_recoveries_lost": [],
+      "band_width_ratio_median": 0.9331415892063596
+    },
+    "fcu": {
+      "extreme": {
+        "detected": 43,
+        "n_scored": 47,
+        "holdout_fp_days": 4,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 4,
+          "absence": 0,
+          "frequency": 0,
+          "oscillation": 0
+        }
+      },
+      "quantile": {
+        "detected": 43,
+        "n_scored": 47,
+        "holdout_fp_days": 6,
+        "holdout_days": 96,
+        "per_channel_fp": {
+          "rules": 0,
+          "residual": 6,
+          "absence": 0,
+          "frequency": 0,
+          "oscillation": 0
+        }
+      },
+      "gained": [],
+      "lost": [],
+      "edge_recoveries_kept": [],
+      "edge_recoveries_lost": [],
+      "band_width_ratio_median": 0.9116567460317465
+    }
+  },
+  "predictions": {
+    "P1_fp_rise_le_3_and_le_10": false,
+    "P2_edge_recoveries_kept": true,
+    "P3_ge_2_new_detections": false,
+    "P3_gained": [],
+    "P4_no_loss": true
+  },
+  "falsifiers_fired": [
+    "F-X36.a: false alarms rose beyond the bar"
+  ]
+}

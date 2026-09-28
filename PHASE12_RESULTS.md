@@ -563,3 +563,40 @@ carry is the one X31 carried, now on the shipped configurations of all five
 systems: sensor error, change-of-value logging with gaps and schedule shifts
 cost at most one detection per system per condition and never break the
 budget.
+
+## X36 — quantile bands instead of extreme bands: what the edge recoveries cost
+
+*Pre-registered (`docs/plans/2026-09-27-x36-quantile-band-prereg.md`) before any
+score was computed; configurations as of 36b9e6e. Alternative calibration arm,
+not an adoption: bands at the 2nd and 98th percentiles of the training-day scores
+(same floors) instead of [min, max], every residual rule on every system, through
+the facade with the alignment channels off (as X31/X35), against the extreme-band
+arm of the same facade. Script `scripts/x36_quantile_band.py`; artefact
+`outputs/x36_quantile_band.json`; guard `tests/test_x36_quantile_band.py`.*
+
+X31 showed a band edge set by a single training day; the series analysis found
+five coverage recoveries less than one band width outside the healthy extremes.
+The question was whether a calibration that ignores single days keeps those
+recoveries, and what it costs.
+
+| system | extreme: detected @ FP | quantile: detected @ FP | ΔFP | residual FP (extreme → quantile) | median band width ratio | edge recoveries kept |
+|---|---|---|---|---|---|---|
+| SDAHU | 14/14 @ 1 | 14/14 @ 1 | 0 | 0 → 0 | 0.95 | — |
+| PFPU | 26/30 @ 6 | 26/30 @ 10 | **+4** | 3 → 8 | 0.88 | 3 of 3 |
+| SFPU | 25/29 @ 4 | 25/29 @ 8 | **+4** | 3 → 7 | 0.92 | 1 of 1 |
+| DDAHU | 50/55 @ 0 | 50/55 @ 3 | +3 | 0 → 3 | 0.93 | 1 of 1 |
+| FCU | 43/47 @ 4 | 43/47 @ 6 | +2 | 4 → 6 | 0.91 | — |
+
+| P1 FP rise ≤ 3 and ≤ 10 | P2 edge recoveries kept | P3 ≥ 2 new detections | P4 no loss | falsifiers |
+|---|---|---|---|---|
+| ✗ +4 on PFPU and SFPU | ✓ all five | ✗ none gained | ✓ none lost | **F-X36.a fired**: quantile bands are not a budget-safe alternative |
+
+**Reading.** Bands about ten per cent narrower buy nothing: no scenario on any
+system moves in either direction, and the false-alarm days added (13 over the
+five systems, all on the residual channel) are healthy days that the extreme
+band covered and the percentile band does not. The five edge recoveries survive
+the narrower band, so they were not artefacts of the exact extreme; and no
+currently missed scenario comes within reach, so the misses are not a
+calibration margin away. The deployed calibration stays [min, max] with floors;
+X31's single-day fragility is a property of the band edge, not a reason to move
+it inward.

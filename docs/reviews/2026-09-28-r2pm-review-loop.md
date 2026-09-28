@@ -84,3 +84,22 @@ Recommendations 7 · Disclosure 6 (author TODO) · Conclusion 7 · Overall 8.
 4. Comma splice in the voided-run sentence.
 5. "in under a second each" → "in seconds" (see above).
 Result: 8 pages, no undefined references.
+
+## Round 3 — 2026-09-28 (after commit a1001ce)
+
+**Spot-checked:** E4 found in Phase 3B (`PHASE3B_RESULTS.md` l.85), raw-rotation gate added in the
+Phase 7 audit (commit 517f13a, 2026-08-18) → "four phases later" holds; E1 OA_TEMP "bit-identical
+across all fault files" matches ERRATA (the JSON note retracts only the "identical to healthy"
+reading, which the paper does not make); E8 +2 °C file shifts −3.6 °F = its label; E5 damper
+floors of the three damper_stuck files sit at 0.25/0.75/1.0 above the 0.1 floor (table says "every
+fault file floors at 0.100" for the non-stuck files — ERRATA wording, acceptable); thresholds and
+day counts re-confirmed; gates_public_log G4 = the paper's "log hashing" gate. Table page rendered
+and inspected at 70 dpi: legible, no overflow.
+
+**Ratings:** Abstract 8 · Intro 8 · Gates 8 · Protocol 8 · Defects 8 · Leak 8 · Taxonomy 8 ·
+Recommendations 7 · Disclosure 6 (author TODO) · Conclusion 7 · Overall 8.
+
+**Gap found and fixed:** §6 claimed the fourth class (E4, E7, E8) is "caught by log-generic gates";
+only E4's misalignment is (the injection test confirms), while the E7/E8 mislabels came from
+audits → "the first class, and the misalignment in the fourth, are caught by log-generic gates; the
+mislabels and the second and third classes cannot be". Nothing else worth fixing. 8 pages.

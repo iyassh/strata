@@ -226,3 +226,95 @@ and the limit of conformance checking alone".
   the text (and ERRATA.md) say eight. Shared file; R2PM agent.
 - Author-block TODOs (co-author order, contact e-mail) remain as comments
   in the source.
+
+## Round 1 (second editor) — 2026-09-28 (hostile process-mining reviewer pass)
+
+Independent take-over from the first editor's four rounds. Stance: a
+process-mining workshop reviewer hunting for claims that outrun the artefacts.
+
+### Numbers spot-checked this round (python3 reads of outputs/)
+
+| claim | artefact | result |
+|---|---|---|
+| Table 2 rows 14/14/0/0, 26/30/0/0, 25/29/7/0, 50/55/3/0, 43/47/6/0; credited total 16; sole 0 everywhere | benchmark_v6_*.json `meaningful_channels`, `excluded` (recomputed per scenario) | ✓ |
+| FA column 1/8/9/3/5 = 26 of 480; all-eight union 15/15/9/8/21 = 68 | union_fpr_*.json `union_minus_rate`, `union_all8`, `holdout_days` 96 | ✓ |
+| series unit 9 → 4 (model 5, device 1, freq 1 shared on 2018-11-29, resid 3); parallel 8 → 6 | union_fpr_sfpu/pfpu.json `channels.*.holdout_fp_dates` (union recomputed from dates) | ✓ |
+| unstable-room-temperature = freq+osc on both fan-powered units; unstable damper = osc alone; DDAHU absence credited 14 of 50 | benchmark_v6_pfpu/sfpu/ddahu.json | ✓ |
+| detections with **no** rules/residual credit: 4 of 158 (the two RMTEMPUnstable, the two VAVDMPRUnstable); absence never carries without rules/resid | benchmark_v6_*.json | ✓ — drives gaps 1 and 2 |
+| seventeen misses all coil fouling | benchmark_v6_*.json undetected list (4+4+5+4) | ✓ |
+| attribution 37 / 13 / 0 wrong / 1 indeterminate / 14 no device stratum | alarm_attribution.json `counts` | ✓ |
+| X37 exact 112/158 = 70.9 %, subsystem 23 (85.4 % cumulative), wrong 16 = 10.1 %; falsifiers F-X37.a and F-X37.b fired | x37_diagnosis.json | ✓ but the paper named only the exact-rate bar — gap 3 |
+| X38 G3 12/14 @ 1, 8/30 @ 0, 9/29 @ 0 vs STRATA 13 @ 1, 26 @ 8, 25 @ 9; F-X38.a fired on every system | x38_guideline36.json, PHASE12 §X38 | ✓ (wording matches PHASE12's licensed statement) |
+| X22 reversed: FCU 55/72, DDAHU 59/83, SDAHU flagged 0 with AUC 0.908, PFPU/SFPU fitness unchanged (PFPU 0.9021 → 0.9026, flagged 4 = unperturbed 4) | x22_positive_control.json | ✓ |
+| X30: 33 misses on four systems (SDAHU 0), worst FA 7/72 = 9.7 %, HM-align not evaluated on SFPU and DDAHU | x30_method_grid.json | ✓ |
+| X15 recovers SFPU airside-moderate fouling in budget under both splits; X18 F-X18.b fired (does not replicate on DDAHU) | x15_enriched_frequency.json, x18_ddahu_enriched_frequency.json, RESEARCH_LOG L38/L41 | ✓ but the paper omitted the X15 recovery — gap 4 |
+| X20 identity holds on 3 of 4 (FCU 74 vs 118); rho −1, p 1/24; control count passes identically; X21 foreign net differs on 6 of 12 pairs, rho −0.6, p 5/24 | x20_transfer_four.json, x21_foreign_net_support.json, RESEARCH_LOG L44 | ✓ but "runs the wrong way" is not what the artefact says — gap 5 |
+| 81 vs 238 over 4,540; rules 3,134; combined 3,152 / 5 FP; 86 of 4,891 (`model_days_minrobust`) | benchmark_v3.json, benchmark_v2_processheal_v1.json, benchmark_v6_sdahu.json | ✓ |
+| matched rules healthy_fp 0 / 124 / 231 | matched_rules_{sfpu,pfpu,sdahu}.json | ✓ |
+| 6.1 % on the real rooftop unit (3 of 49) | x26_real_data_budget.json, union_fpr_rtu_field.json | ✓ |
+| X35 no falsifier, ≤ 1 lost per cell; X31 worst −3 (DDAHU schedule); X29 10 at 0/28 | x35/x31/x29 artefacts | ✓ |
+| rate-channel demotion decided after observing the holdout | union_fpr_*.json `caveats`, paper-v2 §Limitations | ✓ disclosed in the long paper, absent from the ERPM cut — gap 6 |
+
+### Gaps found and fixes
+
+1. **Abstract overclaim.** "The event log carries much of this": only 4 of
+   158 detections have no rules or residual credit. Now "The event log does
+   measurable work in this".
+2. **Absence channel overcredited (intro).** "counts of activities, absence
+   of a scheduled activity on a device — carry detections that no rule or
+   residual carries": the absence channel is never credited without rules
+   or residual. Now: the count band carries detections no rule or residual
+   carries; the absence channel is credited beside the rules on the
+   dual-duct unit; the per-device case names the terminal unit.
+3. **X37 fired falsifier hidden.** The paper named only the exact-rate bar.
+   Now states wrong-subsystem 10 %, both falsifiers fired, and the claim as
+   "subsystem-level with a one-in-ten wrong-subsystem rate".
+4. **X15/X18 under-credited the log channel and hid a fired falsifier.** The
+   enriched-alphabet frequency channel does recover the one X14 scenario
+   inside the budget (X15); it fails to replicate on the fourth system
+   (F-X18.b). Both now stated; x18 artefact added to the footnote.
+5. **X21 mis-stated.** "this first differing ordering runs the wrong way" —
+   the artefact gives rho −0.6 (same sign as the count's −1), p 5/24, one
+   rank swap. Now "one rank swap from the count's at n = 4 (rho −0.6, exact
+   p 0.21): not a measurement in either direction", with "on six of twelve
+   pairs".
+6. **Post-hoc demotion undisclosed.** The 26-day figure excludes the
+   seasonal rate channel, demoted after the all-eight union (68 of 480) was
+   known. One sentence added to Limitations, as in paper-v2.
+7. **Internal inconsistency (conclusion).** Four measurements listed, then
+   "Those three measurements". Now "Those measurements".
+8. **Undefined terms for a process-mining reader.** "coverage audit" is now
+   named where it is defined (5.1); "silence gate" glossed; Table 2's
+   "branch provenance" replaced by "its signal is a benchmark-file
+   configuration offset (erratum E5), not the fault".
+
+### Page budget
+
+The additions cost about eleven lines. Recovered without removing any
+number, falsifier or citation: intro hypothesis sentence, Zhong sentence,
+BINet comparison sentence, the Protocol paragraph folded into the
+abstraction paragraph, "Caveats decay faster than code", the section-7
+opener, three clause-level trims. Compiled: 12 pages (page 12 full, no
+slack left), no undefined references, overfull boxes 0.6 pt and 1.9 pt.
+
+### Ratings (1–10)
+
+| section | first editor r4 | second editor r1 | note |
+|---|---|---|---|
+| Title + abstract | 8 | 8 | "much of this" was a 6 before the fix |
+| 1 Introduction | 8 | 8 | absence-channel claim corrected |
+| 2 Related work | 7 | 7 | compressed |
+| 3 Abstraction / wall / bound | 8 | 8 | |
+| 4 Discovery / reversal / counting | 8 | 8 | |
+| 5 Scorecard / ablation / matched rule / reading | 9 | 8 | X37 and X15/X18 fixes; conformance null still stated plainly (0 sole in 73 and 199, X22, X30) |
+| 6 Transfer test | 7 | 7 | X21 clause corrected |
+| 7 Tests that pin | 7 | 7 | |
+| 8 Limitations | 8 | 8 | demotion disclosure restored |
+| 9 Conclusion | 8 | 8 | "three" fixed |
+| **overall** | **8** | **8** | |
+
+### Disagreements with the first editor
+
+None on substance. The reframing is within the author's rule and the
+conformance null is intact. Two of their additions needed qualification
+(the absence channel in the intro; the X37 sentence), fixed above.

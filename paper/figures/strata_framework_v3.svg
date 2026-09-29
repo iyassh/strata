@@ -56,7 +56,7 @@
       <text x="618" y="187" text-anchor="middle" font-size="11.5" fill="#23282E">Unit stratum — daily operating cycle</text>
       <rect x="502" y="204" width="232" height="30" rx="2" fill="#FFFFFF" stroke="#2F5D8A"/>
       <text x="618" y="223" text-anchor="middle" font-size="11.5" fill="#23282E">System stratum — cross-system grammar &#8225;</text>
-      <text x="618" y="252" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2F5D8A">descriptive: they neither detect nor predict</text>
+      <text x="618" y="252" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2F5D8A">descriptive: they do not detect on their own</text>
     </g>
 
     <!-- A4 calibrate -->

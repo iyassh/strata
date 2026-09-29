@@ -73,3 +73,38 @@ Contribution list vs sections, Section 2 objective statuses vs Sections 6, 7, 9 
 | Overall | 9.5 | |
 
 What keeps parts below 10 and what evidence is missing: (a) abstract length, an editorial choice; (b) Brzychczy's per-domain counts and Crowe's body figures need the full texts, which are login-gated from this session; (c) a field detection result, which the repository does not contain.
+
+## Round 2 — rendered re-read after Round 1's edits; second attempt at the open citation checks
+
+- Recompiled (52 pages, no "??", no undefined citation). The rendered text was diffed against Round 1's rendering: the only changed lines are the three manuscript edits (Section 6.1 phrase; conclusion alarm sentence; conclusion CAC clause) and the seven bibliography entries, each rendering as intended ([4] "Guideline", [35] series expanded, [47] article number, [59] "Bayesian … Guideline", [66] title case, [69] single date, [78] pages). Pages 39–41 re-read in full: the conclusion's six parts stand and every number in them matches Round 1's table.
+- Crowe et al. 2023 [15], full text obtained from eScholarship (CC BY-NC-ND): "the average number of reported faults per building per month is 245"; "317 buildings"; "the most common fault relates to supply air temperature (SAT) setpoint, appearing on 55 % of AHUs"; "behavior-based faults are prominent, representing … seven of the top ten most common". Every Crowe figure in the introduction now verified.
+- Pritoni et al. 2022 [62], full text from eScholarship: "studies estimate that the energy savings achievable from correcting these faults ranges from 5 to 30 % whole building savings". The introduction's 5–30 % sentence is supported by the cited source (as a secondary source, which is how it is cited).
+- Brzychczy et al. 2025 [10]: Springer serves the article only behind its identity-provider redirect from this session (direct fetch, cookie session and the scraping service all refused); OpenAlex lists no repository PDF. The 36-paper total is confirmed from the abstract; the per-domain breakdown (14 + 11 + 7 + 2 + 2 + 1 = 37) remains for the author to confirm against the review's domain table — either one paper is classed under two domains or one count is off by one. Not changed.
+- Bi et al. 2024 [9]: the "211 studies" count is not in the abstract and the ScienceDirect page returns a script shell; not verified from here, not contradicted.
+- No manuscript change in this round.
+
+### Ratings after Round 2
+| Part | Score | Change from Round 1 |
+|---|---|---|
+| Abstract | 9 | unchanged (length) |
+| Introduction | 9.5 → 10 | Crowe's body figures and the 5–30 % savings sentence now verified against the sources' full texts; the one figure still unverified (Bi's 211) is a count, not a claim about this work |
+| Aims and objectives | 10 | — |
+| 3 Related work | 9.5 | Brzychczy breakdown still unverifiable from here |
+| 4 Method | 9.5 | — |
+| 5 Verification | 10 | — |
+| 6 Results | 9.5 | — |
+| 7 Refuted or withdrawn | 10 | — |
+| 8 Errata | 10 | — |
+| 9 Limitations and 9.1 | 9.5 | — |
+| Conclusion | 9.5 → 10 | Every TRU sentence now checked against the LCDES page and the SES report itself; deployment correctly stated as future work |
+| Bibliography | 9.5 | — |
+| Overall | 9.5 | |
+
+## Round 3 — closing read
+
+Pages 1–6 (abstract, introduction, aims) and 45–52 (references) re-read in the final rendering; unchanged since Round 1 except the bibliography lines listed above. Nothing found. Two consecutive rounds (2 and 3) found no manuscript change, so the loop stops here.
+
+What keeps the remaining parts below 10, and the evidence that would close each:
+- Abstract (9): 521 words. Every number is one the author asked to keep; the target venue's abstract limit could not be fetched. An editorial decision on which numbers to move into the introduction would close it.
+- Related work (9.5) and bibliography (9.5): the Brzychczy per-domain counts need one look at the review's domain table (Springer login).
+- Method, Results, Limitations (9.5 each): no error found; each carries a disclosed dependence on a single simulated year and cross-version or post-hoc comparisons that the text already states as such. Only a second healthy year or a field detection result, which the repository does not contain, would raise them.

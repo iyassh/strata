@@ -12,7 +12,7 @@
   journal = {Science and Technology for the Built Environment},
   volume  = {29},
   number  = {10},
-  pages   = {1042--1057},
+  pages   = {1027--1038},
   year    = {2023},
   doi     = {10.1080/23744731.2023.2263324}
 }
@@ -47,7 +47,7 @@
   volume  = {192},
   pages   = {84--92},
   year    = {2019},
-  doi     = {10.1016/j.enbuild.2019.03.010}
+  doi     = {10.1016/j.enbuild.2019.03.024}
 }
 
 @article{tun2021hybridrfsvm,
@@ -81,13 +81,15 @@
   doi     = {10.3390/systems13050330}
 }
 
-@misc{mukhtar2025reproducibility,
-  author = {Mukhtar, Adil and Hadwiger, Michael and Wotawa, Franz and Schweiger, Gerald},
-  title  = {Reproducibility of machine learning-based fault detection and diagnosis for {HVAC} systems in buildings: An empirical study},
-  year   = {2025},
-  eprint = {2508.00880},
-  archivePrefix = {arXiv},
-  note = {arXiv preprint 2508.00880; finds two of sixty-five studies shared code links, one of them broken}
+@article{mukhtar2025reproducibility,
+  author  = {Mukhtar, Adil and Hadwiger, Michael and Wotawa, Franz and Schweiger, Gerald},
+  title   = {Reproducibility of machine learning-based fault detection and diagnosis for {HVAC} systems in buildings: An empirical study},
+  journal = {Energy and AI},
+  volume  = {22},
+  pages   = {100658},
+  year    = {2025},
+  doi     = {10.1016/j.egyai.2025.100658},
+  note    = {Also arXiv:2508.00880}
 }
 
 @article{jung2025vavfaultdata,
@@ -95,7 +97,7 @@
   title   = {Datasets of faults in variable air volume terminal units in a multi-zone commercial building},
   journal = {Scientific Data},
   volume  = {12},
-  pages   = {798},
+  pages   = {763},
   year    = {2025},
   doi     = {10.1038/s41597-025-05063-z}
 }
@@ -183,7 +185,7 @@
   volume  = {258},
   pages   = {111568},
   year    = {2024},
-  doi     = {10.1016/j.buildenv.2024.111481}
+  doi     = {10.1016/j.buildenv.2024.111568}
 }
 
 @article{gao2026contrastivessl,
@@ -273,8 +275,11 @@
   author  = {Vitale, Francesco and Dall'Ora, Nicola and Gaiardelli, Sebastiano and Fraccaroli, Enrico and Mazzocca, Nicola and Fummi, Franco},
   title   = {Process mining-driven modeling and simulation to enhance fault diagnosis in cyber-physical systems},
   journal = {Journal of Manufacturing Systems},
-  year    = {2025},
-  note    = {{arXiv}:2506.21502}
+  volume  = {84},
+  pages   = {189--206},
+  year    = {2026},
+  doi     = {10.1016/j.jmsy.2025.12.005},
+  note    = {Also arXiv:2506.21502 (2025)}
 }
 
 @article{moradbeikie2025pasteurization,
@@ -304,7 +309,7 @@
   journal = {ACM Transactions on Internet Technology},
   volume  = {26},
   number  = {2},
-  pages   = {Article 17},
+  pages   = {1--34},
   year    = {2026},
   doi     = {10.1145/3777897}
 }
@@ -360,7 +365,10 @@
   title       = {Characterization and survey of automated fault detection and diagnostic tools},
   number      = {LBNL-2001075},
   institution = {Lawrence Berkeley National Laboratory},
-  year        = {2017}
+  address     = {Berkeley, CA},
+  month       = nov,
+  year        = {2017},
+  url         = {https://eta-publications.lbl.gov/sites/default/files/lbnl-2001075.pdf}
 }
 
 % ----- Section 8: hybrid PM + ML pipelines ----------------------
@@ -733,13 +741,13 @@
 
 % ---- added 2026-09-23 after round-two review ----
 @software{openfdd2025,
-  author  = {{open-fdd contributors}},
+  author  = {Bartling, Ben and others},
   title   = {open-fdd: open-source fault detection and diagnostics for {HVAC} implementing the {ASHRAE} {Guideline} 36 fault conditions},
-  year    = {2025},
+  year    = {2026},
   version = {4.4.1},
   license = {MIT},
   url     = {https://pypi.org/project/open-fdd/},
-  note    = {PyPI package; the Guideline 36 battery imported, not reimplemented, for the comparison in this paper}
+  note    = {PyPI package, version 4.4.1 released 2026-08-15; source at \url{https://github.com/bbartling/open-fdd}. The Guideline 36 battery is imported, not reimplemented, for the comparison in this paper}
 }
 @article{villani2004hybridpetri,
   author  = {Villani, Emilia and Miyagi, Paulo E.},
@@ -751,26 +759,31 @@
   doi     = {10.1590/S0103-17592004000200003}
 }
 @inproceedings{gomes2007petribas,
-  author    = {Gomes, Lu{\'i}s and Costa, Anik{\'o} and Barros, Jo{\~a}o Paulo and Lima, Paulo},
+  author    = {Gomes, Lu{\'i}s and Costa, Anik{\'o} and Barros, Jo{\~a}o Paulo and Pais, Rui and Rodrigues, Tiago and Ferreira, Richard},
   title     = {{Petri} Net based Building Automation and Monitoring System},
-  booktitle = {5th IEEE International Conference on Industrial Informatics (INDIN)},
+  booktitle = {2007 5th IEEE International Conference on Industrial Informatics (INDIN)},
+  pages     = {57--62},
   year      = {2007},
   doi       = {10.1109/INDIN.2007.4384731}
 }
 @article{xu2015chillerpetri,
-  author  = {Xu, Xiaodong and others},
+  author  = {Xu, Bing and Su, Jun and Fan, Qiu Min and Zhu, Ya Cheng},
   title   = {Wireless sensors system for the chillers fault diagnostic based on characteristic {Petri} net modelling},
   journal = {International Journal of Wireless and Mobile Computing},
   year    = {2015},
   volume  = {9},
-  number  = {3},
+  number  = {1},
+  pages   = {43--48},
   doi     = {10.1504/IJWMC.2015.071684}
 }
 @misc{zhong2022pmids,
   author = {Zhong, Yinzheng and Lisitsa, Alexei},
   title  = {Can process mining help in anomaly-based intrusion detection?},
   year   = {2022},
+  eprint = {2206.10379},
+  archivePrefix = {arXiv},
   howpublished = {arXiv:2206.10379},
+  url    = {https://arxiv.org/abs/2206.10379},
   note   = {Preprint; not peer reviewed. Reports that na\"{i}ve process mining on network event logs was ineffective for intrusion detection}
 }
 @inproceedings{jimenez2017popper,
@@ -810,7 +823,7 @@
   booktitle = {IEEE Symposium on Computational Intelligence and Data Mining (CIDM)},
   year      = {2013},
   pages     = {127--134},
-  doi       = {10.1109/CIDM.2013.6597225}
+  doi       = {10.1109/CIDM.2013.6597227}
 }
 @inproceedings{vaneck2015pm2,
   author    = {van Eck, Maikel L. and Lu, Xixi and Leemans, Sander J. J. and van der Aalst, Wil M. P.},
@@ -861,11 +874,12 @@
 }
 
 @article{ghalamsiah2026ahudatasets,
-  author  = {Ghalamsiah, Naghmeh and Wen, Jin and Li, Guanjing and Chen, Yimin and Lu, Xing and Fu, Yangyang and others},
+  author  = {Ghalamsiah, Naghmeh and Wen, Jin and Li, Guowen and Chen, Yimin and Lu, Xing and Fu, Yangyang and Chu, Mengyuan and O'Neill, Zheng},
   title   = {Labeled Datasets for Air Handling Units Operating in Faulted and Fault-free States},
   journal = {Scientific Data},
   volume  = {13},
-  number  = {15},
+  number  = {1},
+  pages   = {15},
   year    = {2026},
   doi     = {10.1038/s41597-025-06179-y}
 }
@@ -895,8 +909,9 @@
 @incollection{moradbeikie2026sensor2eventlog,
   author    = {Moradbeikie, Azin and Grigore, Iuliana Malina and Lopes, Sergio Ivan and Barbon Junior, Sylvio},
   title     = {{Sensor2EventLog}: Bridging continuous {IoT} data and process mining through eventization},
-  booktitle = {Advanced Information Systems Engineering},
+  booktitle = {Advanced Information Systems Engineering (CAiSE 2026), Part I},
   series    = {Lecture Notes in Computer Science},
+  pages     = {177--194},
   publisher = {Springer},
   year      = {2026},
   doi       = {10.1007/978-3-032-28110-4_10}
@@ -927,12 +942,266 @@
   author = {Hofman, Jake M. and Chatzimparmpas, Angelos and Sharma, Amit and Watts, Duncan J. and Hullman, Jessica},
   title  = {Pre-registration for predictive modeling},
   year   = {2023},
-  note   = {arXiv:2311.18807}
+  eprint = {2311.18807},
+  archivePrefix = {arXiv},
+  howpublished = {arXiv:2311.18807},
+  url    = {https://arxiv.org/abs/2311.18807}
 }
 
-@misc{pawel2022pitfalls,
-  author = {Pawel, Samuel and Kook, Lucas and Reeve, Kelly},
-  title  = {Pitfalls and potentials in simulation studies: questionable research practices in comparative simulation studies allow for spurious claims of superiority of any method},
+@article{pawel2022pitfalls,
+  author  = {Pawel, Samuel and Kook, Lucas and Reeve, Kelly},
+  title   = {Pitfalls and potentials in simulation studies: Questionable research practices in comparative simulation studies allow for spurious claims of superiority of any method},
+  journal = {Biometrical Journal},
+  volume  = {66},
+  number  = {1},
+  pages   = {e2200091},
+  year    = {2024},
+  doi     = {10.1002/bimj.202200091},
+  note    = {First published online 2023; also arXiv:2203.13076 (2022)}
+}
+
+
+% ---- added 2026-09-28 by the citation audit (docs/reviews/2026-09-28-citation-audit.md) ----
+% Every DOI/URL below was resolved and its metadata checked against Crossref,
+% DataCite, arXiv, PubMed or the document itself on 2026-09-28.
+
+@article{katipamula2005fddreview1,
+  author  = {Katipamula, Srinivas and Brambley, Michael R.},
+  title   = {Methods for fault detection, diagnostics, and prognostics for building systems---A review, Part {I}},
+  journal = {HVAC\&R Research},
+  volume  = {11},
+  number  = {1},
+  pages   = {3--25},
+  year    = {2005},
+  doi     = {10.1080/10789669.2005.10391123}
+}
+
+@article{katipamula2005fddreview2,
+  author  = {Katipamula, Srinivas and Brambley, Michael R.},
+  title   = {Methods for fault detection, diagnostics, and prognostics for building systems---A review, Part {II}},
+  journal = {HVAC\&R Research},
+  volume  = {11},
+  number  = {2},
+  pages   = {169--187},
+  year    = {2005},
+  doi     = {10.1080/10789669.2005.10391133}
+}
+
+@techreport{doe2017hvacsavings,
+  author      = {Goetzler, William and Shandross, Richard and Young, Jim and Petritchenko, Oxana and Ringo, Decker and McClive, Sam},
+  title       = {Energy Savings Potential and {RD\&D} Opportunities for Commercial Building {HVAC} Systems},
+  institution = {U.S. Department of Energy, Office of Energy Efficiency and Renewable Energy, Building Technologies Office},
+  type        = {Report},
+  number      = {DOE/EE-1703},
+  note        = {Prepared by Navigant Consulting, Inc.},
+  month       = dec,
+  year        = {2017},
+  url         = {https://www.energy.gov/sites/prod/files/2017/12/f46/bto-DOE-Comm-HVAC-Report-12-21-17.pdf}
+}
+
+@article{schein2006apar,
+  author  = {Schein, Jeffrey and Bushby, Steven T. and Castro, Natascha S. and House, John M.},
+  title   = {A rule-based fault detection method for air handling units},
+  journal = {Energy and Buildings},
+  volume  = {38},
+  number  = {12},
+  pages   = {1485--1492},
+  year    = {2006},
+  doi     = {10.1016/j.enbuild.2006.04.014}
+}
+
+@article{chen2023interpretablereview,
+  author  = {Chen, Zhe and Xiao, Fu and Guo, Fangzhou and Yan, Jinyue},
+  title   = {Interpretable machine learning for building energy management: A state-of-the-art review},
+  journal = {Advances in Applied Energy},
+  volume  = {9},
+  pages   = {100123},
+  year    = {2023},
+  doi     = {10.1016/j.adapen.2023.100123}
+}
+
+@article{nosek2018preregistration,
+  author  = {Nosek, Brian A. and Ebersole, Charles R. and DeHaven, Alexander C. and Mellor, David T.},
+  title   = {The preregistration revolution},
+  journal = {Proceedings of the National Academy of Sciences},
+  volume  = {115},
+  number  = {11},
+  pages   = {2600--2606},
+  year    = {2018},
+  doi     = {10.1073/pnas.1708274114}
+}
+
+@article{hanley1983zeronumerators,
+  author  = {Hanley, James A. and Lippman-Hand, Abby},
+  title   = {If nothing goes wrong, is everything all right? {Interpreting} zero numerators},
+  journal = {JAMA},
+  volume  = {249},
+  number  = {13},
+  pages   = {1743--1745},
+  year    = {1983},
+  doi     = {10.1001/jama.1983.03330370053031}
+}
+
+@article{eypasch1995ruleofthree,
+  author  = {Eypasch, Ernst and Lefering, Rolf and Kum, C. K. and Troidl, Hans},
+  title   = {Probability of adverse events that have not yet occurred: a statistical reminder},
+  journal = {BMJ},
+  volume  = {311},
+  number  = {7005},
+  pages   = {619--620},
+  year    = {1995},
+  doi     = {10.1136/bmj.311.7005.619}
+}
+
+@article{wang2004pcaahu,
+  author  = {Wang, Shengwei and Xiao, Fu},
+  title   = {{AHU} sensor fault diagnosis using principal component analysis method},
+  journal = {Energy and Buildings},
+  volume  = {36},
+  number  = {2},
+  pages   = {147--160},
+  year    = {2004},
+  doi     = {10.1016/j.enbuild.2003.10.002}
+}
+
+@article{jackson1979spe,
+  author  = {Jackson, J. Edward and Mudholkar, Govind S.},
+  title   = {Control procedures for residuals associated with principal component analysis},
+  journal = {Technometrics},
+  volume  = {21},
+  number  = {3},
+  pages   = {341--349},
+  year    = {1979},
+  doi     = {10.1080/00401706.1979.10489779}
+}
+
+@inproceedings{balaji2016brick,
+  author    = {Balaji, Bharathan and Bhattacharya, Arka and Fierro, Gabriel and Gao, Jingkun and Gluck, Joshua and Hong, Dezhi and Johansen, Aslak and Koh, Jason and Ploennigs, Joern and Agarwal, Yuvraj and Berg{\'e}s, Mario and Culler, David and Gupta, Rajesh and Kj{\ae}rgaard, Mikkel Baun and Srivastava, Mani and Whitehouse, Kamin},
+  title     = {Brick: Towards a unified metadata schema for buildings},
+  booktitle = {Proceedings of the 3rd ACM International Conference on Systems for Energy-Efficient Built Environments (BuildSys '16)},
+  pages     = {41--50},
+  publisher = {ACM},
+  year      = {2016},
+  doi       = {10.1145/2993422.2993577}
+}
+
+@incollection{vanderaalst2012manifesto,
+  author    = {van der Aalst, Wil M. P. and Adriansyah, Arya and de Medeiros, Ana Karla Alves and Arcieri, Franco and Baier, Thomas and Blickle, Tobias and Bose, Jagadeesh Chandra and van den Brand, Peter and Brandtjen, Ronald and Buijs, Joos and others},
+  title     = {Process Mining Manifesto},
+  booktitle = {Business Process Management Workshops (BPM 2011)},
+  series    = {Lecture Notes in Business Information Processing},
+  volume    = {99},
+  pages     = {169--194},
+  publisher = {Springer},
+  year      = {2012},
+  doi       = {10.1007/978-3-642-28108-2_19}
+}
+
+@inproceedings{adriansyah2011alignments,
+  author    = {Adriansyah, Arya and van Dongen, Boudewijn F. and van der Aalst, Wil M. P.},
+  title     = {Conformance checking using cost-based fitness analysis},
+  booktitle = {2011 IEEE 15th International Enterprise Distributed Object Computing Conference (EDOC)},
+  pages     = {55--64},
+  publisher = {IEEE},
+  year      = {2011},
+  doi       = {10.1109/EDOC.2011.12}
+}
+
+@article{murata1989petrinets,
+  author  = {Murata, Tadao},
+  title   = {Petri nets: Properties, analysis and applications},
+  journal = {Proceedings of the IEEE},
+  volume  = {77},
+  number  = {4},
+  pages   = {541--580},
+  year    = {1989},
+  doi     = {10.1109/5.24143}
+}
+
+@misc{priem2022openalex,
+  author = {Priem, Jason and Piwowar, Heather and Orr, Richard},
+  title  = {{OpenAlex}: A fully-open index of scholarly works, authors, venues, institutions, and concepts},
   year   = {2022},
-  note   = {arXiv:2203.13076}
+  eprint = {2205.01833},
+  archivePrefix = {arXiv},
+  howpublished = {arXiv:2205.01833},
+  url    = {https://arxiv.org/abs/2205.01833}
+}
+
+@misc{granderson2022lbnlfdddatasets,
+  author = {Granderson, Jessica and Lin, Guanjing and Chen, Yimin and Casillas, Armando and Im, Piljae and Jung, Sungkyun},
+  title  = {{LBNL} Fault Detection and Diagnostics Datasets},
+  howpublished = {DOE Open Energy Data Initiative (OEDI), dataset},
+  year   = {2022},
+  doi    = {10.25984/1881324}
+}
+
+@techreport{unep2025gsr,
+  author      = {{United Nations Environment Programme} and {Global Alliance for Buildings and Construction}},
+  title       = {Global Status Report for Buildings and Construction 2024/2025: Not just another brick in the wall},
+  institution = {United Nations Environment Programme},
+  address     = {Nairobi},
+  year        = {2025},
+  url         = {https://globalabc.org/resources/publications/global-status-report-buildings-and-construction-20242025-not-just-another},
+  note        = {Buildings and construction: 32\,\% of global final energy use and 34\,\% of energy-related CO$_2$ emissions in 2023}
+}
+
+@misc{ashrae2021guideline36,
+  author       = {{ASHRAE}},
+  title        = {{ASHRAE} Guideline 36-2021: High-Performance Sequences of Operation for {HVAC} Systems},
+  howpublished = {American Society of Heating, Refrigerating and Air-Conditioning Engineers, Peachtree Corners, GA},
+  year         = {2021},
+  url          = {https://www.ashrae.org/technical-resources/ashrae-standards-and-guidelines}
+}
+
+@article{wilson1927interval,
+  author  = {Wilson, Edwin B.},
+  title   = {Probable inference, the law of succession, and statistical inference},
+  journal = {Journal of the American Statistical Association},
+  volume  = {22},
+  number  = {158},
+  pages   = {209--212},
+  year    = {1927},
+  doi     = {10.1080/01621459.1927.10502953}
+}
+
+@article{mcnemar1947test,
+  author  = {McNemar, Quinn},
+  title   = {Note on the sampling error of the difference between correlated proportions or percentages},
+  journal = {Psychometrika},
+  volume  = {12},
+  number  = {2},
+  pages   = {153--157},
+  year    = {1947},
+  doi     = {10.1007/BF02295996}
+}
+
+@article{crowe2020commissioning,
+  author  = {Crowe, Eliot and Mills, Evan and Poeling, Tom and Curtin, Claire and Bj{\o}rnskov, Diana and Fischer, Liz and Granderson, Jessica},
+  title   = {Building commissioning costs and savings across three decades and 1500 {North American} buildings},
+  journal = {Energy and Buildings},
+  volume  = {227},
+  pages   = {110408},
+  year    = {2020},
+  doi     = {10.1016/j.enbuild.2020.110408}
+}
+
+@article{myers2018pmics,
+  author  = {Myers, David and Suriadi, Suriadi and Radke, Kenneth and Foo, Ernest},
+  title   = {Anomaly detection for industrial control systems using process mining},
+  journal = {Computers \& Security},
+  volume  = {78},
+  pages   = {103--125},
+  year    = {2018},
+  doi     = {10.1016/j.cose.2018.06.002}
+}
+
+@misc{mangler2024iotbp,
+  author = {Mangler, Juergen and Seiger, Ronny and Benzin, Janik-Vasily and Gr{\"u}ger, Joscha and Kirikkayis, Yusuf and Gallik, Florian and Malburg, Lukas and Ehrendorfer, Matthias and Bertrand, Yannis and Franceschetti, Marco and Weber, Barbara and Rinderle-Ma, Stefanie and Bergmann, Ralph and Serral Asensio, Estefan{\'i}a and Reichert, Manfred},
+  title  = {From {Internet of Things} data to business processes: Challenges and a framework},
+  year   = {2024},
+  eprint = {2405.08528},
+  archivePrefix = {arXiv},
+  howpublished = {arXiv:2405.08528},
+  url    = {https://arxiv.org/abs/2405.08528}
 }

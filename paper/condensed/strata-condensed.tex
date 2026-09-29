@@ -195,6 +195,37 @@ all & 232 $\to$ 387 of 391 & 142 $\to$ 158 / 175 & 21 $\to$ 26 of 480 & 0 \\
 \label{tab:coverage}
 \end{table}
 
+\section{What the Protocol Refuted or Withdrew}
+\label{sec:falsified}
+None of the results here removes a detection from Section~\ref{sec:results}; each removes a claim about why a detection happens or how far the method reaches. Ten pre-registered results went against the project (Table~\ref{tab:refuted}), and they constrain the contribution more usefully than the confirmations do.
+
+\begin{table}[htbp]
+\centering
+\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.02\textwidth}>{\raggedright\arraybackslash}p{0.44\textwidth}>{\raggedright\arraybackslash}p{0.48\textwidth}@{}}
+\hline
+\# & What was claimed or hoped & What the test found, and what survived \\
+\hline
+1 & Discovered models out-detect hand-written rules. & A one-line rule covered 192 days against the model channel's 135 on its best scenario at zero false alarms. Survived: the invariant discovery surfaced became the rule; the models are design-time scaffolding. \\
+2 & Structure learned on one building detects faults on another, zero-shot. & Zero to one detection per building pairing. Survived: portability at configuration level. \\
+3 & The conformance channels catch faults no other channel does. & Every genuine model-channel detection was a frequency deviation seen through alignment cost. Survived: the frequency channel, which measures it directly. \\
+4 & The single-duct unit scores 14 of 14. & One detection was the dataset's configuration branch, not the fault. Survived: 13 of 14 adjudicated, quoted with 14 of 14 naive. \\
+5 & An early day-level significance test. & Its null was impossible by construction. Survived: a binomial against each channel's own noise. \\
+6 & Calibration tuned at one-minute sampling holds at fifteen minutes, and survives contamination. & 28 to 64 spurious healthy days at the coarser rate; one contaminated training day removes two detections. Survived: the healthy-silence gate is re-run at the deployment rate; mild contamination announces itself. \\
+7 & Discovery predicts where a rule transfers between buildings. & The unit of analysis was the building, so three buildings gave a minimum $p$ of 0.167 against 0.05: no power, no conclusion. Survived: a pre-registration field naming the unit of replication. \\
+8 & A coil-effectiveness residual recovers reheat-coil fouling. & One of twelve fouling scenarios, already detected. Survived: fouling needs a different sensor; the refrigerant-side rooftop unit catches 10 of 10 severities at zero false alarms. \\
+9 & The model was starved of vocabulary. & A richer alphabet adds one detection at 7, 18 and 21 false-alarm days in 96. Survived: the enriched frequency channel alone stays in budget, as a candidate, not an adoption. \\
+10 & The four-building transfer re-run. & Passes formally ($p = 0.042$), but a discovery-free control passes identically. Survived: no conclusion in either direction; reported as a protocol failure. \\
+\hline
+\end{tabular}
+\caption{Ten results that went against the project, each with what survived. Rows 1 to 3, 7 and 8 are the basis of the paper's statement of what process mining contributes.}
+\label{tab:refuted}
+\end{table}
+
+Three of the ten carry the argument. Discovered models do not out-detect hand-written rules: on the series fan-powered unit a stuck zone damper erases the unit's daily heating rhythm and the discovered net flags the absence, but a one-line rule, occupied workday and heating never active, covers 192 days to the model channel's 135 at zero false alarms on 365 healthy days. The invariant was surfaced by discovery and the rule written afterwards, which is the division of labour the paper reports. The models' detections were count deviations in disguise: on loop-heavy alphabets the nets are order-permissive, and every genuine model-channel detection was extra heating episodes, collapsed fan cycles or a vanished rhythm surfacing through alignment cost, which the frequency channel measures directly and two-sidedly. And the fouling misses need a different sensor, not one more residual: a pre-registered coil heat-transfer estimate gained nothing, eight of the ten missed fouling scenarios carry no signal in the event log at the deployed alphabet, and on the one dataset that records the refrigerant side the unchanged detector catches every condenser- and evaporator-fouling severity down to 10\% at zero false alarms in 28 held-out days, condenser fouling through the condensing temperature's approach to outdoor air, a point no air handler records.
+
+The transfer test is the protocol's own lesson. It was pre-registered with its quantity, predictions and falsifiers committed before computation, and it never had power, because the model quantity is constant within a building and three buildings give a minimum attainable $p$ of 0.167; two amendments written under the same discipline did not catch it. The remedy is a pre-registration field naming the unit of replication and the minimum attainable $p$ before any prediction is written. A powered test needs more buildings than three.
+
 % Sections follow as the review proceeds.
 
 \bibliographystyle{plain}

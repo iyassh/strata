@@ -110,3 +110,16 @@ Commit 2afd9b8 carries Rounds 1–2 (the lead's rule change of the same hour: co
 | Introduction | 9.5 | Two motivation primaries (UNEP, DOE) await keys from the citation agent |
 | Aims and objectives | 9.5 | Nothing outstanding; the 1.5 h figure is still by commit timestamps, not a logged wall clock |
 | Conclusion | 9.5 | Two TRU sources (LCDES project pages, the 2022 CAC energy study) await keys; deployment itself is future work by the artefacts |
+
+## Round 4 — 2026-09-28, after the citation agent's keys (7ec9db4)
+
+The citation agent added verified keys for all four requested sources and reported two facts that change wording: the DOE report does not carry the 15–30 % figure (its origin is Katipamula and Brambley 2005, now `katipamula2005fddreview1`; DOE gives HVAC as about 30 % of commercial building energy), and TRU's own page says the district energy system was switched on on 1 September 2026, so "under construction" was stale. Also `mukhtar2025reproducibility` is now the journal version (Energy and AI 22:100658).
+
+Edits, all inside the four parts:
+1. Introduction P1: "Buildings and construction account for 32 % of global final energy use and 34 % of energy-related carbon dioxide emissions \cite{unep2025gsr}" (the proposal's 34 % restored, with its primary source); HVAC "up to half of a building's consumption \cite{bi2024aihvacreview} and about 30 % of commercial building energy in the United States \cite{doe2017hvacsavings}"; the 15–30 % waste figure cited to `katipamula2005fddreview1` and `bi2024aihvacreview`; the 5–30 % savings unchanged. Both `%TODO-cite` marks removed.
+2. Introduction P4: "circulated as a preprint" removed ("A 2025 audit of 65 primary … studies found").
+3. Conclusion (c): the LCDES sentence now reads "built with Creative Energy and BC Hydro and switched on in September 2026 to serve the campus's buildings \cite{tru2026lcdes,tru2025lcdesmilestone}"; the proposal's "more than a dozen buildings" dropped because neither TRU source in the bib is recorded as stating a count. The CAC sentence cites `ses2022cacstudy`; its equipment list (AHU-1 with VAV boxes, FCU-1 and FC-1 to FC-9, RTU-1 to RTU-5, Automated Logic front end since 2021, Phase 2 of the district-plant connection plan) was checked against the report's pages 1–2 in Round 1. Both `%TODO-cite` marks removed.
+
+No number in the abstract, aims or the conclusion's findings changed. The three `%TODO-cite` marks that remain (Guideline 36, Schein et al. 2006, Brick) are in the body agent's sections. Compile: exit 0, 47 pages, no undefined reference or citation. PDF copied to both destinations.
+
+Ratings unchanged (abstract 9, introduction 9.5, aims 9.5, conclusion 9.5); the introduction's and conclusion's remaining residues are now closed, and what keeps them below 10 is that the motivation and TRU sentences rest on sources this agent did not open beyond the citation agent's verification notes.

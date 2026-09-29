@@ -165,9 +165,66 @@ RTU, measured rooftop unit (Site 2) & 26 & 2 / 7 & 1 case & --- & 3 / 49 & 182 \
 \label{tab:systems}
 \end{table}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../figures/fig_detection_by_family.pdf}
+\caption{Detected scenarios (blue) of scored scenarios (grey) by fault family on the six scored systems, as scored by the final calibration. Coil fouling is the dominant miss on the four air-side datasets and is caught in full on the simulated rooftop unit, condenser fouling through the refrigerant side and evaporator fouling through the air side (Section~\ref{sec:falsified}).}
+\label{fig:families}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../figures/fig_false_alarms.pdf}
+\caption{False alarms on the held-out fault-free days, per channel and for the deployed detector as a whole, every threshold out-of-sample. The seasonal rate channel (hatched) is advisory and outside the deployed union; the dashed line is the pre-registered budget of 10 of 96 held-out days for the five annual systems; the simulated rooftop unit's 28-day holdout carries no such budget line.}
+\label{fig:falsealarms}
+\end{figure}
+
+
 \paragraph{Time to detection.} The median is one day on all six scored systems; the tails are fouling and charge faults: on the dual-duct unit the moderate and severe waterside cooling fouling at 114 days each, on the fan coil unit the moderate heating waterside fouling at 15 days, on the simulated rooftop unit the 20\% refrigerant undercharge at 14 days. Gradually developing faults are detected slowly, the expected cost of calibrating below a noise floor. Pooled recall misleads for a gated detector: on the single-duct coil-bias scenarios the residual is physics-bound only inside a detection window (coil off, zone occupied, sustained 120 minutes) that exists on 137 to 164 days of the year, and within those windows recall is 100\% on every scenario; the apparent 39--47\% ceiling is window prevalence, not capability.
 
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcccl}
+\hline
+System & Detected & At 1 day & At 2 days & Remaining TTDs (days) \\
+\hline
+SDAHU & 13 (adjudicated) & 9 & 4 & 0 \\
+PFPU & 26 & 26 & 0 & --- \\
+SFPU & 25 & 25 & 0 & --- \\
+DDAHU & 50 & 45 & 0 & 3, 5, 14, 114, 114 \\
+FCU & 43 & 38 & 1 & 3, 3, 4, 15 \\
+RTU (simulated) & 20 & 19 & 0 & 14 \\
+\hline
+\end{tabular}
+\caption{Time-to-detection distribution behind the one-day median, by system, as scored by the final calibration (from the committed scorecards). The long tails are fouling and charge faults: on the dual-duct unit the moderate and severe waterside cooling fouling (114 days each, carried by the rules channel), on the fan coil unit the moderate heating waterside fouling (15 days, the operating-point indicator of Section~\ref{sec:results}), and on the simulated rooftop unit the 20\,\% refrigerant undercharge (14 days).}
+\label{tab:ttd}
+\end{table}
+
+
 \paragraph{Against a principal-component baseline.} A PCA baseline on squared prediction error \cite{wang2004pcaahu,jackson1979spe}, fitted to 95\% of the fault-free variance with its threshold at the largest training-day score and the provenance-leaking columns excluded, detects 61 of the 73 scenarios it shares with STRATA against STRATA's 64 (13 / 23 / 25 against 13 / 26 / 25), with fewer false alarms on the two terminal units (1 of 96 each against 8 and 9) and within one day on the air handler. Wilson intervals overlap (64 of 73 is [78.2, 93.4]\%, 61 of 73 is [73.4, 90.3]\%) and an exact McNemar test on the three discordant scenarios gives $p = 0.25$, an absence of power rather than evidence of superiority \cite{wilson1927interval,mcnemar1947test}. The three scenarios only STRATA detects are an unstable VAV damper and the parallel unit's moderate and severe airside reheat fouling; nine are missed by both, eight of them reheat-coil fouling. What the baseline does not do is name the implicated device or state the evidence behind a flag, which is the difference that matters operationally (Figure~\ref{lst:alarm}).
+
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}@{}}
+\hline
+ & STRATA & PCA-SPE (strict) \\
+\hline
+Detected (of 73, adjudicated) & 64 & 61 \\
+Per system & 13 / 26 / 25 & 13 / 23 / 25 \\
+Holdout false-alarm rate & 1.0\% [0.2, 5.7] / 8.3\% [4.3, 15.6] / 9.4\% [5.0, 16.9] & 1.3\% [0.2, 6.8] / 1.0\% [0.2, 5.7] / 1.0\% [0.2, 5.7] \\
+Sensor columns mapped (STRATA) & 26 of 30 and 109 of 109 (12 and 56 before the coverage audit) & --- \\
+Raw daily features consumed (PCA) & --- & 108 and 424 \\
+Implicated device named correctly & 37 of 50 (13 unnamed, 0 wrong, 1 indeterminate; the 14 single-duct detections have no device stratum; naive universe) & not applicable \\
+Names the implicated device & yes & no \\
+\hline
+\end{tabular}
+\caption{STRATA against the principal-component baseline. Per-system entries are ordered SDAHU / PFPU / SFPU; the counts behind the false-alarm rates are 1/96, 8/96 and 9/96 for STRATA and 1/79, 1/96 and 1/96 for the baseline, with Wilson 95\% intervals \cite{wilson1927interval} in brackets. Feature counts are given for the single-duct and the fan-powered systems.}
+\label{tab:pca}
+\end{table}
+
 
 \begin{figure}[htbp]
 \small
@@ -197,6 +254,14 @@ Held to the treatment STRATA gives its own signature rules, a correctly wired th
 \paragraph{What the event log carries.} Day-by-day comparison of the parallel unit's fault-free year against its scenarios on the state alphabet shows that under waterside reheat-coil fouling the state-event log is identical to healthy to the minute; nine files have that property, among them every fouling miss that remains on the two fan-powered units, and for them no method that reads that log can detect, process mining or otherwise, because at the deployed alphabet the fault lives in heat-transfer magnitudes the abstraction discards. Four pre-registered vocabulary experiments (X12--X15) tested a time-perspective model, a fault-informed coil residual and an enriched alphabet: the enriched frequency channel alone stays in budget and adds one airside-fouling detection, a scenario the PCA baseline also reaches; nothing else new was found, and richer vocabulary bought detections only at false alarms the budget forbids.
 
 \paragraph{What the conformance channel can see.} A pre-registered positive control injected order violations into each system's fault-free holdout traces. The fan coil and dual-duct nets see order (a reversed day is flagged on 55 of 72 and 59 of 83 holdout days, AUC 0.99); the single-duct net separates it on average (AUC 0.91) but no in-budget threshold sees it, because healthy days fit worse than a reversed day; the two fan-powered nets do not move under any perturbation. A pre-registered grid of seven process-mining instruments (inductive miner at two noise settings, token replay, heuristics miner, log skeleton, Declare constraints, temporal profile) detects none of the 33 scenarios the deployed detector then missed, at false-alarm rates of 0 to 9.7\%. The conformance null is a property of the state-event log, not of the miner or the measure.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../figures/fig_x22_positive_control.pdf}
+\caption{The positive control. Left: threshold-free separability (AUC) of perturbed against unperturbed fault-free holdout days for each injected order violation. Right: the share of those days the deployed gate flags. The fan coil and dual-duct units see order; the single-duct unit separates it on average but not at any in-budget threshold; the fan-powered units' nets accept any order.}
+\label{fig:x22}
+\end{figure}
+
 
 \paragraph{Two systems onboarded blind.} The dual-duct air handler (114 points, 55 faults in 15 families, two of them new) was onboarded under a pre-registration written before any data file was opened: 80 mappings, 15 state and 26 signature rules, one healthy-silence iteration, no source change; 45 of 55 detected at 3 false-alarm days in 96, 50 of 55 after the coverage audit. The fan coil unit (29 points, 47 scored faults in 17 families, four of them new) followed under the same form: its first run fired two falsifiers because a scoring rule written for the fan-powered units read this unit's idle setback as a scheduled mode; a two-script repair was pre-registered before it was made, the four earlier scorecards regenerated byte-identically, and the unit scores 41 of 47 at 4 false-alarm days in 96, 43 of 47 after the coverage audit. Nothing on either unit is detected by conformance alone.
 
@@ -251,6 +316,14 @@ Thirty pre-registered experiments produced ten results that went against the hyp
 
 Three of the ten carry the argument. Discovered models do not out-detect hand-written rules: on the series fan-powered unit a stuck zone damper erases the unit's daily heating rhythm and the discovered net flags the absence, but a one-line rule, occupied workday and heating never active, covers 192 days to the model channel's 135 at zero false alarms on 365 healthy days. The invariant was surfaced by discovery and the rule written afterwards, which is the division of labour the paper reports. The models' detections were count deviations in disguise: on alphabets whose events repeat many times a day the nets accept activities in almost any order, and every genuine model-channel detection was extra heating episodes, collapsed fan cycles or a vanished rhythm surfacing through alignment cost, which the frequency channel measures directly and in both directions. And the fouling misses need a different sensor, not one more residual: a pre-registered coil heat-transfer estimate gained nothing, eight of the ten missed fouling scenarios carry no signal in the event log at the deployed alphabet, and on the one dataset that records the refrigerant side the unchanged detector catches every condenser- and evaporator-fouling severity down to 10\% at zero false alarms in 28 held-out days, condenser fouling through the condensing temperature's approach to outdoor air, a point no air handler records.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\textwidth]{../figures/fig_x29_fouling_severity.pdf}
+\caption{Which residual carries each fouling detection on the simulated rooftop unit, by seeded airflow reduction (days flagged of 100, from the per-residual credit artefact). Condenser fouling is carried by the refrigerant-side condensing-temperature approach at every severity; evaporator fouling is carried by the air-side return-minus-supply residual at every severity, with the refrigerant-side residuals joining from 30\,\%.}
+\label{fig:x29}
+\end{figure}
+
+
 The transfer test is the protocol's own lesson. It was pre-registered with its quantity, predictions and falsifiers committed before computation, and it never had power, because the model quantity is constant within a building and three buildings give a minimum attainable $p$ of 0.167; two amendments written under the same discipline did not catch it. The remedy is a pre-registration field naming the unit of replication and the minimum attainable $p$ before any prediction is written. A powered test needs more buildings than three.
 
 \section{Limitations}
@@ -266,6 +339,67 @@ To an operator this is a detector whose false-alarm rate is measured on the buil
 The project's name, ProcessHeal, states the destination: a building that detects, locates, diagnoses and corrects its own faults. Detection, localisation and evidenced alarms exist. A pre-registered diagnosis layer names the fault family from signed residual patterns in three of four resolved cases and resolved the five dual-duct damper cases the carrying rule had misplaced, but missed its bars, and it showed the boundary of passive observation: a stuck actuator and a biased sensor on the same loop leave the same footprint in the recorded points. A self-healing loop needs active tests that perturb a device and watch the response, a witness for cause against response, and an operator study before any automated action \cite{lin2020faultcorrection,pritoni2022faultcorrection,singh2022pmselfhealing}. That is a research programme, and the parts that exist are the detector, the localisation, the coverage audit and the protocol under which each further step would be pre-registered. The protocol is the contribution the paper is surest of: pre-registration with binding falsifiers, independent recomputation before any number is quoted, and tests that pin published values, fired refutations and disclosures. Ten results went against the project and are published, eight benchmark defects were documented, and a completed comparison was voided twice before the surviving version was quoted. In a subfield where independent verification is rare \cite{mukhtar2025reproducibility}, a result that has survived a genuine attempt at refutation is worth more than a larger number that has not.
 
 % Sections follow as the review proceeds.
+
+\appendix
+\section{Every pre-registered experiment}
+\label{app:ledger}
+
+Table~\ref{tab:ledger} lists every pre-registered experiment in the order it was run, with its pre-registered prediction, its outcome and what fired. Each row resolves to a ledger under \texttt{outputs/} or, where noted in the repository's research log, to the phase report; amendments are folded into the row they amend.
+
+{\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}\setlength{\LTcapwidth}{\textwidth}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
+\caption{Every pre-registered experiment, its prediction, its outcome and what fired.}\label{tab:ledger}\\
+\hline
+ID & Question & Pre-registered prediction & Outcome & Fired / failed \\
+\hline
+\endfirsthead
+\multicolumn{5}{@{}l}{\emph{Table~\thetable{} (continued)}}\\
+\hline
+ID & Question & Pre-registered prediction & Outcome & Fired / failed \\
+\hline
+\endhead
+\hline
+\endfoot
+\endlastfoot
+--- & Do discovered unit models out-detect a hand-written rule? & The model channel covers more fault days than any matched rule & A one-line matched rule covered 192 days against the model channel's 135 (178 in the current artefact), at 0 of 365 healthy false alarms & Falsifier fired (matched-rule ablation) \\
+--- & Does behavioural structure transfer zero-shot to a new building? & Source-fitted bands detect faults on the target system & 0 of 14 single-duct scenarios detected under the confidence-bound gate & Falsifier fired (cold-start detection) \\
+--- & Does model support predict where a transplanted rule holds? Three amendments. & Spearman $\rho < 0$ with permutation $p < 0.05$ over nine cells & $\rho = -0.69$, $p = 0.200$; the valid null over three buildings has minimum $p = 0.167$ & F1 and F2 fired, then both voided; never had power \\
+X5 & Are severity ladders monotone in dose? & No ladder is significantly anti-monotone & Series-unit fouling $\rho = +0.87$; no anti-monotone ladder; F-X5.a nearly unfireable at $n = 5$ & None \\
+X7 & Does healthy silence survive 15-minute resampling? & Healthy signature days and residual coverage are preserved & Healthy years gain 28, 64 and 64 signature days; one residual's coverage falls 31 to 1 & F-X7.a (three systems) and F-X7.b \\
+X8 & Does training contamination break extreme-value calibration? & Breakdown at small contamination; mild sources stay visible to rules & One score-carrying contaminated day collapses both negative coil-bias rungs, 164 of 164 to 0 & None \\
+X9/ X10 & Is the deployed detector robust to sensor jitter and to the holdout split? & Detections change by at most 3; false alarms under 10\,\% & Counts unchanged at $1\times$ jitter, within one on the mirrored split; 0 to 4 false alarms of 96 & None \\
+X11 & Is the single-duct OA-bias detection the fault or the configuration branch? & Five baseline estimators agree; the branch offset explains the flags & Offset $+1.06\,^\circ$F; OA-bias drops to 0 flags on 148 window days; 14/14 becomes 13/14 & F-X11.d fired on run 1; leg re-specified \\
+X12 & Does the model's time perspective recover missed scenarios? & The duration channel newly detects missed scenarios & 11 scenarios significant but 0 newly detected; unique against frequency on 11 & None; P3 failed without one \\
+X13 & Does a water-side coil-effectiveness residual separate reheat fouling? & At least 6 of the 9 fouling scenarios it counted significant & 1 of the 12 fouling files scored significant, already detected elsewhere; nothing newly detected & F-X13.b \\
+X14 & Was the discovered model starved of vocabulary? & At least one newly detected scenario inside the false-alarm budget & One newly detected; the single-duct model channel fires on all 14 scenarios instead of none (5 over the three systems before); 7, 18 and 21 false alarms of 96 & F-X14.a (budget) \\
+X15 & Does the enriched gain survive frequency-only scoring under two splits? & The gain is significant under both splits and inside budget & The same one scenario is significant under both splits; 41 significant against 12 deployed & None \\
+X17 & Can a dual-duct air handler be onboarded by configuration alone? & Config-only, gates clean, at least 60\,\% of scenarios detected & 45 of 55 detected (81.8\,\%) at 3 false alarms of 96; one silence iteration & None; P6 failed (5 fouling, not $\le 4$) \\
+X18 & Does the enriched-frequency gain replicate on the dual-duct unit? & A missed fouling scenario becomes significant under both splits & 0 newly significant; enriched 22 against deployed 8 on already-detected scenarios & F-X18.b \\
+X19 run 1 & Can a fan coil unit be onboarded by configuration alone? & Gates clean, at most 10 false alarms of 96, no conformance-only scenario & All 47 scenarios ``detected'' at 28 false alarms of 96; 6 conformance-only & F-X19.b and F-X19.d \\
+X19 A1 & Does the amended fan coil onboarding hold? & Budget restored and no conformance-only detection & 41 of 47 detected at 4 false alarms of 96; 0 conformance-only & None \\
+X20 & Is model support the log's own heating-day count across four buildings? & The identity holds on every building; $\rho < 0$ at $p < 0.05$ & $\rho = -1$, exact one-sided $p = 1/24 = 0.042$; the identity misses by 44 days on the fan coil unit & F-X20.a and F-X20.b \\
+X21 & Can a net's reading of a foreign year escape being that log's count? & The bound holds, the tautology persists, the ordering matches the count & The tautology fails on 6 of 12 pairs; the foreign predictor gives $\rho = -0.6$ against the count's $-1$ & F-X21.a; P3 failed without one \\
+X22 & Does the conformance channel fire on injected order violations? & Reversal is significant on the single-duct unit & Significant on 2 of 5 systems; the single-duct hit rate is 0 at zero false alarms & None; P1--P4 failed \\
+X24 & Does an outdoor-air-fraction residual add detections? & The 20\,\% damper leak is detected, budget held, nothing lost & Fan coil 41 to 42 of 47 at 4 false alarms of 96; no system loses a detection & None \\
+X25 steps 1--2 & Are the conformance thresholds calibrated out of sample? & Rows out of sample, budget $\le 10$ of 96, at most 3 verdict flips & All held at 0 verdict flips; the in-sample rows had understated false alarms by 3 and 4 days & None \\
+X25 step 3 & Does a max(fp,3)/n floor on the pooled denominator keep verdicts? & Counts within 2 and at most 3 verdict flips & Held at 2 verdict flips; one dual-duct scenario gained, one series-unit scenario lost & None \\
+X25 step 4 & Does a per-day residual null keep the detections? & Each system's count stays within 2 & The dual-duct unit loses 3 detections (the series unit 2, the parallel and fan coil units 1 and 2) and 8 verdicts flip across the five systems; budgets unchanged (step-level artefact, before the fan-law channel; the final regeneration, \texttt{x25\_statistical\_repair.json}, nets seven lost and one gained on the dual-duct unit, the count Section~\ref{sec:limitations} quotes, and fires F-X25.c on the series unit) & F-X25.c \\
+X26 (+A1) & Does the false-alarm budget hold on a real building? & At most 3 silence iterations, false alarms under 10\,\%, the fault case flagged & 6.1\,\% false-alarm days with every channel in budget; the 40\,\% undercharge case is not flagged & None; both case predictions failed \\
+X27 & Does a fan-law virtual static recover static-pressure biases? & At least 7 of 8 static-bias scenarios detected & 6 of 8 detected; budget held and nothing lost & F-X27.b \\
+X28 & Does a water-side coil UA channel see the simulated fouling? & At least 3 dual-duct and 2 fan coil fouling scenarios gained & 0 gained on either system; run 1 also broke the fan coil budget & F-X28.b; run 1 also F-X28.a \\
+X29 & Is fouling visible when the refrigerant side is recorded? & At least 3 of 5 condenser and 3 of 5 evaporator severities detected, monotone & All 10 fouling severities detected and monotone at 0 false alarms of 28 & None \\
+X30 & Does any other process-mining instrument see the deployed misses? & No cell detects a miss within 3 false alarms & 33 cells against 33 missed scenarios, 0 detections; worst cell 7 of 72 (9.7\,\%) & F-X30.b (two cells not evaluated) \\
+X31 (+A1) & Does the detector survive field noise, change-of-value logging and schedule shifts? & Budget held everywhere; the schedule arm within $\pm 1$ detection & Budgets held (run before the coverage audit); the dual-duct schedule arm reaches 48 against the clean arm's 45 & None; P3 and the A1 prediction failed \\
+X32 & Does a healthy time-of-day envelope per signal, with departures as events, carry detection? & Envelope counts inside the budget; the envelope does not see fouling; order among deviation events adds nothing beyond their counts & Withdrawn before any computation: a read-only design scan showed a third to a half of signals leaving the envelope on healthy holdout days (9--19\,\% of healthy days flagged); no artefact & None; withdrawn unrun, replaced by X33 \\
+X33a--e & Does mapping every recorded column recover the misses? (one system at a time) & No loss; budget $\le$ clean + 3; named recoveries per system & 142 $\to$ 158 of 175, none lost, 21 $\to$ 26 false-alarm days of 480, model and device rows identical; PFPU and DDAHU fouling recovered against prediction & None; three predictions failed upward, one (PFPU waterside) downward \\
+X34 & Does the carrying rule name the seeded component? & Exact $\ge 60\,\%$; exact or subsystem $\ge 85\,\%$; wrong subsystem $\le 10\,\%$ & Exact 109 of 158 (69\,\%), subsystem 22, wrong 20 (12.7\,\%), unnamed 7 & F-X34.a; the component-level claim withdrawn \\
+X35 & Do the field conditions hold on the post-coverage configurations of all five systems? & Budget $\le$ clean + 3; noise and COV within $-4$; at least two edge recoveries lost under noise & Budget worst 7 of 96; at most one detection lost per system and condition; one edge recovery lost; clean arm equals the scorecard & None; P3 failed \\
+X37 (3 runs) & Do signed patterns and redundant-pair consensus diagnose family and component? & Family $\ge 80\,\%$ with $\le 15\,\%$ unresolved; wrong subsystem $< 10\,\%$ & Family 74.6\,\% with 27.8\,\% unresolved; wrong subsystem 10.1\,\%; the five dual-duct damper cases resolved & F-X37.a, F-X37.b \\
+X36 & Do percentile bands keep the edge recoveries and stay in budget? & False alarms rise $\le 3$; the five edge recoveries kept; $\ge 2$ new detections & Nothing gained or lost; all five kept; false alarms $+4$ on both fan-powered units & F-X36.a \\
+X38 (+A1) & Does the repaired Guideline 36 battery match STRATA under the same gate? & STRATA at least as many at lower false alarms (three framings after A1) & Silent-rule battery 12 of 14 at 1 vs 13 at 1; 8 of 30 and 9 of 29 at 0 vs 26 and 25 at 8 and 9 & F-X38.a under G2, G3 and S \\
+\hline
+\end{longtable}}
+
 
 \bibliographystyle{plain}
 \bibliography{../references}

@@ -117,6 +117,84 @@ An audit of 65 primary machine-learning HVAC fault-detection studies found two t
 
 \paragraph{What it taught.} Sixty-seven numbered lessons carry three patterns: a lesson is not closed until a test enforces it, because documentation decays; every new channel recreated the same missing noise gate until the harness enforced it structurally; and simulation flatters, which is why the sensor-precision floor and the noise-floor requirement exist and why the one measured building is reported as a false-alarm rate, not a detection result. The datasets are public by DOI \cite{granderson2020lbnlfdddata,granderson2022lbnlfdddatasets,granderson2023lbnlfdddata}, the environment is pinned, seeds are fixed, and a claim-to-artefact table maps every published claim to the artefact that backs it.
 
+\section{Results}
+\label{sec:results}
+Under the final gate STRATA detects 158 of 175 seeded scenarios on the five simulated systems (14 of 14 naive on the single-duct unit, 13 adjudicated, so 157 under the adjudication) at 26 false-alarm days in 480 held-out fault-free days, at a median of one day, and names the implicated terminal unit in 37 of the 50 attributable detections with none wrong (Table~\ref{tab:systems}). Evaluation began with three public LBNL datasets \cite{granderson2020lbnlfdddata,granderson2023lbnlfdddata}: a single-duct air handler and the parallel and series fan-powered units, the latter two with no previously published detection result; the dual-duct air handler, the fan coil unit and two rooftop units were onboarded afterwards. Scoring follows the day-level, scenario-as-unit conventions of the FDD evaluation literature \cite{yuill2013fddprotocol,frank2018fddevaluation}.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\hline
+System (LBNL) & points & rules (state\,/\,sig.) & scored & detected & false alarms & healthy days \\
+\hline
+SDAHU, single-duct AHU & 26 & 3 / 12 & 14 & 14 (13 adj.) & 1 / 96 & 365 \\
+PFPU, parallel fan-powered box & 109 & 13 / 45 & 30 & 26 & 8 / 96 & 365 \\
+SFPU, series fan-powered box & 109 & 13 / 49 & 29 & 25 & 9 / 96 & 365 \\
+DDAHU, dual-duct AHU & 114 & 15 / 56 & 55 & 50 & 3 / 96 & 365 \\
+FCU, fan coil unit & 29 & 7 / 19 & 47 & 43 & 5 / 96 & 365 \\
+RTU, simulated rooftop unit & 23 & 3 / 5 & 24 & 20 & 0 / 28 & 100 \\
+RTU, measured rooftop unit (Site 2) & 26 & 2 / 7 & 1 case & --- & 3 / 49 & 182 \\
+\hline
+\end{tabular}
+\caption{The seven LBNL datasets under the final gate: points mapped, rules declared, scenarios scored and detected, and the out-of-sample false-alarm count on the held-out fault-free days (the last eight of each month). The measured unit carries one fault case and is used for its false-alarm rate only. With every channel counted, including the advisory rate channel, the single-duct rate would be 15.6\%.}
+\label{tab:systems}
+\end{table}
+
+\paragraph{Time to detection.} The median is one day on all six scored systems; the tails are fouling and charge faults: on the dual-duct unit the moderate and severe waterside cooling fouling at 114 days each, on the fan coil unit the moderate heating waterside fouling at 15 days, on the simulated rooftop unit the 20\% refrigerant undercharge at 14 days. Gradually developing faults are detected slowly, the expected cost of calibrating below a noise floor. Pooled recall misleads for a gated detector: on the single-duct coil-bias scenarios the residual is physics-bound only inside a detection window (coil off, zone occupied, sustained 120 minutes) that exists on 137 to 164 days of the year, and within those windows recall is 100\% on every scenario; the apparent 39--47\% ceiling is window prevalence, not capability.
+
+\paragraph{Against a principal-component baseline.} A PCA baseline on squared prediction error \cite{wang2004pcaahu,jackson1979spe}, fitted to 95\% of the fault-free variance with its threshold at the largest training-day score and the provenance-leaking columns excluded, detects 61 of the 73 scenarios it shares with STRATA against STRATA's 64 (13 / 23 / 25 against 13 / 26 / 25), with fewer false alarms on the two terminal units (1 of 96 each against 8 and 9) and within one day on the air handler. Wilson intervals overlap (64 of 73 is [78.2, 93.4]\%, 61 of 73 is [73.4, 90.3]\%) and an exact McNemar test on the three discordant scenarios gives $p = 0.25$, an absence of power rather than evidence of superiority \cite{wilson1927interval,mcnemar1947test}. The three scenarios only STRATA detects are an unstable VAV damper and the parallel unit's moderate and severe airside reheat fouling; nine are missed by both, eight of them reheat-coil fouling. What the baseline does not do is name the implicated device or state the evidence behind a flag, which is the difference that matters operationally (Figure~\ref{lst:alarm}).
+
+\begin{figure}[htbp]
+\small
+\begin{verbatim}
+STRATA alarm -- series fan-powered unit, 2018-01-01 (day 1 of the fault)
+  what      zone primary-air flow not tracking its setpoint   [channel: rules]
+  where     terminal unit TU_S, zone S
+  evidence  measured 715 CFM against a 200 CFM setpoint -- a 515 CFM excess
+            sustained for 720 min while occupied; damper position 0.80,
+            fault-free same-day value 0.32
+  budget    rules channel: 0 false-alarm days on the 96-day fault-free holdout
+  seeded    zone-S damper stuck at 80% -- location correct, symptom correct,
+            detected on day 1 of 365
+\end{verbatim}
+\caption{A worked alarm, scenario \texttt{SFPU\_VAVDMPRStuck\_80\%}, every value read from the committed artefacts and the raw data. The alarm names the symptom and its location, not the root cause.}
+\label{lst:alarm}
+\end{figure}
+
+\paragraph{What the discovered models contribute.} For each channel a hand-written equivalent was authored and scored. On the unstable-room-loop scenario two such rules reproduce the frequency channel exactly (141 of 141 flagged days on the series unit, 206 of 206 on the parallel unit): the stratified log's own count bands make explicit rules an expert could have written, had they known where to look. Transplanted without that knowledge the same rules are unusable, firing on 124 fault-free days on the parallel unit and none on the series unit. Some faults need the classical instrument: the oscillation channel alone carries the series unit's unstable-damper scenario, 349 flagged days against at most two from any rule. The decisive ablation reads the channel credited with each detection from the committed scorecards: no scenario on any system is detected only by the two conformance channels. They are credited on none of the single-duct or parallel-unit detections and on 7 of 25 series-unit detections, never alone; removing them leaves every scorecard unchanged and lowers three systems' false-alarm rates (9 to 4, 8 to 6 and 5 to 4 of 96). Whatever the discovered models contribute, they do not contribute detections.
+
+\paragraph{Localisation and portability.} On the 51 detections on the two fan-powered systems in the attribution universe, the alarm names the correct terminal unit in 37, none in 13 and a wrong unit in none, with three wrong units available in every case; because every seeded zone fault is in the same zone, this is reported as specificity, not discrimination. Over all 158 detections the rule carrying the detection names the seeded component exactly in 109 (69\%), the right subsystem but a neighbouring component in 22 (83\% at subsystem level), the wrong subsystem in 20 (12.7\%) and no component in 7; the pre-registered bar for a component-level claim (wrong at most 10\%) was missed, so the claim is subsystem-level. Fourteen of the twenty wrong cases are on the single-zone fan coil unit and name the component that responds to the fault rather than the one that caused it. A pre-registered diagnosis layer of signed residual patterns, redundant-copy consensus and a nearest-pattern family vote raised the exact count to 112 (70.9\%, 85\% at subsystem level) at a 10.1\% wrong-subsystem rate and named the family in 85 of 114 resolved cases with 44 unresolved; both its bars were missed and it is reported, not adopted. Portability was measured: the second system type was onboarded by configuration alone in about 1.5 hours by commit timestamps, and no pipeline code changed for any system.
+
+\paragraph{What the event log carries.} Day-by-day comparison of the parallel unit's fault-free year against its scenarios on the state alphabet shows that under waterside reheat-coil fouling the state-event log is identical to healthy to the minute; nine files have that property, among them every fouling miss that remains on the two fan-powered units, and for them no method that reads that log can detect, process mining or otherwise, because at the deployed alphabet the fault lives in heat-transfer magnitudes the abstraction discards. Four pre-registered vocabulary experiments (X12--X15) tested a time-perspective model, a fault-informed coil residual and an enriched alphabet: the enriched frequency channel alone stays in budget and adds one airside-fouling detection, a scenario the PCA baseline also reaches; nothing else new was found, and richer vocabulary bought detections only at false alarms the budget forbids.
+
+\paragraph{What the conformance channel can see.} A pre-registered positive control injected order violations into each system's fault-free holdout traces. The fan coil and dual-duct nets see order (a reversed day is flagged on 55 of 72 and 59 of 83 holdout days, AUC 0.99); the single-duct net separates it on average (AUC 0.91) but no in-budget threshold sees it, because healthy days fit worse than a reversed day; the two fan-powered nets do not move under any perturbation. A pre-registered grid of seven process-mining instruments (inductive miner at two noise settings, token replay, heuristics miner, log skeleton, Declare constraints, temporal profile) detects none of the 33 scenarios the deployed detector then missed, at false-alarm rates of 0 to 9.7\%. The conformance null is a property of the state-event log, not of the miner or the measure.
+
+\paragraph{Two systems onboarded blind.} The dual-duct air handler (114 points, 55 faults in 15 families, two of them new) was onboarded under a pre-registration written before any data file was opened: 80 mappings, 15 state and 26 signature rules, one healthy-silence iteration, no source change; 45 of 55 detected at 3 false-alarm days in 96, 50 of 55 after the coverage audit. The fan coil unit (29 points, 47 scored faults in 17 families, four of them new) followed under the same form: its first run fired two falsifiers because a scoring rule written for the fan-powered units read this unit's idle setback as a scheduled mode; a two-script repair was pre-registered before it was made, the four earlier scorecards regenerated byte-identically, and the unit scores 41 of 47 at 4 false-alarm days in 96, 43 of 47 after the coverage audit. Nothing on either unit is detected by conformance alone.
+
+\paragraph{The coverage audit.} The misses that remained were read as limits of what the datasets record until a read-only scan showed that for six of fourteen the decisive signal was a column no configuration mapped: the configurations had been written from the control sequences, not from an audit of every recorded column. A pre-registered series audited every column of every system, gave each a physically named reader or a written exclusion, and kept every band from the fault-free file with the state alphabet untouched (Table~\ref{tab:coverage}). Sixteen scenarios were recovered and none lost for five false-alarm days over 480: airside reheat fouling through the series fan's power per cfm delivered (``same power, less air''), room-temperature biases through the return air falling away from the biased zone, deck static and temperature biases through the unbiased copies the mixing boxes record (282 of 282 days at zero false alarms), and the fan coil's damper leaks through the outdoor-air fraction at a fixed damper position. The seventeen misses that remain are coil fouling whose recorded values sit inside every healthy band on every column. Two disclosures bound the claim: which columns to read was decided after a scan of the fault files, so the readers were fault-informed even though every threshold was blind; and five of the sixteen recoveries sit less than one band width outside the healthy extremes, though all five survive bands ten per cent narrower and four of five survive injected field conditions (Section~\ref{sec:limitations}).
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\hline
+System & columns mapped & detected, before $\to$ after & false alarms, before $\to$ after & lost \\
+\hline
+SDAHU & 12 $\to$ 26 of 30 & 14 $\to$ 14 / 14 & 1 $\to$ 1 & 0 \\
+PFPU & 56 $\to$ 109 of 109 & 22 $\to$ 26 / 30 & 7 $\to$ 8 & 0 \\
+SFPU & 56 $\to$ 109 of 109 & 21 $\to$ 25 / 29 & 6 $\to$ 9 & 0 \\
+DDAHU & 79 $\to$ 114 of 114 & 45 $\to$ 50 / 55 & 3 $\to$ 3 & 0 \\
+FCU & 29 $\to$ 29 of 29 & 40 $\to$ 43 / 47 & 4 $\to$ 5 & 0 \\
+\hline
+all & 232 $\to$ 387 of 391 & 142 $\to$ 158 / 175 & 21 $\to$ 26 of 480 & 0 \\
+\hline
+\end{tabular}
+\caption{The coverage audit: sixteen scenarios recovered, none lost, five false-alarm days added over 480 held-out days, the model and device rows identical on every system.}
+\label{tab:coverage}
+\end{table}
+
 % Sections follow as the review proceeds.
 
 \bibliographystyle{plain}

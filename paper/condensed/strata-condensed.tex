@@ -40,6 +40,23 @@ STRATA applies process mining in stratified form: sensor streams are abstracted 
 
 The paper contributes (1) the framework and the detector it yields, evaluated on five public benchmark systems including the two fan-powered terminal units for which no detection results had been published before; (2) what process mining contributes to HVAC fault detection, established under pre-registration: the first such application, whose structure gives the detector its location and several of its rules, and whose conformance channel catches no fault the calibrated channels miss; (3) an evaluation protocol of pre-registration, honoured falsifiers, independent recomputation and full artefact regeneration; and (4) eight machine-verified errata in the benchmark datasets.
 
+\section{Research Aim and Objectives}
+\label{sec:aims}
+The question this research set out to answer is whether a stratified process-mining framework can detect and localise faults in building HVAC systems interpretably and portably from the trend data a building already records, and what the discovered process models themselves contribute to that. The proposal that began the work set out to compare process mining with machine learning for interpretable fault detection and then to combine them; the comparison is delivered here and the combination is deferred until the models' own detection had been settled. The work is validated on public benchmark data; deployment on an operating building is the intended next phase.
+
+STRATA is meant to consume a building's ordinary one-minute trend data and one configuration file naming its sensors and control rules, learn from a fault-free period what healthy operation looks like, and then, every day, name the days that break a physical relationship the healthy period established: which unit, which relationship, by how much, and how often that channel has cried wolf on healthy days. The output is a work order with a false-alarm budget the operator can hold the system to, and onboarding a new equipment type is a configuration exercise. That intent fixes six objectives, each reported with what was done and where it stands.
+
+\begin{enumerate}
+\item \textbf{Abstract events from sensor data} along Guideline 36 control sequences, with fault-signature events held out of model discovery. Done on seven LBNL datasets by configuration alone; the alphabet wall is enforced by a test and the circularity it prevents was measured. Met.
+\item \textbf{Discover models and establish what they contribute.} Nets discovered at device, unit and cross-system strata on every system; their contribution measured under pre-registration on 199 scenarios across six systems. Met: the structure, the event log and the invariants they surfaced are what they contribute; the hypothesis that they would also detect by conformance alone is refuted.
+\item \textbf{Detect against a measured noise floor.} Eight channels, every threshold from the fault-free year, every false-alarm rate out-of-sample; the budget held under injected field conditions and on one measured building. Met; the statistical repair that made this true cost seven detections, and that is stated.
+\item \textbf{Benchmark against known answers.} 158 of 175 seeded scenarios detected at 26 false-alarm days in 480; against an audited PCA baseline, 64 of 73 to its 61; against the open-fdd Guideline 36 battery held to the same gate, within one detection on the air handler and three times the detections on the terminal units. All three parts executed; the improvement claim over current practice is withdrawn on the air handler.
+\item \textbf{Make every claim checkable.} More than thirty pre-registered experiments, ten adverse results and four later fired falsifiers published, every headline number regenerated under a regression gate, a test suite that fails if a caveat is dropped. Met.
+\item \textbf{Release the work openly.} Repository, configurations, artefacts, reproduction path and eight machine-verified dataset errata are public. Met.
+\end{enumerate}
+
+What the objectives add up to is a detector that does what the intent asks on the benchmarks it was tested on, a measured and stated answer to the process-mining question, and a protocol that made both checkable. What they do not yet add up to is a field result; Section~\ref{sec:conclusion} states what that would take. A hybrid with machine-learning classifiers was deferred until the models' own detection had been established, and is future work.
+
 % Sections follow as the review proceeds.
 
 \bibliographystyle{plain}

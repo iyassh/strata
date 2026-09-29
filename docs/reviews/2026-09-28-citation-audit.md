@@ -146,3 +146,36 @@ The manuscript still needs `\cite{}` commands inserted for the gap table; that i
 ## 6. Addendum (same day): TRU primary sources for the front/back agent
 
 Requested keys: (1) UNEP 2024/25 -> `unep2025gsr` (already added). (2) DOE/EE-1703 -> `doe2017hvacsavings` (already added; note the 15--30 % fault-waste sentence is Katipamula & Brambley's, `katipamula2005fddreview1`, not the DOE report's). (3) TRU LCDES -> `tru2026lcdes` (tru.ca/sustainability/lcdes.html, 200; the page dates construction to fall 2024, system on 1 Sept 2026, Powerhouse opening 28 Sept 2026, partners Creative Energy and BC Hydro) and `tru2025lcdesmilestone` (TRU Newsroom, 26 June 2025, 200). No Creative Energy project page for TRU exists (creativeenergycanada.com/projects/thompson-rivers-university returns 404), so Creative Energy is credited inside the TRU entries rather than as an author. (4) SES Consulting study -> `ses2022cacstudy` (tru.ca PDF, 200, application/pdf; first page matches: ASHRAE Level 1 Energy Study, Campus Activity Centre, SES Consulting Inc., Vancouver, 25 May 2022). Compile re-checked: clean.
+
+## 7. Citation insertion (same day, cite-insert agent)
+
+Twenty-seven edits to `paper/paper-v2.tex`: 24 `\cite` insertions and the deletion of the three body `%TODO-cite` comments (Guideline 36, APAR, Brick). The four front/back TODOs had already been resolved by the front/back agent before this pass (unep2025gsr and doe2017hvacsavings in the introduction, katipamula2005fddreview1 on the 15--30 % clause, tru2026lcdes / tru2025lcdesmilestone / ses2022cacstudy in the conclusion), so nothing was left uncited and no TODO comment remains. Distinct cited keys: 65 before this pass, 89 after. Compile: tectonic exit 0, zero undefined citations or references, the one known openfdd2025 style warning; every new first author found in the rendered bibliography.
+
+| Sentence (first words) | Key(s) added |
+|---|---|
+| "A threshold alarm fires ... a pre-programmed rule fires when a named fault pattern is matched" | schein2006apar |
+| "a post-hoc explanation method such as layer-wise relevance propagation" | li2023cnnlrp, xiong2024imlrp, chen2023interpretablereview (added to existing cite) |
+| "discover a Petri-net model of expected behaviour" | murata1989petrinets |
+| "an alignment-based deviation signal that carries formal fitness and precision semantics" | adriansyah2011alignments, vanderaalst2012replaying (added to existing cite) |
+| "ASHRAE Guideline 36 control sequences as the conceptual reference" | ashrae2021guideline36 |
+| "The established response is domain adaptation, which transfers learned network weights" | lei2025crossbuildinguda, feng2024attentiontl |
+| "Process mining was formalised by van der Aalst" | vanderaalst2012manifesto (added to existing cite) |
+| "The methodology has also been applied across cyber-physical and sensor-driven domains" | myers2018pmics, singh2022pmselfhealing |
+| "The technical barrier common to all these applications is event abstraction" | deluzi2025bpmiotreview, mangler2024iotbp |
+| "our own exact-phrase searches of the OpenAlex corpus" | priem2022openalex |
+| "the Lawrence Berkeley National Laboratory team's automated fault-correction line" | lin2020faultcorrection, lin2023controlhunting |
+| "The LBNL FDD dataset family" | granderson2022lbnlfdddatasets, granderson2023lbnlfdddata (added to existing cite) |
+| "The datasets are public and citable by DOI" | granderson2022lbnlfdddatasets, granderson2023lbnlfdddata (added to existing cite) |
+| "the process-mining form of the data-leakage problem" | kapoor2023leakage (added to existing cite) |
+| "Continuous sensor streams are converted ... grounded in ASHRAE Guideline 36" | ashrae2021guideline36 |
+| "physics rules descended from the NIST APAR lineage" | schein2006apar |
+| "on the fault-free holdout days it could evaluate, floored at three days" | hanley1983zeronumerators |
+| "Every experiment is pre-registered ... before the experiment runs" | nosek2018preregistration |
+| "checks coverage of the Brick semantic model" | balaji2016brick |
+| "a principal-component-analysis baseline using squared prediction error" | wang2004pcaahu, jackson1979spe |
+| "with Wilson 95% intervals in brackets" (Table caption) | wilson1927interval |
+| "an exact McNemar test on the three discordant scenarios" | mcnemar1947test |
+| "imports a third-party open-source implementation of the Guideline 36 fault conditions" | ashrae2021guideline36 |
+| "hold them to the same 3/365 null" | hanley1983zeronumerators |
+
+Not inserted, by design: the abstract's "one-sided 95 % upper bound of 1.5 %" (no citations in the abstract); eypasch1995ruleofthree (Hanley & Lippman-Hand used instead); katipamula2005fddreview2 and crowe2020commissioning (no existing sentence for them; section 4 proposals were not turned into prose); the two "(none)" rows (RP-1312, Bonferroni).

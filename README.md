@@ -246,7 +246,7 @@ gets published, not buried.** The breakages are the most instructive part.
 | [7](PHASE7_RESULTS.md) | Made the record citable: [five dataset errata](ERRATA.md) with machine evidence, full reproducibility | Recomputing our own strongest evidence sentence **falsified it** — and uncovered erratum E5 in the process |
 | [8](PHASE8_RESULTS.md) | The adjudication & robustness suite | **14/14 → 13/14** (see asterisk above); training contamination breaks the calibration at **one silent bad day** (measured, with the mitigation measured too); configs don't transfer across sampling rates (three falsifiers fired, honored) |
 
-The complete lesson ledger — 31 numbered lessons, each with the standing
+The complete lesson ledger — 67 numbered lessons, each with the standing
 rule it produced — is in [RESEARCH_LOG.md](RESEARCH_LOG.md).
 
 ### Side contribution: the datasets themselves

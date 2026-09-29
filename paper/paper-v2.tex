@@ -345,14 +345,14 @@ RTU, simulated rooftop unit & 23$^\dagger$ & 3 / 5 & 24 & 20 & 0 / 28 & 100 \\
 RTU, measured rooftop unit (Site 2) & 26$^\dagger$ & 2 / 7 & 1 case & --- & 3 / 49 & 182 \\
 \hline
 \end{tabular}
-\caption{The seven LBNL datasets under the final gate: what each configuration maps and declares after the coverage audit of Section~\ref{sec:coverage}, what was scored, and the out-of-sample false-alarm count on the held-out fault-free days (the last eight of each month). The measured unit carries one fault case and is used for its false-alarm rate only. $^\dagger$Includes one derived operating-state column (fan-on for the measured unit; a constant for the simulated unit, which has no schedule).}
+\caption{The seven LBNL datasets as scored by the final calibration: what each configuration maps and declares after the coverage audit of Section~\ref{sec:coverage}, what was scored, and the out-of-sample false-alarm count on the held-out fault-free days (the last eight of each month). The measured unit carries one fault case and is used for its false-alarm rate only. $^\dagger$Includes one derived operating-state column (fan-on for the measured unit; a constant for the simulated unit, which has no schedule).}
 \label{tab:systems}
 \end{table}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_detection_by_family.pdf}
-\caption{Detected scenarios (blue) of scored scenarios (grey) by fault family on the six scored systems, under the final gate. Coil fouling is the dominant miss on the four air-side datasets and is caught in full on the simulated rooftop unit, condenser fouling through the refrigerant side and evaporator fouling through the air side (Section~\ref{sec:falsified}).}
+\caption{Detected scenarios (blue) of scored scenarios (grey) by fault family on the six scored systems, as scored by the final calibration. Coil fouling is the dominant miss on the four air-side datasets and is caught in full on the simulated rooftop unit, condenser fouling through the refrigerant side and evaporator fouling through the air side (Section~\ref{sec:falsified}).}
 \label{fig:families}
 \end{figure}
 
@@ -382,7 +382,7 @@ FCU & 43 & 38 & 1 & 3, 3, 4, 15 \\
 RTU (simulated) & 20 & 19 & 0 & 14 \\
 \hline
 \end{tabular}
-\caption{Time-to-detection distribution behind the one-day median, by system, under the final gate (from the committed scorecards). The long tails are fouling and charge faults: on the dual-duct unit the moderate and severe waterside cooling fouling (114 days each, carried by the rules channel), on the fan coil unit the moderate heating waterside fouling (15 days, the operating-point indicator of Section~\ref{sec:coverage}), and on the simulated rooftop unit the 20\,\% refrigerant undercharge (14 days).}
+\caption{Time-to-detection distribution behind the one-day median, by system, as scored by the final calibration (from the committed scorecards). The long tails are fouling and charge faults: on the dual-duct unit the moderate and severe waterside cooling fouling (114 days each, carried by the rules channel), on the fan coil unit the moderate heating waterside fouling (15 days, the operating-point indicator of Section~\ref{sec:coverage}), and on the simulated rooftop unit the 20\,\% refrigerant undercharge (14 days).}
 \label{tab:ttd}
 \end{table}
 

@@ -92,3 +92,21 @@ Left for Round 2: read every rewritten paragraph in the rendered PDF for flow; c
 | Conclusion | 9 → 9.5 |
 
 Round 2 found one wording fix and nothing else; a third round is run on the rendered text after recompilation.
+
+Commit 2afd9b8 carries Rounds 1–2 (the lead's rule change of the same hour: commit the .tex as it stands, including the body agent's in-progress edits in other sections, and say so in the message).
+
+## Round 3 — 2026-09-28, rendered re-read after recompilation (pages 1–6, 32–34)
+
+- Abstract: 518 words in the rendered text; every number re-read against Round 1's list; nothing to change.
+- Introduction, aims: nothing to change.
+- Conclusion: the six paragraphs re-read; the Round 2 rewording renders; the cross-references to Section 7 (contamination, sampling rate), Section 6 (X37) and reference [17] (the 2026 AHU datasets) were checked against the .tex by search and land on the text they name. No "??" in the PDF text; tectonic exit 0; no undefined reference or citation.
+- Nothing found. Two consecutive rounds (2 found one wording fix only; 3 found nothing) — the loop stops here.
+
+### Final ratings
+
+| Part | Score | What keeps it below 10 |
+|---|---|---|
+| Abstract | 9 | 518 words; the brief's target of under 400 is not reachable while every number is kept |
+| Introduction | 9.5 | Two motivation primaries (UNEP, DOE) await keys from the citation agent |
+| Aims and objectives | 9.5 | Nothing outstanding; the 1.5 h figure is still by commit timestamps, not a logged wall clock |
+| Conclusion | 9.5 | Two TRU sources (LCDES project pages, the 2022 CAC energy study) await keys; deployment itself is future work by the artefacts |

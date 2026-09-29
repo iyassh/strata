@@ -313,18 +313,18 @@ Evaluation began with three public LBNL fault-detection datasets \cite{granderso
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{lccc}
+\begin{tabular}{lccccc}
 \hline
- & SDAHU & PFPU & SFPU \\
+ & SDAHU & PFPU & SFPU & DDAHU & FCU \\
 \hline
-Scenarios detected & 14/14 naive; 13/14 adjudicated & 26 / 30 & 25 / 29 \\
-Median time to detection & 1 day & 1 day & 1 day \\
-Deployed false-alarm rate & 1.0\% & 8.3\% & 9.4\% \\
-Naive all-channel union & 15.6\% & 15.6\% & 9.4\% \\
-Wrong alarms / all alarms & 0.03\% & 0.11\% & 0.12\% \\
+Scenarios detected & 14/14 naive; 13/14 adj. & 26 / 30 & 25 / 29 & 50 / 55 & 43 / 47 \\
+Median time to detection & 1 day & 1 day & 1 day & 1 day & 1 day \\
+Deployed false-alarm rate & 1.0\% & 8.3\% & 9.4\% & 3.1\% & 5.2\% \\
+Naive all-channel union & 15.6\% & 15.6\% & 9.4\% & 8.3\% & 21.9\% \\
+Wrong alarms / all alarms & 0.03\% & 0.11\% & 0.12\% & 0.02\% & 0.04\% \\
 \hline
 \end{tabular}
-\caption{Detection performance over the 96-day healthy holdout (the last eight days of each month). Naive and adjudicated refer to before and after the branch adjudication of Section~\ref{sec:falsified}; the cry-wolf ratio is wrong alarms as a share of all alarms ($\leq 0.13\%$ on every system, from 96 fault-free holdout days against 4{,}540--9{,}490 observed fault-scenario days), and is small partly because observed fault-scenario days outnumber fault-free days 47--99 to 1. The SDAHU score is reported in both forms for the reason given in Section~\ref{sec:falsified}; the SFPU universe excludes one file with a rotated calendar (erratum E4); the two false-alarm rows differ by the demotion disclosed in Section~\ref{sec:limitations} on the single-duct and parallel systems and coincide on the series unit, where the demoted channel contributes no false-alarm day. Since the three-way split every deployed rate is out-of-sample (Section~\ref{sec:protocol}).}
+\caption{Detection performance on the five simulated systems over the 96-day healthy holdout (the last eight days of each month). Naive and adjudicated refer to before and after the branch adjudication of Section~\ref{sec:falsified}; the cry-wolf ratio is wrong alarms as a share of all alarms ($\leq 0.13\%$ on every system, from 96 fault-free holdout days against 4{,}540--16{,}546 observed fault-scenario days), and is small partly because observed fault-scenario days outnumber fault-free days 47--172 to 1. The SDAHU score is reported in both forms for the reason given in Section~\ref{sec:falsified}; the SFPU universe excludes one file with a rotated calendar (erratum E4); the two false-alarm rows differ by the demotion of the seasonal rate channel disclosed in Section~\ref{sec:limitations}, and coincide on the series unit, where that channel contributes no false-alarm day. Since the three-way split every deployed rate is out-of-sample (Section~\ref{sec:protocol}).}
 \label{tab:results}
 \end{table}
 

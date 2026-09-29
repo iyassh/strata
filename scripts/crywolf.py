@@ -34,7 +34,7 @@ if x11_p.exists():
                     if not s["detected"]}
 
 out = {}
-for system in ("sdahu", "pfpu", "sfpu"):
+for system in ("sdahu", "pfpu", "sfpu", "ddahu", "fcu"):   # extended to the five annual systems 2026-09-29
     u = json.loads(Path(f"outputs/union_fpr_{system}.json").read_text())
     b = json.loads(Path(f"outputs/benchmark_v6_{system}.json").read_text())
     fp = u["union_minus_rate"]["holdout_fp_days"]

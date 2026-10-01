@@ -10,6 +10,10 @@
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,labelsep=period,skip=6pt}
+\captionsetup[table]{position=above}
+\captionsetup[figure]{position=below}
 
 \title{STRATA: A Stratified Process-Mining Framework for HVAC Fault Detection and Diagnosis}
 \author{Yassh Singh \\
@@ -113,6 +117,8 @@ An audit of 65 primary machine-learning HVAC fault-detection studies found two t
 
 \begin{table}[htbp]
 \centering
+\caption{Eight machine-verified defects in the LBNL benchmark datasets.}
+\label{tab:errata}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.03\textwidth}>{\raggedright\arraybackslash}p{0.08\textwidth}>{\raggedright\arraybackslash}p{0.5\textwidth}>{\raggedright\arraybackslash}p{0.33\textwidth}@{}}
@@ -129,8 +135,7 @@ E7 & PFPU, SFPU & Documentation places every fault in the west zone; only the so
 E8 & DDAHU & Mixing-box statics shift by one tenth of the labelled static-sensor bias. & Severity claims from those labels are off by ten; detections unaffected. \\
 \hline
 \end{tabular}
-\caption{Eight machine-verified defects in the LBNL benchmark datasets.}
-\label{tab:errata}
+
 \end{table}
 
 
@@ -147,6 +152,8 @@ STRATA detects 158 of 175 seeded scenarios on the five simulated systems (14 of 
 
 \begin{table}[htbp]
 \centering
+\caption{The seven LBNL datasets as scored by the final calibration: points mapped, rules declared, scenarios scored and detected, and the out-of-sample false-alarm count on the held-out fault-free days (the last eight of each month). The measured unit carries one fault case and is used for its false-alarm rate only. With every channel counted, including the advisory rate channel, the single-duct rate would be 15.6\%.}
+\label{tab:systems}
 \footnotesize
 \setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}lrrrrrr@{}}
@@ -162,8 +169,7 @@ RTU, simulated rooftop unit & 23 & 3 / 5 & 24 & 20 & 0 / 28 & 100 \\
 RTU, measured rooftop unit (Site 2) & 26 & 2 / 7 & 1 case & --- & 3 / 49 & 182 \\
 \hline
 \end{tabular}
-\caption{The seven LBNL datasets as scored by the final calibration: points mapped, rules declared, scenarios scored and detected, and the out-of-sample false-alarm count on the held-out fault-free days (the last eight of each month). The measured unit carries one fault case and is used for its false-alarm rate only. With every channel counted, including the advisory rate channel, the single-duct rate would be 15.6\%.}
-\label{tab:systems}
+
 \end{table}
 
 \begin{figure}[htbp]
@@ -185,6 +191,8 @@ RTU, measured rooftop unit (Site 2) & 26 & 2 / 7 & 1 case & --- & 3 / 49 & 182 \
 
 \begin{table}[htbp]
 \centering
+\caption{Time-to-detection distribution behind the one-day median, by system, as scored by the final calibration (from the committed scorecards). The long tails are fouling and charge faults: on the dual-duct unit the moderate and severe waterside cooling fouling (114 days each, carried by the rules channel), on the fan coil unit the moderate heating waterside fouling (15 days, the operating-point indicator of Section~\ref{sec:results}), and on the simulated rooftop unit the 20\,\% refrigerant undercharge (14 days).}
+\label{tab:ttd}
 \begin{tabular}{lcccl}
 \hline
 System & Detected & At 1 day & At 2 days & Remaining TTDs (days) \\
@@ -197,8 +205,7 @@ FCU & 43 & 38 & 1 & 3, 3, 4, 15 \\
 RTU (simulated) & 20 & 19 & 0 & 14 \\
 \hline
 \end{tabular}
-\caption{Time-to-detection distribution behind the one-day median, by system, as scored by the final calibration (from the committed scorecards). The long tails are fouling and charge faults: on the dual-duct unit the moderate and severe waterside cooling fouling (114 days each, carried by the rules channel), on the fan coil unit the moderate heating waterside fouling (15 days, the operating-point indicator of Section~\ref{sec:results}), and on the simulated rooftop unit the 20\,\% refrigerant undercharge (14 days).}
-\label{tab:ttd}
+
 \end{table}
 
 
@@ -208,6 +215,8 @@ RTU (simulated) & 20 & 19 & 0 & 14 \\
 
 \begin{table}[htbp]
 \centering
+\caption{STRATA against the principal-component baseline. Per-system entries are ordered SDAHU / PFPU / SFPU; the counts behind the false-alarm rates are 1/96, 8/96 and 9/96 for STRATA and 1/79, 1/96 and 1/96 for the baseline, with Wilson 95\% intervals \cite{wilson1927interval} in brackets. Feature counts are given for the single-duct and the fan-powered systems.}
+\label{tab:pca}
 \small
 \setlength{\tabcolsep}{5pt}
 \renewcommand{\arraystretch}{1.15}
@@ -224,8 +233,7 @@ Implicated device named correctly & 37 of 50 (13 unnamed, 0 wrong, 1 indetermina
 Names the implicated device & yes & no \\
 \hline
 \end{tabular}
-\caption{STRATA against the principal-component baseline. Per-system entries are ordered SDAHU / PFPU / SFPU; the counts behind the false-alarm rates are 1/96, 8/96 and 9/96 for STRATA and 1/79, 1/96 and 1/96 for the baseline, with Wilson 95\% intervals \cite{wilson1927interval} in brackets. Feature counts are given for the single-duct and the fan-powered systems.}
-\label{tab:pca}
+
 \end{table}
 
 
@@ -276,6 +284,8 @@ Held to the treatment STRATA gives its own signature rules, a correctly wired th
 
 \begin{table}[htbp]
 \centering
+\caption{The coverage audit: sixteen scenarios recovered, none lost, five false-alarm days added over 480 held-out days, the model and device rows identical on every system.}
+\label{tab:coverage}
 \small
 \begin{tabular}{@{}lrrrr@{}}
 \hline
@@ -290,8 +300,7 @@ FCU & 29 $\to$ 29 of 29 & 40 $\to$ 43 / 47 & 4 $\to$ 5 & 0 \\
 all & 232 $\to$ 387 of 391 & 142 $\to$ 158 / 175 & 21 $\to$ 26 of 480 & 0 \\
 \hline
 \end{tabular}
-\caption{The coverage audit: sixteen scenarios recovered, none lost, five false-alarm days added over 480 held-out days, the model and device rows identical on every system.}
-\label{tab:coverage}
+
 \end{table}
 
 \section{What the Evidence Ruled Out, and What It Settled}
@@ -300,6 +309,8 @@ Thirty pre-registered experiments produced ten results that went against the hyp
 
 \begin{table}[htbp]
 \centering
+\caption{Ten results that went against the project, each with what survived. Rows 1 to 3, 7 and 8 are the basis of the paper's statement of what process mining contributes.}
+\label{tab:refuted}
 \small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.1}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.02\textwidth}>{\raggedright\arraybackslash}p{0.44\textwidth}>{\raggedright\arraybackslash}p{0.48\textwidth}@{}}
 \hline
@@ -317,8 +328,7 @@ Thirty pre-registered experiments produced ten results that went against the hyp
 10 & The four-building transfer re-run. & Passes formally ($p = 0.042$), but a discovery-free control passes identically. Survived: no conclusion in either direction; reported as a protocol failure. \\
 \hline
 \end{tabular}
-\caption{Ten results that went against the project, each with what survived. Rows 1 to 3, 7 and 8 are the basis of the paper's statement of what process mining contributes.}
-\label{tab:refuted}
+
 \end{table}
 
 Three of the ten carry the argument. Discovered models do not out-detect hand-written rules: on the series fan-powered unit a stuck zone damper erases the unit's daily heating rhythm and the discovered net flags the absence, but a one-line rule, occupied workday and heating never active, covers 192 days to the model channel's 135 at zero false alarms on 365 healthy days. The invariant was surfaced by discovery and the rule written afterwards, which is the division of labour the paper reports. The models' detections were count deviations in disguise: on alphabets whose events repeat many times a day the nets accept activities in almost any order, and every genuine model-channel detection was extra heating episodes, collapsed fan cycles or a vanished rhythm surfacing through alignment cost, which the frequency channel measures directly and in both directions. And the fouling misses need a different sensor, not one more residual: a pre-registered coil heat-transfer estimate gained nothing, eight of the ten missed fouling scenarios carry no signal in the event log at the deployed alphabet, and on the one dataset that records the refrigerant side the unchanged detector catches every condenser- and evaporator-fouling severity down to 10\% at zero false alarms in 28 held-out days, condenser fouling through the condensing temperature's approach to outdoor air, a point no air handler records.

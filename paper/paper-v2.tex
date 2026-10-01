@@ -93,6 +93,10 @@
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,labelsep=period,skip=6pt}
+\captionsetup[table]{position=above}
+\captionsetup[figure]{position=below}
 
 \title{STRATA: A Stratified Process-Mining Framework for HVAC Fault Detection and Diagnosis}
 \author{Yassh Singh \\
@@ -308,6 +312,8 @@ Auditing the evaluation produced an unanticipated secondary contribution: eight 
 
 \begin{table}[htbp]
 \centering
+\caption{Eight machine-verified defects in the LBNL benchmark datasets. Each has a reproducing command in the repository's ERRATA.md.}
+\label{tab:errata}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.15}
@@ -325,8 +331,7 @@ E7 & PFPU, SFPU & every fault file & The documentation places every seeded fault
 E8 & DDAHU & \texttt{SensorBias\_\allowbreak CSP/HSP\_\allowbreak -2inwg}, \texttt{-4inwg} & The deck static column is unchanged; the four mixing-box statics shift by +0.20 and +0.40\,in.wg, one tenth of the labelled bias (the +2\,$^\circ$C temperature file shifts by exactly its label). & Severity ladders and per-in.wg sensitivity claims built from these labels are off by ten; detections are unaffected. \\
 \hline
 \end{tabular}
-\caption{Eight machine-verified defects in the LBNL benchmark datasets. Each has a reproducing command in the repository's ERRATA.md.}
-\label{tab:errata}
+
 \end{table}
 
 The most consequential for other researchers concerns the supply-air static-pressure columns, which carry a per-branch additive constant of about 401.86 (added to one column in the fault-free file and subtracted from the other in every fault file) with no overlap between the two ranges. Either column alone separates fault-free from faulty data by file provenance rather than by fault physics: a single threshold on either column, chosen from the fault-free file alone, classifies all 365 fault-free days and all 7{,}150 days of the twenty fault files correctly (accuracy 1.0 on both columns), so any model given these columns can identify provenance perfectly without reference to any fault. We discovered this by auditing our own baseline, whose error statistic had reached implausible magnitudes for precisely this reason; the columns are now excluded from all baselines. Published results on this dataset that used the full column set should be read with this in mind. The companion paper \cite{singh2027erratacompanion} gives each defect with its reproducing command and the protocol that found it; here they stand as the evidence that the checks of this section catch what summary statistics do not.
@@ -343,6 +348,8 @@ Evaluation began with three public LBNL fault-detection datasets \cite{granderso
 
 \begin{table}[htbp]
 \centering
+\caption{Detection performance on the five simulated systems over the 96-day healthy holdout (the last eight days of each month). Naive and adjudicated refer to before and after the branch adjudication of Section~\ref{sec:falsified}; the cry-wolf ratio is wrong alarms as a share of all alarms ($\leq 0.13\%$ on every system, from 96 fault-free holdout days against 4{,}540--16{,}546 observed fault-scenario days), and is small partly because observed fault-scenario days outnumber fault-free days 47--172 to 1. The SDAHU score is reported in both forms for the reason given in Section~\ref{sec:falsified}; the SFPU universe excludes one file with a rotated calendar (erratum E4); the two false-alarm rows differ by the demotion of the seasonal rate channel disclosed in Section~\ref{sec:limitations}, and coincide on the series unit, where that channel contributes no false-alarm day. Since the three-way split every deployed rate is out-of-sample (Section~\ref{sec:protocol}).}
+\label{tab:results}
 \begin{tabular}{lccccc}
 \hline
  & SDAHU & PFPU & SFPU & DDAHU & FCU \\
@@ -354,12 +361,13 @@ Naive all-channel union & 15.6\% & 15.6\% & 9.4\% & 8.3\% & 21.9\% \\
 Wrong alarms / all alarms & 0.03\% & 0.11\% & 0.12\% & 0.02\% & 0.04\% \\
 \hline
 \end{tabular}
-\caption{Detection performance on the five simulated systems over the 96-day healthy holdout (the last eight days of each month). Naive and adjudicated refer to before and after the branch adjudication of Section~\ref{sec:falsified}; the cry-wolf ratio is wrong alarms as a share of all alarms ($\leq 0.13\%$ on every system, from 96 fault-free holdout days against 4{,}540--16{,}546 observed fault-scenario days), and is small partly because observed fault-scenario days outnumber fault-free days 47--172 to 1. The SDAHU score is reported in both forms for the reason given in Section~\ref{sec:falsified}; the SFPU universe excludes one file with a rotated calendar (erratum E4); the two false-alarm rows differ by the demotion of the seasonal rate channel disclosed in Section~\ref{sec:limitations}, and coincide on the series unit, where that channel contributes no false-alarm day. Since the three-way split every deployed rate is out-of-sample (Section~\ref{sec:protocol}).}
-\label{tab:results}
+
 \end{table}
 
 \begin{table}[htbp]
 \centering
+\caption{The seven LBNL datasets as scored by the final calibration: what each configuration maps and declares after the coverage audit of Section~\ref{sec:coverage}, what was scored, and the out-of-sample false-alarm count on the held-out fault-free days (the last eight of each month). The measured unit carries one fault case and is used for its false-alarm rate only. $^\dagger$Includes one derived operating-state column (fan-on for the measured unit; a constant for the simulated unit, which has no schedule).}
+\label{tab:systems}
 \footnotesize
 \setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}lrrrrrr@{}}
@@ -375,8 +383,7 @@ RTU, simulated rooftop unit & 23$^\dagger$ & 3 / 5 & 24 & 20 & 0 / 28 & 100 \\
 RTU, measured rooftop unit (Site 2) & 26$^\dagger$ & 2 / 7 & 1 case & --- & 3 / 49 & 182 \\
 \hline
 \end{tabular}
-\caption{The seven LBNL datasets as scored by the final calibration: what each configuration maps and declares after the coverage audit of Section~\ref{sec:coverage}, what was scored, and the out-of-sample false-alarm count on the held-out fault-free days (the last eight of each month). The measured unit carries one fault case and is used for its false-alarm rate only. $^\dagger$Includes one derived operating-state column (fan-on for the measured unit; a constant for the simulated unit, which has no schedule).}
-\label{tab:systems}
+
 \end{table}
 
 \begin{figure}[t]
@@ -400,6 +407,8 @@ The median time to detection is one day on all six systems, but the median alone
 
 \begin{table}[htbp]
 \centering
+\caption{Time-to-detection distribution behind the one-day median, by system, as scored by the final calibration (from the committed scorecards). The long tails are fouling and charge faults: on the dual-duct unit the moderate and severe waterside cooling fouling (114 days each, carried by the rules channel), on the fan coil unit the moderate heating waterside fouling (15 days, the operating-point indicator of Section~\ref{sec:coverage}), and on the simulated rooftop unit the 20\,\% refrigerant undercharge (14 days).}
+\label{tab:ttd}
 \begin{tabular}{lcccl}
 \hline
 System & Detected & At 1 day & At 2 days & Remaining TTDs (days) \\
@@ -412,8 +421,7 @@ FCU & 43 & 38 & 1 & 3, 3, 4, 15 \\
 RTU (simulated) & 20 & 19 & 0 & 14 \\
 \hline
 \end{tabular}
-\caption{Time-to-detection distribution behind the one-day median, by system, as scored by the final calibration (from the committed scorecards). The long tails are fouling and charge faults: on the dual-duct unit the moderate and severe waterside cooling fouling (114 days each, carried by the rules channel), on the fan coil unit the moderate heating waterside fouling (15 days, the operating-point indicator of Section~\ref{sec:coverage}), and on the simulated rooftop unit the 20\,\% refrigerant undercharge (14 days).}
-\label{tab:ttd}
+
 \end{table}
 
 Gradually developing faults are detected slowly (the two 114-day tails on the dual-duct unit are its moderate and severe waterside cooling-fouling files), which is the expected cost of calibrating below a noise floor and is a genuine limitation for the degradation faults that motivate much of this literature.
@@ -426,6 +434,8 @@ Against a principal-component-analysis baseline using squared prediction error \
 
 \begin{table}[htbp]
 \centering
+\caption{STRATA against the principal-component baseline. Per-system entries are ordered SDAHU / PFPU / SFPU; the counts behind the false-alarm rates are 1/96, 8/96 and 9/96 for STRATA and 1/79, 1/96 and 1/96 for the baseline, with Wilson 95\% intervals \cite{wilson1927interval} in brackets. Feature counts are given for the single-duct and the fan-powered systems.}
+\label{tab:pca}
 \small
 \setlength{\tabcolsep}{5pt}
 \renewcommand{\arraystretch}{1.15}
@@ -442,8 +452,7 @@ Implicated device named correctly & 37 of 50 (13 unnamed, 0 wrong, 1 indetermina
 Names the implicated device & yes & no \\
 \hline
 \end{tabular}
-\caption{STRATA against the principal-component baseline. Per-system entries are ordered SDAHU / PFPU / SFPU; the counts behind the false-alarm rates are 1/96, 8/96 and 9/96 for STRATA and 1/79, 1/96 and 1/96 for the baseline, with Wilson 95\% intervals \cite{wilson1927interval} in brackets. Feature counts are given for the single-duct and the fan-powered systems.}
-\label{tab:pca}
+
 \end{table}
 \begin{figure}[t]
 \small
@@ -545,6 +554,8 @@ The misses that remained after the statistical repair were read as limits of wha
 
 \begin{table}[htbp]
 \centering
+\caption{The coverage audit. Sixteen scenarios recovered, none lost, five false-alarm days added over 480 held-out days, the model and device rows identical on every system (the log hashes change, because the new readers emit signature events). Totals use the naive single-duct count. Ledgers \texttt{outputs/x33\_coverage\_*.json}; per-rule credits \texttt{outputs/x33\_residual\_credits\_*.json}.}
+\label{tab:coverage}
 \small
 \begin{tabular}{@{}lrrrr@{}}
 \hline
@@ -559,8 +570,7 @@ FCU & 29 $\to$ 29 of 29 & 40 $\to$ 43 / 47 & 4 $\to$ 5 & 0 \\
 all & 232 $\to$ 387 of 391 & 142 $\to$ 158 / 175 & 21 $\to$ 26 of 480 & 0 \\
 \hline
 \end{tabular}
-\caption{The coverage audit. Sixteen scenarios recovered, none lost, five false-alarm days added over 480 held-out days, the model and device rows identical on every system (the log hashes change, because the new readers emit signature events). Totals use the naive single-duct count. Ledgers \texttt{outputs/x33\_coverage\_*.json}; per-rule credits \texttt{outputs/x33\_residual\_credits\_*.json}.}
-\label{tab:coverage}
+
 \end{table}
 
 What the recovered misses were, and which physics carried them (Table~\ref{tab:coverage}): airside reheat-coil fouling on both fan-powered units, through the series fan's power per cfm of air delivered (``same power, less air'') and, on the parallel unit, the relationship between two airflow sensors; the fan-flow restriction, through the same fan-power indicator; the room-temperature sensor biases, through the return air falling away from the biased zone's reading; the hot-deck static and temperature biases on the dual-duct unit, through the unbiased copies of both quantities the mixing boxes record (exact, 282 of 282 days, at zero false alarms); one waterside fouling, through the pump's bypass flow; and the two damper leaks on the fan coil unit, through the outdoor-air fraction of discharge flow at a fixed damper position. Two of the recoveries deserve a caveat the ledgers carry: the fan coil unit's moderate heating-waterside fouling is seen only because the controller drives the fan to a speed the healthy year never used, an operating-point indicator rather than a coil measurement; and one predicted recovery on the parallel unit's waterside fouling is visible in the data yet uncertifiable, because the water flow only reveals it on the ten days a year the reheat valve saturates, too few to estimate a null.

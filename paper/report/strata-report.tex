@@ -70,8 +70,8 @@ Measured false-alarm rate & The false-alarm rate of a check, measured on the hel
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.98\textwidth]{../figures/strata_framework_report.pdf}
-\caption{The STRATA framework. Training (top) runs once per building on one fault-free period: the trend data is turned into events, process models of a normal day are discovered from the state events, and the eight checks are calibrated, with their false-alarm rates measured on held-out days. Deployment (bottom) runs every day: the new day is scored by the eight checks, the noise gate passes only alarms that beat the check's own false-alarm rate, and what passes reaches the operator with a fault name, a location, the evidence and the check's measured false-alarm rate. The numbers are the stages of Section~\ref{sec:framework}; 4a and 4b are the two halves of Stage 4, and the new day's box is Stage 2 run again.}
+\includegraphics[width=0.96\textwidth]{../figures/strata_framework_report.pdf}
+\caption{The STRATA framework as four tiers. The top two tiers are set up once per building on one fault-free period: the trend data is turned into events, process models of a normal day are discovered from the state events, and the eight checks are calibrated, with their false-alarm rates measured on held-out days. The bottom two tiers run every day: the new day is turned into events in the same way and scored by the eight checks, the noise gate passes only alarms that beat the check's own false-alarm rate, and what passes reaches the operator with a fault name, a location, the evidence and that rate. The numbered badges are the stages of Section~\ref{sec:framework}; 4a (calibration) and 4b (the checks) are the two halves of Stage 4.}
 \label{fig:framework}
 \end{figure*}
 

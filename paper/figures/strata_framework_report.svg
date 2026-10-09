@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1040" viewBox="0 0 1500 1040">
-<rect width="1500" height="1040" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1064" viewBox="0 0 1500 1064">
+<rect width="1500" height="1064" fill="white"/>
 <rect x="124" y="30" width="1240" height="54" rx="8" fill="#1F4466" stroke="none" stroke-width="0" />
 <rect x="118" y="24" width="1240" height="54" rx="8" fill="#2B5C8C" stroke="none" stroke-width="0" />
 <rect x="140" y="34" width="53" height="34" rx="17" fill="white" stroke="none" stroke-width="0" />
@@ -41,9 +41,9 @@
 <text x="1332.0" y="124" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="white" text-anchor="middle" >2</text>
 <text x="1032.0" y="128" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#17324D" text-anchor="start" >Events</text>
 <text x="1032.0" y="156" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >Each day is one case. State events:</text>
-<text x="1032.0" y="178" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >what the equipment is doing.</text>
-<text x="1032.0" y="200" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >Signature events: what should not</text>
-<text x="1032.0" y="222" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >happen. The two are kept apart.</text>
+<text x="1032.0" y="178" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >what the equipment is doing. Signature</text>
+<text x="1032.0" y="200" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >events: what should not happen. Kept</text>
+<text x="1032.0" y="222" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >apart. Runs again on every new day.</text>
 <rect x="124" y="272" width="1240" height="54" rx="8" fill="#2B5A37" stroke="none" stroke-width="0" />
 <rect x="118" y="266" width="1240" height="54" rx="8" fill="#3C7A4C" stroke="none" stroke-width="0" />
 <rect x="140" y="276" width="64" height="34" rx="17" fill="white" stroke="none" stroke-width="0" />
@@ -60,9 +60,9 @@
 <text x="496.0" y="366" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="white" text-anchor="middle" >3</text>
 <text x="196.0" y="370" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1C3B23" text-anchor="start" >Process models</text>
 <text x="196.0" y="398" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >Discovered from the state events</text>
-<text x="196.0" y="420" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >only, so they cannot learn our own</text>
-<text x="196.0" y="442" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >fault rules. One per terminal unit;</text>
-<text x="196.0" y="464" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >one for the whole unit.</text>
+<text x="196.0" y="420" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >only, so they cannot learn the</text>
+<text x="196.0" y="442" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >configured fault rules. One per</text>
+<text x="196.0" y="464" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >terminal unit; one for the whole unit.</text>
 <rect x="542.0" y="340" width="404.0" height="152" rx="10" fill="#2B5A37" stroke="none" stroke-width="0" />
 <rect x="536.0" y="334" width="404.0" height="152" rx="10" fill="#E2F0E4" stroke="none" stroke-width="0" />
 <path d="M558.0 390 a20 20 0 0 1 40 0" stroke="#3C7A4C" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -91,92 +91,93 @@
 <rect x="118" y="508" width="1240" height="54" rx="8" fill="#B8651F" stroke="none" stroke-width="0" />
 <rect x="140" y="518" width="34" height="34" rx="17" fill="white" stroke="none" stroke-width="0" />
 <text x="157.0" y="541" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#B8651F" text-anchor="middle" >4b</text>
-<text x="188" y="544" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" fill="white"><tspan font-size="25" font-weight="bold">CHECK</tspan><tspan dx="18" font-size="20" fill="#EEF2F6">eight checks score every new day against its own healthy band</tspan></text>
-<rect x="124.0" y="582" width="144.5" height="132" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
-<rect x="118.0" y="576" width="144.5" height="132" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
+<text x="188" y="544" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" fill="white"><tspan font-size="25" font-weight="bold">CHECK</tspan><tspan dx="18" font-size="20" fill="#EEF2F6">eight checks score every new day, each against its healthy band</tspan></text>
+<rect x="124.0" y="582" width="144.5" height="156" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
+<rect x="118.0" y="576" width="144.5" height="156" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
 <text x="132.0" y="606" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >Rules</text>
-<text x="132.0" y="634" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >control-</text>
-<text x="132.0" y="654" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >sequence</text>
-<text x="132.0" y="674" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >rule broken</text>
-<rect x="280.5" y="582" width="144.5" height="132" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
-<rect x="274.5" y="576" width="144.5" height="132" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
+<text x="132.0" y="636" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >control-</text>
+<text x="132.0" y="659" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >sequence</text>
+<text x="132.0" y="682" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >rule broken</text>
+<rect x="280.5" y="582" width="144.5" height="156" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
+<rect x="274.5" y="576" width="144.5" height="156" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
 <text x="288.5" y="606" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >Residual</text>
-<text x="288.5" y="634" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >physical</text>
-<text x="288.5" y="654" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >relation</text>
-<text x="288.5" y="674" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >drifted</text>
-<rect x="437.0" y="582" width="144.5" height="132" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
-<rect x="431.0" y="576" width="144.5" height="132" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
+<text x="288.5" y="636" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >physical</text>
+<text x="288.5" y="659" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >relationship</text>
+<text x="288.5" y="682" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >drifted</text>
+<rect x="437.0" y="582" width="144.5" height="156" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
+<rect x="431.0" y="576" width="144.5" height="156" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
 <text x="445.0" y="606" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >Oscillation</text>
-<text x="445.0" y="634" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >actuator</text>
-<text x="445.0" y="654" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >reversing</text>
-<text x="445.0" y="674" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >too often</text>
-<rect x="593.5" y="582" width="144.5" height="132" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
-<rect x="587.5" y="576" width="144.5" height="132" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
+<text x="445.0" y="636" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >actuator</text>
+<text x="445.0" y="659" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >reversing</text>
+<text x="445.0" y="682" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >too often</text>
+<rect x="593.5" y="582" width="144.5" height="156" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
+<rect x="587.5" y="576" width="144.5" height="156" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
 <text x="601.5" y="606" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >Unit</text>
 <text x="601.5" y="628" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >conformance</text>
-<text x="601.5" y="656" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >day fits the</text>
-<text x="601.5" y="676" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >unit model</text>
-<rect x="750.0" y="582" width="144.5" height="132" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
-<rect x="744.0" y="576" width="144.5" height="132" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
-<text x="758.0" y="606" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >Device</text>
+<text x="601.5" y="658" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >day fits the</text>
+<text x="601.5" y="681" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >unit model</text>
+<rect x="750.0" y="582" width="144.5" height="156" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
+<rect x="744.0" y="576" width="144.5" height="156" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
+<text x="758.0" y="606" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >Terminal-unit</text>
 <text x="758.0" y="628" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >conformance</text>
-<text x="758.0" y="656" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >day fits the</text>
-<text x="758.0" y="676" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >terminal-unit</text>
-<text x="758.0" y="696" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >model</text>
-<rect x="906.5" y="582" width="144.5" height="132" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
-<rect x="900.5" y="576" width="144.5" height="132" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
+<text x="758.0" y="658" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >day fits the</text>
+<text x="758.0" y="681" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >terminal-unit</text>
+<text x="758.0" y="704" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >model</text>
+<rect x="906.5" y="582" width="144.5" height="156" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
+<rect x="900.5" y="576" width="144.5" height="156" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
 <text x="914.5" y="606" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >Absence</text>
-<text x="914.5" y="634" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >expected</text>
-<text x="914.5" y="654" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >device</text>
-<text x="914.5" y="674" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >silent</text>
-<rect x="1063.0" y="582" width="144.5" height="132" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
-<rect x="1057.0" y="576" width="144.5" height="132" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
+<text x="914.5" y="636" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >expected</text>
+<text x="914.5" y="659" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >terminal unit</text>
+<text x="914.5" y="682" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >silent</text>
+<rect x="1063.0" y="582" width="144.5" height="156" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
+<rect x="1057.0" y="576" width="144.5" height="156" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
 <text x="1071.0" y="606" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >Frequency</text>
-<text x="1071.0" y="634" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >daily count</text>
-<text x="1071.0" y="654" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >out of</text>
-<text x="1071.0" y="674" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >range</text>
-<rect x="1219.5" y="582" width="144.5" height="132" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
-<rect x="1213.5" y="576" width="144.5" height="132" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
+<text x="1071.0" y="636" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >daily count</text>
+<text x="1071.0" y="659" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >out of</text>
+<text x="1071.0" y="682" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >range</text>
+<rect x="1219.5" y="582" width="144.5" height="156" rx="10" fill="#8A4A14" stroke="none" stroke-width="0" />
+<rect x="1213.5" y="576" width="144.5" height="156" rx="10" fill="#FBEBDC" stroke="none" stroke-width="0" />
 <text x="1227.5" y="606" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#4A2A0E" text-anchor="start" >Rate</text>
-<text x="1227.5" y="634" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >30-day activity</text>
-<text x="1227.5" y="654" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >vs same month;</text>
-<text x="1227.5" y="674" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#333" text-anchor="start" >support only</text>
-<path d="M122 732 h449.5" stroke="#B8651F" stroke-width="2.5" fill="none"/>
-<text x="346.75" y="754" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#4A2A0E" text-anchor="middle" font-style="italic">read the raw sensors</text>
-<path d="M591.5 732 h606.0" stroke="#B8651F" stroke-width="2.5" fill="none"/>
-<text x="894.5" y="754" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#4A2A0E" text-anchor="middle" font-style="italic">read the event log</text>
-<rect x="124" y="788" width="1240" height="54" rx="8" fill="#121F30" stroke="none" stroke-width="0" />
-<rect x="118" y="782" width="1240" height="54" rx="8" fill="#1E3550" stroke="none" stroke-width="0" />
-<rect x="140" y="792" width="53" height="34" rx="17" fill="white" stroke="none" stroke-width="0" />
-<text x="166.5" y="815" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1E3550" text-anchor="middle" >5–6</text>
-<text x="207" y="818" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" fill="white"><tspan font-size="25" font-weight="bold">ALERT</tspan><tspan dx="18" font-size="20" fill="#EEF2F6">only what beats its own false-alarm rate reaches the operator</tspan></text>
-<rect x="124.0" y="856" width="613.0" height="152" rx="10" fill="#121F30" stroke="none" stroke-width="0" />
-<rect x="118.0" y="850" width="613.0" height="152" rx="10" fill="#E0E5EC" stroke="none" stroke-width="0" />
-<path d="M140.0 878 h40 l-15 18 v16 l-10 5 v-21 z" stroke="#1E3550" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="705.0" cy="876" r="17" fill="#1E3550"/>
-<text x="705.0" y="882" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="white" text-anchor="middle" >5</text>
-<text x="196.0" y="886" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#121F30" text-anchor="start" >Noise gate</text>
-<text x="196.0" y="914" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >A check may alarm only when its flags exceed</text>
-<text x="196.0" y="936" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >what its own false-alarm rate would produce</text>
-<text x="196.0" y="958" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >by chance. The rate is never taken below</text>
-<text x="196.0" y="980" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >3 days in 96.</text>
-<rect x="751.0" y="856" width="613.0" height="152" rx="10" fill="#121F30" stroke="none" stroke-width="0" />
-<rect x="745.0" y="850" width="613.0" height="152" rx="10" fill="#E0E5EC" stroke="none" stroke-width="0" />
-<path d="M773.0 904 v-12 a13 13 0 0 1 26 0 v12 l4 5 h-34 z" stroke="#1E3550" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M781.0 913 a5 5 0 0 0 10 0" stroke="#1E3550" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="1332.0" cy="876" r="17" fill="#1E3550"/>
-<text x="1332.0" y="882" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="white" text-anchor="middle" >6</text>
-<text x="823.0" y="886" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#121F30" text-anchor="start" >Alarm to the operator</text>
-<text x="823.0" y="914" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >What broke.  Where: unit, terminal unit, zone.</text>
-<text x="823.0" y="936" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >The evidence: values and duration.</text>
-<text x="823.0" y="958" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >The check's measured false-alarm rate.</text>
-<rect x="1394" y="30" width="96" height="988" rx="8" fill="#121F30" stroke="none" stroke-width="0" />
-<rect x="1388" y="24" width="96" height="988" rx="8" fill="#1E3550" stroke="none" stroke-width="0" />
-<text x="1444.0" y="518.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" font-weight="bold" fill="white" text-anchor="middle" transform="rotate(-90 1446.0 518.0)" letter-spacing="6">STRATA</text>
-<text x="1474.0" y="518.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="normal" fill="#C9D3E0" text-anchor="middle" transform="rotate(-90 1480.0 518.0)">a process-mining framework for HVAC fault detection</text>
+<text x="1227.5" y="636" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >last 30 days</text>
+<text x="1227.5" y="659" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >against same</text>
+<text x="1227.5" y="682" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >month;</text>
+<text x="1227.5" y="705" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="normal" fill="#333" text-anchor="start" >support only</text>
+<path d="M122 756 h449.5" stroke="#B8651F" stroke-width="2.5" fill="none"/>
+<text x="346.75" y="778" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#4A2A0E" text-anchor="middle" font-style="italic">read the raw sensors</text>
+<path d="M591.5 756 h762.5" stroke="#B8651F" stroke-width="2.5" fill="none"/>
+<text x="972.75" y="778" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="normal" fill="#4A2A0E" text-anchor="middle" font-style="italic">read the event log</text>
+<rect x="124" y="812" width="1240" height="54" rx="8" fill="#121F30" stroke="none" stroke-width="0" />
+<rect x="118" y="806" width="1240" height="54" rx="8" fill="#1E3550" stroke="none" stroke-width="0" />
+<rect x="140" y="816" width="53" height="34" rx="17" fill="white" stroke="none" stroke-width="0" />
+<text x="166.5" y="839" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1E3550" text-anchor="middle" >5–6</text>
+<text x="207" y="842" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" fill="white"><tspan font-size="25" font-weight="bold">ALERT</tspan><tspan dx="18" font-size="20" fill="#EEF2F6">only what beats its own false-alarm rate reaches the operator</tspan></text>
+<rect x="124.0" y="880" width="613.0" height="152" rx="10" fill="#121F30" stroke="none" stroke-width="0" />
+<rect x="118.0" y="874" width="613.0" height="152" rx="10" fill="#E0E5EC" stroke="none" stroke-width="0" />
+<path d="M140.0 902 h40 l-15 18 v16 l-10 5 v-21 z" stroke="#1E3550" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="705.0" cy="900" r="17" fill="#1E3550"/>
+<text x="705.0" y="906" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="white" text-anchor="middle" >5</text>
+<text x="196.0" y="910" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#121F30" text-anchor="start" >Noise gate</text>
+<text x="196.0" y="938" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >A check may alarm only when its flags exceed</text>
+<text x="196.0" y="960" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >what its own false-alarm rate would produce</text>
+<text x="196.0" y="982" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >by chance. The rate is never taken below</text>
+<text x="196.0" y="1004" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >3 days in 96.</text>
+<rect x="751.0" y="880" width="613.0" height="152" rx="10" fill="#121F30" stroke="none" stroke-width="0" />
+<rect x="745.0" y="874" width="613.0" height="152" rx="10" fill="#E0E5EC" stroke="none" stroke-width="0" />
+<path d="M773.0 928 v-12 a13 13 0 0 1 26 0 v12 l4 5 h-34 z" stroke="#1E3550" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M781.0 937 a5 5 0 0 0 10 0" stroke="#1E3550" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1332.0" cy="900" r="17" fill="#1E3550"/>
+<text x="1332.0" y="906" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="white" text-anchor="middle" >6</text>
+<text x="823.0" y="910" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#121F30" text-anchor="start" >Alarm to the operator</text>
+<text x="823.0" y="938" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >What broke.  Where: unit, terminal unit, zone.</text>
+<text x="823.0" y="960" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >The evidence: values and duration.</text>
+<text x="823.0" y="982" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#333" text-anchor="start" >The check's measured false-alarm rate.</text>
+<rect x="1394" y="30" width="96" height="1012" rx="8" fill="#121F30" stroke="none" stroke-width="0" />
+<rect x="1388" y="24" width="96" height="1012" rx="8" fill="#1E3550" stroke="none" stroke-width="0" />
+<text x="1444.0" y="530.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" font-weight="bold" fill="white" text-anchor="middle" transform="rotate(-90 1446.0 530.0)" letter-spacing="6">STRATA</text>
+<text x="1474.0" y="530.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="normal" fill="#C9D3E0" text-anchor="middle" transform="rotate(-90 1480.0 530.0)">a process-mining framework for HVAC fault detection</text>
 <path d="M92 24 h-10 v468 h10" stroke="#555" stroke-width="2" fill="none"/>
-<text x="62" y="258.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#444" text-anchor="middle" transform="rotate(-90 62 258.0)">set up once per building</text>
-<path d="M92 514 h-10 v498 h10" stroke="#555" stroke-width="2" fill="none"/>
-<text x="62" y="763.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" font-weight="bold" fill="#444" text-anchor="middle" transform="rotate(-90 62 763.0)">runs every day</text>
+<text x="62" y="258.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#444" text-anchor="middle" transform="rotate(-90 62 258.0)">built once from the fault-free period (Events: also daily)</text>
+<path d="M92 514 h-10 v522 h10" stroke="#555" stroke-width="2" fill="none"/>
+<text x="62" y="775.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#444" text-anchor="middle" transform="rotate(-90 62 775.0)">run on every new day</text>
 <text x="62" y="494" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="normal" fill="#222" text-anchor="start" ></text>
 </svg>

@@ -4,7 +4,7 @@ Writes paper/figures/strata_framework_report.svg; convert with rsvg-convert.
 """
 from pathlib import Path
 
-W, H = 1500, 1040
+W, H = 1500, 1064
 FONT = "Helvetica Neue, Helvetica, Arial, sans-serif"
 out = []
 
@@ -128,9 +128,9 @@ y = tiles(T["sense"], y, [
         "building means a new file, not code."]),
     dict(badge="2", icon="events", title="Events", lines=[
         "Each day is one case. State events:",
-        "what the equipment is doing.",
-        "Signature events: what should not",
-        "happen. The two are kept apart."]),
+        "what the equipment is doing. Signature",
+        "events: what should not happen. Kept",
+        "apart. Runs again on every new day."]),
 ], 152)
 y += GAP + 8
 
@@ -140,9 +140,9 @@ y += HDR_H + GAP
 y = tiles(T["understand"], y, [
     dict(badge="3", icon="model", title="Process models", lines=[
         "Discovered from the state events",
-        "only, so they cannot learn our own",
-        "fault rules. One per terminal unit;",
-        "one for the whole unit."]),
+        "only, so they cannot learn the",
+        "configured fault rules. One per",
+        "terminal unit; one for the whole unit."]),
     dict(badge="4a", icon="gauge", title="Calibration", lines=[
         "Healthy bands and model thresholds",
         "for every check come from the",
@@ -157,33 +157,33 @@ y = tiles(T["understand"], y, [
 y += GAP + 8
 
 # Tier 3: CHECK
-header(T["check"], y, "CHECK", "eight checks score every new day against its own healthy band", stage="4b")
+header(T["check"], y, "CHECK", "eight checks score every new day, each against its healthy band", stage="4b")
 y += HDR_H + GAP
 checks = [
     ("Rules", ["control-", "sequence", "rule broken"]),
-    ("Residual", ["physical", "relation", "drifted"]),
+    ("Residual", ["physical", "relationship", "drifted"]),
     ("Oscillation", ["actuator", "reversing", "too often"]),
     ("Unit\nconformance", ["day fits the", "unit model"]),
-    ("Device\nconformance", ["day fits the", "terminal-unit", "model"]),
-    ("Absence", ["expected", "device", "silent"]),
+    ("Terminal-unit\nconformance", ["day fits the", "terminal-unit", "model"]),
+    ("Absence", ["expected", "terminal unit", "silent"]),
     ("Frequency", ["daily count", "out of", "range"]),
-    ("Rate", ["30-day activity", "vs same month;", "support only"]),
+    ("Rate", ["last 30 days", "against same", "month;", "support only"]),
 ]
 n = len(checks); gap = 12; w = (STACK_W - gap * (n - 1)) / n
 ty = y
 for i, (name, lines) in enumerate(checks):
     x = LEFT + i * (w + gap)
-    block(x, ty, w, 132, T["check"]["tile"], T["check"]["edge"], rx=10, depth=6)
+    block(x, ty, w, 156, T["check"]["tile"], T["check"]["edge"], rx=10, depth=6)
     parts = name.split("\n")
     for j, part in enumerate(parts):
         text(x + 14, ty + 30 + 22 * j, part, size=19, weight="bold", fill=T["check"]["txt"])
-    wrap(x + 14, ty + 56 + 22 * (len(parts) - 1) + 2, lines, size=17, dy=20, fill="#333")
+    wrap(x + 14, ty + 58 + 22 * (len(parts) - 1) + 2, lines, size=20, dy=23, fill="#333")
 # group labels under the tiles
-gy = ty + 132 + 24
+gy = ty + 156 + 24
 x0 = LEFT; x1 = LEFT + 3 * w + 2 * gap
 out.append(f'<path d="M{x0+4} {gy} h{x1-x0-8}" stroke="{T["check"]["hdr"]}" stroke-width="2.5" fill="none"/>')
 text((x0 + x1) / 2, gy + 22, "read the raw sensors", size=17, fill=T["check"]["txt"], anchor="middle", extra='font-style="italic"')
-x0 = LEFT + 3 * (w + gap); x1 = LEFT + 7 * w + 6 * gap
+x0 = LEFT + 3 * (w + gap); x1 = LEFT + 8 * w + 7 * gap
 out.append(f'<path d="M{x0+4} {gy} h{x1-x0-8}" stroke="{T["check"]["hdr"]}" stroke-width="2.5" fill="none"/>')
 text((x0 + x1) / 2, gy + 22, "read the event log", size=17, fill=T["check"]["txt"], anchor="middle", extra='font-style="italic"')
 y = gy + 36 + GAP
@@ -218,12 +218,12 @@ def bracket(y0, y1, label):
     bx = LEFT - 26
     out.append(f'<path d="M{bx} {y0} h-10 v{y1-y0} h10" stroke="#555" stroke-width="2" fill="none"/>')
     cy = (y0 + y1) / 2
-    text(bx - 30, cy, label, size=19, weight="bold", fill="#444", anchor="middle", extra=f'transform="rotate(-90 {bx-30} {cy})"')
+    text(bx - 30, cy, label, size=18, weight="bold", fill="#444", anchor="middle", extra=f'transform="rotate(-90 {bx-30} {cy})"')
 
 # tiers 1-2 once, 3-4 daily: compute from positions (approximate by known layout)
 t1_top = 24; t2_bottom = 24 + (HDR_H + GAP + 152 + GAP + 8) * 2 - GAP - 8 + 6
-bracket(t1_top, t2_bottom, "set up once per building")
-bracket(t2_bottom + GAP + 8, BOTTOM, "runs every day")
+bracket(t1_top, t2_bottom, "built once from the fault-free period (Events: also daily)")
+bracket(t2_bottom + GAP + 8, BOTTOM, "run on every new day")
 text(LEFT - 56, t2_bottom + 2, "", size=10)
 
 out.append('</svg>')

@@ -72,202 +72,216 @@ def icon(kind, x, y, color):
         out.append(f'<path d="M{x+18} {y+41} a5 5 0 0 0 10 0" {s}/>')
 
 # ---------------------------------------------------------------- canvas
-W = 1540
-H = 1170
-out.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">')
-out.append(f'<rect width="{W}" height="{H}" fill="white"/>')
+W = 1700
 BLUE = "#2B5C8C"
 ORANGE = "#B8651F"
-out.append(f'<defs>'
-           f'<marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
-           f'<path d="M0 0 L10 5 L0 10 z" fill="{BLUE}"/></marker>'
-           f'<marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
-           f'<path d="M0 0 L10 5 L0 10 z" fill="{ORANGE}"/></marker>'
-           f'</defs>')
-
 LEFT = 118            # left margin for the bracket labels
 RIGHT_PILLAR = 96
-CHANNEL = 80          # gap between the stack and the pillar; carries the signature-event bypass
+CHANNEL = 84          # gap between the stack and the pillar; carries the signature-event bypass
 STACK_W = W - LEFT - RIGHT_PILLAR - CHANNEL - 16
 HDR_H = 54
 GAP = 14
-TIER_GAP = 58         # room between tiers for an arrow and its label
-y = 24
+TIER_GAP = 64         # room between tiers for an arrow and its label
+DEPTH = 6
 
 def header(tier, y, label, sub, stage=None):
-    block(LEFT, y, STACK_W, HDR_H, tier["hdr"], tier["edge"], rx=8, depth=6)
+    block(LEFT, y, STACK_W, HDR_H, tier["hdr"], tier["edge"], rx=8, depth=DEPTH)
     x = LEFT + 22
     if stage:
         pw = 34 if len(stage) <= 2 else 20 + 11 * len(stage)
         rect(x, y + 10, pw, 34, "white", rx=17)
         text(x + pw / 2, y + 33, stage, size=16, weight="bold", fill=tier["hdr"], anchor="middle")
         x += pw + 14
-    out.append(f'<text x="{x}" y="{y+36}" font-family="{FONT}" fill="white"><tspan font-size="25" font-weight="bold">{esc(label)}</tspan><tspan dx="18" font-size="20" fill="#EEF2F6">{esc(sub)}</tspan></text>')
+    text(x, y + 36, label, size=25, weight="bold", fill="white")
+    text(LEFT + STACK_W - 22, y + 35, sub, size=20, fill="#EEF2F6", anchor="end")
 
-TILE_POS = {}
+def tile(tier, x, y, w, h, it):
+    block(x, y, w, h, tier["tile"], tier["edge"], rx=10, depth=DEPTH)
+    tx = x + 18
+    if it.get("icon"):
+        icon(it["icon"], x + 18, y + 22, tier["hdr"])
+        tx = x + 78
+    if it.get("badge"):
+        badge(x + w - 26, y + 26, it["badge"], tier["hdr"])
+    text(tx, y + 36, it["title"], size=22, weight="bold", fill=tier["txt"])
+    wrap(tx, y + 64, it.get("lines", []), size=18, dy=22, fill="#333")
+    return (x, y, w, h)
 
-def tiles(tier, y, items, h, ncols=None):
+def row(tier, y, items, h, gap=GAP):
     n = len(items)
-    gap = 14
     w = (STACK_W - gap * (n - 1)) / n
+    pos = []
     for i, it in enumerate(items):
-        x = LEFT + i * (w + gap)
-        block(x, y, w, h, tier["tile"], tier["edge"], rx=10, depth=6)
-        TILE_POS[it["title"]] = (x, y, w, h)
-        tx = x + 18
-        if it.get("icon"):
-            icon(it["icon"], x + 18, y + 22, tier["hdr"])
-            tx = x + 78
-        if it.get("badge"):
-            badge(x + w - 26, y + 26, it["badge"], tier["hdr"])
-        text(tx, y + 36, it["title"], size=22, weight="bold", fill=tier["txt"])
-        wrap(tx, y + 64, it.get("lines", []), size=18, dy=22, fill="#333")
-        if it.get("chips"):
-            cy = y + 52
-            for label, stroke, fill in it["chips"]:
-                rect(tx, cy, w - (tx - x) - 16, 30, fill, stroke=stroke, rx=8, sw=2.5)
-                text(tx + 12, cy + 21, label, size=17, weight="bold", fill=stroke)
-                cy += 38
-            wrap(tx, cy + 13, it.get("foot", []), size=17, dy=21, fill="#333")
-    return y + h
+        pos.append(tile(tier, LEFT + i * (w + gap), y, w, h, it))
+    return pos
 
-def down_arrow(x, y0, y1, label, color, marker, dashed=False, label_side="left"):
+def varrow(x, y0, y1, color, marker, dashed=False, label=None, label_side="right", halo=True, label_y=None):
     dash = ' stroke-dasharray="9 7"' if dashed else ''
+    if halo:
+        out.append(f'<path d="M{x} {y0} V{y1}" stroke="white" stroke-width="9" fill="none" stroke-linecap="round"/>')
     out.append(f'<path d="M{x} {y0} V{y1}" stroke="{color}" stroke-width="3"{dash} fill="none" marker-end="url(#{marker})"/>')
-    ym = (y0 + y1) / 2 + 6
-    if label_side == "left":
-        text(x - 14, ym, label, size=17, fill=color, anchor="end", extra='font-style="italic"')
-    else:
-        text(x + 14, ym, label, size=17, fill=color, anchor="start", extra='font-style="italic"')
+    if label:
+        ym = label_y if label_y is not None else (y0 + y1) / 2 + 6
+        if label_side == "right":
+            text(x + 14, ym, label, size=17, fill=color, anchor="start", extra='font-style="italic"')
+        else:
+            text(x - 14, ym, label, size=17, fill=color, anchor="end", extra='font-style="italic"')
 
 # ---------------------------------------------------------------- tiers
 T = {t["key"]: t for t in TIERS}
+y = 24
 
 # Tier 1: SENSE
 sense_top = y
 header(T["sense"], y, "SENSE", "the building's own data, turned into events", stage="1–2")
 y += HDR_H + GAP
-y = tiles(T["sense"], y, [
+r1 = row(T["sense"], y, [
     dict(badge="1", icon="sensor", title="Trend data", lines=[
-        "What the building-automation",
-        "system already records: temperatures,",
-        "flows, damper and valve positions,",
-        "fan speeds, once a minute."]),
+        "What the building-automation system already records:",
+        "temperatures, flows, damper and valve positions, fan",
+        "speeds, once a minute. No new sensors."]),
     dict(badge="1", icon="file", title="Configuration file", lines=[
-        "Maps sensor names to roles and lists",
-        "the control sequence as rules. The",
-        "only building-specific part: a new",
-        "building means a new file, not code."]),
-    dict(badge="2", title="Events", chips=[
-        ("State events: what the equipment is doing", BLUE, "#FFFFFF"),
-        ("Signature events: what should not happen", ORANGE, "#FFF4EA"),
-    ], foot=["One case per day. Rebuilt every new day."]),
-], 152)
-sense_bottom = y + 6
+        "Maps sensor names to roles and lists the control sequence",
+        "as rules. The only building-specific part: a new building",
+        "means a new file, not code."]),
+], 124)
+y += 124 + GAP + 2
+# Events: one full-width tile with the two chips side by side
+EV_H = 92
+ex, ey, ew, eh = tile(T["sense"], LEFT, y, STACK_W, EV_H, dict(title="Events"))
+badge(LEFT + 112, y + 29, "2", T["sense"]["hdr"])
+text(LEFT + 18, y + 62, "one case per day,", size=16, fill="#333")
+text(LEFT + 18, y + 81, "rebuilt every new day", size=16, fill="#333")
+CHIP_W = 520
+chip1_x = LEFT + 230
+chip2_x = chip1_x + CHIP_W + 40
+chip_y = y + 28
+for cx_, label, stroke, fill in [(chip1_x, "State events: what the equipment is doing", BLUE, "#FFFFFF"),
+                                 (chip2_x, "Signature events: what should not happen", ORANGE, "#FFF4EA")]:
+    rect(cx_, chip_y, CHIP_W, 36, fill, stroke=stroke, rx=8, sw=2.5)
+    text(cx_ + 16, chip_y + 25, label, size=18, weight="bold", fill=stroke)
+state_cx = chip1_x + 120
+sig_mid_y = chip_y + 18
+y += EV_H
+sense_bottom = y + DEPTH
 y += TIER_GAP
 
 # Tier 2: UNDERSTAND
 understand_top = y
 header(T["understand"], y, "UNDERSTAND", "what a normal day looks like, learned from one fault-free period", stage="3–4a")
 y += HDR_H + GAP
-y = tiles(T["understand"], y, [
+r2 = row(T["understand"], y, [
     dict(badge="3", icon="model", title="Process models", lines=[
-        "Discovered from the state events",
-        "only, so they cannot learn the",
-        "configured fault rules. One per",
-        "terminal unit; one for the whole unit."]),
+        "Discovered from the state events only, so",
+        "they cannot learn the configured fault rules.",
+        "One per terminal unit; one for the whole unit."]),
     dict(badge="4a", icon="gauge", title="Calibration", lines=[
-        "Healthy bands and model thresholds",
-        "for every check come from the",
-        "fault-free days. No threshold ever",
-        "sees fault data."]),
+        "Healthy bands and model thresholds for",
+        "every check come from the fault-free days.",
+        "No threshold ever sees fault data."]),
     dict(badge="4a", icon="calendar", title="Held-out days", lines=[
-        "The last eight days of each month",
-        "(96 a year) are kept aside and used",
-        "only to measure each check's",
-        "false-alarm rate."]),
-], 152)
-understand_bottom = y + 6
+        "The last eight days of each month (96 a",
+        "year) are kept aside and used only to",
+        "measure each check's false-alarm rate."]),
+], 130)
+y += 130
+understand_bottom = y + DEPTH
 y += TIER_GAP
 
 # Tier 3: CHECK
 check_top = y
 header(T["check"], y, "CHECK", "eight checks score every new day, each against its own threshold", stage="4b")
-check_hdr_mid = y + HDR_H / 2
 y += HDR_H + GAP
 checks = [
-    ("Rules", ["control-", "sequence", "rule broken"]),
-    ("Residual", ["physical", "relationship", "drifted"]),
-    ("Oscillation", ["actuator", "reversing", "too often"]),
+    ("Absence", ["expected", "terminal unit", "silent"]),
     ("Unit\nconformance", ["day fits the", "unit model"]),
     ("Terminal-unit\nconformance", ["day fits the", "terminal-unit", "model"]),
-    ("Absence", ["expected", "terminal unit", "silent"]),
     ("Frequency", ["daily count", "out of", "range"]),
     ("Rate", ["last 30 days", "against same", "month;", "support only"]),
+    ("Oscillation", ["actuator", "reversing", "too often"]),
+    ("Residual", ["physical", "relationship", "drifted"]),
+    ("Rules", ["a control", "rule broken:", "a signature", "event"]),
 ]
-n = len(checks); gap = 12; w = (STACK_W - gap * (n - 1)) / n
+n = len(checks); cgap = 12; cw = (STACK_W - cgap * (n - 1)) / n
+CH_H = 156
 ty = y
+cpos = []
 for i, (name, lines) in enumerate(checks):
-    x = LEFT + i * (w + gap)
-    block(x, ty, w, 156, T["check"]["tile"], T["check"]["edge"], rx=10, depth=6)
+    x = LEFT + i * (cw + cgap)
+    block(x, ty, cw, CH_H, T["check"]["tile"], T["check"]["edge"], rx=10, depth=DEPTH)
+    cpos.append((x, ty, cw, CH_H))
     parts = name.split("\n")
     for j, part in enumerate(parts):
         text(x + 14, ty + 30 + 22 * j, part, size=19, weight="bold", fill=T["check"]["txt"])
     wrap(x + 14, ty + 58 + 22 * (len(parts) - 1) + 2, lines, size=20, dy=23, fill="#333")
-# group labels under the tiles
-gy = ty + 156 + 24
-x0 = LEFT; x1 = LEFT + 3 * w + 2 * gap
-out.append(f'<path d="M{x0+4} {gy} h{x1-x0-8}" stroke="{T["check"]["hdr"]}" stroke-width="2.5" fill="none"/>')
-text((x0 + x1) / 2, gy + 22, "read the raw sensors", size=17, fill=T["check"]["txt"], anchor="middle", extra='font-style="italic"')
-x0 = LEFT + 3 * (w + gap); x1 = LEFT + 8 * w + 7 * gap
+gy = ty + CH_H + 24
+x0 = LEFT; x1 = LEFT + 5 * cw + 4 * cgap
 out.append(f'<path d="M{x0+4} {gy} h{x1-x0-8}" stroke="{T["check"]["hdr"]}" stroke-width="2.5" fill="none"/>')
 text((x0 + x1) / 2, gy + 22, "read the event log", size=17, fill=T["check"]["txt"], anchor="middle", extra='font-style="italic"')
-check_bottom = gy + 36
+x0 = LEFT + 5 * (cw + cgap); x1 = LEFT + 8 * cw + 7 * cgap
+out.append(f'<path d="M{x0+4} {gy} h{x1-x0-8}" stroke="{T["check"]["hdr"]}" stroke-width="2.5" fill="none"/>')
+text((x0 + x1) / 2, gy + 22, "read the raw sensors", size=17, fill=T["check"]["txt"], anchor="middle", extra='font-style="italic"')
+check_bottom = gy + 30
 y = check_bottom + TIER_GAP
 
 # Tier 4: ALERT
 alert_top = y
 header(T["alert"], y, "ALERT", "only what beats its own false-alarm rate reaches the operator", stage="5–6")
 y += HDR_H + GAP
-y = tiles(T["alert"], y, [
+r4 = row(T["alert"], y, [
     dict(badge="5", icon="gate", title="Noise gate", lines=[
-        "A check may alarm only when its flags exceed",
-        "what its own false-alarm rate would produce",
-        "by chance. The rate is never taken below",
-        "3 days in 96."]),
+        "A check may alarm only when its flags exceed what",
+        "its own false-alarm rate would produce by chance.",
+        "The rate is never taken below 3 days in 96."]),
     dict(badge="6", icon="bell", title="Alarm to the operator", lines=[
         "What broke.  Where: unit, terminal unit, zone.",
         "The evidence: values and duration.",
         "The check's measured false-alarm rate."]),
-], 152)
-y += 10
+], 130, gap=64)
+y += 130 + DEPTH + 10
 BOTTOM = y
+H = BOTTOM + 14
 
-# ---------------------------------------------------------------- flow arrows
-ex, ey, ew, eh = TILE_POS["Events"]
-ax = ex + 150
-down_arrow(ax, sense_bottom + 2, understand_top - 4,
-           "state events only, into model discovery (3)", BLUE, "ab")
-mx = LEFT + STACK_W * 0.5
-down_arrow(mx, understand_bottom + 2, check_top - 4,
-           "the discovered models and the calibrated thresholds", BLUE, "ab")
-down_arrow(mx, check_bottom + 2, alert_top - 4,
-           "each check's flagged days", BLUE, "ab")
-
-# signature-event bypass: leaves the signature chip, runs down the channel, enters CHECK
-chip_y = ey + 52 + 38 + 15            # mid-height of the second chip
-cx = LEFT + STACK_W + 6 + CHANNEL - 14
-out.append(f'<path d="M{ex + ew - 14} {chip_y} H{cx} V{check_hdr_mid} H{LEFT + STACK_W + 10}" '
+# ---------------------------------------------------------------- flow arrows (tile to tile)
+pm = r2[0]                                   # Process models tile
+# 1. state events -> process models (crosses the UNDERSTAND header)
+varrow(state_cx, sense_bottom + 2, pm[1] - 3, BLUE, "ab",
+       label="state events only", label_side="right", label_y=sense_bottom + 36)
+# 2. process models -> the two conformance checks (fork)
+fx = pm[0] + 150
+pm_bottom = pm[1] + pm[3] + DEPTH + 2
+bar_y = check_top - 12
+out.append(f'<path d="M{fx} {pm_bottom} V{bar_y}" stroke="{BLUE}" stroke-width="3" fill="none"/>')
+c0 = cpos[1][0] + cpos[1][2] / 2; c1 = cpos[2][0] + cpos[2][2] / 2
+out.append(f'<path d="M{min(fx, c0)} {bar_y} H{c1}" stroke="{BLUE}" stroke-width="3" fill="none" stroke-linecap="round"/>')
+for cx_ in (c0, c1):
+    out.append(f'<path d="M{cx_} {bar_y} V{cpos[0][1]-3}" stroke="white" stroke-width="9" fill="none"/>')
+    out.append(f'<path d="M{cx_} {bar_y} V{cpos[0][1]-3}" stroke="{BLUE}" stroke-width="3" fill="none" marker-end="url(#ab)"/>')
+text(fx + 14, pm_bottom + 26, "today's events scored against the models", size=17, fill=BLUE,
+     anchor="start", extra='font-style="italic"')
+# 3. checks -> noise gate
+ng = r4[0]
+gx = ng[0] + ng[2] / 2
+varrow(gx, check_bottom + 4, ng[1] - 3, BLUE, "ab", label="each check's flagged days", label_side="right", label_y=check_bottom + 34)
+# 4. noise gate -> alarm
+al = r4[1]
+ay = ng[1] + ng[3] / 2
+out.append(f'<path d="M{ng[0]+ng[2]+DEPTH+2} {ay} H{al[0]-4}" stroke="{BLUE}" stroke-width="3" fill="none" marker-end="url(#ab)"/>')
+# 5. signature events -> Rules check, down the channel, skipping the UNDERSTAND tier
+rules = cpos[-1]
+cx = LEFT + STACK_W + DEPTH + CHANNEL - 16
+rules_mid = rules[1] + rules[3] / 2
+out.append(f'<path d="M{chip2_x + CHIP_W} {sig_mid_y} H{cx} V{rules_mid} H{rules[0] + rules[2] + DEPTH + 4}" '
            f'stroke="{ORANGE}" stroke-width="3" stroke-dasharray="9 7" fill="none" marker-end="url(#ao)"/>')
-lab_y = (chip_y + check_hdr_mid) / 2
+lab_y = (sig_mid_y + rules_mid) / 2
 text(cx - 20, lab_y, "signature events skip discovery", size=16, weight="bold", fill=ORANGE, anchor="middle",
      extra=f'transform="rotate(-90 {cx-20} {lab_y})"')
-text(cx - 42, lab_y, "and feed the Rules check only", size=16, fill=ORANGE, anchor="middle",
+text(cx - 42, lab_y, "and go straight to the Rules check", size=16, fill=ORANGE, anchor="middle",
      extra=f'transform="rotate(-90 {cx-42} {lab_y})"')
 
 # ---------------------------------------------------------------- side pillar
-px = LEFT + STACK_W + 6 + CHANNEL
-block(px, 24, RIGHT_PILLAR, BOTTOM - 24, "#1E3550", "#121F30", rx=8, depth=6)
+px = LEFT + STACK_W + DEPTH + CHANNEL
+block(px, 24, RIGHT_PILLAR, BOTTOM - 24, "#1E3550", "#121F30", rx=8, depth=DEPTH)
 text(px + RIGHT_PILLAR / 2 + 8, (BOTTOM + 24) / 2, "STRATA", size=40, weight="bold", fill="white", anchor="middle",
      extra=f'transform="rotate(-90 {px + RIGHT_PILLAR/2 + 10} {(BOTTOM + 24)/2})" letter-spacing="6"')
 text(px + RIGHT_PILLAR / 2 + 38, (BOTTOM + 24) / 2, "a process-mining framework for HVAC fault detection", size=16, fill="#C9D3E0", anchor="middle",
@@ -284,5 +298,13 @@ bracket(sense_top, understand_bottom, "built once from the fault-free period (Ev
 bracket(check_top, BOTTOM, "run on every new day")
 
 out.append('</svg>')
+out.insert(0, f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">'
+              f'<rect width="{W}" height="{H}" fill="white"/>'
+              f'<defs>'
+              f'<marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
+              f'<path d="M0 0 L10 5 L0 10 z" fill="{BLUE}"/></marker>'
+              f'<marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
+              f'<path d="M0 0 L10 5 L0 10 z" fill="{ORANGE}"/></marker>'
+              f'</defs>')
 Path("paper/figures/strata_framework_report.svg").write_text("\n".join(out))
-print("wrote svg", W, H, "bottom", BOTTOM)
+print("wrote svg", W, H)

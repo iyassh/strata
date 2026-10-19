@@ -81,7 +81,7 @@ CHANNEL = 84          # gap between the stack and the pillar; carries the signat
 STACK_W = W - LEFT - RIGHT_PILLAR - CHANNEL - 16
 HDR_H = 54
 GAP = 14
-TIER_GAP = 64         # room between tiers for an arrow and its label
+TIER_GAP = 50         # room between tiers for the one labelled arrow
 DEPTH = 6
 
 def header(tier, y, label, sub, stage=None):
@@ -193,9 +193,9 @@ check_top = y
 header(T["check"], y, "CHECK", "eight checks score every new day, each against its own threshold", stage="4b")
 y += HDR_H + GAP
 checks = [
-    ("Absence", ["expected", "terminal unit", "silent"]),
     ("Unit\nconformance", ["day fits the", "unit model"]),
     ("Terminal-unit\nconformance", ["day fits the", "terminal-unit", "model"]),
+    ("Absence", ["expected", "terminal unit", "silent"]),
     ("Frequency", ["daily count", "out of", "range"]),
     ("Rate", ["last 30 days", "against same", "month;", "support only"]),
     ("Oscillation", ["actuator", "reversing", "too often"]),
@@ -237,7 +237,7 @@ r4 = row(T["alert"], y, [
         "What broke.  Where: unit, terminal unit, zone.",
         "The evidence: values and duration.",
         "The check's measured false-alarm rate."]),
-], 130, gap=64)
+], 130)
 y += 130 + DEPTH + 10
 BOTTOM = y
 H = BOTTOM + 14
@@ -246,27 +246,7 @@ H = BOTTOM + 14
 pm = r2[0]                                   # Process models tile
 # 1. state events -> process models (crosses the UNDERSTAND header)
 varrow(state_cx, sense_bottom + 2, pm[1] - 3, BLUE, "ab",
-       label="state events only", label_side="right", label_y=sense_bottom + 36)
-# 2. process models -> the two conformance checks (fork)
-fx = pm[0] + 150
-pm_bottom = pm[1] + pm[3] + DEPTH + 2
-bar_y = check_top - 12
-out.append(f'<path d="M{fx} {pm_bottom} V{bar_y}" stroke="{BLUE}" stroke-width="3" fill="none"/>')
-c0 = cpos[1][0] + cpos[1][2] / 2; c1 = cpos[2][0] + cpos[2][2] / 2
-out.append(f'<path d="M{min(fx, c0)} {bar_y} H{c1}" stroke="{BLUE}" stroke-width="3" fill="none" stroke-linecap="round"/>')
-for cx_ in (c0, c1):
-    out.append(f'<path d="M{cx_} {bar_y} V{cpos[0][1]-3}" stroke="white" stroke-width="9" fill="none"/>')
-    out.append(f'<path d="M{cx_} {bar_y} V{cpos[0][1]-3}" stroke="{BLUE}" stroke-width="3" fill="none" marker-end="url(#ab)"/>')
-text(fx + 14, pm_bottom + 26, "today's events scored against the models", size=17, fill=BLUE,
-     anchor="start", extra='font-style="italic"')
-# 3. checks -> noise gate
-ng = r4[0]
-gx = ng[0] + ng[2] / 2
-varrow(gx, check_bottom + 4, ng[1] - 3, BLUE, "ab", label="each check's flagged days", label_side="right", label_y=check_bottom + 34)
-# 4. noise gate -> alarm
-al = r4[1]
-ay = ng[1] + ng[3] / 2
-out.append(f'<path d="M{ng[0]+ng[2]+DEPTH+2} {ay} H{al[0]-4}" stroke="{BLUE}" stroke-width="3" fill="none" marker-end="url(#ab)"/>')
+       label="state events only", label_side="right", label_y=sense_bottom + 30)
 # 5. signature events -> Rules check, down the channel, skipping the UNDERSTAND tier
 rules = cpos[-1]
 cx = LEFT + STACK_W + DEPTH + CHANNEL - 16

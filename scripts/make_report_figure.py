@@ -72,14 +72,26 @@ def icon(kind, x, y, color):
         out.append(f'<path d="M{x+18} {y+41} a5 5 0 0 0 10 0" {s}/>')
 
 # ---------------------------------------------------------------- canvas
+W = 1540
+H = 1170
 out.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">')
 out.append(f'<rect width="{W}" height="{H}" fill="white"/>')
+BLUE = "#2B5C8C"
+ORANGE = "#B8651F"
+out.append(f'<defs>'
+           f'<marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
+           f'<path d="M0 0 L10 5 L0 10 z" fill="{BLUE}"/></marker>'
+           f'<marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
+           f'<path d="M0 0 L10 5 L0 10 z" fill="{ORANGE}"/></marker>'
+           f'</defs>')
 
 LEFT = 118            # left margin for the bracket labels
 RIGHT_PILLAR = 96
-STACK_W = W - LEFT - RIGHT_PILLAR - 46
+CHANNEL = 80          # gap between the stack and the pillar; carries the signature-event bypass
+STACK_W = W - LEFT - RIGHT_PILLAR - CHANNEL - 16
 HDR_H = 54
 GAP = 14
+TIER_GAP = 58         # room between tiers for an arrow and its label
 y = 24
 
 def header(tier, y, label, sub, stage=None):
@@ -92,6 +104,8 @@ def header(tier, y, label, sub, stage=None):
         x += pw + 14
     out.append(f'<text x="{x}" y="{y+36}" font-family="{FONT}" fill="white"><tspan font-size="25" font-weight="bold">{esc(label)}</tspan><tspan dx="18" font-size="20" fill="#EEF2F6">{esc(sub)}</tspan></text>')
 
+TILE_POS = {}
+
 def tiles(tier, y, items, h, ncols=None):
     n = len(items)
     gap = 14
@@ -99,6 +113,7 @@ def tiles(tier, y, items, h, ncols=None):
     for i, it in enumerate(items):
         x = LEFT + i * (w + gap)
         block(x, y, w, h, tier["tile"], tier["edge"], rx=10, depth=6)
+        TILE_POS[it["title"]] = (x, y, w, h)
         tx = x + 18
         if it.get("icon"):
             icon(it["icon"], x + 18, y + 22, tier["hdr"])
@@ -107,12 +122,29 @@ def tiles(tier, y, items, h, ncols=None):
             badge(x + w - 26, y + 26, it["badge"], tier["hdr"])
         text(tx, y + 36, it["title"], size=22, weight="bold", fill=tier["txt"])
         wrap(tx, y + 64, it.get("lines", []), size=18, dy=22, fill="#333")
+        if it.get("chips"):
+            cy = y + 52
+            for label, stroke, fill in it["chips"]:
+                rect(tx, cy, w - (tx - x) - 16, 30, fill, stroke=stroke, rx=8, sw=2.5)
+                text(tx + 12, cy + 21, label, size=17, weight="bold", fill=stroke)
+                cy += 38
+            wrap(tx, cy + 13, it.get("foot", []), size=17, dy=21, fill="#333")
     return y + h
+
+def down_arrow(x, y0, y1, label, color, marker, dashed=False, label_side="left"):
+    dash = ' stroke-dasharray="9 7"' if dashed else ''
+    out.append(f'<path d="M{x} {y0} V{y1}" stroke="{color}" stroke-width="3"{dash} fill="none" marker-end="url(#{marker})"/>')
+    ym = (y0 + y1) / 2 + 6
+    if label_side == "left":
+        text(x - 14, ym, label, size=17, fill=color, anchor="end", extra='font-style="italic"')
+    else:
+        text(x + 14, ym, label, size=17, fill=color, anchor="start", extra='font-style="italic"')
 
 # ---------------------------------------------------------------- tiers
 T = {t["key"]: t for t in TIERS}
 
 # Tier 1: SENSE
+sense_top = y
 header(T["sense"], y, "SENSE", "the building's own data, turned into events", stage="1–2")
 y += HDR_H + GAP
 y = tiles(T["sense"], y, [
@@ -126,15 +158,16 @@ y = tiles(T["sense"], y, [
         "the control sequence as rules. The",
         "only building-specific part: a new",
         "building means a new file, not code."]),
-    dict(badge="2", icon="events", title="Events", lines=[
-        "Each day is one case. State events:",
-        "what the equipment is doing. Signature",
-        "events: what should not happen. Kept",
-        "apart. Runs again on every new day."]),
+    dict(badge="2", title="Events", chips=[
+        ("State events: what the equipment is doing", BLUE, "#FFFFFF"),
+        ("Signature events: what should not happen", ORANGE, "#FFF4EA"),
+    ], foot=["One case per day. Rebuilt every new day."]),
 ], 152)
-y += GAP + 8
+sense_bottom = y + 6
+y += TIER_GAP
 
 # Tier 2: UNDERSTAND
+understand_top = y
 header(T["understand"], y, "UNDERSTAND", "what a normal day looks like, learned from one fault-free period", stage="3–4a")
 y += HDR_H + GAP
 y = tiles(T["understand"], y, [
@@ -154,10 +187,13 @@ y = tiles(T["understand"], y, [
         "only to measure each check's",
         "false-alarm rate."]),
 ], 152)
-y += GAP + 8
+understand_bottom = y + 6
+y += TIER_GAP
 
 # Tier 3: CHECK
-header(T["check"], y, "CHECK", "eight checks score every new day, each against its healthy band", stage="4b")
+check_top = y
+header(T["check"], y, "CHECK", "eight checks score every new day, each against its own threshold", stage="4b")
+check_hdr_mid = y + HDR_H / 2
 y += HDR_H + GAP
 checks = [
     ("Rules", ["control-", "sequence", "rule broken"]),
@@ -186,9 +222,11 @@ text((x0 + x1) / 2, gy + 22, "read the raw sensors", size=17, fill=T["check"]["t
 x0 = LEFT + 3 * (w + gap); x1 = LEFT + 8 * w + 7 * gap
 out.append(f'<path d="M{x0+4} {gy} h{x1-x0-8}" stroke="{T["check"]["hdr"]}" stroke-width="2.5" fill="none"/>')
 text((x0 + x1) / 2, gy + 22, "read the event log", size=17, fill=T["check"]["txt"], anchor="middle", extra='font-style="italic"')
-y = gy + 36 + GAP
+check_bottom = gy + 36
+y = check_bottom + TIER_GAP
 
 # Tier 4: ALERT
+alert_top = y
 header(T["alert"], y, "ALERT", "only what beats its own false-alarm rate reaches the operator", stage="5–6")
 y += HDR_H + GAP
 y = tiles(T["alert"], y, [
@@ -205,8 +243,30 @@ y = tiles(T["alert"], y, [
 y += 10
 BOTTOM = y
 
+# ---------------------------------------------------------------- flow arrows
+ex, ey, ew, eh = TILE_POS["Events"]
+ax = ex + 150
+down_arrow(ax, sense_bottom + 2, understand_top - 4,
+           "state events only, into model discovery (3)", BLUE, "ab")
+mx = LEFT + STACK_W * 0.5
+down_arrow(mx, understand_bottom + 2, check_top - 4,
+           "the discovered models and the calibrated thresholds", BLUE, "ab")
+down_arrow(mx, check_bottom + 2, alert_top - 4,
+           "each check's flagged days", BLUE, "ab")
+
+# signature-event bypass: leaves the signature chip, runs down the channel, enters CHECK
+chip_y = ey + 52 + 38 + 15            # mid-height of the second chip
+cx = LEFT + STACK_W + 6 + CHANNEL - 14
+out.append(f'<path d="M{ex + ew - 14} {chip_y} H{cx} V{check_hdr_mid} H{LEFT + STACK_W + 10}" '
+           f'stroke="{ORANGE}" stroke-width="3" stroke-dasharray="9 7" fill="none" marker-end="url(#ao)"/>')
+lab_y = (chip_y + check_hdr_mid) / 2
+text(cx - 20, lab_y, "signature events skip discovery", size=16, weight="bold", fill=ORANGE, anchor="middle",
+     extra=f'transform="rotate(-90 {cx-20} {lab_y})"')
+text(cx - 42, lab_y, "and feed the Rules check only", size=16, fill=ORANGE, anchor="middle",
+     extra=f'transform="rotate(-90 {cx-42} {lab_y})"')
+
 # ---------------------------------------------------------------- side pillar
-px = LEFT + STACK_W + 30
+px = LEFT + STACK_W + 6 + CHANNEL
 block(px, 24, RIGHT_PILLAR, BOTTOM - 24, "#1E3550", "#121F30", rx=8, depth=6)
 text(px + RIGHT_PILLAR / 2 + 8, (BOTTOM + 24) / 2, "STRATA", size=40, weight="bold", fill="white", anchor="middle",
      extra=f'transform="rotate(-90 {px + RIGHT_PILLAR/2 + 10} {(BOTTOM + 24)/2})" letter-spacing="6"')
@@ -220,12 +280,9 @@ def bracket(y0, y1, label):
     cy = (y0 + y1) / 2
     text(bx - 30, cy, label, size=18, weight="bold", fill="#444", anchor="middle", extra=f'transform="rotate(-90 {bx-30} {cy})"')
 
-# tiers 1-2 once, 3-4 daily: compute from positions (approximate by known layout)
-t1_top = 24; t2_bottom = 24 + (HDR_H + GAP + 152 + GAP + 8) * 2 - GAP - 8 + 6
-bracket(t1_top, t2_bottom, "built once from the fault-free period (Events: also daily)")
-bracket(t2_bottom + GAP + 8, BOTTOM, "run on every new day")
-text(LEFT - 56, t2_bottom + 2, "", size=10)
+bracket(sense_top, understand_bottom, "built once from the fault-free period (Events: also daily)")
+bracket(check_top, BOTTOM, "run on every new day")
 
 out.append('</svg>')
 Path("paper/figures/strata_framework_report.svg").write_text("\n".join(out))
-print("wrote svg", W, H)
+print("wrote svg", W, H, "bottom", BOTTOM)

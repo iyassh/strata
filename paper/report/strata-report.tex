@@ -132,11 +132,11 @@ STRATA alarm -- series fan-powered terminal
 \section{Results on Public Benchmark Data}
 \label{sec:results}
 
-We tested the framework on the public fault-detection datasets of the Lawrence Berkeley National Laboratory (LBNL) \cite{granderson2023lbnlfdddata}. Each dataset covers one kind of equipment. It holds a year of fault-free operation, recorded every minute, and then the equipment recorded again, once for each fault put in: a stuck damper, a biased sensor, a fouled coil, a leaking valve, or an unstable controller. Because each fault was put in on purpose, we know for every case what the right answer is. Of the seven datasets in Table~\ref{tab:systems}, five are the main systems: a single-duct air handler, a dual-duct air handler, a fan coil unit, and two systems of fan-powered terminal units. These five have a full year of data, and unless we say otherwise, every number below is for them. The other two are rooftop units: one simulated, the other a measured year from a real building, with 182 fault-free days and one fault case, so it can tell us how often the framework gives a false alarm but not how many faults it catches. The next five subsections report what it caught, where it pointed, how it compares with two existing methods, what process mining added, and what noisier data did.
+We tested the framework on the public fault-detection datasets of the Lawrence Berkeley National Laboratory (LBNL) \cite{granderson2023lbnlfdddata}. Each dataset covers one kind of equipment. It holds a year of fault-free operation, recorded every minute, and then the equipment recorded again, once for each fault put in: a stuck damper, a biased sensor, a fouled coil, a leaking valve, or an unstable controller. Because each fault was put in on purpose, we know for every case what the right answer is. Of the six datasets in Table~\ref{tab:systems}, five are the main systems: a single-duct air handler, a dual-duct air handler, a fan coil unit, and two systems of fan-powered terminal units. These five have a full year of data, and unless we say otherwise, every number below is for them. The sixth is a rooftop unit. The next five subsections report what it caught, where it pointed, how it compares with two existing methods, what process mining added, and what noisier data did.
 
 \begin{table}[t]
 \centering
-\caption{The seven LBNL datasets. ``Scored'' is seeded faults evaluated; ``Detected'' those caught; ``False-alarm days'' the held-out fault-free days with an alarm. $^{\dagger}$One of these was attributed on audit to a dataset defect rather than to the fault; the totals in the text count it, and are 157 without it.}
+\caption{The six LBNL datasets. ``Scored'' is seeded faults evaluated; ``Detected'' those caught; ``False-alarm days'' the held-out fault-free days with an alarm. $^{\dagger}$One of these was attributed on audit to a dataset defect rather than to the fault; the totals in the text count it, and are 157 without it.}
 \label{tab:systems}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -149,15 +149,14 @@ Fan-powered terminal units (parallel) & 30 & 26 & 8 of 96 \\
 Fan-powered terminal units (series) & 29 & 25 & 9 of 96 \\
 Dual-duct air handler & 55 & 50 & 3 of 96 \\
 Fan coil unit & 47 & 43 & 5 of 96 \\
-Rooftop unit (simulated) & 24 & 20 & 0 of 28 \\
-Rooftop unit (measured) & 1 case & --- & 3 of 49 \\
+Rooftop unit & 24 & 20 & 0 of 28 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Detection and false alarms}
 
-Across the five main systems the framework detected 158 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. The median time from the start of a fault to its first alarm was one day. On the real rooftop unit the false-alarm rate was 3 of 49 held-out days. A later audit mapped every recorded column the first configurations had left unread, and sixteen of the 158 detections came from those columns. The 17 faults it missed are all coil fouling, where the recorded sensor values stay inside every healthy band. On the one dataset that records the refrigerant side, the framework caught every fouling severity.
+Across the five main systems the framework detected 158 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. The median time from the start of a fault to its first alarm was one day. A later audit mapped every recorded column the first configurations had left unread, and sixteen of the 158 detections came from those columns. The 17 faults it missed are all coil fouling, where the recorded sensor values stay inside every healthy band. On the one dataset that records the refrigerant side, the framework caught every fouling severity.
 
 \subsection{Where the alarm points}
 
@@ -204,7 +203,7 @@ Three things decide whether it works. The fault-free period must really be fault
 \section{Limitations}
 \label{sec:limits}
 
-Every detection result above comes from simulated data, and simulated years are cleaner than real ones. Two scoring choices were made after we saw their effect: the rate check was demoted to support-only, and the two conformance checks were re-calibrated on days separate from those used to measure their false-alarm rates. Slowly developing faults are caught late, up to 114 days for two fouling cases. The benchmarks seed equipment and sensor faults, not the schedule and override faults that are most common in real buildings. Finally, the alarm names the symptom and the location, not the cause.
+Every result above comes from simulated data, and simulated years are cleaner than real ones. Two scoring choices were made after we saw their effect: the rate check was demoted to support-only, and the two conformance checks were re-calibrated on days separate from those used to measure their false-alarm rates. Slowly developing faults are caught late, up to 114 days for two fouling cases. The benchmarks seed equipment and sensor faults, not the schedule and override faults that are most common in real buildings. Finally, the alarm names the symptom and the location, not the cause.
 
 \section{Conclusion}
 

@@ -18,7 +18,7 @@ singhy21@mytru.ca}}
 \maketitle
 
 \begin{abstract}
-Faults and poor control in heating, ventilation and air-conditioning (HVAC) equipment waste 15 to 30 percent of a commercial building's energy, and many go unnoticed. Building automation systems log the operating data and display it as trend graphs, so a fault is found only when a technician reads the graphs. Automated tools either apply rules written in advance, which miss any fault that was not anticipated, or report anomaly scores that say a day is unusual without saying where or what is wrong. This paper presents STRATA, a framework that works from the trend data a building already records and learns, from one period of normal, fault-free operation, what each day should look like. It then examines every new day with eight checks, each asking whether a physical relationship or an operating sequence has moved outside its normal range. Each check is first run on fault-free days it has never seen. The number of those days it wrongly flags is its false-alarm rate. A check may then raise an alarm only when it flags far more days than that false-alarm rate could explain. Every alarm states what broke, where, the evidence and the check's measured false-alarm rate. Process mining supplies the structure. The sensor data becomes a log of events along the control sequence, and models of normal operation are discovered from that log for each zone's equipment and for the whole unit, so every alarm knows which piece of equipment it belongs to. On five public benchmark systems from Lawrence Berkeley National Laboratory, each simulated with faults whose cause and location are known, STRATA detected 158 of 175 faults, most on the first day, and raised false alarms on 26 of 480 fault-free days it had never seen. In the 50 cases where the fault lay inside one zone's equipment, the alarm pointed to the correct zone in 37, to no zone in 13, and to a wrong zone in none. Moving the framework to a new building means writing one configuration file, not new code. The planned next step is a live trial on a real building. It is also the first step toward ProcessHeal, a self-healing building that finds its own faults, locates them, works out their cause and corrects them. STRATA does the finding and the locating; working out the cause and correcting it are the later stages.
+Faults and poor control in heating, ventilation and air-conditioning (HVAC) equipment waste 15 to 30 percent of a commercial building's energy, and many go unnoticed. Building automation systems log the operating data and display it as trend graphs, so a fault is found only when a technician reads the graphs. Automated tools either apply rules written in advance, which miss any fault that was not anticipated, or report anomaly scores that say a day is unusual without saying where or what is wrong. This paper presents STRATA, a framework that works from the trend data a building already records and learns, from one period of normal, fault-free operation, what each day should look like. It then examines every new day with eight checks, each asking whether a physical relationship or an operating sequence has moved outside its normal range. Each check is first run on fault-free days it has never seen. The number of those days it wrongly flags is its false-alarm rate. A check may then raise an alarm only when it flags far more days than that false-alarm rate could explain. Every alarm states what broke, where, the evidence and the check's measured false-alarm rate. Process mining supplies the structure. The sensor data becomes a log of events along the control sequence, and models of normal operation are discovered from that log for each zone's equipment and for the whole unit, so every alarm knows which piece of equipment it belongs to. On five public benchmark systems from Lawrence Berkeley National Laboratory, each simulated with faults whose cause and location are known, STRATA detected 157 of 175 faults, most on the first day, and raised false alarms on 26 of 480 fault-free days it had never seen. In the 50 cases where the fault lay inside one zone's equipment, the alarm pointed to the correct zone in 37, to no zone in 13, and to a wrong zone in none. Moving the framework to a new building means writing one configuration file, not new code. The planned next step is a live trial on a real building. It is also the first step toward ProcessHeal, a self-healing building that finds its own faults, locates them, works out their cause and corrects them. STRATA does the finding and the locating; working out the cause and correcting it are the later stages.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -35,7 +35,7 @@ Those automated methods fall into two groups. Rule libraries, which come built i
 
 This paper presents STRATA. It is configured with rules, written once per building in a single file, but those rules do not raise alarms. They turn the sensor data into a log of events: cooling started, damper open while commanded closed, a supply-air reading that physics says cannot be right. What a normal day of those events looks like is then learned from a period of the building's own fault-free operation, and every new day is checked against it, so a fault can show up as a departure from normal even when no rule names it. Each alarm states the fault, the piece of equipment, the evidence, and how often that same check has been wrong on fault-free days.
 
-The method behind it is process mining, which discovers a model of a process from a log of events and checks later behaviour against the model \cite{vanderaalst2016processmining}. STRATA builds such a log from the sensor data, for each zone's equipment and for the whole unit, which is how an alarm knows where it belongs. To our knowledge this is the first use of process mining for HVAC fault detection (Section~\ref{sec:related}). On five public benchmark systems with 175 seeded faults, STRATA detected 158, most on the first day, and placed no alarm in a wrong zone (Section~\ref{sec:results}). The code and the complete evaluation are public.\footnote{\url{https://github.com/iyassh/strata}}
+The method behind it is process mining, which discovers a model of a process from a log of events and checks later behaviour against the model \cite{vanderaalst2016processmining}. STRATA builds such a log from the sensor data, for each zone's equipment and for the whole unit, which is how an alarm knows where it belongs. To our knowledge this is the first use of process mining for HVAC fault detection (Section~\ref{sec:related}). On five public benchmark systems with 175 seeded faults, STRATA detected 157, most on the first day, and placed no alarm in a wrong zone (Section~\ref{sec:results}). The code and the complete evaluation are public.\footnote{\url{https://github.com/iyassh/strata}}
 
 \section{Related Work}
 \label{sec:related}
@@ -136,7 +136,7 @@ We tested the framework on the public fault-detection datasets of the Lawrence B
 
 \begin{table}[t]
 \centering
-\caption{The six LBNL datasets. ``Scored'' is seeded faults evaluated; ``Detected'' those caught; ``False-alarm days'' the held-out fault-free days with an alarm. $^{\dagger}$One of these was attributed on audit to a dataset defect rather than to the fault; the totals in the text count it, and are 157 without it.}
+\caption{The six LBNL datasets. ``Scored'' is seeded faults evaluated; ``Detected'' those caught; ``False-alarm days'' the held-out fault-free days with an alarm. $^{\dagger}$A fourteenth alarm was attributed on audit to a dataset defect rather than to the fault and is not counted.}
 \label{tab:systems}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -144,7 +144,7 @@ We tested the framework on the public fault-detection datasets of the Lawrence B
 \toprule
 System & Scored & Detected & False-alarm days \\
 \midrule
-Single-duct air handler & 14 & 14$^{\dagger}$ & 1 of 96 \\
+Single-duct air handler & 14 & 13$^{\dagger}$ & 1 of 96 \\
 Fan-powered terminal units (parallel) & 30 & 26 & 8 of 96 \\
 Fan-powered terminal units (series) & 29 & 25 & 9 of 96 \\
 Dual-duct air handler & 55 & 50 & 3 of 96 \\
@@ -156,11 +156,11 @@ Rooftop unit & 24 & 20 & 0 of 28 \\
 
 \subsection{Detection and false alarms}
 
-Across the five main systems the framework detected 158 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. The median time from the start of a fault to its first alarm was one day. A later audit mapped every recorded column the first configurations had left unread, and sixteen of the 158 detections came from those columns. The 17 faults it missed are all coil fouling, where the recorded sensor values stay inside every healthy band. On the one dataset that records the refrigerant side, the framework caught every fouling severity.
+Across the five main systems the framework detected 157 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. In plain terms, about nine faults in ten were caught, and about one held-out day in eighteen drew a false alarm. The median time from the start of a fault to its first alarm was one day. One further alarm, on the single-duct air handler, was traced on audit to a defect in the dataset rather than to the fault, and is not counted. The sensors matter. The first configuration files left some recorded sensors unmapped. A later audit mapped every one, and sixteen of the 157 detections came from sensors that audit added. The 17 faults missed are all coil fouling. A fouled coil transfers heat badly, but on these datasets the recorded sensor values stay inside every healthy band, so nothing that reads them can see it. On the one dataset that records the sensors inside the cooling circuit, the framework caught fouling at every strength it was seeded.
 
 \subsection{Where the alarm points}
 
-On the two fan-powered systems, 50 detections made before the column audit had their seeded fault in one terminal unit. In 37 of these the alarm named the correct terminal unit, in 13 it named the air handler but no terminal unit, and in none did it name a wrong one. Over all 158 detections the rule carrying the alarm pointed at the right class of component (coil, fan, damper or terminal unit) in 83 percent of cases and at the exact seeded component in 69 percent.
+On the two fan-powered systems, 50 detections made before the column audit had their seeded fault in one terminal unit. In 37 of these the alarm named the correct terminal unit, in 13 it named the air handler but no terminal unit, and in none did it name a wrong one. Over all 157 detections the rule carrying the alarm pointed at the right class of component (coil, fan, damper or terminal unit) in 83 percent of cases and at the exact seeded component in 69 percent.
 
 \subsection{Against two baselines}
 
@@ -168,7 +168,7 @@ Against principal component analysis, a standard statistical method, the framewo
 
 \begin{table}[t]
 \centering
-\caption{STRATA against the Guideline 36 fault rules on the three systems on which both were run, under the same gate. ``False'' is false-alarm days among the held-out days. The single-duct count is the audited 13 of Table~\ref{tab:systems}.}
+\caption{STRATA against the Guideline 36 fault rules on the three systems on which both were run, under the same gate. ``False'' is false-alarm days among the held-out days.}
 \label{tab:g36}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -207,7 +207,7 @@ Every result above comes from simulated data, and simulated years are cleaner th
 
 \section{Conclusion}
 
-STRATA turns the trend data a building already records into alarms an operator can act on. On the five main benchmark systems it detected 158 of 175 seeded faults and, in the 50 cases where this could be checked, never named a wrong terminal unit. The next step is a live trial on a real building, planned for the TRU campus.
+STRATA turns the trend data a building already records into alarms an operator can act on. On the five main benchmark systems it detected 157 of 175 seeded faults and, in the 50 cases where this could be checked, never named a wrong terminal unit. The next step is a live trial on a real building, planned for the TRU campus.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references-report}

@@ -125,18 +125,18 @@ STRATA alarm -- series fan-powered terminal
  rate      rules check: 0 false-alarm days on
            the 96 held-out fault-free days
 \end{verbatim}
-\caption{One alarm from the series fan-powered benchmark, every value taken from the framework's recorded output. The seeded fault was the zone-S damper stuck at 80 percent: location and symptom correct, caught on day 1.}
+\caption{One alarm from the series fan-powered benchmark, every value taken from the framework's recorded output. The seeded fault was the zone-S damper stuck at 80 percent.}
 \label{fig:alarm}
 \end{figure}
 
 \section{Results on Public Benchmark Data}
 \label{sec:results}
 
-We evaluated the framework on the public HVAC fault-detection datasets from LBNL \cite{granderson2023lbnlfdddata}. Each simulated dataset is one-minute data for one equipment type, recorded once fault-free and once per seeded fault: a stuck damper, a biased sensor, a fouled coil, a leaking valve, an unstable controller. Table~\ref{tab:systems} lists the seven datasets, one of them a measured year from a real rooftop unit. We found no published detection results on the fan-powered or dual-duct datasets. Unless stated, the results are for the five main systems, which have a full year of data. The simulated rooftop unit alone records the refrigerant side; the measured unit has 182 fault-free days and one fault case, so it yields a false-alarm rate but no detection count.
+We tested the framework on the public fault-detection datasets of the Lawrence Berkeley National Laboratory (LBNL) \cite{granderson2023lbnlfdddata}. Each dataset covers one kind of equipment. It holds a year of fault-free operation, recorded every minute, and then the equipment recorded again, once for each fault put in: a stuck damper, a biased sensor, a fouled coil, a leaking valve, or an unstable controller. Because each fault was put in on purpose, we know for every case what the right answer is. Of the seven datasets in Table~\ref{tab:systems}, five are the main systems: a single-duct air handler, a dual-duct air handler, a fan coil unit, and two systems of fan-powered terminal units. These five have a full year of data, and unless we say otherwise, every number below is for them. The other two are rooftop units: one simulated, the other a measured year from a real building, with 182 fault-free days and one fault case, so it can tell us how often the framework gives a false alarm but not how many faults it catches. The next five subsections report what it caught, where it pointed, how it compares with two existing methods, what process mining added, and what noisier data did.
 
 \begin{table}[t]
 \centering
-\caption{The seven LBNL datasets. ``Scored'' is the number of seeded faults evaluated; ``Detected'' those the framework caught; ``False-alarm days'' the held-out fault-free days on which it alarmed. $^{\dagger}$One of these was attributed on audit to a dataset defect rather than to the fault; the totals in the text count it, and are 157 without it.}
+\caption{The seven LBNL datasets. ``Scored'' is seeded faults evaluated; ``Detected'' those caught; ``False-alarm days'' the held-out fault-free days with an alarm. $^{\dagger}$One of these was attributed on audit to a dataset defect rather than to the fault; the totals in the text count it, and are 157 without it.}
 \label{tab:systems}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -157,19 +157,19 @@ Rooftop unit (measured) & 1 case & --- & 3 of 49 \\
 
 \subsection{Detection and false alarms}
 
-Across the five main systems the framework detected 158 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. The median time from the start of a fault to its first alarm was one day. On the real rooftop unit the false-alarm rate was 3 of 49 held-out days. A later audit mapped every recorded column the first configurations had left unread; sixteen of the 158 detections came from columns that audit added. The 17 faults it missed are all coil fouling, where the recorded sensor values stay inside every healthy band. On the one dataset that records the refrigerant side, the framework caught every fouling severity.
+Across the five main systems the framework detected 158 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. The median time from the start of a fault to its first alarm was one day. On the real rooftop unit the false-alarm rate was 3 of 49 held-out days. A later audit mapped every recorded column the first configurations had left unread, and sixteen of the 158 detections came from those columns. The 17 faults it missed are all coil fouling, where the recorded sensor values stay inside every healthy band. On the one dataset that records the refrigerant side, the framework caught every fouling severity.
 
 \subsection{Where the alarm points}
 
-On the two fan-powered systems, where each air handler serves four terminal units, 50 detections made before the column audit had their seeded fault in one terminal unit. In 37 of these the alarm named the correct terminal unit, in 13 it named the air handler but no terminal unit, and in none did it name a wrong one. Over all 158 detections the rule carrying the alarm pointed at the right class of component (coil, fan, damper or terminal unit) in 83 percent of cases and at the exact seeded component in 69 percent.
+On the two fan-powered systems, 50 detections made before the column audit had their seeded fault in one terminal unit. In 37 of these the alarm named the correct terminal unit, in 13 it named the air handler but no terminal unit, and in none did it name a wrong one. Over all 158 detections the rule carrying the alarm pointed at the right class of component (coil, fan, damper or terminal unit) in 83 percent of cases and at the exact seeded component in 69 percent.
 
 \subsection{Against two baselines}
 
-Against principal component analysis, a standard statistical method, the framework detected 64 of 73 shared scenarios against the baseline's 61, a difference too small to be statistically significant; the baseline cannot name the terminal unit. Against the Guideline 36 fault rules that commercial systems run, implemented by an independent open-source library and scored under the same gate, the framework detected one more fault than the rules on the single-duct air handler at the same false-alarm count, and three times as many on the terminal units, because it reads the per-zone sensors the rules do not (Table~\ref{tab:g36}). We had predicted that STRATA would detect at least as many faults as the rules at a lower false-alarm rate on every system. It did not: on the air handler the false-alarm counts were equal, and on the terminal units the extra coverage cost eight and nine false-alarm days against the rules' none.
+Against principal component analysis, a standard statistical method, the framework detected 64 of 73 shared scenarios against the baseline's 61, a difference too small to be statistically significant; the baseline cannot name the terminal unit. Against the Guideline 36 fault rules that commercial systems run, implemented by an independent open-source library and scored under the same gate, the framework detected one more fault than the rules on the single-duct air handler at the same false-alarm count, and three times as many on the terminal units (Table~\ref{tab:g36}). We had predicted that STRATA would match the rules at a lower false-alarm rate on every system. It did not: on the air handler the false-alarm counts were equal, and on the terminal units the extra coverage cost eight and nine false-alarm days against the rules' none.
 
 \begin{table}[t]
 \centering
-\caption{STRATA against the Guideline 36 fault rules on the three systems on which both were run, under the same gate. ``Detected'' is seeded faults detected; ``False'' is false-alarm days among the held-out days. The single-duct count is the audited 13 of Table~\ref{tab:systems}.}
+\caption{STRATA against the Guideline 36 fault rules on the three systems on which both were run, under the same gate. ``False'' is false-alarm days among the held-out days. The single-duct count is the audited 13 of Table~\ref{tab:systems}.}
 \label{tab:g36}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -188,18 +188,18 @@ Fan-powered terminal units (series) & 25 of 29 & 9 of 96 & 9 of 29 & 0 of 96 \\
 \subsection{What process mining contributes}
 \label{sec:pm}
 
-We began with the hypothesis that the discovered process models would detect the faults themselves. They did not. Over 199 scenarios on six systems, no fault was caught by the conformance checks alone, and even on the scenario where the models did best, a one-line hand-written rule flagged more fault days than the model did. What process mining contributes is structure. The per-terminal-unit models give every alarm its location, and the models surfaced the regularities that became rules (Stage 3). On the two fan-powered systems the frequency check, which counts events in the log, is one of only two checks (with the oscillation check) that see the unstable-controller faults. Process mining helps to get detection but is not detecting on its own. That finding came from pre-registered tests, with the refuting result written down before each was run.
+We began with the hypothesis that the discovered process models would detect the faults themselves. They did not. Over 199 scenarios on six systems, no fault was caught by the conformance checks alone, and even on the scenario where the models did best, a one-line hand-written rule flagged more fault days than the model did. What process mining contributes is structure. The per-terminal-unit models give every alarm its location, and the models surfaced the regularities that became rules (Stage 3). On the two fan-powered systems the frequency check, which counts events in the log, is one of only two checks (with the oscillation check) that see the unstable-controller faults. Process mining helps to get detection but is not detecting on its own.
 
 \subsection{Robustness to noisier data}
 
-We applied four perturbations to the fault-free year and every fault file: sensor noise; change-of-value logging, which records a value only when it changes; gaps in the record; and shifted schedules. We then re-fitted and re-scored all five systems against a limit, set beforehand, of 10 false-alarm days in 96. Every system stayed under it, with the worst count at 7 of 96, and each condition cost at most one detection per system.
+We applied four perturbations to the fault-free year and every fault file: sensor noise; change-of-value logging; gaps in the record; and shifted schedules. We then re-fitted and re-scored all five systems against a limit, set beforehand, of 10 false-alarm days in 96. Every system stayed under it, with the worst count at 7 of 96, and each condition cost at most one detection per system.
 
 \section{Deployment on a Real Building: The Next Step}
 \label{sec:deploy}
 
-None of this section has been carried out yet. Thompson Rivers University (TRU) is the planned site. A 2022 energy study of the Campus Activity Centre lists an air-handling unit serving variable-air-volume terminal units, fan coil units and five rooftop units \cite{ses2022cacstudy}, all equipment types on which the framework has been evaluated. Deployment has four steps. First, collect a fault-free period of trend data at the system's own sampling rate, a year if possible. Second, write the configuration file: every recorded point mapped to a role or excluded with a reason, and the control sequence as rules. Third, confirm silence: run the signature rules over the whole fault-free period and fix or remove any that fire, then calibrate the other checks and measure every check's false-alarm rate on this building's held-out days. Fourth, operate: run Stages 2 to 6 on every new day, with the gate's window set in the trial.
+None of this has been carried out yet; Thompson Rivers University (TRU) is the planned site. A 2022 energy study of the Campus Activity Centre lists equipment of every type on which the framework has been evaluated \cite{ses2022cacstudy}. First, collect a fault-free period of trend data at the system's own sampling rate, a year if possible. Second, write the configuration file: every recorded point mapped to a role or excluded with a reason, and the control sequence as rules. Third, confirm silence: run the signature rules over the whole fault-free period and fix or remove any that fire, then calibrate the other checks and measure their false-alarm rates on this building's held-out days. Fourth, operate: run Stages 2 to 6 on every new day, with the gate's window set in the trial.
 
-Three things decide whether it works. The fault-free period must really be fault-free, because one faulty day in it can move a band edge. The configuration must read every recorded point; the column audit of Section~\ref{sec:results} showed what unread columns cost. And the silence step must run at the building's own sampling rate, because thresholds set on one-minute data do not transfer to fifteen-minute data.
+Three things decide whether it works. The fault-free period must really be fault-free, because one faulty day in it can move a band edge. The configuration must read every recorded point, as the column audit of Section~\ref{sec:results} showed. And the silence step must run at the building's own sampling rate, because thresholds set on one-minute data do not transfer to fifteen-minute data.
 
 \section{Limitations}
 \label{sec:limits}

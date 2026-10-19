@@ -247,17 +247,16 @@ pm = r2[0]                                   # Process models tile
 # 1. state events -> process models (crosses the UNDERSTAND header)
 varrow(state_cx, sense_bottom + 2, pm[1] - 3, BLUE, "ab",
        label="state events only", label_side="right", label_y=sense_bottom + 30)
-# 5. signature events -> Rules check, down the channel, skipping the UNDERSTAND tier
+# 5. signature events -> Rules check: down out of the chip, across the gap, down the channel, into Rules
 rules = cpos[-1]
 cx = LEFT + STACK_W + DEPTH + CHANNEL - 16
 rules_mid = rules[1] + rules[3] / 2
-out.append(f'<path d="M{chip2_x + CHIP_W} {sig_mid_y} H{cx} V{rules_mid} H{rules[0] + rules[2] + DEPTH + 4}" '
+sx = chip2_x + CHIP_W - 60
+gap_y = sense_bottom + 24
+out.append(f'<path d="M{sx} {chip_y + 36} V{gap_y} H{cx} V{rules_mid} H{rules[0] + rules[2] + DEPTH + 4}" '
            f'stroke="{ORANGE}" stroke-width="3" stroke-dasharray="9 7" fill="none" marker-end="url(#ao)"/>')
-lab_y = (sig_mid_y + rules_mid) / 2
-text(cx - 20, lab_y, "signature events skip discovery", size=16, weight="bold", fill=ORANGE, anchor="middle",
-     extra=f'transform="rotate(-90 {cx-20} {lab_y})"')
-text(cx - 42, lab_y, "and go straight to the Rules check", size=16, fill=ORANGE, anchor="middle",
-     extra=f'transform="rotate(-90 {cx-42} {lab_y})"')
+text(sx - 14, gap_y + 6, "signature events skip the models and go only to the Rules check", size=17, fill=ORANGE,
+     anchor="end", extra='font-style="italic"')
 
 # ---------------------------------------------------------------- side pillar
 px = LEFT + STACK_W + DEPTH + CHANNEL
@@ -274,7 +273,7 @@ def bracket(y0, y1, label):
     cy = (y0 + y1) / 2
     text(bx - 30, cy, label, size=18, weight="bold", fill="#444", anchor="middle", extra=f'transform="rotate(-90 {bx-30} {cy})"')
 
-bracket(sense_top, understand_bottom, "built once from the fault-free period (Events: also daily)")
+bracket(sense_top, understand_bottom, "built once per building")
 bracket(check_top, BOTTOM, "run on every new day")
 
 out.append('</svg>')

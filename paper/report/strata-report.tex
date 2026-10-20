@@ -132,7 +132,7 @@ STRATA alarm -- series fan-powered terminal
 \section{Results on Public Benchmark Data}
 \label{sec:results}
 
-We tested the framework on the public fault-detection datasets of the Lawrence Berkeley National Laboratory (LBNL) \cite{granderson2023lbnlfdddata}. Each dataset covers one kind of equipment and holds a year of fault-free operation, recorded every minute, and then the equipment recorded again, once for each fault put in: a stuck damper, a biased sensor, a fouled coil, a leaking valve, or an unstable controller. Because each fault was put in on purpose, we know for every case what the right answer is. Of the six datasets in Table~\ref{tab:systems}, five are the main systems: a single-duct air handler, a dual-duct air handler, a fan coil unit, and two systems of fan-powered terminal units. These five have a full year of data, and unless we say otherwise, every number below is for them. The sixth is a rooftop unit. The next five subsections report what it caught, where it pointed, how it compares with two existing methods, what process mining added, and what noisier data did.
+We tested the framework on the public fault-detection datasets of the Lawrence Berkeley National Laboratory (LBNL) \cite{granderson2023lbnlfdddata}. Each dataset covers one kind of equipment and holds a year of fault-free operation, recorded every minute, and then the equipment recorded again, once for each fault put in, such as a stuck damper, a biased sensor or a fouled coil. Because each fault was put in on purpose, we know for every case what the right answer is. Of the six datasets in Table~\ref{tab:systems}, five are the main systems: a single-duct air handler, a dual-duct air handler, a fan coil unit, and two systems of fan-powered terminal units. These five have a full year of data, and unless we say otherwise, every number below is for them. The sixth is a rooftop unit. The next five subsections report what it caught, where it pointed, how it compares with two existing methods, what process mining added, and what noisier data did.
 
 \begin{table}[t]
 \centering
@@ -156,7 +156,7 @@ Rooftop unit & 24 & 20 & 0 of 28 \\
 
 \subsection{Detection and false alarms}
 
-Across the five main systems the framework detected 157 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. The median time from the start of a fault to its first alarm was one day. One further alarm, on the single-duct air handler, was traced on audit to a defect in the dataset rather than to the fault, and is not counted. The first configuration files left some recorded sensors unmapped. A later audit mapped every one, and sixteen of the 157 detections came from sensors that audit added. The 17 faults missed are all coil fouling. On these datasets the recorded sensor values stay inside every healthy band, so nothing that reads them can see it. On the one dataset that records the sensors inside the cooling circuit, the framework caught fouling at every strength it was seeded.
+Across the five main systems the framework detected 157 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. The median time from the start of a fault to its first alarm was one day. One further alarm, on the single-duct air handler, was traced on audit to a defect in the dataset rather than to the fault, and is not counted. The first configuration files left some sensors unmapped; a later audit mapped every one, and sixteen of the 157 detections came from those sensors. The 17 faults missed are all coil fouling. On these datasets the recorded sensor values stay inside every healthy band, so nothing that reads them can see it. On the one dataset that records the sensors inside the cooling circuit, the framework caught fouling at every strength it was seeded.
 
 \subsection{Where the alarm points}
 
@@ -168,14 +168,13 @@ To see whether the framework is progress on what exists, we ran two existing met
 
 \begin{table}[t]
 \centering
-\caption{STRATA against the Guideline 36 rules on the three systems where both were run. ``False'' is false-alarm days among the held-out days.}
+\caption{STRATA against the Guideline 36 rules on the three systems where both were run.}
 \label{tab:g36}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.36\columnwidth}cccc@{}}
 \toprule
- & \multicolumn{2}{c}{STRATA} & \multicolumn{2}{c}{Guideline 36 rules} \\
-System & Detected & False & Detected & False \\
+System & STRATA det. & STRATA false & G36 det. & G36 false \\
 \midrule
 Single-duct air handler & 13 of 14 & 1 of 96 & 12 of 14 & 1 of 96 \\
 Fan-powered terminal units (parallel) & 26 of 30 & 8 of 96 & 8 of 30 & 0 of 96 \\
@@ -187,27 +186,27 @@ Fan-powered terminal units (series) & 25 of 29 & 9 of 96 & 9 of 29 & 0 of 96 \\
 \subsection{What process mining contributes}
 \label{sec:pm}
 
-We began with the hypothesis that the discovered process models would detect the faults themselves. They did not. Over 199 scenarios on six systems, no fault was caught by the conformance checks alone, and even on the scenario where the models did best, a one-line hand-written rule flagged more fault days than the model did. What process mining contributes is structure: the per-terminal-unit models give every alarm its location, and the models surfaced the regularities that became rules (Stage 3). On the two fan-powered systems the frequency check, which counts events in the log, is one of only two checks that see the unstable-controller faults. Process mining helps to get detection but is not detecting on its own.
+Because process mining had not been applied to HVAC fault detection before, nobody knew what it would contribute, so we measured it. We began with the hypothesis that the process models of Stage 3 would detect the faults by themselves. The two conformance checks are the only checks that use the models, and over 199 scenarios on the six systems of Table~\ref{tab:systems} they caught no fault on their own. Even on the scenario where the models did best, a one-line hand-written rule flagged more fault days than the model. That finding is why detection rests on eight calibrated checks rather than on the models. What process mining contributes is structure. The model per terminal unit is what gives every alarm its location. Reading the models showed us regularities of normal operation that became rules (Stage 3). And the event log the models need is what the frequency check reads; on the two fan-powered systems that check is one of only two that see the unstable-controller faults. Process mining helps to get detection but is not detecting on its own.
 
 \subsection{Robustness to noisier data}
 
-We applied four perturbations to the fault-free year and every fault file: sensor noise; change-of-value logging; gaps in the record; and shifted schedules. We then re-fitted and re-scored all five systems against a limit, set beforehand, of 10 false-alarm days in 96; the worst count was 7 of 96, and each condition cost at most one detection per system.
+We applied four perturbations to every file: sensor noise, change-of-value logging, gaps in the record and shifted schedules. We then re-fitted and re-scored all five systems against a limit, set beforehand, of 10 false-alarm days in 96; the worst count was 7 of 96, and each condition cost at most one detection per system.
 
 \section{Deployment on a Real Building: The Next Step}
 \label{sec:deploy}
 
-None of this has been carried out yet; Thompson Rivers University (TRU) is the planned site. First, collect a fault-free period of trend data at the system's own sampling rate, a year if possible. Second, write the configuration file: every recorded point mapped to a role, and the control sequence as rules. Third, confirm silence: run the signature rules over the whole fault-free period and fix or remove any that fire, then calibrate the other checks and measure their false-alarm rates on this building's held-out days. Fourth, operate: run Stages 2 to 6 on every new day.
+None of this has been carried out yet; Thompson Rivers University (TRU) is the planned site. First, collect a fault-free period of trend data, a year if possible. Second, write the configuration file: every recorded point mapped to a role, and the control sequence as rules. Third, confirm silence: run the signature rules over the fault-free period and fix any that fire, then calibrate the checks and measure their false-alarm rates on held-out days. Fourth, operate: run Stages 2 to 6 on every new day.
 
 Three things decide whether it works: the fault-free period must really be fault-free, because one faulty day can move a band edge; the configuration must read every recorded point, as the column audit showed; and the silence step must run at the building's own sampling rate, because thresholds set on one-minute data do not transfer to fifteen-minute data.
 
 \section{Limitations}
 \label{sec:limits}
 
-Every result above comes from simulated data, and simulated years are cleaner than real ones. Two scoring choices were made after we saw their effect: the rate check was demoted to support-only, and the two conformance checks were re-calibrated on days separate from those used to measure their false-alarm rates. Slowly developing faults are caught late, up to 114 days for two fouling cases. The benchmarks seed equipment and sensor faults, not the schedule and override faults that are most common in real buildings. Finally, the alarm names the symptom and the location, not the cause.
+Every result above comes from simulated data, and simulated years are cleaner than real ones. Two scoring choices were made after we saw their effect: the rate check was demoted to support-only, and the conformance checks were re-calibrated on days separate from those that measure their false-alarm rates. Slowly developing faults are caught late, up to 114 days for two fouling cases. The benchmarks seed equipment and sensor faults, not the schedule and override faults that are most common in real buildings.
 
 \section{Conclusion}
 
-On the five main benchmark systems it detected 157 of 175 seeded faults and, in the 50 cases where this could be checked, never named a wrong terminal unit. The next step is a live trial on a real building, planned for the TRU campus.
+On the five main benchmark systems it detected 157 of 175 seeded faults and, in the 50 cases where this could be checked, never named a wrong terminal unit. The next step is a live trial on the TRU campus.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references-report}

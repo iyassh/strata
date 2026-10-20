@@ -6,7 +6,7 @@
 \usepackage[hidelinks]{hyperref}
 \hyphenation{STRATA Process-Heal}
 
-\title{STRATA: A Process-Mining Framework for Detecting and Locating HVAC Faults from Building Trend Data}
+\title{STRATA: A Stratified Process-Mining Framework for HVAC Fault Detection and Diagnosis}
 
 \author{\IEEEauthorblockN{Yassh Singh}
 \IEEEauthorblockA{Thompson Rivers University, Kamloops, Canada\\
@@ -170,11 +170,13 @@ To see whether the framework is progress on what exists, we ran two existing met
 \centering
 \caption{STRATA against the Guideline 36 rules on the three systems where both were run.}
 \label{tab:g36}
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.36\columnwidth}cccc@{}}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\columnwidth}cccc@{}}
 \toprule
-System & STRATA det. & STRATA false & G36 det. & G36 false \\
+& \multicolumn{2}{c}{STRATA} & \multicolumn{2}{c@{}}{G36 rules} \\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+System & Detected & False & Detected & False \\
 \midrule
 Single-duct air handler & 13 of 14 & 1 of 96 & 12 of 14 & 1 of 96 \\
 Fan-powered terminal units (parallel) & 26 of 30 & 8 of 96 & 8 of 30 & 0 of 96 \\

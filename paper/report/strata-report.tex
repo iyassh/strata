@@ -136,7 +136,7 @@ We tested the framework on the public fault-detection datasets of the Lawrence B
 
 \begin{table}[t]
 \centering
-\caption{The six LBNL datasets. ``Scored'' is seeded faults evaluated; ``Detected'' those caught; ``False-alarm days'' the held-out fault-free days with an alarm. $^{\dagger}$A fourteenth alarm was attributed on audit to a dataset defect rather than to the fault and is not counted.}
+\caption{The six LBNL datasets. False-alarm days are held-out fault-free days with an alarm. $^{\dagger}$A fourteenth alarm was attributed on audit to a dataset defect rather than to the fault and is not counted.}
 \label{tab:systems}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -156,11 +156,11 @@ Rooftop unit & 24 & 20 & 0 of 28 \\
 
 \subsection{Detection and false alarms}
 
-Across the five main systems the framework detected 157 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. In plain terms, about nine faults in ten were caught, and about one held-out day in eighteen drew a false alarm. The median time from the start of a fault to its first alarm was one day. One further alarm, on the single-duct air handler, was traced on audit to a defect in the dataset rather than to the fault, and is not counted. The sensors matter. The first configuration files left some recorded sensors unmapped. A later audit mapped every one, and sixteen of the 157 detections came from sensors that audit added. The 17 faults missed are all coil fouling. A fouled coil transfers heat badly, but on these datasets the recorded sensor values stay inside every healthy band, so nothing that reads them can see it. On the one dataset that records the sensors inside the cooling circuit, the framework caught fouling at every strength it was seeded.
+Across the five main systems the framework detected 157 of 175 seeded faults, with 26 false-alarm days in 480 held-out fault-free days. In plain terms, about nine faults in ten were caught, and about one held-out day in eighteen drew a false alarm. The median time from the start of a fault to its first alarm was one day. One further alarm, on the single-duct air handler, was traced on audit to a defect in the dataset rather than to the fault, and is not counted. The sensors matter. The first configuration files left some recorded sensors unmapped. A later audit mapped every one, and sixteen of the 157 detections came from sensors that audit added. The 17 faults missed are all coil fouling. On these datasets the recorded sensor values stay inside every healthy band, so nothing that reads them can see it. On the one dataset that records the sensors inside the cooling circuit, the framework caught fouling at every strength it was seeded.
 
 \subsection{Where the alarm points}
 
-On the two fan-powered systems, 50 detections made before the column audit had their seeded fault in one terminal unit. In 37 of these the alarm named the correct terminal unit, in 13 it named the air handler but no terminal unit, and in none did it name a wrong one. Over all 157 detections the rule carrying the alarm pointed at the right class of component (coil, fan, damper or terminal unit) in 83 percent of cases and at the exact seeded component in 69 percent.
+Catching a fault is only useful if the alarm sends the operator to the right place, so we took the 157 alarms counted above and checked where each one pointed. When the fault was in a zone, the alarm never pointed at the wrong zone. We could test the zone only on the two fan-powered systems, because they are the only ones with zones: each air handler serves four terminal units, and the benchmark puts a fault into one of them. That gave us 50 alarms with a known right answer. In 37 the alarm named the right terminal unit. In 13 it named the air handler but no terminal unit, which is right but not precise. In none did it name a wrong one. These 50 were counted on the first run, before the sensor audit. The other three systems are a single piece of equipment, so for them, and for all 157 alarms together, we asked a simpler question: did the alarm blame the right part, such as the coil, the fan or a damper? It blamed the right kind of part in 83 percent of alarms. It blamed the exact part in 69 percent.
 
 \subsection{Against two baselines}
 

@@ -132,7 +132,7 @@ STRATA alarm -- series fan-powered terminal
 \section{Results on Public Benchmark Data}
 \label{sec:results}
 
-We tested the framework on the public fault-detection datasets of the Lawrence Berkeley National Laboratory (LBNL) \cite{granderson2023lbnlfdddata}. Each dataset covers one kind of equipment and holds a year of fault-free operation, recorded every minute, and then the equipment recorded again, once for each fault put in, such as a stuck damper, a biased sensor or a fouled coil. Because each fault was put in on purpose, we know for every case what the right answer is. Of the six datasets in Table~\ref{tab:systems}, five are the main systems: a single-duct air handler, a dual-duct air handler, a fan coil unit, and two systems of fan-powered terminal units. These five have a full year of data, and unless we say otherwise, every number below is for them. The sixth is a rooftop unit. The next five subsections report what it caught, where it pointed, how it compares with two existing methods, what process mining added, and what noisier data did.
+We tested the framework on the public fault-detection datasets of the Lawrence Berkeley National Laboratory (LBNL) \cite{granderson2023lbnlfdddata}. Each dataset covers one kind of equipment and holds a year of fault-free operation, recorded every minute, and then the equipment recorded again, once for each fault put in, such as a stuck damper, a biased sensor or a fouled coil. Because each fault was put in on purpose, we know for every case what the right answer is. Of the six datasets in Table~\ref{tab:systems}, five are the main systems: a single-duct air handler, a dual-duct air handler, a fan coil unit, and two systems of fan-powered terminal units. These five have a full year of data, and unless we say otherwise, every number below is for them. The sixth is a rooftop unit. The next four subsections report what it caught, where it pointed, how it compares with two existing methods, and what process mining added.
 
 \begin{table}[t]
 \centering
@@ -187,10 +187,6 @@ Fan-powered terminal units (series) & 25 of 29 & 9 of 96 & 9 of 29 & 0 of 96 \\
 \label{sec:pm}
 
 Because process mining had not been applied to HVAC fault detection before, nobody knew what it would contribute, so we measured it. We began with the hypothesis that the process models of Stage 3 would detect the faults by themselves. The two conformance checks are the only checks that use the models, and over 199 scenarios on the six systems of Table~\ref{tab:systems} they caught no fault on their own. Even on the scenario where the models did best, a one-line hand-written rule flagged more fault days than the model. That finding is why detection rests on eight calibrated checks rather than on the models. What process mining contributes is structure. The model per terminal unit is what gives every alarm its location. Reading the models showed us regularities of normal operation that became rules (Stage 3). And the event log the models need is what the frequency check reads; on the two fan-powered systems that check is one of only two that see the unstable-controller faults. Process mining helps to get detection but is not detecting on its own.
-
-\subsection{Robustness to noisier data}
-
-We applied four perturbations to every file: sensor noise, change-of-value logging, gaps in the record and shifted schedules. We then re-fitted and re-scored all five systems against a limit, set beforehand, of 10 false-alarm days in 96; the worst count was 7 of 96, and each condition cost at most one detection per system.
 
 \section{Deployment on a Real Building: The Next Step}
 \label{sec:deploy}
